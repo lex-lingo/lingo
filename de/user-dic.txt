@@ -1,0 +1,10 @@
+#   
+#   Musterwörterbuch user-dic.txt als Vorlage
+#   für eigene Benutzerwörterbücher
+#
+#
+klassifikation=klassifikation #s
+thesaurus=thesaurus #s
+verschlagwortung=verschlagwortung #s
+bibliografie=bibliografie #s
+bibliographie=bibliografie #s

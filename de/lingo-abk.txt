@@ -1,0 +1,74 @@
+#
+#    Abkürzungswörterbuch lingo-abk.txt
+#    enthält Abkürzungen und ihre Auflösungen
+#     
+#    Stand: 16.03.06 / Jan-Helge Jacobs
+#
+#
+abb=abbildung #s
+abk=abkürzung #s
+altdt=altdeutsch #a
+architekton=architektonisch #a
+aufl=auflage #s
+b.a.w=bis auf weiteres #w
+b.z.w=beziehungsweise #w
+beisp=beispiel #s
+bzgl=bezüglich #w
+bzw=beziehungsweise #w
+ca=circa #w
+christl=christlich #a
+christol=christologisch #a
+d.h=das heißt #w
+desgl=desgleichen #w
+dgl=dergleichen #w
+dr=doktor #s
+dt=deutsch #w
+Dtld=deutschland #e
+entspr=entsprechend #w
+etc=et cetera #w
+evang=evangelisch #a
+evtl=eventuell #w
+gesch=geschichtlich #a geschichte #s
+ggf=gegebenenfalls #w
+griech=griechisch #a
+inkl=inklusive #w
+insbes=insbesondere #w
+insges=insgesamt #w
+ital=italienisch #a
+Jb=Jahrbuch #s
+jh=jahrhundert #s
+kaiserl=kaiserlich #a
+kathol=katholisch #a
+lfd=laufend #a
+liturg=liturgisch #a
+lt=laut #w
+ltd=lautend #w
+mwst=mehrwertsteuer #s
+niederdt=niederdeutsch #a
+norddt=norddeutsch #a
+nr=nummer #s
+o.a=oder andere #w
+o.ä=oder ähnliches #w oder ähnliche #w
+oberital=oberitalienisch #a
+pfarrk=pfarrkirche #s
+philol=philologisch #a
+prakt=praktisch #a
+prot=protestantisch #a
+renss=renaissance #s
+Schifffahrtmus=schifffahrtmuseum #s
+sog=sogenannt #w
+stck=stück #s
+std=stunde #s
+tbc=tbc #w tuberkulose #s
+tex=texas #e
+textabb=textabbildung #s
+trojan=trojanisch #a
+trop=tropisch #a
+usf=und so fort #w
+v.a=vor allem #w
+vergl=vergleiche #w
+z.b=zum Beispiel #w
+z.t=zum teil #w
+z.zt=zur zeit #w
+zykl=zyklisch #a
+zzgl=zuzüglich #w

@@ -1,0 +1,143 @@
+#------------------------------------------------------------------------------------------------------------------------------------
+#
+#  database-Section - Definitionen für Wörterbücher
+#
+#  In der database-Section können alle benötigten Wörterbücher angegeben werden. 
+#  Dabei werden folgende Attribute interpretiert:
+#
+#  Attribut    Default  Bedeutung
+#  -----------------------------------------------------------------------------
+#  id                   Über diese Kurzbezeichnung kann die Datenquelle an anderer Stelle referenziert werden, z.B. bei Attendees
+#                       als source-Attribut.
+#
+#  name                 Gibt den Ort der Quelldaten an.
+#
+#  def-wc      ?        Gibt eine Wortklasse vor die verwendet wird, wenn die Datenquelle über keine adäquate Information zur 
+#                       Wortklasse eines Eintrags verfügt.
+#
+#  txt-format  KeyValue Gibt an, in welchem Format die Quelldaten je Zeile vorliegen. Dabei wird unterschieden zwischen
+#                          SingleWord  =  Je Zeile ist nur ein Wort (ohne Projektion) angegeben, z.B.
+#                                         "Nasenbär\n"
+#                          KeyValue    =  Je Zeile ist ein Wort und die dazugehörige Projektion angegeben, z.B.
+#                                         "John Vorhauer*Vorhauer, John\n"
+#                          WordClass   =  Je Zeile ist ein Wort und die dazugehörige Projektion angegeben, die aus mehreren
+#                                         Lexikalisierungen bestehen kann, z.B.
+#                                         "Essen,essen #v Essen #s Esse #s\n"
+#                          MultiValue  =  Je Zeile sind mehrere Worte angegeben, die als Äquivalenzklasse interpretiert werden, z.B.
+#                                         "Fax;Faxkopie;Telefax\n"
+#                          MultiKey
+#
+#  separator   (s.Text)	Gibt an, durch welches Zeichen eine Textzeile die Grundform von der Projektion trennt. Der Defaultwert ist 
+#                       abhängig vom Text-Format: KeyValue='*', WordClass=',' und MultiValue=';'.
+#
+#  use-lex              Gibt an, dass bei Mehrwort-Schlüsseln eine Vorab-Lexikalisierung vorgenommen wird durch Zuhilfenahme der
+#                       Wörterbücher, die mit diesem Attribut angegeben werden, z.B. use-lex='sys-dic'. 
+#                       Die Vorab-Lexikalisierung von Mehrwortgruppen ermöglicht die leichte Erkennung von allen möglichen 
+#                       Dehnungsvarianten. Bei Mehrwort-Wörterbüchern, die ausschließlich Personennamen enthalten, kann dieser Wert
+#                       entfallen, da er nur die Verarbeitungsgeschwindigkeit vermindert ohne die Erkennungsquote zu erhöhen.
+#
+#  ACHTUNG: Wird mit dem Attribut use-lex ein anderes Wörterbuch referenziert, so sollte dieses VOR der ersten Referenzierung 
+#           definiert sein, da es sonst noch nicht existiert!
+#
+
+#    lingo language definition
+--- 
+language:
+  name: 'Deutsch'
+
+  dictionary:
+    databases:
+      #    Systemwörterbücher
+      sys-dic: { name: de/lingo-dic.txt, txt-format: WordClass, separator: '=' }
+      sys-abk: { name: de/lingo-abk.txt, txt-format: WordClass, separator: '=' }
+      sys-syn: { name: de/lingo-syn.txt, txt-format: KeyValue, separator: '=', def-wc: y }
+      sys-mul: { name: de/lingo-mul.txt, txt-format: SingleWord, use-lex: 'sys-dic', def-wc: m }
+      #    Benutzerwörterbücher
+      usr-dic: { name: de/user-dic.txt, txt-format: WordClass, separator: '=' }
+
+      #    Testwörterbücher
+      tst-dic: { name: de/test_dic.txt, txt-format: WordClass }   #  TEST: Lesen von zwei Quellen
+      tst-syn: { name: de/test_syn.txt, txt-format: MultiValue, def-wc: 'y' } # TEST: Mehrere Datenquellen
+      tst-syn2: { name: de/test_syn2.txt, txt-format: MultiValue, def-wc: 'y', use-lex: 'sys-dic' } # TEST: Mehrere Datenquellen
+      tst-mul: { name: de/test_mul.txt, use-lex: 'sys-dic', def-wc: m } # TEST: Mehrere Multiwörterbücher
+      tst-mu2: { name: de/test_mul2.txt, use-lex: 'sys-dic', def-wc: m } # TEST: Mehrere Multiwörterbücher
+      tst-sto: { name: de/test_store.txt, txt-format: WordClass } #  TEST: korrespondierende Store-Datei nicht vorhanden
+      tst-cry: { name: de/test_cry.txt, txt-format: WordClass, crypt } #  TEST: Verschlüsselung
+      tst-sgw: { name: de/test_singleword.txt, txt-format: SingleWord } #  TEST: SingleWord-Format
+      #
+      #    ts_database (TxtFiles werden automatisch erzeugt!)
+      sys-lx1: { name: de/lingo-dic.txt, txt-format: WordClass }   #  TEST: wird automatisch erstellt
+      sys-lx2: { name: de/lingo-gpl.txt, txt-format: WordClass }   #  TEST: wird automatisch erstellt
+      tst-sw1: { name: test/txtfile_singleword.txt, txt-format: SingleWord }   #  TEST: wird automatisch erstellt
+      tst-sw2: { name: test/txtfile_singleword.txt, txt-format: SingleWord, def-wc: '*' }   #  TEST: wird automatisch erstellt
+      tst-sw3: { name: test/txtfile_singleword.txt, txt-format: SingleWord, use-lex: 'sys-lx1,sys-lx2' }   #  TEST: wird automatisch erstellt
+      tst-sw4: { name: test/txtfile_singleword.txt, txt-format: SingleWord, crypt }   #  TEST: wird automatisch erstellt
+      tst-kv1: { name: test/txtfile_keyvalue.txt, txt-format: KeyValue }   #  TEST: wird automatisch erstellt
+      tst-kv2: { name: test/txtfile_keyvalue.txt, txt-format: KeyValue, separator: '*' }   #  TEST: wird automatisch erstellt
+      tst-kv3: { name: test/txtfile_keyvalue.txt, txt-format: KeyValue, separator: '*', def-wc: 's' }   #  TEST: wird automatisch erstellt
+      tst-wc1: { name: test/txtfile_wordclass.txt, txt-format: WordClass, separator: '=' }   #  TEST: wird automatisch erstellt
+      tst-mv1: { name: test/txtfile_multivalue.txt, txt-format: MultiValue, separator: ';'  }   #  TEST: wird automatisch erstellt
+      tst-mk1: { name: test/txtfile_multikey.txt, txt-format: MultiKey }   #  TEST: wird automatisch erstellt
+
+    compositum:
+      min-word-size: "7"
+      min-part-size: "3"
+      max-parts: "5"
+      min-avg-part-size: "4"
+      append-wordclass: "+"
+      skip-sequences: [ xx ]
+      
+    suffix:
+      #    Suffixliste, Stand: 30-06-2005
+      #    Suffixklasse:   s = Substantiv, a = Adjektiv, v = Verb, e = Eigenwort, f = Fugung
+      #    Suffixe je Klasse:   "<suffix>['/'<ersetzung>][ <suffix>['/'<ersetzung>]]"
+      - [s, "e en er ern es n s se sen ses"]
+      - [a, "este ste ster sten stes ester estes esten e em en er ere eren erer eres es"]
+      - [v, "e/en en/en est/en et/en st/en t/en te/en ten/en eten/en ete/en etest/en s"]
+      - [e, "s"]
+      - [f, "s n e en es er ch/che"]
+
+  attendees:
+    tokenizer:
+      regulars:
+        #    Sonderzeichen im ISO-8859-1 Zeichensatz
+        - _ISO_: '\xC0-\xCF\xD1-\xD6\xD8-\xDD\xDF-\xF6\xF8-\xFD\xFF'
+        #    Zusätzliche Sonderzeichen im Windows-1252 Zeichensatz
+        - _WIN_: '\x8A\x8C\x8E\x9A\x9C\x9E\x9F'
+        #    Akzeptiert werden alle Sonderzeichen
+        - _CHR_: '\w_ISO__WIN_'
+        - NUMS:  '[+-]?(\d{4,}|\d{1,3}(\.\d{3,3})*)(\.|(,\d+)?%?)'
+        - URLS:  '((mailto:|(news|http|https|ftp|ftps)://)\S+|^(www(\.\S+)+)|\S+([\._]\S+)+@\S+(\.\S+)+)'
+        - ABRV:  '(([_CHR_]+\.)+)[_CHR_]+'
+#        - ABRS:  '(([_CHR_]{1,1}\.)+)(?!\.\.)'
+#        - OTHR:  '[—„!\"#$%&()*\+,\-\./:;<=>?@\[\\\]^_`{|}~´]'
+#        - WORD:  '[_CHR_\d\-]*[_CHR_\d]+'
+        - WORD:  '[_CHR_\d\-]+'
+        - PUNC:  '[!,\.:;?]'
+        - OTHR:  '[—„!\"#$%&()*\+,\-\./:;<=>?@\[\\\]^_`{|}~´]'
+        - HELP:  '[^ ]*'
+
+    variator:
+      variations:
+        - [ ieh, sch ]
+        - [ fec, see ]
+        - [ it,  st  ]
+        - [ fch, sch ]
+        - [ fp,  sp  ]
+        - [ f,   s   ]
+        - [ c,   e   ]
+        - [ ffc, sse ]
+        - [ ff,  ss  ]
+        - [ e,   c   ]
+        - [ ni,  m   ]
+        - [ feh, sch ]
+        - [ lt,  st  ]
+        - [ il,  st  ]
+        - [ ftc, ste ]
+        - [ ft,  st  ]
+        - [ fl,  st  ]
+        - [ li,  h   ]
+        - [ i,   s   ]
+        
+    sequencer:
+      sequences: [ [AS, "2, 1"], [AK, "2, 1"], [AAK, "3, 1 2"], [AAS, "3, 1 2"] ]

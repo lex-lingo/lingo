@@ -1,0 +1,1317 @@
+[00001.]
+020: ¬Die Aufgabenteilung zwischen Wortschatz und Grammatik in einer Indexsprache.
+
+[00002.]
+020: Nicht-konventionelle Thesaurusrelationen als Orientierungshilfen für Indexierung und Recherche: Analyse ausgewählter Beispiele.
+
+[00003.]
+020: PRECIS: ein englisches Indexierungsverfahren für deutsche Bibliotheken?.
+
+[00004.]
+020: Sachrecherchen in Online-Publikumskatalogen.
+025: Wechselspiel zwischen Dokumentationssprache, Indexierungsprinzip, Datenbankenaufbau und Abfragesprache.
+
+[00005.]
+020: INDEX.
+025: Ein Programm zur Erstellung von Wörterbüchern und Dokumentationssprachen auf Personal-Computern.
+
+[00006.]
+020: Aufbau und Pflege komplexer natürlichsprachig basierter Dokumentationssprachen (Thesauri).
+025: Aktuelle Tendenzen und kritische Analyse einer ausgewählten autonomen Thesaurus-Software für Personal Computer (PC).
+
+[00007.]
+020: Schlagwortkatalog und Schlagwortindex.
+025: eine Untersuchung über die Zweckmäßigkeit ihrer Anwendung und mögliche Kombinationsformen am Beispiel des Katalogwerks einer Großstadtbücherei.
+
+[00008.]
+020: Neue Regelwerke zum Schlagwortkatalog.
+025: Einführung in RSWK und PRECIS. Vorträge einer Fortbildungsveranstaltung der Fachhochschule für Bibliotheks- und Dokumentationswesen in Köln am 9. und 10. Juli 1984.
+
+[00009.]
+020: ¬Der Bremer Schlagwortindex.
+025: Regeln, Datenerfassung, Datenverarbeitung.
+
+[00010.]
+020: Schlagwortindex und Schlagwortkatalog sowie die Tourdefrance.
+
+[00011.]
+020: Theoretische Grundlagen der Indexierungspraxis.
+
+[00012.]
+020: Syntax und Gewichtung in Informationssprachen.
+025: Ein Fortschrittsbericht über präzisere Indexierung und Computer-Suche.
+
+[00013.]
+020: Zitatenanalyse und verwandte Verfahren.
+025: Vorträge einer öffentlichen Sitzung während der 32. Jahrestagung der Deutschen Gesellschaft für Dokumentation, Oktober 1979.
+
+[00014.]
+020: Systematik und Index des Realkatalogs der Stadtbücherei Bochum.
+
+[00015.]
+020: Probleme der syntaktischen Indexierung mit Murkswort.
+
+[00016.]
+020: ¬Ein "¬verbesserter Index" zum systematischen Katalog.
+056: Dieser Beitrag enthält bereits Vorschläge zur Gestaltung eines alphabetischen Schlagwort-Registers zur Systematik (mit Verweis auf die Bibliothek des Haager Friedenspalastes), wie sie später beim Kluth'schen Schlagwortindex wieder aufgegriffen worden sind.
+
+[00017.]
+020: Transparente Indexierungsstrukturen im Fach Literaturwissenschaft.
+056: Das skizzierte Modell verbaler Sacherschließung ist zugeschnitten auf die Erfordernisse des konventionellen Schlagwortkatalogs. Es geht von den Voraussetzungen aus, daß Transparenz der Schlagwortgebung (Indexierung) nur auf der Grundlage von Standardisierungen erwartet werden kann und daß die standardisierten Schlagwörter abgeleitet werden müssen aus den konzeptionellen, terminologischen und methodischen Strukturen einer Wissenschaftsdisziplin. Dad Modell wird entwickelt am Beispiel der Indexierung im Fach Literaturwissenschaft, das methodische prinzip ist übertragbar auf andere Disziplinen.
+
+[00018.]
+020: Entwicklung und Grundprinzipien von PRECIS, einem computergestütztem Indexierungssystem.
+
+[00019.]
+020: DIN 31623: Indexierung zur inhaltlichen Erschließung von Dokumenten.
+025: T.1: Begriffe, Grundlagen; T.2: Gleichordnende Indexierung mit Deskriptoren; T.3: Syntaktische Indexierung mit Deskriptoren.
+
+[00020.]
+020: Entwicklung und Fortschritt bei Klassifikation und Indexierung.
+
+[00021.]
+020: PASSAT: Programm zur automatischen Selektion von Stichwörtern aus Texten.
+
+[00022.]
+020: Methodische Rahmenregelung zur Erarbeitung und Anwendung sachbezogener Indexiermuster.
+
+[00023.]
+020: DIN 31623 oder die Problematik des genormten Indexierens.
+
+[00024.]
+020: Automatisierung in der Sacherschließung der British Library.
+056: Dieser Aufsatz beschäftigt sich mit Management-Aspekten der Sacherschließung in der British Library, Bibliographic Services Division, wo computergestützte, nicht völlig "automatische" Verfahren angewendet werden. In einer ausführlichen Darstellung des Arbeitsablaufes im Subject Systems Office wird der Weg eines Dokumentes durch die verschiedenen Sektionen verfolgt, und die betriebswirtschaftlichen Folgen der besonderen Rolle von PRECIS in diesem Arbeitsablauf werden erörtert. Das Mehrdateiensystem der British-Library-Datenbank wird beschrieben; es wird gezeigt, wie diese Struktur den effektiven Wiedergebrauch von Daten ermöglicht. Weiterhin wird die Verbesserung des on-line Retrieval durch den Einbau von präkoordinierten Themenangaben in den Suchablauf behandelt; abschließend wird die Rolle des Computers in der Sacherschließung einer IuD-Einrichtung wie der British Library diskutiert.
+
+[00025.]
+020: PRECIS, ein computerunterstütztes alphabetisches Indexierungssystem.
+
+[00026.]
+020: PRECIS: Grundprinzipien, Funktion und Anwendung.
+
+[00027.]
+020: Natursprache versus Indexsprache in der Chemie-Dokumentation.
+
+[00028.]
+020: PRECIS als zwischensprachliches System.
+056: PRECIS ist ein Indexierungssystem, das ursprünglich zur Herstellung des Sachregisters für die 1971 auf maschinelle Verarbeitung umgestellte BNB entwickelt wurde. Obwohl für das Englische entworfen, hat sich PRECIS bisher in einer Reihe anderer Sprachen bewährt. Die British Library finanziert seit 1976 ein Projekt, dessen Aufgabe es ist, das Potential von PRECIS als zwischensprachliche Indexsprache zu ermitteln. Es wird vor allem mit Deutsch, Französisch und Englisch gearbeitet. Das Forschungsteam hat eine Anzahl Mechanismen entwickelt, die verbale Indexierungsdaten in Form von "Eingabeketten" von einer Ausgangssprache in eine Zielsprache maschinell umsetzen. Jeder Begriff wird dabei einzeln umgesetzt. Diese Begriffe, die ein Sachverhaltspaket bilden, werden dann von einem Standardprogramm gelesen, das auch Registereinträge in einer Zielsprache oder Zielsprachen erstellt.
+
+[00029.]
+020: PRECIS.
+025: ein computerunterstütztes System zur Herstellung alphabetischer Sachregister und Schlagwortkataloge.
+056: Das Preserved Context Index System der British Library wird auf einer abstrakt linguistischen Basis beschrieben. Die allgemeinen Grundlagen der mehrsprachigen Anwendung des Systems werden reörtert und Änderungen diskutiert, die die Anwendung im Deutschen ermöglichen würden.
+
+[00030.]
+020: ¬Ein formales mathematisches Modell des Indexierens.
+
+[00031.]
+020: Indexieren: die Schwachstelle bei der Bürokommunikation.
+
+[00032.]
+020: Leistungsbewertung von Indexierungssystemen.
+025: Diskussion verschiedener Ansätze unter Einbeziehung der Gesamtbewertung von Informationssystemen.
+
+[00033.]
+020: ¬Der Schlagwortindex als Konkordanzregister zur SfB, ASB und SSD.
+025: eine Untersuchung am Beispiel des Fachgebietes Christliche Religion.
+
+[00034.]
+020: Zusammenarbeit in der Entwicklung and Anwendung von PRECIS.
+056: Kurze Beschreibung des verbalen Indexierungssystems PRECIS, seiner Ursprünge und Entwicklung, seiner Bestandteile und seiner Ziele. Im einzelnen wird an Beispielen gezeigt, wie das Format einer PRECIS-Eintragung aussieht und wie die "Mechanik" der Eintragungsgenerierung mit Computerhilfe abläuft, wobei auch auf die Rollenoperatoren eingegangen wird. Abschließend eine Darstellung der Anwendung von PRECIS in anderen Sprachen, hier in Deutsch. An der Produktion von Eintragungen zum Austausch zwischen den 4 Sprachen Englisch, Französisch, Deutsch und Polnisch wird gegenwärtig gearbeitet. Untersuchungen für die skandinavischen Sprachen sind geplant.
+
+[00035.]
+020: ¬Der Schlagwortindex der Universitätsbibliothek Bremen.
+
+[00036.]
+020: Probabilistische Modelle in Information-Retrieval-Systemen.
+056: Ausgehend vom probabilistischen Relevanzbegriff werden die wichtigsten Ansätze der probabilistischen Indexierungsstrategien (einschließlich der nutztheoretischen Indexierung) aufgezeigt und mit dem statistischen Indexierungsmodell von Harter verglichen. Das probabilistische Retrievalmodell, das auf der Termunabhängigkeitsannahme basiert, wird detailliert erklärt und in Kontrast zum Termunabhängigkeitsmodell gestellt. Dabei wird auf die Probleme der Bestimmung der in den o.g. Strategien vorgeschlagenen Termgewichte hingewiesen. Zum Schluß wird noch auf die Beziehung der behandelten probabilistischen Modelle kurz eingegangen.
+
+[00037.]
+020: Systematik für IHK-Bibliotheken.
+056: Revision of the system established in 1985 with a keyword index, available also as as Allegro-C database and as a WORD(5.0) file.
+
+[00038.]
+020: Wäre es nicht langsam Zeit, die Informationstechnologie in der bibliothekarischen Sacherschließung etwas erster zu nehmen?.
+025: ein Wort zur RSWK.
+056: Millionen D-Mark werden jährlich in die Planung einer Utopie gesteckt, die einen Universalthesaurus aus der Basis der RSWK zum Ziel hat. Ein Erschließungssystem, das sich noch immer an gedruckten Katalogen orientiert. Statt einer breiteren Indexierung sind Bibliothekare gezwungen, Zeit und Geld für eine überholte intellektuelle Arbeit, für Koordination und für eine merkwürdige Diskussion über das enge Schlagwort aufzuwenden. Als Ergebnis finden wir bei der Recherche auf der CD-ROM-Version von BIBLIODATA lediglich 0,35 hilfreiche Schlagwörter der RSWK pro Dokument, mit so unspezifischen Begriffen wie Biologie und Mensch. Als Konsequenz eruieren wir also schätzungsweise 90% der Treffer einer Online-Recherche in BIBLIODATA aus den Titeln. Währenddessen entsteht in vielen Bibliotheken ein zunehmender Mangel an Erfahrung, Kenntnis und Wissenschaft in der Indexierung online-verfügbarer Datenbanken, die von Bibliothekaren produziert werden könnten, und ganze Bücher können weiterhin mit maximal für indizierten Themen gesucht werden. Die wirklich moderne Informationstechnologie ist allgemein verfügbar und sollte zumindest in einigen Bibliotheken nun auch Anwendung finden.
+
+[00039.]
+020: ¬Die Pilotstudie "DB-Thesaurus".
+025: Allgemeiner Thesaurus für Bibliotheken.
+056: Im Jahre 1978/79 wurde bei der Deutschen Bibliothek eine Pilotstudie durchgeführt, in der die zur Indexierung der in der Reihe A der Deutschen Bibliographie ("Wöchentliches Verzeichnis") verwendeten Schlagwörter auf ihre Brauchbarkeit als Deskriptoren eines Allgemeinen Thesaurus für Bibliotheken untersucht werden. Es sollten die Grundprinzipien eines solchen Thesaurus darsgestellt, und seine Struktur (Fachgebiete, Anzahl der Hauptgruppen, Erschließungstiefe), die Möglichkeiten der Wortschatzbegrenzung, die Behandlung der Eigennamen und die Möglichkeiten der Terminologiekontrolle untersucht werden. Es zeigte sich, daß sich die Schlagwörter der DB sehr wohl als Thesauruselemente eignen, daß sie aber um viele Begriffe ergänzt werden müssen, um den Zusammenhang der Hierarchieebenen herzustellen.
+
+[00040.]
+020: Verbindliche versus freie Indexierung.
+056: Enthält kritische Anmerkungen zur Terminologie der Indexierung und diskutiert die Problematik, speziell mit Bezug auf Vor- und Nachteile der freien, intellektuellen und der maschinellen Indexierung. Abschließend Erörterung der Indexierungsanwendungen an Beispielen aus der Landwirtschaft (agris und FSTA). Empfiehlt eine verbindliche Indexierung ergänzt durch Möglichkeiten der freien Textsuche.
+
+[00041.]
+020: Automatische Indexierung zwischen Forschung und Anwendung.
+
+[00042.]
+020: Automatisches Indexieren als Erkennen abstrakter Objekte.
+
+[00043.]
+020: Zukunftsperspektiven der Klassifikation und Indexierung.
+056: Nach einem Rückblick auf die Jahrestagungsthemen seit der Gründung der Gesellschaft für Klassifikation 1977 und auf die inhaltlichen Schwerpunkte ihrer 237 Vorträge in den bisherigen Proceedingsbänden werden einige anscheinend vernachlässigte Themen aus dem Problembereich der Klassifikation genannt. Die Schwerpunkte im internationalen Bereich, die sich in der laufenden Bibliographie in "International Classification" abzeichnen, sind ähnlich verteilt. Realisierbare Möglichkeiten der Klassifikationsforschung und -entwicklung in der Zukunft werden in 10 Punkten dargestellt und anschließend in "10 Thesen für die Weiterarbeit" zusammengefaßt.
+
+[00044.]
+020: ¬Die Funktion von semantischen Kategorien in Indexierungssprachen und bei der Indexierung.
+056: Wenn man unter "Indexierung" den zweistufigen Prozeß (a) des Erkennens der Essenz eines wiederauffindbar zu machenden Textes und (b) des Wiedergebens dieser Essenz in einer ausreichend wiedergabetreuen und genügend gut voraussagbaren Form versteht, dann kann die Qualität der Indexierung gesteigert werden, wenn sie unter besonderer Beachtung der Begriffe aus einer kleinen Zahl von besonders wichtigen semantischen Kategorien erfolgt. Bei der Gestaltung der Indexierungssprache müssen die Begriffe aus diesen Kategorien in der erforderlichen Detailliertheit in den Wortschatz aufgenommen werden, und Präkombinationen, die zu "multikategorialen" Begroffen führen, sind möglichst weitgehend zu vermeiden. Präkombinationen, die ausschließlich durch Einbeziehung von häufig vorkommenden ("ubiquitätren") monokategorialen Begriffen gebildet werden, können und sollen aus pragmatischen Gründen für den Wortschatz zugelassen werden. Das Konzept des "Relationenweges" erklärt, inwiefern solche Präkombinationen für den Wortschatz nicht schädlich sind.
+
+[00045.]
+020: Alphabetische Sachregister und Klassifikation.
+056: Anhand von 2 alphabetischen Sachregistern der Zeitschrift für Buch- und Druckgeschichte "Het Boek" wird dargestellt, welche Rolle die Klassifikation in Sachregistern spielt bei der Wahl der Erschließungseinheiten und bei der Bestimmung der Indexierungstiefe. Als Hauptfunktion der Klassifikation bei Registern erweist sich jedoch die Erleichterung und Verbesserung des Suchvorganges. Erklärt wird, wie die Methode des ersten Registers, Klassifizierung spezifischer Begriffe unter hierarchisch höhere Begriffe, nicht zum Ziel führt und wie die Kontextmethode einen besseren Zugriff gewährleistet.
+
+[00046.]
+020: PRECIS: eine computerunterstützte verbale Sacherschließungsmethode auf linguistischer Grundlage.
+
+[00047.]
+020: Klassifikation, Thesaurus und was dann?.
+025: das Problem der "dritten Generation" in Dokumentation und Information.
+056: Die bisherigen theoretischen und praktischen Beschäftigungen mit der Dokumentation bzw. Informationsvermittlung betrachten diese zu sehr statisch-strukturell und unter weitgehend aktuell-synchronischen Gesichtspunkten. Hierzu muß jetzt auch die dynamisch-diachronische Betrachtung treten, die die historische Entwicklung mit einschließt. Die bisherige Entwicklung zeigt so einen dreifachen Platonismus: desjenigen der absoluten Textinhaltsgegebenheit, der absoluten Identität von Autor, Indexer und Sucher und der absoluten identischen Universalität eines Klassifikationssystems. Diese Probleme werden krtisch durchleuchtet und neue theoretische und praktische Lösungen vorgeschlagen.
+
+[00048.]
+020: Verbesserung der Indexierungsergebnisse durch fachgebietsbezogene Indexierregeln.
+056: Der Autor gibt eine Begründung der Notwendigkeit und eine Darstellung des Schemas zur Ableitung fachspezifischer Indexierregeln, ausgehend von statistischen Untersuchungen zur Häufigkeitsverteilung verschiedener Kategorien des Informationsaufkommens und verschiedener Typen von Veröffentlichungen auf dem untersuchten Fachgebiet. Er nennt Voraussetzungen, die erfüllt werden müssen, bevor das an einigen Beispielen aus dem Fachgebiet Schiffbau dargestellte Schema als allgemeingültig angesehen werden kann. Beispiele fachspezifischer Indexierregeln für Erzeugnisbeschreibungen werden angeführt.
+
+[00049.]
+020: ¬Ein Versuch zur Anpassung des Präkoordinierungsindexes an die individuellen Informationsprofile des betriebseigenen Informationssystems durch Facettierung und Kategorisierung.
+
+[00050.]
+020: Grundriß eines Thesaurus als funktionsfähiges Hilfsmittel für Indexierung und Recherche.
+
+[00051.]
+020: Fünf Jahre KWIC-Indexing nach H.P. Luhn.
+
+[00052.]
+020: Automatische Indexierung: Entwicklung und Perspektiven.
+056: Die Automatische Indexierung als ein Teilgebiet der Inhaltserschließung wird inzwischen in einer Reihe von Gebieten, vor allem in der Fachinformation und Kommunikation praktisch eingesetzt. Dabei dominieren äußerst einfache Systeme, die (noch) erhebliche Anpassungen des Benutzers an die jeweilige Systemstrategie voraussetzen. Unter Berücksichtigung des Konzepts der Einheit von Informationserschließung und -retrieval werden höherwertige ("intelligentere") Verfahren vorgestellt, die der Entlastung des Informationssuchenden wie auch der Verbesserung der Rechercheergebnisse dienen sollen.
+
+[00053.]
+020: Entwicklung und Anwendung des automatischen Indexierungssystems AIR/PHYS.
+056: Seit 1985 wird das automatische Indexierungssystem AIR/PHYS in der Inputproduktion der Physik-Datenbank PHYS des Fachinformationszentrums Karlsruhe angewandt. Das AIR/PHYS-System teilt englischsprachigen Referatetexten Deskriptoren aus einem vorgeschriebenen Vokabular zu. In der vorliegenden Arbeit werden der zugrundeliegende fehlertolerierende Ansatz, der Aufbau des Systems und die wichtigsten Verfahren zur Entwicklung eines großen Indexierungswörterbuches beschrieben. Ferner werden Probleme der Anwendung und Weiterentwicklung des Systems behandelt.
+
+[00054.]
+020: Vektorraum-Modell und Clusteranalyse in Information-Retrieval-Systemen.
+056: Ausgehend von theoretischen Indexierungsansätzen wird das klassische Vektorraum-Modell für automatische Indexierung (mit dem Trennschärfen-Modell) erläutert. Das Clustering in Information-Retrieval-Systemem wird als eine natürliche logische Folge aus diesem Modell aufgefaßt und in allen seinen Ausprägungen (d.h. als Dokumenten-, Term- oder Dokumenten- und Termklassifikation) behandelt. Anschließend werden die Suchstrategien in vorklassifizierten Dokumentenbeständen (Clustersuche) detailliert beschrieben. Zum Schluß wird noch die sinnvolle Anwendung der Clusteranalyse in Information-Retrieval-Systemen kurz diskutiert.
+
+[00055.]
+020: Automatische Indexierung.
+025: Erfahrungen und Perspektiven.
+056: Es wird zunächst ein "ideales Information-Retrieval-System" beschrieben und diskutiert. Als Kernproblem für -selbst bescheidene - Entwicklungen in die dadurch aufgezeigte Richtung wird das "Verstehen" von Texten durch den Computer angesehen, wobei je nach der Aufgabenstellung einer Systemkomponente stets nur ein partielles Verstehen erforderlich ist. Ein relativ einfaches, aber keineswegs triviales Beispiel dieser Art ist die automatische Indexierung von Referatetexten bei vorgegebenen Deskriptorensystem. Von diesem Problem werden Ansätze, Ergebnisse und Erfahrungen mitgeteilt. Darauf aufbauend werden weitere Forschungsrichtungen und Entwicklungsmöglichkeiten mitgeteilt.
+
+[00056.]
+020: ¬Die unerträgliche Bedeutung der Zitate.
+
+[00057.]
+020: Anwendung eines existenten Klassifikationssystems im Bereich der computerunterstützten Inhaltsanalyse.
+056: In universitärer Grundlagenforschung wurde das Computergestützte TeXterschließungssystem (CTX) entwickelt. Es ist ein wörterbuchorientiertes Verfahren, das aufbauend auf einer wort- und satzorientierten Verarbeitung von Texten zu einem deutschsprachigen Text/ Dokument formal-inhaltliche Stichwörter (Grundformen, systemintern "Deskriptoren" genannt) erstellt. Diese dienen als Input für die Computer-Unterstützte Inhaltsanalyse (CUI). Mit Hilfe eines Thesaurus werden die Deskriptoren zu Oberbegriffen zusammengefaßt und die durch CTX erstellte Deskriptorliste über eine Vergleichsliste auf die Kategorien (=Oberbegriffe) des Thesaurus abgebildet. Das Ergebnis wird über mathematisch-statistische Auswertungsverfahren weiterverarbeitet. Weitere Vorteile der Einbringung eines Thesaurus werden genannt.
+
+[00058.]
+020: Manuelle Indexierung.
+025: Analyse der Dokumentation, Thesauri, Indexierung, Abstracts.
+
+[00059.]
+020: Sacherschließung im Verbund.
+025: Vorträge, Materialien und Arbeitsergebnisse eines Fortbildungskurses des Landes Baden-Württemberg im Mathematischen Forschungsinstitut Oberwolfach-Walke vom 6.-10.11.1989.
+
+[00060.]
+020: Formen des sachlichen Zugriffs.
+025: Probleme des automatischen Indexierens.
+
+[00061.]
+020: Indexierung auf linguistischer Grundlage am Beispiel von JUDO-DS(1).
+
+[00062.]
+020: Dokumenten-Management in Büro und Fertigung.
+056: Das Thema Dokumenten-Management stößt auf immer größeres Interesse. Täglich werden tausende von Dokumenten generiert, weiterverarbeitet und abgelegt. Dabei steht nicht nur die Erstellung und Archivierung von Dokumenten im Mittelpunkt, sondern ihre unternehmensweite, integrierte Verarbeitung. Der vorliegende Beitrag behandelt die Thematik der integrierten Vorgangsbearbeitung und computergestützten Gruppenarbeit (CSCW). Dabei liegen die Schwerpunkte auf Indexierungsmethoden, Retrieval von großen Datenmengen und dem Einsatz von Dokumenten-Management-Systemen.
+
+[00063.]
+020: Systematik und Index des Realkataloges der Stadtbücherei Bochum.
+025: Entwurf.
+
+[00064.]
+020: Richtlinien für die Handhabung der Systematik, für die Anlage und Führung der Fachkataloge, für die Klassifizierung, für Anlage und Führung des Schlagwortindex und für die alphabetische Katalogisierung.
+
+[00065.]
+020: Richtlinien für die Sacherschließung der Stadtbücherei Bochum.
+
+[00066.]
+020: Fachsystematik Universitätsbibliothek der Fernuniversität Hagen.
+
+[00067.]
+020: EDV-gestützte Katalogisierung von AV-Materialien.
+056: In 1990 the Berlin Hochschule der Künste began automated cataloguing of audio-visual media, using a local integrated system, planned to be compatible with other at local and supra-regional levels. The college is decentralised; OPAC facilities will be provided so that all library stocks will be accessible from all departments. The computerised cataloguing is well advanced; rare printed material has been covered since 1987, scores, monographs and indexes will be covered from 1992 and other media later. An archive is planned.
+
+[00068.]
+020: ¬Der Song-Index in der öffentlichen Musikbibliothek in Durham.
+
+[00069.]
+020: Katalogerweiterung durch Scanning und Automatische Dokumenterschließung.
+025: Das DFG-Projekt KASCADE.
+
+[00070.]
+020: ¬Der Science Citation Index.
+025: Untersuchung und Vergleich der Erscheinungsformen "Print-Medium", "CD-ROM" und "Online".
+
+[00071.]
+020: ¬Die systematischen Grundlagen für ein linguistisch orientiertes maschinelles Dokumentationsverfahren.
+
+[00072.]
+020: ¬Die Pressedatenbank für Text und Bild des Verlagshauses Gruner + Jahr.
+
+[00073.]
+020: Zur Frage der Vereinheitlichung des Indexierens.
+
+[00074.]
+020: Ist die automatische Indexierung bereits anwendbar?.
+
+[00075.]
+020: Methoden der automatischen Indexierung.
+
+[00076.]
+020: 'Citation indexing' und Rückwärtskatalogisierung'.
+025: Beispiele für Zitatendokumentation.
+
+[00077.]
+020: Probabilistisches Indexing and Retrieval.
+
+[00078.]
+020: Schlagwortverzeichnis mit Komfort.
+025: das Programmsystem zur Arbeit mit dem Schlagwortverzeichnis des Saarländischen Rundfunks.
+056: Describes the introduction of software which facilitates use of the subject heading index at the Saarland radio station. The system was programmed using DBase 3 plus data management system. It is used by a blind documentalist in the radio archive.
+
+[00079.]
+020: Indexierungen in biomedizinischen Literaturdatenbanken.
+025: eine vergleichende Analyse.
+056: Auf der Grundlage von vier Originaldokumenten, d.h. dokumentarischen Bezugseinheiten (DBEs), wird die Indexierung in vier biomedizinischen Online-Datenbanken (MEDLINE, EMBASE, BIOSIS PREVIEWS, SCISEARCH) analysiert. Anhand von Beispielen werden inahltliche Erschließung, Indexierungstiefe, Indexierungsbreite, Indexierungskonsistenz, Präzision (durch syntaktisches Indexieren, Gewichtung, Proximity Operatoren) und Wiederauffindbarkeit (Recall) der in den Datenbanken gespeicherten Dokumentationseinheien (DBEs) untersucht. Die zeitaufwendigere intellektuelle Indexierung bei MEDLINE und EMBASE erweist sich als wesentlich präziser als die schneller verfügbare maschinelle Zuteilung von Deskriptoren in BIOSIS PREVIEWS und SCISEARCH. In Teil 1 der Untersuchung werden die Indexierungen in MEDLINE und EMBASE, in Teil 2 die Deskriptorenzuteilungen in BIOSIS PREVIEWS und SCISEARCH verglichen.
+
+[00080.]
+020: STEINADLER: ein Verfahren zur automatischen Deskribierung und zur automatischen thematischen Klassifikation.
+
+[00081.]
+020: Konzepte der automatischen Indexierung und vergleichende Analyse der Systeme STAIRS, STEINADLER/CONDOR, CTX und PASSAT/GOLEM.
+
+[00082.]
+020: Pressedatenbank: Online-Retrieval und gedruckte Register.
+056: Das PDS-Registerprogramm wird zur Produktion von Registern der Gruner+Jahr-Zeitschriften verwandt. Zusammen mit der Pressedatenbank können die Vorteile einer Suche in gedruckten Registern mit denen der Online-Recherche verbunden werden. Das Registerprogramm arbeitet mit einem modifizierten KWOC-Verfahren, das dem Indexierer eine genaue Steuerung der Registereinträge ermöglicht. Die Ausgabe kann über übliche DV-Drucker, z.B. Laserdrucker oder Lichtsatz erfolgen. Ein Bildschrimtextanschluß für die Online-Abfrage ist eingerichtet.
+
+[00083.]
+020: CONDOR: Modell eines integrierten DB-/IR-Systems für strukturierte und unstrukturierte Daten.
+056: CONDOR ist ein Modell eines modularen, integrierten DB-/IR-Systems, mit dem sowohl strukturierte als auch unstrukturierte Daten (Textdaten) verarbeiet werden können. Die abzuspeichernden Informationen werden weitgehend automatich erschlossen. Da ein breiter Benutzerkreis Zugang zum System haben soll, sind verschiedene Dialogformen (Kommando, natürlichsprachlich, Formular, Menü) implementiert. Es wird versucht, sie in einer systematischen Oberflächengestaltung des Systems zusammenzuführen, um eine möglichst einfache Bedienung für den einzelnen Benutzer bei hoher Nutzungsflexibilität des Systems zu erreichen.
+
+[00084.]
+020: INDEX: ein Programm zur Thesaurusentwicklung und Pflege.
+025: eine Untersuchung unter besonderer Berücksichtigung der Strukturierungsmöglichkeiten für Thesauri.
+
+[00085.]
+020: Marburger Index.
+025: Inventar der Kunst in Deutschland.
+
+[00086.]
+020: Informationsverbünde - Trend der Zukunft.
+025: ökonomische Überlegungen zwingen zu mehr Kooperation.
+056: While the development of library network systems and OPACs is still at the discussion stage in Germany, integrated online retrieval system have been used in information centres for some time. Describes the OKAPI project at the UK and the PICA project in Holland and discusses the 'Informationsverbund Internationale Beziehungen und Länderkunde' and the 'Informationsring Kreditwirtschaft', 2 examples of cooperative online database systems needing intellectual indexing for good results.
+
+[00087.]
+020: Indexieren, Klassieren, Extrahieren.
+
+[00088.]
+020: Indexierung mit Nominalgruppen.
+056: Die Indexierung mit Nominalgruppen ist eine konsequente Fortsetzung der Entwicklung von der gleichordnenden zur syntaktischen Indexierung. Nominalgruppen eignen sich besonders zur Bezeichnung komplexer Begriffe (Themen) und sind benutzerfreundlich. Bei einer automatischen Indexierung mit Nominalgruppen sind keine vollständigen Satzanalysen nötig, auch Systeme mit einem partiellen Parser liefern brauchbare Ergebnisse. Das Problem eines Retrieval mit Nominalgruppen ist noch zu lösen.
+
+[00089.]
+020: Inhaltserschließung von Massendaten.
+025: zur Wirksamkeit informationslinguistischer Verfahren am Beispiel des deutschen Patentinformationssystems.
+
+[00090.]
+020: Verbale Sacherschließung in den neunziger Jahren.
+025: eine internationale Tagung in Lissabon.
+
+[00091.]
+020: Section on classification and indexing.
+
+[00092.]
+020: Maschinelle Indexierung von Titelaufnahmen zur Verbesserung der sachlichen Erschließung in Online-Publikumskatalogen.
+
+[00093.]
+020: OPAC und verbale Sacherschließung.
+056: In der vorliegenden Form können die RSWK nicht befriedigen. Die geforderte hochdifferenzierte Erschließung ist in einem OPAC wegen der vielfältigen Abfragemöglichkeiten gar nicht nötig, ja eine einheitliche Indexierung und effiziente Suche is aufgrund der komplexen Regeln sogar erschwert. Aufgaben und Probleme der verbalen Sacherschließung in OPACs werden in dieser Arbeit aufgezeigt und Ansätze zu einer Alternative diskutiert. Der traditionelle Indexkatalog hat als Ergänzung des modernen Information Retrieval nur eine Zukunft, wenn die Möglichkeiten der EDV und der Faktor Mensch bei der Regelwerkentwicklung besser berücksichtigt werden.
+
+[00094.]
+020: Theoretische Grundlagen der Indexierungspraxis.
+
+[00095.]
+020: Verfahren der automatischen Indexierung.
+025: benötigtes Vorwissen und Ansätze zu seiner automatischen Akquisition, ein Überblick.
+
+[00096.]
+020: Verbale Sacherschließung im Südwestdeutschen Bibliotheksverbund.
+025: Fortbildungskurs 1993 für Bibliothekare an den wissenschaftlichen Bibliotheken des Landes Baden-Württemberg vom 8.-12. November 1993 in Oberwolfach.
+
+[00097.]
+020: ¬Der Einsatz des Automatischen Indexierungs- und Retrievalsystems (AIR) im Fachinformationszentrum Karlsruhe.
+
+[00098.]
+020: Urteilszitierungen in Rechtsprechungsdatenbanken.
+025: Vorschlag für zwei neue Methoden im juristischen Information Retrieval.
+056: Wie die Geschichte des Science Citation Index (SCI) zeigt, hat sich im wissenschaftlichen Information Retrieval die Nutzung von Zitationsbezügen zwischen Texten als wohl erfolgreichste Ergänzung traditioneller, begriffsorientierter Erschließungsmethoden erwiesen. Dieser Erfolg läßt sich durch neuere Experimente bestätigen, die Recall und Precision Boolescher Begriffssuchen mit zitationsgestützten Suchen in Online-Datenbanken vergleichen. Mit Hilfe zitationsgestützter Suche lassen sich in der Regel zusätzliche relevante Dokumente nachweisen, wobei die Schnittmenge der mit den beiden Methoden erhaltenen Dokumente stets gering ist. Aus einer Reihe von Beobachtungen richterlichen Zitierverhaltens anhand von Dokumenten des 'Juristischen Informationssystems für die Bundesrepublik Deutschland' (Juris) läßt sich folgern, daß auch das Retrieval von Urteilsdokumenten durch Berücksichtigung von Zitationsbezügen zwischen Urteilen verbessert werden kann. Diese Verbesserung sollte sich vor allem der Methoden des 'bibliographic coupling' und der Kozitationsanalyse bedienen (analog zu entsprechenden Verfahren des SCI auf CD-ROM-Datenträgern). Voraussetzung hierfür ist, daß die 'Juris'-Praxis, in Urteilen des Finanz- und Abgabenrechts Zitate vollständig nachzuweisen, auf alle Rechtsgebiete ausgedehnt wird.
+
+[00099.]
+020: Indexieren.
+
+[00100.]
+020: ¬Die Nutzungsentwicklung von Fachbibliographien auf CD-ROM.
+025: ein Bericht über die Erfahrungen mit dem 'Philosopher's Index'.
+
+[00101.]
+020: Information Retrieval: Grundlegendes für Informationswissenschaftler.
+
+[00102.]
+020: PRECIS: Für die Anwendung in deutschen Bibliotheken überarbeitete u. vereinfachte Form des syntaktischen Indexierungsverfahrens der British Library.
+
+[00103.]
+020: SWI: Schlagwortindex zu Systematik für Bibliotheken (SfB), Allgemeine Systematik für Öffentliche Bibliotheken (ASB), Systematik Stadtbibliothek Duisburg (SSD). T.1-2.
+
+[00104.]
+020: Information systematisch gewinnen.
+025: Leitfaden für Studenten aller Fachrichtungen.
+
+[00105.]
+020: Was wir über OPAC-Nutzer wissen.
+025: fehlertolerante Suchprozesse in OPACs.
+056: Rekapituliert aus Ergebnissen der OOPAC-Nutzerforschung werden einige wesentliche Schwierigkeiten, die Endnutzer bei der Literaturrecherche in OPACs haben, und erklärt werden einige softwareseitige Maßnahmen zur fehlertoleranten OPAC-Gestaltung. Schwierigkeiten bei der OPAC-Nutzung sind: keine Treffer (kein recall), zu viele Treffer (Ballast), Orientierungslosigkeit, unverständliche Optionen, ungenügende Daten für Relevanzbeurteilung, Überschätzung des Datenbankinhaltes, unwirksame Hilfestellung. Einige in deutschen OPACs noch nicht implementierte Maßnahmen mit fehlertoleranter Auswirkung sind: automatische Wortformenreduktion, automatische Rechtschreibkorrektur, relevance ranking, Relevanzrückmeldung und Recherche mit Koindexaten.
+
+[00106.]
+020: Automatische Indexierung und Schnittstellen zu Thesauri.
+056: Über eine Schnittstelle zwischen Programmen zur automatischen Indexierung (PRIMUS-IDX) und zur maschinellen Thesaurusverwaltung (INDEX) sollen große Textmengen schnell, kostengünstig und konsistent erschlossen und verbesserte Recherchemöglichkeiten geschaffen werden. Zielvorstellung ist ein Verfahren, das auf PCs ablauffähig ist und speziell deutschsprachige Texte bearbeiten kann.
+
+[00107.]
+020: ¬Das Projekt WAI.
+025: Wörterbuchentwicklung für automatisches Indexing.
+
+[00108.]
+020: Nutzen der Indexierung bei Online-Datenbanken.
+
+[00109.]
+020: Benutzungshilfen für das Retrieval bei wörterbuchunabhängig indexiertem Textmaterial.
+
+[00110.]
+020: ¬Der Mangel an Grammatik bei Indexsprachen und seine Folgen.
+
+[00111.]
+020: ¬Ein Retrievaltest mit automatisch indexierten Dokumenten.
+
+[00112.]
+020: Zitatenanalyse im engeren Sinne.
+
+[00113.]
+020: Fehlerquellen bei der Zitatenanalyse.
+
+[00114.]
+020: Probleme der automatischen Indexierung mit Nominalgruppen.
+
+[00115.]
+020: Komplexe Nominalgruppen als Indexierungseinheiten am Beispiel des Projekte CONDOR.
+
+[00116.]
+020: Schätzung von Zuteilungswahrscheinlichkeiten für Deskriptoren als Eintrag im Indexierungswörterbuch.
+
+[00117.]
+020: Weiterentwicklung der automatischen Indexierung im Projekt AIR.
+
+[00118.]
+020: Zur Aufwandsabschätzung beim Aufbau eines automatischen Indexierungssystems.
+
+[00119.]
+020: Ranking-Experimente mit gewichteter Indexierung.
+
+[00120.]
+020: Freitextindexierung in der Parlamentsdokumentation.
+
+[00121.]
+020: ¬Der Thesaurus als Grundlage sachgerechten Indexierens und Voraussetzung selektiver Literaturdatenbanken.
+
+[00122.]
+020: Erfahrungen mit dem automatischen Indexierungssystem AIR/PHYS.
+
+[00123.]
+020: Entwicklung und Pflege des Indexierungswörterbuches PHYS/PILOT.
+
+[00124.]
+020: ¬Das automatische Indexierungssystem AIR/PHYS.
+
+[00125.]
+020: Internet yellow pages.
+025: das Adreßbuch für jeden Datenreisenden.
+056: Mit diesem Adreßbuch für das Internet erhalten Sie eine komplette Übersicht über die Leistungen und den Nutzen, die das Internet bietet. Alle Datenanbieter sind in einer alphabetischen Übersicht schnell und leicht zu finden. Der dazugehörige Index in dieser deutschen Übersetzung wurde komplett neu überarbeitet und erweitert. Dadurch wurde eine Übersichtlichkeit erreicht, die den totalen Durchblick im Umgang mit dem Internet und seinen Leistungen schafft. Einen Zusatznutzen bringen Ihnen die kurzen Einführungen zum Internet und seiner Bedienung.
+
+[00126.]
+020: Internationales Biographisches Informationssystem.
+
+[00127.]
+020: Thesaurus-Software.
+025: ein Vergleich.
+056: Sechs Computerprogramme zur Erstellung und Verwaltung von Thesauri werden in den folgenden Ausführungen vorgestellt und mit Hilfe eines Kriterienkatalogs verglichen. Hierbei werden im besonderen 3 Punkte untersucht. Dies sind einmal die Eintragsinformationen und Relationen, dann die Konsistenzwahrung sowie die Benutzungsoberfläche und deren Hypertextfähigkeiten. Die betrachtete Software umfaßt sowohl eigenständige Thesaurussysteme als auch Thesauruskomponenten von Information Retrieval-Systemen.
+
+[00128.]
+020: Zur Abhängigkeit der Ergebnisse maschineller Indexierung vom verwendeten Begriffssystem.
+056: Die Ergebnisse automatischen Indexierens nach Worthäufigkeit werden in verschiedenen Varianten gezeigt. Zuerst werden die Textwörter mit einer fortlaufenden Numerierung maschinell selegiert, dann alphabetisch sortiert mit Häufigkeitsangaben. Durch die Bildung von Quasi-Stämmen läßt eine Frequenzliste dominierende Fachgebiete erkennen. Danach wird noch eine Ordnung nach Begriffen vorgeführt. Sie zeigt, wie man beim Retrieval hohe Vollständigkeits- oder hohe Genauigkeitsraten erzielen kann.
+
+[00129.]
+020: Syntaktische Indexierung durch Aspektkodierung.
+025: Zukunft der Eppelsheimer Methode.
+056: Diese vor Jahrzehnten entwickelte Methode birgt interessante Anregungen für die Entwicklung moderner Fachinformationssysteme, insbesondere für die Geisteswissenschaften. Aus einer Betrachtung der syntaktischen Beziehungen zwischen den Bestandteilen einer Dokumentbeschreibung ergeben sich drei Vorschläge: (1) konsequente Facettierung und eindeutige Kennzeichnung der Deskriptorgattungen; (2) Anwendung eines Standard-Unterteilungsschemas als syntaktisches Verknüpfungsmittel und (3) Ergänzunge des systematischen durch alphabetische Ordnungselemente bei schwer zu ordnenden Begriffen.
+
+[00130.]
+020: Wortrelationierung in der Sprachtechnik.
+025: Stilhilfen, Retrievalhilfen, Übersetzungshilfen.
+
+[00131.]
+020: Neuigkeiten von der ISMN.
+056: In Sept 94 the 1st regional agency for music published in Germany, Austria, Switzerland and Luxembourg was established in Frankfurt. National agencies have been established in Italy and Lithuania. All ISMN agencies are participating in a data recording scheme. In 1995 the 1st index of 200.000 titles of available music should be published on CD-ROM.
+
+[00132.]
+020: Sacherschließung im Jahr 2000.
+025: Spielwiese für Theoretiker oder berufsbedingtes Erfordernis?.
+056: Outlines the future increase in importance of subject indexing and subject retrieval in libraries. Examines the value of an efficient subject index in public service operations as well as the advantages offered by new technology for exploring the possibility of storing and retrieving documents.
+
+[00133.]
+020: Präkoordination - ja oder nein?.
+056: Die Diskussion um Vor- und Nachteile von Präkoordination oder Postkoordination wird unter den in der verbalen Sacherschließung Engagierten in Deutschland seit Jahren geführt. Mit zunehmender Verbreitung der RSWK gewinnen die Überlegungen, die sich angesichts der Ausbreitung des OPAC für das 'Zerschlagen' der Schlagwortketten aussprechen, an Bedeutung. In diesem Zusammenhang trägt eine Berücksichtigung der internationalen Debatte um Prä- und Postkoordination zur Erweiterung des nationalen Horizontes bei. Der Beitrag ist eine leicht gekürzte Übersetzung eines Referates, das die Autorin beim IFLA Satellite Meeting zum Thema 'Subject indexing in the 90's  - principles and practices' im August 1993 in Lissabon gehalten hat.
+
+[00134.]
+020: Semantische Analyse morphologisch komplexer Wörter.
+025: ein dreistufiges Verfahren zur maschinellen Inhaltserschließung von Wortableitungen und Komposita.
+
+[00135.]
+020: Welchen 'Rang' hat ein Wissenschaftler?.
+056: Für die Einschätzung der Relevanz der Arbeit von Wissenschaftlern wird in zunehmendem Maße deren Publikationsverhalten als Bewertungskriterium eingesetzt. Hierbei sind vor allem die Zahl der Publikationen sowie die wissenschaftliche Reputation des jeweiligen zeitschriftentitels von zentraler Bedeutung. Die vorliegenden Ausführungen geben einen kurzen Einblick in die Probleme bei der Beurteilung wissenschaftlicher Tätigkeit mit Hilfe der Zitationsanalyse.
+
+[00136.]
+020: Men in black.
+025: Die amerikanische 'National Security Agency' fängt weltweit elektronische Post ab.
+
+[00137.]
+020: Entwicklungen bei Patentdatenbanken.
+056: Der Artikel befaßt sich mit neuen Inhalten in Patentdatenbanken und Veränderungen im Design der vorhandenen Datenbanken. Neue Inhalte sind insbesondere Patentzitierungen, Patentgrafiken, Volltexte und die als Thesaurus strukturierte Patentklassifikation. Aktuelle Änderungen im Design betreffen besonders gegenseitige Anpassungen der Datenbanken hinsichtlich der verwendeten Datenformate und der Indexgenerierung.
+
+[00138.]
+020: Wissenschaftsevaluation mittels Datenbanken.
+025: methodisch einwandfrei?.
+056: Als Maß für die Produktivität und den Einfluß von Forschern, wissenschaftlichen Einrichtungen und Fachbereichen dienen häufig anhand von Publikations- und Zitationsanalysen erstellte Ranglisten. Doch nach welchen Kriterien sind die in elektronischen Fachdatenbanken gespeicherten Informationen auszuwerten, um ein einigermaßen zutreffendes Abbild der Forschungsleistung zu erhalten?.
+
+[00139.]
+020: Wissensrepräsentation und Information Retrieval.
+
+[00140.]
+020: Beschleunigung und Verbesserung der national-bibliographischen Dienste der Deutschen Bibliothek.
+056: The effectivity of bibliographic data depends upon clearly defined standards, prompt publication and a range of possible users. The Deutsche Bibiothek has converted data into UNIMARC for national exchange purposes. The keyword standard file of over 260.000 heading and reference forms is available on magnetic tape and microfiche. A central data file on corporate bodies, produced by the Deutsche Bibliotheksinstitut is also available. From 1989 the amount of information in topical index entries may be reduced. Further changes planned include more precise definition of collection guidelines, new operational forms for floppy disc and CD-ROM and selective bibliographic services for particular publication forms and types of library..
+
+[00141.]
+020: EDV-Katalogisierung und Online-Benutzerkatalog.
+025: Möglichkeiten und Probleme neuer Erschließungstechniken in Öffentlichen Bibliotheken.
+056: Describes the function and problems of the traditional card catalogue compared with a computerised catalogue. Examines library cataloguing with the computer, linked to rules for subject cataloguing, as well as the oppor-tunities offered by computerised title entries, the transfer of data from outside, data base structure and indexing. Also looks at techniques for searching catalogues with computers, including search rules with Boolean operators, searches restricted to specific fields of free search in all fields for a vague concept. Other topics cover the essential principles of the OPAC, its information functions, mail box function and hardware configuration..
+
+[00142.]
+020: ¬Die Analyse von Online-Datenbanken.
+025: ein Instrument für das Beobachten von Forschungsaktivitäten; dargestellt an einem Forschungsfeld der Festkörperphysik.
+056: Sinnvolle forschungspolitische bzw. forschungsstrategische Entscheidungsprozesse bedürfen beim Wissenschafts- und Forschungsmanagement ausreichender Informationen hinsichtlich der Forschungsaktivitäten bestimmter Wissenschaftlergruppen, Institutionen bzw. Länder. Durch entsprechende Vergleichsuntersuchungen lassen sich u.a. auch thematische, länderweite bzw. zeitkritische Forschungsschwerpunkte herausarbeiten. Die folgende Arbeit skizziert die Möglichkeiten von Forschungsanalysen mittels Online-Datenbanken und verdeutlicht die spezifischen Möglichekeiten und Probleme am Beispiel von Arbeiten aus der Festkörperphysik.
+
+[00143.]
+020: Vergleichende Untersuchung von PC-Thesaurusprogrammen.
+
+[00144.]
+020: Automatische Inhaltserschließung einer Volltextdatenbank.
+025: Machbarkeitsstudie am Beispiel der FAZ.
+
+[00145.]
+020: Werkzeuge zur Evaluierung und Optimierung von Regeln zur Automatischen Indexierung.
+025: Anwendungssystementwicklung.
+
+[00146.]
+020: Maschinelles Indexieren zur Verbesserung der sachlichen Suche im OPAC.
+025: DFG-Projekt an der Universitäts- und Landesbibliothek Düsseldorf.
+
+[00147.]
+020: Sprache und Computer.
+025: Wortbedeutung und Termassoziation. Methoden zur automatischen semantischen Klassifikation.
+
+[00148.]
+020: All in the mind.
+025: concept analysis in indexing.
+056: The indexing process consists of the comprehension of the document to be indexed, followed by the production of a set of index terms. Differences between academic indexing and back-of-the-book indexing are discussed. Text comprehension is a branch of human information processing, and it is argued that the model of text comprehension and production debeloped by van Dijk and Kintsch can form the basis for a cognitive process model of indexing. Strategies for testing such a model are suggested.
+
+[00149.]
+020: Automatische Indexierung für Online-Kataloge.
+025: Ergebnisse eines Retrievaltests.
+056: Examines the effectiveness of automated indexing and presents the results of a study of information retrieval from a segment (40.000 items) of the ULB Düsseldorf database. The segment was selected randomly and all the documents included were indexed automatically. The search topics included 50 subject areas ranging from economic growth to alternative energy sources. While there were 876 relevant documents in the database segment for each of the 50 search topics, the recall ranged from 1 to 244 references, with the average being 17.52 documents per topic. Therefore it seems that, in the immediate future, automatic indexing should be used in combination with intellectual indexing.
+
+[00150.]
+020: Index als elektronische Datei.
+056: Kurzbericht über das Archiv der Rheinischen Post.
+
+[00151.]
+020: Mit dem 'Surfbrett' in die Bibliothek.
+025: der World-Wide-Web Katalog der Bibliothek der Friedrich-Ebert-Stiftung.
+
+[00152.]
+020: Automatisierung in der Sacherschließung.
+025: Maschinelles Indexieren von Titeldaten.
+
+[00153.]
+020: SCI auf CD-ROM oder das größte Expertensystem der Welt?.
+056: Presents a feature of information science implemented for the 1st time by the offer of Science Citation Index (SCI) on CD-ROM: the implementation of the so-called bibliographic linking in a commercial data base. Discusses the difference between cocitation linking and bibliographic linking, and illustrates the implementation within the SCI data base by means of an example..
+
+[00154.]
+020: AMPHORE.
+025: ein Arbeitsplatz zur Filmdokumentation.
+056: AMPHORE ist ein Client-Server-System zur Dokumentation von Filmmaterial. Den Server bildet eine SGML-fähige Volltextdatenbank, während als Clients PC-Arbeitsplätze mit Software zur Dokumentation und Recherche von Filmen und/oder Filmteilen fungieren. Das Filmmaterial in AMPHORE liegt komplett digital vor und kann so zur inhaltlichen Dokumentation und Recherche interaktiv genutzt werden. Der so erreicht Komfort bei der Inhaltsanalyse wird genutzt, um das Material sequenz- oder gar schnittgenau zu erschließen. Die Erschließung basiert auf einer syntaktischen, durch thesauri kontrollierten Indexierung, die Handlungsabläufe und -ebenen in den Filmen widerspiegeln soll.
+
+[00155.]
+020: Deutschsprachige Zeitungen auf CD-ROM.
+025: ein Vergleich der Zeitungen F.A.Z., NZZ und taz.
+056: Die große Speicherkapazität des Mediums CD-ROM eignet sich in besonderem Maße für die Volltextspeicherung von Tageszeitungen. Im deutschsprachigen Raum ist das Spektrum der Tagespresse auf CD-ROM noch beschränkt auf die FAZ, die Neue Zürcher Zeitung (NZZ) und die taz. Alle drei Produkte sind keine Cover-to-cover-Versionen der gedruckten Ausgaben, da sie keine Grafiken, Fotos und Anzeigenteile enthalten. Bei einer kritischen Prüfung der 3 Pressedatenbanken zeigt sich, daß die Retrievalflexibilität als Voraussetzung für einen zielgenauen Zugriff auf die gewünschten Informationen hinsichtlich des Angebotes an Operatoren, Trunkierungsmöglichkeiten und der Indexaufbereitung noch zu optimieren ist. Auch im Bereich der Oberflächengestaltung gibt es Defizite, die insbesondere die Nutzung der guten Inhaltserschließung der FAZ erschweren.
+
+[00156.]
+020: Linguistische Grundlagen.
+
+[00157.]
+020: Zukunft der Sacherschließung im OPAC.
+025: Vorträge des 2. Düsseldorfer OPAC-Kolloquiums am 21. Juni 1995.
+
+[00158.]
+020: Automatische Indexierung und alektronische Thesauri.
+
+[00159.]
+020: Automatische Indexierung und bibliothekarische Inhaltserschließung.
+025: Ergebnisse des DFG-Projekts MILOS I.
+
+[00160.]
+020: Multimedia.
+025: eine Auswahlbibliographie.
+
+[00161.]
+020: MILOS: Automatische Indexierung für Bibliotheken.
+025: Handbuch.
+
+[00162.]
+020: Kostengünstige Konversion großer Bibliothekskataloge.
+
+[00163.]
+020: Quantitative und qualitative Aspekte der verbalen Sacherschließung in Online-Katalogen.
+
+[00164.]
+020: Lost in Cyberspace?.
+025: Informationssuche mit Search Engines im World Wide Web.
+056: Das WWW hat sich in den vergangenen Monaten zum größten und wohl auch populärsten Online-Medium entwickelt. Eine riesige Informationsmenge scheint nur auf den Abruf zu warten. Diese Informationsflut führt im chaotische organisierten Internet zwangsläufig auch zu einem schwerwiegenden Problem: wie lassen sich relevante Dokumente im Dickicht von Millionen Web-Seiten auffinden? Abhilfe versprechen hier die 'Search engines' genannten Suchwerkzeuge, deren effektive Nutzung in diesem Beitrag geschildert wird.
+
+[00165.]
+020: Wie mißt man Forschungsqualität?.
+025: der Science Citation Index - ein Maßstab für die Bewertung.
+056: Ein überfordertes Gutachter-System, knapper fließende Forschungsgelder sowie die starke Faszination von Ranglisten bewirken zunehmend den Einsatz bibliometrischer Methoden zur Messung von Forschungsqualität. Grundlage der meisten Bewertungen ist der Science Citation Index, der nun auch in der Version als Online-Datenbank für umfangreiche Analysen genutzt werden kann. Erweiterungen der Retrievalsprache beim Host STN International ermöglichen statistische Analysen, die bisher nur dem SCI-Hersteller und wenigen Spezialisten vorbehalten waren. Voraussetzung für eine sinnvolle Anwendung sind vor allem die Wahl geeigneter Selektionskriterien sowie die sorgfältige Interpretation der Ergebnisse im Rahmen der Grenzen dieser Methoden.
+
+[00166.]
+020: ¬Die Entlinearisierung und Strukturierung von Texten zur Inhaltserschließung und Wissensrepräsentation.
+056: In der linearen Struktur eines natursprachigen Textes sind zwangsläufig viele syntaktisch verknüpfte Begriffe getrennt. Dier hierdurch bedingte Mangel an Ordnung zwingt dazu, einen Text von Anfang bis zu Ende durchzulesen, bevor man einen Überblick über das Umfeld eines gesuchten begriffes gewonnen hat. Noch im letzten Satz kann hierzu eine wichtige Aussage gemacht worden sein. Hat man in einem Informationssystem eine kategorisierte Indexsprache zur Verfügung, so lassen sich im Interesse eines besseren Überblickes und einer höheren Ordnung die zusammengehörenden Begriffe eines Textes nach einfachen Regeln zweidimensional gruppieren.
+
+[00167.]
+020: ¬Eine deutschsprachige Testdatenbank für moderne Erschließungs- und Retrievalsysteme.
+025: German Indexing and Retrieval Testdatabase - GIRT.
+
+[00168.]
+020: ¬Die 62. General Conference der IFLA in Beijing.
+025: Veranstaltungen der Division IV Bibliographic Control.
+
+[00169.]
+020: ¬Der Erlanger Katalogverbund.
+025: Geschichte und Nutzen.
+056: 1967 saw the publication of the printed Erlangen periodicals index. Between 1973-76 an alphabetical union catalogue for the university of Erlangen-Nürnberg was produced. From 1982 main entries went to the Bavarian library cooperative offline and computerization was introduced. In 1986 the periodicals index began using computerization; the union catalogue was filmed and appeared in microfiche in 1987. Now the Erlangen cooperative has 1.4 million entries, one third from institute libraries.
+
+[00170.]
+020: ¬Ein '¬Clearinghouse'-Konzept für Fachinformation aus dem Internet oder wie man aus dem Chaos sinnvolle Informationsvermittlung betreibt.
+056: Technical information sources on the Internet are still relatively unstructured despite several attempts at indexing and despite the use of search mechanisms to bring such information sources together. Discusses, from the perspective of the concept of a clearinghouse, methods for the retrieval, concentration and structuring of technical information sources on the Internet for specific user groups. Cooperation between information institutions such as the German Research Society (DFG) special subject libraries and other similar special libraries can promote the establishment of value added services in the realm of information retrieval. Outlines the consequences of the increasing use of networked information sourvces on library work and on librarians' job profiles in general.
+
+[00171.]
+020: Internet versus Intranet.
+056: Unermüdlich kreative Marketingstrategen haben einen neuen Begriff eingeführt: Intranet. Was auf den ersten Blick wie ein Rechtschreibfehler aussehen mag, entwickelt sich zu einem der wichtigsten Zukunftsmärkte im Computerbereich.
+
+[00172.]
+020: Comics auf dem Web.
+
+[00173.]
+020: ¬Das Internet - ein globaler Bildschirmschoner.
+025: Melbournes öffentliche Toiletten und Hillarys 320 Frisuren: die seltsamsten Webpages.
+
+[00174.]
+020: Visual bibliometrics.
+025: eine visuelle Oberfläche zur Erweiterung der Nutzungsmöglichkeiten bibliographischer Datenbanken.
+056: In einer früheren Studie wurde bereits der 'informationelle Mehrwert' von bibliographischen Datenbanken durch bibliometrische Nutzung untersucht. Im folgenden soll nun eine visuelle Oberfläche vorgestellt werden, die mit Hilfe einer bibliometrischen 'Sekundärdatenbank' einerseits die Nutzungsmöglichkeiten der zugrundeliegenden bibliographischen Datenbanken vor allem in den Bereichen Wissenschaftsinformation, Forschungsevaluation und Wissenschaftspolitik erweitern soll, andererseits aber auch eine Rückkopplung zu den Aufgaben des traditionellen Retrievals erlaubt. Die visuelle Oberfläche 'Visual Bibliometrics' ist eine Erweiterung des CD-Edition des 'Science Citation Index' und des 'Social Science Citation Index'.
+
+[00175.]
+020: Alphabetic subject indexes and coordinate indexes.
+025: an experimental comparison.
+
+[00176.]
+020: Information als Rohstoff für Innovation.
+025: Programm der Bundesregierung 1996 bis 2000.
+056: Es wird versucht, das Programm in seinen wesentlichen Strukturen, den Begriff der wissenschaftlichen und technischen Information und des Wissens, den drei wesentlichen Zielen und den ihnen zugeordneten wesentlichen Maßnahmen aus der Sicht des BMBF und des Verfassers zu skizzieren. Langfristiges Ziel ist die Überführung der Informationsinfrastruktur von einer stark staatlich geprägten in eine Aktivität in möglichst großer wirtschaftlicher und wissenschaftlicher Selbstverwaltung. Hierzu gehören: den effizienten Zugang zur Information vom Arbeitsplatzrechner zu ermöglichen (Beispiel: MeDoC, Förderkonzept); eine verstärkte Nutzung der Information vor allem in KMU (Beispiel: INSTI); Rückzug des Staates aus den Fachinformationseinrichtungen, wenn die Dienstleistungen privatwirtschaftlich fortgeführt werden können (Beispiel: FIZ Karlsruhe, FIZ Chemie). Die Schwerpunktkapitel (Internet, Fachverlage, Fachinformationseinrichtungen, wissenschaftliche Bibliotheken sowie Nutzung) sind nach Ausgangslage, Ziele und Maßnahmen gegliedert. Der Text erläutert die Probleme in kurzer Form und versucht, sie auch dem Außenstehenden zu verdeutlichen.
+
+[00177.]
+020: ¬Ein umfassendes Datenbanksystem für Print, Radio, Fernsehen und das Internet.
+056: Es wird ein Datenbanksystem vorgestellt, mit dem die Arbeit in Presse- sowie Informations- und Dokumentationsabteilungen (IuD-Abteilungen) von Unternehmen und Regierungsstellen im Sinne des Workgrouping so gut koordiniert werden kann, daß Doppelarbeit weitgehend vermieden wird und beide Abteilungen einen Zusatznutzen haben. Das gesamte Datenbanksystem (genannt 'Multimedia-Pressesystem') besteht aus bis zu 20 miteinander verbundenen Datenbanken, die möglichst viele Archivierungsaufgaben und sonstige Arbeitsgänge von IuD- und Presseabteilungen erleichtern sollen. Zentrum dieses Pressesystems ist eine umfassende Mediendatenbank, in der alle verschiedene Dokumenttypen verwaltet und gemeinsam durchsucht werden können. Audio- und Videodateien von Radio- und Fernsehberichten können in der Datenbank selbst im Original abgehört oder betrachtet werden. Internetseiten können in der Datenbank im Volltext indexiert und aus der Datenbank heraus können auch alle Textdokumente im HTML-Format automatisch erzeugt werden. Der Beitrag zeigt, wie die Mediendatenbank all die Dokumente aufnimmt und indexiert, die bei der elektronischen Zusammenstellung eines Pressespiegels mit OCR entstehen.
+
+[00178.]
+020: Digitale Bilder in der Altbestandserschließung.
+025: drei Projekte und ihre Realisierung.
+056: Digitization of old material in libraries speeds up access and makes rare works better known and more accessible than before. 3 digitization projects are described: the Incipit project in the Incunabula Short Title Catalogue; incorporating of graphic title pages representation for catalogue retrieval from the Oettingen-Wallerstein collection at Augsburg University; the VD17, the index of 17th century printed material in German-speaking countries.
+
+[00179.]
+020: CD-ROMs für den Auskunftsdienst.
+025: Teil 4: Bibliographien, Biographien und Adreßsammlungen.
+
+[00180.]
+020: Evaluationsresultate des mehrsprachigen Suchsystems CANAL/LS.
+056: The search system CANAL/LS simplifies the searching of library catalogues by analyzing search questions linguistically and translating them if required. The linguistic analysis reduces the search question words to their basic forms so that they can be compared with basic title forms. Consequently all variants of words and parts of compounds in German can be found. Presents the results of an analysis of search questions in a catalogue of 45.000 titles in the field of psychology.
+
+[00181.]
+020: Selbstzitat.
+056: 'Zwischenruf' zur Zitierpraxis im Wissenschaftsbereich: "Jeder kann seine Plazierung auf dieser Weltrangliste gelehrter Eitelkeit verbessern, indem er sich so oft und andere so wenig wie möglich zitiert. Die Verbreitung des Ruhms, den man braucht, nimmt man am besten selbst in die Hand, von Jugend an".
+
+[00182.]
+020: Neue Technologien mit Inhalten verknüpfen, um die Medienkompetenz der Kinder zu fördern.
+056: Die Zukunft der Medien- und Informationsgesellschaft aktiv mitzugestalten, ist Chance und Herausforderung für Bibliotheken. Mit ihrem schöpferischen und phantasievollen Potential können gerade Kinderbibliotheken Impulse setzen für kreative Medienerlebnisse, innovatives Lernen und Medienkompetenz im gleichberechtigten Miteinander alter und neuer Medien. Das EU-Projekt CHILIAS erprobt die Nutzung des Internet/WWW, um neue Zugänge zur realen Welt der Kinderbücherei, der Bücher und Medien für Kinder zu präsentieren.
+
+[00183.]
+020: ¬Der große Kulturfahrplan.
+025: die interaktive Enzyklopädie von der Vorzeit bis zur Gegenwart.
+
+[00184.]
+020: Textretrieval im Intranet.
+056: Kurzvorstellung des Einsatzes der Textretrieval-Werkzeuge von: Dataware, Excalibur, Fulcrum, Inmagic, PLS, Verity und ZyLAB.
+
+[00185.]
+020: Automatische Indexierung und Klassifikation.
+056: Im Beitrag wird zunächst eine terminologische Klärung und Gliederung für drei Indexierungsmethoden und weitere Begriffe, die Konsistenzprobleme bei intellektueller Indexierung betreffen, unternommen. Zur automatichen Indexierung werden Extraktionsmethoden erläutert und zur Automatischen Klassifikation (Clustering) und Indexierung zwei Anwendungen vorgestellt. Eine enge Kooperation zwischen den Befürwortern der intellektuellen und den Entwicklern von automatischen Indexierungsverfahren wird empfohlen.
+
+[00186.]
+020: Klassifikationsverfahren bei der automatischen Indexierung.
+056: Nach einer kurzen Einführung in die Darmstädter Projekte WAI und AIR werden die folgenden Themen behandelt: Ein Ansatz zur automatischen Klassifikation. Statistische Relationen für die Klassifikation. Indexieren von Dokumenten als Spezialfall der automatischen Klassifikation. Klassifikation von Elementen der Relevanzbeschreibung. Klassifikation zur Verbesserung der Relevanzbeschreibungen. Automatische Dokumentklassifikation und Automatische Indexierung klassifizierter Dokumente. Das Projekt AIR wird in Zusammenarbeit mit der Datenbasis INKA-PHYS des Fachinformationszentrums Energie, Physik, Mathematik in Karlsruhe durchgeführt.
+
+[00187.]
+020: Erschließen, Suchen, Finden.
+025: Vorträge aus den bibliothekarischen Arbeitsgruppen der 19. und 20. Jahrestagungen (Basel 1995 / Freiburg 1996) der Gesellschaft für Klassifikation.
+
+[00188.]
+020: Vom OPAC zum Hyperkatalog.
+025: Daten und Indexierung.
+
+[00189.]
+020: Sacherschließung.
+
+[00190.]
+020: Indexieren, Klassieren, Extrahieren.
+
+[00191.]
+020: Automatische thematische Textklassifikation und ihre Interpretation in der Dokumentengrobrecherche.
+056: Für die automatische Erschließung natürlich-sprachlicher Dokumente in einem Informationssystem wurde ein Verfahren zur automatischen thematischen hierarchischen Klassifikation der Texte entwickelt. Die dabei gewonnene Ordnungsstruktur (Begriffsnetz) wird beim Retrieval als Recherchehilfe engeboten. Die Klassifikation erfolgt in vier Stufen: Textindexierung, Prioritätsklassenbildung, Verknüpfung der begriffe und Vernetzung der Prioritätsklassen miteinander. Die so entstandenen Wichtigkeitsstufen sind die Hierarchieebenen der Klassifikation. Die während des Clusteringverfahrens erzeugten Begriffs- und Dokumenten-Gruppierungen bilden die Knoten des Klassifikationsnetzes. Die Verknüpfung zwischen den Knoten benachbarter Prioritätsklassen repräsentieren die Netzwege in diesem Netz. Die Abbildung der Suchfrage auf dieses Begriffsnetz wird zur Relevanzbeurteilung der wiedergewonnenen Texte benutzt.
+
+[00192.]
+020: ¬Die automatische Indexierung beliebiger Titel und Schlagwörter auf der Grundlage eines Modells für einen Gesamtthesaurus des Wissens.
+056: Unter automatischer Indexierung oder auch Klassifizierung wird hier das vermittels eines Computers durchgeführte Einordnen beliebiger Stich- oder Schlagwörter in ein vorgegebenes Klassifikationssystem verstanden. Das hier beschriebene Verfahren wurde im Rahmen der Biologiedokumentation entwickelt, erprobt und für den Aufbau einer großen Datenbank mit Erfolg verwendet. Auf der Basis dieser Erfahrungen wurde ein Gesamtthesaurus das Wissens in deutscher Sprache aufgebaut. Eine Voraussetzung hierzu war die Erstellung einer universellen Facettenklassifikation. Der Gesamtthesaurus enthält sowohl die Wörter der Umgangssprache als auch die wichtigsten Fachwörter und Namen, wie sie in Titeln von wissenschaftlichen Veröffentlichungen vorkommen.
+
+[00193.]
+020: Hierarchiebildung bei numerischer Indexierung.
+025: schnellerer Zugang zum Wissen mit einer online abfragbaren DK.
+
+[00194.]
+020: Neuere Methoden der intellektuellen Indexierung.
+025: Britische Systeme unter besonderer Berücksichtigung von PRECIS.
+
+[00195.]
+020: Neuere Methoden der intellektuellen Indexierung.
+025: Britische Systeme unter besonderer Berücksichtigung von PRECIS.
+
+[00196.]
+020: Marburger-Index-Datenbank.
+025: Wegweiser zur Kunst in Deutschland.
+
+[00197.]
+020: ¬Der eigene Kern der Dokumentation im Wandel der Technik.
+056: Die technischen Veränderungen in der beruflichen Arbeit der Dokumentare und die Tendenzen zur Ausweitung des Fachs Dokumentation werden beschrieben und bewertet. Um die Dokumentation eigenständig und damit stabil zu positionieren, wird für eine Rückbesinnung auf den Kern des Faches argumentiert. Dieser Kern besteht aus den 4 Gegenständen: Wissen, Texte, Benennungen, Begriffe sowie aus bestimmten Beziehungen zwischen diesen Gegenständen. Das Fachwissen konzentriert sich auf die formalen und thematischen Einheiten der kommunizierten Inhalte. Es geht vor allem um Indexieren, Ordnen und um die Aufgabe, über Relevenaz zu entscheiden. Auf das fachliche und technische Potential in diesem komplexen Kerngebiet und auf die Notwendigkeit, die fachspezifischen Methoden zu verbessern, wird hingewiesen.
+
+[00198.]
+020: KASCADE: Dokumentanreicherung und automatische Inhaltserschließung.
+025: Projektbericht und Ergebnisse des Retrievaltests.
+
+[00199.]
+020: Pretest zum Projekt German Indexing and Retrieval Testdatabase (GIRT) unter Anwendung der Retrievalsysteme Messenger und freeWAISsf.
+056: GIRT soll den Rahmen für einen aussagekräftigen Vergleich moderner, intelligenter Indexierungs- und Retrievalsysteme schaffen, auf dessen Basis die Leistungsfähigkeit dieser Systeme gegenüber herkömmlichen Standardsystemen beurteilt werden kann. Es geht darum, die existierenden bzw. in der Entwicklung befindlichen modernen Indexierungs- und Retrievalsysteme auf ihre Leistungsfähigkeit und Einsatzfähigkeit für den Bereich der Fachinformation hin zu überprüfen.
+
+[00200.]
+020: Automatisches Indexieren - Ende der intellektuellen Sacherschließung?.
+
+[00201.]
+020: ¬Die Bibliothek der Universität Konstanz und ihr Internet-Benutzerservice.
+056: Referat der Veranstaltung 'Internet-Zugang für Benutzer in öffentlichen und wissenschaftlichen Bibliotheken' während der 7. Deutschen Bibliothekskongresses in Dortmund am 22.5.97.
+
+[00202.]
+020: Erstellung von Registern.
+056: The paper deals with procedures and problems arising when computers are used as tools in the production of indexes. The following steps of the procedure are explained and studied: 1) Correction of machine-readable records; 2) Production of index entries. Here, various methods and forms (KWIC, KWOC, rotation method) and dictionary use are described and discussed, and information about their advantages and disadvantages is given; 3) Sorting and cumulation of index entries; 4) Output and setting, output feasibilities are detailed. Emphasis is also laid on the problems arising from the non-satisfactory links of the processing chain: data recording, limited fonts, and choice of index terms..
+
+[00203.]
+020: ¬Die 63. Council and General Conference der IFLA in Kopenhagen.
+025: Veranstaltungen der Division IV Bibliographic Control.
+
+[00204.]
+020: "Principles and future of AACR2r".
+025: Internationale Konferenz in Toronto.
+056: Bericht ueber eine Konferenz und ihre Beitraege; darunter (1) T. Delsey: Modeling the logic of AACR - (2) L.C. Howarth: Content versus carrier - (3) J. Hirons u. C. Graham: Seriality - (4) Ein OPAC mit super records von R. Fattahi (http://www.silas.unsw.edu.au/students/rfattahi/super.htm).
+
+[00205.]
+020: Drucksachen.
+056: Kurzbericht über die Angebote der Buchhändlervereinigung (VLB), des OPACs der Deutschen Bibliothek und Subito.
+
+[00206.]
+020: Auf dem Weg zur automatischen Inhaltserschließung?.
+025: Das DFG-Projekt MILOS und seine Ergebnisse.
+056: Der Beitrag beschäftigt sich mit der Anwendung eines Verfahrens zur Automatischen Indexierung von Titeldaten in Bibliotheken. Die Arbeitsweise des Verfahrens und seine Nutzung innerhalb des von der Deutschen Forschungsgemeinschaft geförderten und an der Universitäts- und Landesbibliothek Düsseldorf durchgeführten Projekts MILOS werden geschildert. Die Ergebnisse eines Retrievaltests belegen die Tauglichkeit des Verfahrens für den Einsatz in Bibliotheken. Aufbauend auf diesen Ergebnissen werden Perspektiven für eine sinnvolle Verbindung von konventioneller bibliothekarischer Sacherschließung und automatischen Verfahren entworfen.
+
+[00207.]
+020: EDV unterstützte Hilfen zur Sacherschließung phytomedizinischer Fachliteratur.
+056: Zur weiteren Rationalisierung der Dokumentationsarbeit wurde mit Hilfe des Datenbankenprogrammes LARS eine Oberfläche entwickelt, die den vielfältigen Anforderungen zur Erschließung von Fachdokumenten entspricht. Mußte bislang in verschiedenen Nachschlagewerken geblättert werden, um beispielsweise die systematische Stellung biologischer Objekte festzustellen, können solche Angaben durch Tastendruck aus einer vorgegebenen Indexdatei übernommen werden. Nicht vorhandene oder durch Wechsel der taxonomischen Bezeichnung veränderte Begriffe können einfach aktualisiert werden. In gleicher Weise werden mit dieser Anwendung chemische und freie Deskriptoren ergänzt und verarbeitet. Weiterhin wurde unter MS-Access eine Datenbankanwendung programmiert, die es ermöglichst, neben den wissenschaftlichen Namen von Insekten, Mikroorganismen, Pflanzen und deren systematische Stellung auch die Trivialnamen in deutsch, englisch, französisch, spanisch und protugiesisch zu recherchieren. Damit ist es möglich, unter Eingabe des Namens einer Krankheit (z.B. 'apple scab') die dazugehörigen Erreger ausfindig zu machen.
+
+[00208.]
+020: Weiterentwicklung der SWD.
+056: Im Hinblick auf den erreichten Umfang der SWD und ihre Funktion in elektronischen Katalogen werden Überlegungen zur strukturellen Anpassung der SWD diskutiert. Diese Überlegungen sollen nicht als Aufforderung zur grundsätzlichen Überarbeitung der SWD verstanden werden, sie sollen jedoch dazu beitragen, daß die SWD als Hilfsmittel bei der Literaturrecherche sinnvoll eingesetzt werden kann. Dabei sind folgende Bereiche angesprochen: (1) Allgemeine Probleme in einem universellen Vokabular; (2) Disambiguierung; (3) Verhältnis Zugangssprache - Indexierungssprache; (4) Berücksichtigung fremdsprachiger Äquivalente und Problemen der Weiterentwicklung der SWD zu einer multilingualen Normdatei; (5) Relationierung; (6) Strukturierung nach art der Schlagwortkategorien; (7) Systematisierung; (8) Codierung.
+
+[00209.]
+020: Semantische Umfeldsuche im Information Retrieval.
+056: Sachliche Suchen in bibliothekarischen Online-Katalogen enden häufig mit unbefriedigenden Ergebnissen. Als eine Ursache dafür kann angesehen werden, daß die Gestaltung des Suchprozesses das semantische Umfeld einer Suchanfrage nicht mit einbezieht, daß in Übertragung der Verhältnisse in konventionellen Katalogen am Paradigma des Wort-Matching zwischen Suchwort und Indexat festgehalten wird. Es wird statt dessen das Konzept einer semantischen Umfeldsuche entwickelt und gezeigt, welche Rolle die Verwendung strukturierten Vokabulars dafür spielen kann. Insbesondere wird dargestellt, welche Möglichkeiten Verfahren der wörterbuchgestützten maschinellen Indexierung in diesem Zusammenhang spielen können. Die Ausführungen werden durch Beispiele illustriert.
+
+[00210.]
+020: Image mining.
+025: Stand der Entwicklung auf dem Gebiet von Image-Retrieval-Systemen.
+056: EDV-Entwicklungen haben die technischen Möglichkeiten geschaffen, kostengünstige computergestützte Bilddatenbanken aufzubauen, die nicht nur die textuelle Beschreibung des Bildes und Kataloginformationen speichern, sondern auch die entsprechenden Bilder in digitalisierter Form. Insofern besteht ein Bedarf an Indexierungs- und Retrievalsystemen, die eine effizientes und effektives Speichern und Wiederfinden der Daten gewährleisten. Es werden verschiedene Systeme beschrieben, die es ermöglichen, den Inhalt von Bildern automatisch zu indexieren und somit alle Voraussetzungen dafür zu schaffen, Bilder nicht nur mit Schlüsselwörtern zu suchen, sondern auch über 'grafisch' formulierte Suchanfragen zu finden.
+
+[00211.]
+020: Testverfahren für intelligente Indexierungs- und Retrievalsysteme anhand deutsch-sprachiger sozialwissenschaftlicher Fachinformation (GIRT).
+025: Bericht über einen Workshop am 12. September 1997 im IZ Sozialwissenschaften, Bonn.
+
+[00212.]
+020: Probabilistische Modellierung der effizienten Informationssuche in verteilten multimedialen Dokumentbeständen durch Einschränkung des Suchraums.
+056: Ein Modell für die Informationssuche in einer verteilten Multimedia-Dokumentkollektion wird vorgestellt. Das Modell basiert auf dem probabilistischen Anordnungsprinzip. NAch der Berechnung individueller Ranglisten zu den einzelnen Subkollektionen werden diese schrittweise in eine finale Rangliste überführt, in der die Dokumente gemäß ihrer Relevanzwahrscheinlichkeiten geordnet sind. Dabei können die Dokumente (bzw. Dokumentpassagen, falls es sich um multimediale Dokumente handelt) aus verschiedenen Subkollektionen mit verschiedenen Verfahren indexiert werden. Auch lassen sich unterschiedliche probabilistische Verfahren zur Berechnung der subkollektionsspezifischen Ranglisten einsetzen. Damit wird die Integration von Dokumenten beliebigen Typs unterstützt. Übredies ist das zugrundeliegende Datenvolumen beliebig skalierbar. Das Modell wird durch ein Kriterium zur Einschränkung des Suchraums erweitert, um die effiziente Informationssuche zu ermöglichen. Dabei werden verschiedene Kostenfaktoren berücksichtigt.
+
+[00213.]
+020: Zur Aufwandsabschätzung bei der Entwicklung eines Indexierungswörterbuches.
+056: Für die automatische Indexierung mit einem vorgegebenen Deskriptorensystem wird ein Wörterbuch benötigt, das möglichst viele Fachausdrücke des Anwendungsgebietes durch Relationen mit Deskriptoren verbindet. Werden die in einem solchen Indexierungswörterbuch erfaßten Relationen aus der Verarbeitung von Texten gewonnen, so ergibt sich eine Beziehung zwischen der Anzahl der Texte und der Größe und Leistungsfähigkeit des Wörterbuches. Die beschreibung derartiger Beziehungen ist besonders vor Beginn der Entwicklung eines automatischen Indexierungssystems von großem Interesse. H. Hüther hat sich in mehreren Arbeiten mit diesem Problem beschäftigt und verschiedene Schätzverfahren theoretische hergeleitet. Für eines der von ihm vorgeschlagenen Schätzverfahren zur Abschätzung der Größe eines Indexierungswörterbuches in Abhängigkeit von der Anzahl der zugrundeliegenden Texte werden im vorliegenden beitrag die Leistungsfähigkeit und die Anwendbarkeit untersucht.
+
+[00214.]
+020: Wachstumsfunktionen in der automatischen Indexierung.
+
+[00215.]
+020: Entwicklung linear-iterativer und logistischer Indexierungsfunktionen.
+
+[00216.]
+020: Internetseiten Öffentlicher Bibliotheken.
+025: eine kritische Analyse.
+
+[00217.]
+020: Verbesserung der Literatursuche durch Dokumentanreicherung und automatische Inhaltserschließung.
+025: Das Projekt 'KASCADE' an der Universitäts- und Landesbibliothek Düsseldorf.
+
+[00218.]
+020: Wo ist der OPAC der virtuellen Bibliothek?.
+025: Strukturen des Kooperativen Bibliotheksverbundes.
+
+[00219.]
+020: Sacherschließung ohne RSWK?.
+025: Neue Praxis an der Universitäts- und Landesbibliothek Düsseldorf.
+
+[00220.]
+020: CD-ROMs für den Auskunftsdienst.
+025: Teil 7: Datenbankführer, Abstracts-Dienste und Schutzrechte.
+
+[00221.]
+020: ¬Ein allgemeiner Bibliotheksindex.
+056: A general library index, produced as a series over years, would describe performance in the whole national system, showing increases and decreases compared with previous years. The index should cover input, processing and output and be modelled on the consumer price index. This will reflect service quality and quantity and users' reactions.
+
+[00222.]
+020: Intentionen der Indexierungsnorm DIN 31623 und Überlegungen zum Verhältnis gleichordnende/syntaktische Indexierung.
+
+[00223.]
+020: Immer gut informiert.
+056: Das Internet wird oft als die größte Informationsquelle der WElt dargestellt - und das ist es wohl auch. Klar, daß hier auch die aktuellen NAchrichten nicht zu kurz kommen dürfen.
+
+[00224.]
+020: Dietrichs Index philosophicus.
+025: Basisdatenbank 1983/96.
+
+[00225.]
+020: ¬Die grüne Spur auf der Datenautobahn.
+025: Das Internet bringt unzählige Umwelt-Angebote, professionelle deutsche Seiten sind aber noch Mangelware.
+
+[00226.]
+020: ¬Die 64. IFLA General Conference in Amsterdam.
+025: Bericht über die Veranstaltungen der Division IV Bibliographic Control.
+056: Section on bibliography (S.1776-1777) Section on classification and indexing (1777-1778).
+
+[00227.]
+020: Aspekte der Mathematikliteratur.
+025: Untersuchungen in verschiedenen Datenbanken.
+056: Literaturdatenbanken wurden eigentlich mit zwei Zielen aufgebaut: einerseits Fachliteratur zu archivieren und zu dokumentieren und andererseits die Literaturhinweise den Wissenschaftlern für Recherchen zur Verfügung zu stellen. Aus diesen gespeicherten Datenmengen kann man baer auch allgemeine Erkenntnisse über die Literatur eines Fachgebietes und das Verhalten der Forscher gewinnen. Vor allem seit den sechziger Jahren, seit dem Aufbau des Science Citation Index - in dem man auch nach zitierten Arbeiten suchen kann - gibt es eine Fülle von informationswisenschaftlichen und wissenssoziologischen Untersuchungen mit Datenbanken.
+
+[00228.]
+020: Und immer lockt das Netz.
+025: Internet-Sucht.
+056: Macht das Internet einsam und depressiv? Neueste Studien sagen ja. Viele Onliner und manche Psychologen sehen das aber anders.
+
+[00229.]
+020: Natürlichsprachige Suche - more like this!.
+025: Lexis-Nexis' Freestyle.
+056: Insbesondere durch die Suchmaschinen im Internet wurde die Aufmerksamkeit der Information Professionals auf Retrievalmöglichkeiten jenseits der Booleschen Operatoren gelenkt. Auch die kommerziellen Online-Archive entwickelten in den letzten Jahren natürlichsprachige Suchoptionen. Lexis-Nexis erhielt im Laufe des Jahres 1998 2 Patente für Module automatischer Indexierung erteilt..
+
+[00230.]
+020: Ähnlichkeitsmessung mit und ohne aspektische Indexierung.
+056: Für eine fiktive Dokumentmenge wird eine Dokument-Wort-Matrix erstellt und mittels zweier Suchanfragen, ebenfalls als Matrix dargestellt, die Retrievalergebnisse ermittelt. Den Wörtern der Dokumentmenge werden in einem zweiten Schritt Aspekte zugeordnet und die Untersuchung erneut durchgeführt. Ein Vergleich bestätigt die schon früher gefundenen Vorteile des aspektischen Indexierung gegenüber anderen Methoden der Retrievalverbesserung, wie Trunkierung und Controlled Terms.
+
+[00231.]
+020: Schlagwort-Syntax.
+025: linguistische und fachwissenschaftliche Gesichtspunkte. Eine vergleichende Untersuchung der Regeln für die Schlagwortvergabe der Deutschen Bibliothek, RSWK, Voll-PRECIS und Kurz-PRECIS.
+
+[00232.]
+020: Linguistische und fachwissenschaftliche Gesichtspunkte der Schlagwortsyntax.
+056: Die deutsche Bibliothek in Frankfurt bietet seit einigen Jahren zentrale Dienste im Bereich der verbalen Sacherschließung an, Um deren Akzeptanz zu verbessern, will die Deutsche Bibliothek ab 1986 von der augenblicklichen gleichordnenden Indexierung zu einem syntaktischen Verfahren übergehen. Als Alternativen standen die RSWK und eine verkürzte Version des britischen Indexierungsverfahrens PRECIS zur Diskussion. Die Anforderungen einer Fachwissenschaft an die Schlagwort-Syntax einer adäquaten Dokumentationssprache werden exemplarisch entwickelt, die vier Alternativen - augenblickliche verbale Sacherschließunf der DB, RSWK, PRECIS (britische Version) und Kurz-PRECIS (DB-Version) - an ihnen gemessen. Die Kriterien basiern auf Grammatik-theorien der modernen Linguistik und gehen von einer Analogie zwischen Dokumentationssprachen und natürlicher Sprache aus.
+
+[00233.]
+020: Halbautomatische Volltextanalyse, Datenbankaufbau und Document Retrieval.
+056: In diesem Aufsatz beschreiben wir ein System zur Analyse von Kurzartikeln. Das System arbeitet halbautomatisch. Das heißt, zunächst wird der Artikel vom System analysiert und dann dem benutzer zur Nachberarbeitung vorgelegt. Die so gewonnene Information wird in einem Datenbankeintrag abgelegt. Über die Datenbank - in dBase IV implementiert - sind dann Abfragen und Zugriffe auf die Originaltexte effizient möglich. Der Kern dieses Aufsatzes betrifft die halbautomatische Analyse. Wir beschreiben unser Verfahren für parametrisiertes Pattern Matching sowie linguistische Heuristiken zur Ermittlung von Nominalphrasen und Präpositionalphrasen. Das System wurde für den praktischen Einsatz im Bonner Büro des 'Forums InformatikerInnen Für Frieden und gesellschaftliche Verantwortung e.V. (FIFF)' entwickelt.
+
+[00234.]
+020: Neuauflage der Internationalen Patentklassifikation.
+025: incompatibility issues of library classification systems and subject headings in subject cataloguing.
+056: Die internationale Patentklassifikation (IPC) ist mit ihrer 4.Aufl. in Englisch, Französisch und Deutsch erschienen. Sie trat am 1.1.1985 weltweit für 5 Jahre in Kraft und ersetzt seitdem  die seit 1980 geltende IPC3. Die Zahl der Verzweigungen und Symbole stieg mit der letzten Auflage auf nun rund 58.500 Gruppen. Die Einführung der sog. Hybrid-Systeme mit Index-Symbolen ist sicherlich die gravierendste Neuerung in IPC4. Bisher war die IPC monohierarchisch aufgebaut, d.h. für jeden technischen Sachverhalt gab es nur eine passende Stelle im ganzen Einteilungssystem. Der erste Schritt ist nun zu einem multihierarchischen Aufbau getan. Auf bestimmten Sachgebieten ist es möglich, die mit obligatorischen Klassifikationssymbolen erfaßten Informationen mit zusätzlichen, nicht-obligatorischen Symbolen zu verknüpfen.
+
+[00235.]
+020: Inhaltserschließungssysteme für Patenttexte.
+025: Test und Systemvergleich im Projekt PADOK.
+
+[00236.]
+020: PADOK-II.
+025: Retrievaltests zur Bewertung von Volltextindexierungsvarianten für das deutsche Patentinformationssystem.
+056: Vorgestellt werden die Ergebnisse extensiver Retrievaltests von zwei Varianten von Inhalteserschließungen (Freitext und PASSAT) für das deutsche Patentinformationssystem auf der Basis von Volltexten. Die Tests führte die Fachgruppe Linguistische Informationswissenschaft der Universität Regensburg von 1986-1989 in Zusammenarbeit mit dem Deutschen Patentamt, dem Fachinformationszentrum Karlsruhe und meheren industrieellen Partnern durch. Der Schwerpunkt des Berichts liegt auf dem allgemeinen Ansatz der Bewertung der Ziele des Projekts und auf der Darstellung der statistischen Evaluierungsergebnisse..
+
+[00237.]
+020: GERHARD.
+025: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen im deutschen World Wide Web.
+056: Die intellektuelle Erschließung des Internet befindet sich in einer Krise. Yahoo und andere Dienste können mit dem Wachstum des Web nicht mithalten. GERHARD ist derzeit weltweit der einzige Such- und Navigationsdienst, der die mit einem Roboter gesammelten Internetressourcen mit computerlinguistischen und statistischen Verfahren auch automatisch vollständig klassifiziert. Weit über eine Million HTML-Dokumente von wissenschaftlich relevanten Servern in Deutschland können wie bei anderen Suchmaschinen in der Datenbank gesucht, aber auch über die Navigation in der dreisprachigen Universalen Dezimalklassifikation (ETH-Bibliothek Zürich) recherchiert werden.
+
+[00238.]
+020: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen im deutschen World Wide Web.
+025: das DFG-Projekt GERHARD.
+
+[00239.]
+020: Information Retrieval und Dokumentmanagement im Multimedia-Zeitalter.
+056: "Das Buch ist ein praxisbezogenes VADEMECUM für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln, ordnen und Relevantes aus der stetig anwachsenden Informationsflut wiederfinden müssen (Retrieval). Behandelt werden alle Bedingungen, die für Aufbau und Pflege einer Datenbank notwendig sind. Themen wie der Wert eines Thesaurus als Basis geordneten Wissens werden dabei ebenso erfaßt wie die Indexierungspraxis, die Vor- und Nachteile von Volltextsystemen sowie moderne Verfahren. Hier geht es um Dokument-Management-Systeme, das Prinzip des Data-Warehouse, optische Archivsysteme und Informationsverbünde. Internationale Datenbanken sowie das technische Umfeld in der Medienwelt werden bis hin zum Internet angesprochen. Ein Ausblick in die Zukunft des Dokumentars runden das Werk ab.
+
+[00240.]
+020: ¬Das kurze Leben des S.B. Preuss.
+056: Darstellung einer bemerkenswerten Zitierkette, die zu einem Mitverfasser S.B. Preus eines Aufsatzes von A. Einstein geführt hat.
+
+[00241.]
+020: Inhaltsanalyse.
+056: Die Inhaltsanalyse ist der elementare Teilprozeß der Indexierung von Dokumenten. Trotz dieser zentralen Stellung im Rahmen einer inhaltlichen Dokumenterschließung wird der Vorgang der Inhaltsanalyse in theorie und Praxis noch zu wenig beachtet. Der Grund dieser Vernachlässigung liegt im vermeintlich subjektiven Charakter des Verstehensprozesses. Zur Überwindung dieses Problems wird zunächst der genaue Gegenstand der Inhaltsanalyse bestimmt. Daraus abgeleitet lassen sich methodisch weiterführende Ansätze und Verfahren einer inhaltlichen Analyse gewinnen. Abschließend werden einige weitere Aufgaben der Inhaltsanalyse, wir z.B. eine qualitative Bewertung, behandelt.
+
+[00242.]
+020: Möglichkeiten und Probleme automatischer Erschließungsverfahren in Bibliotheken.
+025: Bericht vom KASCADE-Workshop in der Universitäts- und Landesbibliothek Düsseldorf.
+
+[00243.]
+020: Computer-unterstütztes Indexieren in Intelligenten Information Retrieval Systemen.
+025: Ein Relevanz-Feedback orientierter Ansatz zur Informationserschließung in unformatierten Datenbanken.
+
+[00244.]
+020: Automatische Indexierung und der 'Aufbruch ins Wissensmanagement'.
+025: OLBG-Tagung. Abschlußveranstaltung.
+
+[00245.]
+020: Bericht über den Workshop 'Perspektiven der Sacherschließung im GBV' am 12. März 1998 in der TIB Hannover.
+
+[00246.]
+020: Maschinelle und manuelle Indexierung optimieren.
+
+[00247.]
+020: ¬Ein Netz wissenschaftlicher Informationen.
+025: gesponnen aus Fußnoten.
+056: Das ISI in Philadelphia bündelt seine großen Zitationsdatenbanken und bietet sie (vorzugsweise als Intranet-, aber auch als Internetlösung) als 'Web of Science'an. Im derzeitigen entwicklungsstand geht 'Web of Science' bis in die 70er Jahre zurück und weist damit knapp 20 Mill. Quellenartikel mit darin enthaltenen rund 300 Mill. Zitationen in einer einzigen datenbank nach. Neben 'gewohnten' Suchstrategien etwa nach Sachthemen oder Namen werden zitationsanalytische Suchstrategien geboten: Recherchen nach zitierter Literatur, nach zitierenden Artikeln und nach (im Sinne gemeinsamer Fußnoten) 'verwandten' Artikeln. Die Ausgabefunktionen umfassen Document Delivery via ISI sowie Links zu Artikeln, die parallel zur Druckausgabe im WWW erscheinen. Durch die Multidisziplinarität der ISI-Datenbanken sind als Kundenkreis vor allem Einrichtungen angesprochen, die mehrere Wissenschaftsfächer berühren. Hochschulbibliotheken oder Bibliotheken großer Forschungseinrichtungen dürften am 'Web of Science' kaum vorbeikommen. Parallele Produkte bei Online-Archiven, auf CD-ROM oder als Druckausgabe verlieren an Bedeutung.
+
+[00248.]
+020: Inhaltserschließung durch Indexieren.
+025: Prinzipien und Praxis.
+056: Das Buch ist ein umfassendes Kompendium der Inhaltserschließung. Es informiert gleichermaßen kompetent über theoretische Grundlagen und Methoden der inhaltlichen Erschließung wie auch über die im praktischen Einsatz auftretenden Probleme der Fragen und zeigt Wege zu ihrer Lösung auf. Der Wert eines Thesaurus als Basis geordneten Wissens wird ebenso behandelt wie verschiedene Arten klassifikatorischer Systeme und ihre Handhabung beim Aufbau von Datenbanken und Dokumentationen. Indexierungspraxis und ihre Auswirkung auf die Qualität der Dokumentation und die späteren Retrievalmöglichkeiten werden in einer leichtnachvollziehbaren, aus gründlicher Überlegung und intensiver praktischer Erfahrung rührenden Form vermittelt. Das Buch eignet sich gleichermaßen als Lehrbuch an Hochschulen wie auch als Nachschlagewerk, Ratgeber und Entscheidungshilfe in der praktischen Arbeit, wozu auch das ungewöhnlich ausführliche Register beiträgt.
+
+[00249.]
+020: Sammlung von Online-Dissertationen an Der Deutschen Bibliothek.
+025: Neue Metadatenschnittstelle und neues Metadatenformat.
+
+[00250.]
+020: Neue Pfade durch den Internet-Dschungel.
+025: Die zweite Generation von Web-Suchmaschinen.
+056: Die im WWW verfügbare Datenmenge wächst mit atemberaubender Geschwindigkeit; entsprechend schwieriger wird es, relevante Informationen zu finden. ein neues Analyseverfahren stellt nahezu automatische Abhilfe in Aussicht.
+
+[00251.]
+020: ¬Den Server im Griff.
+056: Ausgereifte Suchfunktionen auf dem eigenen Webserver sind wichtiger der je. Dabei ist es gar nicht schwer, eine eigene Suchfunktion in den Server zu integrieren.
+
+[00252.]
+020: Indexierung, Volltextrecherche und digital Text-Dossiers.
+056: Der Artikel stellt Ergebnisse einer Studie zur vergleichenden Bewertung von Verfahren der nachfrageorientierten Inhaltserschließung im Volltextarchiv der Stuttgarter Zeitung vor. Im ersten Teil der Arbeit wird empirisch untersucht, ob in der digitalen Pressedokumentation auf eine intellektuelle Indexierung von Artikeln verzichtet werden kann, wenn ausschließlich im Volltext recherchiert wird. Im zweiten Teil der Arbeit werden Möglichkeiten und Grenzen einer innovativen Inhaltserschließung von Volltexten in der Textdokumentation der Stuttgarter Zeitung mittels Digitaler Textdossiers diskutiert.
+
+[00253.]
+020: Digitale Text-Dossiers.
+025: Versuch einer nachfrageorientierten Indexierung.
+056: Bezug: Volltextarchiv der Stuttgarter Zeitung.
+
+[00254.]
+020: PSYNDEX Terms.
+025: Deskriptoren / Subject terms zu den Datenbanken PSYNDEX und PSYTKOM.
+056: Ende 1996 hat die American Psychological Association, Produzent der Datenbank PsycINFO, ihren 'Thesaurus of Psychological Index Terms' zum achten Mal aktualisiert. Die ZPID, die mit diesem Thesaurus ihre Records verschlagwortet, hat diese aktuelle Thesaurus-Version mit Genehmigung der APA in ihre Datenbanken eingebracht. Um Recherchen in ihren Datenbanken auch in deutscher Sprache zu ermöglichen, wurde das gesamte Vokabular ins Deutsche übersetzt.
+
+[00255.]
+020: Unterdrückte Wahrheiten.
+025: Die Fotografie: erst als Medium der Wahrheit gefeiert, heute aber zunehmend der Manipulation geziehen. Drei Meinungen.
+056: Die digitale Bildbearbeitung löst das Original auf. Damit ist der vorläufige Höhepunkt in den Manipulationsmöglichkeiten von Bildern gegeben. Vor allem die politische Fotografie hat sich der Fälschung bedient und damit Zensur ausgeübt. Mit diesem Thema befasst sich 'Index on Censorship'. Wir dokumentieren 3 Beiträge. 'Unterdrückte Wahrheiten' erscheint alle 2 Monate in Zusammenarbeit mit der Heinrich-Böll-Stiftung Berlin und 'Index of Censorship', einer Zeitschrift, die seit 1972 in London existiert und sich mit Zensur weltweit beschäftigt. Ausgewählt und übersetzt werden die Beiträge von Uta Ruge, Beiratsmiglied bei 'Index of Censorship'..
+
+[00256.]
+020: Zitationsanalysen.
+025: Editoral.
+
+[00257.]
+020: ¬Das Messen des leicht Meßbaren.
+025: Output-Indikatoren, Impact-Maße: Artefakte der Szeintometrie?.
+
+[00258.]
+020: Metadaten in den wissenschaftlichen Fachgesellschaften.
+056: Wissenschaftler nutzen Dublin Core Metadaten im Internet einerseits zur besseren Verfügbarkeit ihrer Arbeitsergebnisse, andererseits zur besseren Darstellung ihrer Arbeitsgruppen, Lehrveranstaltungen und Forschungsprojekte. Die Metadaten erlauben ein qualitativ hochwertiges Retrieval auf diesem spezifischen Material. die Nutzung von Retrievalwerkzeugen und das Angebot von Indexen dieser Materialien, sowie die Bereitstellung von Metadaten wird seit einigen Jahren von den Wissenschaftlern selbst übernommen. Die dazu verwendeten technischen Methoden und Organisationsstrukturen werden exemplarisch am Mathematics PREprint Search System vorgestellt.
+
+[00259.]
+020: Knowledge-Management braucht Terminologie-Management.
+025: Das Werkzeug IC INDEX 5.0.
+056: Vorstellung und Beschreibung der neuen Version der Thesaurus-Software INDEX, die unter Lotus Notes läuft.
+
+[00260.]
+020: Im Heuhaufen suchen - und finden.
+025: Automatische Erschließung von Internetquellen: Möglichkeiten und Grenzen.
+056: Das Internet wird immer unübersichtlicher - auch eine Binsenweisheit, aber wohl mehr ein handfestes Problem. Abhilfe versprechen die diversen Suchmaschinen und Verzeichnisse der kommerziellen Anbieter, zu denen sich thematische Link-Sammlungen anderer Institutionen - etwas Bibliotheken - gesellen. Während die Suchmaschinen mit dem Anspruch arbeiten, das gesamte Netz zu erschließen (und diesen damit einlösen, daß sie ihre Kundschaft teilweise mit mehreren hundert Treffern nach einer Anfrage konfrontieren), haben die Anbieter ausgewählter und intellektuelle erschlossener Quellen häufig mit dem Problem mangelnder Aktualität und der Beschränktheit ihres Angebots zu kämpfen. - Der folgende Beitrag diskutiert verschiedene Verfahren, die in erheblich stärkerem Maße sowohl die Vollständigkeit als auch die Relevanz der durchsuchten beziehungsweise gefundenen Internetquellen sicherstellen sollen. In diesem Zusammenhang wird auch die Frage erörtert, welche Rolle den Bibliotheken bei der Entwicklung und Anwendung solcher Techniken zukommen könnte.
+
+[00261.]
+020: Automatische Indexierung zur Erschließung deutschsprachiger Dokumente.
+056: Der Beitrag beschäftigt sich mit der Anwendung eines Verfahrens zur automatischen Indexierung deutschsprachiger Texte in Bibliotheken. Die Arbeitsweise des Verfahrens und seine Entwicklung innerhalb der von der Deutschen Forschungsgemeinschaft geförderte und an der ULB Düsseldorf gemeinsam mit der Fachrichtung Informationswissenschaft der Universität des Saarlandes durchgeführten Projekte MILOS I, MILOS II und KASCADE werden geschildert. Die Ergebnisse von Retrievaltests belegen die Tauglichkeit des Verfahrens für den Einsatz in Bibliotheken. Aufsetzend auf diesen Ergebnissen werden Perspektiven für die bibliothekarische Sacherschließung im Hinblick auf den Einsatz von automatischen Verfahren entworfen.
+
+[00262.]
+020: ¬Das CORC-Projekt von OCLC an der Niedersächsischen Staats- und Universitätsbibliothek Göttingen.
+
+[00263.]
+020: IC INDEX 5.0 jetzt online im Web.
+025: Erarbeitung von Wissensordnungen als Schlüssel im Knowledge Management.
+
+[00264.]
+020: Vergleichsuntersuchung MESSENGER-FULCRUM.
+056: In einem Benutzertest, der im Rahmen der Projektes GIRT stattfand, wurde die Leistungsfähigkeit zweier Retrievalsprachen für die Datenbankrecherche überprüft. Die Ergebnisse werden in diesem Bericht dargestellt: Das System FULCRUM beruht auf automatischer Indexierung und liefert ein nach statistischer Relevanz sortiertes Suchergebnis. Die Standardfreitextsuche des Systems MESSENGER wurde um die intellektuell vom IZ vergebenen Deskriptoren ergänzt. Die Ergebnisse zeigen, dass in FULCRUM das Boole'sche Exakt-Match-Retrieval dem Verktos-Space-Modell (Best-Match-Verfahren) von den Versuchspersonen vorgezogen wurde. Die in MESSENGER realisierte Mischform aus intellektueller und automatischer Indexierung erwies sich gegenüber dem quantitativ-statistischen Ansatz beim Recall als überlegen.
+
+[00265.]
+020: Textwortmethode.
+025: Norbert Henrichs zum 65. (3).
+056: Nur wenige Dokumentationsmethoden werden mit dem Namen ihrer Entwickler assoziiert. Ausnahmen sind Melvil Dewey (DDC), S.R. Ranganathan (Colon Classification) - und Norbert Henrichs. Seine Textwortmethode ermöglicht die Indexierung und das Retrieval von Literatur aus Fachgebieten, die keine allseits akzeptierte Fachterminologie vorweisen, also viele Sozial- und Geisteswissenschaften, vorneweg die Philosophie. Für den Einsatz in der elektronischen Philosophie-Dokumentation hat Henrichs in den späten sechziger Jahren die Textwortmethode entworfen. Er ist damit nicht nur einer der Pioniere der Anwendung der elektronischen Datenverarbeitung in der Informationspraxis, sondern auch der Pionier bei der Dokumentation terminologisch nicht starrer Fachsprachen.
+
+[00266.]
+020: IC INDEX 5.0 jetzt online im Web.
+025: Erarbeitung von Wissensordnungen als Schlüssel im Knowledge Management.
+
+[00267.]
+020: Katalogerweiterung durch Scanning und automatische Dokumenterschließung.
+025: Ergebnisse des DFG-Projekts KASCADE.
+056: Der Beitrag befasst sich mit den Zielen, Inhalten und Ergebnissen des von der DFG geförderten Projekts KASCADE. Für KASCADE wurden Katalogdaten aus dem Fachbereich Rechtswissenschafft um Inhaltsverzeichnisse angereichert. Die angereicherten Titeldaten wurden mit einem erweiterten MILOS-Verfahren automatisch indexiert sowie mit den beiden linguistisch und statistisch basierten Verfahren SELIX und THEAS zusätzlich erschlossen. In einem umfangreichen Retrievaltest wurden die Ergebnisse der automatischen Indexierung und Gewichtung untersucht.
+
+[00268.]
+020: Elektronisches Publizieren an Universitäten - aktuelle Trends und zwei Tagungen aus bibliothekarischer Sicht.
+025: II. XML-basierte elektronische Publikationen in Universitätsbibliotheken - eine Frage von Dokumenttypdefinitionen? Projekte, Ansätze und Ergebnisse eines NDLTD-Workshops zu Dokumenttypdefinitionen für Hochschulschriften.
+
+[00269.]
+020: Mehr Information durch Visualisierung von Daten?.
+025: Konventionelle und innovative Visualisierungstechniken.
+
+[00270.]
+020: Verbale Inhaltserschließung.
+025: Ein Übersichtsartikel als kommentierter Literaturbericht.
+056: Investigates current thinking on the theory and application of index language. Explains their links with on-line retrieval systems and the need to go beyond a narrow library application, identifying 2 regularly occurring points of view: transferring traditional ideas about conventional keyword catalogues to post-coordinate on-line searches and redundant terminology about input and its replacement by pure subject searching. Explores the general subject literature, the theory of verbal documentation languages, syntactical indexing, the thesaurus principle and faceted classification structure.
+
+[00271.]
+020: Verbale Sacherschließung im Fach Mathematik.
+056: Up to now, in the field of subject indexing by verbal descriptors, very little work has been done in studying the characteristics of a special subject field, its terminology, and the information needs of its users. Presents the results of such a study in the field of mathematics. Firstly a detailed analysis of mathematical terminology is presented, following which a proposal is made for verbal indexing by subject headings using the classification scheme of the American Mathematical Society, in order to increase quality and consistency of indexing. Some practical applications are given.
+
+[00272.]
+020: Literatur zur Inhaltserschließung.
+025: ein Projekt an der FHBD in Köln.
+056: Cologne Library School ran a project to construct a database for literature on content cataloguing and fringe disciplines. Software was the BISMAS 1.0 programme and is now the 1.5 version. The category scheme, indexes and retrieval possibilities are described. Retrieval is mainly free text, using the whole document description and all descriptive categories. BISMAS does not permit standard data file administration so a further database was provided....
+
+[00273.]
+020: Vom Nutzen einer syntaktischen Indexierung im Online Retrieval.
+056: Since the introduction of Regeln fur den Schlagwortkatalog (RSWK - Subject Cataloguing Rules) and the arrival of online public catalogues, librarians might ask whether number building is essential or whether the same result could be achieved with Boolean operators. Descriptive categories could be prepared, with word or phrase inversion, as a retrieval system component. The role of syntactic indexing in online retrieval and consequences for service interface....
+
+[00274.]
+020: Inhaltliche Dokumenterschließung, Information Retrieval und Navigation in Informationsräumen.
+056: Examines the advantages and disadvantages of precoordinated, postcoordinated and automatic indexing with regard to existing information storage systems, such as card catalogues, OPACs, CR-ROM databases, and online databases. Presents a general model of document content representation and concludes that the library profession needs to address the development of databank design models, relevance feedback methods and automatic indexing assessment methods, to make indexing more effective.
+
+[00275.]
+020: Maschinelle Indexierung auf dem Prüfstand.
+025: Ergebnisse eines Retrievaltests zum MILOS II Projekt.
+056: The test ran between Nov 95-Aug 96 in Cologne Fachhochschule fur Bibliothekswesen (College of Librarianship).The test basis was a database of 190,000 book titles published between 1990-95. MILOS II mechanized indexing methods proved helpful in avoiding or reducing numbers of unsatisfied/no result retrieval searches. Retrieval from mechanised indexing is 3 times more successful than from title keyword data. MILOS II also used a standardized semantic vocabulary. Mechanised indexing demands high quality software and output data.
+
+[00276.]
+020: Portale, Search Engines and Math-Net.
+056: In Math-Net stellen Personen und Institutionen ihre für die Mathematik relevanten Informationen auf eigenen Web-Servern bereit, doch sollen die Informationen in einheitlicher Weise erschlossen werden. Dazu gibt es sowohl für Server als auch für die Dokumente Empfehlungen für deren Strukturierung. Die lokalen Informationen werden durch automatische Verfahren gesammelt, ausgewertet und indexiert. Diese Indexe sind die Basis für die Math-Net Dienste. Das sind Search Engines und Portale, die einen qualifizierten und effizienten Zugang zu den Informationen im Math-Net bieten. Die Dienste decken im Gegensatz zu den universellen Suchmaschinen nur den für die Mathematik relevanten Teil des Web ab. Math-Net ist auch ein Informations- und Kornmunikationssystem sowie ein Publikationsmedium für die Mathematik. Die Entwicklung des Math-Net wird von dem breiten Konsens der Mathematiker getragen, den Zugang zu der für die Mathematik relevanten Information zu erleichtern und zu verbessern.
+
+[00277.]
+020: ¬Das Nominalsyntagna.
+025: über die Nutzbarmachung eines logico-semantischen Konzeptes für dokumentarische Fragestellungen.
+056: Am Anfang nachfolgender Ausführungen werden die für die Indexierung großer textmengen notwendigen strategischen Entscheidungen aufgezeigt: es müssen sowohl das Indexierungsverfahren (menschliche oder automatische Indexierung) als auch die Indexierungssparche (freie, kontrollierte oder natürliche Sprache) ausgewählt werden. Hierbei hat sich die Forschungsgruppe SYDO-LYON für natürlichsprachige automatische Vollindexierung entschieden. Auf der Grundlage der Unterscheidung zwischen prädikativen und referentiellen Textteilen wird d as Nominalsyntagma als kleinste referentielle Texteinheit definiert, dann das für die Konstituierung eines Nominalsyntagmas entscheidende Phänomen der Aktualisierung erläutert und schließlich auf die morphologischen Mittel zur Erkennung des Nominalsyntagmas hingewiesen. Alle Nominalsyntagma eines Textes werden als dessen potentielle Deskriptoren extrahiert, und Hilfsmittel für die Benutzer einer mit diesem Indexierungsverfahren arbeitenden Datenbank werden vorgestellt. Außerdem wird der begriff der Anapher (d.h. die Wiederaufnahme von Nominalsyntagmen durch Pronomen) kurz definiert, ihre Anwendung als Mittel zur Gewichtung des Deskriptorterme (durch Zählung ihrer Häufigkeit im text) aufgezeigt und morphologische uns syntaktische Regeln zur automatischen Bestimmung des von einem anaphorischen Pronomen aufgenommenen Nominalsyntagmas aufgestellt. Bevor abschließend Ziele und Grenzen der Arbeit diskutiert werden, wird noch auf einen Unterschied zwischen Nominalsyntagma und Deskriptorterm hingewiesen: das Nonimalsyntagma verweist auf ein Objekt, das ein Einzelobjekt oder eine Klasse sein kann, der Deskriptorterm verweist immer auf eine Klasse.
+
+[00278.]
+020: Dateien auf dem Index.
+025: Dokumentenmanagement zu Hause.
+056: Verzeichnisse auf der Festplatte, Unterordner, Dateien - die Daten, auf die man gerade wieder zugreifen möchte, könnten überall liegen. Dokumentenmanagement-Systeme wollen helfen, diese Informationen anhand ihres Inhaltes zu strukturieren, damit man sie themenbezogen und schnell wieder finden kann. Solche Programmpakete sind oft groß und teuer, es gibt aber auch anbieter, die mit schlanken und preisgünstigen Programmversionen an den Heimanwender denken.
+
+[00279.]
+020: Grundlagen der praktischen Information und Dokumentation.
+025: Ein Handbuch zur Einführung in die fachliche Informationsarbeit.
+
+[00280.]
+020: ¬Der Online-Publikumskatalog der Universitätsbibliothek Düsseldorf.
+025: Methodische Erkenntnisse und Erfahrungen; OPAC-Kolloquium am 27.-28.11.1989.
+
+[00281.]
+020: Lässt sich wissenschaftliche Leistung messen?.
+025: Wer zitiert wird, liegt vorne - in den USA berechnet man Forschungsleistung nach einem Zitat-Index.
+
+[00282.]
+020: 3. META-LIB Workshop an der SUB Göttingen.
+025: Metadata: new developments - new frontiers.
+
+[00283.]
+020: Kooperativer Bibliotheksverbund Berlin-Brandenburg.
+025: Lokale Konzepte und technische Schnittstellen.
+
+[00284.]
+020: Wortmodell und Begriffssprache als Basis des semantischen Retrievals.
+056: Der heutigen Retrievaltechnik wird das Projekt eines semantisch basierten Suchsystems gegenübergestellt. Es soll genauer und vollständiger arbeiten sowie systematische Zusammenhänge zwischen Themen unterstützen. Bei diesem Ansatz wird ein umfassendes Wörterbuch mit einer einfachen begrifflichen Darstellung der Wortbedeutungen benötigt. Das Wortmodell bildet Wort, Wortmerkmale, Lemma, Wortbedeutungen (Lesarten), Lesartenmerkmale und Begriffe ab. Begriffe sind formale Ausdrücke einer Begriffssprache. Entsprechend dieser Differenzierung wird Lenunaindexierung, Lesartenindexierung und Begriffsindexierung unterschieden. Begriffe werden mit dem Programm Concepto grafisch konstruiert und erfasst.
+
+[00285.]
+020: Informationskompetenz am Beispiel einer szientometrischen Untersuchung zum Informationsmanagement.
+056: In diesem Beitrag wird eine szientometrische Studie zum Informationsmanagement vorgestellt. Unter Verwendung von Science Citation Index und Social Science Citation Index wurde die Literatur zum Informationsmanagement nach verschiedenen Kriterien (Fachgruppen, in denen publiziert wird; Herkunft der Autoren; Publikationssprachen; zeitliche Verteilung) ausgewertet. Darüber hinaus wurde eine Zitatenanalyse durchgeführt. Auf Basis einer Autoren-Kozitationsanalyse wurde schließlich die formale Wissenschaftskommunikation im Bereich des Informationsmanagements abgebildet. Neben den Ergebnissen werden aber auch die Problembereiche aufgezeigt, die mit szientometrischen Untersuchungen verbunden sind.
+
+[00286.]
+020: Arbeitsbericht AG Indexierung der Konferenz für Regelwerksfragen.
+056: Vor dem Hintergrund der zunehmenden Verbreitung von Suchmaschinen für bibliothekarische Datenbanken - KvK, KOBV, etc. - ergeben sich aus der unterschiedlichen Konstruktion der angegangenen Indexsysteme einige Probleme: - inkonsistente Suchergebnisse bei scheinbar gleichen Suchschlüsseln Autor: Müller-Udenscheid -> müller, Udenscheid, mueller? - Titelstichworte: sind Zusätze zum Sachtitel indexiert oder nicht? - unterschiedliche Suchschlüssel: Beschränkung auf die kleinste gemeinsame Schnittmenge. Die Verwendung einer einheitlichen Oberfläche gaukelt an dieser Stelle aber konsistente Ergebnisse vor. Auf Grund dieser Ausgangslage hat die KM eine Arbeitsgruppe eingesetzt, die Empfehlungen für eine einheitliche Indexierung bibliothekarischer Datenbanken erarbeiten soll. Diese Arbeitsgruppe hat sich bisher dreimal getroffen und Entwürfe für erste Festlegungen erarbeitet. ____________________.
+
+[00287.]
+020: Zugang zu mehrsprachigen Nachrichten im Internet.
+056: In einer Kooperation zwischen smart information und dem IAI werden täglich ca. 20.000 aktuelle Nachrichten des Tages (in deutscher Sprache) linguistisch indexiert. Die Nachrichten werden täglich von der Nachrichtensuchmaschine newscan http://www.newscan.de von smart information aus den verschiedensten InternetQuellen gesammelt. Der Benutzer kann mit frei gewählten Begriffen suchen. Das Ergebnis einer solchen Schlüsselwortsuche wird in Tabellenform ausgegeben, nach Häufigkeit geordnet. Bei einer größeren Ergebnismenge (mehr als zehn Dokumente) werden die Nachrichten automatisch gruppiert (Clusteranalyse) und mit einem Label (Thema) versehen. Diese Themen werden in einer Baumstruktur dargestellt. Der Nutzer kann gezielt auf einen Themenbereich zugreifen. Die Clusteranalyse beruht auf der automatischen Gruppierung der Dokumente und ihrer Stichwörter (Deskriptoren), wie sie von dem automatischen Deskribierungsmodul AUDESC des IAI erzeugt werden. Die in einer großen Datei zusammengestellten Nachrichten werden in jeder Nacht an das IAI geschickt. Mit einer speziell an diese Nachrichten angepaßte Version des Indexierungsmoduls AUTINDEX werden jeder einzelnen Nachricht Schlagwörter zugeordnet.
+
+[00288.]
+020: Knowledge Management braucht Terminologie Management.
+056: Sprache ist der Kern allen kommunikativen Austausches. Darüber lehren wir - darüber lernen wir - darin speichern wir unser Wissen. Auch modernes Knowledge Management benötigt Wege, die es erlauben, die Daten der vielen Sprecher/Schreiber auffindbar speichern zu können. Gerade weil es immer leichter wird, viele Daten zu speichern, verschärft sich das Problem des Wiederfindens. Die Vielfältigkeit, Vieldeutigkeit von Sprache und Mehrsprachigkeit führen oft zu ungewolltem Informationsverlust. Eine professionelle Terminologie kann Informationsverlust vermeiden. Dazu ein Beispiel: Große Teile des gesamten technischen Weltwissens sind in Patenten niedergelegt. Der entscheidende Schlüssel zu diesem gigantischen Schatz ist die IPC die International Patent Classification. Sie erfasst alle Technologien und ist auf der ganzen Erde gültig. Millionen von Patentschriften in zahlreichen Sprachen können jederzeit punktgenau recherchiert werden. Elektronische Datenspeicher haben zusätzlich den Raum überbrückt und weitere Suchoptionen eröffnet - doch das Rückgrat IPC bleibt und entwickelt sich weiter. So wie die IPC über Grenzen hinweg Wissen zuverlässig erschließt, können auch im Knowledge Management in Unternehmen und Organisationen interne Objekte erschlossen werden - egal ob es sich dabei um Dokumente, Experten oder Gegenstände handelt. Angesichts immer größerer und globalerer Unternehmen und Organisationen steigt der Bedarf laufend. Eine gemeinsame Terminologie hat dabei ein stark integrative Wirkung.
+
+[00289.]
+020: Internet-Suchwerkzeuge im Vergleich (III).
+025: Informationslinguistik und -statistik: AltaVista, FAST und Northern Light.
+056: Suchmaschinen im World Wide Web arbeiten automatisch: Sie spüren Dokumente auf, indexieren sie, halten die Datenbank (mehr oder minder) aktuell und bieten den Kunden Retrievaloberflächen an. In unserem Known-Item-Retrievaltest (Password 11/2000) schnitten - in dieser Reihenfolge - Google, Alta Vista, Northern Light und FAST (All the Web) am besten ab. Die letzten drei Systeme arbeiten mit einer Kombination aus informationslinguistischen und informationsstatistischen Algorithmen, weshalb wir sie hier gemeinsam besprechen wollen. Im Zentrum unserer informationswissenschaftlichen Analysen stehen die "Highlights" der jeweiligen Suchwerkzeuge.
+
+[00290.]
+020: ¬Das World Wide Web gleicht einer Fliege.
+025: Studien versuchen zu erklären, warum Suchmaschinen nicht immer fündig werden.
+056: Einer möchte wissen, auf welchen Webseiten sein Name vorkommt. Die andere sucht nach den neusten Sportergebnissen. Ein Dritter recherchiert den Wissensstand über Schrödingers Katze. Internetnutzer befragen jede Minute zu Hunderttausenden Suchmaschinen und Webkataloge. Die wurden, seit das Internet zum Masseninedium herangereift ist, zu Info- (Mono-) Polen für den Zugang zur heterogenen Welt des Web. Dahinter steckt viel Arbeit. Die Suchmaschinen schicken unentwegt Roboter und Agenten los, die Seiten lesen - und Inhalte oder Verweise an mächtige Datenbankservermelden. Täglich entstehen mehrere hunderttausend Webseiten; die Zahl der Adressen, die verarbeitet werden müsste, ist mittlerweile auf mehr als eine Milliarde gewachsen. Nicht nur deshalb wird die automatische Recherche zunehmend schwierig. Eine Untersuchung der Firmen Altavista, Compac und IBM, die die Verbindungen auf 500 Millionen Seiten auswertete, ergab: Im WWW wächst ein Bereich heran, den konventionelle Suchtechnologien nicht erfassen können. Das widerspricht früheren Studien, nach denen zwei beliebige Webadressen höchstens 19 Hyperlinks voneinander entfernt liegen - sich prinzipiell also alles finden lässt. Die Forscher um Altavista-Chefwissenschaftler Andrei Broder vergleichen den Aufbau des World Wide Weh mit der Form einer Fliege. Das Netz gliedert sich demnach in vier Bereiche. Etwa ein Drittel der Seiten fügen den zentralen Kein, um den sich die anderen Gebiete lagern. Den Knoten beschreiben die Fachleute als Giant Strongly Connected Components (SCC): Die Seiten sind untereinander eng verknüpft; es bestehen gute Linkverbindungen zwischen den Angeboten; sie sind leicht zu finden. Ein Viertel der Adressen macht eine Schicht aus, die sich als eine Schleife der Fliege sehen lässt. Es handelt sich vorwiegend um Anfangsseiten, Einstiegspunkte zu Webseiten und inhaltlich sortierende Kataloge. Von dort aus sind die zentralen Seiten im Knoten gut erreichbar. Eine zweite Schleife, ein weiteres Viertel aller Webseiten, bilden die Endpunkte - Angebote ohne Links. Sie sind nur über den Knoten erreichbar. Verbleibt etwa ein Fünftel aller Seiten, die gar nicht oder nur indirekt mit dem Knoten verknüpft sind. Letztere werden als Tendrils bezeichnet. Diese Webangebote basieren beispielsweise auf Datenbanken von Unternehmen, Verbänden oder Organisationen. Sie entstehen erst in den wenn sie abgerufen werden - oft in kryptischen Dateiformaten und mit Animationen, Bildern oder Audiodateien angereichert. Surfer können diese Informationen mit Recherchen in den Webseiten der Schleifen aufspüren. Die Agenten der Suchmaschinen dagegen sind darauf trainiert, ständig verfügbare Dokumente im html-Format zu finden. Ihnen entgeht dieser Teil des World Wide Web. Das US-Softwareunternehmen Bright Planet schätzt, das WWW umfasst 2000-mal so viele Seiten, wie alle Suchsysteme zusammen glauben. Auch wenn sie systembedingt nicht alle Seiten kennen: Insgesamt liefern die automatischen Maschinen mehr Ergebnisse als Kataloge wie Yahoo, Dino-Online oder Looksmart. Deren Macher beschäftigen Redaktionsstäbe, die Inhalte recherchieren, sichten und in die Verzeichnisse einordnen. Webkataloge bauen also auf die humane Intelligenz ihrer Rechercheure, die Themen und Seiten verknüpfen sowie Inhalte kommentieren und einordnen. Yahoo, Lieblingskind der New Economy, bringt es indes gerade einmal auf 15 Millionen katalogisierter Webseiten. Gleichwohl kauft Yahoo bei einigen Themen mancher Suchmaschine den Schneid ab: Eine vorstrukturierte, handverlesene Einarbeitung von Inhalten in die Rubriken eines Katalogs kann genauer Auskunft geben. Die Spitzenreiter unter den Suchmaschinen sehen sich im Zugzwang, ihren Service zu verbessern. Schließlich sollen die Kunden immer wieder Anfragen starten und damit indirekt die üppigen Werbepreise rechtfertigen. Alltheweb, Google und Altavista erkunden das Netz unterschiedlich. Alltheweb, betrieben vom norwegisch-amerikanischen Unternehmens Fast, setzt bei der Verwaltung der Index-Datenbank auf superschnelle Rechenleistungen und Servertechnologie, damit die richtigen Hyperlinks oben stehen. Etwa 500 Millionen indizierter Webseiten bedeuten für Alltheweb die Pole-Position. Die rein maschinelle Verarbeitung scheint ein gutes Konzept zu sein: Allthewebs Resultatslisten warten mit den besten mehrsprachigen Kommentaren auf. Die Suchmaschine Google, die ihren Namen der Zahl Googol verdankt und eine eins mit hundert Nullen bezeichnet, speichert alle Webseiten lokal auf einer Computerfarm mit 6000 Zentraleinheiten. Sie verwendet ein mathematisches Verfahren, um Webseiten nach inhaltlichen Kriterien zu ordnen. Larry Page und Sergej Brin, die Entwickler des kalifornischen Projekts an der Stanford University, setzen bei der internen Bewertung von Webseiten, dem Page-Ranking, auf die Einschätzungen der Internet-Surfer: Wenn sie einem Verweis auf eine andere Adresse folgen, treffen sie eine intuitive Entscheidung. Sie rufen ein Angebot auf, von dem sie bessere Informationen, eine konkrete Antwort auf ihre Frage erwarten. Page und Brin überlegten, die Summe der Surfentscheidungen kann ihren Inhalt indirekt qualifizieren: Je häufiger eine Webseite ausgewählt wird, desto höher kann ihre Qualität sein - in Bezug auf die inhaltliche Relevanz hinsichtlich eines Themas. Mit einem komplizierten Bewertungsverfahren filtern die Datenbankserver von Google permanent und ohne menschliches Zutun die Entscheidungen unzähliger Surfer Die Ergebnisse von Google gehören nachweisbar zu den besten, die Maschinen weltweit bieten. Altavista ist schon lange im Geschäft. Auch die Manager dieses Unternehmens setzen auf einen hohen technologischen Aufwand. Sie schicken Suchroboter, genannt Scooter, los, die Tag für Tag ungefähr 24 Millionen Dokumente überprüfen und gegebenenfalls der Datenbank hinzufügen. Das entspricht einer Kapazität von 800 DIN-A4-Seiten pro Sekunde. Die Datenbank erfasst alle Worte eines Dokuments. Der Vorteil der Volltext-Indizierung ist offenkundig: Jedes Dokument kann theoretisch auf Grund eines darin enthaltenen Worts sekundenschnell gefunden werden. Altavista kennt 50 Millionen deutschsprachiger Webseiten. Als Spezialität findet sie auch Produktinformationen und Markenbezeichnungen - und sicher auch das Neueste zu Schrödingers Katze.
+
+[00291.]
+020: Erschließung mittelalterlicher Handschriften.
+025: Anmerkungen zum Projekt einer Handschriftendatenbank.
+056: Seit einigen Jahren wird von der DFG das Projekt einer Datenbank für mittelalterliche Handschriften betrieben. Sie soll die von der DFG geförderten Handschriftenkataloge, die nach den Richtlinien Handschriftenkatalogisierung der DFG' bearbeitet wurden, umfassen. Ein erstes Ergebnis, das auf dem früheren Gesamtindex mittelalterlicher Handschriften basiert und mittlerweile die Kataloge selbst enthält, steht bereits im internet zur Verfügung.2 Der Inhalt der Handschriftendatenbank soll jetzt redigiert und um ältere nach anderen Grundsätzen erstellte Kataloge erweitert werden. Das als Erfassungssystern verwendete System HIDA/ MIDAS soll gleichzeitig für die Produktion von gedruckten Handschriftenkatalogen genutzt werden. Über die Grundsätze, nach denen in diesem Projekt erschlossen werden soll, ist bisher außerhalb des engeren Kreises der Handschriftenbibliothekare kaum diskutiert worden. Eine ausführliche Darstellung der Probleme enthält der Aufsatz von Thomas Stäcker in Bibliothek 23 (1999). In manchen Bereichen schlägt er eine Anlehnung an die bibliothekarischen Regelwerke und Normdateien vor. Einen deutlich anderen Weg geht das Handbuch zur Handschriftendatenbank, in dem die neuen für das DFG-Projekt gültigen Richtlinien zur Erschließung zusammengefasst sind. Es enthält vielfach inhaltliche Festlegungen, die einem Regelwerk nahe kommen. Dieses Handbuch ist derzeit vergriffen; es wurde vermutlich auch nur an wenigen Bibliotheken verbreitet und ist bisher anscheinend in diesen Bibliotheken noch nicht katalogisiert worden. Für ein so weitreichendes Projekt blieb die Beachtung in der Öffentlichkeit bemerkenswert gering. Auch die Konferenz für Regelwerksfragen, die bis 1999 für alle Fragen bibliothekarischer Erschließung zuständig war, und ihre Nachfolgeorganisation, der Standardisierungsausschuss, haben sich mit dieser Frage nicht befasst, vermutlich weil die Fakten als solche und die Relevanz für die bibliothekarische Erschließung nicht deutlich wurden. Es istjedoch erforderlich, den Zusammenhang zwischen der Erschließung besonderer Bibliotheksmaterialien und den allgemeinen Bibliothekskatalogen sowohl von den Regelwerken her wie die dabei entstehenden technischen Probleme zu diskutieren. Die Aufgaben der Handschriftenkatalogisierung stellen sich heute völlig neu. Die Richtlinien Handschriftenkatalogisierung der DFG zielten auf die Publikation gedruckter Kataloge. Heute zieht mit der Umstellung auf eine Datenbankstruktur nicht nur die EDV-gestützte Erschließung verspätet, dafür mit umso tiefgreifenderer Wirkung in einen bisher nur partiell automatisierten Bereich der Bibliothek ein. Dies bedeutet einen erheblichen Informationsgewinn für den Benutzer. Die stärkere Belastung für die Bearbeiter im Vergleich zur Nutzung der Textverarbeitung7 ist demgegenüber weniger gewichtig; allerdings sollte die Bearbeitung optimiert werden. Der Aufwand ist stark abhängig vom jeweiligen Katalogsystem. Zusammen mit dieser Umstellung werden gleichzeitig völlig neue Anforderungen an eine vereinheitlichte Suche über die verschiedensten Materialien hinweggestellt. Dies betrifft neben Büchern alle anderen Bibliotheksmaterialien, nicht nur die neuen elektronischen Dokumente, sondern auch herkömmliche Bibliotheksmaterialien, Handschriften des Mittelalters, aber auch solche der Neuzeit sowie Nachlässe und Autographen.
+
+[00292.]
+020: Automatische Inhaltserschließung im Zeichen von Wissensmanagement.
+056: Methoden der automatischen Inhaltserschließung werden seit mehr als 30 Jahren entwickelt, ohne in luD-Kreisen auf merkliche Akzeptanz zu stoßen. Gegenwärtig führen jedoch die steigende Informationsflut und der Bedarf an effizienten Zugriffsverfahren im Informations- und Wissensmanagement in breiten Anwenderkreisen zu einem wachsenden Interesse an diesen Methoden, zu verstärkten Anstrengungen in Forschung und Entwicklung und zu neuen Produkten. In diesem Beitrag werden verschiedene Ansätze zu intelligentem und inhaltsbasiertem Retrieval und zur automatischen Inhaltserschließung diskutiert sowie kommerziell vertriebene Softwarewerkzeuge und Lösungen präsentiert. Abschließend wird festgestellt, dass in naher Zukunft mit einer zunehmenden Automatisierung von bestimmten Komponenten des Informations- und Wissensmanagements zu rechnen ist, indem Software-Werkzeuge zur automatischen Inhaltserschließung in den Workflow integriert werden.
+
+[00293.]
+020: Phonetische Ähnlichkeitssuche in Datenbanken.
+056: In dialoggesteuerten Systemen zur Informationswiedergewinnung (Information Retrieval Systems, IRS) kann man - vergröbernd - das Wechselspiel zwischen Mensch und Computer als iterativen Prozess zur Erhöhung von Genauigkeit (Precision) auf der einen und Vollständigkeit (Recall) der Nachweise auf der anderen Seite verstehen. Vorgestellt wird ein maschinell anwendbares Verfahren, das auf phonologische Untersuchungen des Sprachwissenschaftlers Nikolaj S. Trubetzkoy (1890-1938) zurückgeht. In den Grundzügen kann es erheblich zur Verbesserung der Nachweisvollständigkeit beitragen. Dadurch, daß es die 'Ähnlichkeitsumgebungen' von Suchbegriffen in die Recherche mit einbezieht, zeigt es sich vor allem für Systeme mit koordinativer maschineller Indexierung als vorteilhaft. Bei alphabetischen Begriffen erweist sich die Einführung eines solchen zunächst nur auf den Benutzer hin orientierten Verfahrens auch aus technischer Sicht als günstig, da damit die Anzahl der Zugriffe bei den Suchvorgängen auch für große Datenvolumina niedrig gehalten werden kann.
+
+[00294.]
+020: "Sind Sie ein Mensch?".
+025: Auskunft per Chat an der UB Trier.
+056: Das Internet hat die Bibliotheksarbeit in den letzten Jahren stark verändert, die Auskunft vielleicht sogar in besonderem Maße. Wir verfügen über hervorragende Recherchemöglichkeiten, müssen uns aber auch veränderten Ansprüchen unserer Benutzer stellen. Insbesondere im universitären Umfeld ist die Nutzung vernetzter, multimedialer Arbeitsplätze mittlerweile verbreitet, und es wird erwartet, dass die Dienstleistungen der Bibliothek vom PC aus zugänglich sind. Aber auch externe Bibliotheksbenutzer greifen zunehmend auf das Internet als Kornmunikationsmedium zurück. Das zeigt sich in einem starken Rückgang der schriftlichen Anfragen per Brief, dagegen steigt die Zahl der E-Mail-Anfragen kontinuierlich an. Das Problem bei diesen Anfragen ist oft, dass sie unklar formuliert sind und daher ohne Rückfragen nicht angemessen beantwortet werden können. Ein Angebot, das in vielen Bibliotheken mittlerweile zum Standard gehört, sind Hilfetexte und Listen häufig gestellter Fragen (FAQ) auf den Webseiten, die aber leider selten gelesen werden. Ein häufiges Problem ist auch, dass Benutzer nicht wissen, wer für bestimmte Fragen zuständig ist. Fazit: Den qualitativ oft hochwertigen Internetangeboten der Bibliotheken mangelt es an Interaktionsmöglichkeiten. Wie man dies verbessern könnte, beschrieb in allerdings recht allgemeiner Form ein Vortrag von Anne-Katharina Weilenmann auf dem Bibliothekartag 2000 in Leipzig. Durch einen Eintrag in dem sehr nützlichen "Librarians' Index to the Internet"  wurden wir auf das ELITE Project der University of Leicester aufmerksam, das eine Fülle von Informationen zum Thema Online-Auskunftsdienste zusammenträgt und eine Liste mit Links zu Bibliotheken aus dem angloamerikanischen Raum anbietet, die solche Möglichkeiten bereits nutzen.
+
+[00295.]
+020: Internet-Suchwerkzeuge im Vergleich.
+025: Teil 1: Retrievaltests mit Known Item searches.
+056: Web Search Engines und Web Directories sind die technologische Speerspitze im High-Tech-Bereich Internet. Als Suchassistenten gestatten sie Laien und Profi-Searchern gleichsam einen optimalen Einstieg in die Vielfalt der Informationsquellen des World Wide Web, Sie ermöglichen durch eine Kombination aus hierarchisch geordnetem kontrollierten Vokabular, automatischer Indexierung sowie diverser Synonym-, Homonym- und Fachwörterbücher einen zielgenauen Zugriff auf WebSites. - Stop! Glauben Sie das? Wir waren skeptisch und haben Suchmaschinen und Suchverzeichnisse genau angeschaut. Durchgeführt wurde ein Retrievaltest, der unterschiedliche Suchsysteme mit jeweils dergleichen Anfrage konfrontierte, auf die wir bereits die Antwort wussten ("Known Item Search"). Skizziert werden zudem bisher ausgearbeitete empirische Erhebungen zur Evaluation von Web-Retrievalsystemen, angefangen von seriösen informationswissenschaftlichen Forschungen bis hinzu den Tests in Publikumszeitschriften.
+
+[00296.]
+020: Qualitätskriterien von Suchmaschinen.
+025: Checkliste für Retrievalsysteme.
+056: Suchmaschinen im World Wide Web wird nachgesagt, dass sie - insbesondere im Vergleich zur Retrievalsoftware kommerzieller Online-Archive suboptimale Methoden und Werkzeuge einsetzen. Elaborierte befehlsorientierte Retrievalsysteme sind vom Laien gar nicht und vom Professional nur dann zu bedienen, wenn man stets damit arbeitet. Die Suchsysteme einiger "independents", also isolierter Informationsproduzenten im Internet, zeichnen sich durch einen Minimalismus aus, der an den Befehlsumfang anfangs der 70er Jahre erinnert. Retrievalsoftware in Intranets, wenn sie denn überhaupt benutzt wird, setzt fast ausnahmslos auf automatische Methoden von Indexierung und Retrieval und ignoriert dabei nahezu vollständig dokumentarisches Know how. Suchmaschinen bzw. Retrievalsysteme - wir wollen beide Bezeichnungen synonym verwenden - bereiten demnach, egal wo sie vorkommen, Schwierigkeiten. An ihrer Qualität wird gezweifelt. Aber was heißt überhaupt: Qualität von Suchmaschinen? Was zeichnet ein gutes Retrievalsystem aus? Und was fehlt einem schlechten? Wir wollen eine Liste von Kriterien entwickeln, die für gutes Suchen (und Finden!) wesentlich sind. Es geht also ausschließlich um Quantität und Qualität der Suchoptionen, nicht um weitere Leistungsindikatoren wie Geschwindigkeit oder ergonomische Benutzerschnittstellen. Stillschweigend vorausgesetzt wirdjedoch der Abschied von ausschließlich befehlsorientierten Systemen, d.h. wir unterstellen Bildschirmgestaltungen, die die Befehle intuitiv einleuchtend darstellen. Unsere Checkliste enthält nur solche Optionen, die entweder (bei irgendwelchen Systemen) schon im Einsatz sind (und wiederholt damit zum Teil Altbekanntes) oder deren technische Realisierungsmöglichkeit bereits in experimentellen Umgebungen aufgezeigt worden ist. insofern ist die Liste eine Minimalforderung an Retrievalsysteme, die durchaus erweiterungsfähig ist. Gegliedert wird der Kriterienkatalog nach (1.) den Basisfunktionen zur Suche singulärer Datensätze, (2.) den informetrischen Funktionen zur Charakterisierunggewisser Nachweismengen sowie (3.) den Kriterien zur Mächtigkeit automatischer Indexierung und natürlichsprachiger Suche.
+
+[00297.]
+020: Publikation und Zitat.
+025: Die problematische Basis empirischer Wissenschaftsforschung.
+056: Die empirische Wissenschaftsforschung arbeitet bei den Indikatoren wissenschaftlicher Leistung und wissenschaftlicher Wirkung mit Publikations- und Zitationsraten. Die vorliegende Arbeit befaßt sich mit dabei auftretenden methodischen Problemen. Was ist überhaupt eine Publikation? Was heißt Zitation? Zentral ist auch die Zählbasis, d.h. die Einheitenbildung: Was ist 1 Publikation? und: Was ist 1 Zitation? Bei Printpublikationen gibt es eine Reihe von beachtenswerten Faktoren (u.a. Mehrautorenwerke, Gewichtungsfaktoren wie den Impact Factor, Dokumenttypen). Bei elektronischen Publikationen im Internet mit ihrem dynamischen Charakter ist die Einheitenbildung noch weitaus problematischer. Zitationen, verstanden als zitierte Publikationen, werfen alle methodischen Probleme der Publikationseinheiten auf, hinzu kommen weitere, spezifische Probleme. Lösungsmöglichkeiten im syntaktischen Bereich (Relativierung auf Textseiten oder Zeichen) ändern am grundlegenden Problem nur wenig, Lösungsversuche im semantischen Bereich (etwa im Rahmen der semantischen Informationstheorie) sind im Rahmen der Publikations- und Zitationsanalysen nicht durchführbar und verweisen sowohl auf themenanalytische Methoden als auch auf die Wissenschaftstheorie. Mit diesem Working Paper wollen wir vor allem auf offene Probleme hinweisen; "endgültige" Lösungen wird der Leser nicht finden, wohl aber Lösungsvorschläge, die meist durchaus noch diskussionswürdig sind. In der Informationswissenschaft wie in der Wissenschaftsforschung sind wir bisher viel zu sicher davon ausgegangen, daß wir wissen, was Publikationen und Zitationen sind.
+
+[00298.]
+020: Verfahren zur automatischen inhaltlichen Erschließung von elektronischen Texten.
+025: ASPECTIX.
+056: Das Verfahren zur automatischen syntaktischen inhaltlichen Erschließung von elektronischen Texten, AspectiX, basiert auf einem Index, dessen Elemente mit einer universellen Aspekt-Klassifikation verknüpft sind, die es erlauben, ein syntaktisches Retrieval durchzuführen. Mit diesen, auf den jeweiligen Suchgegenstand inhaltlich bezogenen Klassifikationselementen, werden die Informationen in elektronischen Texten mit bekannten Suchalgorithmen abgefragt und die Ergebnisse entsprechend der Aspektverknüpfung ausgewertet. Mit diesen Aspekten ist es möglich, unbekannte Textdokumente automatisch fachgebiets- und sprachunabhängig nach Inhalten zu klassifizieren und beim Suchen in einem Textcorpus nicht nur auf die Verwendung von Zeichenfolgen angewiesen zu sein wie bei Suchmaschinen im WWW. Der Index kann bei diesen Vorgängen intellektuell und automatisch weiter ausgebaut werden und liefert Ergebnisse im Retrieval von nahezu 100 Prozent Precision, bei gleichzeitig nahezu 100 Prozent Recall. Damit ist das Verfahren AspectiX allen anderen Recherchetools um bis zu 40 Prozent an Precision bzw. Recall überlegen, wie an zahlreichen Recherchen in drei Datenbanken, die unterschiedlich groß und thematisch unähnlich sind, nachgewiesen wird.
+
+[00299.]
+020: "Dokumentenfutter" für Retrievalforschung.
+025: Reuters.
+056: Reuters (London) arbeitet seit langem mit der Wissenschaftsgemeinschaft zusammen und hatte dieser 21.000 Berichte zu Forschungszwecken beispielsweise in den Bereichen Retrieval, Filtertechniken, automatisches Indexieren und automatische Übersetzungssysteme zur Verfügung gestellt. Nunmehr wurde das kostenfrei zu nutzende Angebot auf über 800.000 Berichte auf zwei CD-ROMs im XML-Format, recherchierbar nach Inhalt, Land und Branche, erhöht. Während die Wissenschaftler in ihren Entwicklungsarbeiten auf genügend "Dokumentenfutter" angewiesen sind, erhält Reuters alle Veröffentlichungen, die aus seinen Geschenken resultieren.
+
+[00300.]
+020: Was leisten Topic Maps?.
+056: Dieser Kurzbeitrag skizziert das Potenzial der Topic Map-Technologie (ISO/IEC 13250 und XTM 1.0) für die Wissensorganisation und veranschaulicht dies anhand einer Liste fruchtbarer Anwendungsfälle (Use Cases). Er berichtet auch knapp über erste Erfahrungen bei der experimentellen Anwendung. Am Beispiel von Informationsressourcen zur Thematik sozialwissenschaftlicher Migration werden Möglichkeiten und Grenzen von Topic Maps für die inhaltliche Erschließung und semantische Suche aufgezeigt werden. Da es sich um eine terminologisch "weiche" Donnerte handelt, ist von besonderem Interesse, wie sich komplexe Relationen und multiple Indexierungssichten umsetzen lassen und wie sich diese auf das Retrieval-Ergebnis auswirken.
+
+[00301.]
+020: Integriertes Management inhaltlicher Datenarten.
+056: Inhaltliche Daten sind im Unterschied zu Messdaten, Zahlen, Analogsignalen und anderen Informationen solche Daten, die sich auch sprachlich interpretieren lassen. Sie transportieren Inhalte, die sich benennen lassen. Zu inhaltlichen Daten gehören z. B. Auftragsdaten, Werbetexte, Produktbezeichnungen und Patentklassifikationen. Die meisten Daten, die im Internet kommuniziert werden, sind inhaltliche Daten. Man kann inhaltliche Daten in vier Klassen einordnen: * Wissensdaten  - formatierte Daten (Fakten u. a. Daten in strukturierter Form),  - nichtformatierte Daten (vorwiegend Texte); * Zugriffsdaten  - Benennungsdaten (Wortschatz, Terminologie, Themen u. a.),  - Begriffsdaten (Ordnungs- und Bedeutungsstrukturen). In der Wissensorganisation geht es hauptsächlich darum, die unüberschaubare Fülle des Wissens zu ordnen und wiederauffindbar zu machen. Daher befasst sich das Fach nicht nur mit dem Wissen selbst, selbst sondern auch mit den Mitteln, die dazu verwendet werden, das Wissen zu ordnen und auffindbar zu machen.
+
+[00302.]
+020: Automatische Indexierung von Volltexten für die Gruner+Jahr Pressedatenbank.
+056: Retrievaltests sind die anerkannteste Methode, um neue Verfahren der Inhaltserschließung gegenüber traditionellen Verfahren zu rechtfertigen. Im Rahmen einer Diplomarbeit wurden zwei grundsätzlich unterschiedliche Systeme der automatischen inhaltlichen Erschließung anhand der Pressedatenbank des Verlagshauses Gruner + Jahr (G+J) getestet und evaluiert. Untersucht wurde dabei natürlichsprachliches Retrieval im Vergleich zu Booleschem Retrieval. Bei den beiden Systemen handelt es sich zum einen um Autonomy von Autonomy Inc. und DocCat, das von IBM an die Datenbankstruktur der G+J Pressedatenbank angepasst wurde. Ersteres ist ein auf natürlichsprachlichem Retrieval basierendes, probabilistisches System. DocCat demgegenüber basiert auf Booleschem Retrieval und ist ein lernendes System, das aufgrund einer intellektuell erstellten Trainingsvorlage indexiert. Methodisch geht die Evaluation vom realen Anwendungskontext der Textdokumentation von G+J aus. Die Tests werden sowohl unter statistischen wie auch qualitativen Gesichtspunkten bewertet. Ein Ergebnis der Tests ist, dass DocCat einige Mängel gegenüber der intellektuellen Inhaltserschließung aufweist, die noch behoben werden müssen, während das natürlichsprachliche Retrieval von Autonomy in diesem Rahmen und für die speziellen Anforderungen der G+J Textdokumentation so nicht einsetzbar ist.
+
+[00303.]
+020: COLLATE.
+025: Historische Filmforschung in einem verteilten Annotationssystem im WWW.
+056: Im COLLATE-Projekt wird mit Hilfe dedizierter Techniken des Wissensmanagements ein verteiltes, Webbasiertes Annotationssystem entwickelt, das die Benutzer bei ihrer Arbeit mit digitalisiertem historischen Quellenmaterial unterstützt. Als exemplarischen Anwendungsbereich verwendet COLLATE filmhistorische Dokumente, die sich auf Filme der 20er und 30er Jahre des vorigen Jahrhunderts beziehen und von drei großen europäischen Filmarchiven zur Verfügung gestellt wurden. Die Dokumente umfassen ein großes Korpus von digitalisiertem Material zur Filmzensur, einschlägigen Artikeln, Fotos, Plakaten und Filmfragmenten. Als eine virtuelle Wissens- und Arbeitsumgebung für verteilte Benutzergruppen stellt COLLATE einen inhaltsbasierten Zugriff auf die gespeicherten Datenbestände und entsprechende aufgabenbasierte Schnittstellen zur Verfügung, um das Material zu analysieren, zu vergleichen, zu indexieren und zu annotieren. Dieser wachsende Bestand von Metadaten wird vom System mit Hilfe intelligenter Dokumentenverarbeitung sowie moderner XML-basierter Dokumentmanagement- und Retrievalfunktionalitäten genutzt. Der vorliegende Beitrag beschreibt den konzeptuellen Ansatz von COLLATE, wobei im Mittelpunkt steht, wie die verschiedenen Benutzertypen und die damit verbundenen komplexen Aufgaben durch komfortable aufgabenorientierte Benutzungsschnittstellen in einer kollaborativen Arbeitsumgebung unterstützt werden können.
+
+[00304.]
+020: Automatische Indexierung.
+
+[00305.]
+020: Entwicklung und Anwendung eines Telecom-Thesaurus.
+056: Eutelis Consult ist eines der führenden Beratungsunternehmen auf dem Sektor der Telekommunikation und der Mehrwertdienste. Eutelis Consult erbringt national und international Beratungsdienstleistungen für Anbieter von Telekommunikations- und Mehrwertdiensten, für Netzbetreiber, Hersteller von Vermittlungssystemen und Endgeräten, Anwender und Nutzer von Telekommunikationsdiensten sowie öffentliche Auftraggeber. Weitere Beratungsschwerpunkte von Eutelis Consult konzentrieren sich auf die regulatorischen Rahmenbedingungen, Smartcardanwendungen, die Personalberatung sowie auf die Finanzierung junger Unternehmen in diesen Sektoren. Von der für das EUTELIS-interne Content Management verantwortlichen Abteilung wird aktuell ein Telecom Thesaurus erstellt, der der Indexierung aller internen Projektberichte und der dokumentierten externen Materialien dient. Grundlage ist ein Lotus Notes & Domino-basiertes internes Netz. Die Entstehungsgeschichte des Thesaurus, Experimente mit maschineller Generierung von Thesaurus-Relationen, maschineller Generierung von Thesaurus-Kandidaten und dem Einblick in den derzeitigen Stand mit dem Entwicklungstool IC INDEX 5.0 werden vermittelt.
+
+[00306.]
+020: Automatische Indexierung.
+025: Einführung in betriebliche Verfahren, Systeme und Anwendungen.
+056: Das vorliegende Buch zur automatischen Indexierung trägt dem Umstand Rechnung, dass ein ständig wachsender Berg von Dokumenten in Unternehmen, öffentlichen Verwaltungen, Einrichtungen der Fachinformation oder dem Internet entscheidungsrelevante Informationen enthält, die mit manuellen Mitteln und Methoden kaum mehr beherrschbar und erschließbar sind. Diese unstrukturierten Informationen sind in einer zunehmend von der schnellen Verarbeitung der Ressource Information abhängigen Wirtschaft von größter Bedeutung, ihre Beherrschung ist unabdingbar für den Wettbewerbserfolg. Verfahren der automatischen Indexierung von Dokumenten sind damit eine Basistechnik der betrieblichen Informationswirtschaft geworden. Trotz dieses Urnstandes, liegt bis auf den heutigen Tag keine einführende Darstellung in die Thematik vor. Die Zielsetzung dieses Buches ist es, einführend die Grundlagen sowie die verschiedenen Ansätze und Verfahren der automatischen Indexierung von Dokumenten vorzustellen. Die Darstellung verzichtet dabei bewusst auf die allzu detaillierte Tiefendarstellung einzelner Verfahren und Indexierungssysteme zugunsten einer Übersicht der grundsätzlichen Ansätze mit ihren jeweiligen Voraussetzungen, ihren Möglichkeiten und ihren Beschränkungen. Soweit einzelne Verfahren und Indexierungssysteme behandelt werden, besitzen diese beispielhaften Charakter für den behandelten Ansatz. Bei der Darstellung war ich stets uni eine verständliche Sprache bemüht. Der Text dieses Buches ist entstanden aus Vorlesungen in entsprechenden Lehrveranstaltungen im Studiengang Informationswirtschaft an der Fachhochschule Stuttgart. Die Darstellung richtet sich an Studierende und Lehrende der Informationswirtschaft, des Informationsmanagements, der Dokumentation sowie der Wirtschaftsinformatik, zugleich aber auch an die interessierten und mit der Thernatik konfrontierten Praktiker, die weniger an der technischen Seite der automatischen Indexierung, als vielmehr einen grundsätzlichen Informationsbedarf über die Möglichkeiten und die Schwierigkeiten des Einsatzes entsprechender Verfahren haben.
+
+[00307.]
+020: Informationswirtschaft.
+025: Management externen Wissens.
+
+[00308.]
+020: Journal Citation Reports.
+025: Ein Impact Factor für Bibliotheken, Verlage und Autoren?.
+056: Gibt es objektive Kriterien für die Bestellung und Abbestellung wissenschaftlicher Zeitschriften? Wie lange sollte eine Bibliothek Periodikabestände benutzernah aufstellen? Kann ein Verlag -außer via Verkaufszahlen - auf Kriterien des Erfolgs seiner Zeitschriften zurückgreifen? Hat ein Autor eine Entscheidungsgrundlage, welcher Zeitschrift er seinen Artikel anbietet? Ist die Forschungsaktivität eines Instituts oder eines Wissenschaftlers über den Impact derjenigen Zeitschriftentitel zu evaluieren, die die Forschungsergebnisse drucken? Können die 'Journal Citation Reports (JCR) "des "Institute for Scientific Information" bei der Klärung solcher Fragen helfen? Sind die JCR ein nützliches oder gar ein notwendiges Hilfsmittel für Bibliotheken, für Verlage, für Wissenschaftsmanager und für wissenschaftliche Autoren? Die 'Journal Citation Reports" geben im Jahresrhythmus informetrische Kennzahlen wie die Zitationsrate, den Impact Factor, den Immediacy Index, die Halbwertszeit für eine Auswahl wissenschaftlicher Zeitschriften an. Zusätzlich berichten sie darüber, weiche Zeitschriften weiche anderen Zeitschriften zitieren bzw. von diesen zitiert werden, so dass "Soziogramme" wissenschaftlicher Zeitschriftenkommunikation entstehen. Wir wollen am Beispiel des aktuellen Jahrgangs ( 1999) die JCR detailliert beschreiben, die Auswahlkriterien der Zeitschriften beleuchten, die verwendeten informetrischen Kennwerte - vor allem den Impact Factor - kritisch hinterfragen, um danach die Einsatzgebiete bei Bibliotheken, in der Wissenschaftsevaluation, bei Verlagen und bei Autoren zu diskutieren. Das Fazit sei vorweggenommen: Die JCR sind ein nicht umgehbares Hilfsmittel für die fokussierten Anwendungsbereiche. Sie sind mitnichten frei von Problemen. Wir schließen daher mit einigen Verbesserungsvorschlägen.
+
+[00309.]
+020: OSIRIS und eLib.
+025: Information Retrieval und Search Engines in Full-text Databases.
+056: OSIRIS und ELIB sind von der Deutschen Forschungsgemeinschaft (DFG) und dem Niedersächsischen Ministerium für Wissenschaft und Kultur (MWK) geförderte Projekte an der Universität Osnabrück. Sie beschäftigen sich mit intuitiv-natürlichsprachlichen Retrievalsystemen und mit Fragen der Indexierung großer Volltexdatenbanken in dieser Technik. Die Entwicklungen haben dazu geführt, daß an sich aufwendige und komplexe Verfahren der syntaktisch-semantischen Analyse und Bewertung von textuellen Phrasen in relationale Datenbanken für Massendaten eingebettet werden konnten und nun im Produktionsbetrieb eingesetzt werden können.
+
+[00310.]
+020: Suchmuster erfahrener und unerfahrener Suchmaschinennutzer im deutschsprachigen World Wide Web.
+056: In einem Labor-Experiment wurden insgesamt achtzehn Studenten und Studentinnen mit zwei offenen Web-Rechercheaufgaben konfrontiert. Während deren Bewältigung mit einer Suchmaschine wurden sie per Proxy-Logfile-Protokollierung verdeckt beobachtet. Sie machten demographische und ihre Webnutzungs-Gewohnheiten betreffende Angaben, bewerteten Aufgaben-, Performance- und Suchmaschinen-Eigenschaften in Fragebögen und stellten sich einem Multiple-Choice-Test zu ihrem Wissen über Suchmaschinen. Die Versuchspersonen wurden gezielt angeworben und eingeteilt: in eine erfahrene und eine unerfahrene Untergruppe mit je neun Teilnehmern. Die Untersuchung beruht auf dem Vergleich der beiden Gruppen: Im Zentrum stehen dabei die Lesezeichen, die sie als Lösungen ablegten, ihre Einschätzungen aus den Fragebögen, ihre Suchphrasen sowie die Muster ihrer Suchmaschinen-Interaktion und Navigation in Zielseiten. Diese aus den Logfiles gewonnen sequentiellen Aktionsmuster wurden vergleichend visualisiert, ausgezählt und interpretiert. Zunächst wird das World Wide Web als strukturell und inhaltlich komplexer Informationsraum beschrieben. Daraufhin beleuchtet der Autor die allgemeinen Aufgaben und Typen von Meta-Medienanwendungen, sowie die Komponenten Index-basierter Suchmaschinen. Im Anschluß daran wechselt die Perspektive von der strukturell-medialen Seite hin zu Nutzungsaspekten. Der Autor beschreibt Nutzung von Meta-Medienanwendungen als Ko-Selektion zwischen Nutzer und Suchmaschine auf der Basis von Entscheidungen und entwickelt ein einfaches, dynamisches Phasenmodell. Der Einfluß unterschiedlicher Wissensarten auf den Selektionsprozeß findet hier Beachtung.Darauf aufbauend werden im folgenden Schritt allgemeine Forschungsfragen und Hypothesen für das Experiment formuliert. Dessen Eigenschaften sind das anschließende Thema, wobei das Beobachtungsinstrument Logfile-Analyse, die Wahl des Suchdienstes, die Formulierung der Aufgaben, Ausarbeitung der Fragebögen und der Ablauf im Zentrum stehen. Im folgenden präsentiert der Autor die Ergebnisse in drei Schwerpunkten: erstens in bezug auf die Performance - was die Prüfung der Hypothesen erlaubt - zweitens in bezug auf die Bewertungen, Kommentare und Suchphrasen der Versuchspersonen und drittens in bezug auf die visuelle und rechnerische Auswertung der Suchmuster. Letztere erlauben einen Einblick in das Suchverhalten der Versuchspersonen. Zusammenfassende Interpretationen und ein Ausblick schließen die Arbeit ab.
+
+[00311.]
+020: ¬Die "cacouacs" und der Baum des Wissens.
+025: Kein Pardon für Narren und Tyrannen: 250 Jahre Encyclopédie von Diderot und d'Alembert.
+
+[00312.]
+020: Zeitschrifteninhaltsdienst Theologie.
+025: Zusätzliche verbale Sacherschließung in englischer Sprache.
+056: Seit März 1996 werden die Dokumentbeschreibungen rezenter Aufsätze in der Tübinger Datenbank "Zeitschrifteninhaltsdienst Theologie (ZiD)" verbal sacherschlossen nach einer Methode, die sich an die RSWK anlehnt und im Wesentlichen auf der SWID basiert. Bereits ein Jahr zuvor war eine Grobklassifikation implementiert worden, die selbstverständlich ebenfalls die Möglichkeit eines verbalen Einstiegs bietet. Da die ZilD-Datenbank den Anspruch erhebt, unselbständig erschienene theologische Literatur unabhängig von ihrer nationalen Provenienz, also international, zu repräsentieren und zu erschließen, da sie seit einigen Jahren auf dem nordamerikanischen Markt von der American Association of Theological Libraries (ATLA) vertrieben wird, vor allem jedoch, da sie über eine englischsprachige Benutzeroberfläche nebst englischen Hilfetexten verfügt, war eine zusätzliche englischsprachige Sacherschließung von jeher ein Desiderat, dessen Verwirklichung sich allerdings aufgrund der Personalsituation verbot: Für jährlich annähernd 20.000 Erschließungsfälle stehen zwei (!) Indexierer zur Verfügung, die zudem jeweils noch etliche weitere Aufgaben haben. Dass unter diesen Umständen an eine titelbezogene doppelte verbale Sacherschließung nicht zu denken ist - von den Fragen nach einem zugrunde zu legenden Regelwerk und nach der Sprachkompetenz der Indexierer einmal ganz abgesehen - , dürfte allgemein einleuchten. Einen Ausweg aus dem Dilemma boten schließlich, wie schon in manch anderem Fall, die Windows-Programme von allegro, deren Mächtigkeit kaum zu überschätzen ist. Sie erlauben die Einbindung eines Find-Befehls in die Anzeigeparameter, eine Möglichkeit, von der die ZiD-Datenbank reichlich Gebrauch macht. Sie ist auch die Grundlage einer englischsprachigen verbalen Sacherschließung, deren Aufbau ein gegenwärtig mit Stammpersonal als "Parergon" durchgeführtes kleines Projekt darstellt, mit dessen relativem Abschluss innerhalb eines Zeitraums von ca. zwei Jahren zu rechnen sein dürfte. Die ZiD-Datenbank weist eine flache Datenstruktur auf, d.h., sie arbeitet nicht mit Stammsatzverknüpfungen. Einmal getroffen, lässt sich diese Grundentscheidung angesichts eines Volumens von mittlerweile weit über 150.000 Aufsatznachweisen, deren größerer Teil eine verbale Sacherschließung aufweist, nicht mehr revidieren.
+
+[00313.]
+020: Tippfehler in Bibliothekskatalogen.
+025: Möglichkeiten einer EDV-gestützten Ermittlung.
+056: Ein nicht unerheblicher Anteil von Benutzer-Recherchen am OPAC und Vorakzessionsarbeiten laufen deshalb ins Leere, weil die gesuchten Titelaufnahmen aufgrund von Tippfehlern in der Datenbank nicht ermittelt werden können, weil mit zutreffender Schreibweise gesucht wird, was mit Tippfehler katalogisiert wurde.2 Ob es sich bei den Tippfehlern tatsächlich um die "banalste Schadensweise" (Kuhn 2000) defizitärer Titelaufnahmen handelt, mag dahingestellt sein. Fest steht, dass dann, wenn sich die korrekte Schreibweise nicht in einem verknüpften Feld findet, Schaden entsteht: Verzicht auf die Lektüre von etwas, dessen Lektüre dem betreffenden Forschungsprojekt nützlich gewesen wäre, vermeidbare Neubeschaffung, vermeidbare Fernleihen, vermeidbare Wege zu Bibliotheken, die das Gesuchte ebenfalls haben... Ein Teil der hier aufgeführten Schäden ist also unmittelbar kostenverursachend; mittelbar kostenverursachend im kulturellen, wissenschaftlichen bzw. volkswirtschaftlichen Sinne sind alle hier aufgeführten Schäden. Der durch Tippfehler entstehende Schaden überwiegt bei weitem den, der z.B. durch Verwechslung von Verfasser-, Urheber- und Sachtitelwerk, fehlerhafte Auflagen- oder Sprachbezeichnungen oder gar den des nicht rechtzeitigen Wechsels vom Hauptsachtitel zu dessen Zusatz usw. entsteht - womit nicht gesagt ist, dass derlei Fälle irrelevant sind. Angesichts der Relevanz der Tippfehler war und bin ich erstaunt, wie wenig diese bisher Gegenstand bibliothekarischer Diskussion bzw. Literatur gewesen sind. (Eine gewisse Ausnahme hiervon beinhaltet die Literatur über automatische Indexierung). Von den Tippfehlern soll im Folgenden der Teil besprochen werden, der nicht mit Normdateien verknüpft, aber retrievalrelevant ist: Hauptsachtitel, Zusatz dazu usw. (in manchen Bibliothekskatalogen sind auch die Felder für z.B. Gesamttitel, Bandangaben und Fußnoten indexiert) nicht jedoch Auflagenbezeichnung, Erscheinungsort, Verlag, Kollationsangaben usw..
+
+[00314.]
+020: Suchen ohne worte.
+025: Wie inhaltsbasierte Bildersuche funktioniert.
+056: Für Wörter gibt es Wörterbücher und für Texte gibt es Suchmaschinen, die sie nach Wörtern durchsuchen können. wie aber kann man Multimediadaten wie Bilder, Videos oder Musik verwalten und greifbar machen? Die Lösung heißt Content Based Image Retrieval (inhaltsbasierte Bildersuche): Wie man aus einer Ansammlung von Millionen Pixel die wirklich wichtigen Information herauszieht, erklärt unser Grundlagenartikel.
+
+[00315.]
+020: Globalisierung und Wissensorganisation.
+025: Neue Aspekte für Wissen, Wissenschaft und Informationssysteme: Proceedings der 6. Tagung der Deutschen Sektion der Internationalen Gesellschaft für Wissensorganisation Hamburg, 23.-25.9.1999.
+
+[00316.]
+020: Indexierung und Fulcrum-Evaluierung.
+
+[00317.]
+020: Automatische Indexierung von Volltexten für die Gruner+Jahr Pressedatenbank.
+056: Retrieval Tests sind die anerkannteste Methode, um neue Verfahren der Inhaltserschließung gegenüber traditionellen Verfahren zu rechtfertigen. Im Rahmen einer Diplomarbeit wurden zwei grundsätzlich unterschiedliche Systeme der automatischen inhaltlichen Erschließung anhand der Pressedatenbank des Verlagshauses Gruner + Jahr (G+J) getestet und evaluiert. Untersucht wurde dabei natürlichsprachliches Retrieval im Vergleich zu Booleschem Retrieval. Bei den beiden Systemen handelt es sich zum einen um Autonomy von Autonomy Inc. und DocCat, das von IBM an die Datenbankstruktur der G+J Pressedatenbank angepasst wurde. Ersteres ist ein auf natürlichsprachlichem Retrieval basierendes, probabilistisches System. DocCat demgegenüber basiert auf Booleschem Retrieval und ist ein lernendes System, das auf Grund einer intellektuell erstellten Trainingsvorlage indexiert. Methodisch geht die Evaluation vom realen Anwendungskontext der Textdokumentation von G+J aus. Die Tests werden sowohl unter statistischen wie auch qualitativen Gesichtspunkten bewertet. Ein Ergebnis der Tests ist, dass DocCat einige Mängel gegenüber der intellektuellen Inhaltserschließung aufweist, die noch behoben werden müssen, während das natürlichsprachliche Retrieval von Autonomy in diesem Rahmen und für die speziellen Anforderungen der G+J Textdokumentation so nicht einsetzbar ist.
+
+[00318.]
+020: Sexuelle Belästigung im Internet.
+025: Pornographie, Gewalt und Hass finden zunehmend den Weg ins Web. Jugendschützer kämpfen dagegen an.
+
+[00319.]
+020: Zum Prinzip der Objektdarstellung in SGML.
+056: Semantische Thesauri sind dazu geeignet, Wissen zu strukturieren. Der vorliegende Beitrag soll unter anderem deutlich machen, daß die SGML (Standard Generalized Markup Language) ein mögliches Instrument zum Aufbau semantischer Thesauri ist. Die SGML ist eine Metasprache, die geeignet ist, Texte in natürlicher Sprache mit Strukturen zu versehen, die das Erkennen des Informationsgehaltes eines Dokuments erleichtern. Zugleich wird damit unter anderem die Voraussetzung dafür geschaffen, Volltextindexierungen in einer Weise vorzunehmen, wie dies bislang nicht möglich war. Die rasant zunehmende Bedeutung der SGML, liegt zweifellos an der bekanntesten Document Type Definition (DTD) im Rahmen der SGML, der Hypertext Markup Language (HTML), wie wir sie im WWW (World Wide Web) des Internet in Anwendung finden. Darüber hinaus erfüllt SGML je nach DTD die Bedingungen, die Objektorientiertheit unserer natürlichen Sprache mit ihren definierbaren Begriffen sinnvoll zu unterstützen und beispielsweise mit Hilfe der objektorientierten Programmiersprache JAVA zu verarbeiten. Besonders hervorzuheben ist die sich damit verändernde Publikationsform bei wissensbasierten Texten, in denen SGML-Dokumente nicht mehr nur für sich zu betrachten sind, wie Zeitschriftenaufsätze oder Bücher, sondern die darüber hinaus in Form von Wissenselementen in einer Daten- und Wissensbank organisiert und recherchiert werden können.
+
+[00320.]
+020: Ordnungssysteme als Wissensbasis für die Suche in textbasierten Datenbeständen.
+025: dargestellt am Beispiel einer soziologischen Bibliographie.
+056: Es wird eine Methode vorgestellt, wie sich Ordnungssysteme für die Suche in textbasierten Datenbeständen verwenden lassen. "Ordnungssystem" wird hier als Oberbegriff für beliebige geordnete Begriffssammlungen verwendet. Dies sind beispielsweise Thesauri, Klassifikationen und formale Systematiken. Weil Thesauri dabei die leistungsfähigsten Ordnungssysteme sind, finden sie eine besondere Berücksichtigung. Der Beitrag ist streng praxisbezogenen und auf die Nutzerschnittstelle konzentriert. Die Basis für die Nutzerschnittstelle bilden Ordnungssysteme, die über eine WWW-Schnittstelle angeboten werden. Je nach Fachgebiet kann der Nutzer ein spezielles Ordnungssystem für die Suche auswählen. Im Unterschied zu klassischen Verfahren werden die Ordnungssysteme nicht zur ausschließlichen Suche in Deskriptorenfeldern, sondern für die Suche in einem Basic Index verwendet. In der Anwendung auf den Basic Index sind die Ordnungssysteme quasi "entkoppelt" von der ursprünglichen Datenbank und den Deskriptorenfeldern, für die das Ordnungssystem entwickelt wurde. Die Inhalte einer Datenbank spielen bei der Wahl der Ordnungssysteme zunächst keine Rolle. Sie machen sich erst bei der Suche in der Anzahl der Treffer bemerkbar: so findet ein rechtswissenschaftlicher Thesaurus natürlicherweise in einer Medizin-Datenbank weniger relevante Dokumente als in einer Rechts-Datenbank, weil das im Rechts-Thesaurus abgebildete Begriffsgut eher in einer Rechts-Datenbank zu finden ist. Das Verfahren ist modular aufgebaut und sieht in der Konzeption nachgeordnete semantische Retrievalverfahren vor, die zu einer Verbesserung von Retrievaleffektivität und -effizienz führen werden. So werden aus einer Ergebnismenge, die ausschließlich durch exakten Zeichenkettenabgleich gefunden wurde, in einem nachfolgenden Schritt durch eine semantische Analyse diejenigen Dokumente herausgefiltert, die für die Suchfrage relevant sind. Die WWW-Nutzerschnittstelle und die Verwendung bereits bestehender Ordnungssysteme führen zu einer Minimierung des Arbeitsaufwands auf Nutzerseite. Die Kosten für eine Suche lassen sich sowohl auf der Input-Seite verringern, indem eine aufwendige "manuelle" Indexierung entfällt, als auch auf der Output-Seite, indem den Nutzern leicht bedienbare Suchoptionen zur Verfügung gestellt werden.
+
+[00321.]
+020: ¬Ein Struktursystem zur Klassifikation von Wissen in der Biosphäre.
+056: Das vorgestellte Struktursystem dient zur Klassifikation von Arten von Wissen, die nur schwer oder gar nicht in begrifflich und schriftlich fixierbare Formen zu bringen sind, so z.B. das implizite Wissen nach Polanyi. Wissen ist die formale Notation für eine Spezifikationshierarchie von { *Wissen... {'Wissen { °Wissen } }...) die es ermöglicht, alle Formen des Proto-Wissens in der Biosphäre zu erfassen. Menschliches und wissenschaftliches Wissen sind in dieser Systematik nur durch ihren Index, nicht aber durch prinzipiell unüberbrückbare Demarkationen ausgezeichnet. Die theoretische Basis dieses Wissenssystems wird von Generalisierten Neuronalen Netzen (GNN) geliefert.
+
+[00322.]
+020: Thesaurus Sozialwissenschaften online.
+056: Es wird die elektronische Version des "Thesaurus Sozialwissenschaften" vorgestellt. In Anlehnung an die mehrfach neu aufgelegte gedruckte Ausgabe kann zwischen alphabetischer und systematischer Darstellung und deutsch oder englischsprachiger Version gewählt werden. Die Funktionen `Suche' und `Navigation' im Vokabular werden vorgeführt. Über eine Export-Funktion kann der Thesaurus zur Indexierung in den Datenbanken SOLIS und FORIS des Informationszentrum Sozialwissenschaften eingesetzt werden.
+
+[00323.]
+020: Pragmatische Aspekte der Wissensmodellierung in Wissenschaftlichen Informationssystemen.
+056: Der Beitrag stellt einen Ansatz für die Repräsentation wissenschaftlicher Ergebnisse vor, der die klassischen Verfahren zur Indexierung von Dokumenten um eine neue Dimension erweitert. Grundlage hierfür ist die These, daß die Kodierung möglicher Informationen, die zur Lösung von (Forschungs-)Problemen benötigt werden, den pragmatischen Aspekt interessegeleiteten Handelns mit einbeziehen muss. Wir begründen unseren Standpunkt unter Bezugnahme auf die philosophische Position des Pragmatismus. Die demgemäß entwickelten Repräsentationsstrukturen sind das Ergebnis einer Analyse natürlichsprachlicher Nominalphrasen und deren Transformation in standardisierte und normierte Ausdrücke. Gleichzeitig wird die Verwendbarkeit solcher Strukturen für effiziente Retrievalverfahren aufgezeigt.
+
+[00324.]
+020: Landkarten des Wissens.
+025: Eine Tagung über enzyklopädische Informationsverarbeitung.
+056: "Wie definiert man die Schwerpunkte künftiger Forschung? Wie lassen sich ertragreiche Themen finden? Das Bundesministerium für Bildung und Forschung gründete dazu im Sommer dieses Jahres die Initiative "Futur". Ziel ist eine am "Bedarf dieser Gesellschaft" orientierte Forschungsförderung. Bevor man sich auf bestimmte Themen festlegen kann, ist ein Um- und Überblick nötig. Diesen enzyklopädischen Überblick besitzt heute keine einzelne Person. Deshalb sollen insgesamt etwa zweitausend Beteiligte dieses "deutschen Forschungsdialogs" einen umfassenden Informationsaustausch sicherstellen. Der Fortschritt des Wissens soll hier also befördert werden durch thematische Umschau und Konzentration der Kräfte. Eine ähnliche Wirkung enzyklopädischer Wissenssammlung versprach sich der französische Philosoph Denis Diderot von der "Encyclopédie", die er ab 1750 gemeinsam mit dem Mathematiker Jean le Rond d Alembert herausgab. Die Encyclopedie dachte sich Diderot als eine "Weltkarte" des Wissens. Mehr als 160 Schriftsteller, Philosophen, Wissenschaftler und Spezialisten aller Disziplinen stellten darin den "Stand der herrschenden Anschauungen" dar. Mit "einem Blick" würde man erkennen, "an welchen Gegenständen man arbeiten" müsse. Das selbstbewußte Fortschreiten der wissenschaftlichen Zivilisation wurde damit zum Selbstläufer. Ein bereits existierender technischer Standard für die Repräsentation von Wissen heißt heute "Topic Maps" (ISO 13250). Noch immer ist die Metapher der Weltkarte leitend. Prinzipiell gleichgeblieben ist das Bedürfnis, die durch Buchdruck, Zeitschriften und heute das Internet wachsende Masse des Wissens zu sammeln, zu verwalten und gezielt weiterzuentwickeln. Wissen vom Wissen: Man könnte dies die enzyklopädische Funktion nennen, die jede Kultur mit ihren spezifischen Medientechniken anders realisiert. Eine Tagung des rührigen Instituts für Europäische Kulturgeschichte der Universität Augsburg sprach vom "europäischen Modell der Enzyklopädien". Thematisch war die Tagung jedoch im wesentlichen auf die Enzyklopädistik der frühen Neuzeit eingeschränkt. Eine gezielte epochenübergreifende Betrachtung verschiedener Erscheinungsformen der enzyklopädischen Funktionen Sichern, Ordnen und Verarbeiten versuchten auch die historischen Überblicksbeiträge nicht. Marco Jorio (Bern) etwa beleuchtete den Beitrag enzyklopädischer Werke zur nationalen Identitätsfindung. Hans Zotter (Graz) schlug einen nicht sehr systematischen Bogen von den barocken Kunstsprachen - Versuchen, die Welt auf eine überschaubare Zahl von Begriffen zu reduzieren - zum Wissensmanagement moderner Bibliotheken..
+
+[00325.]
+020: ¬Die Nutzung von Zitationsindizes durch deutsche Soziologen.
+025: Ergebnisse einer Umfrage.
+056: Über das Ausmaß der Nutzung der Zitationsindizes des Institute for Scientific Information ist wenig bekannt; dies gilt insbesondere auch für den Social Science Citation Index (SSCI). Eine im Sommer 1999 durchgeführte Untersuchung unter deutschen Soziologen bestätigte bekannte Schwachpunkte des SSCI in Bezug auf Sprachraum und Literaturformen. Rund die Hälfte der antwortenden Soziologen gehörte zu den Nutzern, von denen wiederum die Hälfte den SSCI nur selten in Anspruch nahmen. etwa die Hälfte der Antwortenden hält die Auswertung von Zitationsindizes für eine sinnvolle informationelle Ergänzung der Evaluation sozialwissenschaftlicher Forschungsleistungen. Als weiteres Umfragergebnis zeigte sich, dass das Phanomen unsubstanzieller Koautorenschaft auch in der Soziologie weit verbreitet ist.
+
+[00326.]
+020: Wissensorganisation und Informations Retrieval im Wandel.
+025: Konzepte für die Ausbildung in Deutschland.
+056: Es wird ein Überblick gegeben, wie sich die Veränderungen sich im Bereich der Informationsverarbeitung und -technik auf die Gestaltung von Studienkonzepten im Bereich Wissensorganisation und Information Retrieval in deutschen bibliothekarischen Ausbildungseinrichtungen ausgewirkt haben. Dabei wird unterschieden in Bereiche der Veränderungen und in Bereiche der Stabilität. Die Bereiche der Veränderungen lassen sich den Verfahren und Anwendungen in der Praxis zuordnen. Sie sind zum einen geprägt durch eine integrative Sicht auf Indexierung und Information Retrieval und lassen sich zum anderen durch folgende Trends charakterisieren: - Von Katalogen zu OPACs und WebOPACs - Von der Katalogisierung zum intelligenten Information Retrieval und Suchmaschinen mit benutzerfreundlichen Interaktionsschnittstellen - Vom lokalen Katalog zum kooperativen Erschließen und Retrieval in heterogenen Netzen - Von intellektueller zu automatischer Indexierung - Von Regelwerken zu strukturierten Beschreibungsebenen (z.B. Metadaten) - Von Beschreibung und Bewertung zu Entwicklungen und Produktdesign Die Bereiche der Stabilität lassen sich der Theorie und den Methoden zuordnen und sind durch folgende Themen beschreibbar: - Grundlagen der Wissensorganisation und Informationserschließung (z.B. in Philosophie, Linguistik, Informatik, Kognitionspsychologie) - Grundlagen der Gestaltung von Dokumentationssprachen - Grundlagen des Information Retrieval.
+
+[00327.]
+020: WebSPIRS-5 und ERL-5.
+
+[00328.]
+020: 67. IFLA General Conference in Boston.
+025: Veranstaltungen der Division IV Bibliographic Control.
+056: Bericht über die Veranstaltungen der Section on Bibliography, Section on Cataloguing, Section on classification and Indexing.
+
+[00329.]
+020: Zum Wert multipler und adaptiver Indexierung mit Konzeptrahmen für die Sozialwissenschaften.
+056: Dieser Beitrag argumentiert für eine konzeptuelle Indexierungsmethode, die für Diskursgemeinschaften relevante Wissensstrukturen symbolisch und domänenabhängig modelliert. In Kombination mit nutzerorientierter, selektiver Tiefenanalyse sind mehrfache Indexierungen derselben Ressource aus dem Blickwinkel unterschiedlicher Zielgruppen zulässig (multiple Indexierung), Indexierungen werden an Informationsbedarfe von Nutzergruppen angepaßt (adaptive Indexierung) und mit an eine Ontologie gebundenen Konzeptrahmen ausgedrückt (Indexierungssprache). Die Anwendung auf komplexe Fragestellungen in den Sozialwissenschaften ist beabsichtigt..
+
+[00330.]
+020: Wie Google für uns nach der ominösen Gluonenkraft stöbert.
+025: Software-Krabbler machen sich vor der Anfrage auf die Suche - Das Netz ist etwa fünfhundertmal größer als alles Durchforschte.
+056: Ohne das Internet ist heute das Wissen der Welt kaum mehr vorstellbar - und ohne Suchmaschinen wäre es nicht auffindbar. Freilich steht nicht alles Wissen im Word Wide Web. Und erst recht nicht ist es dort zu finden, nicht einmal von dieser) technischen Wunderwerken, den Suchmaschinen, die uns dabei helfen. In den sechziger Jahren entstand Hypertext als eine einheitliche Darstellung und Verknüpfung von elektronischen Dokumenten. Im Jahr 1980 empfahl Tim Berners-Lee dem Genfer Kernforschungszentrum Cern einheitliche Verweise zwischen Dokumenten, sogenannte Links. Zu Weihnachten 1990 schrieb er dort den ersten Browser und erfindet damit das World Wide Web. Am 15. Dezember 1995 ging Altavista in Palo Alto ans Netz. Als wir hier einige Monate später über diese Suchmaschine berichteten, schätzten wir damals 30 Millionen Seiten im Interne. Inzwischen mag es da 300 Milliarden Dateien geben, wie viele, weiß keiner, nicht einmal die größte Suchmaschine. Die Technik der Suchmaschinen ist gleich geblieben. Sie suchen die Inhalte vorher, vor der Abfrage, mit Software, den "Krabblern", einer Erfindung des Franzosen Louis Monier. Die machen eine Liste aller vorkommenden Wörter und krabbeln dann, Link um Link, zu weiteren Seiten, von Datei zu Datei, von Domane zu Domäne, von Kontinent zu Kontinent. Wie genau die invertierten Dateien aussehen, die sie erzeugen, wie groß sie sind, wie dort Worthäufigkeit oder Stellung des Treffers auf der durchforschten Seite gespeichert ist - wichtig beim Sortieren der Ergebnisse -, wie daraus später geschlossene Wortgruppen herausgeholt werden, bleibt ein Betriebsgeheimnis. Einen kleinen Einblick gab uns Guido Adam, Technikchef der deutschen Suchmaschine Infoseek. In dieser Auskunftei mit 35 festen und noch einmal so vielen freien Mitarbeitern sind neun für den Katalog tätig. Die Rechner stehen in Darmstadt. In 19-Zoll-Gestellen laufen hinter Plexiglas sechs Krabbler-PCs mit 3 bis 8 Gigabyte (GB) Ram-Speicher und je hundert Krabbelprogrammen. Sie sind mit 640 Megabit je Sekunde ans Internet angeschlossen. Ihr Ziel: Wenigstens einmal mönatlich 30 Millionen deutsche Dateien besuchen. Erkennen sie häufig wechselnde Inhalte, kommen sie öfter vorbei; für ganz Aktuelles wie Zeitungsberichte gibt es Sondersucher, die notfalls stündlich nachlesen. Zwei weitere Maschinen bauen immerfort neue Indizes und legen die Ergebnisse in einem Speicher-Server mit brutto 5 Terabyte (5 mal 10**12 Byte) ab. Der Index - jeweils rund 350 GB - wird fünffach gehalten, damit Anfragen blitzschnell - in etwa einer Sekunde - von drei weiteren Maschinen beantwortet werden können. Index-"Instanz" Nummer vier ist Reserve und die fünfte im Aufbau. Der weitere Speicher wird für die URL-Adreßdatenbank gebraucht, welche die Krabbler steuert, und als Zwischenspeicher für frisch aufgesuchte Dokumente, die dort ihrer Indizierung harren. An Anfragen kommen bei Infoseek, die T-Online und andere bedienen, täglich zwei Millionen herein; Hauptsuchzeit ist abends 20 bis 23 Uhr. Ja, Spitzenreiter der Suchbegriffe ist immer noch Sex. Gehen wir auf die Suche nach Seltenem. Im internationalen Wettstreit um die weitreichendste Netzausforschung hat zur Zeit die Suchmaschine Google (www.Google.com, "search 1.346.966.000 web pages") mit über 700 Millionen indizierten, teils sogar gespeicherten Seiten die Nase vorn, zumal sie dank ihrer Linktechnik weitere fast 700 Millionen Seiten kennt. Täglich bekommt Google 70 Millionen Anfragen. An zweiter Stelle mit knapp 600 Millionen Seiten folgt Fast, als "Alltheweb" bekannt (www.alltheweb.com), danach etwa gleichrangig mit über 500 Millionen Seiten der Oldtimer Altavista (www.altavista.com), Inktomi und Webtop (www.webtop.com). Inktomi liefert seine Ergebnisse an andere, erst an Hotbot, dann an Microsoft (www.msn.com), bis zum Juli 2000 auch an Yahoo (www.yahoo.com). Yahoo, geboren 1994, ist die älteste und immer noch eine sehr beliebte Suchmaschine, nicht, weil sie Exotika wie "Gluonenkraft" liefern könnte-, sondern weil sich dort rund 150 Katalogisierer Menschen! - um Stichwörter kümmern. Nur wenn die nichts fanden, werden fremde Ergebnisse zugespielt, inzwischen von Google. Ähnlich ist das bei Look Smart (www.looksmart.com), die von Inktomi unterversorgt wird. In hartnäckigen Fällen nutze man Übersuchmaschinen, sogenannte Meta-Crawler wie www.ixquick.com oder hier www.metager.de, die den eingegebenen Begriff automatisch in mehreren Suchmaschinen aufzuspüren versuchen (nicht in Google). Bei den meisten Suchen geht es jedoch nicht um seltene Begriffe. Von den 75 Millionen Ausdrücken, die Altavista einst zählte, werden üblicherweise triviale gesucht. Die Datenbankgröße der Suchmaschine ist dann belanglos. Zudem stehen viele Inhalte mehrfach im Netz, und der Suchende will nicht fünfmal dasselbe vorgespielt bekommen. Bei den meist viel zu vielen Treffern ist die wirkliche Frage deren Anzeigereihenfolge. Da wird versucht, nach Häufigkeit des Wortes im Text zu sortieren oder danach, ob es im Titel und näher am Textanfang vorkommt. Die Suchmaschinen erklären selbst ein wenig davon, zugleich als Aufforderung an WebDesigner, einfache Seiten zu machen, sich kurz und möglichst rahmenlos zu fassen. Speziell für die Suchmaschinen haben die meisten Webseiten im Kopfeintrag Stichwörter, im Quelltext der Seite von jedermann zu sehen. Webseiten können sich "Roboter" sogar verbitten. In den Suchmaschinen-Redaktionen wird für viele Begriffe die Ausgabe manuell festgelegt - wobei zuweilen bereits ein gutes "Placement" bezahlt wird, was sicher bedenklich ist. Für den Neuankömmling Google haben sich 1998 Sergey Brin und Larry Page etwas Besonderes ausgedacht: Die Seiten werden nach Beliebtheit bewertet, und die hängt davon ab, wie viele (beliebte) Seiten zur jeweiligen Seite einen Link hin haben. Das ist gut für klassische Inhalte. Neuigkeiten, auf die noch niemand deutet, werden so nicht gefunden. Für allgemeine Fragen kommt die Lösung nicht von großen Automaten, sondern von spezialisierten Auskunfteien, die rubriziert nach Sachgebieten vorgehen. Da gibt es Spezialisten für alles, etwa Webbrain (www.webbrain.com), wo zur Sache gegangen werden kann bis hinunter zu Dürrenmatt, es gibt Sammlungen für Universitäten und Ausbildung (www.searchedu.com) und deutsche für Technik (www.fiz-technik.de), für Juristisches, Medizinisches und, von den Mormonen gesponsert, für Ahnenforschung (www.familysearch.com); Suche nach vermißten Kindern (www.fredi.org) ist genauso möglich wie nach Gratisgeschenken (www.kostenlos.de) oder in Bücherkatalogen samt Verkauf (www.amazon.de). Nur die deutsche Telefonbuchsuche wird immer schlechter. Es gibt Maschinen, die freies Fragen zulassen - und dann erstaunliche Ergebnisse bringen, etwa Northern Light (www.northernlight.com) auf die deutsch gestellte Frage: "Wie alt wurde Cäsar?" Wird dasselbe dagegen von Julius Cäsar" erfragt, ist man zwei Klicks später beim Ergebnis. Hier muß maschinelle Intelligenz noch üben. Erfahrungsgemäß denkt man sich besser selbst eine Reihe von Begriffen aus, die das zu findende Dokument enthalten könnte, und variiert, bis die Treffer näherkommen, so auch bei Xipolis (www.xipolis.net), das sich Wissensbibliothek nennt, Cäsars Geburtsjahr aber aus dem 24bändigen Brockhaus nur gegen Gebühr herausrücken will. Wissen.de gibt's frank und frei, und die berühmte Encyclopedia Britannica (www.Britannica.com) ist inzwischen auch schon offen! Kepnt man ein paar Worte des genauen Wortlauts, sagen wir, "zu Mantua in Banden", so setze man sie in Anführungszeichen und lasse nur nach dieser Folge suchen. Google hält durchsuchte Seiten (bis zu rund 100 Kilobyte) - sozusagen das ganze Netz, unvorstellbar! - in Kopie vor und kann selbst dann aus seinem Archiv dienen, wenn das Original schlecht oder nicht mehr erreichbar ist. Sie schnell anzUklicken hat den Zusatzvorteil, daß die Suchbegriffe farbig hervorgehoben werden. Und man sieht, wie die Seite vielleicht vor zwei Monaten beim letzten Google-Besuch ausgesehen hat. Insgesamt hat Google stets über hundert Indizes mit jeweils mehreren Terabyte Daten am Netz; Googles Legebatterie von über 8000 billigen Linux-PC-Servern grast in mehr a s einem Petabyte eigenem Speicher (1011 Byte). Dennoch: Die größte Sorge aller Netzfreunde ist das "unsichtbare Netz", das schätzungsweise fünfhundertmal umfangreicher ist als das mit Suchmaschinen Durchforschbare. Es gibt riesige Inseln nach außen nicht verlinkter Dateien, es gibt Formate, die dem HTML-Standard nicht entsprechen und von Suchmaschinen nicht oder ungern gelesen werden, von Word-Dokumenten bis zu PDF-Dateien (Google durchkämmt sie und speichert sie zum schnellen Uberblick und vorteilhaft kopierbar als Textdateien!), Tabellen und Folienvorträge, Gedcom-Stammbäume, vor allem aber Bilder, Filme, Musik, die sich nur schwer elektronisch katalogisieren lassen. Haben Suchmaschinen Zeit, mit künstlicher Intelligenz herauszufinden, ob auf einem Bild eine Person ist? Und wenn, wer mag es sein? Infoseek bemüht sich in einer eigenen Bildersuche darum, kann allerdings auch kein Konterfei von Luis Trenker oder Toni Sailer herbeizaubern, wogegen "Luis Trenker Bild", besonders bei Google, zum Foto führt. "Britney Spears" strahlt einem gleich entgegen! Wenn Bilder beliebig benannt werden, bleiben sie unauffindbar. MP3-Dateien enthalten oft maschinenlesbar den Titel in der Musikdatei - eine große Hilfe für Suchmaschinen. Neue Webformate wie Macromedia Flash, dem Internet-Veteranen ohnehin ein Graus, vernebeln das in ihrem Troß Folgende. Und bietet eine Internetseite eine eigene Datenbanksuche an, dann bleibt diese Datenbank vor Suchmaschinen verborgen, von Telefonnummern und Zügen bis zu Artikeln dieser Zeitung. Zuvorkommender ist es, die Inhalte in Hypertext ins Netz zu stellen - für die Suchmaschinen und zusätzlich manuell darin suchen zu lassen. Suchmaschinen wie Freefind oder Atomz bieten das kostenlos an. Grundsätzlich
+
+ können Suchmaschinen kostenpflichtige Inhalte nicht durchkämmen. So wie sich die olympische Idee inzwischen den Profis gebeugt hat, besteht auch im Internet die Gefahr, daß es immer kommerzieller zugeht. Ein Musterbeispiel sind WapInhalte für mobile Betrachter, die im Gegensatz zu HTML-Seiten nicht systematisch von einem Domänennamen her über Links erreichbar sind. Wap-Suchmaschinen weisen also nur angemeldete Seiten nach und spielen eine untergeordnete Rolle. Viel lieber schleusen die Mobilfunkanbieter ihre Kunden über Portale. Zollund Zahlgrenzen, Partikularismus zerstören das Netz. Beim japanischen Imode, mit HTML kompatibel, ist das anders; selbst Google bietet über www.google.com/imode Suche an, hat dann aber Mühe, Imode-Inhalte (in cHTML, compact HTML) von HTML zu unterscheiden. Grundsätzlich ist die Rivalität zwischen Internet-Portalen mit ihrer Zugangsführung und Suchmaschinen für Quereinsteiger noch nicht ausgefochten. Noch aus der Vor-Web-Zeit stammen Diskussionsforen. Dort werden zu bestimmten Themen Meinungen ausgetauscht, - moderiert oder wildwachsend. Die Beiträge, eine Art E-Mails mit gestrengen Usancen, finden sich dann auf vielen kooperierenden Servern, auf uralten nichtkommerziellen Fido- oder Zerberus-Boxen und bei großen Internet-Anbietern à la T-Online, die die Eintrage wie kommunizierende Röhren untereinander austauschen. Die mit Newsreader-Zusatzsoftware zu lesenden, zuweilen ruppigen Beiträge dieser Zehntausenden von Newsgroups im "Usenet" sind ein wahres Dorado für Tips und Meinungen, für praktische Hilfe und unermüdliche Kollegialität - oft zum Ärger der Produkthersteller, gelegentlich zur Entlastung von deren Kundendiensten. Frage-und-Antwort-Fäden (Threads) verästeln sich zu einem Baum der Meinungen und des Wissens. Einen Überblick gibt etwa Tile.net oder groups.google.com, versuchsweise mag man als Sprachfreund bei http://faql.de einsteigen. Über www.deja.com konnte man überall browsergeführt mitdiskutieren und seinen Senf dazugeben. Ende 2000 ging es damit bergab, am 12. Februar stellte Deja seinen Dienst ein. Domänenname und Datenbank (mehr als ein Terabyte mit über 500 Millionen Beiträgen seit 1995) wurden von Altavista an Google verkauft und sind unter der alten Adresse lebendig. Nur neue Beiträge kann man dort nicht mehr loswerden und muß sich dazu schon direkt zum jeweiligen Forum bemühen. Manche Suchmaschinen bieten maschinelle Übersetzungen. Die Ergebnisse helfen Amerikanern, uns zu verstehen, mit Phantasie und gutem Willen, Auf seiner sehenswerten englischen Suchseite bietet dies Google an, so wie seit längerem Altavista - vom selben Übersetzer. Gefundenen Text bekommt man ins Englische übersetzt; klickt man weiter, so auch die weiteren Seiten. Man sollte sich nicht darüber lustig machen, selbst wenn eines Dichters Werk als "its factory" erscheint und die Stadt Essen als "meal". Die Wunscheinstellungen (speicherbar, wenn man Cookies zuläßt) bei Google lassen übrigens zu, daß die gefundenen Seiten, ob original, ob übersetzt, in einem neuen Browserfenster aufscheinen.'Alle anderen machen das auch wenn man die Shift-Taste beim Klicken drückt. Hoffen wir, daß uns diese offene Wunderwelt des Internet mit ihren Suchmaschinen noch lange erhalten bleibt und daß kommende Multimedia-Inhalte nicht in einem Wust von Formaten untergehen. Das Netz muß Schranken überwinden können, für Maschinen, letztlich aber von Mensch zu Mensch.
+
+[00331.]
+020: Sind Verfahren zur maschinellen Indexierung für Literaturbestände Öffentlicher Bibliotheken geeignet?.
+025: Retrievaltests von indexierten ekz-Daten mit der Software IDX.
+056: Maschinelles Indexieren vereinheitlicht und vermehrt das Suchvokabular eines Bibliothekskatalogs durch verschiedene Methoden (u.a. Ermittlung der Grundform, Kompositazerlegung, Wortableitungen). Ein Retrievaltest mit einem für öffentliche Bibliotheken typischen Sachbuchbestand zeigt, dass dieses Verfahren die Ergebnisse von OPAC-Recherchen verbessert - trotz 'blumiger' Titelformulierungen. Im Vergleich zu herkömmlichen Erschließungsmethoden (Stich- und Schlagwörter) werden mehr relevante Titel gefunden, ohne gleichzeitig den 'Ballast' zu erhöhen. Das maschinelle Indexieren kann die Verschlagwortung jedoch nicht ersetzen, sondern nur ergänzen.
+
