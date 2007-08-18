@@ -167,7 +167,9 @@ public
 		key = string.downcase
 		if hit?(key)
 			inc('cache hits')
-			return retrieve(key)
+			word = retrieve(key)
+			word.form = string
+			return word
 		end
 
 		word = Word.new(string, WA_UNKNOWN)
