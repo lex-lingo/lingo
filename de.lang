@@ -1,42 +1,42 @@
 #------------------------------------------------------------------------------------------------------------------------------------
 #
-#  database-Section - Definitionen für Wörterbücher
+#  database-Section - Definitionen fŸr WšrterbŸcher
 #
-#  In der database-Section können alle benötigten Wörterbücher angegeben werden. 
+#  In der database-Section kšnnen alle benštigten WšrterbŸcher angegeben werden. 
 #  Dabei werden folgende Attribute interpretiert:
 #
 #  Attribut    Default  Bedeutung
 #  -----------------------------------------------------------------------------
-#  id                   Über diese Kurzbezeichnung kann die Datenquelle an anderer Stelle referenziert werden, z.B. bei Attendees
+#  id                   †ber diese Kurzbezeichnung kann die Datenquelle an anderer Stelle referenziert werden, z.B. bei Attendees
 #                       als source-Attribut.
 #
 #  name                 Gibt den Ort der Quelldaten an.
 #
-#  def-wc      ?        Gibt eine Wortklasse vor die verwendet wird, wenn die Datenquelle über keine adäquate Information zur 
-#                       Wortklasse eines Eintrags verfügt.
+#  def-wc      ?        Gibt eine Wortklasse vor die verwendet wird, wenn die Datenquelle Ÿber keine adŠquate Information zur 
+#                       Wortklasse eines Eintrags verfŸgt.
 #
 #  txt-format  KeyValue Gibt an, in welchem Format die Quelldaten je Zeile vorliegen. Dabei wird unterschieden zwischen
 #                          SingleWord  =  Je Zeile ist nur ein Wort (ohne Projektion) angegeben, z.B.
-#                                         "Nasenbär\n"
-#                          KeyValue    =  Je Zeile ist ein Wort und die dazugehörige Projektion angegeben, z.B.
+#                                         "NasenbŠr\n"
+#                          KeyValue    =  Je Zeile ist ein Wort und die dazugehšrige Projektion angegeben, z.B.
 #                                         "John Vorhauer*Vorhauer, John\n"
-#                          WordClass   =  Je Zeile ist ein Wort und die dazugehörige Projektion angegeben, die aus mehreren
+#                          WordClass   =  Je Zeile ist ein Wort und die dazugehšrige Projektion angegeben, die aus mehreren
 #                                         Lexikalisierungen bestehen kann, z.B.
 #                                         "Essen,essen #v Essen #s Esse #s\n"
-#                          MultiValue  =  Je Zeile sind mehrere Worte angegeben, die als Äquivalenzklasse interpretiert werden, z.B.
+#                          MultiValue  =  Je Zeile sind mehrere Worte angegeben, die als €quivalenzklasse interpretiert werden, z.B.
 #                                         "Fax;Faxkopie;Telefax\n"
 #                          MultiKey
 #
 #  separator   (s.Text)	Gibt an, durch welches Zeichen eine Textzeile die Grundform von der Projektion trennt. Der Defaultwert ist 
-#                       abhängig vom Text-Format: KeyValue='*', WordClass=',' und MultiValue=';'.
+#                       abhŠngig vom Text-Format: KeyValue='*', WordClass=',' und MultiValue=';'.
 #
-#  use-lex              Gibt an, dass bei Mehrwort-Schlüsseln eine Vorab-Lexikalisierung vorgenommen wird durch Zuhilfenahme der
-#                       Wörterbücher, die mit diesem Attribut angegeben werden, z.B. use-lex='sys-dic'. 
-#                       Die Vorab-Lexikalisierung von Mehrwortgruppen ermöglicht die leichte Erkennung von allen möglichen 
-#                       Dehnungsvarianten. Bei Mehrwort-Wörterbüchern, die ausschließlich Personennamen enthalten, kann dieser Wert
-#                       entfallen, da er nur die Verarbeitungsgeschwindigkeit vermindert ohne die Erkennungsquote zu erhöhen.
+#  use-lex              Gibt an, dass bei Mehrwort-SchlŸsseln eine Vorab-Lexikalisierung vorgenommen wird durch Zuhilfenahme der
+#                       WšrterbŸcher, die mit diesem Attribut angegeben werden, z.B. use-lex='sys-dic'. 
+#                       Die Vorab-Lexikalisierung von Mehrwortgruppen ermšglicht die leichte Erkennung von allen mšglichen 
+#                       Dehnungsvarianten. Bei Mehrwort-WšrterbŸchern, die ausschlie§lich Personennamen enthalten, kann dieser Wert
+#                       entfallen, da er nur die Verarbeitungsgeschwindigkeit vermindert ohne die Erkennungsquote zu erhšhen.
 #
-#  ACHTUNG: Wird mit dem Attribut use-lex ein anderes Wörterbuch referenziert, so sollte dieses VOR der ersten Referenzierung 
+#  ACHTUNG: Wird mit dem Attribut use-lex ein anderes Wšrterbuch referenziert, so sollte dieses VOR der ersten Referenzierung 
 #           definiert sein, da es sonst noch nicht existiert!
 #
 
