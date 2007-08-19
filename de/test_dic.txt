@@ -1,0 +1,24 @@
+a-bombe,a-bombe #s
+a-cappella-chor,a-cappella-chor #s
+a-dur,b-dur #s
+a-dur-tonleiter,a-dur-tonleiter #s
+a-kohle,a-kohle #s
+a-saite,a-saite #s
+aach,aach #s
+aachen,aachen #e
+aal,aal #s
+aalen,aalen #e aalen #v
+aalend,aalend #a
+aalfang,aalfang #s
+aalfischer,aalfischer #s
+aalkorb,aalkorb #s
+aalraupe,aalraupe #s
+aalräucherei,aalräucherei #s
+aar,aar #s
+aarau,aarau #s
+aare,aare #e
+aargau,aargau #e
+aargauer,aargauer #s
+aaron,aaron #e
+aas,aas #s
+lex-lingo,super indexierungssystem #m

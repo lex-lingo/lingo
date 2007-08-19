@@ -1,6 +1,14 @@
 = Release Dokumentation
 
 
+== Lingo 1.66 18.08.2007
+
+* <b>Englische Wörterbücher ergänzt</b>
+
+  Lingo kann nun auch Englisch. Dazu muss beim Aufruf von Lingo die Option "-l en"
+  angegeben werden. Ein englischer Artikel ist unter txt/artikel-en.txt zu finden.
+
+  
 == Lingo 1.65 18.09.2006
 
 * <b>Eckige Klammern als darstellbare Zeichen eingebaut</b>

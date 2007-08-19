@@ -21,6 +21,17 @@
 #
 #  Lex Lingo rules from here on
 
+class WordSequence 
+	attr_reader :classes, :format
+private
+
+	def initialize(wordclasses, format)
+		@classes = wordclasses.upcase
+		@format = format
+	end
+
+end
+
 
 =begin rdoc
 == Sequencer
@@ -88,17 +99,6 @@ ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
   out> *EOF('test.txt')
 =end
 
-
-class WordSequence
-	attr_reader :classes, :format
-private
-
-	def initialize(wordclasses, format)
-		@classes = wordclasses.upcase
-		@format = format
-	end
-
-end
 
 
 class Sequencer < BufferedAttendee

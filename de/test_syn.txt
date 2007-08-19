@@ -1,0 +1,4 @@
+Kerlchen;Zwerg-Nase
+Lingo;Indexierungssystem;linguistisch;Lego
+abwickeln;abspulen
+regen;niederschlag

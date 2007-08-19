@@ -23,15 +23,8 @@
 
 
 =begin rdoc
-== Multiworder
-Mit der bisher beschriebenen Vorgehensweise werden die durch den Tokenizer erkannten 
-Token aufgelöst und in Words verwandelt und über den Abbreviator und Decomposer auch 
-Spezialfälle behandelt, die einzelne Wörter betreffen. 
-Um jedoch auch Namen wie z.B. John F. Kennedy als Sinneinheit erkennen zu können, muss
-eine Analyse über mehrere Objekte erfolgen. Dies ist die Hauptaufgabe des Multiworders.
-Der Multiworder analysiert die Teile des Datenstroms, die z.B. durch Satzzeichen oder 
-weiteren Einzelzeichen (z.B. '(') begrenzt sind. Erkannte Mehrwortgruppen werden als 
-zusätzliches Objekt in den Datenstrom mit eingefügt.
+== Dehyphenizer
+Der Dehyphenizer ... muss noch dokumentiert werden
 
 === Mögliche Verlinkung
 Erwartet:: Daten vom Typ *Word* z.B. von Wordsearcher, Decomposer, Ocr_variator, Multiworder

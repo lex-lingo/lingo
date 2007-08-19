@@ -47,15 +47,15 @@ language:
 
   dictionary:
     databases:
-      #    Systemwörterbücher
+      #    SystemwšrterbŸcher
       sys-dic: { name: de/lingo-dic.txt, txt-format: WordClass, separator: '=' }
       sys-abk: { name: de/lingo-abk.txt, txt-format: WordClass, separator: '=' }
       sys-syn: { name: de/lingo-syn.txt, txt-format: KeyValue, separator: '=', def-wc: y }
       sys-mul: { name: de/lingo-mul.txt, txt-format: SingleWord, use-lex: 'sys-dic', def-wc: m }
-      #    Benutzerwörterbücher
+      #    BenutzerwšrterbŸcher
       usr-dic: { name: de/user-dic.txt, txt-format: WordClass, separator: '=' }
 
-      #    Testwörterbücher
+      #    TestwšrterbŸcher
       tst-dic: { name: de/test_dic.txt, txt-format: WordClass }   #  TEST: Lesen von zwei Quellen
       tst-syn: { name: de/test_syn.txt, txt-format: MultiValue, def-wc: 'y' } # TEST: Mehrere Datenquellen
       tst-syn2: { name: de/test_syn2.txt, txt-format: MultiValue, def-wc: 'y', use-lex: 'sys-dic' } # TEST: Mehrere Datenquellen
@@ -68,16 +68,16 @@ language:
       #    ts_database (TxtFiles werden automatisch erzeugt!)
       sys-lx1: { name: de/lingo-dic.txt, txt-format: WordClass }   #  TEST: wird automatisch erstellt
       sys-lx2: { name: de/lingo-gpl.txt, txt-format: WordClass }   #  TEST: wird automatisch erstellt
-      tst-sw1: { name: test/txtfile_singleword.txt, txt-format: SingleWord }   #  TEST: wird automatisch erstellt
-      tst-sw2: { name: test/txtfile_singleword.txt, txt-format: SingleWord, def-wc: '*' }   #  TEST: wird automatisch erstellt
-      tst-sw3: { name: test/txtfile_singleword.txt, txt-format: SingleWord, use-lex: 'sys-lx1,sys-lx2' }   #  TEST: wird automatisch erstellt
-      tst-sw4: { name: test/txtfile_singleword.txt, txt-format: SingleWord, crypt }   #  TEST: wird automatisch erstellt
-      tst-kv1: { name: test/txtfile_keyvalue.txt, txt-format: KeyValue }   #  TEST: wird automatisch erstellt
-      tst-kv2: { name: test/txtfile_keyvalue.txt, txt-format: KeyValue, separator: '*' }   #  TEST: wird automatisch erstellt
-      tst-kv3: { name: test/txtfile_keyvalue.txt, txt-format: KeyValue, separator: '*', def-wc: 's' }   #  TEST: wird automatisch erstellt
-      tst-wc1: { name: test/txtfile_wordclass.txt, txt-format: WordClass, separator: '=' }   #  TEST: wird automatisch erstellt
-      tst-mv1: { name: test/txtfile_multivalue.txt, txt-format: MultiValue, separator: ';'  }   #  TEST: wird automatisch erstellt
-      tst-mk1: { name: test/txtfile_multikey.txt, txt-format: MultiKey }   #  TEST: wird automatisch erstellt
+      tst-sw1: { name: test/de/singleword.txt, txt-format: SingleWord }   #  TEST: wird automatisch erstellt
+      tst-sw2: { name: test/de/singleword.txt, txt-format: SingleWord, def-wc: '*' }   #  TEST: wird automatisch erstellt
+      tst-sw3: { name: test/de/singleword.txt, txt-format: SingleWord, use-lex: 'sys-lx1,sys-lx2' }   #  TEST: wird automatisch erstellt
+      tst-sw4: { name: test/de/singleword.txt, txt-format: SingleWord, crypt }   #  TEST: wird automatisch erstellt
+      tst-kv1: { name: test/de/keyvalue.txt, txt-format: KeyValue }   #  TEST: wird automatisch erstellt
+      tst-kv2: { name: test/de/keyvalue.txt, txt-format: KeyValue, separator: '*' }   #  TEST: wird automatisch erstellt
+      tst-kv3: { name: test/de/keyvalue.txt, txt-format: KeyValue, separator: '*', def-wc: 's' }   #  TEST: wird automatisch erstellt
+      tst-wc1: { name: test/de/wordclass.txt, txt-format: WordClass, separator: '=' }   #  TEST: wird automatisch erstellt
+      tst-mv1: { name: test/de/multivalue.txt, txt-format: MultiValue, separator: ';'  }   #  TEST: wird automatisch erstellt
+      tst-mk1: { name: test/de/multikey.txt, txt-format: MultiKey }   #  TEST: wird automatisch erstellt
 
     compositum:
       min-word-size: "7"
@@ -102,7 +102,7 @@ language:
       regulars:
         #    Sonderzeichen im ISO-8859-1 Zeichensatz
         - _ISO_: '\xC0-\xCF\xD1-\xD6\xD8-\xDD\xDF-\xF6\xF8-\xFD\xFF'
-        #    Zusätzliche Sonderzeichen im Windows-1252 Zeichensatz
+        #    ZusŠtzliche Sonderzeichen im Windows-1252 Zeichensatz
         - _WIN_: '\x8A\x8C\x8E\x9A\x9C\x9E\x9F'
         #    Akzeptiert werden alle Sonderzeichen
         - _CHR_: '\w_ISO__WIN_'
