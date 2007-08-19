@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>process (Vector_filter)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/attendee/vector_filter.rb, line 102</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">process</span>(<span class="ruby-identifier">obj</span>)
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Word</span>)
+                        <span class="ruby-ivar">@word_count</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@skip</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">attr</span>).<span class="ruby-identifier">nil?</span>
+                        <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">lexicals</span>.<span class="ruby-identifier">nil?</span>
+                                <span class="ruby-identifier">lexis</span> = <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">get_class</span>(<span class="ruby-ivar">@lexis</span>) <span class="ruby-comment cmt">#lexicals.collect { |lex| (lex.attr =~ @lexis) ? lex : nil }.compact # get_class(@lexis)</span>
+                                <span class="ruby-identifier">lexis</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">lex</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@vectors</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">form</span>.<span class="ruby-identifier">downcase</span> }
+                                <span class="ruby-identifier">add</span>(<span class="ruby-value str">'Anzahl von Vektor-Wörtern'</span>, <span class="ruby-identifier">lexis</span>.<span class="ruby-identifier">size</span>)
+                        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

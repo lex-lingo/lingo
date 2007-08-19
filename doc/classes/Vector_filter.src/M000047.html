@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>init (Vector_filter)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/attendee/vector_filter.rb, line 82</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">init</span>
+                <span class="ruby-ivar">@lexis</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">get_key</span>(<span class="ruby-value str">'lexicals'</span>, <span class="ruby-value str">'[sy]'</span>).<span class="ruby-identifier">downcase</span>)
+                <span class="ruby-ivar">@sort</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-value str">'sort'</span>, <span class="ruby-value str">'normal'</span>).<span class="ruby-identifier">downcase</span>
+                <span class="ruby-ivar">@skip</span> = <span class="ruby-identifier">get_array</span>(<span class="ruby-value str">'skip'</span>, <span class="ruby-constant">TA_PUNCTUATION</span><span class="ruby-operator">+</span><span class="ruby-value str">','</span><span class="ruby-operator">+</span><span class="ruby-constant">TA_OTHER</span>).<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">upcase</span> }
+                <span class="ruby-ivar">@vectors</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+                <span class="ruby-ivar">@word_count</span> = <span class="ruby-value">0</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

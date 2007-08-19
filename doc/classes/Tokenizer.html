@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Tokenizer</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Tokenizer</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/lib/attendee/tokenizer_rb.html">
+                lib/attendee/tokenizer.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Attendee
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h2><a href="Tokenizer.html">Tokenizer</a></h2>
+<p>
+Der <a href="Tokenizer.html">Tokenizer</a> zerlegt eine Textzeile in
+einzelne Token. Dies ist notwendig, damit nachfolgende Attendees die
+Textdatei häppchenweise verarbeiten können.
+</p>
+<h3>Mögliche Verlinkung</h3>
+<table>
+<tr><td valign="top">Erwartet:</td><td>Daten des Typs <b>String</b> (Textzeilen) z.B. von <a
+href="Textreader.html">Textreader</a>
+
+</td></tr>
+<tr><td valign="top">Erzeugt:</td><td>Daten des Typs <b>Token</b> z.B. für <a
+href="Abbreviator.html">Abbreviator</a>, <a
+href="Wordsearcher.html">Wordsearcher</a>
+
+</td></tr>
+</table>
+<h3>Parameter</h3>
+<p>
+Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der
+Voreinstellung). Alle anderen Parameter müssen zwingend angegeben werden.
+</p>
+<table>
+<tr><td valign="top"><b>in</b>:</td><td>siehe allgemeine Beschreibung des Attendee.
+
+</td></tr>
+<tr><td valign="top"><b>out</b>:</td><td>siehe allgemeine Beschreibung des Attendee
+
+</td></tr>
+</table>
+<h3>Konfiguration</h3>
+<p>
+Der <a href="Tokenizer.html">Tokenizer</a> benötigt zur Identifikation
+einzelner Token Regeln, nach denen er arbeiten soll. Die benötigten Regeln
+werden aufgrund des Umfangs nicht als Parameter, sondern in der
+Sprachkonfiguration hinterlegt, die sich standardmäßig in der Datei
+<tt>de.lang</tt> befindet (YAML-Format).
+</p>
+<pre>
+  language:
+    attendees:
+      tokenizer:
+        regulars:
+          - _CHR_: '\wÄÖÜÁÂÀÉÊÈÍÎÌÓÔÒÚÛÙÝäöüáâàéêèíîìóôòúûùý'
+          - NUMS:  '[+-]?(\d{4,}|\d{1,3}(\.\d{3,3})*)(\.|(,\d+)?%?)'
+          - URLS:  '((mailto:|(news|http|https|ftp|ftps)://)\S+|^(www(\.\S+)+)|\S+([\._]\S+)+@\S+(\.\S+)+)'
+          - ABRV:  '(([_CHR_]+\.)+)[_CHR_]+'
+          - ABRS:  '(([_CHR_]{1,1}\.)+)(?!\.\.)'
+          - WORD:  '[_CHR_\d]+'
+          - PUNC:  '[!,\.:;?]'
+          - OTHR:  '[—„!\&quot;#$%&amp;()*\+,\-\./:;&lt;=&gt;?@\[\\\]^_`{|}~´]'
+          - HELP:  '.*'
+</pre>
+<p>
+Die Regeln werden in der angegebenen Reihenfolge abgearbeitet, solange bis
+ein Token erkannt wurde. Sollte keine Regel zutreffen, so greift die letzt
+Regel <tt>HELP</tt> in jedem Fall. Regeln, deren Name in Unterstriche
+eingefasst sind, werden als Makro interpretiert. Makros werden genutzt, um
+lange oder sich wiederholende Bestandteile von Regeln einmalig zu
+definieren und in den Regeln über den Makronamen eine Auflösung zu
+forcieren. Makros werden selber nicht für die Erkennung von Token
+eingesetzt.
+</p>
+<h3>Generierte Kommandos</h3>
+<p>
+Damit der nachfolgende Datenstrom einwandfrei verarbeitet werden kann,
+generiert der <a href="Tokenizer.html">Tokenizer</a> Kommandos, die mit in
+den Datenstrom eingefügt werden.
+</p>
+<table>
+<tr><td valign="top"><b>*EOL(&lt;dateiname&gt;)</b>:</td><td>Kennzeichnet das Ende einer Textzeile, da die Information ansonsten
+
+</td></tr>
+</table>
+<p>
+für nachfolgende Attendees verloren wäre.
+</p>
+<h3>Beispiele</h3>
+<p>
+Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration
+<tt>t1.cfg</tt>
+</p>
+<pre>
+  meeting:
+    attendees:
+      - textreader: { out: lines, files: '$(files)' }
+      - tokenizer:  { in: lines, out: token }
+      - debugger:   { in: token, prompt: 'out&gt;' }
+</pre>
+<p>
+ergibt die Ausgabe über den <a href="Debugger.html">Debugger</a>: <tt>lingo
+-c t1 test.txt</tt>
+</p>
+<pre>
+  out&gt; *FILE('test.txt')
+  out&gt; :Dies/WORD:
+  out&gt; :ist/WORD:
+  out&gt; :eine/WORD:
+  out&gt; :Zeile/WORD:
+  out&gt; :./PUNC:
+  out&gt; *EOL('test.txt')
+  out&gt; :Dies/WORD:
+  out&gt; :ist/WORD:
+  out&gt; :noch/WORD:
+  out&gt; :eine/WORD:
+  out&gt; :./PUNC:
+  out&gt; *EOL('test.txt')
+  out&gt; *EOF('test.txt')
+</pre>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000020">control</a>&nbsp;&nbsp;
+      <a href="#M000019">init</a>&nbsp;&nbsp;
+      <a href="#M000021">process</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Protected Instance methods</h3>
+
+      <div id="method-M000020" class="method-detail">
+        <a name="M000020"></a>
+
+        <div class="method-heading">
+          <a href="Tokenizer.src/M000020.html" target="Code" class="method-signature"
+            onclick="popupCode('Tokenizer.src/M000020.html');return false;">
+          <span class="method-name">control</span><span class="method-args">(cmd, param)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000019" class="method-detail">
+        <a name="M000019"></a>
+
+        <div class="method-heading">
+          <a href="Tokenizer.src/M000019.html" target="Code" class="method-signature"
+            onclick="popupCode('Tokenizer.src/M000019.html');return false;">
+          <span class="method-name">init</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000021" class="method-detail">
+        <a name="M000021"></a>
+
+        <div class="method-heading">
+          <a href="Tokenizer.src/M000021.html" target="Code" class="method-signature"
+            onclick="popupCode('Tokenizer.src/M000021.html');return false;">
+          <span class="method-name">process</span><span class="method-args">(obj)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>process_buffer (Sequencer)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/attendee/sequencer.rb, line 128</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">process_buffer</span>
+                <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">size</span><span class="ruby-operator">==</span><span class="ruby-value">0</span>
+
+                <span class="ruby-comment cmt">#     Sequence aus der Wortliste auslesen</span>
+                <span class="ruby-ivar">@sequence</span> = <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">obj</span><span class="ruby-operator">|</span>
+                        <span class="ruby-identifier">res</span> = <span class="ruby-value str">'#'</span>
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Word</span>)
+                                <span class="ruby-identifier">lex</span> = <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">lexicals</span>[<span class="ruby-value">0</span>]
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">attr!</span>=<span class="ruby-constant">WA_UNKNOWN</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">attr!</span>=<span class="ruby-constant">WA_UNKMULPART</span> <span class="ruby-comment cmt"># &amp;&amp; lex.attr!=LA_VERB</span>
+                                        <span class="ruby-identifier">res</span> = <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">attr</span>
+                                <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-identifier">res</span>
+                }.<span class="ruby-identifier">join</span>.<span class="ruby-identifier">upcase</span>
+
+                <span class="ruby-comment cmt">#             Muster erkennen</span>
+                <span class="ruby-ivar">@seq_strings</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">wordseq</span><span class="ruby-operator">|</span>
+                        <span class="ruby-identifier">pos</span> = <span class="ruby-value">0</span>
+                        <span class="ruby-keyword kw">until</span> (<span class="ruby-identifier">pos</span> = <span class="ruby-ivar">@sequence</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">wordseq</span>.<span class="ruby-identifier">classes</span>, <span class="ruby-identifier">pos</span>)).<span class="ruby-identifier">nil?</span>
+                                <span class="ruby-comment cmt">#   got a match</span>
+                                <span class="ruby-identifier">inc</span>(<span class="ruby-value str">'Anzahl erkannter Sequenzen'</span>)
+                                <span class="ruby-identifier">form</span> = <span class="ruby-identifier">wordseq</span>.<span class="ruby-identifier">format</span>
+                                <span class="ruby-identifier">lexis</span> = []
+                                (<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-identifier">wordseq</span>.<span class="ruby-identifier">classes</span>.<span class="ruby-identifier">size</span>).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">j</span><span class="ruby-operator">|</span>
+                                        <span class="ruby-identifier">lex</span> = <span class="ruby-ivar">@buffer</span>[<span class="ruby-identifier">pos</span><span class="ruby-operator">+</span><span class="ruby-identifier">j</span>].<span class="ruby-identifier">lexicals</span>[<span class="ruby-value">0</span>]
+                                        <span class="ruby-identifier">form</span> = <span class="ruby-identifier">form</span>.<span class="ruby-identifier">gsub</span>((<span class="ruby-identifier">j</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>).<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">form</span>)
+                                        <span class="ruby-identifier">lexis</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">lex</span>
+                                }
+                                <span class="ruby-identifier">word</span> = <span class="ruby-constant">Word</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">form</span>, <span class="ruby-constant">WA_SEQUENCE</span>) <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Lexical</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">form</span>, <span class="ruby-constant">LA_SEQUENCE</span>)
+                                <span class="ruby-identifier">deferred_insert</span>(<span class="ruby-identifier">pos</span>, <span class="ruby-identifier">word</span>)
+                                <span class="ruby-identifier">pos</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+                        <span class="ruby-keyword kw">end</span>
+                }     
+                <span class="ruby-identifier">forward_buffer</span>                
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

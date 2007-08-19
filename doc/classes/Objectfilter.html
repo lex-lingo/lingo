@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Objectfilter</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Objectfilter</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/lib/attendee/objectfilter_rb.html">
+                lib/attendee/objectfilter.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Attendee
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h2><a href="Objectfilter.html">Objectfilter</a></h2>
+<p>
+Der <a href="Objectfilter.html">Objectfilter</a> ermöglicht es, beliebige
+Objekte aus dem Datenstrom herauszufiltern. Um die gewünschten Objekte zu
+identifizieren, sind ein paar Ruby-Kenntnisse und das Wissen um die Lingo
+Klassen notwendig. Hier sollen kurz die häufigsten Fälle angesprochen
+werden:
+</p>
+<p>
+Filtern nach einem bestimmten Typ, z.B. Token oder Word wird beispielsweise
+durch den Ausdruck &#8216;obj.kind_of?(Word)&#8217; ermöglicht. Token und
+Words haben jeweils ein Attribut <tt>attr</tt>. Bei Token gibt
+<tt>attr</tt> an, mit welcher <a href="Tokenizer.html">Tokenizer</a>-Regel
+das Token erkannt wurde. So können z.B. alle numerischen Token mit dem
+Ausdruck &#8216;obj.kind_of?(Token) &amp;&amp;
+obj.attr==&quot;NUMS&quot;&#8217; identifiziert werden. Wie bereits
+gezeigt, können Bedingungen durch logisches UND (&amp;&amp;) oder ODER (||)
+verknüpft werden. Das Attribut <tt>form</tt> kann genutzt werden, um auf
+den Text eines Objektes zuzugreifen, z.B.
+&#8216;obj.form==&quot;John&quot;&#8217;.
+</p>
+<h3>Mögliche Verlinkung</h3>
+<table>
+<tr><td valign="top">Erwartet:</td><td>Daten beliebigen Typs von allen Attendees
+
+</td></tr>
+<tr><td valign="top">Erzeugt:</td><td>Daten, die der als Parameter übergebenen Bedingung entsprechen
+
+</td></tr>
+</table>
+<h3>Parameter</h3>
+<p>
+Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der
+Voreinstellung). Alle anderen Parameter müssen zwingend angegeben werden.
+</p>
+<table>
+<tr><td valign="top"><b>in</b>:</td><td>siehe allgemeine Beschreibung des Attendee
+
+</td></tr>
+<tr><td valign="top"><b>out</b>:</td><td>siehe allgemeine Beschreibung des Attendee
+
+</td></tr>
+<tr><td valign="top"><b><em>objects</em></b>:</td><td>(Standard: true) Gibt einen Ruby-Ausdruck an, der, wenn der Ausdruck als
+Wahr ausgewertet wird, das Objekt weiterleitet und ansonsten filtert.
+
+</td></tr>
+</table>
+<h3>Beispiele</h3>
+<p>
+Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration
+<tt>t1.cfg</tt>
+</p>
+<pre>
+  meeting:
+    attendees:
+      - textreader:   { out: lines, files: '$(files)' }
+      - tokenizer:    { in: lines, out: token }
+      - wordsearcher: { in: token, out: words, source: 'sys-dic' }
+      - objectfilter: { in: words, out: filtr, objects: 'obj.kind_of?(Word) &amp;&amp; obj.lexicals.size&gt;0 &amp;&amp; obj.lexicals[0].attr==LA_SUBSTANTIV' }
+      - debugger:     { in: filtr, prompt: 'out&gt;' }
+</pre>
+<p>
+ergibt die Ausgabe über den <a href="Debugger.html">Debugger</a>: <tt>lingo
+-c t1 test.txt</tt>
+</p>
+<pre>
+  out&gt; *FILE('test.txt')
+  out&gt; &lt;Indexierung = [(indexierung/s)]&gt;
+  out&gt; &lt;Indexierung = [(indexierung/s)]&gt;
+  out&gt; *EOL('test.txt')
+  out&gt; *EOF('test.txt')
+</pre>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000024">init</a>&nbsp;&nbsp;
+      <a href="#M000025">process</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Protected Instance methods</h3>
+
+      <div id="method-M000024" class="method-detail">
+        <a name="M000024"></a>
+
+        <div class="method-heading">
+          <a href="Objectfilter.src/M000024.html" target="Code" class="method-signature"
+            onclick="popupCode('Objectfilter.src/M000024.html');return false;">
+          <span class="method-name">init</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000025" class="method-detail">
+        <a name="M000025"></a>
+
+        <div class="method-heading">
+          <a href="Objectfilter.src/M000025.html" target="Code" class="method-signature"
+            onclick="popupCode('Objectfilter.src/M000025.html');return false;">
+          <span class="method-name">process</span><span class="method-args">(obj)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

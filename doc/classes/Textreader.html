@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Textreader</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Textreader</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/lib/attendee/textreader_rb.html">
+                lib/attendee/textreader.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Attendee
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h2><a href="Textreader.html">Textreader</a></h2>
+<p>
+Der <a href="Textreader.html">Textreader</a> ist eine klassische
+Datenquelle. Er liest eine oder mehrere Dateien und gibt sie Zeilenweise in
+den Ausgabekanal. Der Start bzw. Wechsel einer Datei wird dabei über den
+Kommandokanal angekündigt, ebenso wie das Ende.
+</p>
+<p>
+Der <a href="Textreader.html">Textreader</a> kann ebenfalls ein spezielles
+Dateiformat verarbeiten, welches zum Austausch mit dem LIR-System dient.
+Dabei enthält die Datei Record-basierte Informationen, die wie mehrere
+Dateien verarbeitet werden.
+</p>
+<h3>Mögliche Verlinkung</h3>
+<table>
+<tr><td valign="top">Erzeugt:</td><td>Daten des Typs <b>String</b> (Textzeile) z.B. für <a
+href="Tokenizer.html">Tokenizer</a>, <a
+href="Textwriter.html">Textwriter</a>
+
+</td></tr>
+</table>
+<h3>Parameter</h3>
+<p>
+Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der
+Voreinstellung). Alle anderen Parameter müssen zwingend angegeben werden.
+</p>
+<table>
+<tr><td valign="top"><b>out</b>:</td><td>siehe allgemeine Beschreibung des Attendee
+
+</td></tr>
+<tr><td valign="top"><b>files</b>:</td><td>Es können eine oder mehrere Dateien angegeben werden, die nacheinander
+eingelesen und zeilenweise weitergeleitet werden. Die Dateien werden mit
+Komma voneinander getrennt, z.B.
+
+<pre>
+  files: 'readme.txt'
+  files: 'readme.txt,lingo.cfg'
+</pre>
+</td></tr>
+<tr><td valign="top"><b><em>lir-record-pattern</em></b>:</td><td>Mit diesem Parameter wird angegeben, woran der Anfang eines neuen Records
+erkannt werden kann und wie die Record-Nummer identifiziert wird. Das
+Format einer LIR-Datei ist z.B.
+
+<pre>
+  [00001.]
+  020: ¬Die Aufgabenteilung zwischen Wortschatz und Grammatik.
+
+  [00002.]
+  020: Nicht-konventionelle Thesaurusrelationen als Orientierungshilfen.
+</pre>
+<p>
+Mit der Angabe von
+</p>
+<pre>
+  lir-record-pattern: &quot;^\[(\d+)\.\]&quot;
+</pre>
+<p>
+werden die Record-Zeilen erkannt und jeweils die Record-Nummer +00001+,
+bzw. +00002+ erkannt.
+</p>
+</td></tr>
+</table>
+<h3>Generierte Kommandos</h3>
+<p>
+Damit der nachfolgende Datenstrom einwandfrei verarbeitet werden kann,
+generiert der <a href="Textreader.html">Textreader</a> Kommandos, die mit
+in den Datenstrom eingefügt werden.
+</p>
+<table>
+<tr><td valign="top"><b>*FILE(&lt;dateiname&gt;)</b>:</td><td>Kennzeichnet den Beginn der Datei &lt;dateiname&gt;
+
+</td></tr>
+<tr><td valign="top"><b>*EOF(&lt;dateiname&gt;)</b>:</td><td>Kennzeichnet das Ende der Datei &lt;dateiname&gt;
+
+</td></tr>
+<tr><td valign="top"><b>*LIR_FORMAT(&#8217;&#8217;)</b>:</td><td>Kennzeichnet die Verarbeitung einer Datei im LIR-Format (nur bei
+LIR-Format).
+
+</td></tr>
+<tr><td valign="top"><b>*RECORD(&lt;nummer&gt;)</b>:</td><td>Kennzeichnet den Beginn eines neuen Records (nur bei LIR-Format).
+
+</td></tr>
+</table>
+<h3>Beispiele</h3>
+<p>
+Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration
+<tt>t1.cfg</tt>
+</p>
+<pre>
+  meeting:
+    attendees:
+      - textreader: { out: lines, files: '$(files)' }
+      - debugger:   { in: lines, prompt: 'out&gt;' }
+</pre>
+<p>
+ergibt die Ausgabe über den <a href="Debugger.html">Debugger</a>: <tt>lingo
+-c t1 test.txt</tt>
+</p>
+<pre>
+  out&gt; *FILE('test.txt')
+  out&gt; &quot;Dies ist eine Zeile.&quot;
+  out&gt; &quot;Dies ist noch eine.&quot;
+  out&gt; *EOF('test.txt')
+</pre>
+<p>
+Bei der Verarbeitung einer LIR-Datei mit der Ablaufkonfiguration
+<tt>t2.cfg</tt>
+</p>
+<pre>
+  meeting:
+    attendees:
+      - textreader: { out: lines,  files: '$(files)', lir-record-pattern: &quot;^\[(\d+)\.\]&quot; }
+      - debugger:   { in: lines, prompt: 'out&gt;'}
+</pre>
+<p>
+ergibt die Ausgabe mit <tt>lingo -c t2 lir.txt</tt>
+</p>
+<pre>
+  out&gt; *LIR-FORMAT('')
+  out&gt; *FILE('lir.txt')
+  out&gt; *RECORD('00001')
+  out&gt; &quot;020: \254Die Aufgabenteilung zwischen Wortschatz und Grammatik.&quot;
+  out&gt; *RECORD('00002')
+  out&gt; &quot;020: Nicht-konventionelle Thesaurusrelationen als Orientierungshilfen.&quot;
+  out&gt; *EOF('lir.txt')
+</pre>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000023">control</a>&nbsp;&nbsp;
+      <a href="#M000022">init</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Protected Instance methods</h3>
+
+      <div id="method-M000023" class="method-detail">
+        <a name="M000023"></a>
+
+        <div class="method-heading">
+          <a href="Textreader.src/M000023.html" target="Code" class="method-signature"
+            onclick="popupCode('Textreader.src/M000023.html');return false;">
+          <span class="method-name">control</span><span class="method-args">(cmd, param)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000022" class="method-detail">
+        <a name="M000022"></a>
+
+        <div class="method-heading">
+          <a href="Textreader.src/M000022.html" target="Code" class="method-signature"
+            onclick="popupCode('Textreader.src/M000022.html');return false;">
+          <span class="method-name">init</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+TODO: FILE und LIR-FILE TODO: lir-record-pattern abkürzen Interpretation
+der Parameter
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

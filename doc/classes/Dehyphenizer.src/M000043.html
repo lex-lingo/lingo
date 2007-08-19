@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>process_buffer (Dehyphenizer)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/attendee/dehyphenizer.rb, line 111</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">process_buffer</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@buffer</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Word</span>) <span class="ruby-operator">&amp;&amp;</span> 
+                  <span class="ruby-ivar">@buffer</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">form</span>[<span class="ruby-value">-1</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">'-'</span> <span class="ruby-operator">&amp;&amp;</span> 
+                  <span class="ruby-ivar">@buffer</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Word</span>) <span class="ruby-operator">&amp;&amp;</span>
+                  <span class="ruby-operator">!</span>(<span class="ruby-operator">!</span>( <span class="ruby-identifier">ttt</span> = <span class="ruby-ivar">@buffer</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">get_class</span>(<span class="ruby-regexp re">/./</span>) ).<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> 
+      <span class="ruby-operator">!</span><span class="ruby-ivar">@skip</span>.<span class="ruby-identifier">index</span>( <span class="ruby-identifier">ttt</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">attr</span> ).<span class="ruby-identifier">nil?</span>)
+
+<span class="ruby-comment cmt">#p [@buffer[0..1], ttt, @skip.index( @buffer[1].get_class(/./) ).nil?]</span>
+
+                  <span class="ruby-comment cmt">#   Einfache Zusammensetzung versuchen</span>
+                  <span class="ruby-identifier">form</span> = <span class="ruby-ivar">@buffer</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">form</span>[<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-value">-1</span>] <span class="ruby-operator">+</span> <span class="ruby-ivar">@buffer</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">form</span>
+                  <span class="ruby-identifier">word</span> = <span class="ruby-ivar">@dic</span>.<span class="ruby-identifier">find_word</span>( <span class="ruby-identifier">form</span> )
+                  <span class="ruby-identifier">word</span> = <span class="ruby-ivar">@gra</span>.<span class="ruby-identifier">find_compositum</span>( <span class="ruby-identifier">form</span> ) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">word</span>.<span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-constant">WA_IDENTIFIED</span>
+                  
+      <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">word</span>.<span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-constant">WA_IDENTIFIED</span> <span class="ruby-operator">||</span> (<span class="ruby-identifier">word</span>.<span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-constant">WA_KOMPOSITUM</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">word</span>.<span class="ruby-identifier">get_class</span>(<span class="ruby-value str">'x+'</span>).<span class="ruby-identifier">empty?</span>)
+        <span class="ruby-comment cmt">#   Zusammensetzung mit Bindestrich versuchen</span>
+                  <span class="ruby-identifier">form</span> = <span class="ruby-ivar">@buffer</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">form</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@buffer</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">form</span>
+                  <span class="ruby-identifier">word</span> = <span class="ruby-ivar">@dic</span>.<span class="ruby-identifier">find_word</span>( <span class="ruby-identifier">form</span> )
+                  <span class="ruby-identifier">word</span> = <span class="ruby-ivar">@gra</span>.<span class="ruby-identifier">find_compositum</span>( <span class="ruby-identifier">form</span> ) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">word</span>.<span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-constant">WA_IDENTIFIED</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">word</span>.<span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-constant">WA_IDENTIFIED</span> <span class="ruby-operator">||</span> (<span class="ruby-identifier">word</span>.<span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-constant">WA_KOMPOSITUM</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">word</span>.<span class="ruby-identifier">get_class</span>(<span class="ruby-value str">'x+'</span>).<span class="ruby-identifier">empty?</span>)
+        <span class="ruby-comment cmt">#   Zusammensetzung mit Bindestrich versuchen</span>
+                  <span class="ruby-identifier">form</span> = <span class="ruby-ivar">@buffer</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">form</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@buffer</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">form</span>
+                  <span class="ruby-identifier">word</span> = <span class="ruby-ivar">@dic</span>.<span class="ruby-identifier">find_word</span>( <span class="ruby-identifier">form</span> )
+                  <span class="ruby-identifier">word</span> = <span class="ruby-ivar">@gra</span>.<span class="ruby-identifier">find_compositum</span>( <span class="ruby-identifier">form</span> ) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">word</span>.<span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-constant">WA_IDENTIFIED</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">word</span>.<span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-constant">WA_IDENTIFIED</span> <span class="ruby-operator">||</span> (<span class="ruby-identifier">word</span>.<span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-constant">WA_KOMPOSITUM</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">word</span>.<span class="ruby-identifier">get_class</span>(<span class="ruby-value str">'x+'</span>).<span class="ruby-identifier">empty?</span>)
+        <span class="ruby-ivar">@buffer</span>[<span class="ruby-value">0</span>] = <span class="ruby-identifier">word</span>
+        <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">delete_at</span>( <span class="ruby-value">1</span> )
+      <span class="ruby-keyword kw">end</span>                 
+    <span class="ruby-keyword kw">end</span>
+                        
+                <span class="ruby-comment cmt">#     Buffer weiterschaufeln</span>
+                <span class="ruby-identifier">forward_number_of_token</span>( <span class="ruby-value">1</span>, <span class="ruby-keyword kw">false</span> )
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Abbreviator</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Abbreviator</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/lib/attendee/abbreviator_rb.html">
+                lib/attendee/abbreviator.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                BufferedAttendee
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h2><a href="Abbreviator.html">Abbreviator</a></h2>
+<p>
+Die Erkennung von Abkürzungen kann auf vielfältige Weise erfolgen. In jedem
+Fall sollte eine sichere Unterscheidung von einem Satzende-Punkt möglich
+sein. Der in Lingo gewählte Ansatz befreit den <a
+href="Tokenizer.html">Tokenizer</a> von dieser Arbeit und konzentriert die
+Erkennung in diesem Attendee. Sobald der <a
+href="Abbreviator.html">Abbreviator</a> im Datenstrom auf ein Punkt trifft
+(Token = <tt>:./PUNC:</tt>), prüft er das vorhergehende Token auf eine
+gültige Abkürzung im Abkürzungs-Wörterbuch. Wird es als Abkürzung erkannt,
+dann wird das Token in ein Word gewandelt und das Punkt-Token aus dem
+Zeichenstrom entfernt.
+</p>
+<h3>Mögliche Verlinkung</h3>
+<table>
+<tr><td valign="top">Erwartet:</td><td>Daten des Typs <b>Token</b> z.B. von <a href="Tokenizer.html">Tokenizer</a>
+
+</td></tr>
+<tr><td valign="top">Erzeugt:</td><td>Leitet Token weiter und wandelt erkannte Abkürzungen in den Typ <b>Word</b>
+z.B. für <a href="Wordsearcher.html">Wordsearcher</a>
+
+</td></tr>
+</table>
+<h3>Parameter</h3>
+<p>
+Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der
+Voreinstellung). Alle anderen Parameter müssen zwingend angegeben werden.
+</p>
+<table>
+<tr><td valign="top"><b>in</b>:</td><td>siehe allgemeine Beschreibung des Attendee
+
+</td></tr>
+<tr><td valign="top"><b>out</b>:</td><td>siehe allgemeine Beschreibung des Attendee
+
+</td></tr>
+<tr><td valign="top"><b>source</b>:</td><td>siehe allgemeine Beschreibung des Dictionary
+
+</td></tr>
+<tr><td valign="top"><b><em>mode</em></b>:</td><td>(Standard: all) siehe allgemeine Beschreibung des Dictionary
+
+</td></tr>
+</table>
+<h3>Beispiele</h3>
+<p>
+Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration
+<tt>t1.cfg</tt>
+</p>
+<pre>
+  meeting:
+    attendees:
+      - textreader:  { out: lines, files: '$(files)' }
+      - tokenizer:   { in: lines, out: token }
+      - abbreviator: { in: token, out: abbrev, source: 'sys-abk' }
+      - debugger:    { in: abbrev, prompt: 'out&gt;' }
+</pre>
+<p>
+ergibt die Ausgabe über den <a href="Debugger.html">Debugger</a>: <tt>lingo
+-c t1 test.txt</tt>
+</p>
+<pre>
+  out&gt; *FILE('test.txt')
+  out&gt; :Dies/WORD:
+  out&gt; :ist/WORD:
+  out&gt; &lt;ggf. = [(gegebenenfalls/w)]&gt;
+  out&gt; :eine/WORD:
+  out&gt; :Abk³rzung/WORD:
+  out&gt; :./PUNC:
+  out&gt; *EOL('test.txt')
+  out&gt; *EOF('test.txt')
+</pre>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000003">control</a>&nbsp;&nbsp;
+      <a href="#M000002">init</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Protected Instance methods</h3>
+
+      <div id="method-M000003" class="method-detail">
+        <a name="M000003"></a>
+
+        <div class="method-heading">
+          <a href="Abbreviator.src/M000003.html" target="Code" class="method-signature"
+            onclick="popupCode('Abbreviator.src/M000003.html');return false;">
+          <span class="method-name">control</span><span class="method-args">(cmd, par)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000002" class="method-detail">
+        <a name="M000002"></a>
+
+        <div class="method-heading">
+          <a href="Abbreviator.src/M000002.html" target="Code" class="method-signature"
+            onclick="popupCode('Abbreviator.src/M000002.html');return false;">
+          <span class="method-name">init</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>
