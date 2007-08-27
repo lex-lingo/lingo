@@ -18,7 +18,6 @@ CLEAN.include( 'de/*.rev', 'en/*.rev', 'test/de/*.rev' )
 # => Diese Dateien werden mit dem Aufruf von 'rake clobber' gelöscht (Dateien, die auch wieder neu generiert werden können)
 CLOBBER.include( 'de/store', 'en/store', 'test/de/store', 'doc' ,'pkg/*' )
 CLOBBER.exclude( PACKAGE_PATH )
-p PACKAGE_PATH, CLOBBER
 
 # => LINGO-FILES
 # => Diese Dateien benötigt Lingo um zu funktionieren

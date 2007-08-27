@@ -135,7 +135,7 @@ private
 		puts '='*width
 
 		@options['command-line-options'].each_pair { |opt, att|
-			printf "%-8s %2s %3s %s", opt[0..7], att['opt'], att.has_key?('value')?'val':'', att['comment']
+			printf "%-8s %2s %3s %s", opt[0..7], att['opt'], att.has_key?( 'value' ) ? 'val' : '', att['comment']
 		}
 		puts '='*width
 		exit( 1 )

@@ -62,6 +62,10 @@ public
 		supplier = Hash.new( [] )
 		subscriber = Hash.new( [] )
 
+    # Daten für automatische Verlinkung vorbereiten
+    last_link_out = ''
+    auto_link_number = 0 
+    
 		#	Teilnehmer einzeln einladen		
 		invitation_list.each do |cfg|
 			#	att = {'attendee' => {'name'=>'Attendee', 'in'=>'nase', 'out'=>'ohr', 'param'=>'hase'}}
@@ -74,6 +78,15 @@ public
 				config[ key ].downcase!
 			end
 
+      # Automatisch verlinken  
+      if config['in'] == ''
+        config['in'] = last_link_out
+      end
+      if config['out'] == ''
+        config['out'] = 'auto_link_out_' + (auto_link_number += 1).to_s
+      end
+      last_link_out = config['out']
+      
 			#	Attendee-Daten ergänzen
 			data = Lingo.config["language/attendees/#{config['name'].downcase}"]
 			config.update( data ) unless data.nil?
