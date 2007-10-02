@@ -1,3 +1,5 @@
+#! /usr/bin/ruby
+
 #  LINGO ist ein Indexierungssystem mit Grundformreduktion, Kompositumzerlegung, 
 #  Mehrworterkennung und Relationierung.
 #
