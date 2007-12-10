@@ -73,7 +73,7 @@ desc 'Erstellen der Dokumentation'
 Rake::RDocTask.new do |doc|
     doc.title = 'Lex Lingo - RDoc Dokumentation'
     doc.rdoc_dir = 'doc'
-    doc.rdoc_files.include( 'RELEASE', 'README', 'lib/attendee/*.rb' )
+    doc.rdoc_files.include( 'release', 'readme', 'lib/attendee/*.rb' )
 end
 
 
@@ -144,7 +144,7 @@ end
 # => test_remote
 #
 desc 'Vollständiges Testen der fertig packettierten Lingo-Version'
-task :test_remote => [ ] do
+task :test_remote => [ :package ] do
 
     chdir( PACKAGE_PATH.gsub( /\.zip/, '' ) ) do
 

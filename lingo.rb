@@ -25,6 +25,8 @@
 
 
 
+$KCODE = 'n'
+
 #require 'English'
 require 'lib/config'
 require 'lib/meeting'
