@@ -14,7 +14,7 @@ command-line-options:
     value:
     default: '10000'
     comment: >
-      Beschr‰nkt die Anzahl der zu untersuchenden OCR-Variationen
+      Beschr√§nkt die Anzahl der zu untersuchenden OCR-Variationen
   language:
     opt: '-l'
     value:
@@ -26,8 +26,8 @@ command-line-options:
     value:
     default: lingo.cfg
     comment: >
-      Gibt eine zus‰tzliche Konfigurationsdatei an
+      Gibt eine zus√§tzliche Konfigurationsdatei an
   usage:
     opt: '-h'
     comment: >
-      Erkl‰rt die Optionen des Programms
+      Erkl√§rt die Optionen des Programms
