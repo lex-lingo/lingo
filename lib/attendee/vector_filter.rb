@@ -17,7 +17,7 @@
 #  51 Franklin St, Fifth Floor, Boston, MA 02110, USA
 #
 #  For more information visit http://www.lex-lingo.de or contact me at
-#  welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
+#  welcomeATlex-lingoDOTde near 50Â°55'N+6Â°55'E.
 #
 #  Lex Lingo rules from here on
 
@@ -28,33 +28,33 @@ Die Hauptaufgabe des Vector_filter ist die Erstellung eines Dokumenten-Index-Vek
 Dabei werden die durch die anderen Attendees ermittelten Grundformen eines Wortes 
 gespeichert und bei einem Datei- oder Record-Wechsel weitergeleitet. Der Vector_filter 
 kann bestimmte Wortklassen filtern und die Ergebnisse in verschiedenen Arten aufbereiten.
-Dabei werden Funktionen wie das einfache Zählen der Häufigkeit innerhalb eines Dokuments, 
-aber auch die Term-Frequenz und unterschiedliche Ausgabeformate unterstützt.
+Dabei werden Funktionen wie das einfache ZÃ¤hlen der HÃ¤ufigkeit innerhalb eines Dokuments, 
+aber auch die Term-Frequenz und unterschiedliche Ausgabeformate unterstÃ¼tzt.
 
-=== Mögliche Verlinkung
+=== MÃ¶gliche Verlinkung
 Erwartet:: Daten vom Typ *Word*, z.B. von Abbreviator, Wordsearcher, Decomposer, Synonymer, Multiworder, Sequencer
-Erzeugt:: Daten vom Typ *String*, z.B. für Textwriter
+Erzeugt:: Daten vom Typ *String*, z.B. fÃ¼r Textwriter
 
 === Parameter
 Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der Voreinstellung). 
-Alle anderen Parameter müssen zwingend angegeben werden.
+Alle anderen Parameter mÃ¼ssen zwingend angegeben werden.
 <b>in</b>:: siehe allgemeine Beschreibung des Attendee
 <b>out</b>:: siehe allgemeine Beschreibung des Attendee
 <b><i>lexicals</i></b>:: (Standard: '[sy]' => die Wortklassen Substantiv und Synonyme werden gefiltert)
-                         Es können in eckige Klammern beliebige Wortklassen angegeben werden (siehe lib/strings.rb).
-                         Der Parameter wird als regulärer Ausdruck ausgewertet.
+                         Es kÃ¶nnen in eckige Klammern beliebige Wortklassen angegeben werden (siehe lib/strings.rb).
+                         Der Parameter wird als regulÃ¤rer Ausdruck ausgewertet.
 <b><i>sort</i></b>:: (Standard: 'normal')
-                     Der Parameter +sort+ beeinflußt Verarbeitung und Ausgabeformat des Vector_filters.
+                     Der Parameter +sort+ beeinfluÃŸt Verarbeitung und Ausgabeformat des Vector_filters.
                      normal:: Jedes gefilterte Wort wird einmalig (keine Doppelnennungen!) in 
                               alphabetischer Reihenfolge in der Form "wort" ausgegeben.
-                     term_abs:: Jedes gefilterte Wort wird einmalig in absteigender Häufigkeit mit Angabe
-                                der absoluten Häufigkeit im Dokument in der Form "12 wort" ausgegeben.
-                     term_rel:: Jedes gefilterte Wort wird einmalig in absteigender Häufigkeit mit Angabe 
-                                der relativen Häufigkeit im Dokument in der Form "0.1234 wort" ausgegeben.
-                     sto_abs:: Jedes gefilterte Wort wird einmalig in absteigender Häufigkeit mit Angabe 
-                               der absoluten Häufigkeit im Dokument in der Form "wort {12}" ausgegeben.
-                     sto_rel:: Jedes gefilterte Wort wird einmalig in absteigender Häufigkeit mit Angabe 
-                               der relativen Häufigkeit im Dokument in der Form "wort {0.1234}" ausgegeben.
+                     term_abs:: Jedes gefilterte Wort wird einmalig in absteigender HÃ¤ufigkeit mit Angabe
+                                der absoluten HÃ¤ufigkeit im Dokument in der Form "12 wort" ausgegeben.
+                     term_rel:: Jedes gefilterte Wort wird einmalig in absteigender HÃ¤ufigkeit mit Angabe 
+                                der relativen HÃ¤ufigkeit im Dokument in der Form "0.1234 wort" ausgegeben.
+                     sto_abs:: Jedes gefilterte Wort wird einmalig in absteigender HÃ¤ufigkeit mit Angabe 
+                               der absoluten HÃ¤ufigkeit im Dokument in der Form "wort {12}" ausgegeben.
+                     sto_rel:: Jedes gefilterte Wort wird einmalig in absteigender HÃ¤ufigkeit mit Angabe 
+                               der relativen HÃ¤ufigkeit im Dokument in der Form "wort {0.1234}" ausgegeben.
 <b><i>skip</i></b>:: (Standard: TA_PUNCTUATION und TA_OTHER) Hiermit wird angegeben, welche Objekte nicht 
                      verarbeitet werden sollen. Die +skip+-Angabe bezieht sich auf das Attribut +attr+ von 
                      Token oder Word-Objekten.
@@ -68,7 +68,7 @@ Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration <tt>t1
       - wordsearcher: { in: token, out: words, source: 'sys-dic' }
       - vector_filter: { in: words, out: filtr, sort: 'term_rel' }
       - debugger:     { in: filtr, prompt: 'out>' }
-ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
+ergibt die Ausgabe Ã¼ber den Debugger: <tt>lingo -c t1 test.txt</tt>
   out> *FILE('test.txt')
   out> "0.28571 indexierung"
   out> *EOF('test.txt')
@@ -105,7 +105,7 @@ protected
       unless obj.lexicals.nil?
         lexis = obj.get_class(@lexis) #lexicals.collect { |lex| (lex.attr =~ @lexis) ? lex : nil }.compact # get_class(@lexis)
         lexis.each { |lex| @vectors << lex.form.downcase }
-        add('Anzahl von Vektor-Wörtern', lexis.size)
+        add('Anzahl von Vektor-WÃ¶rtern', lexis.size)
       end
     end
   end
@@ -118,7 +118,7 @@ private
 
     add('Objekte gefiltert', @vectors.size)
       
-    #    Array der Vector-Wörter zählen und nach Häufigkeit sortieren
+    #    Array der Vector-WÃ¶rter zÃ¤hlen und nach HÃ¤ufigkeit sortieren
     if @sort=='normal'
       @vectors = @vectors.compact.sort.uniq
     else

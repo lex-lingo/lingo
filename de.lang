@@ -1,42 +1,42 @@
 #------------------------------------------------------------------------------------------------------------------------------------
 #
-#  database-Section - Definitionen für Wörterbücher
+#  database-Section - Definitionen f√ºr W√∂rterb√ºcher
 #
-#  In der database-Section können alle benötigten Wörterbücher angegeben werden. 
+#  In der database-Section k√∂nnen alle ben√∂tigten W√∂rterb√ºcher angegeben werden. 
 #  Dabei werden folgende Attribute interpretiert:
 #
 #  Attribut    Default  Bedeutung
 #  -----------------------------------------------------------------------------
-#  id                   Über diese Kurzbezeichnung kann die Datenquelle an anderer Stelle referenziert werden, z.B. bei Attendees
+#  id                   √úber diese Kurzbezeichnung kann die Datenquelle an anderer Stelle referenziert werden, z.B. bei Attendees
 #                       als source-Attribut.
 #
 #  name                 Gibt den Ort der Quelldaten an.
 #
-#  def-wc      ?        Gibt eine Wortklasse vor die verwendet wird, wenn die Datenquelle über keine adäquate Information zur 
-#                       Wortklasse eines Eintrags verfügt.
+#  def-wc      ?        Gibt eine Wortklasse vor die verwendet wird, wenn die Datenquelle √ºber keine ad√§quate Information zur 
+#                       Wortklasse eines Eintrags verf√ºgt.
 #
 #  txt-format  KeyValue Gibt an, in welchem Format die Quelldaten je Zeile vorliegen. Dabei wird unterschieden zwischen
 #                          SingleWord  =  Je Zeile ist nur ein Wort (ohne Projektion) angegeben, z.B.
-#                                         "Nasenbär\n"
-#                          KeyValue    =  Je Zeile ist ein Wort und die dazugehörige Projektion angegeben, z.B.
+#                                         "Nasenb√§r\n"
+#                          KeyValue    =  Je Zeile ist ein Wort und die dazugeh√∂rige Projektion angegeben, z.B.
 #                                         "John Vorhauer*Vorhauer, John\n"
-#                          WordClass   =  Je Zeile ist ein Wort und die dazugehörige Projektion angegeben, die aus mehreren
+#                          WordClass   =  Je Zeile ist ein Wort und die dazugeh√∂rige Projektion angegeben, die aus mehreren
 #                                         Lexikalisierungen bestehen kann, z.B.
 #                                         "Essen,essen #v Essen #s Esse #s\n"
-#                          MultiValue  =  Je Zeile sind mehrere Worte angegeben, die als Äquivalenzklasse interpretiert werden, z.B.
+#                          MultiValue  =  Je Zeile sind mehrere Worte angegeben, die als √Ñquivalenzklasse interpretiert werden, z.B.
 #                                         "Fax;Faxkopie;Telefax\n"
 #                          MultiKey
 #
 #  separator   (s.Text)  Gibt an, durch welches Zeichen eine Textzeile die Grundform von der Projektion trennt. Der Defaultwert ist 
-#                       abhängig vom Text-Format: KeyValue='*', WordClass=',' und MultiValue=';'.
+#                       abh√§ngig vom Text-Format: KeyValue='*', WordClass=',' und MultiValue=';'.
 #
-#  use-lex              Gibt an, dass bei Mehrwort-Schlüsseln eine Vorab-Lexikalisierung vorgenommen wird durch Zuhilfenahme der
-#                       Wörterbücher, die mit diesem Attribut angegeben werden, z.B. use-lex='sys-dic'. 
-#                       Die Vorab-Lexikalisierung von Mehrwortgruppen ermöglicht die leichte Erkennung von allen möglichen 
-#                       Dehnungsvarianten. Bei Mehrwort-Wörterbüchern, die ausschließlich Personennamen enthalten, kann dieser Wert
-#                       entfallen, da er nur die Verarbeitungsgeschwindigkeit vermindert ohne die Erkennungsquote zu erhöhen.
+#  use-lex              Gibt an, dass bei Mehrwort-Schl√ºsseln eine Vorab-Lexikalisierung vorgenommen wird durch Zuhilfenahme der
+#                       W√∂rterb√ºcher, die mit diesem Attribut angegeben werden, z.B. use-lex='sys-dic'. 
+#                       Die Vorab-Lexikalisierung von Mehrwortgruppen erm√∂glicht die leichte Erkennung von allen m√∂glichen 
+#                       Dehnungsvarianten. Bei Mehrwort-W√∂rterb√ºchern, die ausschlie√ülich Personennamen enthalten, kann dieser Wert
+#                       entfallen, da er nur die Verarbeitungsgeschwindigkeit vermindert ohne die Erkennungsquote zu erh√∂hen.
 #
-#  ACHTUNG: Wird mit dem Attribut use-lex ein anderes Wörterbuch referenziert, so sollte dieses VOR der ersten Referenzierung 
+#  ACHTUNG: Wird mit dem Attribut use-lex ein anderes W√∂rterbuch referenziert, so sollte dieses VOR der ersten Referenzierung 
 #           definiert sein, da es sonst noch nicht existiert!
 #
 
@@ -47,22 +47,22 @@ language:
 
   dictionary:
     databases:
-      #    Systemwörterbücher
+      #    Systemw√∂rterb√ºcher
       sys-dic: { name: de/lingo-dic.txt, txt-format: WordClass, separator: '=' }
       sys-abk: { name: de/lingo-abk.txt, txt-format: WordClass, separator: '=' }
       sys-syn: { name: de/lingo-syn.txt, txt-format: KeyValue, separator: '=', def-wc: y }
       sys-mul: { name: de/lingo-mul.txt, txt-format: SingleWord, use-lex: 'sys-dic', def-wc: m }
-      #    Benutzerwörterbücher
+      #    Benutzerw√∂rterb√ºcher
       usr-dic: { name: de/user-dic.txt, txt-format: WordClass, separator: '=' }
 
-      #    Testwörterbücher
+      #    Testw√∂rterb√ºcher
       tst-dic: { name: de/test_dic.txt, txt-format: WordClass }   #  TEST: Lesen von zwei Quellen
       tst-syn: { name: de/test_syn.txt, txt-format: MultiValue, def-wc: 'y' } # TEST: Mehrere Datenquellen
       tst-syn2: { name: de/test_syn2.txt, txt-format: MultiValue, def-wc: 'y', use-lex: 'sys-dic' } # TEST: Mehrere Datenquellen
-      tst-mul: { name: de/test_mul.txt, use-lex: 'sys-dic', def-wc: m } # TEST: Mehrere Multiwˆrterb¸cher
-      tst-mu2: { name: de/test_mul2.txt, use-lex: 'sys-dic', def-wc: m } # TEST: Mehrere Multiwˆrterb¸cher
+      tst-mul: { name: de/test_mul.txt, use-lex: 'sys-dic', def-wc: m } # TEST: Mehrere MultiwÀÜrterb¬∏cher
+      tst-mu2: { name: de/test_mul2.txt, use-lex: 'sys-dic', def-wc: m } # TEST: Mehrere MultiwÀÜrterb¬∏cher
       tst-sto: { name: de/test_store.txt, txt-format: WordClass } #  TEST: korrespondierende Store-Datei nicht vorhanden
-      tst-cry: { name: de/test_cry.txt, txt-format: WordClass, crypt } #  TEST: Verschl¸sselung
+      tst-cry: { name: de/test_cry.txt, txt-format: WordClass, crypt } #  TEST: Verschl¬∏sselung
       tst-sgw: { name: de/test_singleword.txt, txt-format: SingleWord } #  TEST: SingleWord-Format
       #
       #    ts_database (TxtFiles werden automatisch erzeugt!)
@@ -102,7 +102,7 @@ language:
       regulars:
         #    Sonderzeichen im ISO-8859-1 Zeichensatz
         - _ISO_: '\xC0-\xCF\xD1-\xD6\xD8-\xDD\xDF-\xF6\xF8-\xFD\xFF'
-        #    Zusätzliche Sonderzeichen im Windows-1252 Zeichensatz
+        #    Zus√§tzliche Sonderzeichen im Windows-1252 Zeichensatz
         - _WIN_: '\x8A\x8C\x8E\x9A\x9C\x9E\x9F'
         #    Akzeptiert werden alle Sonderzeichen
         - _CHR_: '\w_ISO__WIN_'
@@ -110,11 +110,11 @@ language:
         - URLS:  '((mailto:|(news|http|https|ftp|ftps)://)\S+|^(www(\.\S+)+)|\S+([\._]\S+)+@\S+(\.\S+)+)'
         - ABRV:  '(([_CHR_]+\.)+)[_CHR_]+'
 #        - ABRS:  '(([_CHR_]{1,1}\.)+)(?!\.\.)'
-#        - OTHR:  '[óÑ!\"#$%&()*\+,\-\./:;<=>?@\[\\\]^_`{|}~¥]'
+#        - OTHR:  '[√≥√ë!\"#$%&()*\+,\-\./:;<=>?@\[\\\]^_`{|}~¬•]'
 #        - WORD:  '[_CHR_\d\-]*[_CHR_\d]+'
         - WORD:  '[_CHR_\d\-]+'
         - PUNC:  '[!,\.:;?]'
-        - OTHR:  '[óÑ!\"#$%&()*\+,\-\./:;<=>?@\[\\\]^_`{|}~¥]'
+        - OTHR:  '[√≥√ë!\"#$%&()*\+,\-\./:;<=>?@\[\\\]^_`{|}~¬•]'
         - HELP:  '[^ ]*'
 
     variator:

@@ -19,7 +19,7 @@
 #  51 Franklin St, Fifth Floor, Boston, MA 02110, USA
 #
 #  For more information visit http://www.lex-lingo.de or contact me at
-#  welcomeATlex-lingoDOTde near 50�55'N+6�55'E.
+#  welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
 #
 #  Lex Lingo rules from here on
 
@@ -70,7 +70,7 @@ private
       name, values = att_cfg.to_a[0]
       values['name'] = name.capitalize
 
-      #  Attendee-Daten ergänzen
+      #  Attendee-Daten ergÃ¤nzen
       data = @@config['language']['attendees'][name.downcase]
       values.update( @@config['language']['attendees'][name.downcase] ) unless data.nil?
     end

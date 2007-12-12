@@ -17,43 +17,43 @@
 #  51 Franklin St, Fifth Floor, Boston, MA 02110, USA
 #
 #  For more information visit http://www.lex-lingo.de or contact me at
-#  welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
+#  welcomeATlex-lingoDOTde near 50Â°55'N+6Â°55'E.
 #
 #  Lex Lingo rules from here on
 
 
 =begin rdoc
 == Attendee
-Lingo ist als universelles Indexierungssystem entworfen worden. Seine Stärke liegt in der einfachen Konfigurierbarkeit für 
-spezifische Aufgaben und in der schnelle Entwicklung weiterer Funktionen durch systematischen Kapselung der Komplexität auf
-kleine Verarbeitungseinheiten. Die kleinste Verarbeitungseinheit wird Attendee genannt. Um ein gewünschtes Verarbeitungsergebnis
-zu bekommen, werden die benötigten Attendees einfach in einer Reihe hinter einander geschaltet. Ein einfaches Beispiel hierfür ist
+Lingo ist als universelles Indexierungssystem entworfen worden. Seine StÃ¤rke liegt in der einfachen Konfigurierbarkeit fÃ¼r 
+spezifische Aufgaben und in der schnelle Entwicklung weiterer Funktionen durch systematischen Kapselung der KomplexitÃ¤t auf
+kleine Verarbeitungseinheiten. Die kleinste Verarbeitungseinheit wird Attendee genannt. Um ein gewÃ¼nschtes Verarbeitungsergebnis
+zu bekommen, werden die benÃ¶tigten Attendees einfach in einer Reihe hinter einander geschaltet. Ein einfaches Beispiel hierfÃ¼r ist
 eine direkte Verbindung zwischen einem Textreader, einem Tokenizer und einem Textwriter. Alle drei Klassen sind von der Klasse
 Attendee abgeleitet.
 
 Der Textreader liest beispielsweise Zeilen aus einer Textdatei und leitet sie weiter an den Tokenizer. Der Tokenizer zerlegt eine
-Textzeile in einzelne Wörter und gibt diese weiter an den Textwriter, der diese in eine (andere) Datei schreibt. Über vielfältige 
-Konfigurationsmöglichkeiten kann das Verhalten der Attendees an die eigenen Bedürfnisse angepasst werden.
+Textzeile in einzelne WÃ¶rter und gibt diese weiter an den Textwriter, der diese in eine (andere) Datei schreibt. Ãœber vielfÃ¤ltige 
+KonfigurationsmÃ¶glichkeiten kann das Verhalten der Attendees an die eigenen BedÃ¼rfnisse angepasst werden.
 
-Die Verkettung einzelner Attendees findet über die Schnittstellen +listen+ und +talk+ statt. An +listen+ können beliebige Objekte 
-zur Ver- und Bearbeitung übergeben werden. Nach der Verarbeitung werden sie mittels +talk+ an die verketteten Attendees weiter 
+Die Verkettung einzelner Attendees findet Ã¼ber die Schnittstellen +listen+ und +talk+ statt. An +listen+ kÃ¶nnen beliebige Objekte 
+zur Ver- und Bearbeitung Ã¼bergeben werden. Nach der Verarbeitung werden sie mittels +talk+ an die verketteten Attendees weiter 
 gegeben. Objekte der Klasse AgendaItem dienen dabei der Steuerung der Verarbeitung und sind nicht Bestandteil der normalen 
-Verarbeitung. Beispiele für AgendaItems sind die Kommandos TALK (Aufforderung zum Start der Verarbeitung), WARN (zur Ausgabe von 
-Warnungen eines Attendees) und EOL (End of Line, Ende einer Textzeile nach Zerlegung in einzelne Wörter). Eine vollständige 
-Übersicht benutzer AgendaItems (oder auf Stream Commands) steht in lib/const.rb mit dem Prefix STR_CMD_.
+Verarbeitung. Beispiele fÃ¼r AgendaItems sind die Kommandos TALK (Aufforderung zum Start der Verarbeitung), WARN (zur Ausgabe von 
+Warnungen eines Attendees) und EOL (End of Line, Ende einer Textzeile nach Zerlegung in einzelne WÃ¶rter). Eine vollstÃ¤ndige 
+Ãœbersicht benutzer AgendaItems (oder auf Stream Commands) steht in lib/const.rb mit dem Prefix STR_CMD_.
 
 Um die Entwicklung von neuen Attendees zu beschleunigen, wird durch die Vererbung sind bei wird die gesammte sind in der Regel nur 
 drei abstrakte Methoden zu implementieren: +init+, +control+ und +process+. Die Methode +init+ wird bei der Instanziierung eines 
-Objektes einmalig aufgerufen. Sie dient der Vorbereitung der Verarbeitung, z.B. durch das Öffnen und Bereitstellen von 
-Wörterbüchern zur linguistischen Analyse. An die Methode +control+ werden alle eingehenden AgendaItems weitergeleitet. Dort erfolgt
-die Verarbeitungssteuerung, also z.B. bei STR_CMD_FILE das Öffnen einer Datei und bei STR_CMD_EOF respektive das Schließen. Die 
+Objektes einmalig aufgerufen. Sie dient der Vorbereitung der Verarbeitung, z.B. durch das Ã–ffnen und Bereitstellen von 
+WÃ¶rterbÃ¼chern zur linguistischen Analyse. An die Methode +control+ werden alle eingehenden AgendaItems weitergeleitet. Dort erfolgt
+die Verarbeitungssteuerung, also z.B. bei STR_CMD_FILE das Ã–ffnen einer Datei und bei STR_CMD_EOF respektive das SchlieÃŸen. Die 
 echte Verarbeitung von Daten findet daher durch die Methode +process+ statt.
 
   
 was macht attendee
 - verkettung der attendees anhand von konfigurationsinformationen
 - bereitstellung von globalen und spezifischen konfigurationsinformationen 
-- behandlung von bestimmten übergreifenden Kommandos, z.B. STR_CMD_TALK, STR_CMD_STATUS, STR_CMD_WARN, STR_CMD_ERR
+- behandlung von bestimmten Ã¼bergreifenden Kommandos, z.B. STR_CMD_TALK, STR_CMD_STATUS, STR_CMD_WARN, STR_CMD_ERR
 - separierung und routing von kommando bzw. datenobjekten
 
 was macht die abgeleitet klasse
@@ -86,7 +86,7 @@ private
       raise "Fehler in der .lang-Datei bei 'language/dictionary'"
     end if @@library_config.nil?
     
-    #    Informationen für Teilnehmer vorbereiten
+    #    Informationen fÃ¼r Teilnehmer vorbereiten
     @config = config
     @subscriber = Array.new
     
@@ -125,7 +125,7 @@ public
         control(obj.cmd, obj.param) 
       end
 
-      #    Spezialbehandlung für einige TOPs nach Verarbeitung
+      #    Spezialbehandlung fÃ¼r einige TOPs nach Verarbeitung
       case obj.cmd
       #    keine weitere Behandlung oder Weiterleitung
       when STR_CMD_TALK then nil
@@ -227,8 +227,8 @@ private
   def initialize(config)
     #  In den Buffer werden alle Objekte geschrieben, bis process_buffer? == true ist
     @buffer = []
-    #  deferred_inserts beeinflussen nicht die Buffer-Größe, sondern werden an einer 
-    #  bestimmten Stelle in den Datenstrom eingefügt
+    #  deferred_inserts beeinflussen nicht die Buffer-GrÃ¶ÃŸe, sondern werden an einer 
+    #  bestimmten Stelle in den Datenstrom eingefÃ¼gt
     @deferred_inserts = []
     super
   end
@@ -245,7 +245,7 @@ protected
 private
   
   def forward_buffer
-    #  Aufgeschobene Einfügungen in Buffer kopieren
+    #  Aufgeschobene EinfÃ¼gungen in Buffer kopieren
     @deferred_inserts.sort! { |x,y| y.position <=> x.position }
     @deferred_inserts.each do |ins|
       case ins.position

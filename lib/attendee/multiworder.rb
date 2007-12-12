@@ -17,7 +17,7 @@
 #  51 Franklin St, Fifth Floor, Boston, MA 02110, USA
 #
 #  For more information visit http://www.lex-lingo.de or contact me at
-#  welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
+#  welcomeATlex-lingoDOTde near 50Â°55'N+6Â°55'E.
 #
 #  Lex Lingo rules from here on
 
@@ -25,21 +25,21 @@
 =begin rdoc
 == Multiworder
 Mit der bisher beschriebenen Vorgehensweise werden die durch den Tokenizer erkannten 
-Token aufgelöst und in Words verwandelt und über den Abbreviator und Decomposer auch 
-Spezialfälle behandelt, die einzelne Wörter betreffen. 
-Um jedoch auch Namen wie z.B. John F. Kennedy als Sinneinheit erkennen zu können, muss
-eine Analyse über mehrere Objekte erfolgen. Dies ist die Hauptaufgabe des Multiworders.
+Token aufgelÃ¶st und in Words verwandelt und Ã¼ber den Abbreviator und Decomposer auch 
+SpezialfÃ¤lle behandelt, die einzelne WÃ¶rter betreffen. 
+Um jedoch auch Namen wie z.B. John F. Kennedy als Sinneinheit erkennen zu kÃ¶nnen, muss
+eine Analyse Ã¼ber mehrere Objekte erfolgen. Dies ist die Hauptaufgabe des Multiworders.
 Der Multiworder analysiert die Teile des Datenstroms, die z.B. durch Satzzeichen oder 
 weiteren Einzelzeichen (z.B. '(') begrenzt sind. Erkannte Mehrwortgruppen werden als 
-zusätzliches Objekt in den Datenstrom mit eingefügt.
+zusÃ¤tzliches Objekt in den Datenstrom mit eingefÃ¼gt.
 
-=== Mögliche Verlinkung
+=== MÃ¶gliche Verlinkung
 Erwartet:: Daten vom Typ *Word* z.B. von Wordsearcher, Decomposer, Ocr_variator, Multiworder
-Erzeugt:: Daten vom Typ *Word* (mit Attribut WA_MULTIWORD). Je erkannter Mehrwortgruppe wird ein zusätzliches Word-Objekt in den Datenstrom eingefügt. Z.B. für Ocr_variator, Sequencer, Noneword_filter, Vector_filter
+Erzeugt:: Daten vom Typ *Word* (mit Attribut WA_MULTIWORD). Je erkannter Mehrwortgruppe wird ein zusÃ¤tzliches Word-Objekt in den Datenstrom eingefÃ¼gt. Z.B. fÃ¼r Ocr_variator, Sequencer, Noneword_filter, Vector_filter
 
 === Parameter
 Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der Voreinstellung). 
-Alle anderen Parameter müssen zwingend angegeben werden.
+Alle anderen Parameter mÃ¼ssen zwingend angegeben werden.
 <b>in</b>:: siehe allgemeine Beschreibung des Attendee
 <b>out</b>:: siehe allgemeine Beschreibung des Attendee
 <b>source</b>:: siehe allgemeine Beschreibung des Dictionary
@@ -59,7 +59,7 @@ Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration <tt>t1
       - decomposer:   { in: words, out: comps, source: 'sys-dic' }
       - multiworder:  { in: comps, out: multi, source: 'sys-mul' }
       - debugger:     { in: multi, prompt: 'out>' }
-ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
+ergibt die Ausgabe Ã¼ber den Debugger: <tt>lingo -c t1 test.txt</tt>
   out> *FILE('test.txt')
   out> <Sein = [(sein/s), (sein/v)]>
   out> <Name = [(name/s)]>
@@ -82,19 +82,19 @@ protected
     #  Parameter verwerten
     @stopper = get_array('stopper', TA_PUNCTUATION+','+TA_OTHER).collect {|s| s.upcase }
     
-    #  Wörterbuch bereitstellen
+    #  WÃ¶rterbuch bereitstellen
     mul_src = get_array('source')
     mul_mod = get_key('mode', 'all')
     @mul_dic = Dictionary.new({'source'=>mul_src, 'mode'=>mul_mod}, @@library_config)
 
-    #  Lexikalisierungs-Wörterbuch aus angegebenen Quellen ermitteln
+    #  Lexikalisierungs-WÃ¶rterbuch aus angegebenen Quellen ermitteln
     lex_src = nil
     mul_src.each { |src|
       this_src = @@library_config['databases'][src]['use-lex']
       if lex_src.nil? || lex_src==this_src
         lex_src = this_src
       else
-        forward(STR_CMD_WARN, "Die Mehrwortwörterbücher #{mul_src.join(',')} sind mit unterschiedlichen Wörterbüchern lexikalisiert worden")
+        forward(STR_CMD_WARN, "Die MehrwortwÃ¶rterbÃ¼cher #{mul_src.join(',')} sind mit unterschiedlichen WÃ¶rterbÃ¼chern lexikalisiert worden")
       end
     }
     @lex_dic = Dictionary.new({'source'=>lex_src.split(STRING_SEPERATOR_PATTERN), 'mode'=>'first'}, @@library_config)
@@ -108,7 +108,7 @@ protected
   def control(cmd, par)
     @mul_dic.report.each_pair { |key, value| set(key, value) } if cmd == STR_CMD_STATUS
     
-    #  Jedes Control-Object ist auch Auslöser der Verarbeitung
+    #  Jedes Control-Object ist auch AuslÃ¶ser der Verarbeitung
     if cmd == STR_CMD_RECORD || cmd == STR_CMD_EOF
       @eof_handling = true
       while number_of_valid_tokens_in_buffer > 1
@@ -127,18 +127,18 @@ protected
   
   def process_buffer
     unless @buffer[0].form == CHAR_PUNCT
-      #  Prüfe 3er Schlüssel
+      #  PrÃ¼fe 3er SchlÃ¼ssel
       result = check_multiword_key( 3 )
       unless result.empty?
-        #  3er Schlüssel gefunden
+        #  3er SchlÃ¼ssel gefunden
         lengths = sort_result_len( result )
         unless lengths[0] > 3
-          #  Längster erkannter Schlüssel = 3
+          #  LÃ¤ngster erkannter SchlÃ¼ssel = 3
           create_and_forward_multiword( 3, result )
           forward_number_of_token( 3 )
           return
         else
-          #  Längster erkannter Schlüssel > 3, Buffer voll genug?
+          #  LÃ¤ngster erkannter SchlÃ¼ssel > 3, Buffer voll genug?
           unless @buffer.size >= lengths[0] || @eof_handling
             @number_of_expected_tokens_in_buffer = lengths[0]
             return
@@ -165,7 +165,7 @@ protected
         end
       end
       
-      #  Prüfe 2er Schlüssel
+      #  PrÃ¼fe 2er SchlÃ¼ssel
       result = check_multiword_key( 2 )
       unless result.empty?
         create_and_forward_multiword( 2, result )
@@ -220,7 +220,7 @@ private
   end
 
   
-  #  Ermittelt die maximale Ergebnislänge
+  #  Ermittelt die maximale ErgebnislÃ¤nge
   def sort_result_len( result )
     result.collect do |res|
       if res.is_a?( Lexical )
@@ -233,7 +233,7 @@ private
   end
   
   
-  #  Prüft einen definiert langen Schlüssel ab Position 0 im Buffer
+  #  PrÃ¼ft einen definiert langen SchlÃ¼ssel ab Position 0 im Buffer
   def check_multiword_key( len )
     return [] if number_of_valid_tokens_in_buffer < len
     
@@ -248,13 +248,13 @@ private
         obj
       end
     end.compact
-    #  Schlüssel für Mehrwortwörterbuch ermitteln
+    #  SchlÃ¼ssel fÃ¼r MehrwortwÃ¶rterbuch ermitteln
     key = sequence[0...len].join(' ').downcase
     @mul_dic.select( key )
   end
 
 
-  #  Liefert die Anzahl gültiger Token zurück
+  #  Liefert die Anzahl gÃ¼ltiger Token zurÃ¼ck
   def number_of_valid_tokens_in_buffer
     @buffer.collect { |token| (token.form == CHAR_PUNCT) ? nil : 1 }.compact.size
   end

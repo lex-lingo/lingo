@@ -17,7 +17,7 @@
 #  51 Franklin St, Fifth Floor, Boston, MA 02110, USA
 #
 #  For more information visit http://www.lex-lingo.de or contact me at
-#  welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
+#  welcomeATlex-lingoDOTde near 50Â°55'N+6Â°55'E.
 #
 #  Lex Lingo rules from here on
 
@@ -30,7 +30,7 @@ include FileUtils::Verbose
 
 ################################################################################
 #
-#    Hilfsroutinen für kurze Schreibweisen
+#    Hilfsroutinen fÃ¼r kurze Schreibweisen
 def split( text )
   text =~ /^([^|]+)\|([^|]*)$/
   [$1.nil? ? '' : $1, $2.nil? ? '' : $2]
@@ -168,7 +168,7 @@ class TestLexicalHash < Test::Unit::TestCase
   
   def test_multivalue
     ds = LexicalHash.new( 'sys-syn' )
-#    assert_equal([lx('abrollen', LA_SYNONYM), lx('abschaffen', LA_SYNONYM), lx('abwickeln', LA_SYNONYM), lx('auflösen (geschäft)','y')], ds['abwickeln'])
+#    assert_equal([lx('abrollen', LA_SYNONYM), lx('abschaffen', LA_SYNONYM), lx('abwickeln', LA_SYNONYM), lx('auflÃ¶sen (geschÃ¤ft)','y')], ds['abwickeln'])
 #    assert_equal([lx('niederschlag', LA_SYNONYM), lx('regen', LA_SYNONYM), lx('schauer', LA_SYNONYM)], ds['regen'])
     ds.close
   end
@@ -300,7 +300,7 @@ class TestDictionary < Test::Unit::TestCase
     dic = Dictionary.new({'source'=>['sys-dic']}, @dictionary_config)
     assert_equal([lx('mau|s'), lx('mauer|s')], dic.suffix_lexicals('mauern'))
     assert_equal([lx('hasen|s'), lx('hasen|v'), lx('hasen|e')], dic.suffix_lexicals('hasens'))
-    assert_equal([lx('schönst|s'), lx('schön|a'), lx('schönst|a')], dic.suffix_lexicals('schönster'))
+    assert_equal([lx('schÃ¶nst|s'), lx('schÃ¶n|a'), lx('schÃ¶nst|a')], dic.suffix_lexicals('schÃ¶nster'))
     assert_equal([lx('segnen|v'), lx('segneen|v')], dic.suffix_lexicals('segnet'))
     dic.close
   end
@@ -317,7 +317,7 @@ class TestDictionary < Test::Unit::TestCase
     dic = Dictionary.new({'source'=>['sys-dic']}, @dictionary_config)
     assert_equal([lx('mauer|s'), lx('mauern|v')], dic.select_with_suffix('mauern'))
     assert_equal([lx('hase|s')], dic.select_with_suffix('hasen'))
-    assert_equal([lx('schön|a')], dic.select_with_suffix('schönster'))
+    assert_equal([lx('schÃ¶n|a')], dic.select_with_suffix('schÃ¶nster'))
     assert_equal([lx('segnen|v')], dic.select_with_suffix('segnet'))
     dic.close
   end
@@ -357,7 +357,7 @@ class TestGrammar < Test::Unit::TestCase
 
   
   def test_params
-    #  Die gleichen Fälle wie bei Dictionary, daher nicht notwendig
+    #  Die gleichen FÃ¤lle wie bei Dictionary, daher nicht notwendig
   end
 
 
@@ -429,11 +429,11 @@ class TestGrammar < Test::Unit::TestCase
     )
     #  bindestrichversion drei-teilig
     assert_equal([ [6, 7, 11], \
-      [  lx('albert-ludwigs-universität|k'), \
-        lx('universität|s'), \
+      [  lx('albert-ludwigs-universitÃ¤t|k'), \
+        lx('universitÃ¤t|s'), \
         lx('albert|e'), \
         lx('ludwig|e')] ], \
-      gra.permute_compositum('albert-ludwigs-universität', 1, false) \
+      gra.permute_compositum('albert-ludwigs-universitÃ¤t', 1, false) \
     )
     #  normal mit suggestion
     assert_equal([ [8, 9], \
@@ -457,8 +457,8 @@ class TestGrammar < Test::Unit::TestCase
       gra.find_compositum('cd-rom-technologie') 
     )
     assert_equal( 
-      wd('albert-ludwigs-universität|KOM', 'albert-ludwigs-universität|k', 'albert|e+', 'ludwig|e+', 'universität|s+'), 
-      gra.find_compositum('albert-ludwigs-universität') 
+      wd('albert-ludwigs-universitÃ¤t|KOM', 'albert-ludwigs-universitÃ¤t|k', 'albert|e+', 'ludwig|e+', 'universitÃ¤t|s+'), 
+      gra.find_compositum('albert-ludwigs-universitÃ¤t') 
     )
     assert_equal( 
       wd('client-server-system|KOM', 'client-server-system|k', 'client|s+', 'server|s+', 'system|s+'), 

@@ -63,13 +63,13 @@ class TestAttendeeTextwriter < Test::Unit::TestCase
       ai('RECORD|00237'),
       '020: GERHARD.',
       '025: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.',
-      '056: Die intellektuelle Erschlie�ung des Internet befindet sich in einer Krise. GERHARD ist derzeit weltweit der einzige.',
+      '056: Die intellektuelle Erschließung des Internet befindet sich in einer Krise. GERHARD ist derzeit weltweit der einzige.',
       ai('RECORD|00238'),
       '020: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.',
       '025: das DFG-Projekt GERHARD.',
       ai('RECORD|00239'),
       '020: Information Retrieval und Dokumentmanagement im Multimedia-Zeitalter.',
-      '056: "Das Buch ist ein praxisbezogenes VADEMECUM f�r alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.',
+      '056: "Das Buch ist ein praxisbezogenes VADEMECUM für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.',
       ai('EOF|test/lir.txt')
     ]
     @expect = [
@@ -88,8 +88,8 @@ FG-Projekt GERHARD.\n",
 
 
   def test_nonewords
-    @input = [ai('FILE|test/text.txt'), 'Nonwörter', 'Nonsense', ai('EOF|test/text.txt')]
-    @expect = [ "Nonwörter\n", "Nonsense" ]
+    @input = [ai('FILE|test/text.txt'), 'NonwÃ¶rter', 'Nonsense', ai('EOF|test/text.txt')]
+    @expect = [ "NonwÃ¶rter\n", "Nonsense" ]
     meet({'ext'=>'non', 'sep'=>"\n"}, false)
 
     @output = File.open('test/text.non').readlines

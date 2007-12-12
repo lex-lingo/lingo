@@ -12,13 +12,13 @@ class TestAttendeeTextreader < Test::Unit::TestCase
       ai('RECORD|00237'),
       '020: GERHARD.',
       '025: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.',
-      '056: Die intellektuelle Erschließung des Internet befindet sich in einer Krise. GERHARD ist derzeit weltweit der einzige.',
+      '056: Die intellektuelle ErschlieÃŸung des Internet befindet sich in einer Krise. GERHARD ist derzeit weltweit der einzige.',
       ai('RECORD|00238'),
       '020: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.',
       '025: das DFG-Projekt GERHARD.',
       ai('RECORD|00239'),
       '020: Information Retrieval und Dokumentmanagement im Multimedia-Zeitalter.',
-      '056: "Das Buch ist ein praxisbezogenes VADEMECUM für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.',
+      '056: "Das Buch ist ein praxisbezogenes VADEMECUM fÃ¼r alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.',
       ai('EOF|test/lir.txt')
     ]
     meet({'files'=>'test/lir.txt', 'lir-record-pattern'=>'^\[(\d+)\.\]'})
@@ -31,13 +31,13 @@ class TestAttendeeTextreader < Test::Unit::TestCase
       ai('RECORD|00237'),
       '020: GERHARD.',
       '025: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.',
-      '056: Die intellektuelle Erschließung des Internet befindet sich in einer Krise. GERHARD ist derzeit weltweit der einzige.',
+      '056: Die intellektuelle ErschlieÃŸung des Internet befindet sich in einer Krise. GERHARD ist derzeit weltweit der einzige.',
       ai('RECORD|00238'),
       '020: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.',
       '025: das DFG-Projekt GERHARD.',
       ai('RECORD|00239'),
       '020: Information Retrieval und Dokumentmanagement im Multimedia-Zeitalter.',
-      '056: "Das Buch ist ein praxisbezogenes VADEMECUM für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.',
+      '056: "Das Buch ist ein praxisbezogenes VADEMECUM fÃ¼r alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.',
       ai('EOF|test/lir2.txt')
     ]
     meet({'files'=>'test/lir2.txt', 'lir-record-pattern'=>'^\021(\d+)\022'})
@@ -47,7 +47,7 @@ class TestAttendeeTextreader < Test::Unit::TestCase
   def test_normal_file
     @expect = [
       ai('FILE|test/mul.txt'),
-      'Die abstrakte Kunst ist schön.',
+      'Die abstrakte Kunst ist schÃ¶n.',
       ai('EOF|test/mul.txt')
     ]
     meet({'files'=>'test/mul.txt'})

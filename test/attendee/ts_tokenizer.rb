@@ -14,13 +14,13 @@ class TestAttendeeTokenizer < Test::Unit::TestCase
 
 
   def test_complex
-    @input = ["1964 www.vorhauer.de bzw. nasenbär, ()"]
+    @input = ["1964 www.vorhauer.de bzw. nasenbÃ¤r, ()"]
     @expect = [
       tk('1964|NUMS'),
       tk('www.vorhauer.de|URLS'),
       tk('bzw|WORD'),
       tk('.|PUNC'),
-      tk('nasenbär|WORD'),
+      tk('nasenbÃ¤r|WORD'),
       tk(',|PUNC'),
       tk('(|OTHR'),
       tk(')|OTHR')

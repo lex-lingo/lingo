@@ -17,29 +17,29 @@
 #  51 Franklin St, Fifth Floor, Boston, MA 02110, USA
 #
 #  For more information visit http://www.lex-lingo.de or contact me at
-#  welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
+#  welcomeATlex-lingoDOTde near 50Â°55'N+6Â°55'E.
 #
 #  Lex Lingo rules from here on
 
 
 =begin rdoc
 == Decomposer
-Komposita, also zusammengesetzte Wörter, sind eine Spezialität der deutschen Sprache 
+Komposita, also zusammengesetzte WÃ¶rter, sind eine SpezialitÃ¤t der deutschen Sprache 
 (z.B. Indexierungssystem oder Kompositumerkennung).
-Könnte man alle Kombinationen in den Wörterbüchern hinterlegen, dann würde der 
-Wordsearcher die Erkennung bereits erledigt haben. Die hohe Anzahl der möglichen 
+KÃ¶nnte man alle Kombinationen in den WÃ¶rterbÃ¼chern hinterlegen, dann wÃ¼rde der 
+Wordsearcher die Erkennung bereits erledigt haben. Die hohe Anzahl der mÃ¶glichen 
 Kombinationen verbietet jedoch einen solchen Ansatz aufgrund des immensen Pflegeaufwands,
-eine algorithmische Lösung erscheint sinnvoller.
-Der Decomposer wertet alle vom Wordsearcher nicht erkannten Wörter aus und prüft sie
+eine algorithmische LÃ¶sung erscheint sinnvoller.
+Der Decomposer wertet alle vom Wordsearcher nicht erkannten WÃ¶rter aus und prÃ¼ft sie
 auf Kompositum.
 
-=== Mögliche Verlinkung
+=== MÃ¶gliche Verlinkung
 Erwartet:: Daten vom Typ *Word* (andere werden einfach durchgereicht) z.B. von Wordsearcher
-Erzeugt:: Daten vom Typ *Word* (erkannte Komposita werden entsprechend erweitert) z.B. für Synonymer, Ocr_variator, Multiworder, Sequencer, Noneword_filter, Vector_filter
+Erzeugt:: Daten vom Typ *Word* (erkannte Komposita werden entsprechend erweitert) z.B. fÃ¼r Synonymer, Ocr_variator, Multiworder, Sequencer, Noneword_filter, Vector_filter
 
 === Parameter
 Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der Voreinstellung). 
-Alle anderen Parameter müssen zwingend angegeben werden.
+Alle anderen Parameter mÃ¼ssen zwingend angegeben werden.
 <b>in</b>:: siehe allgemeine Beschreibung des Attendee
 <b>out</b>:: siehe allgemeine Beschreibung des Attendee
 <b>source</b>:: siehe allgemeine Beschreibung des Dictionary
@@ -55,7 +55,7 @@ Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration <tt>t1
       - wordsearcher: { in: abbrev, out: words, source: 'sys-dic' }
       - decomposer:   { in: words, out: comps, source: 'sys-dic' }
       - debugger:     { in: comps, prompt: 'out>' }
-ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
+ergibt die Ausgabe Ã¼ber den Debugger: <tt>lingo -c t1 test.txt</tt>
   out> *FILE('test.txt')
   out> <Lingo|?>
   out> :,/PUNC:
@@ -74,7 +74,7 @@ class Decomposer < Attendee
 protected
 
   def init
-    #  Wörterbuch bereitstellen
+    #  WÃ¶rterbuch bereitstellen
     src = get_array('source')
     mod = get_key('mode', 'all')
     @grammar = Grammar.new({'source'=>src, 'mode'=>mod}, @@library_config)

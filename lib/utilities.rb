@@ -17,7 +17,7 @@
 #  51 Franklin St, Fifth Floor, Boston, MA 02110, USA
 #
 #  For more information visit http://www.lex-lingo.de or contact me at
-#  welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
+#  welcomeATlex-lingoDOTde near 50Â°55'N+6Â°55'E.
 #
 #  Lex Lingo rules from here on
 
@@ -51,7 +51,7 @@ class String
   
   
   def downcase # utf-8 downcase
-    self.old_downcase.tr('ÄÖÜÁÂÀÉÊÈÍÎÌÓÔÒÚÛÙİ', 'äöüáâàéêèíîìóôòúûùı')
+    self.old_downcase.tr('Ã„Ã–ÃœÃÃ‚Ã€Ã‰ÃŠÃˆÃÃÃŒÃ“Ã”Ã’ÃšÃ›Ã™Ã', 'Ã¤Ã¶Ã¼Ã¡Ã¢Ã Ã©ÃªÃ¨Ã­Ã®Ã¬Ã³Ã´Ã²ÃºÃ»Ã¹Ã½')
   end
   
   
@@ -89,7 +89,7 @@ class String
   end
 
 
-  #  als patch für dictionary.select.sort.uniqual
+  #  als patch fÃ¼r dictionary.select.sort.uniqual
   def attr
     ''
   end

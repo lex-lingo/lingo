@@ -17,7 +17,7 @@
 #  51 Franklin St, Fifth Floor, Boston, MA 02110, USA
 #
 #  For more information visit http://www.lex-lingo.de or contact me at
-#  welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
+#  welcomeATlex-lingoDOTde near 50Â°55'N+6Â°55'E.
 #
 #  Lex Lingo rules from here on
 
@@ -39,11 +39,11 @@ Wort1
 Wort2
 Wort2
 juristische Personen
-höher schneller weiter
-höher schneller weiter größer
-ganz großer und blöder quatsch
-ganz großer und blöder mist
-ganz großer und blöder schwach sinn
+hÃ¶her schneller weiter
+hÃ¶her schneller weiter grÃ¶ÃŸer
+ganz groÃŸer und blÃ¶der quatsch
+ganz groÃŸer und blÃ¶der mist
+ganz groÃŸer und blÃ¶der schwach sinn
 END_OF_TEXT
 
     @keyvalue = <<END_OF_TEXT
@@ -74,11 +74,11 @@ END_OF_TEXT
       'wort1'=>'#s',
       'wort2'=>'#s',
       'juristische personen'=>'#m',
-      'höher schneller weiter'=>'#m',
-      'höher schneller weiter größer'=>'#m',
-      'ganz großer und blöder quatsch'=>'#m',
-      'ganz großer und blöder mist'=>'#m',
-      'ganz großer und blöder schwach sinn'=>'#m'
+      'hÃ¶her schneller weiter'=>'#m',
+      'hÃ¶her schneller weiter grÃ¶ÃŸer'=>'#m',
+      'ganz groÃŸer und blÃ¶der quatsch'=>'#m',
+      'ganz groÃŸer und blÃ¶der mist'=>'#m',
+      'ganz groÃŸer und blÃ¶der schwach sinn'=>'#m'
     }
     compare( 'tst-sw1', @singleword, expect )
   end
@@ -89,11 +89,11 @@ END_OF_TEXT
       'wort1'=>'#*',
       'wort2'=>'#*',
       'juristische personen'=>'#m',
-      'höher schneller weiter'=>'#m',
-      'höher schneller weiter größer'=>'#m',
-      'ganz großer und blöder quatsch'=>'#m',
-      'ganz großer und blöder mist'=>'#m',
-      'ganz großer und blöder schwach sinn'=>'#m'
+      'hÃ¶her schneller weiter'=>'#m',
+      'hÃ¶her schneller weiter grÃ¶ÃŸer'=>'#m',
+      'ganz groÃŸer und blÃ¶der quatsch'=>'#m',
+      'ganz groÃŸer und blÃ¶der mist'=>'#m',
+      'ganz groÃŸer und blÃ¶der schwach sinn'=>'#m'
     }
     compare( 'tst-sw2', @singleword, expect )
   end
@@ -103,13 +103,13 @@ END_OF_TEXT
     expect = {
       'wort1'=>'#s',
       'wort2'=>'#s',
-      'ganz groß und blöd mist'=>'ganz großer und blöder mist#m',
+      'ganz groÃŸ und blÃ¶d mist'=>'ganz groÃŸer und blÃ¶der mist#m',
       'juristisch person'=>'juristische personen#m',
-      'höher schnell weit'=>'*4|höher schneller weiter#m',
-      'ganz groß und blöd quatsch'=>'ganz großer und blöder quatsch#m',
-      'höher schnell weit größer'=>'höher schneller weiter größer#m',
-      'ganz groß und blöd schwach sinn'=>'ganz großer und blöder schwach sinn#m',
-      'ganz groß und'=>'*5|*6'
+      'hÃ¶her schnell weit'=>'*4|hÃ¶her schneller weiter#m',
+      'ganz groÃŸ und blÃ¶d quatsch'=>'ganz groÃŸer und blÃ¶der quatsch#m',
+      'hÃ¶her schnell weit grÃ¶ÃŸer'=>'hÃ¶her schneller weiter grÃ¶ÃŸer#m',
+      'ganz groÃŸ und blÃ¶d schwach sinn'=>'ganz groÃŸer und blÃ¶der schwach sinn#m',
+      'ganz groÃŸ und'=>'*5|*6'
     }
     compare( 'tst-sw3', @singleword, expect )
   end
@@ -132,11 +132,11 @@ END_OF_TEXT
       'wort1'=>'#s',
       'wort2'=>'#s',
       'juristische personen'=>'#m',
-      'höher schneller weiter'=>'#m',
-      'höher schneller weiter größer'=>'#m',
-      'ganz großer und blöder quatsch'=>'#m',
-      'ganz großer und blöder mist'=>'#m',
-      'ganz großer und blöder schwach sinn'=>'#m'
+      'hÃ¶her schneller weiter'=>'#m',
+      'hÃ¶her schneller weiter grÃ¶ÃŸer'=>'#m',
+      'ganz groÃŸer und blÃ¶der quatsch'=>'#m',
+      'ganz groÃŸer und blÃ¶der mist'=>'#m',
+      'ganz groÃŸer und blÃ¶der schwach sinn'=>'#m'
     }
     dbm = DbmFile.new( 'tst-sw4' )
     dbm.open
@@ -203,13 +203,13 @@ END_OF_TEXT
     txtfile = %q{
       Hasen;Nasen;Vasen;Rasen
       Gold;Edelmetall;Mehrwert
-      Rasen;Gras;Grüne Fläche
+      Rasen;Gras;GrÃ¼ne FlÃ¤che
       Rasen;Rennen;Wettrennen
     }.delete( "\t" )
     expect = {
       '^0'=>'hasen|nasen|rasen|vasen',
       '^1'=>'edelmetall|gold|mehrwert',
-      '^2'=>'gras|grüne fläche|rasen',
+      '^2'=>'gras|grÃ¼ne flÃ¤che|rasen',
       '^3'=>'rasen|rennen|wettrennen',    
       'hasen'=>'^0',
       'nasen'=>'^0',
@@ -219,7 +219,7 @@ END_OF_TEXT
       'gold'=>'^1',
       'mehrwert'=>'^1',
       'gras'=>'^2',
-      'grüne fläche'=>'^2',
+      'grÃ¼ne flÃ¤che'=>'^2',
       'wettrennen'=>'^3',
       'rennen'=>'^3'
     }

@@ -17,7 +17,7 @@
 #  51 Franklin St, Fifth Floor, Boston, MA 02110, USA
 #
 #  For more information visit http://www.lex-lingo.de or contact me at
-#  welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
+#  welcomeATlex-lingoDOTde near 50Â°55'N+6Â°55'E.
 #
 #  Lex Lingo rules from here on
 
@@ -41,7 +41,7 @@
 #  51 Franklin St, Fifth Floor, Boston, MA 02110, USA
 #
 #  For more information visit http://www.lex-lingo.de or contact me at
-#  welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
+#  welcomeATlex-lingoDOTde near 50Â°55'N+6Â°55'E.
 #
 #  Lex Lingo rules from here on
 
@@ -92,7 +92,7 @@ TA_STOPWORD    = 'STOP'
 #    word attributes
 #
 WA_UNSET      = '-'    #    Standardattribut bei der Initialisierung eines Word-Objektes
-WA_IDENTIFIED    = 'IDF'    #    Status, nachdem das Word im Wörterbuch gefunden wurde
+WA_IDENTIFIED    = 'IDF'    #    Status, nachdem das Word im WÃ¶rterbuch gefunden wurde
 WA_UNKNOWN      = '?'    #    Status, wenn das Word nicht gefunden werden konnte
 WA_KOMPOSITUM    = 'KOM'    #    Wort ist als Kompositum erkannt worden
 WA_MULTIWORD    = 'MUL'    #    Wort ist eine Mehrwortgruppe

@@ -17,7 +17,7 @@
 #  51 Franklin St, Fifth Floor, Boston, MA 02110, USA
 #
 #  For more information visit http://www.lex-lingo.de or contact me at
-#  welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
+#  welcomeATlex-lingoDOTde near 50Â°55'N+6Â°55'E.
 #
 #  Lex Lingo rules from here on
 
@@ -26,20 +26,20 @@
 == Textreader
 Der Textreader ist eine klassische Datenquelle. Er liest eine oder mehrere Dateien  
 und gibt sie Zeilenweise in den Ausgabekanal. Der Start bzw. Wechsel einer Datei 
-wird dabei über den Kommandokanal angekündigt, ebenso wie das Ende.
+wird dabei Ã¼ber den Kommandokanal angekÃ¼ndigt, ebenso wie das Ende.
 
 Der Textreader kann ebenfalls ein spezielles Dateiformat verarbeiten, welches zum 
-Austausch mit dem LIR-System dient. Dabei enthält die Datei Record-basierte Informationen,
+Austausch mit dem LIR-System dient. Dabei enthÃ¤lt die Datei Record-basierte Informationen,
 die wie mehrere Dateien verarbeitet werden.
 
-=== Mögliche Verlinkung
-Erzeugt:: Daten des Typs *String* (Textzeile) z.B. für Tokenizer, Textwriter
+=== MÃ¶gliche Verlinkung
+Erzeugt:: Daten des Typs *String* (Textzeile) z.B. fÃ¼r Tokenizer, Textwriter
 
 === Parameter
 Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der Voreinstellung). 
-Alle anderen Parameter müssen zwingend angegeben werden.
+Alle anderen Parameter mÃ¼ssen zwingend angegeben werden.
 <b>out</b>:: siehe allgemeine Beschreibung des Attendee
-<b>files</b>:: Es können eine oder mehrere Dateien angegeben werden, die nacheinander 
+<b>files</b>:: Es kÃ¶nnen eine oder mehrere Dateien angegeben werden, die nacheinander 
                eingelesen und zeilenweise weitergeleitet werden. Die Dateien werden mit 
                Komma voneinander getrennt, z.B.
                  files: 'readme.txt'
@@ -49,7 +49,7 @@ Alle anderen Parameter müssen zwingend angegeben werden.
                                    Record-Nummer identifiziert wird. Das Format einer 
                                    LIR-Datei ist z.B.
                                      [00001.]
-                                     020: ¬Die Aufgabenteilung zwischen Wortschatz und Grammatik.
+                                     020: Â¬Die Aufgabenteilung zwischen Wortschatz und Grammatik.
 
                                      [00002.]
                                      020: Nicht-konventionelle Thesaurusrelationen als Orientierungshilfen.
@@ -60,7 +60,7 @@ Alle anderen Parameter müssen zwingend angegeben werden.
 
 === Generierte Kommandos
 Damit der nachfolgende Datenstrom einwandfrei verarbeitet werden kann, generiert der Textreader
-Kommandos, die mit in den Datenstrom eingefügt werden. 
+Kommandos, die mit in den Datenstrom eingefÃ¼gt werden. 
 <b>*FILE(<dateiname>)</b>:: Kennzeichnet den Beginn der Datei <dateiname>
 <b>*EOF(<dateiname>)</b>:: Kennzeichnet das Ende der Datei <dateiname>
 <b>*LIR_FORMAT('')</b>:: Kennzeichnet die Verarbeitung einer Datei im LIR-Format (nur bei LIR-Format).
@@ -71,7 +71,7 @@ Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration <tt>t1
     attendees:
       - textreader: { out: lines, files: '$(files)' }
       - debugger:   { in: lines, prompt: 'out>' }
-ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
+ergibt die Ausgabe Ã¼ber den Debugger: <tt>lingo -c t1 test.txt</tt>
   out> *FILE('test.txt')
   out> "Dies ist eine Zeile."
   out> "Dies ist noch eine."
@@ -97,7 +97,7 @@ class Textreader < Attendee
 protected
 
   #   TODO: FILE und LIR-FILE
-  #  TODO: lir-record-pattern abkürzen
+  #  TODO: lir-record-pattern abkÃ¼rzen
   #  Interpretation der Parameter
   def init
     @files = get_array('files')
@@ -128,7 +128,7 @@ private
     File.open(filename).each_line { |line| 
       inc('Anzahl Zeilen')
       line.chomp!
-      line.gsub!(/\303\237/, "ß")
+      line.gsub!(/\303\237/, "ÃŸ")
 ### HACK      
       if @is_LIR_file && line =~ @rec_pat
         forward(STR_CMD_RECORD, $1)

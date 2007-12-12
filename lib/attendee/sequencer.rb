@@ -17,7 +17,7 @@
 #  51 Franklin St, Fifth Floor, Boston, MA 02110, USA
 #
 #  For more information visit http://www.lex-lingo.de or contact me at
-#  welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
+#  welcomeATlex-lingoDOTde near 50Â°55'N+6Â°55'E.
 #
 #  Lex Lingo rules from here on
 
@@ -35,25 +35,25 @@ end
 
 =begin rdoc
 == Sequencer
-Der Sequencer ist von seiner Funktion her ähnlich dem Multiworder. Der Multiworder 
-nutzt zur Erkennung von Mehrwortgruppen spezielle Wörterbücher, der Sequencer hingegen
-definierte Folgen von Wortklassen. Mit dem Sequencer können Indexterme generiert werden,
-die sich über mehrere Wörter erstrecken. 
+Der Sequencer ist von seiner Funktion her Ã¤hnlich dem Multiworder. Der Multiworder 
+nutzt zur Erkennung von Mehrwortgruppen spezielle WÃ¶rterbÃ¼cher, der Sequencer hingegen
+definierte Folgen von Wortklassen. Mit dem Sequencer kÃ¶nnen Indexterme generiert werden,
+die sich Ã¼ber mehrere WÃ¶rter erstrecken. 
 Die Textfolge "automatische Indexierung und geniale Indexierung"
 wird bisher in die Indexterme "automatisch", "Indexierung" und "genial" zerlegt.
-Über die Konfiguration kann der Sequencer Mehrwortgruppen identifizieren, die 
-z.B. aus einem Adjektiv und einem Substantiv bestehen. Mit der o.g. Textfolge würde
+Ãœber die Konfiguration kann der Sequencer Mehrwortgruppen identifizieren, die 
+z.B. aus einem Adjektiv und einem Substantiv bestehen. Mit der o.g. Textfolge wÃ¼rde
 dann auch "Indexierung, automatisch" und "Indexierung, genial" als Indexterm erzeugt
 werden. Welche Wortklassenfolgen erkannt werden sollen und wie die Ausgabe aussehen 
-soll, wird dem Sequencer über seine Konfiguration mitgeteilt.
+soll, wird dem Sequencer Ã¼ber seine Konfiguration mitgeteilt.
 
-=== Mögliche Verlinkung
+=== MÃ¶gliche Verlinkung
 Erwartet:: Daten vom Typ *Word* z.B. von Wordsearcher, Decomposer, Ocr_variator, Multiworder
-Erzeugt:: Daten vom Typ *Word* (mit Attribut WA_SEQUENCE). Je erkannter Mehrwortgruppe wird ein zusätzliches Word-Objekt in den Datenstrom eingefügt. Z.B. für Ocr_variator, Sequencer, Noneword_filter, Vector_filter
+Erzeugt:: Daten vom Typ *Word* (mit Attribut WA_SEQUENCE). Je erkannter Mehrwortgruppe wird ein zusÃ¤tzliches Word-Objekt in den Datenstrom eingefÃ¼gt. Z.B. fÃ¼r Ocr_variator, Sequencer, Noneword_filter, Vector_filter
 
 === Parameter
 Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der Voreinstellung). 
-Alle anderen Parameter müssen zwingend angegeben werden.
+Alle anderen Parameter mÃ¼ssen zwingend angegeben werden.
 <b>in</b>:: siehe allgemeine Beschreibung des Attendee
 <b>out</b>:: siehe allgemeine Beschreibung des Attendee
 <b><i>stopper</i></b>:: (Standard: TA_PUNCTUATION, TA_OTHER) Gibt die Begrenzungen an, zwischen 
@@ -61,16 +61,16 @@ Alle anderen Parameter müssen zwingend angegeben werden.
                         weil sie kaum in einer Mehrwortgruppen vorkommen.
 
 === Konfiguration
-Der Sequencer benötigt zur Identifikation von Mehrwortgruppen Regeln, nach denen er 
-arbeiten soll. Die benötigten Regeln werden nicht als Parameter, sondern in der 
-Sprachkonfiguration hinterlegt, die sich standardmäßig in der Datei
+Der Sequencer benÃ¶tigt zur Identifikation von Mehrwortgruppen Regeln, nach denen er 
+arbeiten soll. Die benÃ¶tigten Regeln werden nicht als Parameter, sondern in der 
+Sprachkonfiguration hinterlegt, die sich standardmÃ¤ÃŸig in der Datei
 <tt>de.lang</tt> befindet (YAML-Format).
   language:
     attendees:
       sequencer:
         sequences: [ [AS, "2, 1"], [AK, "2, 1"] ]
 Hiermit werden dem Sequencer zwei Regeln mitgeteilt: Er soll Adjektiv-Substantiv- (AS) und 
-Adjektiv-Kompositum-Folgen (AK) erkennen. Zusätzlich ist angegeben, in welchem Format die
+Adjektiv-Kompositum-Folgen (AK) erkennen. ZusÃ¤tzlich ist angegeben, in welchem Format die
 dadurch ermittelte Wortfolge ausgegeben werden soll. In diesem Beispiel also zuerst das 
 Substantiv und durch Komma getrennt das Adjektiv.
 
@@ -83,7 +83,7 @@ Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration <tt>t1
       - wordsearcher: { in: token, out: words, source: 'sys-dic' }
       - sequencer:    { in: words, out: seque }
       - debugger:     { in: seque, prompt: 'out>' }
-ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
+ergibt die Ausgabe Ã¼ber den Debugger: <tt>lingo -c t1 test.txt</tt>
   out> *FILE('test.txt')
   out> <Lingo|?>
   out> <kann = [(koennen/v)]>
@@ -115,7 +115,7 @@ protected
 
 
   def control(cmd, par)
-    #  Jedes Control-Object ist auch Auslöser der Verarbeitung
+    #  Jedes Control-Object ist auch AuslÃ¶ser der Verarbeitung
     process_buffer
   end
 

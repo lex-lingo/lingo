@@ -17,34 +17,34 @@
 #  51 Franklin St, Fifth Floor, Boston, MA 02110, USA
 #
 #  For more information visit http://www.lex-lingo.de or contact me at
-#  welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
+#  welcomeATlex-lingoDOTde near 50Â°55'N+6Â°55'E.
 #
 #  Lex Lingo rules from here on
 
 
 =begin rdoc
 == Noneword_filter
-Der Noneword_filter ermöglicht es, alle nicht erkannten Wörter aus dem Datenstrom zu 
-selektieren und weiterzuleiten. Im Prinzip werden alle erkannten Wörter gefiltert.
-Bei einem Indexierungslauf können so alle nicht durch den Wordsearcher erkannten Wörter, 
-also die, die im Wörterbuch nicht enthalten sind, separat ausgegeben werden und als Grundlage für 
-die Wörterbuchpflege dienen.
-Der Noneword_filter ist in einer frühen Entwicklungsphase entstanden. Die gleiche Funktion 
+Der Noneword_filter ermÃ¶glicht es, alle nicht erkannten WÃ¶rter aus dem Datenstrom zu 
+selektieren und weiterzuleiten. Im Prinzip werden alle erkannten WÃ¶rter gefiltert.
+Bei einem Indexierungslauf kÃ¶nnen so alle nicht durch den Wordsearcher erkannten WÃ¶rter, 
+also die, die im WÃ¶rterbuch nicht enthalten sind, separat ausgegeben werden und als Grundlage fÃ¼r 
+die WÃ¶rterbuchpflege dienen.
+Der Noneword_filter ist in einer frÃ¼hen Entwicklungsphase entstanden. Die gleiche Funktion 
 kann auch mit dem universelleren Objectfilter mit dem Ausdruck 'obj.kind_of?(Word) && obj.attr==WA_UNKNOWN'
-durchgeführt werden, mit dem einzigen Unterschied, dass der Noneword_filter nur die Wortform weiterleitet.
+durchgefÃ¼hrt werden, mit dem einzigen Unterschied, dass der Noneword_filter nur die Wortform weiterleitet.
 Der Noneword_filter verschluckt ebenfalls alle Kommandos, ausser dem Dateianfang (*FILE) und Ende (*EOF),
 sowie dem LIR-Format-Spezifikum (*RECORD).
 
 *Hinweis* Dieser Attendee sammelt die auszugebenden Daten so lange, bis ein Dateiwechsel oder Record-Wechsel 
-angekündigt wird. Erst dann werden alle Daten auf einmal weitergeleitet.
+angekÃ¼ndigt wird. Erst dann werden alle Daten auf einmal weitergeleitet.
 
-=== Mögliche Verlinkung
+=== MÃ¶gliche Verlinkung
 Erwartet:: Daten vom Typ *Word*, z.B. von Abbreviator, Wordsearcher, Decomposer, Synonymer, Multiworder, Sequencer
-Erzeugt:: Daten vom Typ *String*, z.B. für Textwriter
+Erzeugt:: Daten vom Typ *String*, z.B. fÃ¼r Textwriter
 
 === Parameter
 Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der Voreinstellung). 
-Alle anderen Parameter müssen zwingend angegeben werden.
+Alle anderen Parameter mÃ¼ssen zwingend angegeben werden.
 <b>in</b>:: siehe allgemeine Beschreibung des Attendee
 <b>out</b>:: siehe allgemeine Beschreibung des Attendee
 
@@ -57,7 +57,7 @@ Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration <tt>t1
       - wordsearcher:    { in: token, out: words, source: 'sys-dic' }
       - noneword_filter: { in: words, out: filtr }
       - debugger:        { in: filtr, prompt: 'out>' }
-ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
+ergibt die Ausgabe Ã¼ber den Debugger: <tt>lingo -c t1 test.txt</tt>
   out> *FILE('test.txt')
   out> "lingo"
   out> *EOF('test.txt')
@@ -73,8 +73,8 @@ protected
   end
   
   
-  #  Control behandelt die Kommandos zum Öffnen und Schließen einer Datei. 
-  #  Für jede Datei wird ein neuer Satz nicht erkannter Wörter registriert.
+  #  Control behandelt die Kommandos zum Ã–ffnen und SchlieÃŸen einer Datei. 
+  #  FÃ¼r jede Datei wird ein neuer Satz nicht erkannter WÃ¶rter registriert.
   def control(cmd, par)
     case cmd
       when STR_CMD_FILE
@@ -92,7 +92,7 @@ protected
 
   def process(obj)
     if obj.is_a?(Word) && obj.attr==WA_UNKNOWN
-      inc('Anzahl nicht erkannter Wörter')
+      inc('Anzahl nicht erkannter WÃ¶rter')
       @nonewords << obj.form.downcase
     end
   end

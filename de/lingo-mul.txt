@@ -1,6 +1,6 @@
 #
-#    Mehrwort-Wörterbuch lingo-mul.txt
-#    enthält als Basis für eigene Erweiterungen 
+#    Mehrwort-WÃ¶rterbuch lingo-mul.txt
+#    enthÃ¤lt als Basis fÃ¼r eigene Erweiterungen 
 #    exemplarisch Mehrwortbegriffe, die mit "a" beginnen
 # 
 #    Stand: 18.10.05 / Klaus Lepsky
@@ -42,7 +42,7 @@ abelian schemes
 abelmoschus esculentus
 abelsche algebra
 abelsche eichtheorie
-abelsche erweiterung von körpern
+abelsche erweiterung von kÃ¶rpern
 abelsche gruppe
 abelsche halbgruppe
 abelsche hypergruppe
@@ -52,19 +52,19 @@ abelsche partielle summation
 abelsche transformation
 abelsche umformung
 abelsche untergruppe
-abelsche varietät
+abelsche varietÃ¤t
 abelscher gruppenring
 abelscher krull-ring
-abelscher körper
+abelscher kÃ¶rper
 abelscher normalteiler
 abelscher ring ohne nullteiler
 abelscher ring
-abelscher zahlkörper
+abelscher zahlkÃ¶rper
 abelsches gruppenschema
 abelsches monoid
 abelsches schema
-abendländischer lebensbaum
-abendländisches schisma
+abendlÃ¤ndischer lebensbaum
+abendlÃ¤ndisches schisma
 aberratio ictus
 abessinische katze
 abessinische zwerghirse
@@ -100,10 +100,10 @@ abgestimmte verhaltensweise
 abgestimmtes verhalten
 abgestufte vergeltung
 abhanden gekommene sache
-abhängige variable
-abhängige zufallsvariable
-abhängiger interrogativsatz
-abhängiges unternehmen
+abhÃ¤ngige variable
+abhÃ¤ngige zufallsvariable
+abhÃ¤ngiger interrogativsatz
+abhÃ¤ngiges unternehmen
 abies alba
 abies balsamea
 abies cephalonica
@@ -139,8 +139,8 @@ abnehmende industrie
 abnehmendes unternehmen
 abnormal lie
 abnormal system end
-abnorme persönlichkeit
-abnormer täter
+abnorme persÃ¶nlichkeit
+abnormer tÃ¤ter
 abnormes verhalten
 abortus artificialis
 abortus bang
@@ -149,7 +149,7 @@ abramis brama
 abrasio dentium
 abrasio uteri
 abrasive wear
-abrasiver verschleiß
+abrasiver verschleiÃŸ
 abraxas grossulariata
 abri sous roche
 abruptio placentae
@@ -159,32 +159,32 @@ abschaltbarer thyristor
 abschied von der literatur
 abschmelzende elektrode
 abschnittsweise chiffrierung
-abschnittsweise verschlüsselung
+abschnittsweise verschlÃ¼sselung
 abscisin ii
 absetzbarer stoff
-absetzung für abnutzung
+absetzung fÃ¼r abnutzung
 abshagen, robert
-absolter hilbertscher klassenkörper
+absolter hilbertscher klassenkÃ¶rper
 absolute altersbestimmung
 absolute chronologie
 absolute class field
 absolute datierung
 absolute geometrie
-absolute größe
+absolute grÃ¶ÃŸe
 absolute helligkeit
 absolute konstruktion
 absolute konzentration
-absolute krümmung
+absolute krÃ¼mmung
 absolute monarchie
 absolute neighbourhood retract
-absolute permeabilität
+absolute permeabilitÃ¤t
 absolute temperatur
 absolute temperaturskala
-absoluter differentialkalkül
+absoluter differentialkalkÃ¼l
 absoluter film
 absoluter kasus
 absoluter kasusgebrauch
-absoluter klassenkörper
+absoluter klassenkÃ¶rper
 absoluter nullpunkt
 absoluter umgebungsretrakt
 absolutes urteil
@@ -223,11 +223,11 @@ abweichende meinung
 abweichende richtermeinung
 abweichendes sexualverhalten
 abweichendes verhalten
-abwickelbare varietät
-abzugsfähige ausgabe
-abzugsfähige ausgaben
-abzählende kombinatorik
-abänderliches recht
+abwickelbare varietÃ¤t
+abzugsfÃ¤hige ausgabe
+abzugsfÃ¤hige ausgaben
+abzÃ¤hlende kombinatorik
+abÃ¤nderliches recht
 acacia catechu
 acacia farnesiana
 acacia horrida
@@ -239,8 +239,8 @@ acacia senegal
 acacianisches schisma
 academic learning time in physical education
 academy award
-académie des beaux-arts
-académie goncourt
+acadÃ©mie des beaux-arts
+acadÃ©mie goncourt
 acalypha hom
 acalypha indica
 acanthaster planci
@@ -306,7 +306,7 @@ achillea roseo-alba
 achillea roseoalba
 achillea tomentosa
 achras caimito
-achse des körpers
+achse des kÃ¶rpers
 achsfolge 2'b1'
 achsfolge 2'c1
 achsfolge 2'd1'
@@ -321,12 +321,12 @@ achtfacher pfad
 achtgliedriger pfad
 achtstrahlige blumentiere
 achtstrahlige korallen
-achtzigjähriger krieg
-achtzähniger fichtenborkenkäfer
-achtzähniger lärchenborkenkäfer
-achtzähniger zirbenborkenkäfer
+achtzigjÃ¤hriger krieg
+achtzÃ¤hniger fichtenborkenkÃ¤fer
+achtzÃ¤hniger lÃ¤rchenborkenkÃ¤fer
+achtzÃ¤hniger zirbenborkenkÃ¤fer
 achylia pancreatica
-achäischer bund
+achÃ¤ischer bund
 acid house culture
 acid jazz
 acid rock
@@ -427,7 +427,7 @@ acylaktivierendes enzym
 acylase i
 ada system for embedded real-time industrial execution
 adam kadmon
-adam qadmôn
+adam qadmÃ´n
 adams-novikov spectral sequence
 adamssche operation
 adamssche spektralfolge
@@ -463,7 +463,7 @@ adenomatosis coli
 adenota kob
 adhatoda vasica
 adiabatische entmagnetisierung
-adiabatische näherung
+adiabatische nÃ¤herung
 adiabatischer grenzwert
 adiabatischer limes
 adipositas dolorosa
@@ -494,7 +494,7 @@ adobe premiere 5.0
 adobe premiere 6.0
 adobe premiere 6.5
 adobe type 1 font
-adolf würth gmbh und co. kg
+adolf wÃ¼rth gmbh und co. kg
 adonis aestivalis
 adonis vernalis
 adorno, theodor w.
@@ -545,7 +545,7 @@ advoforderung 367
 adygische harmonika
 adygskaja garmonika
 adynamia episodica hereditaria
-adäquater kausalzusammenhang
+adÃ¤quater kausalzusammenhang
 ae phoenicis
 aedemone mirabilis
 aedes aegypti
@@ -559,8 +559,8 @@ aegopodium pograria
 aepyceros melampus
 aequiforme geometrie
 aerob thermophile stabilisierung
-aerobe kapazität
-aerobe leistungsfähigkeit
+aerobe kapazitÃ¤t
+aerobe leistungsfÃ¤higkeit
 aerobe photosynthetische bakterien
 aerobe phototrophe bakterien
 aerobe schwelle
@@ -578,26 +578,26 @@ aesthetic surgery
 aethusa cynapium
 affaire des fiches
 affectio papalis
-affektiv-antriebsmässiges rückfallsyndrom
+affektiv-antriebsmÃ¤ssiges rÃ¼ckfallsyndrom
 affektive bindung
 affektive entwicklung
 affektive psychose
-affektive störung
+affektive stÃ¶rung
 affektive zufuhr
 affektlosigkeit gottes
 afferente nervenfaser
-affiche lacérée
-affiches lacérées
+affiche lacÃ©rÃ©e
+affiches lacÃ©rÃ©es
 affine abbildung
 affine algebraic quotient
 affine ebene geometrie
 affine variety
-affine varietät
+affine varietÃ¤t
 affiner algebraischer quotient
 affinity group
 affirmative action
 affirmative diskriminierung
-affäre dutroux
+affÃ¤re dutroux
 afghanisch-britischer krieg
 afghanischer windhund
 african cassava mosaic virus
@@ -615,17 +615,17 @@ afrikanische schlafkrankheit
 afrikanische schweinepest
 afrikanische striemengrasmaus
 afrikanische theologie
-afrikanische unabhängige kirche
+afrikanische unabhÃ¤ngige kirche
 afrikanische wanderheuschrecke
 afrikanische zwergziege
-afrikanische Ölpalme
+afrikanische Ã–lpalme
 afrikanischer affenbrotbaum
 afrikanischer baumwollwurm
 afrikanischer buntbarsch
 afrikanischer elefant
 afrikanischer hamster
-afrikanischer löwenhund
-afrikanischer strauß
+afrikanischer lÃ¶wenhund
+afrikanischer strauÃŸ
 afrikanischer tanz
 afrikanischer waldelefant
 afrikanischer wildesel
@@ -688,7 +688,7 @@ agonum dorsale
 agostische bindung
 agostische wechselwirkung
 agouti paca
-agrarischer großbetrieb
+agrarischer groÃŸbetrieb
 agrarstrukturelle planung
 agrarwissenschaftliche forschung
 agrarwissenschaftliches studium
@@ -705,7 +705,7 @@ agrostis palustris
 agrostis stolonifera
 agrotis segetum
 agrotis vestigialis
-agrupación bases
+agrupaciÃ³n bases
 agthe, arend
 agusta bell 204
 aguti paca
@@ -716,7 +716,7 @@ ahl-e hakk
 ahl-i hakk
 ahl-i haqq
 ahrensburger kultur
-ahrensburger rentierjäger
+ahrensburger rentierjÃ¤ger
 aids-kranke frau
 aie d'avignon
 ailuropoda melanoleuca
@@ -731,12 +731,12 @@ airline transport pilot
 airysche funktion
 aitiologische sage
 ajuga reptans
-akademie der bildenden künste
-akademie der künste
+akademie der bildenden kÃ¼nste
+akademie der kÃ¼nste
 akademie der wissenschaften
 akademische bildung
 akademische freiheit
-akademische freizügigkeit
+akademische freizÃ¼gigkeit
 akademische gerichtsbarkeit
 akademischer arbeiter-unterrichtskurs
 akademischer grad
@@ -747,7 +747,7 @@ akakianisches schisma
 akanthosis nigricans
 akazianisches schisma
 akhila bharata krsaka sabha
-akinetische motilitätspsychose
+akinetische motilitÃ¤tspsychose
 akinetischer mutismus
 akkusativ mit infinitiv
 akrodermatitis chronica atrophicans
@@ -760,7 +760,7 @@ aktien 2.0
 aktin-bindende proteine
 aktion 14 f 13
 aktion postfach synode
-aktionsprogramm zur förderung der mobilität von hochschulstudenten
+aktionsprogramm zur fÃ¶rderung der mobilitÃ¤t von hochschulstudenten
 aktiv-entdeckendes lernen
 aktive analyse
 aktive antenne
@@ -772,9 +772,9 @@ aktive lohnveredelung
 aktive platte
 aktive psychoanalyse
 aktive rayleigh-spektroskopie
-aktive schalldämmung
-aktive schalldämpfung
-aktive schwingungsdämpfung
+aktive schalldÃ¤mmung
+aktive schalldÃ¤mpfung
+aktive schwingungsdÃ¤mpfung
 aktive sterbehilfe
 aktive streuspektroskopie
 aktive teilnahme
@@ -789,22 +789,22 @@ aktives sehen
 aktives sternsystem
 aktives wahlrecht
 aktives zentrum
-aktivierte essigsäure
+aktivierte essigsÃ¤ure
 aktivierter komplex
 aktivischer sprachtyp
-aktuelle paläontologie
+aktuelle palÃ¤ontologie
 aktueller bezug
 akustisch evoziertes potential
 akustisch evoziertes potenzial
 akustische dichtung
 akustische emission
-akustische führung
+akustische fÃ¼hrung
 akustische impedanz
 akustische kernresonanz
 akustische medien
 akustische methode
 akustische mikroskopie
-akustische oberflächenwelle
+akustische oberflÃ¤chenwelle
 akustische paramagnetische resonanz
 akustische rinde
 akustische spektrographie
@@ -820,40 +820,40 @@ akustischer reiz
 akustisches filter
 akustisches gitter
 akustisches nahfeldmikroskop
-akustisches oberflächenwellenbauelement
+akustisches oberflÃ¤chenwellenbauelement
 akustisches rastermikroskop
 akustisches signal
 akustisches spektrum
 akustisches trauma
 akustisches verfahren
-akustoelektrischer oberflächenwellenwandler
+akustoelektrischer oberflÃ¤chenwellenwandler
 akustoelektronisches bauelement
 akutagawa, ryunosuke
-akute bauchspeicheldrüsenentzündung
-akute biliäre bauchspeicheldrüsenentzündung
-akute biliäre pankreatitis
-akute hämorrhagisch-nekrotisierende pankreatitis
-akute hämorrhagische bindehautentzündung
-akute hämorrhagische pankreatitis
-akute hörschädigung
-akute infektiöse lymphozytose
+akute bauchspeicheldrÃ¼senentzÃ¼ndung
+akute biliÃ¤re bauchspeicheldrÃ¼senentzÃ¼ndung
+akute biliÃ¤re pankreatitis
+akute hÃ¤morrhagisch-nekrotisierende pankreatitis
+akute hÃ¤morrhagische bindehautentzÃ¼ndung
+akute hÃ¤morrhagische pankreatitis
+akute hÃ¶rschÃ¤digung
+akute infektiÃ¶se lymphozytose
 akute krankheit
 akute leberinsuffizienz
-akute leukämie
-akute lymphatische leukämie
-akute lymphoblastische leukämie
-akute myeloische leukämie
+akute leukÃ¤mie
+akute lymphatische leukÃ¤mie
+akute lymphoblastische leukÃ¤mie
+akute myeloische leukÃ¤mie
 akute niereninsuffizienz
 akute pankreatitis
 akute paralyse
 akute phase
 akute respiratorische insuffizienz
-akute tubuläre nephrose
+akute tubulÃ¤re nephrose
 akute vergiftung
 akuter bauch
 akuter herztod
 akuter hoden
-akuter hörsturz
+akuter hÃ¶rsturz
 akuter schub
 akutes abdomen
 akutes leberversagen
@@ -904,7 +904,7 @@ aldabra tortoise
 aldabrachelys gigantea
 aldehyd-reductase 1
 aldrovandi, pompeo
-aldus photostyler für windows
+aldus photostyler fÃ¼r windows
 alectoris graeca
 aleukia haemorrhagica
 aleurodes brassicae
@@ -916,20 +916,20 @@ alexandrinische philosophenschule
 alexandrinische schule
 alexandrinische theologie
 alexandrov space
-alexej-jawlensky-preis für bildende kunst
+alexej-jawlensky-preis fÃ¼r bildende kunst
 aleyrodes brassicae
 aleyrodes citri
 aleyrodes proletella
 alfa romeo spa
 alfa romeo
 alfalfa mosaic virus
-alfred-müller-felsenburg-preis für aufrechte literatur
+alfred-mÃ¼ller-felsenburg-preis fÃ¼r aufrechte literatur
 alfred-toepfer-stiftung fvs
 algebra der logik
-algebra mit glättungsgesetz
+algebra mit glÃ¤ttungsgesetz
 algebra mit involution
-algebra mit polynomialen identitäten
-algebra mit polynomidentität
+algebra mit polynomialen identitÃ¤ten
+algebra mit polynomidentitÃ¤t
 algebra of functions
 algebra with involution
 algebra with straightening law
@@ -949,7 +949,7 @@ algebraische halbgruppe
 algebraische invariantentheorie
 algebraische kombinatorik
 algebraische korrespondenz
-algebraische körpererweiterung
+algebraische kÃ¶rpererweiterung
 algebraische logik
 algebraische matrix-riccati-gleichung
 algebraische methode
@@ -958,12 +958,12 @@ algebraische rekursionstheorie
 algebraische riccati-gleichung
 algebraische spezifikation
 algebraische struktur
-algebraische unabhängigkeit
-algebraische varietät
+algebraische unabhÃ¤ngigkeit
+algebraische varietÃ¤t
 algebraischer datentyp
-algebraischer erweiterungskörper
+algebraischer erweiterungskÃ¶rper
 algebraischer homomorphismus
-algebraischer oberkörper
+algebraischer oberkÃ¶rper
 algebraisches lineares monoid
 algebraisches mehrgitterverfahren
 algebraisches rechnen
@@ -987,8 +987,8 @@ algorithmisches lernen
 algorithmus mit gruppenweiser behandlung der daten
 alicyclische verbindungen
 alicyclobacillus acidocaldarius
-alimentäre allergie
-alkalische drüse
+alimentÃ¤re allergie
+alkalische drÃ¼se
 alkalische leukozytenphosphatase
 alkalische phosphatase
 alkalische phosphomonoesterase
@@ -998,9 +998,9 @@ alkanna tinctoria
 alke, detlev harald
 alkoholbedingte krankheit
 alkoholbedingtes amnestisches syndrom
-alkoholfreies getränk
+alkoholfreies getrÃ¤nk
 alkoholische polyneuropathie
-alkoholisches getränk
+alkoholisches getrÃ¤nk
 alkylierende substanz
 alkylierte aromatische kohlenwasserstoffe
 all hallows' eve
@@ -1056,34 +1056,34 @@ allergisches asthma
 allergisches bronchialasthma
 alley cropping
 allgegenwart gottes
-allgegenwärtige datenverarbeitung
-allgemein bildende höhere schule
+allgegenwÃ¤rtige datenverarbeitung
+allgemein bildende hÃ¶here schule
 allgemein bildende polytechnische oberschule
 allgemein bildende schule
 allgemein bildender unterricht
 allgemein bildendes schulwesen
 allgemein bildendes unterrichtsfach
 allgemeinbildende bibliothek
-allgemeinbildende höhere schule
+allgemeinbildende hÃ¶here schule
 allgemeinbildende polytechnische oberschule
 allgemeinbildende schule
 allgemeinbildender unterricht
 allgemeinbildendes schulwesen
 allgemeinbildendes unterrichtsfach
 allgemeine algebra
-allgemeine atmosphärische zirkulation
-allgemeine außenprüfung
+allgemeine atmosphÃ¤rische zirkulation
+allgemeine auÃŸenprÃ¼fung
 allgemeine bedingungen
-allgemeine benützungsordnung der bayerischen staatlichen bibliotheken
+allgemeine benÃ¼tzungsordnung der bayerischen staatlichen bibliotheken
 allgemeine betriebswirtschaftslehre
-allgemeine bevölkerungsumfrage der sozialwissenschaften
+allgemeine bevÃ¶lkerungsumfrage der sozialwissenschaften
 allgemeine biologie
 allgemeine chemie
-allgemeine entzündungsreaktion
+allgemeine entzÃ¼ndungsreaktion
 allgemeine genetik
 allgemeine geographie
 allgemeine geologie
-allgemeine geschäftsbedingungen
+allgemeine geschÃ¤ftsbedingungen
 allgemeine gleichgewichtstheorie
 allgemeine grammatik
 allgemeine innere verwaltung
@@ -1093,7 +1093,7 @@ allgemeine linguistik
 allgemeine musiklehre
 allgemeine ortskrankenkasse
 allgemeine pathologie
-allgemeine pädagogik
+allgemeine pÃ¤dagogik
 allgemeine schule
 allgemeine schulordnung
 allgemeine semantik
@@ -1102,14 +1102,14 @@ allgemeine sprachwissenschaft
 allgemeine staatslehre
 allgemeine steuerlehre
 allgemeine versicherungsbedingungen
-allgemeine verwaltungsvorschrift für die betriebsprüfung
+allgemeine verwaltungsvorschrift fÃ¼r die betriebsprÃ¼fung
 allgemeine wasserversorgungsbedingungen
 allgemeine wehrpflicht
 allgemeine wiener musikzeitung
 allgemeine wirtschaftslehre
 allgemeine wirtschaftspolitik
-allgemeine zirkulation der atmosphäre
-allgemeine öffentliche bibliothek
+allgemeine zirkulation der atmosphÃ¤re
+allgemeine Ã¶ffentliche bibliothek
 allgemeiner heilswille gottes
 allgemeiner rechtsgrundsatz
 allgemeiner sozialdienst
@@ -1118,7 +1118,7 @@ allgemeiner studentenausschuss
 allgemeiner teil
 allgemeines deutsches kommersbuch
 allgemeines gebet
-allgemeines gewaltverhältnis
+allgemeines gewaltverhÃ¤ltnis
 allgemeines gleichgewicht
 allgemeines gleichgewichtsmodell
 allgemeines kirchengebet
@@ -1127,12 +1127,12 @@ allgemeines krankenhaus
 allgemeines lineares modell
 allgemeines luftfahrer-abzeichen
 allgemeines priestertum
-allgemeines präferenzzollsystem
+allgemeines prÃ¤ferenzzollsystem
 allgemeines raumgetriebe
 allgemeines schuldrecht
 allgemeines sprechfunkzeugnis
 allgemeines strafrecht
-allgemeines system der präferenzen
+allgemeines system der prÃ¤ferenzen
 allgemeines verwaltungsrecht
 alligator mississippiensis
 alliierte landung
@@ -1177,10 +1177,10 @@ alopecurus myosuroides
 alopecurus pratensis
 alopex lagopus
 alosa alosa
-aloë barbadensis
-aloë perfoliata
-aloë vera
-aloë vulgaris
+aloÃ« barbadensis
+aloÃ« perfoliata
+aloÃ« vera
+aloÃ« vulgaris
 alpha axp
 alpha cir
 alpha circini
@@ -1188,9 +1188,9 @@ alpha jet
 alpha movement
 alpha reaction
 alpha-adrenerger rezeptor
-alpha-beta-ungesättigte verbindungen
+alpha-beta-ungesÃ¤ttigte verbindungen
 alpha-substituierte verbindungen
-alphabet phonétique international
+alphabet phonÃ©tique international
 alphabet stock
 alphabetische anordnung
 alphabetische katalogisierung
@@ -1199,7 +1199,7 @@ alphainduzierte kernreaktion
 alphamerischer text
 alphanumerischer text
 alphatronic pc
-alpidische faltungsära
+alpidische faltungsÃ¤ra
 alpidische gebirgsbildung
 alpidische orogenese
 alpine tiere
@@ -1207,7 +1207,7 @@ alpiner ski
 alpiner skilauf
 alpines klettern
 alpinia officinarum
-alpinistischer stützpunkt
+alpinistischer stÃ¼tzpunkt
 alpinistischer verein
 alsine friesiana
 alt-evangelische taufgesinnte
@@ -1240,20 +1240,20 @@ alter ego
 alter herr
 alter mensch
 alter stil
-alter zürichkrieg
+alter zÃ¼richkrieg
 altern in der migration
 alternaria citri rough lemon toxin
 alternate history
 alternating direction implicit method
 alternativ erzeugtes lebensmittel
-alternative anknüpfung
+alternative anknÃ¼pfung
 alternative architektur
 alternative bewegung
 alternative bewegungskultur
 alternative bildung
 alternative chemie
 alternative energiequelle
-alternative ernährung
+alternative ernÃ¤hrung
 alternative erziehung
 alternative geburtshilfe
 alternative geschichte
@@ -1269,8 +1269,8 @@ alternative schule
 alternative sportkultur
 alternative verurteilung
 alternative wirtschaft
-alternative Ökonomie
-alternativer büchnerpreis
+alternative Ã–konomie
+alternativer bÃ¼chnerpreis
 alternativer kraftstoff
 alternativer landbau
 alternativer nobelpreis
@@ -1292,12 +1292,12 @@ alteromonas luteoviolacea
 alteromonas luteoviolaceus
 alteromonas putrefaciens
 alters- und hinterlassenenversicherung
-altersabhängige makuladegeneration
+altersabhÃ¤ngige makuladegeneration
 altersgemischte gruppe
 altersgerechtes bauen
-altershilfe für landwirte
+altershilfe fÃ¼r landwirte
 altershomogene gruppe
-altersspezifische arbeitszeitverkürzung
+altersspezifische arbeitszeitverkÃ¼rzung
 altersvorsorge 1.0
 altes buch
 altes stadthaus
@@ -1310,7 +1310,7 @@ althea rosea
 altheimer gruppe
 altindustrielle region
 altindustrielles gebiet
-altkanaanäisch-sumerische bilingue
+altkanaanÃ¤isch-sumerische bilingue
 altkatholische kirche
 altkretische schrift
 altman, robert
@@ -1319,7 +1319,7 @@ altonaer blutsonntag
 altorientalische kirche
 altprotestantische orthodoxie
 altprotestantische schulphilosophie
-altrömischer gesang
+altrÃ¶mischer gesang
 altslawischer kirchengesang
 altspanische liturgie
 altsprachlicher unterricht
@@ -1329,8 +1329,8 @@ aluminiumlegierter stahl
 alveolaris inferior
 alveolus dentis
 alveolus pulmonis
-alveoläre echinococcose
-alveoläre echinokokkose
+alveolÃ¤re echinococcose
+alveolÃ¤re echinokokkose
 alysia manducator
 alytes obstetricans
 alzheimersche krankheit
@@ -1379,14 +1379,14 @@ ambulante hilfe zur erziehung
 ambulante koronargruppe
 ambulante krankenpflege
 ambulante krankenversorgung
-ambulante maßnahme
+ambulante maÃŸnahme
 ambulante pflege
 ambulante psychiatrie
 ambulante psychiatrische versorgung
 ambulante sanktion
 ambulante sozialpsychiatrie
 ambulante therapie
-ambulante ärztliche versorgung
+ambulante Ã¤rztliche versorgung
 ambulanter gewerbebetrieb
 ambulanter handel
 ambulanter hilfs- und pflegedienst
@@ -1423,12 +1423,12 @@ american standard code for information interchange
 american studies
 amerikanisch-japanischer krieg
 amerikanische bulldogge
-amerikanische bürokrankheit
+amerikanische bÃ¼rokrankheit
 amerikanische forelle
 amerikanische frau
-amerikanische großschabe
+amerikanische groÃŸschabe
 amerikanische kermesbeere
-amerikanische krähe
+amerikanische krÃ¤he
 amerikanische lebensbaumminiermotte
 amerikanische nuss
 amerikanische platane
@@ -1437,7 +1437,7 @@ amerikanische schabe
 amerikanische trypanosomiase
 amerikanische wasserpest
 amerikanischer brachvogel
-amerikanischer bürgerkrieg
+amerikanischer bÃ¼rgerkrieg
 amerikanischer einwanderer
 amerikanischer flussaal
 amerikanischer flusskrebs
@@ -1454,7 +1454,7 @@ amerikanischer traum
 amerikanischer uhu
 amerikanisches englisch
 amerikanisches kind
-amerikanisches mädchen
+amerikanisches mÃ¤dchen
 amerikanisches rotholz
 amesa spenta
 amesa spentas
@@ -1462,7 +1462,7 @@ amescha spenta
 amescha spentas
 amfebutamon hydrochlorid
 ami et amile
-ami pro 3.0 für os/2
+ami pro 3.0 fÃ¼r os/2
 ami pro 3.0
 amicus und amelius
 aminerge nervenzelle
@@ -1489,7 +1489,7 @@ amorphe legierung
 amorphe phase
 amorphe polymere
 amorphe zwischenzellschicht
-amorpher festkörper
+amorpher festkÃ¶rper
 amorpher halbleiter
 amorpher metallfilm
 amorpher schwefel
@@ -1529,19 +1529,19 @@ ampullarius gigas
 ampullarius scalaris
 amstrad comsumer electronics plc
 amt christi
-amtlich anerkannte prüfstelle
+amtlich anerkannte prÃ¼fstelle
 amtliche bekanntmachung
 amtliche druckschrift
-amtliche geodäsie
+amtliche geodÃ¤sie
 amtliche karte
 amtliche werbemarke
-amtlicher sportbootführerschein
-amtliches führungszeugnis
+amtlicher sportbootfÃ¼hrerschein
+amtliches fÃ¼hrungszeugnis
 amtliches kennzeichen
 amtliches schreiben
 amtliches topographisch-kartographisches informationssystem
-amtssässige stadt
-amtstierärztlicher dienst
+amtssÃ¤ssige stadt
+amtstierÃ¤rztlicher dienst
 amtswegige wahrnehmung
 amygdalus communis
 amygdalus persica
@@ -1563,7 +1563,7 @@ anaemia oligosideraemica
 anaerobe fermentation
 anaerobe schwelle
 anagalaktische radioquelle
-anagalaktische röntgenquelle
+anagalaktische rÃ¶ntgenquelle
 anagalaktisches magnetfeld
 anagalaktisches objekt
 anagasta kuehniella
@@ -1579,7 +1579,7 @@ analogien der erfahrung
 analogische karte
 analsadistische phase
 analyse latenter strukturen
-analyse- und abwicklungshilfen für die entwicklung digitaler systeme
+analyse- und abwicklungshilfen fÃ¼r die entwicklung digitaler systeme
 analyses services
 analysis auf zeitskalen
 analysis situs
@@ -1598,10 +1598,10 @@ analytische metrik
 analytische moralphilosophie
 analytische organische chemie
 analytische philosophie
-analytische prüfungshandlung
+analytische prÃ¼fungshandlung
 analytische psychologie
 analytische psychotherapie
-analytische pädagogik
+analytische pÃ¤dagogik
 analytische religionsphilosophie
 analytische sprachphilosophie
 analytische statistik
@@ -1619,7 +1619,7 @@ analyzing power
 ananas comosus
 ananas lucidus
 anarchistische erziehung
-anarchistische pädagogik
+anarchistische pÃ¤dagogik
 anas discors
 anas penelope
 anas platyrhynchos domestica
@@ -1629,21 +1629,21 @@ anascospore hefen
 anationaler schiedsspruch
 anationaler vertrag
 anatomische pathologie
-anatomischer hörsaal
-anatomisches leberläppchen
+anatomischer hÃ¶rsaal
+anatomisches leberlÃ¤ppchen
 anatomisches schnittbild
 anbautechnischer versuch
 anchor hocking corporation
-ancien régime
+ancien rÃ©gime
 ancylostoma caninum
 ancylostoma canium
 ancylus fluviatilis
-andachtsbild mit zwölf szenen aus dem leben christi
+andachtsbild mit zwÃ¶lf szenen aus dem leben christi
 anderer zustand
 andersen, hans christian
 andhra pradesh
 andine hochkulturen
-andreas-gryphius-preis der künstlergilde e.v.
+andreas-gryphius-preis der kÃ¼nstlergilde e.v.
 andrews-curtis conjecture
 androctonus australis
 androctonus quinquestriatus aculeatus
@@ -1662,7 +1662,7 @@ andropogon sorghum sudanese
 androsace carnea
 androsace lactea
 androsace obtusifolia
-andré-gide-preis für deutsch-französische literaturübersetzungen
+andrÃ©-gide-preis fÃ¼r deutsch-franzÃ¶sische literaturÃ¼bersetzungen
 anelastische deformation
 anellierte verbindungen
 anelliertes ringsystem
@@ -1678,12 +1678,12 @@ aneurysma cordis
 aneurysma dissecans aortae
 anfallsartiger krankheitsverlauf
 anfallsweises hinken
-anfängliche unmöglichkeit der leistung
-anfängliche unmöglichkeit
+anfÃ¤ngliche unmÃ¶glichkeit der leistung
+anfÃ¤ngliche unmÃ¶glichkeit
 angebaute pilze
 angeborene fehlbildung
 angeborene gelenkstarre
-angeborene hüftdysplasie
+angeborene hÃ¼ftdysplasie
 angeborene ideen
 angeborene krankheit
 angeborene missbildung
@@ -1697,8 +1697,8 @@ angebotsorientierte wirtschaftspolitik
 angekleidete wechselwirkung
 angelica archangelica litoralis
 angelica archangelica
-angelsächsische schrift
-angelsächsisches recht
+angelsÃ¤chsische schrift
+angelsÃ¤chsisches recht
 angelus interpres
 angemessener barbetrag
 angeordnete gruppe
@@ -1765,7 +1765,7 @@ anguis fragilis
 angular-motion transducer
 angulus iridocornealis
 angulus pontocerebellaris
-anhaltischer verdienstorden für wissenschaft und kunst
+anhaltischer verdienstorden fÃ¼r wissenschaft und kunst
 anharmonic fourier series
 anharmonische fourier-reihe
 anharmonische schwingung
@@ -1777,27 +1777,27 @@ anionischer farbstoff
 anionisches tensid
 anionoide reaktion
 anisothermisches plasma
-anisotroper festkörper
+anisotroper festkÃ¶rper
 anisotroper stoff
 anisotropes gitter
 anisotropes system
-ankaufspreis der diözese graz-seckau für zeitgenössische bildende kunst
-ankaufspreis für zeitgenössische bildende kunst
+ankaufspreis der diÃ¶zese graz-seckau fÃ¼r zeitgenÃ¶ssische bildende kunst
+ankaufspreis fÃ¼r zeitgenÃ¶ssische bildende kunst
 anker mit dem gewundenen delphin
 ankylosierende spondylitis
-anlage der öffentlichen hand
+anlage der Ã¶ffentlichen hand
 annahme als kind
 annahme an kindesstatt
 annales bertiniani
 annales de saint-bertin
 annaud, jean-jacques
-annehmbare qualitätsgrenzlage
+annehmbare qualitÃ¤tsgrenzlage
 annelliertes ringsystem
 annemarie- und will-grohmann-stipendium
 annexin ii
 annexin v
 annexin vii
-anneé géophysique internationale
+anneÃ© gÃ©ophysique internationale
 annona cherimola
 annona muricata
 annona squamosa
@@ -1805,7 +1805,7 @@ annonin i
 annotated ada
 annulate lamellae
 annulierte lamellen
-annähernd zweijährige schwingung
+annÃ¤hernd zweijÃ¤hrige schwingung
 anodisch oxidiertes aluminium
 anodische oxidation
 anodisches polieren
@@ -1814,13 +1814,13 @@ anodonta cygnea
 anolis carolinensis
 anolis lineatopus
 anomale dispersion
-anomales maßstabgesetz
+anomales maÃŸstabgesetz
 anonyme alkoholiker
 anonyme bestattung
 anonyme christen
 anonymer autor
 anonymer christ
-anonymes begräbnis
+anonymes begrÃ¤bnis
 anonymes christentum
 anonymes werk
 anoptichthys jordani
@@ -1839,10 +1839,10 @@ anorganische biochemie
 anorganische chemie
 anorganische salze
 anorganische synthese
-anorganische säuren
+anorganische sÃ¤uren
 anorganische verbindung
 anorganische verbindungen
-anorganischer Überzug
+anorganischer Ãœberzug
 anorganisches glas
 anoxygen phototrophe bakterien
 anregendes mittel
@@ -1866,10 +1866,10 @@ ansi z39.50-1992
 ansoff, harry i.
 anspornender atemmesser
 anstalt des privatrechts
-anstalt des öffentlichen rechts
+anstalt des Ã¶ffentlichen rechts
 ansteckende blutarmut
 ansteckende krankheit
-ansteckende tracheobronchitis der hühnerküken
+ansteckende tracheobronchitis der hÃ¼hnerkÃ¼ken
 ansteckender scheidenkatarrh
 anstiftung der anstiftung
 ant colony optimization
@@ -1886,14 +1886,14 @@ anthonomus grandis
 anthrenus verbasci
 anthriscus silvestris
 anthriscus sylvestris
-anthropogene klimaänderung
+anthropogene klimaÃ¤nderung
 anthropogene wetterbeeinflussung
 anthropogener einfluss
 anthropogonischer mythos
 anthropoide darstellung
 anthropologische linguistik
 anthropologische psychologie
-anthropologische pädagogik
+anthropologische pÃ¤dagogik
 anthurium scherzerianum
 anthus campestris
 anthus pratensis
@@ -1907,16 +1907,16 @@ anti ballistic missile
 anti matter spectrometer
 anti-bleeding factor
 anti-cult movement
-anti-idiotypischer antikörper
+anti-idiotypischer antikÃ¶rper
 anti-stokessche linie
 anti-vant hoff-lebel-verbindungen
 anti-virenkit 5 le
 antiaris toxicaria
 antiarrhythmikum klasse i
 antiarrhythmikum klasse iii
-antiautoritäre bewegung
+antiautoritÃ¤re bewegung
 antibiotikum 255e
-anticellulärer antikörper
+anticellulÃ¤rer antikÃ¶rper
 antidiphtheric serum
 antidiuretisches hormon
 antifaktor xa
@@ -1940,12 +1940,12 @@ antigene determinante
 antigenhaltiges arzneimittel
 antigonish movement
 antihomotoxische medizin
-antihämophiles globulin a
+antihÃ¤mophiles globulin a
 antiinflammatorisch wirkendes mittel
 antijapanische nationale einheitsfront
-antiker fünfkampf
+antiker fÃ¼nfkampf
 antiker zyklus
-antikörperhaltiges arzneimittel
+antikÃ¶rperhaltiges arzneimittel
 antillianischer jugendlicher
 antillianisches kind
 antillische frau
@@ -1956,8 +1956,8 @@ antilymphocyte serum
 antimikrobielle eigenschaft
 antimikrobieller wirkstoff
 antinukleoneninduzierte kernreaktion
-antinukleärer antikörper
-antinukleärer faktor
+antinukleÃ¤rer antikÃ¶rper
+antinukleÃ¤rer faktor
 antinutritional factor
 antinutritiver faktor
 antiochenische schule
@@ -1968,7 +1968,7 @@ antiprotonischer wasserstoff
 antiquarische school
 antique zierrathe
 antirrhinum majus
-antisoziale persönlichkeitsstörung
+antisoziale persÃ¶nlichkeitsstÃ¶rung
 antithamnion spirographidis
 antithamnionella spirographidis
 antithrombin ii
@@ -1977,14 +1977,14 @@ antiviraler wirkstoff
 antivirales agens
 antivirenkit 5
 antivirus 2.0
-antizellulärer antikörper
+antizellulÃ¤rer antikÃ¶rper
 antizipierte erbfolge
 antizyklische finanzpolitik
 antizyklische fiskalpolitik
 antoinette perry award
 anton faistauer-preis
 anton piller order
-anton-faistauer-preis für malerei des landes salzburg
+anton-faistauer-preis fÃ¼r malerei des landes salzburg
 antriebstechnische industrie
 antrozous pallidus
 anuraphis roseus
@@ -1995,7 +1995,7 @@ anwenderspezifische integrierte schaltung
 anwendungsspezifische integrierte schaltung
 anxietas tibiarum
 anzeigepflichtige entlassung
-anästhesiebedingte komplikation
+anÃ¤sthesiebedingte komplikation
 ao po tu
 aobo tu
 aoristus mixtus
@@ -2038,7 +2038,7 @@ aphis rapae
 aphis raphani
 aphis zeae
 aphrastasia funitecta
-aphrodite in den gärten
+aphrodite in den gÃ¤rten
 aphrodite louvre-neapel
 apiognomonia errabunda
 apiognomonia veneta
@@ -2061,7 +2061,7 @@ aplanobacter anthracis
 aplasia moniliformis
 aplasia pilorum intermittens
 aplastic anemia in chickens
-aplastische anämie
+aplastische anÃ¤mie
 aplocheilus lineatus
 aplodontia rufa
 apo (a)
@@ -2072,7 +2072,7 @@ apodemus sylvaticus
 apokalyptische literatur
 apokalyptische reiter
 apokrine akne
-apolare flüssigkeit
+apolare flÃ¼ssigkeit
 apolare verbindungen
 apolipoprotein a
 apolipoprotein j
@@ -2104,7 +2104,7 @@ apostolische und katholische kirche des ostens
 apostolischer delegat
 apostolisches amt
 apothekenpflichtiges arzneimittel
-apotropäischer zauber
+apotropÃ¤ischer zauber
 appalachian dulcimer
 apparatus digestorius
 apparatus respiratorius
@@ -2153,7 +2153,7 @@ approximate reasoning
 approximation algorithm
 approximation by rational functions
 approximationssatz von runge
-approximatives schließen
+approximatives schlieÃŸen
 apriorische erkenntnis
 aptenodytes forsteri
 aptenodytes patagonica
@@ -2168,9 +2168,9 @@ aqua noodle
 aquatische chemie
 aquatische pilze
 aquatisches system
-aquatisches Ökosystem
+aquatisches Ã–kosystem
 aquila audax
-aquila chrysaëtos
+aquila chrysaÃ«tos
 aquila clanga
 aquila rapax
 aquila verreauxi
@@ -2200,13 +2200,13 @@ arado ar 234
 arado ar 240
 aradus cinnamomeus
 arakelovsche schnitttheorie
-aramidfaserverstärkter aluminium-hybridverbundwerkstoff
+aramidfaserverstÃ¤rkter aluminium-hybridverbundwerkstoff
 araneus diadematus
 araschnia levana
 aratus latinus
 araucaria angustifolia
-arbeiter- und bauern-fakultät
-arbeiter- und soldatenräte
+arbeiter- und bauern-fakultÃ¤t
+arbeiter- und soldatenrÃ¤te
 arbeiter-turn- und sportbewegung
 arbeiterbildende akademie
 arbeitsbedingte krankheit
@@ -2214,11 +2214,11 @@ arbeitsfreies wochenende
 arbeitsloser jugendlicher
 arbeitsmarktwirkungen moderner technologien
 arbeitsplatzorientierte computerleistung
-arbeitsstipendien für bildende künstler der hansestadt hamburg
-arbeitsstipendium für bildende kunst
+arbeitsstipendien fÃ¼r bildende kÃ¼nstler der hansestadt hamburg
+arbeitsstipendium fÃ¼r bildende kunst
 arbor vitae
 arbovirus- gruppe b
-arbuskuläre endomykorrhiza
+arbuskulÃ¤re endomykorrhiza
 arbutus unedo
 arc furnaces
 arceuthobium oxycedri
@@ -2228,10 +2228,10 @@ archaische kunst
 arche noah
 archidiskodon meridionalis
 archilochus colubris
-archimedischer körper
+archimedischer kÃ¶rper
 archips rosana
 architectuatal synthesis
-architektenkammer baden-württemberg
+architektenkammer baden-wÃ¼rttemberg
 architektenkammer hessen
 architektenkammer rheinland-pfalz
 architektonische bionik
@@ -2239,16 +2239,16 @@ architektonische terrakotta
 architektonischer garten
 architektur integrierter informationssysteme
 architekturforum nordostschweiz
-archäologische gesellschaft
-archäologische karte
-archäologische landesaufnahme
-archäologische stätte
-archäologischer lehrpfad
-archäologischer verein
-archäologischer wanderpfad
-archäologischer wanderweg
-archäologisches denkmal
-archäologisches museum
+archÃ¤ologische gesellschaft
+archÃ¤ologische karte
+archÃ¤ologische landesaufnahme
+archÃ¤ologische stÃ¤tte
+archÃ¤ologischer lehrpfad
+archÃ¤ologischer verein
+archÃ¤ologischer wanderpfad
+archÃ¤ologischer wanderweg
+archÃ¤ologisches denkmal
+archÃ¤ologisches museum
 arcobacter cryaerophilus
 arctia caja
 arctica islandica
@@ -2258,7 +2258,7 @@ arcus palmaris
 arcus vertebralis
 ardea cinerea
 ardea herodias
-ardenne, manfred ¬von¬
+ardenne, manfred Â¬vonÂ¬
 area chorioidea
 area parahippocampalis
 aregeneratorische panmyelopathie
@@ -2270,7 +2270,7 @@ argania sideroxylon
 argania spinosa
 argas reflexus
 argentinische dogge
-argentinische schlangenhalsschildkröte
+argentinische schlangenhalsschildkrÃ¶te
 argentinischer teju
 argininosuccinat lyase
 argiope bruennichi
@@ -2305,7 +2305,7 @@ arithmetische halbgruppe
 arithmetische progression
 arithmetischer ausdruck
 arithmetischer coprozessor
-arithmetischer körper
+arithmetischer kÃ¶rper
 arithmetischer prozessor
 arithmetisches mittel
 arithmetric semigroup
@@ -2328,8 +2328,8 @@ armoracia lapathifolia
 armoracia rusticana
 arms control
 army group
-armée de condé
-armée des princes
+armÃ©e de condÃ©
+armÃ©e des princes
 arnica montana
 arnis de mano
 arnold-chiari deformity
@@ -2338,17 +2338,17 @@ aromatische acetylene
 aromatische alkine
 aromatische alkohole
 aromatische amine
-aromatische aminosäuredecarboxylase
+aromatische aminosÃ¤uredecarboxylase
 aromatische heterocyclen
 aromatische kohlenwasserstoffe
 aromatische nitroverbindungen
 aromatische polycyclen
-aromatische sulfonsäuren
-aromatisches Öl
+aromatische sulfonsÃ¤uren
+aromatisches Ã–l
 aron ha-kodesch
 aronia melanocarpa
 arousal reaction
-arretinische gefässe
+arretinische gefÃ¤sse
 arretinische keramik
 arrhenatherum elatius
 arrival process
@@ -2370,7 +2370,7 @@ art gallery theorem
 art neural networks
 art nouveau
 art rock
-art-directors-club für deutschland
+art-directors-club fÃ¼r deutschland
 artemia salina
 artemisia abrotanum
 artemisia absinthium
@@ -2398,7 +2398,7 @@ arteria uterina
 arteria vertebralis
 arteriae bronchiales
 arterielle applikation
-arterielle durchblutungsstörung
+arterielle durchblutungsstÃ¶rung
 arterielle hypertonie
 arterielle injektion
 arterielle switch-operation
@@ -2409,21 +2409,21 @@ arterielles blut
 arteriitis cranialis
 arteriitis temporalis
 arteriosklerotische demenz
-arteriovenöse malformation
-arteriovenöse sauerstoffdifferenz
-arteriovenöses angiom
+arteriovenÃ¶se malformation
+arteriovenÃ¶se sauerstoffdifferenz
+arteriovenÃ¶ses angiom
 artes grammaticae
 artes liberales
 artes magicae
 artes mechanicae
-artgemässe tierhaltung
+artgemÃ¤sse tierhaltung
 artgerechte haltung
 arthritis deformans
 arthritis psoriatica
 arthritis rheumatica
 arthritis sacroiliaca
 arthritis urica
-arthro-muskuläres gleichgewicht
+arthro-muskulÃ¤res gleichgewicht
 arthrobacter nicotinivorans
 arthrobacter nicotinovorans
 arthrobacter oxidans
@@ -2469,7 +2469,7 @@ artificial neural network
 artificial reality
 artificial world
 artifizielle replikation
-artifizielle veränderung
+artifizielle verÃ¤nderung
 artifizieller samen
 artikulation des unterrichts
 artikulatorische dyspraxie
@@ -2484,7 +2484,7 @@ arts and crafts movement
 arubanische frau
 arum maculatum
 arundo donax
-arvalische brüder
+arvalische brÃ¼der
 arvicola amphibius
 arvicola sapidus
 arvicola terrestris
@@ -2492,7 +2492,7 @@ arya samaj
 arylsulfatase a
 arylsulfatase b
 arzneimittel/ gebrauchsinformation
-arzt für allgemeinmedizin
+arzt fÃ¼r allgemeinmedizin
 arzt im praktikum
 as 2.2
 as 400
@@ -2501,7 +2501,7 @@ ascaris lumbricoides suum
 ascaris lumbricoides
 ascaris megalocephala
 ascaris suum
-aschari, abul-hasan ¬al-¬
+aschari, abul-hasan Â¬al-Â¬
 aschnersche konstitutionstherapie
 asclepias cornuti
 asclepias syriaca
@@ -2516,7 +2516,7 @@ ascochyta ruborum
 ascochytes pinodes
 ascophaera apis
 ascophyllum nodosum
-aseität gottes
+aseitÃ¤t gottes
 asellus aquaticus
 asellus cavaticus
 aseptische lockerung
@@ -2530,8 +2530,8 @@ asiatische frau
 asiatische keiljungfer
 asiatischer baumwollwurm
 asiatischer elefant
-asiatischer löwe
-asiatischer maiszünsler
+asiatischer lÃ¶we
+asiatischer maiszÃ¼nsler
 asiatischer wildhund
 asio flammeus
 asio otus
@@ -2565,13 +2565,13 @@ asset-backed securities
 asset-backed security
 assimilatorische nitratreduktase
 assimilatorische nitratreduktion
-assistent für konstruktions- und fertigungstechnik
-association de solidarité franco-arabe
+assistent fÃ¼r konstruktions- und fertigungstechnik
+association de solidaritÃ© franco-arabe
 association scheme
 assoziative aktivierung
 assoziativer prozessor
 assoziativer speicher
-assoziatives gedächtnis
+assoziatives gedÃ¤chtnis
 assoziatives gruppoid
 assoziatives netz
 assumption based truth maintenance system
@@ -2583,7 +2583,7 @@ astacus astacus
 astacus fluviatilis
 astacus leptodactylus
 astat 211
-astatisches gewässer
+astatisches gewÃ¤sser
 aster bellidiastrum
 aster tripolium
 asterias rubens
@@ -2593,15 +2593,15 @@ asthma bronchiale
 astra diesel
 astragalus membranaceus
 astro star
-astro-world für windows 2.1
-astrologie für windows 2.1
+astro-world fÃ¼r windows 2.1
+astrologie fÃ¼r windows 2.1
 astrologische deutung
 astrologische medizin
 astrologisches haus
 astrologisches zeitalter
-astronomische geodäsie
+astronomische geodÃ¤sie
 astronomische koordinaten
-astronomische länge
+astronomische lÃ¤nge
 astronomische monumentaluhr
 astronomische navigation
 astronomische photometrie
@@ -2619,7 +2619,7 @@ astyanax fasciatus mexicanus
 astyanax fasciatus
 astyanax hubbsi
 astyanax mexicanus
-asu-auszeichnung für umweltbewusste unternehmensführung
+asu-auszeichnung fÃ¼r umweltbewusste unternehmensfÃ¼hrung
 asymetrix compel
 asymmetric defect
 asymmetric digital subscriber line
@@ -2634,7 +2634,7 @@ asymmetrische reaktion
 asymmetrische synthese
 asymmetrische verteilung
 asymmetrisches kryptosystem
-asymmetrisches verschlüsselungssystem
+asymmetrisches verschlÃ¼sselungssystem
 asymptotic equidistribution
 asymptotic giant branch
 asymptotic giant
@@ -2643,17 +2643,17 @@ asymptotically uniform distribution
 asymptotische effizienz
 asymptotische entwicklung
 asymptotische expansion
-asymptotische gleichmäßige verteilung
+asymptotische gleichmÃ¤ÃŸige verteilung
 asymptotische gleichverteilung
 asymptotische theorie
 asymptotische wirksamkeit
 asymptotischer riesenast
 asymptotischer roter riese
-asymptotisches lösungsverhalten
+asymptotisches lÃ¶sungsverhalten
 asymptotisches martingal
-asymptotisches verhalten von lösungen
+asymptotisches verhalten von lÃ¶sungen
 asymptotisches verhalten
-asynchrone breitbandübertragung
+asynchrone breitbandÃ¼bertragung
 asynchroner transfer-modus
 asynchronous machines
 asynchronous transfer mode
@@ -2667,7 +2667,7 @@ atari (us) corporation
 atari mega st
 ataxia teleangiectatica
 ateles paniscus
-atelier d'écriture
+atelier d'Ã©criture
 atelier zo
 atemzentrierte verhaltenstherapie
 athene noctua
@@ -2686,21 +2686,21 @@ atlas portatif
 atmel avr-risc-mikrocontroller
 atmel mikrocontroller-familie
 atmospheric pressure cvd
-atmosphärisch-optische erscheinung
-atmosphärische elektrizität
-atmosphärische grenzschicht
-atmosphärische optik
-atmosphärische störung
-atmosphärische turbulenz
-atmosphärische zirkulation
-atmosphärischer druck
-atmosphärischer eintritt
-atmosphärisches aerosol
-atmosphärisches fenster
+atmosphÃ¤risch-optische erscheinung
+atmosphÃ¤rische elektrizitÃ¤t
+atmosphÃ¤rische grenzschicht
+atmosphÃ¤rische optik
+atmosphÃ¤rische stÃ¶rung
+atmosphÃ¤rische turbulenz
+atmosphÃ¤rische zirkulation
+atmosphÃ¤rischer druck
+atmosphÃ¤rischer eintritt
+atmosphÃ¤risches aerosol
+atmosphÃ¤risches fenster
 atmungsketten-komplex i
 atom location by channeling enhanced microanalysis
 atom probe
-atomare abrüstung
+atomare abrÃ¼stung
 atomare abschreckung
 atomare absorptionsanalyse
 atomare bedrohung
@@ -2708,9 +2708,9 @@ atomare bewaffnung
 atomare bewegung
 atomare entsorgung
 atomare fehlstelle
-atomare kriegführung
-atomare kriegsführung
-atomare rüstung
+atomare kriegfÃ¼hrung
+atomare kriegsfÃ¼hrung
+atomare rÃ¼stung
 atomare schwelle
 atomare struktur
 atomare stufe
@@ -2718,7 +2718,7 @@ atomare wirtschaft
 atomarer erstschlag
 atomarer photoeffekt
 atomarer stickstoff
-atomarer stoß
+atomarer stoÃŸ
 atomaria linearis
 atomic force microscopy
 atomic layer epitaxy
@@ -2727,7 +2727,7 @@ atonia uteri
 atopische dermatitis
 atopisches ekzem
 atopisches palmoplantarekzem
-atp-abhängiger proteolysefaktor 1
+atp-abhÃ¤ngiger proteolysefaktor 1
 atresia auris
 atrial fibrillation
 atrial flutter
@@ -2737,8 +2737,8 @@ atriales natriuretisches hormon
 atriales natriuretisches peptid
 atrionatriuretischer faktor
 atrionatriuretisches peptid
-atrioventrikulärer block
-atrioventrikulärer defekt
+atrioventrikulÃ¤rer block
+atrioventrikulÃ¤rer defekt
 atriplex hortensis
 atriplex littoralis
 atrium cordis
@@ -2769,7 +2769,7 @@ attributiver genitiv
 attributives adjektiv
 attributives partizip
 atya striolata
-atypische geflügelpest
+atypische geflÃ¼gelpest
 atypische mykobakterien
 atzenhofer gruppe
 au pair
@@ -2788,9 +2788,9 @@ audiovisuelles unterrichtsmittel
 audit committee
 auditive medien
 auditive poesie
-auditive rückkopplung
+auditive rÃ¼ckkopplung
 auditive wahrnehmung
-auditive wahrnehmungsförderung
+auditive wahrnehmungsfÃ¶rderung
 auditives signal
 auditorischer cortex
 auditorischer kortex
@@ -2799,18 +2799,18 @@ auf frischer tat
 auf wasser schreiben
 auferstehung der toten
 aufforderung zu straftaten
-auffälliges verhalten
-aufführungspraxis alter musik
-aufgeklärter absolutismus
+auffÃ¤lliges verhalten
+auffÃ¼hrungspraxis alter musik
+aufgeklÃ¤rter absolutismus
 aufhebung der philosophie
 aufholende entwicklung
 aufholendes wachstum
-auflösbare lie-gruppe
-auflösung der philosophie
-auflösung der singularitäten
-auflösung einer gleichung
-auflösung von singularitäten
-aufmerksamkeits- und hyperaktivitätsstörung
+auflÃ¶sbare lie-gruppe
+auflÃ¶sung der philosophie
+auflÃ¶sung der singularitÃ¤ten
+auflÃ¶sung einer gleichung
+auflÃ¶sung von singularitÃ¤ten
+aufmerksamkeits- und hyperaktivitÃ¤tsstÃ¶rung
 aufrechte trespe
 aufrechte waldrebe
 aufrechter sauerklee
@@ -2825,10 +2825,10 @@ aufstand 1921
 aufstand der comuneros
 aufstand des zebrzydowski
 aufsuchende arbeit
-aufwendung für die ingangsetzung und erweiterung des geschäftsbetriebes
+aufwendung fÃ¼r die ingangsetzung und erweiterung des geschÃ¤ftsbetriebes
 augen der angst
 augenanomalie des collie
-augenoptisches gerät
+augenoptisches gerÃ¤t
 augmented lagrange-methode
 augmented plane wave method
 augmented reality
@@ -2839,8 +2839,8 @@ augsburger hohes friedensfest
 augsburger interim
 augsburger religionsfriede
 augsburger strukturorientierte rechnerarchitektur
-auktorialer erzähler
-auktoriales erzählen
+auktorialer erzÃ¤hler
+auktoriales erzÃ¤hlen
 aunjetitzer kultur
 aurea catena homeri
 aurelia aurita
@@ -2852,59 +2852,59 @@ aus- und ableitungsverfahren
 ausbeutung fremden rufs
 ausdauernde pflanzen
 ausdauernder lolch
-auserwähltes volk
+auserwÃ¤hltes volk
 ausfallsicheres system
-ausführende gewalt
+ausfÃ¼hrende gewalt
 ausgeartetes stefan-problem
 ausgebreitetes glaskraut
-ausgeglichene ernährung
+ausgeglichene ernÃ¤hrung
 ausgeglichener baum
-ausgelöstes gehirnpotential
-ausgelöstes gehirnpotenzial
+ausgelÃ¶stes gehirnpotential
+ausgelÃ¶stes gehirnpotenzial
 ausgeschlossenes volumen
 ausgestopfte tiere
 ausgestorbene sprache
 ausgestorbenes volk
-ausgewogene ernährung
-ausgewählter rat
+ausgewogene ernÃ¤hrung
+ausgewÃ¤hlter rat
 ausgleichende erziehung
-auskunfts- und informationstätigkeit
-ausländische aktie
-ausländische arbeitnehmerin
-ausländische bank
-ausländische betriebsstätte
-ausländische direktinvestition
-ausländische eingriffsnorm
-ausländische einkünfte
-ausländische familie
-ausländische finanzierungsgesellschaft
-ausländische frau
-ausländische investition
-ausländische jugend
-ausländische streitkräfte
-ausländische tochtergesellschaft
-ausländische vertretung
-ausländische währung
-ausländischer arbeitgeber
-ausländischer arbeitnehmer
-ausländischer baum
-ausländischer erwachsener
-ausländischer jugendlicher
-ausländischer schüler
-ausländischer sportler
-ausländischer staat
-ausländisches geschäft
-ausländisches kind
-ausländisches militär
-ausländisches recht
-ausländisches studium
-ausländisches tochterunternehmen
-ausländisches unternehmen
-ausländisches urteil
-ausländisches vermögen
-ausmärkisches gebiet
+auskunfts- und informationstÃ¤tigkeit
+auslÃ¤ndische aktie
+auslÃ¤ndische arbeitnehmerin
+auslÃ¤ndische bank
+auslÃ¤ndische betriebsstÃ¤tte
+auslÃ¤ndische direktinvestition
+auslÃ¤ndische eingriffsnorm
+auslÃ¤ndische einkÃ¼nfte
+auslÃ¤ndische familie
+auslÃ¤ndische finanzierungsgesellschaft
+auslÃ¤ndische frau
+auslÃ¤ndische investition
+auslÃ¤ndische jugend
+auslÃ¤ndische streitkrÃ¤fte
+auslÃ¤ndische tochtergesellschaft
+auslÃ¤ndische vertretung
+auslÃ¤ndische wÃ¤hrung
+auslÃ¤ndischer arbeitgeber
+auslÃ¤ndischer arbeitnehmer
+auslÃ¤ndischer baum
+auslÃ¤ndischer erwachsener
+auslÃ¤ndischer jugendlicher
+auslÃ¤ndischer schÃ¼ler
+auslÃ¤ndischer sportler
+auslÃ¤ndischer staat
+auslÃ¤ndisches geschÃ¤ft
+auslÃ¤ndisches kind
+auslÃ¤ndisches militÃ¤r
+auslÃ¤ndisches recht
+auslÃ¤ndisches studium
+auslÃ¤ndisches tochterunternehmen
+auslÃ¤ndisches unternehmen
+auslÃ¤ndisches urteil
+auslÃ¤ndisches vermÃ¶gen
+ausmÃ¤rkisches gebiet
 aussaat per hand
-ausschließliche wirtschaftszone
+ausschlieÃŸliche wirtschaftszone
 ausschluss des rechtsweges
 aussereheliche beziehung
 aussereheliches kind
@@ -2926,7 +2926,7 @@ australian quality awards foundation
 australische frau
 australische silbereiche
 australischer kriegsgefangener
-australischer marienkäfer
+australischer marienkÃ¤fer
 australischer teebaum
 australisches opossum
 australopithecus habilis
@@ -2939,16 +2939,16 @@ austroasca viridigrisea
 austropotamobius torrentium
 auswahl mit ungleichen wahrscheinlichkeiten
 auswahl mit unterschiedlichen wahrscheinlichkeiten
-auswahl ohne zurücklegen
-auswärtige angelegenheiten
-auswärtige beziehungen
-auswärtige gewalt
-auswärtige kulturpolitik
-auswärtige politik
-auswärtiger dienst
-auswärtiger handel
-auswärtiger leihverkehr
-auszeichnung für umweltbewusste unternehmensführung
+auswahl ohne zurÃ¼cklegen
+auswÃ¤rtige angelegenheiten
+auswÃ¤rtige beziehungen
+auswÃ¤rtige gewalt
+auswÃ¤rtige kulturpolitik
+auswÃ¤rtige politik
+auswÃ¤rtiger dienst
+auswÃ¤rtiger handel
+auswÃ¤rtiger leihverkehr
+auszeichnung fÃ¼r umweltbewusste unternehmensfÃ¼hrung
 auszeichnung gutes bauen
 authoring program
 authoring software
@@ -2959,7 +2959,7 @@ autoaggressives kratzen
 autobiographischer gehalt
 autobiographischer roman
 autobiographisches element
-autobiographisches erzählen
+autobiographisches erzÃ¤hlen
 autodesk inventor 6
 autodesk mechanical desktop 3
 autodesk mechanical desktop 4
@@ -2995,14 +2995,14 @@ automatische bildverarbeitung
 automatische datenverarbeitung
 automatische differentiation
 automatische dokumentation
-automatische fahrtzielführung
-automatische fahrzeugführung
+automatische fahrtzielfÃ¼hrung
+automatische fahrzeugfÃ¼hrung
 automatische flugsteuerung
 automatische folge
 automatische handlungsplanung
 automatische inhaltsanalyse
 automatische justierung
-automatische lastabhängige bremskraftregelung
+automatische lastabhÃ¤ngige bremskraftregelung
 automatische lauterkennung
 automatische lexikographie
 automatische literatur
@@ -3011,25 +3011,25 @@ automatische messung
 automatische modusumschaltung
 automatische montage
 automatische parallelisierung
-automatische prüfanlage
+automatische prÃ¼fanlage
 automatische regelung
 automatische satzanalyse
 automatische schriftzeichenerkennung
-automatische skalenbildung für itemanalytische anwendungen
+automatische skalenbildung fÃ¼r itemanalytische anwendungen
 automatische sprachanalyse
-automatische sprachenübersetzung
+automatische sprachenÃ¼bersetzung
 automatische spracherkennung
 automatische sprachproduktion
 automatische sprachsynthese
 automatische sprachverarbeitung
 automatische syntaxanalyse
 automatische textverarbeitung
-automatische tür
+automatische tÃ¼r
 automatische uhr
 automatische waffe
 automatische wortproduktion
 automatische zugsteuerung
-automatische Übersetzung
+automatische Ãœbersetzung
 automatischer abgleich
 automatischer implantierbarer kardioverter-defibrillator
 automatischer interaktionsdetektor
@@ -3046,21 +3046,21 @@ automatisches leitungssystem
 automatisches melken
 automatisches melkverfahren
 automatisches messsystem
-automatisches prüfen
-automatisches prüfsystem
+automatisches prÃ¼fen
+automatisches prÃ¼fsystem
 automatisches schreiben
 automatisches spielzeug
 automatisches testen
 automatisches theorembeweisen
-automatisches zielführungssystem
-automatisches Übersetzen
+automatisches zielfÃ¼hrungssystem
+automatisches Ãœbersetzen
 automatisierte datenverarbeitung
 automatisiertes grundbuch
 automatisiertes lagersystem
 automatisiertes leitungssystem
 automatized medical anamnesis dialog assistant
 automaton based modelling and task operating system
-automobiles citroën sa
+automobiles citroÃ«n sa
 automobiles talbot sa
 automorphy factor
 automorphy summand
@@ -3097,68 +3097,68 @@ autoregressives differenziertes modell der gleitenden mittel
 autoregressives integriertes modell der gleitenden mittel
 autoregressives modell der gleitenden mittel
 autoregulative therapie
-autoritäre persönlichkeit
-autoritärer charakter
-autoritärer staat
-autoritäres regime
-autoritäres system
-autorität und familie
+autoritÃ¤re persÃ¶nlichkeit
+autoritÃ¤rer charakter
+autoritÃ¤rer staat
+autoritÃ¤res regime
+autoritÃ¤res system
+autoritÃ¤t und familie
 autosomal-dominante zystenniere (erwachsenenform)
 autosomal-dominante zystenniere
 autothematischer film
 autusie gottes
-außerabendländische kultur
-außerabendländische kunst
-außerbetriebliche datenverarbeitung
-außerbiblische quelle
-außerbiblisches zeugnis
-außerbilanzielles geschäft
-außerbörslicher wertpapierhandel
-außerchristliche religion
-außerdienstliche verhaltenspflicht
-außerdienstliches verhalten
-außereuropäische kultur
-außereuropäische kunst
-außereuropäische literatur
-außereuropäische musik
-außereuropäische pflanzen
-außereuropäische tiere
-außerfachliche qualifikation
-außergalaktische radioquelle
-außergalaktische röntgenquelle
-außergalaktisches magnetfeld
-außergalaktisches objekt
-außergerichtliche streitbeilegung
-außergewöhnlicher bewusstseinszustand
-außerirdische intelligenz
-außerirdisches leben
-außerirdisches material
-außerkörperliche erfahrung
-außerordentliche befriedungsaktion
-außerordentliche beiträge
-außerordentliche bilanz
-außerordentliche ersitzung
-außerordentlicher güterstand
-außerordentlicher professor
-außerordentliches imperium
-außerparlamentarische opposition
-außerschulische berufstätigkeit
-außerschulische bildung
-außerschulische bildungsarbeit
-außerschulische erziehung
-außerschulische jugendarbeit
-außerschulische jugendbildung
-außerschulische medizin
-außersinnliche wahrnehmung
-außersprachliche kommunikation
-außersprachliche Äußerung
-außerstaatliche forschungsförderung
-außerstreitiges verfahren
-außertariflicher angestellter
-außeruniversitäre forschung
-außeruniversitäre forschungseinrichtung
-außeruniversitäre staatliche forschungseinrichtung
-außerunterrichtliche schulveranstaltung
+auÃŸerabendlÃ¤ndische kultur
+auÃŸerabendlÃ¤ndische kunst
+auÃŸerbetriebliche datenverarbeitung
+auÃŸerbiblische quelle
+auÃŸerbiblisches zeugnis
+auÃŸerbilanzielles geschÃ¤ft
+auÃŸerbÃ¶rslicher wertpapierhandel
+auÃŸerchristliche religion
+auÃŸerdienstliche verhaltenspflicht
+auÃŸerdienstliches verhalten
+auÃŸereuropÃ¤ische kultur
+auÃŸereuropÃ¤ische kunst
+auÃŸereuropÃ¤ische literatur
+auÃŸereuropÃ¤ische musik
+auÃŸereuropÃ¤ische pflanzen
+auÃŸereuropÃ¤ische tiere
+auÃŸerfachliche qualifikation
+auÃŸergalaktische radioquelle
+auÃŸergalaktische rÃ¶ntgenquelle
+auÃŸergalaktisches magnetfeld
+auÃŸergalaktisches objekt
+auÃŸergerichtliche streitbeilegung
+auÃŸergewÃ¶hnlicher bewusstseinszustand
+auÃŸerirdische intelligenz
+auÃŸerirdisches leben
+auÃŸerirdisches material
+auÃŸerkÃ¶rperliche erfahrung
+auÃŸerordentliche befriedungsaktion
+auÃŸerordentliche beitrÃ¤ge
+auÃŸerordentliche bilanz
+auÃŸerordentliche ersitzung
+auÃŸerordentlicher gÃ¼terstand
+auÃŸerordentlicher professor
+auÃŸerordentliches imperium
+auÃŸerparlamentarische opposition
+auÃŸerschulische berufstÃ¤tigkeit
+auÃŸerschulische bildung
+auÃŸerschulische bildungsarbeit
+auÃŸerschulische erziehung
+auÃŸerschulische jugendarbeit
+auÃŸerschulische jugendbildung
+auÃŸerschulische medizin
+auÃŸersinnliche wahrnehmung
+auÃŸersprachliche kommunikation
+auÃŸersprachliche Ã„uÃŸerung
+auÃŸerstaatliche forschungsfÃ¶rderung
+auÃŸerstreitiges verfahren
+auÃŸertariflicher angestellter
+auÃŸeruniversitÃ¤re forschung
+auÃŸeruniversitÃ¤re forschungseinrichtung
+auÃŸeruniversitÃ¤re staatliche forschungseinrichtung
+auÃŸerunterrichtliche schulveranstaltung
 avantgardistische kunst
 avantgardistische literatur
 avena fatua
@@ -3167,11 +3167,11 @@ average case complexity
 averaged coupled pair functional
 averrhoa carambola
 aversive konditionierung
-aveu et dénombrement
+aveu et dÃ©nombrement
 avian leucosis
 avicennia germinans
 avignonesisches exil
-aviäre leukose
+aviÃ¤re leukose
 avocado sunblotch viroid
 avogadrosche hypothese
 avogadrosches gesetz

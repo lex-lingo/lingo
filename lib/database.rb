@@ -17,7 +17,7 @@
 #  51 Franklin St, Fifth Floor, Boston, MA 02110, USA
 #
 #  For more information visit http://www.lex-lingo.de or contact me at
-#  welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
+#  welcomeATlex-lingoDOTde near 50Â°55'N+6Â°55'E.
 #
 #  Lex Lingo rules from here on
 
@@ -32,8 +32,8 @@ require 'lib/modules'
 
 ################################################################################
 #
-#    ShowPercent ermöglicht die Fortschrittsanzeige beim konvertieren der 
-#    Wörterbücher
+#    ShowPercent ermÃ¶glicht die Fortschrittsanzeige beim konvertieren der 
+#    WÃ¶rterbÃ¼cher
 #
 class ShowPercent
 
@@ -92,7 +92,7 @@ end
 
 ################################################################################
 #
-#    Crypter ermöglicht die Ver- und Entschlüsselung von Wörterbüchern
+#    Crypter ermÃ¶glicht die Ver- und EntschlÃ¼sselung von WÃ¶rterbÃ¼chern
 #
 class Crypter
 
@@ -136,11 +136,11 @@ end
 =begin rdoc
 == TxtFile
 Die Klasse TxtFile stellt eine einheitliche Schnittstelle auf die unterschiedlichen Formate
-von Wörterbuch-Quelldateien bereit. Die Identifizierung der Quelldatei erfolgt über die ID
+von WÃ¶rterbuch-Quelldateien bereit. Die Identifizierung der Quelldatei erfolgt Ã¼ber die ID
 der Datei, so wie sie in der Sprachkonfigurationsdatei <tt>de.lang</tt> unter
 <tt>language/dictionary/databases</tt> hinterlegt ist.
 
-Die Verarbeitung der Wörterbücher erfolgt mittels des Iterators <b>each</b>, der für jede 
+Die Verarbeitung der WÃ¶rterbÃ¼cher erfolgt mittels des Iterators <b>each</b>, der fÃ¼r jede 
 Zeile der Quelldatei ein Array bereitstellt in der Form <tt>[ key, [val1, val2, ...] ]</tt>.
 
 Nicht korrekt erkannte Zeilen werden abgewiesen und in eine Revoke-Datei gespeichert, die 
@@ -154,7 +154,7 @@ class TxtFile
     config = Lingo.config['language/dictionary/databases/' + id]
     raise "Es gibt in 'language/dictionary/databases' keine Datenbank mit der Kurzform '#{id}'" if config.nil? || !config.has_key?( 'name' )
     
-    #  Pfade für Quelldatei und für ungültige Zeilen
+    #  Pfade fÃ¼r Quelldatei und fÃ¼r ungÃ¼ltige Zeilen
     config['name']
   end
 
@@ -164,11 +164,11 @@ private
     #  Konfiguration der Datenbank auslesen
     @config = Lingo.config['language/dictionary/databases/' + id]
     
-    #  Pfade für Quelldatei und für ungültige Zeilen
+    #  Pfade fÃ¼r Quelldatei und fÃ¼r ungÃ¼ltige Zeilen
     @pn_source = Pathname.new( @config['name'] )
     @pn_reject = Pathname.new( @config['name'].gsub( FILE_EXTENSION_PATTERN, '.rev' ) )
 
-    Lingo.error( "Quelldatei für id '#{id}' unter '" + @config['name'] + "' existiert nicht" ) unless @pn_source.exist?
+    Lingo.error( "Quelldatei fÃ¼r id '#{id}' unter '" + @config['name'] + "' existiert nicht" ) unless @pn_source.exist?
     
     #  Parameter standardisieren
     @wordclass = @config.fetch( 'def-wc', '?' ).downcase
@@ -192,20 +192,20 @@ public
     fail_msg = ''
 
     begin
-      #  Reject-Datei öffnen
-      fail_msg = "Fehler beim öffnen der Reject-Datei '#{@pn_reject.to_s}'"
+      #  Reject-Datei Ã¶ffnen
+      fail_msg = "Fehler beim Ã¶ffnen der Reject-Datei '#{@pn_reject.to_s}'"
       reject_file = @pn_reject.open( 'w' )
 
       #  Alle Zeilen der Quelldatei verarbeiten    
-      fail_msg = "Fehler beim öffnen der Wörterbuch-Quelldatei '#{@pn_source.to_s}'"
+      fail_msg = "Fehler beim Ã¶ffnen der WÃ¶rterbuch-Quelldatei '#{@pn_source.to_s}'"
 
       @pn_source.each_line do |raw_line|
         @position += raw_line.size          #  Position innerhalb der Datei aktualisieren
         line = raw_line.chomp.downcase        #  Zeile normieren
 
-        next if line =~ /^\s*\043/ || line.strip == ''  #  Kommentarzeilen und leere Zeilen überspringen
+        next if line =~ /^\s*\043/ || line.strip == ''  #  Kommentarzeilen und leere Zeilen Ã¼berspringen
         
-        #  Ungültige Zeilen protokollieren
+        #  UngÃ¼ltige Zeilen protokollieren
 
         unless line =~ @line_pattern
           fail_msg = "Fehler beim schreiben der Reject-Datei '#{@pn_reject.to_s}'"
@@ -218,7 +218,7 @@ public
         
       end  
 
-      fail_msg = "Fehler beim Schließen der Reject-Datei '#{@pn_reject.to_s}'"
+      fail_msg = "Fehler beim SchlieÃŸen der Reject-Datei '#{@pn_reject.to_s}'"
       reject_file.close
       @pn_reject.delete if @pn_reject.size == 0
       
@@ -237,7 +237,7 @@ end
 == TxtFile_Singleword
 Abgeleitet von TxtFile behandelt die Klasse Dateien mit dem Format <tt>SingleWord</tt>.
 Eine Zeile <tt>"Fachbegriff\n"</tt> wird gewandelt in <tt>[ 'fachbegriff', ['#s'] ]</tt>.
-Die Wortklasse kann über den Parameter <tt>def-wc</tt> beeinflusst werden.
+Die Wortklasse kann Ã¼ber den Parameter <tt>def-wc</tt> beeinflusst werden.
 =end
 class TxtFile_Singleword < TxtFile
 private
@@ -260,8 +260,8 @@ end
 == TxtFile_Keyvalue
 Abgeleitet von TxtFile behandelt die Klasse Dateien mit dem Format <tt>KeyValue</tt>.
 Eine Zeile <tt>"Fachbegriff*Fachterminus\n"</tt> wird gewandelt in <tt>[ 'fachbegriff', ['fachterminus#s'] ]</tt>.
-Die Wortklasse kann über den Parameter <tt>def-wc</tt> beeinflusst werden.
-Der Trenner zwischen Schlüssel und Projektion kann über den Parameter <tt>separator</tt> geändert werden.
+Die Wortklasse kann Ã¼ber den Parameter <tt>def-wc</tt> beeinflusst werden.
+Der Trenner zwischen SchlÃ¼ssel und Projektion kann Ã¼ber den Parameter <tt>separator</tt> geÃ¤ndert werden.
 =end
 class TxtFile_Keyvalue < TxtFile
 private
@@ -285,7 +285,7 @@ end
 == TxtFile_Wordclass
 Abgeleitet von TxtFile behandelt die Klasse Dateien mit dem Format <tt>WordClass</tt>.
 Eine Zeile <tt>"essen,essen #v essen #o esse #s\n"</tt> wird gewandelt in <tt>[ 'essen', ['esse#s', 'essen#v', 'essen#o'] ]</tt>.
-Der Trenner zwischen Schlüssel und Projektion kann über den Parameter <tt>separator</tt> geändert werden.
+Der Trenner zwischen SchlÃ¼ssel und Projektion kann Ã¼ber den Parameter <tt>separator</tt> geÃ¤ndert werden.
 =end
 class TxtFile_Wordclass < TxtFile
 private
@@ -312,7 +312,7 @@ end
 == TxtFile_Multivalue
 Abgeleitet von TxtFile behandelt die Klasse Dateien mit dem Format <tt>MultiValue</tt>.
 Eine Zeile <tt>"Triumph;Sieg;Erfolg\n"</tt> wird gewandelt in <tt>[ nil, ['triumph', 'sieg', 'erfolg'] ]</tt>.
-Der Trenner zwischen Schlüssel und Projektion kann über den Parameter <tt>separator</tt> geändert werden.
+Der Trenner zwischen SchlÃ¼ssel und Projektion kann Ã¼ber den Parameter <tt>separator</tt> geÃ¤ndert werden.
 =end
 class TxtFile_Multivalue < TxtFile
 private
@@ -333,9 +333,9 @@ end
 == TxtFile_Multikey
 Abgeleitet von TxtFile behandelt die Klasse Dateien mit dem Format <tt>MultiKey</tt>.
 Eine Zeile <tt>"Triumph;Sieg;Erfolg\n"</tt> wird gewandelt in <tt>[ 'triumph', ['sieg', 'erfolg'] ]</tt>.
-Die Sonderbehandlung erfolgt in der Klasse Txt2DbmConverter, wo daraus Schlüssel-Werte-Paare in der Form
+Die Sonderbehandlung erfolgt in der Klasse Txt2DbmConverter, wo daraus SchlÃ¼ssel-Werte-Paare in der Form
 <tt>[ 'sieg', ['triumph'] ]</tt> und <tt>[ 'erfolg', ['triumph'] ]</tt> erzeugt werden.
-Der Trenner zwischen Schlüssel und Projektion kann über den Parameter <tt>separator</tt> geändert werden.
+Der Trenner zwischen SchlÃ¼ssel und Projektion kann Ã¼ber den Parameter <tt>separator</tt> geÃ¤ndert werden.
 =end
 class TxtFile_Multikey < TxtFile
 private
@@ -356,11 +356,11 @@ end
 =begin rdoc
 == DbmFile
 Die Klasse DbmFile stellt eine einheitliche Schnittstelle auf Lingo-Datenbanken bereit.
-Die Identifizierung der Datenbank erfolgt über die ID der Datenbank, so wie sie in der 
+Die Identifizierung der Datenbank erfolgt Ã¼ber die ID der Datenbank, so wie sie in der 
 Sprachkonfigurationsdatei <tt>de.lang</tt> unter <tt>language/dictionary/databases</tt>
 hinterlegt ist.
 
-Das Lesen und Schreiben der Datenbank erfolgt über die Funktionen []() und []=().
+Das Lesen und Schreiben der Datenbank erfolgt Ã¼ber die Funktionen []() und []=().
 =end
 class DbmFile
 
@@ -375,7 +375,7 @@ class DbmFile
   end
 
 
-  #  Überprüft die Aktualität des DbmFile
+  #  ÃœberprÃ¼ft die AktualitÃ¤t des DbmFile
   def DbmFile.uptodate?( id )
     #  Datei ist nicht uptodate
     uptodate = false
@@ -383,7 +383,7 @@ class DbmFile
     #  Dbm-Dateinamen merken
     dbm_name = DbmFile.filename( id )
 
-    #  System-Schlüssel aus Dbm-Datei lesen
+    #  System-SchlÃ¼ssel aus Dbm-Datei lesen
     source_key = nil
     begin
       SDBM.open( dbm_name ) do |dbm|
@@ -404,7 +404,7 @@ class DbmFile
       end
     end
 
-    #  Gib Status zurück
+    #  Gib Status zurÃ¼ck
     uptodate
   end
 
@@ -418,10 +418,10 @@ private
     @id = id
     @dbm = nil
 
-    #  Aktualität prüfen
+    #  AktualitÃ¤t prÃ¼fen
     Txt2DbmConverter.new( id ).convert if read_mode && !DbmFile.uptodate?( id )
     
-    #  Verschlüsselung vorbereiten
+    #  VerschlÃ¼sselung vorbereiten
     @crypter = Lingo.config['language/dictionary/databases/' + id].has_key?( 'crypt' ) ? Crypter.new : nil
     
     #  Store-Ordner anlegen
@@ -437,7 +437,7 @@ public
     if @dbm.nil?
       @dbm = SDBM.open( DbmFile.filename( @id ) )
     else
-      Lingo.error( "DbmFile #{@dbm_name} bereits geöffnet" )
+      Lingo.error( "DbmFile #{@dbm_name} bereits geÃ¶ffnet" )
     end
   end
 
@@ -465,7 +465,7 @@ public
       @dbm.close
       @dbm = nil
     else
-      Lingo.error( "DbmFile #{@dbm_name} nicht geöffnet" )
+      Lingo.error( "DbmFile #{@dbm_name} nicht geÃ¶ffnet" )
     end
   end
 
@@ -475,7 +475,7 @@ public
 
     val = nil
     unless @dbm.nil? #|| @dbm.closed?
-      #  Entschlüsselung behandeln
+      #  EntschlÃ¼sselung behandeln
       if @crypter.nil?
         val = @dbm[key]
       else
@@ -483,11 +483,11 @@ public
         val = @crypter.decode( key, val ) unless val.nil?
       end
 
-      #  Äquvalenzklassen behandeln
+      #  Ã„quvalenzklassen behandeln
 #      val = @dbm[val] if val =~ INDEX_PATTERN
 #      val = val.split( FLD_SEP  ) unless val.nil?
       
-      #  Äquvalenzklassen behandeln
+      #  Ã„quvalenzklassen behandeln
       val = val.split( FLD_SEP ).collect do |v|
         (v =~ INDEX_PATTERN) ? @dbm[v] : v
       end.compact.join( FLD_SEP ).split( FLD_SEP ) unless val.nil?
@@ -501,7 +501,7 @@ public
 
   def []=(key, val)
      unless @dbm.nil? #|| @dbm.closed?
-      #  Werte im Cache berücksichtigen
+      #  Werte im Cache berÃ¼cksichtigen
       values = hit?( key ) ? val + retrieve( key ) : val
       #  Werte vorsortieren
       values = values.sort.uniq
@@ -509,7 +509,7 @@ public
       store( key, values )
       #  in String wandeln
       values = values.join( FLD_SEP )
-      #  Verschlüsselung behandeln
+      #  VerschlÃ¼sselung behandeln
       if @crypter.nil?
         @dbm[key] = (values.size<950) ? values : values[0...950]
       else
@@ -534,8 +534,8 @@ end
 
 =begin rdoc
 == Txt2DbConverter
-Die Klasse Txt2DbConverter steuert die Konvertierung von Wörterbuch-Quelldateien in 
-Lingo-Datenbanken. Die Identifizierung der Quelldatei erfolgt über die ID
+Die Klasse Txt2DbConverter steuert die Konvertierung von WÃ¶rterbuch-Quelldateien in 
+Lingo-Datenbanken. Die Identifizierung der Quelldatei erfolgt Ã¼ber die ID
 der Datei, so wie sie in der Sprachkonfigurationsdatei <tt>de.lang</tt> unter
 <tt>language/dictionary/databases</tt> hinterlegt ist.
 =end
@@ -547,7 +547,7 @@ private
     @config = Lingo::config['language/dictionary/databases/' + id]
     @index = 0
     
-    #  Objekt für Quelldatei erzeugen
+    #  Objekt fÃ¼r Quelldatei erzeugen
     @format = @config.fetch( 'txt-format', 'KeyValue' ).downcase
     case @format
       when 'singleword'  then @source = TxtFile_Singleword.new( id )
@@ -569,7 +569,7 @@ private
       print @config['name'], ': '
     end
 
-    #  Lexikalisierungen für Mehrwortgruppen vorbereiten
+    #  Lexikalisierungen fÃ¼r Mehrwortgruppen vorbereiten
     lexical_dictionary = @config['use-lex']
 
     begin
@@ -578,7 +578,7 @@ private
       @grammar = Grammar.new( {'source'=>lexical_dictionary.split(STRING_SEPERATOR_PATTERN)}, Lingo::config['language/dictionary'] )
     rescue RuntimeError
 
-      Lingo.error( "Auf das Wörterbuch (#{lexical_dictionary}) für die Lexikalisierung der Mehrwortgruppen in (#{@config['name']}) konnte nicht zugegriffen werden" )
+      Lingo.error( "Auf das WÃ¶rterbuch (#{lexical_dictionary}) fÃ¼r die Lexikalisierung der Mehrwortgruppen in (#{@config['name']}) konnte nicht zugegriffen werden" )
     end unless lexical_dictionary.nil?
 
     self
@@ -598,9 +598,9 @@ public
     @source.each do |key, value|
       @perc.set( @source.position ) if @verbose        #  Status ausgeben
 
-      #  Behandle Mehrwortschlüssel
+      #  Behandle MehrwortschlÃ¼ssel
       if @lexicalize && key =~ / /
-        #  Schlüssel in Grundform wandeln
+        #  SchlÃ¼ssel in Grundform wandeln
         gkey = key.split( ' ' ).collect do |form|
           
           # => Wortform ohne Satzendepunkt benutzen
@@ -618,7 +618,7 @@ public
         end.join( ' ' )
         
         skey = gkey.split
-        #  Zusatzschlüssel einfügen, wenn Anzahl Wörter > 3
+        #  ZusatzschlÃ¼ssel einfÃ¼gen, wenn Anzahl WÃ¶rter > 3
         @destination[skey[0...3].join( ' ' )] = [KEY_REF + skey.size.to_s] if skey.size > 3
         
         value = value.collect { |v| (v=~/^\043/) ? key+v : v }
@@ -628,12 +628,12 @@ public
       #  Format Sonderbehandlungen
       key.gsub!( /\.$/, '' ) unless key.nil?
       case @format
-      when 'multivalue'    #  Äquvalenzklassen behandeln
+      when 'multivalue'    #  Ã„quvalenzklassen behandeln
         key = IDX_REF + @index.to_s
         @index += 1
         @destination[key] = value
         value.each { |v| @destination[v] = [key] }
-      when 'multikey'      #  Äquvalenzklassen behandeln
+      when 'multikey'      #  Ã„quvalenzklassen behandeln
         value.each { |v| @destination[v] = [key] }
       else
         @destination[key] = value

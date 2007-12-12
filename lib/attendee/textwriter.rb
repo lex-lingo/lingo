@@ -17,38 +17,38 @@
 #  51 Franklin St, Fifth Floor, Boston, MA 02110, USA
 #
 #  For more information visit http://www.lex-lingo.de or contact me at
-#  welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
+#  welcomeATlex-lingoDOTde near 50Â°55'N+6Â°55'E.
 #
 #  Lex Lingo rules from here on
 
 
 =begin rdoc
 == Textwriter
-Der Textwriter ermöglicht die Umleitung des Datenstroms in eine Textdatei. Dabei werden
+Der Textwriter ermÃ¶glicht die Umleitung des Datenstroms in eine Textdatei. Dabei werden
 Objekte, die nicht vom Typ String sind in eine sinnvolle Textrepresentation gewandelt.
 Der Name der Ausgabedatei wird durch den Namen der Eingabedatei (des Textreaders) bestimmt.
-Es kann lediglich die Extension verändert werden. Der Textwriter kann auch das LIR-Format 
+Es kann lediglich die Extension verÃ¤ndert werden. Der Textwriter kann auch das LIR-Format 
 erzeugen.
 
-=== Mögliche Verlinkung
+=== MÃ¶gliche Verlinkung
 Erwartet:: Daten verschiedenen Typs
 
 === Parameter
 Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der Voreinstellung). 
-Alle anderen Parameter müssen zwingend angegeben werden.
+Alle anderen Parameter mÃ¼ssen zwingend angegeben werden.
 <b>in</b>:: siehe allgemeine Beschreibung des Attendee
 <b>out</b>:: siehe allgemeine Beschreibung des Attendee
-<b><i>ext</i></b>:: (Standard: txt2) Gibt die Dateinamen-Erweiertung für die Ausgabedatei an.
+<b><i>ext</i></b>:: (Standard: txt2) Gibt die Dateinamen-Erweiertung fÃ¼r die Ausgabedatei an.
                     Wird z.B. dem Textreader die Datei <tt>Dokument.txt</tt> angegeben und 
-                    über die Lingo-Konfiguration alle Indexwörter herausgefiltert, kann mit 
-                    <tt>ext: 'idx'</tt> der Textwriter veranlasst werden, die Indexwörter in 
+                    Ã¼ber die Lingo-Konfiguration alle IndexwÃ¶rter herausgefiltert, kann mit 
+                    <tt>ext: 'idx'</tt> der Textwriter veranlasst werden, die IndexwÃ¶rter in 
                     die Datei <tt>Dokument.idx</tt> zu schreiben.
 <b><i>sep</i></b>:: (Standard: ' ') Gibt an, mit welchem Trennzeichen zwei aufeinanderfolgende 
-                    Objekte in der Ausgabedatei getrennt werden sollen. Gängige Werte sind auch 
-                    noch '\n', welches die Ausgabe jedes Objektes in eine Zeile ermöglicht.
+                    Objekte in der Ausgabedatei getrennt werden sollen. GÃ¤ngige Werte sind auch 
+                    noch '\n', welches die Ausgabe jedes Objektes in eine Zeile ermÃ¶glicht.
 <b><i>lir-format</i></b>:: (Standard: false) Dieser Parameter hat keinen Wert. Wird er angegeben, 
-                           dann wird er als true ausgewertet. Damit ist es möglich, die Ausgabedatei 
-                           im für LIR lesbarem Format zu erstellen.
+                           dann wird er als true ausgewertet. Damit ist es mÃ¶glich, die Ausgabedatei 
+                           im fÃ¼r LIR lesbarem Format zu erstellen.
 
 === Beispiele
 Bei der Verarbeitung der oben angegebenen Funktionsbeschreibung des Textwriters mit der Ablaufkonfiguration <tt>t1.cfg</tt>

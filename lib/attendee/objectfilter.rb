@@ -17,32 +17,32 @@
 #  51 Franklin St, Fifth Floor, Boston, MA 02110, USA
 #
 #  For more information visit http://www.lex-lingo.de or contact me at
-#  welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
+#  welcomeATlex-lingoDOTde near 50Â°55'N+6Â°55'E.
 #
 #  Lex Lingo rules from here on
 
 
 =begin rdoc
 == Objectfilter
-Der Objectfilter ermöglicht es, beliebige Objekte aus dem Datenstrom herauszufiltern.
-Um die gewünschten Objekte zu identifizieren, sind ein paar Ruby-Kenntnisse und das Wissen
-um die Lingo Klassen notwendig. Hier sollen kurz die häufigsten Fälle angesprochen werden:
+Der Objectfilter ermÃ¶glicht es, beliebige Objekte aus dem Datenstrom herauszufiltern.
+Um die gewÃ¼nschten Objekte zu identifizieren, sind ein paar Ruby-Kenntnisse und das Wissen
+um die Lingo Klassen notwendig. Hier sollen kurz die hÃ¤ufigsten FÃ¤lle angesprochen werden:
 
 Filtern nach einem bestimmten Typ, z.B. Token oder Word wird beispielsweise durch den Ausdruck
-'obj.kind_of?(Word)' ermöglicht. Token und Words haben jeweils ein Attribut +attr+. 
-Bei Token gibt +attr+ an, mit welcher Tokenizer-Regel das Token erkannt wurde. So können z.B. 
+'obj.kind_of?(Word)' ermÃ¶glicht. Token und Words haben jeweils ein Attribut +attr+. 
+Bei Token gibt +attr+ an, mit welcher Tokenizer-Regel das Token erkannt wurde. So kÃ¶nnen z.B. 
 alle numerischen Token mit dem Ausdruck 'obj.kind_of?(Token) && obj.attr=="NUMS"' identifiziert 
-werden. Wie bereits gezeigt, können Bedingungen durch logisches UND (&&) oder ODER (||) verknüpft werden.
+werden. Wie bereits gezeigt, kÃ¶nnen Bedingungen durch logisches UND (&&) oder ODER (||) verknÃ¼pft werden.
 Das Attribut +form+ kann genutzt werden, um auf den Text eines Objektes zuzugreifen, z.B. 
 'obj.form=="John"'.
 
-=== Mögliche Verlinkung
+=== MÃ¶gliche Verlinkung
 Erwartet:: Daten beliebigen Typs von allen Attendees
-Erzeugt:: Daten, die der als Parameter übergebenen Bedingung entsprechen
+Erzeugt:: Daten, die der als Parameter Ã¼bergebenen Bedingung entsprechen
 
 === Parameter
 Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der Voreinstellung). 
-Alle anderen Parameter müssen zwingend angegeben werden.
+Alle anderen Parameter mÃ¼ssen zwingend angegeben werden.
 <b>in</b>:: siehe allgemeine Beschreibung des Attendee
 <b>out</b>:: siehe allgemeine Beschreibung des Attendee
 <b><i>objects</i></b>:: (Standard: true) Gibt einen Ruby-Ausdruck an, der, wenn der Ausdruck 
@@ -57,7 +57,7 @@ Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration <tt>t1
       - wordsearcher: { in: token, out: words, source: 'sys-dic' }
       - objectfilter: { in: words, out: filtr, objects: 'obj.kind_of?(Word) && obj.lexicals.size>0 && obj.lexicals[0].attr==LA_SUBSTANTIV' }
       - debugger:     { in: filtr, prompt: 'out>' }
-ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
+ergibt die Ausgabe Ã¼ber den Debugger: <tt>lingo -c t1 test.txt</tt>
   out> *FILE('test.txt')
   out> <Indexierung = [(indexierung/s)]>
   out> <Indexierung = [(indexierung/s)]>

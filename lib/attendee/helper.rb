@@ -17,7 +17,7 @@
 #  51 Franklin St, Fifth Floor, Boston, MA 02110, USA
 #
 #  For more information visit http://www.lex-lingo.de or contact me at
-#  welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
+#  welcomeATlex-lingoDOTde near 50Â°55'N+6Â°55'E.
 #
 #  Lex Lingo rules from here on
 
@@ -25,7 +25,7 @@
 =begin rdoc
 == Helper
 Der Helper hilft bei automatischen Testreihen vor Releasefreigabe von Lingo. 
-Für den praktischen Einsatz ist er nicht vorgesehen.
+FÃ¼r den praktischen Einsatz ist er nicht vorgesehen.
 =end
 
 

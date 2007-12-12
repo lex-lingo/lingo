@@ -13,7 +13,7 @@ aalfang,aalfang #s
 aalfischer,aalfischer #s
 aalkorb,aalkorb #s
 aalraupe,aalraupe #s
-aalr‰ucherei,aalr‰ucherei #s
+aalr√§ucherei,aalr√§ucherei #s
 aar,aar #s
 aarau,aarau #s
 aare,aare #e

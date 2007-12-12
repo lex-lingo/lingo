@@ -17,7 +17,7 @@
 #  51 Franklin St, Fifth Floor, Boston, MA 02110, USA
 #
 #  For more information visit http://www.lex-lingo.de or contact me at
-#  welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
+#  welcomeATlex-lingoDOTde near 50Â°55'N+6Â°55'E.
 #
 #  Lex Lingo rules from here on
 
@@ -25,49 +25,49 @@
 =begin rdoc
 == Tokenizer
 Der Tokenizer zerlegt eine Textzeile in einzelne Token. Dies ist notwendig,
-damit nachfolgende Attendees die Textdatei häppchenweise verarbeiten können.
+damit nachfolgende Attendees die Textdatei hÃ¤ppchenweise verarbeiten kÃ¶nnen.
 
-=== Mögliche Verlinkung
+=== MÃ¶gliche Verlinkung
 Erwartet:: Daten des Typs *String* (Textzeilen) z.B. von Textreader
-Erzeugt:: Daten des Typs *Token* z.B. für Abbreviator, Wordsearcher
+Erzeugt:: Daten des Typs *Token* z.B. fÃ¼r Abbreviator, Wordsearcher
 
 === Parameter
 Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der Voreinstellung). 
-Alle anderen Parameter müssen zwingend angegeben werden.
+Alle anderen Parameter mÃ¼ssen zwingend angegeben werden.
 <b>in</b>:: siehe allgemeine Beschreibung des Attendee.
 <b>out</b>:: siehe allgemeine Beschreibung des Attendee
 
 === Konfiguration
-Der Tokenizer benötigt zur Identifikation einzelner Token Regeln, nach denen er 
-arbeiten soll. Die benötigten Regeln werden aufgrund des Umfangs nicht als Parameter,
-sondern in der Sprachkonfiguration hinterlegt, die sich standardmäßig in der Datei
+Der Tokenizer benÃ¶tigt zur Identifikation einzelner Token Regeln, nach denen er 
+arbeiten soll. Die benÃ¶tigten Regeln werden aufgrund des Umfangs nicht als Parameter,
+sondern in der Sprachkonfiguration hinterlegt, die sich standardmÃ¤ÃŸig in der Datei
 <tt>de.lang</tt> befindet (YAML-Format).
   language:
     attendees:
       tokenizer:
         regulars:
-          - _CHR_: '\wÄÖÜÁÂÀÉÊÈÍÎÌÓÔÒÚÛÙİäöüáâàéêèíîìóôòúûùı'
+          - _CHR_: '\wÃ„Ã–ÃœÃÃ‚Ã€Ã‰ÃŠÃˆÃÃÃŒÃ“Ã”Ã’ÃšÃ›Ã™ÃÃ¤Ã¶Ã¼Ã¡Ã¢Ã Ã©ÃªÃ¨Ã­Ã®Ã¬Ã³Ã´Ã²ÃºÃ»Ã¹Ã½'
           - NUMS:  '[+-]?(\d{4,}|\d{1,3}(\.\d{3,3})*)(\.|(,\d+)?%?)'
           - URLS:  '((mailto:|(news|http|https|ftp|ftps)://)\S+|^(www(\.\S+)+)|\S+([\._]\S+)+@\S+(\.\S+)+)'
           - ABRV:  '(([_CHR_]+\.)+)[_CHR_]+'
           - ABRS:  '(([_CHR_]{1,1}\.)+)(?!\.\.)'
           - WORD:  '[_CHR_\d]+'
           - PUNC:  '[!,\.:;?]'
-          - OTHR:  '[—„!\"#$%&()*\+,\-\./:;<=>?@\[\\\]^_`{|}~´]'
+          - OTHR:  '[Â—Â„!\"#$%&()*\+,\-\./:;<=>?@\[\\\]^_`{|}~Â´]'
           - HELP:  '.*'
 Die Regeln werden in der angegebenen Reihenfolge abgearbeitet, solange bis ein Token 
 erkannt wurde. Sollte keine Regel zutreffen, so greift die letzt Regel +HELP+ in jedem 
 Fall.
 Regeln, deren Name in Unterstriche eingefasst sind, werden als Makro interpretiert. 
 Makros werden genutzt, um lange oder sich wiederholende Bestandteile von Regeln
-einmalig zu definieren und in den Regeln über den Makronamen eine Auflösung zu forcieren.
-Makros werden selber nicht für die Erkennung von Token eingesetzt.
+einmalig zu definieren und in den Regeln Ã¼ber den Makronamen eine AuflÃ¶sung zu forcieren.
+Makros werden selber nicht fÃ¼r die Erkennung von Token eingesetzt.
 
 === Generierte Kommandos
 Damit der nachfolgende Datenstrom einwandfrei verarbeitet werden kann, generiert der Tokenizer
-Kommandos, die mit in den Datenstrom eingefügt werden. 
+Kommandos, die mit in den Datenstrom eingefÃ¼gt werden. 
 <b>*EOL(<dateiname>)</b>:: Kennzeichnet das Ende einer Textzeile, da die Information ansonsten 
-für nachfolgende Attendees verloren wäre.
+fÃ¼r nachfolgende Attendees verloren wÃ¤re.
 
 === Beispiele
 Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration <tt>t1.cfg</tt>
@@ -76,7 +76,7 @@ Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration <tt>t1
       - textreader: { out: lines, files: '$(files)' }
       - tokenizer:  { in: lines, out: token }
       - debugger:   { in: token, prompt: 'out>' }
-ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt> 
+ergibt die Ausgabe Ã¼ber den Debugger: <tt>lingo -c t1 test.txt</tt> 
   out> *FILE('test.txt')
   out> :Dies/WORD:
   out> :ist/WORD:
@@ -99,11 +99,11 @@ class Tokenizer < Attendee
 protected
 
   def init
-    #  Regular Expressions für Token-Erkennung einlesen
+    #  Regular Expressions fÃ¼r Token-Erkennung einlesen
     regulars = get_key('regulars', '')
     forward(STR_CMD_ERR, 'regulars nicht definiert') if regulars.nil?
 
-    #  Mit _xxx_ gekennzeichnete Makros anwenden und Expressions ergänzen und umwandeln
+    #  Mit _xxx_ gekennzeichnete Makros anwenden und Expressions ergÃ¤nzen und umwandeln
     macros = Hash.new
     @rules = regulars.collect { |rule|
       name = rule.keys[0]
@@ -119,7 +119,7 @@ protected
     
     #  Der Tokenizer gibt jedes Zeilenende als Information weiter, sofern es sich 
     #  nicht um die Verarbeitung einer LIR-Datei handelt. Im Falle einer normalen Datei
-    #  wird der Dateiname gespeichert und als Kennzeichen für die Erzeugung von 
+    #  wird der Dateiname gespeichert und als Kennzeichen fÃ¼r die Erzeugung von 
     #  Zeilenende-Nachrichten herangezogen.
     @filename = nil
   end

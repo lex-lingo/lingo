@@ -17,15 +17,15 @@
 #  51 Franklin St, Fifth Floor, Boston, MA 02110, USA
 #
 #  For more information visit http://www.lex-lingo.de or contact me at
-#  welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
+#  welcomeATlex-lingoDOTde near 50Â°55'N+6Â°55'E.
 #
 #  Lex Lingo rules from here on
 
 
 
 #
-#    Die Klasse StringA ist die Basisklasse für weitere Klassen, die im Rahmen der 
-#    Objektstruktur eines Wortes benötigt werden. Die Klasse stellt eine Zeichenkette bereit,
+#    Die Klasse StringA ist die Basisklasse fÃ¼r weitere Klassen, die im Rahmen der 
+#    Objektstruktur eines Wortes benÃ¶tigt werden. Die Klasse stellt eine Zeichenkette bereit,
 #    die mit einem Attribut versehen werden kann.
 #
 class StringA
@@ -61,7 +61,7 @@ end
 
 #
 #    Die Klasse Token, abgeleitet von der Klasse StringA, stellt den Container
-#    für ein einzelnes Wort eines Textes dar. Das Wort wird mit einem Attribut versehen,
+#    fÃ¼r ein einzelnes Wort eines Textes dar. Das Wort wird mit einem Attribut versehen,
 #    welches der Regel entspricht, die dieses Wort identifiziert hat.
 #
 #    Steht z.B. in ruby.cfg eine Regel zur Erkennung einer Zahl, die mit NUM bezeichnet wird,
@@ -73,10 +73,10 @@ end
 
 #
 #    Die Klasse Lexical, abgeleitet von der Klasse StringA, stellt den Container
-#    für eine Grundform eines Wortes bereit, welches mit der Wortklasse versehen ist.
+#    fÃ¼r eine Grundform eines Wortes bereit, welches mit der Wortklasse versehen ist.
 #
-#    Wird z.B. aus dem Wörterbuch eine Grundform gelesen, so wird dies in Form eines
-#    Lexical-Objektes zurückgegeben, z.B. Lexical.new('Rennen', 'S') -> (rennen/s)
+#    Wird z.B. aus dem WÃ¶rterbuch eine Grundform gelesen, so wird dies in Form eines
+#    Lexical-Objektes zurÃ¼ckgegeben, z.B. Lexical.new('Rennen', 'S') -> (rennen/s)
 #
 class Lexical < StringA
   
@@ -118,22 +118,22 @@ end
 
 
 #
-#    Die Klasse Word bündelt spezifische Eigenschaften eines Wortes mit den 
+#    Die Klasse Word bÃ¼ndelt spezifische Eigenschaften eines Wortes mit den 
 #    dazu notwendigen Methoden.
 #
 class Word < StringA
 
-  #    Exakte Representation der originären Zeichenkette, so wie sie im Satz 
+  #    Exakte Representation der originÃ¤ren Zeichenkette, so wie sie im Satz 
   #    gefunden wurde, z.B. <tt>form = "RubyLing"</tt>
   
-  #    Ergebnis der Wörterbuch-Suche. Sie stellt die Grundform des Wortes dar.
-  #    Dabei kann es mehrere mögliche Grundformen geben, z.B. kann +abgeschoben+ 
+  #    Ergebnis der WÃ¶rterbuch-Suche. Sie stellt die Grundform des Wortes dar.
+  #    Dabei kann es mehrere mÃ¶gliche Grundformen geben, z.B. kann +abgeschoben+ 
   #    als Grundform das _Adjektiv_ +abgeschoben+ sein, oder aber das _Verb_ 
   #    +abschieben+. 
   #
   #    <tt>lemma = [['abgeschoben', '#a'], ['abschieben', '#v']]</tt>.
   #
-  #    <b>Achtung: Lemma wird nicht durch die Word-Klasse bestückt, sondern extern
+  #    <b>Achtung: Lemma wird nicht durch die Word-Klasse bestÃ¼ckt, sondern extern
   #    durch die Klasse Dictionary</b>
 
   def initialize(form, attr=WA_UNSET)
@@ -154,7 +154,7 @@ class Word < StringA
     end
   end
 
-  #    für Compositum
+  #    fÃ¼r Compositum
   def parts
     1
   end
@@ -164,7 +164,7 @@ class Word < StringA
   end
 
 
-  #    Gibt genau die Grundform der Wortklasse zurück, die der RegExp des Übergabe-Parameters 
+  #    Gibt genau die Grundform der Wortklasse zurÃ¼ck, die der RegExp des Ãœbergabe-Parameters 
   #    entspricht, z.B. <tt>word.get_wc(/a/) = ['abgeschoben', '#a']</tt>
   def get_class(wc_re)
     if @lexicals.size>0

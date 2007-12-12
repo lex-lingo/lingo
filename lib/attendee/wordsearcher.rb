@@ -17,25 +17,25 @@
 #  51 Franklin St, Fifth Floor, Boston, MA 02110, USA
 #
 #  For more information visit http://www.lex-lingo.de or contact me at
-#  welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
+#  welcomeATlex-lingoDOTde near 50Â°55'N+6Â°55'E.
 #
 #  Lex Lingo rules from here on
 
 
 =begin rdoc
 == Wordsearcher
-Der Wordsearcher ist das Herzstück von Lingo. Er macht die Hauptarbeit und versucht 
+Der Wordsearcher ist das HerzstÃ¼ck von Lingo. Er macht die Hauptarbeit und versucht 
 alle Token die nach einem sinnvollen Wort aussehen, in den ihm angegebenen 
-Wörterbüchern zu finden und aufzulösen. Dabei werden die im Wörterbuch gefundenen
-Grundformen inkl. Wortklassen an das Word-Objekt angehängt.
+WÃ¶rterbÃ¼chern zu finden und aufzulÃ¶sen. Dabei werden die im WÃ¶rterbuch gefundenen
+Grundformen inkl. Wortklassen an das Word-Objekt angehÃ¤ngt.
 
-=== Mögliche Verlinkung
+=== MÃ¶gliche Verlinkung
 Erwartet:: Daten vom Typ *Token* (andere werden einfach durchgereicht) z.B. von Tokenizer, Abbreviator
-Erzeugt:: Daten vom Typ *Word* für erkannte Wörter z.B. für Synonymer, Decomposer, Ocr_variator, Multiworder, Sequencer, Noneword_filter, Vector_filter
+Erzeugt:: Daten vom Typ *Word* fÃ¼r erkannte WÃ¶rter z.B. fÃ¼r Synonymer, Decomposer, Ocr_variator, Multiworder, Sequencer, Noneword_filter, Vector_filter
 
 === Parameter
 Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der Voreinstellung). 
-Alle anderen Parameter müssen zwingend angegeben werden.
+Alle anderen Parameter mÃ¼ssen zwingend angegeben werden.
 <b>in</b>:: siehe allgemeine Beschreibung des Attendee
 <b>out</b>:: siehe allgemeine Beschreibung des Attendee
 <b>source</b>:: siehe allgemeine Beschreibung des Dictionary
@@ -50,13 +50,13 @@ Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration <tt>t1
       - abbreviator:  { in: token, out: abbrev, source: 'sys-abk' }
       - wordsearcher: { in: abbrev, out: words, source: 'sys-dic' }
       - debugger:     { in: words, prompt: 'out>' }
-ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
+ergibt die Ausgabe Ã¼ber den Debugger: <tt>lingo -c t1 test.txt</tt>
   out> *FILE('test.txt')
   out> <Dies = [(dies/w)]>
   out> <ist = [(sein/v)]>
   out> <ggf. = [(gegebenenfalls/w)]>
   out> <eine = [(einen/v), (ein/w)]> 
-  out> <Abk³rzung = [(abk³rzung/s)]>
+  out> <AbkÂ³rzung = [(abkÂ³rzung/s)]>
   out> :./PUNC:
   out> *EOL('test.txt')
   out> *EOF('test.txt')
@@ -65,7 +65,7 @@ ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
 class Wordsearcher < Attendee
 
   def init
-    #  Wörterbuch bereitstellen
+    #  WÃ¶rterbuch bereitstellen
     src = get_array('source')
     mod = get_key('mode', 'all')
     @dic = Dictionary.new({'source'=>src, 'mode'=>mod}, @@library_config)
@@ -81,9 +81,9 @@ class Wordsearcher < Attendee
 
   def process(obj)
     if obj.is_a?(Token) && obj.attr == TA_WORD
-      inc('Anzahl gesuchter Wörter')
+      inc('Anzahl gesuchter WÃ¶rter')
       word = @dic.find_word(obj.form)
-      inc('Anzahl gefundener Wörter') unless word.attr == WA_UNKNOWN
+      inc('Anzahl gefundener WÃ¶rter') unless word.attr == WA_UNKNOWN
       obj = word
     end
     forward(obj)

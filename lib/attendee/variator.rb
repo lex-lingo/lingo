@@ -17,35 +17,35 @@
 #  51 Franklin St, Fifth Floor, Boston, MA 02110, USA
 #
 #  For more information visit http://www.lex-lingo.de or contact me at
-#  welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
+#  welcomeATlex-lingoDOTde near 50Â°55'N+6Â°55'E.
 #
 #  Lex Lingo rules from here on
 
 
 =begin rdoc
 == Variator
-Der Variator ermöglicht bei nicht erkannten Wörtern den listenbasierten 
-Austausch einzelner Wortteile einchließlich erneuter Wörterbuchsuche zur 
+Der Variator ermÃ¶glicht bei nicht erkannten WÃ¶rtern den listenbasierten 
+Austausch einzelner Wortteile einchlieÃŸlich erneuter WÃ¶rterbuchsuche zur 
 Verbesserung der Worterkennungsquote.
 
-Ursprünglich wurde der Variator entwickelt, um die mangelnde Qualität bei der
+UrsprÃ¼nglich wurde der Variator entwickelt, um die mangelnde QualitÃ¤t bei der
 OCR-Erkennung altdeutscher 's'-Konsonanten zu optimieren. Er kann ebenso bei
-alternativen Umlautschreibweisen z.B. zur Wandlung von 'Koeln' in 'Köln' dienen.
+alternativen Umlautschreibweisen z.B. zur Wandlung von 'Koeln' in 'KÃ¶ln' dienen.
 
-=== Mögliche Verlinkung
+=== MÃ¶gliche Verlinkung
 Erwartet:: Daten vom Typ *Word* (andere werden einfach durchgereicht) z.B. von Wordsearcher
 Erzeugt:: Daten vom Typ *Word* zur Weiterleitung z.B. an Synonymer, Decomposer, Multiworder, Sequencer, Noneword_filter oder Vector_filter
 
 === Parameter
 Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der Voreinstellung). 
-Alle anderen Parameter müssen zwingend angegeben werden.
+Alle anderen Parameter mÃ¼ssen zwingend angegeben werden.
 <b>in</b>:: siehe allgemeine Beschreibung des Attendee
 <b>out</b>:: siehe allgemeine Beschreibung des Attendee
 <b>source</b>:: siehe allgemeine Beschreibung des Dictionary
 <b><i>mode</i></b>:: (Standard: all) siehe allgemeine Beschreibung des Dictionary
 <b><i>^check</i></b>:: (Standard: WA_UNKNOWN) Gebrenzt die zu variierenden Worttypen
-<b><i>marker</i></b>:: (Standard: '*') Kennzeichnung durch Variation erkannter Wörter
-<b><i>max-var</i></b>:: (Standard: '10000') Begrenzung der maximal zu prüfenden Permutationen bei der vollständigen Kombination aller auf ein Wort anzuwendenen aufgelisteten Wortteile.
+<b><i>marker</i></b>:: (Standard: '*') Kennzeichnung durch Variation erkannter WÃ¶rter
+<b><i>max-var</i></b>:: (Standard: '10000') Begrenzung der maximal zu prÃ¼fenden Permutationen bei der vollstÃ¤ndigen Kombination aller auf ein Wort anzuwendenen aufgelisteten Wortteile.
 
 === Beispiele
 Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration <tt>t1.cfg</tt>
@@ -56,7 +56,7 @@ Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration <tt>t1
       - wordsearcher: { in: abbrev, out: words, source: 'sys-dic' }
       - variator:     { in: words, out: varios, source: 'sys-dic' }
       - debugger:     { in: varios, prompt: 'out>' }
-ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
+ergibt die Ausgabe Ã¼ber den Debugger: <tt>lingo -c t1 test.txt</tt>
   out> *FILE('test.txt')
   out> <*Dies = [(dies/w)]>
   out> <*ist = [(ist/t)]>
@@ -89,7 +89,7 @@ protected
     @check = Hash.new(false)
     filter.each { |s| @check[s.upcase] = true }
   
-    #  Wörterbuchzugriff
+    #  WÃ¶rterbuchzugriff
     @dic = Dictionary.new({'source'=>src, 'mode'=>mod}, @@library_config)
     @gra = Grammar.new({'source'=>src, 'mode'=>mod}, @@library_config)
     
@@ -112,10 +112,10 @@ protected
 
 
   def process(obj)
-    #  Zu prüfende Wörter filtern
+    #  Zu prÃ¼fende WÃ¶rter filtern
     if obj.is_a?(Word) && @check[obj.attr]
-      #  Statistik für Report
-      inc('Anzahl gesuchter Wörter')
+      #  Statistik fÃ¼r Report
+      inc('Anzahl gesuchter WÃ¶rter')
 
       #  Erzeuge Variationen einer Wortform
       variations = [obj.form]
@@ -124,15 +124,15 @@ protected
         variations = variate(variations, from, to)
       end
 
-      #  Prüfe Variation auf bekanntes Wort
+      #  PrÃ¼fe Variation auf bekanntes Wort
       variations[0...@max_var].each do |var|
-        #  Variiertes Wort im Wörterbuch suchen
+        #  Variiertes Wort im WÃ¶rterbuch suchen
         word = @dic.find_word(var)
         word = @gra.find_compositum(var) if word.attr == WA_UNKNOWN
         next if word.attr == WA_UNKNOWN
 
         #  Das erste erkannte Wort beendet die Suche
-        inc('Anzahl gefundener Wörter')
+        inc('Anzahl gefundener WÃ¶rter')
         word.form = @marker + var
         forward(word)
         return
@@ -145,7 +145,7 @@ protected
 
 private
 
-  #  Variiere die Bestandteile eines Arrays gemäß den Austauschvorgaben.
+  #  Variiere die Bestandteile eines Arrays gemÃ¤ÃŸ den Austauschvorgaben.
   #
   #  variate( 'Tiieh', 'ieh', 'sch' ) => ['Tiieh', 'Tisch']
   def variate(variation_list, from, to)
@@ -153,10 +153,10 @@ private
     add_variations = []
     from_re = Regexp.new(from)
     
-    #  alle Wörter in der variation_list permutieren
+    #  alle WÃ¶rter in der variation_list permutieren
     variation_list.each do |wordform|
 
-      #  Wortform in Teile zerlegen und anschließend Dimension feststellen
+      #  Wortform in Teile zerlegen und anschlieÃŸend Dimension feststellen
       wordpart = " #{wordform} ".split( from_re )
       n = wordpart.size - 1
 

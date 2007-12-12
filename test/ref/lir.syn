@@ -3,8 +3,8 @@
 00006*analytik
 00024*automation deutschaufsatz schulaufsatz
 00028*aufgabenstellung aufgabentyp
-00029*alteration modifikation <‰nderung> ver‰nderung
-00034*auswechslung tausch <austausch> ‰uﬂere erscheinung
+00029*alteration modifikation <√§nderung> ver√§nderung
+00034*auswechslung tausch <austausch> √§u√üere erscheinung
 00038*erwerbsarbeit
 00047*verfasser
 00048*prestige verfasser
@@ -14,18 +14,18 @@
 00055*prestige spezies
 00058*analytik
 00059*arbeitsprodukt
-00064*formalerschlieﬂung formalkatalogisierung katalogisat <titelaufnahme> titelaufnahme
+00064*formalerschlie√üung formalkatalogisierung katalogisat <titelaufnahme> titelaufnahme
 00067*archivwesen repertorium <archiv>
 00078*archivwesen erwerbsarbeit repertorium <archiv>
 00079*analytik
 00081*analytik
 00093*aufgabenstellung aufgabentyp erwerbsarbeit
 00105*folge fortwirken nachwirkung <auswirkung>
-00128*dependenz unselbstst‰ndigkeit unselbst‰ndigkeit
+00128*dependenz unselbstst√§ndigkeit unselbst√§ndigkeit
 00133*ausbreitungsmodell ausbreitungsrechnung
 00134*analytik
 00135*erwerbsarbeit
-00137*adaptation adaption akkommodation alteration modifikation <‰nderung> ver‰nderung
+00137*adaptation adaption akkommodation alteration modifikation <√§nderung> ver√§nderung
 00142*analytik erwerbsarbeit
 00148*mathematische analysis
 00150*archivwesen repertorium <archiv>
@@ -33,23 +33,23 @@
 00154*arbeitsumgebung
 00165*analytik
 00166*beginn
-00171*‰uﬂere erscheinung
+00171*√§u√üere erscheinung
 00174*aufgabenstellung aufgabentyp
 00176*arbeitsplatzcomputer
 00177*erwerbsarbeit
-00179*auskunft <auskunftsdienst> auskunfts- und informationst‰tigkeit auskunftst‰tigkeit
+00179*auskunft <auskunftsdienst> auskunfts- und informationst√§tigkeit auskunftst√§tigkeit
 00180*mathematische analysis
-00182*aktivum alter mensch betagter t‰tigkeitsform
+00182*aktivum alter mensch betagter t√§tigkeitsform
 00197*argumentation aufgabenstellung aufgabentyp erwerbsarbeit
 00206*individuelle arbeitsweise
 00207*aktualisierung
-00208*adaptation adaption akkommodation aufforderung zu straftaten entsprechung spezies ˆffentliche aufforderung zu straftaten
+00208*adaptation adaption akkommodation aufforderung zu straftaten entsprechung spezies √∂ffentliche aufforderung zu straftaten
 00209*prestige
-00213*anwendungsbereich dependenz erwerbsarbeit unselbstst‰ndigkeit unselbst‰ndigkeit
+00213*anwendungsbereich dependenz erwerbsarbeit unselbstst√§ndigkeit unselbst√§ndigkeit
 00216*analytik
-00220*auskunft <auskunftsdienst> auskunfts- und informationst‰tigkeit auskunftst‰tigkeit
+00220*auskunft <auskunftsdienst> auskunfts- und informationst√§tigkeit auskunftst√§tigkeit
 00227*erwerbsarbeit
-00229*dauerbeobachtungsf‰higkeit dauer¸berwachungsf‰higkeit konzentration <psychologie> vigilanz wachsamkeit
+00229*dauerbeobachtungsf√§higkeit dauer√ºberwachungsf√§higkeit konzentration <psychologie> vigilanz wachsamkeit
 00233*analytik deutschaufsatz schulaufsatz
 00239*archivierungssystem aussicht elektronisches archivierungssystem
 00240*deutschaufsatz schulaufsatz
@@ -60,7 +60,7 @@
 00254*aktualisierung
 00257*steinartefakt
 00258*arbeitsprodukt
-00260*aktueller bezug bezugsquelle erwerbsarbeit gegenwartsbezug zeitn‰he
+00260*aktueller bezug bezugsquelle erwerbsarbeit gegenwartsbezug zeitn√§he
 00261*individuelle arbeitsweise
 00271*mathematische analysis
 00272*verwaltung
@@ -84,11 +84,11 @@
 00308*anwendungsgebiet verfasser
 00309*analytik
 00310*aufgabenstellung aufgabentyp aussicht erwerbsarbeit verfasser verlauf
-00312*aufgabenstellung aufgabentyp gehˆrlosensprache taubstummensprache
+00312*aufgabenstellung aufgabentyp geh√∂rlosensprache taubstummensprache
 00320*analytik
 00321*spezies
 00323*analytik
 00324*erwerbsarbeit innere anschauung
-00326*ausbildungsst‰tte
+00326*ausbildungsst√§tte
 00329*argumentation
-00330*archivwesen aufforderung zu straftaten genealogie g‰nsef¸ﬂchen musikalischer ausdruck query repertorium <archiv> spezies ‰ltestenamt ‰uﬂere erscheinung ˆffentliche aufforderung zu straftaten
+00330*archivwesen aufforderung zu straftaten genealogie g√§nsef√º√üchen musikalischer ausdruck query repertorium <archiv> spezies √§ltestenamt √§u√üere erscheinung √∂ffentliche aufforderung zu straftaten

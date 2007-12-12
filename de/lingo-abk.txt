@@ -1,24 +1,24 @@
 #
-#    Abkürzungswörterbuch lingo-abk.txt
-#    enthält Abkürzungen und ihre Auflösungen
+#    AbkÃ¼rzungswÃ¶rterbuch lingo-abk.txt
+#    enthÃ¤lt AbkÃ¼rzungen und ihre AuflÃ¶sungen
 #     
 #    Stand: 16.03.06 / Jan-Helge Jacobs
 #
 #
 abb=abbildung #s
-abk=abkürzung #s
+abk=abkÃ¼rzung #s
 altdt=altdeutsch #a
 architekton=architektonisch #a
 aufl=auflage #s
 b.a.w=bis auf weiteres #w
 b.z.w=beziehungsweise #w
 beisp=beispiel #s
-bzgl=bezüglich #w
+bzgl=bezÃ¼glich #w
 bzw=beziehungsweise #w
 ca=circa #w
 christl=christlich #a
 christol=christologisch #a
-d.h=das heißt #w
+d.h=das heiÃŸt #w
 desgl=desgleichen #w
 dgl=dergleichen #w
 dr=doktor #s
@@ -48,7 +48,7 @@ niederdt=niederdeutsch #a
 norddt=norddeutsch #a
 nr=nummer #s
 o.a=oder andere #w
-o.ä=oder ähnliches #w oder ähnliche #w
+o.Ã¤=oder Ã¤hnliches #w oder Ã¤hnliche #w
 oberital=oberitalienisch #a
 pfarrk=pfarrkirche #s
 philol=philologisch #a
@@ -57,7 +57,7 @@ prot=protestantisch #a
 renss=renaissance #s
 Schifffahrtmus=schifffahrtmuseum #s
 sog=sogenannt #w
-stck=stück #s
+stck=stÃ¼ck #s
 std=stunde #s
 tbc=tbc #w tuberkulose #s
 tex=texas #e
@@ -71,4 +71,4 @@ z.b=zum Beispiel #w
 z.t=zum teil #w
 z.zt=zur zeit #w
 zykl=zyklisch #a
-zzgl=zuzüglich #w
+zzgl=zuzÃ¼glich #w

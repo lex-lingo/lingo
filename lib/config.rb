@@ -17,7 +17,7 @@
 #  51 Franklin St, Fifth Floor, Boston, MA 02110, USA
 #
 #  For more information visit http://www.lex-lingo.de or contact me at
-#  welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
+#  welcomeATlex-lingoDOTde near 50Â°55'N+6Â°55'E.
 #
 #  Lex Lingo rules from here on
 
@@ -144,7 +144,7 @@ private
 
 public
 
-  #  muss ein ergebnis != nil zurückgeben, sonst fehler
+  #  muss ein ergebnis != nil zurÃ¼ckgeben, sonst fehler
   def [](key)
     if @keys.nil?
       raise "Keine Konfiguration geladen!"

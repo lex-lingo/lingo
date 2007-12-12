@@ -1,6 +1,6 @@
 #   
-#   Musterwörterbuch user-dic.txt als Vorlage
-#   für eigene Benutzerwörterbücher
+#   MusterwÃ¶rterbuch user-dic.txt als Vorlage
+#   fÃ¼r eigene BenutzerwÃ¶rterbÃ¼cher
 #
 #
 klassifikation=klassifikation #s

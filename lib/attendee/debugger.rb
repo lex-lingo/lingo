@@ -17,37 +17,37 @@
 #  51 Franklin St, Fifth Floor, Boston, MA 02110, USA
 #
 #  For more information visit http://www.lex-lingo.de or contact me at
-#  welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
+#  welcomeATlex-lingoDOTde near 50Â°55'N+6Â°55'E.
 #
 #  Lex Lingo rules from here on
 
 
 =begin rdoc
 == Debugger
-Die Attendees von Lingo übergeben Daten über ihre Kommunikationskanäle und entweder kommt bei 
-einer komplexen Konfiguration hinten das gewünschte Ergebnis raus oder aber auch nicht. Für den 
-letzeren Fall ist der Debugger primär gedacht. Er kann an beliebige Stelle in den Datenstrom 
-eingeschleust werden, um Schritt für Schritt zu schauen, durch welchen Attendee das Ergebnis 
-verfälscht wird um so den Fehler einzugrenzen und schließlich zu lösen.
+Die Attendees von Lingo Ã¼bergeben Daten Ã¼ber ihre KommunikationskanÃ¤le und entweder kommt bei 
+einer komplexen Konfiguration hinten das gewÃ¼nschte Ergebnis raus oder aber auch nicht. FÃ¼r den 
+letzeren Fall ist der Debugger primÃ¤r gedacht. Er kann an beliebige Stelle in den Datenstrom 
+eingeschleust werden, um Schritt fÃ¼r Schritt zu schauen, durch welchen Attendee das Ergebnis 
+verfÃ¤lscht wird um so den Fehler einzugrenzen und schlieÃŸlich zu lÃ¶sen.
 
-Der Debugger wird jedoch auch gerne für die Verfolgung der Verarbeitung am Bildschirm verwendet.
+Der Debugger wird jedoch auch gerne fÃ¼r die Verfolgung der Verarbeitung am Bildschirm verwendet.
 
 Achtung: Um Irritationen bei der Anwendung mehrerer Debugger zu vermeiden wird empfohlen, den 
 Debugger in der Konfiguration immer unmittelbar nach dem Attendee zu platzieren, dessen Ausgabe 
-debugt werden soll. Ansonsten kann es zu scheinbar unerklärlichen Interferrenzen bei der Ausgabe 
+debugt werden soll. Ansonsten kann es zu scheinbar unerklÃ¤rlichen Interferrenzen bei der Ausgabe 
 kommen.
 
-=== Mögliche Verlinkung
+=== MÃ¶gliche Verlinkung
 Erwartet:: Daten beliebigen Typs
 
 === Parameter
 Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der Voreinstellung). 
-Alle anderen Parameter müssen zwingend angegeben werden.
+Alle anderen Parameter mÃ¼ssen zwingend angegeben werden.
 <b>in</b>:: siehe allgemeine Beschreibung des Attendee
 <b>out</b>:: siehe allgemeine Beschreibung des Attendee
-<b><i>eval</i></b>:: (Standard: true) Gibt eine Bedingung an, die erfüllt sein muss, damit ein 
+<b><i>eval</i></b>:: (Standard: true) Gibt eine Bedingung an, die erfÃ¼llt sein muss, damit ein 
                      Datenobjekt ausgegeben wird (siehe Beschreibung Objectfilter)
-<b><i>ceval</i></b>:: (Standard: true) Gibt eiune Bedingung an, die erfüllt sein muss, damit ein 
+<b><i>ceval</i></b>:: (Standard: true) Gibt eiune Bedingung an, die erfÃ¼llt sein muss, damit ein 
                      Kommandoobjekt ausgegeben wird.
 <b><i>prompt</i></b>:: (Standard: 'lex:) ') Gibt an, mit welchem Prefix die Ausgabe versehen werden
                        soll. Insbesondere wenn mit mehreren Debuggern gearbeitet wird, sollte dies 

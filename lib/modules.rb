@@ -17,7 +17,7 @@
 #  51 Franklin St, Fifth Floor, Boston, MA 02110, USA
 #
 #  For more information visit http://www.lex-lingo.de or contact me at
-#  welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
+#  welcomeATlex-lingoDOTde near 50Â°55'N+6Â°55'E.
 #
 #  Lex Lingo rules from here on
 
@@ -25,7 +25,7 @@
 
 =begin rdoc
 == Reportable
-Das Modul Reportable ermöglicht das setzen und hochzählen von statistischen Werten.
+Das Modul Reportable ermÃ¶glicht das setzen und hochzÃ¤hlen von statistischen Werten.
 =end
 module Reportable
 
@@ -70,8 +70,8 @@ end
 
 =begin rdoc
 == Cachable
-Das Modul Cachable ermöglicht das Verwerten von zwischengespeicherten Ergebnisse
-für einen schnelleren Zugriff.
+Das Modul Cachable ermÃ¶glicht das Verwerten von zwischengespeicherten Ergebnisse
+fÃ¼r einen schnelleren Zugriff.
 =end
 module Cachable
 

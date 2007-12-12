@@ -2,8 +2,6 @@
 
 (most important first)
 
-* The encoding of source code and dictionary files is to be changed to UTF-8.
-
 == General considerations
 
 * New code *should* meet the guidelines outlined in the RubyStyleGuide

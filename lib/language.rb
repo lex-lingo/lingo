@@ -17,7 +17,7 @@
 #  51 Franklin St, Fifth Floor, Boston, MA 02110, USA
 #
 #  For more information visit http://www.lex-lingo.de or contact me at
-#  welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
+#  welcomeATlex-lingoDOTde near 50Â°55'N+6Â°55'E.
 #
 #  Lex Lingo rules from here on
 
@@ -29,9 +29,9 @@ require 'lib/database'
 
 =begin rdoc
 == LexicalHash
-Die Klasse LexicalHash ermöglicht den Zugriff auf die Lingodatenbanken. Im Gegensatz zur
-Klasse DbmFile, welche nur Strings als Ergebnis zurück gibt, wird hier als Ergebnis ein
-Array von Lexical-Objekten zurück gegeben.
+Die Klasse LexicalHash ermÃ¶glicht den Zugriff auf die Lingodatenbanken. Im Gegensatz zur
+Klasse DbmFile, welche nur Strings als Ergebnis zurÃ¼ck gibt, wird hier als Ergebnis ein
+Array von Lexical-Objekten zurÃ¼ck gegeben.
 =end
 class LexicalHash
   include Cachable
@@ -64,7 +64,7 @@ public
 
 
   def [](ikey)
-    #  Schlüssel normalisieren
+    #  SchlÃ¼ssel normalisieren
     inc('total requests')
     key = ikey.downcase
     
@@ -81,9 +81,9 @@ public
     #  Werte in interne Objekte umwandeln
     record = record.collect do |str|
       case str
-      #  Hinweis für Multiworder, dass Multiword mit (\d) Wörtern länge zu prüfen ist
+      #  Hinweis fÃ¼r Multiworder, dass Multiword mit (\d) WÃ¶rtern lÃ¤nge zu prÃ¼fen ist
       when /^\*\d+$/          then str
-      #  Alleinige Angabe der Wortklasse => Ergebniswort ist gleich dem Schlüssel
+      #  Alleinige Angabe der Wortklasse => Ergebniswort ist gleich dem SchlÃ¼ssel
       when /^#(.)$/            then Lexical.new(key, $1)
       #  Angabe Ergebniswort und Wortklasse
       when /^([^#]+?)\s*#(.)$/  then Lexical.new($1, $2)
@@ -93,7 +93,7 @@ public
       end
     end.compact.sort.uniqual unless record.nil?
 
-    #  Ergebnis zurückgeben
+    #  Ergebnis zurÃ¼ckgeben
     inc('data found') unless record.nil?
     store(key, record)
   end
@@ -114,7 +114,7 @@ private
     #  Parameter aus de.lang:language/dictionary/databases auslesen
 #    config = Lingo.config['language/dictionary/databases/' + id]
 
-    #  Parameter prüfen
+    #  Parameter prÃ¼fen
     raise "Keine Sprach-Konfiguration angegeben!" if dictionary_config.nil?
     raise "Keine Parameter angegeben!" if config.nil?
     raise "Keine Datenquellen angegeben!" unless config.has_key?('source')
@@ -161,7 +161,7 @@ public
 
   #    _dic_.find_word( _aString_ ) -> _aNewWord_
   #
-  #    Erstellt aus dem String ein Wort und sucht nach diesem im Wörterbuch.
+  #    Erstellt aus dem String ein Wort und sucht nach diesem im WÃ¶rterbuch.
   def find_word(string)
     #  Cache abfragen
     key = string.downcase
@@ -184,7 +184,7 @@ public
 
   #    _dic_.select( _aString_ ) -> _ArrayOfLexicals_
   #
-  #    Sucht alle Wörterbücher durch und gibt den ersten Treffer zurück (+mode = first+), oder alle Treffer (+mode = all+)
+  #    Sucht alle WÃ¶rterbÃ¼cher durch und gibt den ersten Treffer zurÃ¼ck (+mode = first+), oder alle Treffer (+mode = all+)
   def select(string)
     lexicals = []
     
@@ -197,7 +197,7 @@ public
 
 #v TODO: v1.5.1
 #v    lexicals.sort.uniqual
-# TODO: anders lösen
+# TODO: anders lÃ¶sen
     lex = lexicals.collect { |i| i.is_a?(Lexical) ? i : nil }.compact.sort.uniqual
     txt = lexicals.collect { |i| i.is_a?(String) ? i : nil }.compact.sort.uniq
 #  p lex+txt
@@ -208,8 +208,8 @@ public
 
   #    _dic_.select_with_suffix( _aString_ ) -> _ArrayOfLexicals_
   #
-  #    Sucht alle Wörterbücher durch und gibt den ersten Treffer zurück (+mode = first+), oder alle Treffer (+mode = all+).
-  #    Sucht dabei auch Wörter, die um wortklassenspezifische Suffixe bereinigt wurden.
+  #    Sucht alle WÃ¶rterbÃ¼cher durch und gibt den ersten Treffer zurÃ¼ck (+mode = first+), oder alle Treffer (+mode = all+).
+  #    Sucht dabei auch WÃ¶rter, die um wortklassenspezifische Suffixe bereinigt wurden.
   def select_with_suffix(string)
     lexicals = select(string)
     if lexicals.empty?
@@ -225,8 +225,8 @@ public
 
   #    _dic_.select_with_infix( _aString_ ) -> _ArrayOfLexicals_
   #
-  #    Sucht alle Wörterbücher durch und gibt den ersten Treffer zurück (+mode = first+), oder alle Treffer (+mode = all+).
-  #    Sucht dabei auch Wörter, die eine Fugung am Ende haben.
+  #    Sucht alle WÃ¶rterbÃ¼cher durch und gibt den ersten Treffer zurÃ¼ck (+mode = first+), oder alle Treffer (+mode = all+).
+  #    Sucht dabei auch WÃ¶rter, die eine Fugung am Ende haben.
   def select_with_infix(string)
     lexicals = select(string)
     if lexicals.size == 0
@@ -242,7 +242,7 @@ public
 
   #    _dic_.suffix_lexicals( _aString_ ) -> _ArrayOfLexicals_
   #
-  #    Gibt alle möglichen Lexicals zurück, die von der Endung her auf den String anwendbar sind:
+  #    Gibt alle mÃ¶glichen Lexicals zurÃ¼ck, die von der Endung her auf den String anwendbar sind:
   #
   #    dic.suffix_lexicals("Hasens") -> [(hasen/s), (hasen/e), (has/e)]
   def suffix_lexicals(string)
@@ -261,7 +261,7 @@ public
 
   #    _dic_.gap_lexicals( _aString_ ) -> _ArrayOfLexicals_
   #
-  #    Gibt alle möglichen Lexicals zurück, die von der Endung her auf den String anwendbar sind:
+  #    Gibt alle mÃ¶glichen Lexicals zurÃ¼ck, die von der Endung her auf den String anwendbar sind:
   def infix_lexicals(string)
     lexicals = []
     newform = regex = ext = type = nil
@@ -286,10 +286,10 @@ end
 
 =begin rdoc
 == Grammar
-Die Klasse Grammar beinhaltet grammatikalische Spezialitäten einer Sprache. Derzeit findet die 
+Die Klasse Grammar beinhaltet grammatikalische SpezialitÃ¤ten einer Sprache. Derzeit findet die 
 Kompositumerkennung hier ihren Platz, die mit der Methode find_compositum aufgerufen werden kann.
-Die Klasse Grammar wird genau wie ein Dictionary initialisiert. Das bei der Initialisierung angegebene Wörterbuch ist Grundlage 
-für die Erkennung der Kompositumteile.
+Die Klasse Grammar wird genau wie ein Dictionary initialisiert. Das bei der Initialisierung angegebene WÃ¶rterbuch ist Grundlage 
+fÃ¼r die Erkennung der Kompositumteile.
 =end
 
 class Grammar
@@ -310,33 +310,33 @@ private
     
         @dictionary = Dictionary.new(config, dictionary_config)
     
-        #   Sprachspezifische Einstellungen für Kompositumverarbeitung laden (die nachfolgenden Werte können in der
+        #   Sprachspezifische Einstellungen fÃ¼r Kompositumverarbeitung laden (die nachfolgenden Werte kÃ¶nnen in der
         #   Konfigurationsdatei de.lang nach belieben angepasst werden)
         comp = dictionary_config['compositum']
     
-        #   Ein Wort muss mindestens 8 Zeichen lang sein, damit überhaupt eine Prüfung stattfindet.
+        #   Ein Wort muss mindestens 8 Zeichen lang sein, damit Ã¼berhaupt eine PrÃ¼fung stattfindet.
         @comp_min_word_size = (comp['min-word-size'] || '8').to_i
     
-         #   Die durchschnittliche Länge der Kompositum-Wortteile muss mindestens 4 Zeichen lang sein, sonst ist es kein 
-         #   gültiges Kompositum.
+         #   Die durchschnittliche LÃ¤nge der Kompositum-Wortteile muss mindestens 4 Zeichen lang sein, sonst ist es kein 
+         #   gÃ¼ltiges Kompositum.
         @comp_min_avg_part_size = (comp['min-avg-part-size'] || '4').to_i
           
-        #   Der kürzeste Kompositum-Wortteil muss mindestens 1 Zeichen lang sein
+        #   Der kÃ¼rzeste Kompositum-Wortteil muss mindestens 1 Zeichen lang sein
         @comp_min_part_size = (comp['min-part-size'] || '1').to_i
     
-        #   Ein Kompositum darf aus höchstens 4 Wortteilen bestehen
+        #   Ein Kompositum darf aus hÃ¶chstens 4 Wortteilen bestehen
         @comp_max_parts = (comp['max-parts'] || '4').to_i
     
-        #   Die Wortklasse eines Kompositum-Wortteils kann separat gekennzeichnet werden, um sie von Wortklassen normaler Wörter
-        #   unterscheiden zu können z.B. Hausmeister => ['haus/s', 'meister/s'] oder Hausmeister => ['haus/s+', 'meister/s+'] mit
+        #   Die Wortklasse eines Kompositum-Wortteils kann separat gekennzeichnet werden, um sie von Wortklassen normaler WÃ¶rter
+        #   unterscheiden zu kÃ¶nnen z.B. Hausmeister => ['haus/s', 'meister/s'] oder Hausmeister => ['haus/s+', 'meister/s+'] mit
         #   append-wordclass = '+' 
         @append_wc = comp.fetch( 'append-wordclass', '' )
     
-        #   Bestimmte Sequenzen können als ungültige Komposita erkannt werden, z.B. ist ein Kompositum aus zwei Adjetiven kein
+        #   Bestimmte Sequenzen kÃ¶nnen als ungÃ¼ltige Komposita erkannt werden, z.B. ist ein Kompositum aus zwei Adjetiven kein
         #   Kompositum, also skip-sequence = 'aa'
         @sequences = comp.fetch( 'skip-sequences', [] ).collect { |sq| sq.downcase }
 
-        #   Liste der Vorschläge für eine Zerlegung
+        #   Liste der VorschlÃ¤ge fÃ¼r eine Zerlegung
         @suggestions = []
     end
 
@@ -360,11 +360,11 @@ public
     #   find_compositum(string) -> word wenn level=1
     #    find_compositum(string) -> [lexicals, stats] wenn level!=1
     #
-    #   find_compositum arbeitet in verschiedenen Leveln, da die Methode auch rekursiv aufgerufen wird. Ein Level größer 1 
+    #   find_compositum arbeitet in verschiedenen Leveln, da die Methode auch rekursiv aufgerufen wird. Ein Level grÃ¶ÃŸer 1 
     #   entspricht daher einem rekursiven Aufruf
     def find_compositum(string, level=1, has_tail=false)
   
-        #   Prüfen, ob string bereits auf Kompositum getestet wurde. Wenn ja, dann Ergebnis des letztes Aufrufs zurück geben.
+        #   PrÃ¼fen, ob string bereits auf Kompositum getestet wurde. Wenn ja, dann Ergebnis des letztes Aufrufs zurÃ¼ck geben.
         key = string.downcase
         if level == 1 && hit?(key)
             inc('cache hits')
@@ -374,18 +374,18 @@ public
         #   Ergebnis vorbelegen
         comp = Word.new(string, WA_UNKNOWN)
     
-        #    Validitätsprüfung: nur Strings mit Mindestlänge auf Kompositum prüfen
+        #    ValiditÃ¤tsprÃ¼fung: nur Strings mit MindestlÃ¤nge auf Kompositum prÃ¼fen
         if string.size <= @comp_min_word_size
             inc('String zu kurz')
             return (level==1) ? comp : [[],[],'']
         end
     
         #    Kompositumerkennung initialisieren
-        inc('Komposita geprüft')
+        inc('Komposita geprÃ¼ft')
         stats, lexis, seqs = permute_compositum(string.downcase, level, has_tail)
 
         if level==1
-            #   Auf Level 1 Kompositum zurück geben
+            #   Auf Level 1 Kompositum zurÃ¼ck geben
             if lexis.size > 0 && is_valid?( string, stats, lexis, seqs )
                 inc('Komposita erkannt')
                 comp.attr = WA_KOMPOSITUM
@@ -397,7 +397,7 @@ public
             return store(key, comp)
         end
         
-        #  Validitätsprüfung
+        #  ValiditÃ¤tsprÃ¼fung
         if lexis.size > 0 && is_valid?(string, stats, lexis, seqs)
             return [stats, lexis, seqs]
         else
@@ -460,19 +460,19 @@ private
     #
     #    Testet einen definiert zerlegten String auf Kompositum
     def test_compositum(front_string, infix, back_string, level, has_tail)
-        #  Statistik merken für Validitätsprüfung
+        #  Statistik merken fÃ¼r ValiditÃ¤tsprÃ¼fung
         stats = [front_string.size, back_string.size]
         seqs = ['?', '?']
         
-         #  zuerst hinteren Teil auflösen
-        #  1. Möglichkeit:  Wort mit oder ohne Suffix
+         #  zuerst hinteren Teil auflÃ¶sen
+        #  1. MÃ¶glichkeit:  Wort mit oder ohne Suffix
         back_lexicals = @dictionary.select_with_suffix(back_string)
         unless back_lexicals.empty?
             back_form = has_tail ? back_string : back_lexicals.sort[0].form
             seqs[1] = back_lexicals.sort[0].attr
         end
             
-        #  2. Möglichkeit:  Wort mit oder ohne Infix, wenn es nicht der letzte Teil des Wortes ist
+        #  2. MÃ¶glichkeit:  Wort mit oder ohne Infix, wenn es nicht der letzte Teil des Wortes ist
         if back_lexicals.empty? && has_tail
             back_lexicals = @dictionary.select_with_infix(back_string)
             unless back_lexicals.empty?
@@ -481,7 +481,7 @@ private
             end
         end
         
-        #  3. Möglichkeit:  Selber ein Kompositum (nur im Bindestrich-Fall!)
+        #  3. MÃ¶glichkeit:  Selber ein Kompositum (nur im Bindestrich-Fall!)
         if back_lexicals.empty? && infix=='-'
             back_stats, back_lexicals, back_seqs = find_compositum(back_string, level+1, has_tail)
             unless back_lexicals.empty?
@@ -491,27 +491,27 @@ private
             end
         end
           
-        #  4. Möglichkeit:  Take it as is [Nimm's, wie es ist] (nur im Bindestrich-Fall!)
+        #  4. MÃ¶glichkeit:  Take it as is [Nimm's, wie es ist] (nur im Bindestrich-Fall!)
         if back_lexicals.empty? && infix=='-'
             back_lexicals = [Lexical.new(back_string, LA_TAKEITASIS)]
             back_form = back_string
             seqs[1] = back_lexicals.sort[0].attr
         end
         
-        #  wenn immer noch nicht erkannt, dann sofort zurück
+        #  wenn immer noch nicht erkannt, dann sofort zurÃ¼ck
         return [[],[],''] if back_lexicals.empty?
         
     
-        #  dann vorderen Teil auflösen
+        #  dann vorderen Teil auflÃ¶sen
         #
-        #  1. Möglichkeit:  Wort mit oder ohne Infix
+        #  1. MÃ¶glichkeit:  Wort mit oder ohne Infix
         front_lexicals = @dictionary.select_with_infix(front_string)
         unless front_lexicals.empty?
             front_form = front_string
             seqs[0] = front_lexicals.sort[0].attr
         end
         
-        #  2. Möglichkeit:  Selber ein Kompositum
+        #  2. MÃ¶glichkeit:  Selber ein Kompositum
         if front_lexicals.empty?
             front_stats, front_lexicals, front_seqs = find_compositum(front_string, level+1, true)
             unless front_lexicals.empty?
@@ -521,14 +521,14 @@ private
             end
         end
         
-        #  3. Möglichkeit:  Take it as is [Nimm's, wie es ist] (nur im Bindestrich-Fall!)
+        #  3. MÃ¶glichkeit:  Take it as is [Nimm's, wie es ist] (nur im Bindestrich-Fall!)
         if front_lexicals.empty? && infix=='-'
             front_lexicals = [Lexical.new(front_string, LA_TAKEITASIS)]
             seqs[0] = front_lexicals.sort[0].attr
             front_form = front_string
         end
         
-        #  wenn immer noch nicht erkannt, dann sofort zurück
+        #  wenn immer noch nicht erkannt, dann sofort zurÃ¼ck
         return [[],[],''] if front_lexicals.empty?
         
         
