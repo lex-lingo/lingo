@@ -1,45 +1,0 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!DOCTYPE html 
-     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html>
-<head>
-  <title>process (Variator)</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
-</head>
-<body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File lib/attendee/variator.rb, line 114</span>
-        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">process</span>(<span class="ruby-identifier">obj</span>)
-                <span class="ruby-comment cmt">#     Zu prüfende Wörter filtern</span>
-                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Word</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@check</span>[<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">attr</span>]
-                        <span class="ruby-comment cmt">#    Statistik für Report</span>
-                        <span class="ruby-identifier">inc</span>(<span class="ruby-value str">'Anzahl gesuchter Wörter'</span>)
-
-                        <span class="ruby-comment cmt">#    Erzeuge Variationen einer Wortform</span>
-                        <span class="ruby-identifier">variations</span> = [<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">form</span>]
-                        <span class="ruby-ivar">@var_strings</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">switch</span><span class="ruby-operator">|</span>
-                                <span class="ruby-identifier">from</span>, <span class="ruby-identifier">to</span> = <span class="ruby-identifier">switch</span>
-                                <span class="ruby-identifier">variations</span> = <span class="ruby-identifier">variate</span>(<span class="ruby-identifier">variations</span>, <span class="ruby-identifier">from</span>, <span class="ruby-identifier">to</span>)
-                        <span class="ruby-keyword kw">end</span>
-
-                        <span class="ruby-comment cmt">#    Prüfe Variation auf bekanntes Wort</span>
-                        <span class="ruby-identifier">variations</span>[<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-ivar">@max_var</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">var</span><span class="ruby-operator">|</span>
-                                <span class="ruby-comment cmt">#   Variiertes Wort im Wörterbuch suchen</span>
-                                <span class="ruby-identifier">word</span> = <span class="ruby-ivar">@dic</span>.<span class="ruby-identifier">find_word</span>(<span class="ruby-identifier">var</span>)
-                                <span class="ruby-identifier">word</span> = <span class="ruby-ivar">@gra</span>.<span class="ruby-identifier">find_compositum</span>(<span class="ruby-identifier">var</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">word</span>.<span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-constant">WA_UNKNOWN</span>
-                                <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">word</span>.<span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-constant">WA_UNKNOWN</span>
-
-                                <span class="ruby-comment cmt">#   Das erste erkannte Wort beendet die Suche</span>
-                                <span class="ruby-identifier">inc</span>(<span class="ruby-value str">'Anzahl gefundener Wörter'</span>)
-                                <span class="ruby-identifier">word</span>.<span class="ruby-identifier">form</span> = <span class="ruby-ivar">@marker</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">var</span>
-                                <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">word</span>)
-                                <span class="ruby-keyword kw">return</span>
-                        <span class="ruby-keyword kw">end</span>
-                <span class="ruby-keyword kw">end</span>
-                
-                <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">obj</span>)
-        <span class="ruby-keyword kw">end</span></pre>
-</body>
-</html>

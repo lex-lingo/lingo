@@ -1,67 +1,0 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!DOCTYPE html 
-     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html>
-<head>
-  <title>process_buffer (Multiworder)</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
-</head>
-<body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File lib/attendee/multiworder.rb, line 128</span>
-        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">process_buffer</span>
-                <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@buffer</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">form</span> <span class="ruby-operator">==</span> <span class="ruby-constant">CHAR_PUNCT</span>
-                        <span class="ruby-comment cmt">#    Prüfe 3er Schlüssel</span>
-                        <span class="ruby-identifier">result</span> = <span class="ruby-identifier">check_multiword_key</span>( <span class="ruby-value">3</span> )
-                        <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">empty?</span>
-                                <span class="ruby-comment cmt">#   3er Schlüssel gefunden</span>
-                                <span class="ruby-identifier">lengths</span> = <span class="ruby-identifier">sort_result_len</span>( <span class="ruby-identifier">result</span> )
-                                <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">lengths</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">&gt;</span> <span class="ruby-value">3</span>
-                                        <span class="ruby-comment cmt">#  Längster erkannter Schlüssel = 3</span>
-                                        <span class="ruby-identifier">create_and_forward_multiword</span>( <span class="ruby-value">3</span>, <span class="ruby-identifier">result</span> )
-                                        <span class="ruby-identifier">forward_number_of_token</span>( <span class="ruby-value">3</span> )
-                                        <span class="ruby-keyword kw">return</span>
-                                <span class="ruby-keyword kw">else</span>
-                                        <span class="ruby-comment cmt">#  Längster erkannter Schlüssel &gt; 3, Buffer voll genug?</span>
-                                        <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">lengths</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">||</span> <span class="ruby-ivar">@eof_handling</span>
-                                                <span class="ruby-ivar">@number_of_expected_tokens_in_buffer</span> = <span class="ruby-identifier">lengths</span>[<span class="ruby-value">0</span>]
-                                                <span class="ruby-keyword kw">return</span>
-                                        <span class="ruby-keyword kw">else</span>
-                                                <span class="ruby-comment cmt"># Buffer voll genug, Verarbeitung kann beginnen</span>
-                                                <span class="ruby-identifier">catch</span>( <span class="ruby-identifier">:forward_one</span> ) <span class="ruby-keyword kw">do</span>
-                                                        <span class="ruby-identifier">lengths</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">len</span><span class="ruby-operator">|</span>
-                                                                <span class="ruby-identifier">result</span> = <span class="ruby-identifier">check_multiword_key</span>( <span class="ruby-identifier">len</span> )
-                                                                <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">empty?</span>
-                                                                        <span class="ruby-identifier">create_and_forward_multiword</span>( <span class="ruby-identifier">len</span>, <span class="ruby-identifier">result</span> )
-                                                                        <span class="ruby-identifier">forward_number_of_token</span>( <span class="ruby-identifier">len</span> )
-                                                                        <span class="ruby-identifier">throw</span> <span class="ruby-identifier">:forward_one</span>
-                                                                <span class="ruby-keyword kw">end</span>
-                                                        <span class="ruby-keyword kw">end</span>
-                                                        
-                                                        <span class="ruby-comment cmt">#        Keinen Match gefunden</span>
-                                                        <span class="ruby-identifier">forward_number_of_token</span>( <span class="ruby-value">1</span> )             
-                                                <span class="ruby-keyword kw">end</span>
-                                                
-                                                <span class="ruby-ivar">@number_of_expected_tokens_in_buffer</span> = <span class="ruby-value">3</span>
-                                                <span class="ruby-identifier">process_buffer</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">process_buffer?</span>
-                                                <span class="ruby-keyword kw">return</span>
-                                        <span class="ruby-keyword kw">end</span>
-                                <span class="ruby-keyword kw">end</span>
-                        <span class="ruby-keyword kw">end</span>
-                        
-                        <span class="ruby-comment cmt">#    Prüfe 2er Schlüssel</span>
-                        <span class="ruby-identifier">result</span> = <span class="ruby-identifier">check_multiword_key</span>( <span class="ruby-value">2</span> )
-                        <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">empty?</span>
-                                <span class="ruby-identifier">create_and_forward_multiword</span>( <span class="ruby-value">2</span>, <span class="ruby-identifier">result</span> )
-                                <span class="ruby-identifier">forward_number_of_token</span>( <span class="ruby-value">1</span> )
-                        <span class="ruby-keyword kw">end</span>
-                <span class="ruby-keyword kw">end</span>
-                        
-                <span class="ruby-comment cmt">#     Buffer weiterschaufeln</span>
-                <span class="ruby-identifier">forward_number_of_token</span>( <span class="ruby-value">1</span>, <span class="ruby-keyword kw">false</span> )
-                <span class="ruby-ivar">@number_of_expected_tokens_in_buffer</span> = <span class="ruby-value">3</span>
-        <span class="ruby-keyword kw">end</span></pre>
-</body>
-</html>

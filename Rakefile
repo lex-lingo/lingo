@@ -32,7 +32,7 @@ LINGO_INFO = FileList.new( 'info/gpl-hdr.txt', 'info/*.png' )
 TEST_CORE = FileList.new( 'test.cfg', 'test/ts_*.rb', 'test/attendee/*.rb' )
 TEST_DATA = FileList.new( '??/test_*.txt', 'test/lir*.txt', 'test/mul.txt', 'test/ref/*', 'test/de/*' )
 
-RELEASE = FileList.new( 'readme', 'release', 'license', 'rakefile.rb' )
+RELEASE = FileList.new( 'README', 'ChangeLog', 'COPYING', 'Rakefile', 'TODO' )
 LIR_FILES = FileList.new( 'lir.cfg', 'txt/lir.txt' )
 
 
@@ -72,8 +72,9 @@ end
 desc 'Erstellen der Dokumentation'
 Rake::RDocTask.new do |doc|
     doc.title = 'Lex Lingo - RDoc Dokumentation'
+    doc.options = [ '--charset', 'UTF-8' ]
     doc.rdoc_dir = 'doc'
-    doc.rdoc_files.include( 'release', 'readme', 'lib/attendee/*.rb' )
+    doc.rdoc_files.include( 'README', 'ChangeLog', 'TODO', 'lib/attendee/*.rb' )
 end
 
 

@@ -1,42 +1,0 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!DOCTYPE html 
-     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html>
-<head>
-  <title>init (Variator)</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
-</head>
-<body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File lib/attendee/variator.rb, line 75</span>
-        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">init</span>
-                <span class="ruby-comment cmt">#     Parameter verarbeiten</span>
-                <span class="ruby-ivar">@marker</span>       = <span class="ruby-identifier">get_key</span>(<span class="ruby-value str">'marker'</span>, <span class="ruby-value str">'*'</span>)
-                <span class="ruby-ivar">@max_var</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-value str">'max-var'</span>, <span class="ruby-value str">'10000'</span>).<span class="ruby-identifier">to_i</span>
-                <span class="ruby-identifier">filter</span> = <span class="ruby-identifier">get_array</span>(<span class="ruby-value str">'check'</span>, <span class="ruby-constant">WA_UNKNOWN</span>)
-                
-                <span class="ruby-identifier">src</span> = <span class="ruby-identifier">get_array</span>(<span class="ruby-value str">'source'</span>)
-                <span class="ruby-identifier">mod</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-value str">'mode'</span>, <span class="ruby-value str">'all'</span>)
-
-                <span class="ruby-comment cmt">#     Daten verarbeiten</span>
-                <span class="ruby-ivar">@var_strings</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-value str">'variations'</span>)
-                <span class="ruby-identifier">forward</span>(<span class="ruby-constant">STR_CMD_ERR</span>, <span class="ruby-value str">'Ocr-variator: Konfiguration &lt;ocr-variator&gt; ist leer'</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@var_strings</span>.<span class="ruby-identifier">size</span><span class="ruby-operator">==</span><span class="ruby-value">0</span>
-
-                <span class="ruby-comment cmt">#     Initialisierungen</span>
-                <span class="ruby-ivar">@check</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">false</span>)
-                <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@check</span>[<span class="ruby-identifier">s</span>.<span class="ruby-identifier">upcase</span>] = <span class="ruby-keyword kw">true</span> }
-        
-                <span class="ruby-comment cmt">#     Wörterbuchzugriff</span>
-                <span class="ruby-ivar">@dic</span> = <span class="ruby-constant">Dictionary</span>.<span class="ruby-identifier">new</span>({<span class="ruby-value str">'source'</span>=<span class="ruby-operator">&gt;</span><span class="ruby-identifier">src</span>, <span class="ruby-value str">'mode'</span>=<span class="ruby-operator">&gt;</span><span class="ruby-identifier">mod</span>}, <span class="ruby-ivar">@@library_config</span>)
-                <span class="ruby-ivar">@gra</span> = <span class="ruby-constant">Grammar</span>.<span class="ruby-identifier">new</span>({<span class="ruby-value str">'source'</span>=<span class="ruby-operator">&gt;</span><span class="ruby-identifier">src</span>, <span class="ruby-value str">'mode'</span>=<span class="ruby-operator">&gt;</span><span class="ruby-identifier">mod</span>}, <span class="ruby-ivar">@@library_config</span>)
-                
-                <span class="ruby-comment cmt">#     Optimierungen</span>
-                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@max_var</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
-                        <span class="ruby-identifier">forward</span>( <span class="ruby-constant">STR_CMD_WARN</span>, <span class="ruby-value str">'Ocr-variator: max-var ist 0, setze es auf 10.000'</span> )
-                        <span class="ruby-ivar">@max_var</span> = <span class="ruby-value">10000</span>
-                <span class="ruby-keyword kw">end</span>
-        <span class="ruby-keyword kw">end</span></pre>
-</body>
-</html>

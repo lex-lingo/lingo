@@ -1,40 +1,0 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!DOCTYPE html 
-     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html>
-<head>
-  <title>init (Tokenizer)</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
-</head>
-<body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File lib/attendee/tokenizer.rb, line 101</span>
-        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">init</span>
-                <span class="ruby-comment cmt">#     Regular Expressions für Token-Erkennung einlesen</span>
-                <span class="ruby-identifier">regulars</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-value str">'regulars'</span>, <span class="ruby-value str">''</span>)
-                <span class="ruby-identifier">forward</span>(<span class="ruby-constant">STR_CMD_ERR</span>, <span class="ruby-value str">'regulars nicht definiert'</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">regulars</span>.<span class="ruby-identifier">nil?</span>
-
-                <span class="ruby-comment cmt">#     Mit _xxx_ gekennzeichnete Makros anwenden und Expressions ergänzen und umwandeln</span>
-                <span class="ruby-identifier">macros</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
-                <span class="ruby-ivar">@rules</span> = <span class="ruby-identifier">regulars</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">rule</span><span class="ruby-operator">|</span>
-                        <span class="ruby-identifier">name</span> = <span class="ruby-identifier">rule</span>.<span class="ruby-identifier">keys</span>[<span class="ruby-value">0</span>]
-                        <span class="ruby-identifier">expr</span> = <span class="ruby-identifier">rule</span>.<span class="ruby-identifier">values</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/(_\w+?_)/</span>) { <span class="ruby-identifier">macros</span>[<span class="ruby-identifier">$1</span>] }
-                        
-                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">name</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^_\w+_$/</span>         <span class="ruby-comment cmt">#              is a macro</span>
-                                <span class="ruby-identifier">macros</span>[<span class="ruby-identifier">name</span>] = <span class="ruby-identifier">expr</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">name</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^_\w+_$/</span>
-                                <span class="ruby-keyword kw">nil</span>
-                        <span class="ruby-keyword kw">else</span>
-                                [<span class="ruby-identifier">name</span>, <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">'^'</span><span class="ruby-operator">+</span><span class="ruby-identifier">expr</span>)]
-                        <span class="ruby-keyword kw">end</span>
-                }.<span class="ruby-identifier">compact</span>
-                
-                <span class="ruby-comment cmt">#     Der Tokenizer gibt jedes Zeilenende als Information weiter, sofern es sich </span>
-                <span class="ruby-comment cmt">#     nicht um die Verarbeitung einer LIR-Datei handelt. Im Falle einer normalen Datei</span>
-                <span class="ruby-comment cmt">#     wird der Dateiname gespeichert und als Kennzeichen für die Erzeugung von </span>
-                <span class="ruby-comment cmt">#     Zeilenende-Nachrichten herangezogen.</span>
-                <span class="ruby-ivar">@filename</span> = <span class="ruby-keyword kw">nil</span>
-        <span class="ruby-keyword kw">end</span></pre>
-</body>
-</html>

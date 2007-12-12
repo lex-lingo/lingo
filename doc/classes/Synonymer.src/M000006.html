@@ -1,48 +1,0 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!DOCTYPE html 
-     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html>
-<head>
-  <title>process (Synonymer)</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
-</head>
-<body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File lib/attendee/synonymer.rb, line 88</span>
-        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">process</span>(<span class="ruby-identifier">obj</span>)
-                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Word</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@skip</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">attr</span>).<span class="ruby-identifier">nil?</span>
-                        <span class="ruby-identifier">inc</span>(<span class="ruby-value str">'Anzahl gesuchter Wörter'</span>)
-
-                        <span class="ruby-comment cmt">#            finde die Synonyme für alle Lexicals des Wortes</span>
-
-                        <span class="ruby-comment cmt">#    alle Lexicals des Wortes</span>
-                        <span class="ruby-identifier">lexis</span> = <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">lexicals</span>
-                        <span class="ruby-comment cmt">#    alle Lexical-Wortformen, um gleichlautende Synonyme zu filtern</span>
-                        <span class="ruby-identifier">forms</span> = <span class="ruby-identifier">lexis</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">lex</span><span class="ruby-operator">|</span> <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">form</span> }
-                        <span class="ruby-comment cmt">#    alle gefundenen Synonyme</span>
-                        <span class="ruby-identifier">synos</span> = []
-
-                        <span class="ruby-identifier">lexis</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">lex</span><span class="ruby-operator">|</span>
-                                <span class="ruby-comment cmt">#   Synonyme für Teile eines Kompositum ausschließen</span>
-                                <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">attr</span><span class="ruby-operator">==</span><span class="ruby-constant">WA_KOMPOSITUM</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">attr!</span>=<span class="ruby-constant">LA_KOMPOSITUM</span>
-                                <span class="ruby-comment cmt">#   Synonyme für Synonyme ausschließen</span>
-                                <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">attr</span><span class="ruby-operator">==</span><span class="ruby-constant">LA_SYNONYM</span>
-                                
-                                <span class="ruby-ivar">@dic</span>.<span class="ruby-identifier">select</span>(<span class="ruby-identifier">lex</span>.<span class="ruby-identifier">form</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">syn</span><span class="ruby-operator">|</span> 
-                                        <span class="ruby-comment cmt">#  Gleichlautende Synonyme ausschließen</span>
-                                        <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">syn</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^\*(\d+)/</span>
-                                        <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">forms</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">syn</span>.<span class="ruby-identifier">form</span>).<span class="ruby-identifier">nil?</span>
-                                        <span class="ruby-identifier">synos</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">syn</span>
-                                <span class="ruby-keyword kw">end</span>
-                        <span class="ruby-keyword kw">end</span>
-                        <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">lexicals</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">synos</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">uniqual</span>
-
-                        <span class="ruby-identifier">inc</span>(<span class="ruby-value str">'Anzahl erweiteter Wörter'</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">synos</span>.<span class="ruby-identifier">size</span><span class="ruby-operator">&gt;</span><span class="ruby-value">0</span>
-                        <span class="ruby-identifier">add</span>(<span class="ruby-value str">'Anzahl gefundener Synonyme'</span>, <span class="ruby-identifier">synos</span>.<span class="ruby-identifier">size</span>)
-                <span class="ruby-keyword kw">end</span>
-                <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">obj</span>)
-        <span class="ruby-keyword kw">end</span></pre>
-</body>
-</html>
