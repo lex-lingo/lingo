@@ -54,32 +54,34 @@ class ShowPercent
     @clear  = ' ' * length + back
   end
 
-
   def start(max)
-    @max, @cur = max, 0
+    @max, @count, @next_step = max, 0, 0
     show
   end
-
 
   def stop
     print @clear
   end
 
-
-  def inc(inc)
-    @cur += inc
-    show if inc > 0
+  def inc(increment)
+    @count += increment
+    show if show?
   end
 
-
-  def set(abs)
-    @cur = abs
-    show
+  def set(absolute)
+    @count = absolute
+    show if show?
   end
-
 
   def show
-    print @format % (100 * @cur / @max) if @verbose
+    percent = 100 * @count / @max
+    @next_step = (percent + 1) * @max / 100
+
+    print @format % percent if @verbose
+  end
+
+  def show?
+    @count >= @next_step
   end
 
 end
