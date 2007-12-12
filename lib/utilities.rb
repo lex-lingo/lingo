@@ -55,30 +55,35 @@ class String
 	end
 	
 	
-	@@hex_chars = '0123456789abcdef'
+	HEX_CHARS = '0123456789abcdef'.freeze
 
 	def to_x
 		hex = ''
-		self.each_byte {|b|
-			hex << @@hex_chars[(b & 0xf0) /16]
-			hex << @@hex_chars[b & 0x0f]
+		each_byte { |byte|
+      # To get a hex representation for a char we just utilize
+      # the quotient and the remainder of division by base 16.
+      q, r = byte.divmod(16)
+			hex << HEX_CHARS[q] << HEX_CHARS[r]
 		}
 		hex
 	end
 	
 	
 	def from_x
-		str = ''
-		b = 0
-		h = 1
-		self.each_byte {|c|
-			if h==1
-				b = @@hex_chars.index(c) * 16
+		str, q, first = '', 0, false
+		each_byte { |byte|
+      # Our hex chars are 2 bytes wide, so we have to keep track
+      # of whether it's the first or the second of the two.
+      #
+      # NOTE: inject with each_slice(2) would be a natural fit,
+      # but it's kind of slow...
+			if first = !first
+				q = HEX_CHARS.index(byte)
 			else
-				b += @@hex_chars.index(c)
-				str << b
+        # Now we got both parts, so let's do the
+        # inverse of divmod(16): q * 16 + r
+				str << q * 16 + HEX_CHARS.index(byte)
 			end
-			h = 1 - h
 		}
 		str
 	end

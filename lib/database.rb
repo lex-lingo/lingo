@@ -37,41 +37,49 @@ require 'lib/modules'
 #
 class ShowPercent
 
-	def initialize( verbose = true )
+	def initialize(verbose = true)
 		@verbose = verbose
-		@len = 7
-		@format = " [%3d%%]"+"\b"*@len
+
+    format = ' [%3d%%]'
+
+    # To get the length of the formatted string we have
+    # to actually substitute the place-holder(s).
+    length = (format % 0).length
+
+    # Now we know how far to "go back" to
+    # overwrite the formatted string...
+    back = "\b" * length
+
+		@format = format       + back
+    @clear  = ' ' * length + back
 	end
 
 
-	def start( max )
-		@max = max
-		@cur = @per = @nxt = 0
+	def start(max)
+		@max, @cur = max, 0
 		show
 	end
 
 
 	def stop
-		print ' '*@len+"\b"*@len
+		print @clear
 	end
 
 
-	def inc( inc )
+	def inc(inc)
 		@cur += inc
-		show if @cur>=@nxt
+		show if inc > 0
 	end
 
 
-	def set( abs )
+	def set(abs)
 		@cur = abs
-		show if @cur>=@nxt
+		show
 	end
 
 
 	def show
-		@per = (100*@cur/@max).to_i
-		@nxt = (@per+1)*@max/100
-		printf @format, @per, @back if @verbose
+		print @format % (100 * @cur / @max) if @verbose
 	end
 
 end

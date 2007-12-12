@@ -1,0 +1,29 @@
+= ToDo list for lingo
+
+(most important first)
+
+* Indentation *should* be 2 blanks, tabs are to be replaced accordingly.
+* Unix EOL is to be preferred over DOS EOL.
+* The encoding of source code and dictionary files is to be changed to UTF-8.
+
+== General considerations
+
+* New code *should* meet the guidelines outlined in the RubyStyleGuide
+  <http://www.rubygarden.org/Ruby/page/show/RubyStyleGuide>, existing code
+  will be adjusted along the way.
+* New comments and documentation and stuff *should* be in English, existing
+  texts will be translated as time allows.
+
+== Specific features
+
+* Package lingo as gem, allowing it to be installed system-wide, with user
+  documents, dictionaries and configuration files separate from system files
+  and dictionaries. (Location for user configuration and dictionaries, maybe:
+  ~/.lingo)
+* Allow for handling of documents in various encodings, not just the one the
+  dictionaries are encoded in (maybe provide automatic encoding detection?).
+  Particularly, allow for UTF-8 encoded documents and dictionaries. (Probably
+  affects: Tokenizer, *.lang, const.rb)
+* Make sure the Crypter is sufficiently secure.
+* Provide a DSL for configuration -- in addition to or instead of the current
+  YAML format.
