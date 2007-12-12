@@ -2,7 +2,6 @@
 
 (most important first)
 
-* Unix EOL is to be preferred over DOS EOL.
 * The encoding of source code and dictionary files is to be changed to UTF-8.
 
 == General considerations
