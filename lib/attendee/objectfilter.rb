@@ -70,13 +70,13 @@ class Objectfilter < Attendee
 
 protected
 
-	def init
-		@obj_eval = get_key('objects', 'true')
-	end
+  def init
+    @obj_eval = get_key('objects', 'true')
+  end
 
-	
-	def process(obj)
-		forward(obj) if eval(@obj_eval)
-	end
-	
+  
+  def process(obj)
+    forward(obj) if eval(@obj_eval)
+  end
+  
 end

@@ -96,48 +96,48 @@ class Textreader < Attendee
 
 protected
 
-	# 	TODO: FILE und LIR-FILE
-	#	TODO: lir-record-pattern abkürzen
-	#	Interpretation der Parameter
-	def init
-		@files = get_array('files')
-		@rec_pat = Regexp.new(get_key('lir-record-pattern', ''))
-		@is_LIR_file = has_key?('lir-record-pattern')
-	end
+  #   TODO: FILE und LIR-FILE
+  #  TODO: lir-record-pattern abkürzen
+  #  Interpretation der Parameter
+  def init
+    @files = get_array('files')
+    @rec_pat = Regexp.new(get_key('lir-record-pattern', ''))
+    @is_LIR_file = has_key?('lir-record-pattern')
+  end
 
 
-	def control(cmd, param)
-		if cmd==STR_CMD_TALK
-			forward(STR_CMD_LIR, '') if @is_LIR_file
-			@files.each { |filename| spool(filename) }
-		end
-	end
+  def control(cmd, param)
+    if cmd==STR_CMD_TALK
+      forward(STR_CMD_LIR, '') if @is_LIR_file
+      @files.each { |filename| spool(filename) }
+    end
+  end
 
 
 private
 
-	#	Gibt eine Datei zeilenweise in den Ausgabekanal
-	def spool(filename)
-		FileTest.exist?(filename) || forward(STR_CMD_ERR, "Datei #{filename} nicht gefunden")
+  #  Gibt eine Datei zeilenweise in den Ausgabekanal
+  def spool(filename)
+    FileTest.exist?(filename) || forward(STR_CMD_ERR, "Datei #{filename} nicht gefunden")
 
-		inc('Anzahl Dateien')
-		add('Anzahl Bytes', File.stat(filename).size)
+    inc('Anzahl Dateien')
+    add('Anzahl Bytes', File.stat(filename).size)
 
-		forward(STR_CMD_FILE, filename)
+    forward(STR_CMD_FILE, filename)
 
-		File.open(filename).each_line { |line| 
-			inc('Anzahl Zeilen')
-			line.chomp!
-			line.gsub!(/\303\237/, "ß")
-### HACK			
-			if @is_LIR_file && line =~ @rec_pat
-				forward(STR_CMD_RECORD, $1)
-			else
-				forward(line) if line.size>0
-			end
-		}
+    File.open(filename).each_line { |line| 
+      inc('Anzahl Zeilen')
+      line.chomp!
+      line.gsub!(/\303\237/, "ß")
+### HACK      
+      if @is_LIR_file && line =~ @rec_pat
+        forward(STR_CMD_RECORD, $1)
+      else
+        forward(line) if line.size>0
+      end
+    }
 
-		forward(STR_CMD_EOF, filename)
-	end
-	
+    forward(STR_CMD_EOF, filename)
+  end
+  
 end

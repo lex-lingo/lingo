@@ -29,40 +29,40 @@ Das Modul Reportable ermöglicht das setzen und hochzählen von statistischen Wert
 =end
 module Reportable
 
-	def init_reportable
-		@counters = Hash.new(0)
-		@prefix = ''
-	end
-	
-	
-	def report_prefix(prefix)
-		@prefix = prefix
-	end	
-	
-	
-	def inc(counter)
-		@counters[counter] += 1
-	end
-	
-	
-	def add(counter, value)
-		@counters[counter] += value
-	end
-	
-	
-	def set(counter, value)
-		@counters[counter] = value
-	end
+  def init_reportable
+    @counters = Hash.new(0)
+    @prefix = ''
+  end
 
 
-	def report
-		rep = Hash.new
-		@counters.each_pair { |stat, value|
-			name = (@prefix=='') ? stat : @prefix+': '+stat
-			rep[name] = value
-		}
-		rep
-	end
+  def report_prefix(prefix)
+    @prefix = prefix
+  end
+
+
+  def inc(counter)
+    @counters[counter] += 1
+  end
+
+
+  def add(counter, value)
+    @counters[counter] += value
+  end
+
+
+  def set(counter, value)
+    @counters[counter] = value
+  end
+
+
+  def report
+    rep = Hash.new
+    @counters.each_pair { |stat, value|
+      name = (@prefix=='') ? stat : @prefix+': '+stat
+      rep[name] = value
+    }
+    rep
+  end
 
 end
 
@@ -71,29 +71,29 @@ end
 =begin rdoc
 == Cachable
 Das Modul Cachable ermöglicht das Verwerten von zwischengespeicherten Ergebnisse
-für einen schnelleren Zugriff. 
+für einen schnelleren Zugriff.
 =end
 module Cachable
 
-	def init_cachable
-		@cache = Hash.new(false)
-	end
-
-	
-	def hit?(key)
-		@cache.has_key?(key)
-	end
+  def init_cachable
+    @cache = Hash.new(false)
+  end
 
 
-	def store(key, value)
-		res = value.nil? ? nil : value.dup
-		@cache[key] = res
-		value
-	end
+  def hit?(key)
+    @cache.has_key?(key)
+  end
 
-	
-	def retrieve(key)
-		value = @cache[key]
-		value.nil? ? nil : value.dup
-	end
+
+  def store(key, value)
+    res = value.nil? ? nil : value.dup
+    @cache[key] = res
+    value
+  end
+
+
+  def retrieve(key)
+    value = @cache[key]
+    value.nil? ? nil : value.dup
+  end
 end

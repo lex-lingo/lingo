@@ -27,7 +27,7 @@
 #                                         "Fax;Faxkopie;Telefax\n"
 #                          MultiKey
 #
-#  separator   (s.Text)	Gibt an, durch welches Zeichen eine Textzeile die Grundform von der Projektion trennt. Der Defaultwert ist 
+#  separator   (s.Text)  Gibt an, durch welches Zeichen eine Textzeile die Grundform von der Projektion trennt. Der Defaultwert ist 
 #                       abhängig vom Text-Format: KeyValue='*', WordClass=',' und MultiValue=';'.
 #
 #  use-lex              Gibt an, dass bei Mehrwort-Schlüsseln eine Vorab-Lexikalisierung vorgenommen wird durch Zuhilfenahme der

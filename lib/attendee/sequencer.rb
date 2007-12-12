@@ -22,13 +22,13 @@
 #  Lex Lingo rules from here on
 
 class WordSequence 
-	attr_reader :classes, :format
+  attr_reader :classes, :format
 private
 
-	def initialize(wordclasses, format)
-		@classes = wordclasses.upcase
-		@format = format
-	end
+  def initialize(wordclasses, format)
+    @classes = wordclasses.upcase
+    @format = format
+  end
 
 end
 
@@ -105,60 +105,60 @@ class Sequencer < BufferedAttendee
 
 protected
 
-	def init
-		#	Parameter verwerten
-		@stopper = get_array('stopper', TA_PUNCTUATION+','+TA_OTHER).collect {|s| s.upcase }
-		@seq_strings = get_key('sequences')
-		@seq_strings.collect! { |e| WordSequence.new(e[0], e[1]) }
-		forward(STR_CMD_ERR, 'Konfiguration ist leer') if @seq_strings.size==0
-	end
+  def init
+    #  Parameter verwerten
+    @stopper = get_array('stopper', TA_PUNCTUATION+','+TA_OTHER).collect {|s| s.upcase }
+    @seq_strings = get_key('sequences')
+    @seq_strings.collect! { |e| WordSequence.new(e[0], e[1]) }
+    forward(STR_CMD_ERR, 'Konfiguration ist leer') if @seq_strings.size==0
+  end
 
 
-	def control(cmd, par)
-		#	Jedes Control-Object ist auch Auslöser der Verarbeitung
-		process_buffer
-	end
+  def control(cmd, par)
+    #  Jedes Control-Object ist auch Auslöser der Verarbeitung
+    process_buffer
+  end
 
 
-	def process_buffer?
-		@buffer[-1].kind_of?(StringA) && @stopper.include?(@buffer[-1].attr.upcase)
-	end
+  def process_buffer?
+    @buffer[-1].kind_of?(StringA) && @stopper.include?(@buffer[-1].attr.upcase)
+  end
 
 
-	def process_buffer
-		return if @buffer.size==0
+  def process_buffer
+    return if @buffer.size==0
 
-		#	Sequence aus der Wortliste auslesen
-		@sequence = @buffer.collect { |obj|
-			res = '#'
-			if obj.kind_of?(Word)
-				lex = obj.lexicals[0]
-				if obj.attr!=WA_UNKNOWN && obj.attr!=WA_UNKMULPART # && lex.attr!=LA_VERB
-					res = lex.attr
-				end
-			end
-			res
-		}.join.upcase
+    #  Sequence aus der Wortliste auslesen
+    @sequence = @buffer.collect { |obj|
+      res = '#'
+      if obj.kind_of?(Word)
+        lex = obj.lexicals[0]
+        if obj.attr!=WA_UNKNOWN && obj.attr!=WA_UNKMULPART # && lex.attr!=LA_VERB
+          res = lex.attr
+        end
+      end
+      res
+    }.join.upcase
 
-		#		Muster erkennen
-		@seq_strings.each { |wordseq|
-			pos = 0
-			until (pos = @sequence.index(wordseq.classes, pos)).nil?
-				#	got a match
-				inc('Anzahl erkannter Sequenzen')
-				form = wordseq.format
-				lexis = []
-				(0...wordseq.classes.size).each { |j|
-					lex = @buffer[pos+j].lexicals[0]
-					form = form.gsub((j+1).to_s, lex.form)
-					lexis << lex
-				}
-				word = Word.new(form, WA_SEQUENCE) << Lexical.new(form, LA_SEQUENCE)
-				deferred_insert(pos, word)
-				pos += 1
-			end
-		}	
-		forward_buffer		
-	end
+    #    Muster erkennen
+    @seq_strings.each { |wordseq|
+      pos = 0
+      until (pos = @sequence.index(wordseq.classes, pos)).nil?
+        #  got a match
+        inc('Anzahl erkannter Sequenzen')
+        form = wordseq.format
+        lexis = []
+        (0...wordseq.classes.size).each { |j|
+          lex = @buffer[pos+j].lexicals[0]
+          form = form.gsub((j+1).to_s, lex.form)
+          lexis << lex
+        }
+        word = Word.new(form, WA_SEQUENCE) << Lexical.new(form, LA_SEQUENCE)
+        deferred_insert(pos, word)
+        pos += 1
+      end
+    }  
+    forward_buffer    
+  end
 
 end

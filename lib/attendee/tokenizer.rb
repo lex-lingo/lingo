@@ -98,73 +98,73 @@ class Tokenizer < Attendee
 
 protected
 
-	def init
-		#	Regular Expressions für Token-Erkennung einlesen
-		regulars = get_key('regulars', '')
-		forward(STR_CMD_ERR, 'regulars nicht definiert') if regulars.nil?
+  def init
+    #  Regular Expressions für Token-Erkennung einlesen
+    regulars = get_key('regulars', '')
+    forward(STR_CMD_ERR, 'regulars nicht definiert') if regulars.nil?
 
-		#	Mit _xxx_ gekennzeichnete Makros anwenden und Expressions ergänzen und umwandeln
-		macros = Hash.new
-		@rules = regulars.collect { |rule|
-			name = rule.keys[0]
-			expr = rule.values[0].gsub(/(_\w+?_)/) { macros[$1] }
-			
-			if name =~ /^_\w+_$/		#		is a macro
-				macros[name] = expr if name =~ /^_\w+_$/
-				nil
-			else
-				[name, Regexp.new('^'+expr)]
-			end
-		}.compact
-		
-		#	Der Tokenizer gibt jedes Zeilenende als Information weiter, sofern es sich 
-		#	nicht um die Verarbeitung einer LIR-Datei handelt. Im Falle einer normalen Datei
-		#	wird der Dateiname gespeichert und als Kennzeichen für die Erzeugung von 
-		#	Zeilenende-Nachrichten herangezogen.
-		@filename = nil
-	end
-
-
-	def control(cmd, param)
-		case cmd
-    		when STR_CMD_FILE then @filename = param
-    		when STR_CMD_LIR  then @filename = nil
-		end
-	end
+    #  Mit _xxx_ gekennzeichnete Makros anwenden und Expressions ergänzen und umwandeln
+    macros = Hash.new
+    @rules = regulars.collect { |rule|
+      name = rule.keys[0]
+      expr = rule.values[0].gsub(/(_\w+?_)/) { macros[$1] }
+      
+      if name =~ /^_\w+_$/    #    is a macro
+        macros[name] = expr if name =~ /^_\w+_$/
+        nil
+      else
+        [name, Regexp.new('^'+expr)]
+      end
+    }.compact
+    
+    #  Der Tokenizer gibt jedes Zeilenende als Information weiter, sofern es sich 
+    #  nicht um die Verarbeitung einer LIR-Datei handelt. Im Falle einer normalen Datei
+    #  wird der Dateiname gespeichert und als Kennzeichen für die Erzeugung von 
+    #  Zeilenende-Nachrichten herangezogen.
+    @filename = nil
+  end
 
 
-	def process(obj)
-		if obj.is_a?(String)
-			inc('Anzahl Zeilen')
-			tokenize(obj.strip).each { |token|
-				inc('Anzahl Muster '+token.attr)
-				inc('Anzahl Token')
-				forward(token) 
-			}
-			forward(STR_CMD_EOL, @filename) unless @filename.nil?
-		else
-			forward(obj)
-		end
-	end
+  def control(cmd, param)
+    case cmd
+        when STR_CMD_FILE then @filename = param
+        when STR_CMD_LIR  then @filename = nil
+    end
+  end
+
+
+  def process(obj)
+    if obj.is_a?(String)
+      inc('Anzahl Zeilen')
+      tokenize(obj.strip).each { |token|
+        inc('Anzahl Muster '+token.attr)
+        inc('Anzahl Token')
+        forward(token) 
+      }
+      forward(STR_CMD_EOL, @filename) unless @filename.nil?
+    else
+      forward(obj)
+    end
+  end
 
 
 private
 
-	#	tokenize("Eine Zeile.")	->	[:Eine/WORD:, :Zeile/WORD:, :./PUNC:]
-	def tokenize(textline)
-		rule = name = expr = nil
-		token = []
-		until textline.empty?
-			@rules.each { |rule|
-				name, expr = rule
-				if textline =~ expr
-					token << Token.new($~[0], name)
-					textline = $'.strip
-					break
-				end
-			}
-		end
-		token
-	end
+  #  tokenize("Eine Zeile.")  ->  [:Eine/WORD:, :Zeile/WORD:, :./PUNC:]
+  def tokenize(textline)
+    rule = name = expr = nil
+    token = []
+    until textline.empty?
+      @rules.each { |rule|
+        name, expr = rule
+        if textline =~ expr
+          token << Token.new($~[0], name)
+          textline = $'.strip
+          break
+        end
+      }
+    end
+    token
+  end
 
 end

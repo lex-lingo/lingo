@@ -71,150 +71,150 @@ require 'lib/types'
 
 
 class Attendee
-	include Reportable
+  include Reportable
 
-	@@library_config = nil
+  @@library_config = nil
 
 private
 
-	def initialize(config)
-		init_reportable
+  def initialize(config)
+    init_reportable
 
-		begin
-			@@library_config = Lingo::config['language/dictionary']
-		rescue
-			raise "Fehler in der .lang-Datei bei 'language/dictionary'"
-		end if @@library_config.nil?
-		
-		#		Informationen für Teilnehmer vorbereiten
-		@config = config
-		@subscriber = Array.new
-		
-		#		Teilnehmer initialisieren
-		init if self.class.method_defined?(:init)
-		
-		@attendee_can_control = self.class.method_defined?(:control)
-		@attendee_can_process = self.class.method_defined?(:process)
-		
-		@skip_this_command = false
-	end
+    begin
+      @@library_config = Lingo::config['language/dictionary']
+    rescue
+      raise "Fehler in der .lang-Datei bei 'language/dictionary'"
+    end if @@library_config.nil?
+    
+    #    Informationen für Teilnehmer vorbereiten
+    @config = config
+    @subscriber = Array.new
+    
+    #    Teilnehmer initialisieren
+    init if self.class.method_defined?(:init)
+    
+    @attendee_can_control = self.class.method_defined?(:control)
+    @attendee_can_process = self.class.method_defined?(:process)
+    
+    @skip_this_command = false
+  end
 
 
 public
 
-	def add_subscriber( subscriber )
-		@subscriber += subscriber
-	end
+  def add_subscriber( subscriber )
+    @subscriber += subscriber
+  end
 
 
 
-	def listen(obj)
-	  
-		unless obj.is_a?(AgendaItem)
-			#		Informationen zum aktuellen Tagesordnungspunkt (TOP) verarbeiten
-			if @attendee_can_process
-				inc('Objekte empfangen')
-				process(obj) 
-			else
-				forward(obj)
-			end
-		else
-			#		Neuen TOP verarbeiten
-			if @attendee_can_control
-				inc('TOPs empfangen')
-				control(obj.cmd, obj.param) 
-			end
+  def listen(obj)
+    
+    unless obj.is_a?(AgendaItem)
+      #    Informationen zum aktuellen Tagesordnungspunkt (TOP) verarbeiten
+      if @attendee_can_process
+        inc('Objekte empfangen')
+        process(obj) 
+      else
+        forward(obj)
+      end
+    else
+      #    Neuen TOP verarbeiten
+      if @attendee_can_control
+        inc('TOPs empfangen')
+        control(obj.cmd, obj.param) 
+      end
 
-			#		Spezialbehandlung für einige TOPs nach Verarbeitung
-			case obj.cmd
-			#		keine weitere Behandlung oder Weiterleitung
-			when STR_CMD_TALK then nil
-			#		Standardprotokollinformationen ausgeben
-			when STR_CMD_STATUS
-				printf "\nTeilnehmer <%s> verbunden von '%s' nach '%s' berichtet...\n", @config['name'], @config['in'], @config['out']					
-				report.to_a.sort.each { |info| puts "   #{info[0]} = #{info[1]}" }
-				forward(obj.cmd, obj.param)
-			else
-				if @skip_this_command
-					@skip_this_command = false
-				else
-					forward(obj.cmd, obj.param)
-				end
-			end
-		end
-	end
+      #    Spezialbehandlung für einige TOPs nach Verarbeitung
+      case obj.cmd
+      #    keine weitere Behandlung oder Weiterleitung
+      when STR_CMD_TALK then nil
+      #    Standardprotokollinformationen ausgeben
+      when STR_CMD_STATUS
+        printf "\nTeilnehmer <%s> verbunden von '%s' nach '%s' berichtet...\n", @config['name'], @config['in'], @config['out']          
+        report.to_a.sort.each { |info| puts "   #{info[0]} = #{info[1]}" }
+        forward(obj.cmd, obj.param)
+      else
+        if @skip_this_command
+          @skip_this_command = false
+        else
+          forward(obj.cmd, obj.param)
+        end
+      end
+    end
+  end
 
 
-	def talk(obj)
-		@subscriber.each { |attendee| attendee.listen(obj) }
-	end
+  def talk(obj)
+    @subscriber.each { |attendee| attendee.listen(obj) }
+  end
 
 
 private
-	
-	def deleteCmd
-		@skip_this_command = true
-	end
-	
+  
+  def deleteCmd
+    @skip_this_command = true
+  end
+  
 
-	def forward(obj, param=nil)
-		if param.nil?
-			#		Information weiterreichen
-			talk(obj)
-		else
-			#		TOP weiterreichen (wenn keine Warnung oder Fehler)
-			case obj
-				when STR_CMD_WARN	then printf "+%s\n|   %s: %s\n+%s\n", '-'*60, @config['name'], param, '-'*60
-				when STR_CMD_ERR	then printf "%s\n=   %s: %s\n%s\n", '='*61, @config['name'], param, '='*61;	exit( 1 )
-				else
-					talk(AgendaItem.new(obj, param))
-			end
-		end
-	end
-
-
-	#	---------------------------------------------------
-	#		Konfigurationshilfsmethoden
-	#	---------------------------------------------------
-	def has_key?(key)
-		!@config.nil? && @config.has_key?(key)
-	end
-
-	
-	def get_key(key, default=nil)
-		forward(STR_CMD_ERR, "Attribut #{key} nicht gesetzt") if default.nil? && !has_key?(key)
-		@config.fetch(key, default)
-	end
+  def forward(obj, param=nil)
+    if param.nil?
+      #    Information weiterreichen
+      talk(obj)
+    else
+      #    TOP weiterreichen (wenn keine Warnung oder Fehler)
+      case obj
+        when STR_CMD_WARN  then printf "+%s\n|   %s: %s\n+%s\n", '-'*60, @config['name'], param, '-'*60
+        when STR_CMD_ERR  then printf "%s\n=   %s: %s\n%s\n", '='*61, @config['name'], param, '='*61;  exit( 1 )
+        else
+          talk(AgendaItem.new(obj, param))
+      end
+    end
+  end
 
 
-	def get_array(key, default=nil)
-		get_key(key, default).split(STRING_SEPERATOR_PATTERN)
-	end
-	
+  #  ---------------------------------------------------
+  #    Konfigurationshilfsmethoden
+  #  ---------------------------------------------------
+  def has_key?(key)
+    !@config.nil? && @config.has_key?(key)
+  end
 
-	#	---------------------------------------------------
-	#		Abstrakte Methoden
-	#
-	#		init
-	#		control(cmd, param)
-	#		process(obj)
-	#	---------------------------------------------------
+  
+  def get_key(key, default=nil)
+    forward(STR_CMD_ERR, "Attribut #{key} nicht gesetzt") if default.nil? && !has_key?(key)
+    @config.fetch(key, default)
+  end
+
+
+  def get_array(key, default=nil)
+    get_key(key, default).split(STRING_SEPERATOR_PATTERN)
+  end
+  
+
+  #  ---------------------------------------------------
+  #    Abstrakte Methoden
+  #
+  #    init
+  #    control(cmd, param)
+  #    process(obj)
+  #  ---------------------------------------------------
 end
 
 
 #==============================================================================
-#		BufferedAttendee 
+#    BufferedAttendee 
 #==============================================================================
 
 class BufferInsert
-	attr_reader :position, :object
+  attr_reader :position, :object
 
 private
 
-	def initialize(pos, obj)
-		@position = pos
-		@object = obj
-	end
+  def initialize(pos, obj)
+    @position = pos
+    @object = obj
+  end
 
 end
 
@@ -224,60 +224,60 @@ class BufferedAttendee < Attendee
 
 private
 
-	def initialize(config)
-		#	In den Buffer werden alle Objekte geschrieben, bis process_buffer? == true ist
-		@buffer = []
-		#	deferred_inserts beeinflussen nicht die Buffer-Größe, sondern werden an einer 
-		#	bestimmten Stelle in den Datenstrom eingefügt
-		@deferred_inserts = []
-		super
-	end
+  def initialize(config)
+    #  In den Buffer werden alle Objekte geschrieben, bis process_buffer? == true ist
+    @buffer = []
+    #  deferred_inserts beeinflussen nicht die Buffer-Größe, sondern werden an einer 
+    #  bestimmten Stelle in den Datenstrom eingefügt
+    @deferred_inserts = []
+    super
+  end
 
 protected
-	
-	def process(obj)
-		@buffer.push(obj)
-		if process_buffer?
-			process_buffer
-		end
-	end
+  
+  def process(obj)
+    @buffer.push(obj)
+    if process_buffer?
+      process_buffer
+    end
+  end
 
 private
-	
-	def forward_buffer
-		#	Aufgeschobene Einfügungen in Buffer kopieren
-		@deferred_inserts.sort! { |x,y| y.position <=> x.position }
-		@deferred_inserts.each do |ins|
-			case ins.position
-			when 0				then	@buffer.unshift(ins.object)
-			when @buffer.size-1	then	@buffer.push(ins.object)
-			else
-				@buffer = @buffer[0...ins.position] + [ins.object] + @buffer[ins.position..-1]
-			end
-		end
-		@deferred_inserts.clear
+  
+  def forward_buffer
+    #  Aufgeschobene Einfügungen in Buffer kopieren
+    @deferred_inserts.sort! { |x,y| y.position <=> x.position }
+    @deferred_inserts.each do |ins|
+      case ins.position
+      when 0        then  @buffer.unshift(ins.object)
+      when @buffer.size-1  then  @buffer.push(ins.object)
+      else
+        @buffer = @buffer[0...ins.position] + [ins.object] + @buffer[ins.position..-1]
+      end
+    end
+    @deferred_inserts.clear
 
-		#	Buffer weiterleiten
-		@buffer.each do |obj|
-			forward(obj)
-		end
-		@buffer.clear
-	end
+    #  Buffer weiterleiten
+    @buffer.each do |obj|
+      forward(obj)
+    end
+    @buffer.clear
+  end
 
-	
-	def process_buffer?
-		true
-	end
-	
+  
+  def process_buffer?
+    true
+  end
+  
 
-	def process_buffer
-		#	to be defined by child class
-	end
+  def process_buffer
+    #  to be defined by child class
+  end
 
 
-	def deferred_insert(pos, obj)
-		@deferred_inserts << BufferInsert.new(pos, obj)
-	end	
-	
+  def deferred_insert(pos, obj)
+    @deferred_inserts << BufferInsert.new(pos, obj)
+  end  
+  
 end
 

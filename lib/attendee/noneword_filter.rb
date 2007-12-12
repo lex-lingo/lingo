@@ -68,33 +68,33 @@ class Noneword_filter < Attendee
 
 protected
 
-	def init
-		@nonewords = []
-	end
-	
-	
-	#	Control behandelt die Kommandos zum Öffnen und Schließen einer Datei. 
-	#	Für jede Datei wird ein neuer Satz nicht erkannter Wörter registriert.
-	def control(cmd, par)
-		case cmd
-			when STR_CMD_FILE
-				@nonewords.clear
-			when STR_CMD_EOL
-				deleteCmd
-			when STR_CMD_RECORD, STR_CMD_EOF
-				nones = @nonewords.sort.uniq
-				nones.each { |nw| forward(nw) }
-				add('Objekte gefiltert', nones.size)
-				@nonewords.clear
-		end
-	end
+  def init
+    @nonewords = []
+  end
+  
+  
+  #  Control behandelt die Kommandos zum Öffnen und Schließen einer Datei. 
+  #  Für jede Datei wird ein neuer Satz nicht erkannter Wörter registriert.
+  def control(cmd, par)
+    case cmd
+      when STR_CMD_FILE
+        @nonewords.clear
+      when STR_CMD_EOL
+        deleteCmd
+      when STR_CMD_RECORD, STR_CMD_EOF
+        nones = @nonewords.sort.uniq
+        nones.each { |nw| forward(nw) }
+        add('Objekte gefiltert', nones.size)
+        @nonewords.clear
+    end
+  end
 
 
-	def process(obj)
-		if obj.is_a?(Word) && obj.attr==WA_UNKNOWN
-			inc('Anzahl nicht erkannter Wörter')
-			@nonewords << obj.form.downcase
-		end
-	end
-	
+  def process(obj)
+    if obj.is_a?(Word) && obj.attr==WA_UNKNOWN
+      inc('Anzahl nicht erkannter Wörter')
+      @nonewords << obj.form.downcase
+    end
+  end
+  
 end

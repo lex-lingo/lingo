@@ -77,78 +77,78 @@ class Textwriter < Attendee
 
 protected
 
-	def init
-		@ext = get_key('ext', 'txt2')
-		@lir = get_key('lir-format', false)
-		@sep = eval("\"#{@config['sep'] || ' '}\"")
-		@sep = ' ' if @lir
-		@no_sep = true
-	end
+  def init
+    @ext = get_key('ext', 'txt2')
+    @lir = get_key('lir-format', false)
+    @sep = eval("\"#{@config['sep'] || ' '}\"")
+    @sep = ' ' if @lir
+    @no_sep = true
+  end
 
 
-	def control(cmd, par)
-		case cmd
-		when STR_CMD_LIR
-			@lir = true
-		when STR_CMD_FILE
-			@no_sep = true
-			@filename = par.sub(/(\.[^.]+)?$/, '.'+@ext)
-			@file = File.new(@filename,'w')
-			inc('Anzahl Dateien')
-			
-			@lir_rec_no = ''
-			@lir_rec_buf = Array.new
-			
-		when STR_CMD_RECORD
-			@no_sep = true
-			if @lir
-				flush_lir_buffer
-				@lir_rec_no = par
-			end
-			
-		when STR_CMD_EOL
-			@no_sep = true
-			unless @lir
-				@file.puts # unless @sep=="\n"
-				inc('Anzahl Zeilen')
-			end
-			
-		when STR_CMD_EOF
-			flush_lir_buffer if @lir
-			@file.close
-			add('Anzahl Bytes', File.stat(@filename).size)
-		end
-	end
+  def control(cmd, par)
+    case cmd
+    when STR_CMD_LIR
+      @lir = true
+    when STR_CMD_FILE
+      @no_sep = true
+      @filename = par.sub(/(\.[^.]+)?$/, '.'+@ext)
+      @file = File.new(@filename,'w')
+      inc('Anzahl Dateien')
+      
+      @lir_rec_no = ''
+      @lir_rec_buf = Array.new
+      
+    when STR_CMD_RECORD
+      @no_sep = true
+      if @lir
+        flush_lir_buffer
+        @lir_rec_no = par
+      end
+      
+    when STR_CMD_EOL
+      @no_sep = true
+      unless @lir
+        @file.puts # unless @sep=="\n"
+        inc('Anzahl Zeilen')
+      end
+      
+    when STR_CMD_EOF
+      flush_lir_buffer if @lir
+      @file.close
+      add('Anzahl Bytes', File.stat(@filename).size)
+    end
+  end
 
 
-	def process(obj)
-		if @lir
-			@lir_rec_buf << (obj.kind_of?(Token) ? obj.form : obj.to_s)
-		else
-			@file.print @sep unless @no_sep
-			@no_sep=false if @no_sep
-			if obj.is_a?(Word) || obj.is_a?(Token)
-				@file.print obj.form
-			else
-				@file.print obj
-			end
-		end
-	end
+  def process(obj)
+    if @lir
+      @lir_rec_buf << (obj.kind_of?(Token) ? obj.form : obj.to_s)
+    else
+      @file.print @sep unless @no_sep
+      @no_sep=false if @no_sep
+      if obj.is_a?(Word) || obj.is_a?(Token)
+        @file.print obj.form
+      else
+        @file.print obj
+      end
+    end
+  end
 
 
 private
-	
-	def flush_lir_buffer
- 		unless @lir_rec_no.empty? || @lir_rec_buf.empty?
- 			if @sep =~ /\n/
- 				@file.print '*', @lir_rec_no, "\n", @lir_rec_buf.join(@sep), "\n"
- 			else
- 				@file.print @lir_rec_no, '*', @lir_rec_buf.join(@sep), "\n"
- 			end
- 		end
-		@lir_rec_no = ''
-		@lir_rec_buf.clear
-	end
+  
+  def flush_lir_buffer
+     unless @lir_rec_no.empty? || @lir_rec_buf.empty?
+       if @sep =~ /\n/
+         @file.print '*', @lir_rec_no, "\n", @lir_rec_buf.join(@sep), "\n"
+       else
+         @file.print @lir_rec_no, '*', @lir_rec_buf.join(@sep), "\n"
+       end
+     end
+    @lir_rec_no = ''
+    @lir_rec_buf.clear
+  end
 
 end
 

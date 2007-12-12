@@ -64,29 +64,29 @@ ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
 
 class Wordsearcher < Attendee
 
-	def init
-		#	Wörterbuch bereitstellen
-		src = get_array('source')
-		mod = get_key('mode', 'all')
-		@dic = Dictionary.new({'source'=>src, 'mode'=>mod}, @@library_config)
-	end
+  def init
+    #  Wörterbuch bereitstellen
+    src = get_array('source')
+    mod = get_key('mode', 'all')
+    @dic = Dictionary.new({'source'=>src, 'mode'=>mod}, @@library_config)
+  end
 
 
-	def control(cmd, par)
-		@dic.report.each_pair { |key, value|
-			set(key, value) 
-		} if cmd == STR_CMD_STATUS
-	end
+  def control(cmd, par)
+    @dic.report.each_pair { |key, value|
+      set(key, value) 
+    } if cmd == STR_CMD_STATUS
+  end
 
 
-	def process(obj)
-		if obj.is_a?(Token) && obj.attr == TA_WORD
-			inc('Anzahl gesuchter Wörter')
-			word = @dic.find_word(obj.form)
-			inc('Anzahl gefundener Wörter') unless word.attr == WA_UNKNOWN
-			obj = word
-		end
-		forward(obj)
-	end
+  def process(obj)
+    if obj.is_a?(Token) && obj.attr == TA_WORD
+      inc('Anzahl gesuchter Wörter')
+      word = @dic.find_word(obj.form)
+      inc('Anzahl gefundener Wörter') unless word.attr == WA_UNKNOWN
+      obj = word
+    end
+    forward(obj)
+  end
 
 end

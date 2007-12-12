@@ -79,71 +79,71 @@ class Vector_filter < Attendee
 
 protected
 
-	def init
-		@lexis = Regexp.new(get_key('lexicals', '[sy]').downcase)
-		@sort = get_key('sort', 'normal').downcase
-		@skip = get_array('skip', TA_PUNCTUATION+','+TA_OTHER).collect {|s| s.upcase }
-		@vectors = Array.new
-		@word_count = 0
-	end
+  def init
+    @lexis = Regexp.new(get_key('lexicals', '[sy]').downcase)
+    @sort = get_key('sort', 'normal').downcase
+    @skip = get_array('skip', TA_PUNCTUATION+','+TA_OTHER).collect {|s| s.upcase }
+    @vectors = Array.new
+    @word_count = 0
+  end
 
 
-	def control(cmd, par)
-		case cmd
-			when STR_CMD_EOL
-				deleteCmd
-			when STR_CMD_FILE, STR_CMD_RECORD, STR_CMD_EOF
-				sendVector
-				@vectors.clear
-		end
-	end
+  def control(cmd, par)
+    case cmd
+      when STR_CMD_EOL
+        deleteCmd
+      when STR_CMD_FILE, STR_CMD_RECORD, STR_CMD_EOF
+        sendVector
+        @vectors.clear
+    end
+  end
 
 
-	def process(obj)
-		if obj.is_a?(Word)
-			@word_count += 1 if @skip.index(obj.attr).nil?
-			unless obj.lexicals.nil?
-				lexis = obj.get_class(@lexis) #lexicals.collect { |lex| (lex.attr =~ @lexis) ? lex : nil }.compact # get_class(@lexis)
-				lexis.each { |lex| @vectors << lex.form.downcase }
-				add('Anzahl von Vektor-Wörtern', lexis.size)
-			end
-		end
-	end
+  def process(obj)
+    if obj.is_a?(Word)
+      @word_count += 1 if @skip.index(obj.attr).nil?
+      unless obj.lexicals.nil?
+        lexis = obj.get_class(@lexis) #lexicals.collect { |lex| (lex.attr =~ @lexis) ? lex : nil }.compact # get_class(@lexis)
+        lexis.each { |lex| @vectors << lex.form.downcase }
+        add('Anzahl von Vektor-Wörtern', lexis.size)
+      end
+    end
+  end
 
 
 private
 
-	def sendVector
-		return if @vectors.size==0
+  def sendVector
+    return if @vectors.size==0
 
-		add('Objekte gefiltert', @vectors.size)
-			
-		#		Array der Vector-Wörter zählen und nach Häufigkeit sortieren
-		if @sort=='normal'
-			@vectors = @vectors.compact.sort.uniq
-		else
-			cnt = Hash.new(0)
-			@vectors.compact.each { |e| cnt[e]+=1 }
-			@vectors = cnt.to_a.sort { |x,y|
-				if (y[1]<=>x[1])==0
-					x[0]<=>y[0]
-				else
-					y[1]<=>x[1]
-				end
-			}
-		end
+    add('Objekte gefiltert', @vectors.size)
+      
+    #    Array der Vector-Wörter zählen und nach Häufigkeit sortieren
+    if @sort=='normal'
+      @vectors = @vectors.compact.sort.uniq
+    else
+      cnt = Hash.new(0)
+      @vectors.compact.each { |e| cnt[e]+=1 }
+      @vectors = cnt.to_a.sort { |x,y|
+        if (y[1]<=>x[1])==0
+          x[0]<=>y[0]
+        else
+          y[1]<=>x[1]
+        end
+      }
+    end
 
-		#		Vectoren je nach Parameter formatiert weiterleiten
-		@vectors.collect { |vec|
-			case @sort
-			when 'term_abs' then sprintf "%d %s", vec[1], vec[0]
-			when 'term_rel' then sprintf "%6.5f %s", vec[1].to_f/@word_count, vec[0]
-			when 'sto_abs'	then sprintf "%s {%d}", vec[0], vec[1]
-			when 'sto_rel'	then sprintf "%s {%6.5f}", vec[0], vec[1].to_f/@word_count
-			else sprintf "%s", vec
-			end
-		}.each { |str| forward(str) }
-		
-	end
-	
+    #    Vectoren je nach Parameter formatiert weiterleiten
+    @vectors.collect { |vec|
+      case @sort
+      when 'term_abs' then sprintf "%d %s", vec[1], vec[0]
+      when 'term_rel' then sprintf "%6.5f %s", vec[1].to_f/@word_count, vec[0]
+      when 'sto_abs'  then sprintf "%s {%d}", vec[0], vec[1]
+      when 'sto_rel'  then sprintf "%s {%6.5f}", vec[0], vec[1].to_f/@word_count
+      else sprintf "%s", vec
+      end
+    }.each { |str| forward(str) }
+    
+  end
+  
 end

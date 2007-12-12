@@ -25,156 +25,156 @@
 require 'pathname'
 
 #
-#		Util stellt Hilfsroutinen bereit, die der Denke des Autors besser entsprechen.
+#    Util stellt Hilfsroutinen bereit, die der Denke des Autors besser entsprechen.
 #
 
 
 
 
-#		Erweiterung der Klasse String.
+#    Erweiterung der Klasse String.
 class String
-	alias old_split split
-	alias old_downcase downcase
-	
-	#		_str_.split( _anInteger_ ) -> _anArray_
-	#
-	#		Die Methode split wird um eine Aufruf-Variante erweitert, z.B.
-	#
-	#		<tt>"Wortklasse".split(4) -> ["Wort", "klasse"]</tt> 
-	def split(*par)
-		if par.size == 1 && par[0].kind_of?(Fixnum)
-			[slice(0...par[0]), slice(par[0]..self.size-1)]
-		else
-			old_split(*par)
-		end
-	end
-	
-	
-	def downcase # utf-8 downcase
-		self.old_downcase.tr('ÄÖÜÁÂÀÉÊÈÍÎÌÓÔÒÚÛÙİ', 'äöüáâàéêèíîìóôòúûùı')
-	end
-	
-	
-	HEX_CHARS = '0123456789abcdef'.freeze
+  alias old_split split
+  alias old_downcase downcase
+  
+  #    _str_.split( _anInteger_ ) -> _anArray_
+  #
+  #    Die Methode split wird um eine Aufruf-Variante erweitert, z.B.
+  #
+  #    <tt>"Wortklasse".split(4) -> ["Wort", "klasse"]</tt> 
+  def split(*par)
+    if par.size == 1 && par[0].kind_of?(Fixnum)
+      [slice(0...par[0]), slice(par[0]..self.size-1)]
+    else
+      old_split(*par)
+    end
+  end
+  
+  
+  def downcase # utf-8 downcase
+    self.old_downcase.tr('ÄÖÜÁÂÀÉÊÈÍÎÌÓÔÒÚÛÙİ', 'äöüáâàéêèíîìóôòúûùı')
+  end
+  
+  
+  HEX_CHARS = '0123456789abcdef'.freeze
 
-	def to_x
-		hex = ''
-		each_byte { |byte|
+  def to_x
+    hex = ''
+    each_byte { |byte|
       # To get a hex representation for a char we just utilize
       # the quotient and the remainder of division by base 16.
       q, r = byte.divmod(16)
-			hex << HEX_CHARS[q] << HEX_CHARS[r]
-		}
-		hex
-	end
-	
-	
-	def from_x
-		str, q, first = '', 0, false
-		each_byte { |byte|
+      hex << HEX_CHARS[q] << HEX_CHARS[r]
+    }
+    hex
+  end
+  
+  
+  def from_x
+    str, q, first = '', 0, false
+    each_byte { |byte|
       # Our hex chars are 2 bytes wide, so we have to keep track
       # of whether it's the first or the second of the two.
       #
       # NOTE: inject with each_slice(2) would be a natural fit,
       # but it's kind of slow...
-			if first = !first
-				q = HEX_CHARS.index(byte)
-			else
+      if first = !first
+        q = HEX_CHARS.index(byte)
+      else
         # Now we got both parts, so let's do the
         # inverse of divmod(16): q * 16 + r
-				str << q * 16 + HEX_CHARS.index(byte)
-			end
-		}
-		str
-	end
+        str << q * 16 + HEX_CHARS.index(byte)
+      end
+    }
+    str
+  end
 
 
-	#	als patch für dictionary.select.sort.uniqual
-	def attr
-		''
-	end
+  #  als patch für dictionary.select.sort.uniqual
+  def attr
+    ''
+  end
 
 end
 
 
-#		Erweiterung der Klasse File
+#    Erweiterung der Klasse File
 class File
 
-	#		File.change_ext( _fileName_, _aString_ ) -> _fileName_
-	#
-	#		Tauscht bei einem bestehenden Dateinamen die Endung aus.
-	#
-	#		File.change_ext('C:\dev\rubyling.rb', 'save') -> 'C:\dev\rubyling.save'
-	def File.change_ext(fileName, ext)
-		fileName =~ /^(.*\.)[^\.]+$/
-		$1+ext
-	end
-	
+  #    File.change_ext( _fileName_, _aString_ ) -> _fileName_
+  #
+  #    Tauscht bei einem bestehenden Dateinamen die Endung aus.
+  #
+  #    File.change_ext('C:\dev\rubyling.rb', 'save') -> 'C:\dev\rubyling.save'
+  def File.change_ext(fileName, ext)
+    fileName =~ /^(.*\.)[^\.]+$/
+    $1+ext
+  end
+  
 
-	def File.obj_type(obj)
-		db_re = Regexp.new($CFG['db-file-index-pattern'])
-		begin
-			obj_type = (File.stat(obj).directory?) ? 'dir' : 'file'
-			if obj_type == 'file'
-				found_index = 0
-				File.open(obj) { |file|
-					(1..50).each { |i|
-						found_index += 1 if file.gets =~ db_re 
-					} 
-				}
-				obj_type = 'db' if found_index > 3
-			end
-			rescue StandardError
-				obj_type = nil
-		end
-		obj_type
-	end
-	
+  def File.obj_type(obj)
+    db_re = Regexp.new($CFG['db-file-index-pattern'])
+    begin
+      obj_type = (File.stat(obj).directory?) ? 'dir' : 'file'
+      if obj_type == 'file'
+        found_index = 0
+        File.open(obj) { |file|
+          (1..50).each { |i|
+            found_index += 1 if file.gets =~ db_re 
+          } 
+        }
+        obj_type = 'db' if found_index > 3
+      end
+      rescue StandardError
+        obj_type = nil
+    end
+    obj_type
+  end
+  
 end
 
 
 class Array
 
-	def uniq2
-		if self.size > 1
-			this = nil
-			(self.size-1).downto(1) {|i|
-				if self[i]==this
-					self.delete_at(i)
-				else
-					this = self[i]
-				end
-			}
-		end
-		self
-	end
-	
-	def uniqual
-		result = self.dup
-		if result.size > 1
-			this = result[-1]
-			(result.size-2).downto(0) {|i|
-				if result[i]==this
-					result.delete_at(i)
-				else
-					this = result[i]
-				end
-			}
-		end
-		result
-	end
-	
+  def uniq2
+    if self.size > 1
+      this = nil
+      (self.size-1).downto(1) {|i|
+        if self[i]==this
+          self.delete_at(i)
+        else
+          this = self[i]
+        end
+      }
+    end
+    self
+  end
+  
+  def uniqual
+    result = self.dup
+    if result.size > 1
+      this = result[-1]
+      (result.size-2).downto(0) {|i|
+        if result[i]==this
+          result.delete_at(i)
+        else
+          this = result[i]
+        end
+      }
+    end
+    result
+  end
+  
 end
 
 
 class Pathname
-	def create_path
-		here = Pathname.new( '.' )
-		self.split[0].each_filename do |path|
-			here += path
-			unless here.directory?
-				here.mkdir(0777)
-			end
-		end
-	end
+  def create_path
+    here = Pathname.new( '.' )
+    self.split[0].each_filename do |path|
+      here += path
+      unless here.directory?
+        here.mkdir(0777)
+      end
+    end
+  end
 end

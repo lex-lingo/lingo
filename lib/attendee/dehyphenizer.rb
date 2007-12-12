@@ -71,98 +71,98 @@ class Dehyphenizer < BufferedAttendee
 
 protected
 
-	def init
-		#	Parameter verwerten
-		@stopper = get_array('stopper', TA_PUNCTUATION+','+TA_OTHER).collect {|s| s.upcase }
-		
-		#	Wörterbuch bereitstellen
-		src = get_array('source')
-		mod = get_key('mode', 'all')
-		@dic = Dictionary.new({'source'=>src, 'mode'=>mod}, @@library_config)
-		@gra = Grammar.new({'source'=>src, 'mode'=>mod}, @@library_config)
-		
-		@number_of_expected_tokens_in_buffer = 2
-		@eof_handling = false
-		
-		@skip = get_array('skip', "").collect { |wc| wc.downcase }
-	end
+  def init
+    #  Parameter verwerten
+    @stopper = get_array('stopper', TA_PUNCTUATION+','+TA_OTHER).collect {|s| s.upcase }
+    
+    #  Wörterbuch bereitstellen
+    src = get_array('source')
+    mod = get_key('mode', 'all')
+    @dic = Dictionary.new({'source'=>src, 'mode'=>mod}, @@library_config)
+    @gra = Grammar.new({'source'=>src, 'mode'=>mod}, @@library_config)
+    
+    @number_of_expected_tokens_in_buffer = 2
+    @eof_handling = false
+    
+    @skip = get_array('skip', "").collect { |wc| wc.downcase }
+  end
 
 
-	def control(cmd, par)
-		@dic.report.each_pair { |key, value| set(key, value) } if cmd == STR_CMD_STATUS
-		
-		#	Jedes Control-Object ist auch Auslöser der Verarbeitung
-		if cmd == STR_CMD_RECORD || cmd == STR_CMD_EOF
-			@eof_handling = true
-			while number_of_valid_tokens_in_buffer > 1
-				process_buffer
-			end 
-			forward_number_of_token( @buffer.size, false )
-			@eof_handling = false
-		end
-	end
+  def control(cmd, par)
+    @dic.report.each_pair { |key, value| set(key, value) } if cmd == STR_CMD_STATUS
+    
+    #  Jedes Control-Object ist auch Auslöser der Verarbeitung
+    if cmd == STR_CMD_RECORD || cmd == STR_CMD_EOF
+      @eof_handling = true
+      while number_of_valid_tokens_in_buffer > 1
+        process_buffer
+      end 
+      forward_number_of_token( @buffer.size, false )
+      @eof_handling = false
+    end
+  end
 
 
-	def process_buffer?
-		number_of_valid_tokens_in_buffer >= @number_of_expected_tokens_in_buffer
-	end
+  def process_buffer?
+    number_of_valid_tokens_in_buffer >= @number_of_expected_tokens_in_buffer
+  end
 
 
-	def process_buffer
-		if @buffer[0].is_a?(Word) && 
-		  @buffer[0].form[-1..-1] == '-' && 
-		  @buffer[1].is_a?(Word) &&
-		  !(!( ttt = @buffer[1].get_class(/./) ).nil? && 
+  def process_buffer
+    if @buffer[0].is_a?(Word) && 
+      @buffer[0].form[-1..-1] == '-' && 
+      @buffer[1].is_a?(Word) &&
+      !(!( ttt = @buffer[1].get_class(/./) ).nil? && 
       !@skip.index( ttt[0].attr ).nil?)
 
 #p [@buffer[0..1], ttt, @skip.index( @buffer[1].get_class(/./) ).nil?]
 
-		  #   Einfache Zusammensetzung versuchen
-		  form = @buffer[0].form[0...-1] + @buffer[1].form
-		  word = @dic.find_word( form )
-		  word = @gra.find_compositum( form ) unless word.attr == WA_IDENTIFIED
-		  
+      #   Einfache Zusammensetzung versuchen
+      form = @buffer[0].form[0...-1] + @buffer[1].form
+      word = @dic.find_word( form )
+      word = @gra.find_compositum( form ) unless word.attr == WA_IDENTIFIED
+      
       unless word.attr == WA_IDENTIFIED || (word.attr == WA_KOMPOSITUM && word.get_class('x+').empty?)
         #   Zusammensetzung mit Bindestrich versuchen
-  		  form = @buffer[0].form + @buffer[1].form
-  		  word = @dic.find_word( form )
-   		  word = @gra.find_compositum( form ) unless word.attr == WA_IDENTIFIED
+        form = @buffer[0].form + @buffer[1].form
+        word = @dic.find_word( form )
+         word = @gra.find_compositum( form ) unless word.attr == WA_IDENTIFIED
       end
       
       unless word.attr == WA_IDENTIFIED || (word.attr == WA_KOMPOSITUM && word.get_class('x+').empty?)
         #   Zusammensetzung mit Bindestrich versuchen
-  		  form = @buffer[0].form + @buffer[1].form
-  		  word = @dic.find_word( form )
-  		  word = @gra.find_compositum( form ) unless word.attr == WA_IDENTIFIED
+        form = @buffer[0].form + @buffer[1].form
+        word = @dic.find_word( form )
+        word = @gra.find_compositum( form ) unless word.attr == WA_IDENTIFIED
       end
       
       if word.attr == WA_IDENTIFIED || (word.attr == WA_KOMPOSITUM && word.get_class('x+').empty?)
         @buffer[0] = word
         @buffer.delete_at( 1 )
-      end		  
+      end      
     end
-    			
-		#	Buffer weiterschaufeln
-		forward_number_of_token( 1, false )
-	end				
+          
+    #  Buffer weiterschaufeln
+    forward_number_of_token( 1, false )
+  end        
 
 
 private
 
-	#	Leitet 'len' Token weiter
-	def forward_number_of_token( len, count_punc = true )
-		begin
-			unless @buffer.empty?
-				forward( @buffer[0] )
-				len -= 1 unless count_punc && @buffer[0].form == CHAR_PUNCT
-				@buffer.delete_at( 0 )
-			end
-		end while len > 0
-	end
+  #  Leitet 'len' Token weiter
+  def forward_number_of_token( len, count_punc = true )
+    begin
+      unless @buffer.empty?
+        forward( @buffer[0] )
+        len -= 1 unless count_punc && @buffer[0].form == CHAR_PUNCT
+        @buffer.delete_at( 0 )
+      end
+    end while len > 0
+  end
 
-	#	Liefert die Anzahl gültiger Token zurück
-	def number_of_valid_tokens_in_buffer
-		@buffer.collect { |token| (token.form == CHAR_PUNCT) ? nil : 1 }.compact.size
-	end
-	
+  #  Liefert die Anzahl gültiger Token zurück
+  def number_of_valid_tokens_in_buffer
+    @buffer.collect { |token| (token.form == CHAR_PUNCT) ? nil : 1 }.compact.size
+  end
+  
 end

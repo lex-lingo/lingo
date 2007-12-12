@@ -2,7 +2,7 @@
 #
 #  database-Section - Definitionen für Wörterbücher
 #
-#  In der database-Section können alle benötigten Wörterbücher angegeben werden. 
+#  In der database-Section können alle benötigten Wörterbücher angegeben werden.
 #  Dabei werden folgende Attribute interpretiert:
 #
 #  Attribut    Default  Bedeutung
@@ -12,7 +12,7 @@
 #
 #  name                 Gibt den Ort der Quelldaten an.
 #
-#  def-wc      ?        Gibt eine Wortklasse vor die verwendet wird, wenn die Datenquelle über keine adäquate Information zur 
+#  def-wc      ?        Gibt eine Wortklasse vor die verwendet wird, wenn die Datenquelle über keine adäquate Information zur
 #                       Wortklasse eines Eintrags verfügt.
 #
 #  txt-format  KeyValue Gibt an, in welchem Format die Quelldaten je Zeile vorliegen. Dabei wird unterschieden zwischen
@@ -27,21 +27,21 @@
 #                                         "Fax;Faxkopie;Telefax\n"
 #                          MultiKey
 #
-#  separator   (s.Text)	Gibt an, durch welches Zeichen eine Textzeile die Grundform von der Projektion trennt. Der Defaultwert ist 
+#  separator   (s.Text)  Gibt an, durch welches Zeichen eine Textzeile die Grundform von der Projektion trennt. Der Defaultwert ist
 #                       abhängig vom Text-Format: KeyValue='*', WordClass=',' und MultiValue=';'.
 #
 #  use-lex              Gibt an, dass bei Mehrwort-Schlüsseln eine Vorab-Lexikalisierung vorgenommen wird durch Zuhilfenahme der
-#                       Wörterbücher, die mit diesem Attribut angegeben werden, z.B. use-lex='sys-dic'. 
-#                       Die Vorab-Lexikalisierung von Mehrwortgruppen ermöglicht die leichte Erkennung von allen möglichen 
+#                       Wörterbücher, die mit diesem Attribut angegeben werden, z.B. use-lex='sys-dic'.
+#                       Die Vorab-Lexikalisierung von Mehrwortgruppen ermöglicht die leichte Erkennung von allen möglichen
 #                       Dehnungsvarianten. Bei Mehrwort-Wörterbüchern, die ausschließlich Personennamen enthalten, kann dieser Wert
 #                       entfallen, da er nur die Verarbeitungsgeschwindigkeit vermindert ohne die Erkennungsquote zu erhöhen.
 #
-#  ACHTUNG: Wird mit dem Attribut use-lex ein anderes Wörterbuch referenziert, so sollte dieses VOR der ersten Referenzierung 
+#  ACHTUNG: Wird mit dem Attribut use-lex ein anderes Wörterbuch referenziert, so sollte dieses VOR der ersten Referenzierung
 #           definiert sein, da es sonst noch nicht existiert!
 #
 
 #    lingo language definition
---- 
+---
 language:
 
   name: 'Englisch'
@@ -64,7 +64,7 @@ language:
       min-avg-part-size: "4"
       append-wordclass: "+"
       skip-sequences: [ xx ]
-      
+
     suffix:
       #    Suffixliste, Stand: *****ENGLISCH****
       #    Suffixklasse:   s = Substantiv, a = Adjektiv, v = Verb, e = Eigenwort, f = Fugung
@@ -113,6 +113,6 @@ language:
         - [ fl,  st  ]
         - [ li,  h   ]
         - [ i,   s   ]
-        
+
     sequencer:
       sequences: [ [AS, "2, 1"], [AK, "2, 1"], [AAK, "3, 1 2"], [AAS, "3, 1 2"] ]

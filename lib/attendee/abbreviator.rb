@@ -70,48 +70,48 @@ class Abbreviator < BufferedAttendee
 
 protected
 
-	def init
-		#	Wörterbuch bereitstellen
-		src = get_array('source')
-		mod = get_key('mode', 'all')
-		@dic = Dictionary.new({'source'=>src, 'mode'=>mod}, @@library_config)
-	end
+  def init
+    #  Wörterbuch bereitstellen
+    src = get_array('source')
+    mod = get_key('mode', 'all')
+    @dic = Dictionary.new({'source'=>src, 'mode'=>mod}, @@library_config)
+  end
 
 
-	def control(cmd, par)
-		@dic.report.each_pair { |key, value| set(key, value) } if cmd == STR_CMD_STATUS
+  def control(cmd, par)
+    @dic.report.each_pair { |key, value| set(key, value) } if cmd == STR_CMD_STATUS
 
-		#	Jedes Control-Object ist auch Auslöser der Verarbeitung
-		process_buffer
-	end
+    #  Jedes Control-Object ist auch Auslöser der Verarbeitung
+    process_buffer
+  end
 
 
 private
 
-	def process_buffer?
-		@buffer[-1].kind_of?(Token) && @buffer[-1].form == CHAR_PUNCT
-	end
+  def process_buffer?
+    @buffer[-1].kind_of?(Token) && @buffer[-1].form == CHAR_PUNCT
+  end
 
 
-	def process_buffer
-		if @buffer.size < 2
-			forward_buffer
-			return
-		end
+  def process_buffer
+    if @buffer.size < 2
+      forward_buffer
+      return
+    end
 
-		#	Wort vor dem Punkt im Abkürzungswörterbuch suchen
-		if @buffer[-2].kind_of?(Token)
-			inc('Anzahl gesuchter Abkürzungen')
-			abbr = @dic.find_word(@buffer[-2].form)
-			if abbr.attr == WA_IDENTIFIED
-				inc('Anzahl gefundener Abkürzungen')
-				abbr.form += CHAR_PUNCT
-				@buffer[-2] = abbr
-				@buffer.delete_at(-1)
-			end
-		end
-		
-		forward_buffer
-	end
-	
+    #  Wort vor dem Punkt im Abkürzungswörterbuch suchen
+    if @buffer[-2].kind_of?(Token)
+      inc('Anzahl gesuchter Abkürzungen')
+      abbr = @dic.find_word(@buffer[-2].form)
+      if abbr.attr == WA_IDENTIFIED
+        inc('Anzahl gefundener Abkürzungen')
+        abbr.form += CHAR_PUNCT
+        @buffer[-2] = abbr
+        @buffer.delete_at(-1)
+      end
+    end
+    
+    forward_buffer
+  end
+  
 end

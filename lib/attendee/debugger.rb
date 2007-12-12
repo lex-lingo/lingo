@@ -87,23 +87,23 @@ class Debugger < Attendee
 
 protected
 
-	def init
-		@obj_eval = get_key('eval', 'true')
-		@cmd_eval = get_key('ceval', 'true')
-		@prompt = get_key('prompt', 'lex:) ')
-	end
-	
-	
-	def control(cmd, par)
-		if cmd!=STR_CMD_STATUS
-			puts "#{@prompt} #{AgendaItem.new(cmd, par).inspect}" if eval(@cmd_eval)
-		end
-	end
-	
-	
-	def process(obj)
-		puts "#{@prompt} #{obj.inspect}" if eval(@obj_eval)
-	end
-	
+  def init
+    @obj_eval = get_key('eval', 'true')
+    @cmd_eval = get_key('ceval', 'true')
+    @prompt = get_key('prompt', 'lex:) ')
+  end
+  
+  
+  def control(cmd, par)
+    if cmd!=STR_CMD_STATUS
+      puts "#{@prompt} #{AgendaItem.new(cmd, par).inspect}" if eval(@cmd_eval)
+    end
+  end
+  
+  
+  def process(obj)
+    puts "#{@prompt} #{obj.inspect}" if eval(@obj_eval)
+  end
+  
 end
 

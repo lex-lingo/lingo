@@ -47,36 +47,36 @@ class Meeting
 
 private
 
-	#	Meeting initialisieren
-	def initialize
-		@attendees = Array.new
-	end
+  #  Meeting initialisieren
+  def initialize
+    @attendees = Array.new
+  end
 
 
 public
 
-	#	Einladen aller Teilnehmer
-	def invite( invitation_list )
+  #  Einladen aller Teilnehmer
+  def invite( invitation_list )
 
-		#	Daten für Verlinkung der Teilnehmer vorbereiten	
-		supplier = Hash.new( [] )
-		subscriber = Hash.new( [] )
+    #  Daten für Verlinkung der Teilnehmer vorbereiten  
+    supplier = Hash.new( [] )
+    subscriber = Hash.new( [] )
 
     # Daten für automatische Verlinkung vorbereiten
     last_link_out = ''
     auto_link_number = 0 
     
-		#	Teilnehmer einzeln einladen		
-		invitation_list.each do |cfg|
-			#	att = {'attendee' => {'name'=>'Attendee', 'in'=>'nase', 'out'=>'ohr', 'param'=>'hase'}}
-			config = cfg.values[ 0 ]
-			config['name'] = cfg.keys[ 0 ].capitalize
+    #  Teilnehmer einzeln einladen    
+    invitation_list.each do |cfg|
+      #  att = {'attendee' => {'name'=>'Attendee', 'in'=>'nase', 'out'=>'ohr', 'param'=>'hase'}}
+      config = cfg.values[ 0 ]
+      config['name'] = cfg.keys[ 0 ].capitalize
 
-			#	Link-Parameter standardisieren
-			[ 'in', 'out' ].each do |key|
-				config[ key ] ||= ''
-				config[ key ].downcase!
-			end
+      #  Link-Parameter standardisieren
+      [ 'in', 'out' ].each do |key|
+        config[ key ] ||= ''
+        config[ key ].downcase!
+      end
 
       # Automatisch verlinken  
       if config['in'] == ''
@@ -87,64 +87,64 @@ public
       end
       last_link_out = config['out']
       
-			#	Attendee-Daten ergänzen
-			data = Lingo.config["language/attendees/#{config['name'].downcase}"]
-			config.update( data ) unless data.nil?
+      #  Attendee-Daten ergänzen
+      data = Lingo.config["language/attendees/#{config['name'].downcase}"]
+      config.update( data ) unless data.nil?
 
-			#	Teilnehmer-Objekt erzeugen
-			attendee = eval( config[ 'name' ] + ".new(config)" )
-			exit if attendee.nil?
-			@attendees << attendee
+      #  Teilnehmer-Objekt erzeugen
+      attendee = eval( config[ 'name' ] + ".new(config)" )
+      exit if attendee.nil?
+      @attendees << attendee
 
-			#	Supplier und Subscriber merken			
-			config[ 'in' ].split( STRING_SEPERATOR_PATTERN ).each do |interest|
-				subscriber[ interest ] += [ attendee ]
-			end
-			config[ 'out' ].split( STRING_SEPERATOR_PATTERN ).each do |theme|
-				supplier[ theme ] += [ attendee ]
-			end
-		end
+      #  Supplier und Subscriber merken      
+      config[ 'in' ].split( STRING_SEPERATOR_PATTERN ).each do |interest|
+        subscriber[ interest ] += [ attendee ]
+      end
+      config[ 'out' ].split( STRING_SEPERATOR_PATTERN ).each do |theme|
+        supplier[ theme ] += [ attendee ]
+      end
+    end
 
-		#	Teilnehmer verlinken
-		supplier.each do |supp|
-			channel, attendees = supp
-			attendees.each do |att|
-				att.add_subscriber( subscriber[ channel ] )
-			end
-		end
-	end
-
-
-	#		protocol = 0		Keinerlei Ausgaben
-	#		protocol = 1		Normales Protokoll
-	#		protocol = 2		Protokoll mit Statistik
-	def start( protocol )
-		#	Besprechung starten
-		start_time = Time.new
-		@attendees.first.listen( AgendaItem.new( STR_CMD_TALK ) )
-
-		#		Besprechung beenden
-		end_time = Time.new
-		if protocol == 2
-			puts "Erbitte Sitzungsprotokoll..."
-			puts '-'*61
-			@attendees.first.listen( AgendaItem.new( STR_CMD_STATUS ) )
-		end
-
-		#		Dauer der Sitzung
-		if protocol > 0
-			duration, units = (end_time-start_time), 'sec.'
-			duration, units = (duration/60.0), 'min.' if duration > 60
-			duration, units = (duration/60.0), 'std.' if duration > 60
-	
-			printf "%s\nDie Dauer der Sitzung war %5.2f %s\n", '-'*61, duration, units
-		end
-	end
+    #  Teilnehmer verlinken
+    supplier.each do |supp|
+      channel, attendees = supp
+      attendees.each do |att|
+        att.add_subscriber( subscriber[ channel ] )
+      end
+    end
+  end
 
 
-	def reset
-		@attendees = Array.new
-	end
+  #    protocol = 0    Keinerlei Ausgaben
+  #    protocol = 1    Normales Protokoll
+  #    protocol = 2    Protokoll mit Statistik
+  def start( protocol )
+    #  Besprechung starten
+    start_time = Time.new
+    @attendees.first.listen( AgendaItem.new( STR_CMD_TALK ) )
+
+    #    Besprechung beenden
+    end_time = Time.new
+    if protocol == 2
+      puts "Erbitte Sitzungsprotokoll..."
+      puts '-'*61
+      @attendees.first.listen( AgendaItem.new( STR_CMD_STATUS ) )
+    end
+
+    #    Dauer der Sitzung
+    if protocol > 0
+      duration, units = (end_time-start_time), 'sec.'
+      duration, units = (duration/60.0), 'min.' if duration > 60
+      duration, units = (duration/60.0), 'std.' if duration > 60
+  
+      printf "%s\nDie Dauer der Sitzung war %5.2f %s\n", '-'*61, duration, units
+    end
+  end
+
+
+  def reset
+    @attendees = Array.new
+  end
 
 end
 

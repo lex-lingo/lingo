@@ -46,7 +46,7 @@ task :default => :test
 #
 desc 'Stelle die aktuelle Version auf Subversion bereit'
 task :deploy => [ :package, :test_remote ] do
-	  system( 'svn status' ) || exit
+    system( 'svn status' ) || exit
 end
 
 ################################################################################
@@ -94,7 +94,7 @@ Rake::TestTask.new( :test ) do |tst|
     tst.test_files = FileList.new( 'test/ts_*.rb', 'test/attendee/ts_*.rb' )
 end
 
-  
+
 ################################################################################
 #
 # => test_txt
@@ -103,15 +103,15 @@ desc 'Vollständiges Testen der Lingo-Prozesse anhand einer Textdatei'
 task :test_txt => [] do
 
     # => Testlauf mit normaler Textdatei
-  	system( "ruby lingo.rb -c test txt/artikel.txt" ) || exit
+    system( "ruby lingo.rb -c test txt/artikel.txt" ) || exit
 
     # => Für jede vorhandene _ref-Dateien sollen die Ergebnisse verglichen werden
     continue = true
-		Dir[ 'test/ref/artikel.*' ].each do |ref|
-  	  org = ref.gsub(/test\/ref/, 'txt')
-		  puts '#' * 60 + "  Teste #{org}"
-    	system( "diff -b #{ref} #{org}" ) || (continue = false)
-		end
+    Dir[ 'test/ref/artikel.*' ].each do |ref|
+      org = ref.gsub(/test\/ref/, 'txt')
+      puts '#' * 60 + "  Teste #{org}"
+      system( "diff -b #{ref} #{org}" ) || (continue = false)
+    end
 
     exit unless continue
 end
@@ -125,19 +125,19 @@ desc 'Vollständiges Testen der Lingo-Prozesse anhand einer LIR-Datei'
 task :test_lir => [] do
 
     # => Testlauf mit LIR-Datei
-  	system( "ruby lingo.rb -c lir txt/lir.txt" ) || exit
+    system( "ruby lingo.rb -c lir txt/lir.txt" ) || exit
 
     # => Für jede vorhandene _ref-Dateien sollen die Ergebnisse verglichen werden
     continue = true
-		Dir[ 'test/ref/lir.*' ].each do |ref|
-  	  org = ref.gsub(/test\/ref/, 'txt')
-		  puts '#' * 60 + "  Teste #{org}"
-    	system( "diff -b #{ref} #{org}" ) || (continue = false)
-		end
+    Dir[ 'test/ref/lir.*' ].each do |ref|
+      org = ref.gsub(/test\/ref/, 'txt')
+      puts '#' * 60 + "  Teste #{org}"
+      system( "diff -b #{ref} #{org}" ) || (continue = false)
+    end
 
     exit unless continue
 end
-  
+
 
 ################################################################################
 #
@@ -149,12 +149,12 @@ task :test_remote => [ :package ] do
     chdir( PACKAGE_PATH.gsub( /\.zip/, '' ) ) do
 
         # => Testlauf im Package-Verzeichnis
-  	    system( "rake testall" ) || exit
+        system( "rake testall" ) || exit
 
     end
-    
+
 end
-  
+
 
 
 
@@ -167,27 +167,27 @@ task :test => :test_init
 
 
 def lingo_gpl
-	message( "Aktualisiere GPL-Hinweis" )
-	
-	#	GPL-Header aller Ruby-Dateien erneuern
-	FileUtils.chdir( TST_PATH ) do
-		Dir['**/*.rb'].each do |filename|
-			rubycode = File.open( filename ).readlines
-			lex_idx  = rubycode.rindex( LEX_TEXT )
-			code_start = (lex_idx ||= -1) + 1
-			rubycode = GPL_TEXT + rubycode[ code_start..-1 ]
-			File.open( filename, 'w') do |file|
-			  file.write( rubycode.join )
-			end
-		end
-	end
+  message( "Aktualisiere GPL-Hinweis" )
+
+  #  GPL-Header aller Ruby-Dateien erneuern
+  FileUtils.chdir( TST_PATH ) do
+    Dir['**/*.rb'].each do |filename|
+      rubycode = File.open( filename ).readlines
+      lex_idx  = rubycode.rindex( LEX_TEXT )
+      code_start = (lex_idx ||= -1) + 1
+      rubycode = GPL_TEXT + rubycode[ code_start..-1 ]
+      File.open( filename, 'w') do |file|
+        file.write( rubycode.join )
+      end
+    end
+  end
 
 end
 
 
 
-GPL_TEXT	= File.open( 'info/gpl-hdr.txt' ).readlines
-LEX_TEXT	= "#  Lex Lingo rules from here on" + $/
+GPL_TEXT  = File.open( 'info/gpl-hdr.txt' ).readlines
+LEX_TEXT  = "#  Lex Lingo rules from here on" + $/
 
 
 =end

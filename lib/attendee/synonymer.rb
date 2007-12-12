@@ -70,53 +70,53 @@ class Synonymer < Attendee
 
 protected
 
-	def init
-		#	Wörterbuch bereitstellen
-		src = get_array('source')
-		mod = get_key('mode', 'all')
-		@dic = Dictionary.new({'source'=>src, 'mode'=>mod}, @@library_config)
+  def init
+    #  Wörterbuch bereitstellen
+    src = get_array('source')
+    mod = get_key('mode', 'all')
+    @dic = Dictionary.new({'source'=>src, 'mode'=>mod}, @@library_config)
 
-		@skip = get_array('skip', WA_UNKNOWN).collect {|s| s.upcase }
-	end
-
-
-	def control(cmd, par)
-		@dic.report.each_pair { |k, v| set( k, v ) } if cmd == STR_CMD_STATUS
-	end
+    @skip = get_array('skip', WA_UNKNOWN).collect {|s| s.upcase }
+  end
 
 
-	def process(obj)
-		if obj.is_a?(Word) && @skip.index(obj.attr).nil?
-			inc('Anzahl gesuchter Wörter')
+  def control(cmd, par)
+    @dic.report.each_pair { |k, v| set( k, v ) } if cmd == STR_CMD_STATUS
+  end
 
-			#		finde die Synonyme für alle Lexicals des Wortes
 
-			#	alle Lexicals des Wortes
-			lexis = obj.lexicals
-			#	alle Lexical-Wortformen, um gleichlautende Synonyme zu filtern
-			forms = lexis.collect { |lex| lex.form }
-			#	alle gefundenen Synonyme
-			synos = []
+  def process(obj)
+    if obj.is_a?(Word) && @skip.index(obj.attr).nil?
+      inc('Anzahl gesuchter Wörter')
 
-			lexis.each do |lex|
-				#	Synonyme für Teile eines Kompositum ausschließen
-				next if obj.attr==WA_KOMPOSITUM && lex.attr!=LA_KOMPOSITUM
-				#	Synonyme für Synonyme ausschließen
-				next if lex.attr==LA_SYNONYM
-				
-				@dic.select(lex.form).each do |syn| 
-					#	Gleichlautende Synonyme ausschließen
-					next if syn =~ /^\*(\d+)/
-					next unless forms.index(syn.form).nil?
-					synos << syn
-				end
-			end
-			obj.lexicals += synos.sort.uniqual
+      #    finde die Synonyme für alle Lexicals des Wortes
 
-			inc('Anzahl erweiteter Wörter') if synos.size>0
-			add('Anzahl gefundener Synonyme', synos.size)
-		end
-		forward(obj)
-	end
+      #  alle Lexicals des Wortes
+      lexis = obj.lexicals
+      #  alle Lexical-Wortformen, um gleichlautende Synonyme zu filtern
+      forms = lexis.collect { |lex| lex.form }
+      #  alle gefundenen Synonyme
+      synos = []
+
+      lexis.each do |lex|
+        #  Synonyme für Teile eines Kompositum ausschließen
+        next if obj.attr==WA_KOMPOSITUM && lex.attr!=LA_KOMPOSITUM
+        #  Synonyme für Synonyme ausschließen
+        next if lex.attr==LA_SYNONYM
+        
+        @dic.select(lex.form).each do |syn| 
+          #  Gleichlautende Synonyme ausschließen
+          next if syn =~ /^\*(\d+)/
+          next unless forms.index(syn.form).nil?
+          synos << syn
+        end
+      end
+      obj.lexicals += synos.sort.uniqual
+
+      inc('Anzahl erweiteter Wörter') if synos.size>0
+      add('Anzahl gefundener Synonyme', synos.size)
+    end
+    forward(obj)
+  end
 
 end

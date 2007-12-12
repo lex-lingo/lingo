@@ -49,9 +49,9 @@
 STRING_SEPERATOR_PATTERN = /[; ,\|]/
 FILE_EXTENSION_PATTERN = /(\.[^.]+)$/
 
-#		String-Konstanten im Datenstrom
+#    String-Konstanten im Datenstrom
 
-CHAR_PUNCT		= '.'
+CHAR_PUNCT    = '.'
 
 ISO8859_1_ALPHANUM = "0-9A-Za-z"
 WIN1252_EXTRA = "\x8A\x8C\x8E\x9A\x9C\x9E\x9F"
@@ -60,76 +60,76 @@ PRINTABLE_CHAR = "#{ISO8859_1_ALPHANUM}#{WIN1252_EXTRA}#{ISO8859_1_EXTRA}<>"
 
 
 #
-#		stream commands
+#    stream commands
 #
-STR_CMD_TALK	= 'TALK'
-STR_CMD_STATUS 	= 'STATUS'
-STR_CMD_ERR 	= 'ERR'
-STR_CMD_WARN 	= 'WARN'
-STR_CMD_LIR		= 'LIR-FORMAT'
-STR_CMD_FILE	= 'FILE'
-STR_CMD_EOL 	= 'EOL'
-STR_CMD_RECORD 	= 'RECORD'
-STR_CMD_EOF 	= 'EOF'
-
-#
-#		class StringA attributes
-#
-#		token attributes
-TA_WORD			= 'WORD'
-TA_PUNCTUATION	= 'PUNC'
-TA_NUMERICAL	= 'NUMS'
-TA_URL			= 'URLS'
-TA_ABREVIATION	= 'ABRV'
-TA_ABREVIATION1	= 'ABRS'
-#TA_ABREVIATION1	= '*ABR1'
-TA_OTHER		= 'OTHR'
-TA_STOPWORD		= 'STOP'
-
-
+STR_CMD_TALK  = 'TALK'
+STR_CMD_STATUS   = 'STATUS'
+STR_CMD_ERR   = 'ERR'
+STR_CMD_WARN   = 'WARN'
+STR_CMD_LIR    = 'LIR-FORMAT'
+STR_CMD_FILE  = 'FILE'
+STR_CMD_EOL   = 'EOL'
+STR_CMD_RECORD   = 'RECORD'
+STR_CMD_EOF   = 'EOF'
 
 #
-#		word attributes
+#    class StringA attributes
 #
-WA_UNSET			= '-'		#		Standardattribut bei der Initialisierung eines Word-Objektes
-WA_IDENTIFIED		= 'IDF'		#		Status, nachdem das Word im Wörterbuch gefunden wurde
-WA_UNKNOWN			= '?'		#		Status, wenn das Word nicht gefunden werden konnte
-WA_KOMPOSITUM		= 'KOM'		#		Wort ist als Kompositum erkannt worden
-WA_MULTIWORD		= 'MUL'		#		Wort ist eine Mehrwortgruppe
-WA_SEQUENCE			= 'SEQ'		#		Wort ist eine Mehrwortgruppe
-WA_UNKMULPART		= 'MU?'		#		Word ist unbekannt, jedoch Teil einer Mehrwortgruppe
+#    token attributes
+TA_WORD      = 'WORD'
+TA_PUNCTUATION  = 'PUNC'
+TA_NUMERICAL  = 'NUMS'
+TA_URL      = 'URLS'
+TA_ABREVIATION  = 'ABRV'
+TA_ABREVIATION1  = 'ABRS'
+#TA_ABREVIATION1  = '*ABR1'
+TA_OTHER    = 'OTHR'
+TA_STOPWORD    = 'STOP'
 
-#		lexical attributes ( Wortklassen )
-LA_SUBSTANTIV		= 's'
-LA_ADJEKTIV			= 'a'
-LA_VERB				= 'v'
-LA_EIGENNAME		= 'e'
 
-LA_KOMPOSITUM		= 'k'
-LA_MULTIWORD		= 'm'
-LA_SEQUENCE			= 'q'
-LA_WORTFORM			= 'w'
-LA_SYNONYM			= 'y'
-LA_STOPWORD			= 't'
-LA_TAKEITASIS		= 'x'
-LA_UNKNOWN			= '?'
 
-LA_SORTORDER		= [ \
-	LA_MULTIWORD, 
-	LA_KOMPOSITUM, 
-	LA_SUBSTANTIV, 
-	LA_VERB, 
-	LA_ADJEKTIV,
-	LA_EIGENNAME,
-	LA_WORTFORM,
-	LA_STOPWORD,
-	LA_TAKEITASIS,
-	LA_SYNONYM,
-	LA_UNKNOWN \
+#
+#    word attributes
+#
+WA_UNSET      = '-'    #    Standardattribut bei der Initialisierung eines Word-Objektes
+WA_IDENTIFIED    = 'IDF'    #    Status, nachdem das Word im Wörterbuch gefunden wurde
+WA_UNKNOWN      = '?'    #    Status, wenn das Word nicht gefunden werden konnte
+WA_KOMPOSITUM    = 'KOM'    #    Wort ist als Kompositum erkannt worden
+WA_MULTIWORD    = 'MUL'    #    Wort ist eine Mehrwortgruppe
+WA_SEQUENCE      = 'SEQ'    #    Wort ist eine Mehrwortgruppe
+WA_UNKMULPART    = 'MU?'    #    Word ist unbekannt, jedoch Teil einer Mehrwortgruppe
+
+#    lexical attributes ( Wortklassen )
+LA_SUBSTANTIV    = 's'
+LA_ADJEKTIV      = 'a'
+LA_VERB        = 'v'
+LA_EIGENNAME    = 'e'
+
+LA_KOMPOSITUM    = 'k'
+LA_MULTIWORD    = 'm'
+LA_SEQUENCE      = 'q'
+LA_WORTFORM      = 'w'
+LA_SYNONYM      = 'y'
+LA_STOPWORD      = 't'
+LA_TAKEITASIS    = 'x'
+LA_UNKNOWN      = '?'
+
+LA_SORTORDER    = [ \
+  LA_MULTIWORD, 
+  LA_KOMPOSITUM, 
+  LA_SUBSTANTIV, 
+  LA_VERB, 
+  LA_ADJEKTIV,
+  LA_EIGENNAME,
+  LA_WORTFORM,
+  LA_STOPWORD,
+  LA_TAKEITASIS,
+  LA_SYNONYM,
+  LA_UNKNOWN \
 ].reverse.join
 
 #
-#		field seperator for dbm files
+#    field seperator for dbm files
 #
 KEY_SEP = '='
 FLD_SEP = '|'

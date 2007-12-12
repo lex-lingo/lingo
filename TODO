@@ -2,7 +2,6 @@
 
 (most important first)
 
-* Indentation *should* be 2 blanks, tabs are to be replaced accordingly.
 * Unix EOL is to be preferred over DOS EOL.
 * The encoding of source code and dictionary files is to be changed to UTF-8.
 

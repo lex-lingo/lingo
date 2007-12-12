@@ -73,26 +73,26 @@ class Decomposer < Attendee
 
 protected
 
-	def init
-		#	Wörterbuch bereitstellen
-		src = get_array('source')
-		mod = get_key('mode', 'all')
-		@grammar = Grammar.new({'source'=>src, 'mode'=>mod}, @@library_config)
-	end
+  def init
+    #  Wörterbuch bereitstellen
+    src = get_array('source')
+    mod = get_key('mode', 'all')
+    @grammar = Grammar.new({'source'=>src, 'mode'=>mod}, @@library_config)
+  end
 
 
-	def control(cmd, par)
-		@grammar.report.each_pair { |key, value|
-			set(key, value) 
-		} if cmd == STR_CMD_STATUS
-	end
+  def control(cmd, par)
+    @grammar.report.each_pair { |key, value|
+      set(key, value) 
+    } if cmd == STR_CMD_STATUS
+  end
 
 
-	def process(obj)
-		if obj.is_a?(Word) && obj.attr == WA_UNKNOWN
-			obj = @grammar.find_compositum(obj.form)
-		end
-		forward(obj)
-	end
+  def process(obj)
+    if obj.is_a?(Word) && obj.attr == WA_UNKNOWN
+      obj = @grammar.find_compositum(obj.form)
+    end
+    forward(obj)
+  end
 
 end
