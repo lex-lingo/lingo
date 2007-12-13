@@ -67,7 +67,7 @@ private
       name, values = att_cfg.to_a[0]
       values['name'] = name.capitalize
 
-      #  Attendee-Daten ergÃ¤nzen
+      #  Attendee-Daten ergänzen
       data = @@config['language']['attendees'][name.downcase]
       values.update( @@config['language']['attendees'][name.downcase] ) unless data.nil?
     end

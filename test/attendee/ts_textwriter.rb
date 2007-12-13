@@ -88,8 +88,8 @@ FG-Projekt GERHARD.\n",
 
 
   def test_nonewords
-    @input = [ai('FILE|test/text.txt'), 'NonwÃ¶rter', 'Nonsense', ai('EOF|test/text.txt')]
-    @expect = [ "NonwÃ¶rter\n", "Nonsense" ]
+    @input = [ai('FILE|test/text.txt'), 'Nonwörter', 'Nonsense', ai('EOF|test/text.txt')]
+    @expect = [ "Nonwörter\n", "Nonsense" ]
     meet({'ext'=>'non', 'sep'=>"\n"}, false)
 
     @output = File.open('test/text.non').readlines
