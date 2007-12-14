@@ -8,10 +8,15 @@
   <http://www.rubygarden.org/Ruby/page/show/RubyStyleGuide>, existing code
   will be adjusted along the way.
 * New comments and documentation and stuff *should* be in English, existing
-  texts will be translated as time allows.
+  texts will be translated as time allows. Use Ri18n or Ruby-GetText for the
+  UI (to not loose existing translations).
 
 == Specific features
 
+* Reorganize file and module structure (directories: bin/, config/, dict/,
+  lib/{lingo,tasks}; Lingo namespace).
+* Refactor Rakefile (lib/tasks/).
+* Use RSpec for testing.
 * Package lingo as gem, allowing it to be installed system-wide, with user
   documents, dictionaries and configuration files separate from system files
   and dictionaries. (Location for user configuration and dictionaries, maybe:
@@ -22,6 +27,8 @@
   affects: Tokenizer, *.lang, const.rb)
 * Use OptionParser (optparse) or similar for command-line processing instead
   of custom-made routines.
+* Provide automatic encoding detection.
+* Provide automatic language detection (as fine-grained as possible).
 * Make sure the Crypter is sufficiently secure.
 * Provide a DSL for configuration -- in addition to or instead of the current
   YAML format.
