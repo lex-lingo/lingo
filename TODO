@@ -29,6 +29,7 @@
   of custom-made routines.
 * Provide automatic encoding detection.
 * Provide automatic language detection (as fine-grained as possible).
+* Make lingo run faster!? (benchmark - profile - optimize)
 * Make sure the Crypter is sufficiently secure.
 * Provide a DSL for configuration -- in addition to or instead of the current
   YAML format.
