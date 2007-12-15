@@ -22,30 +22,6 @@
 #  Lex Lingo rules from here on
 
 
-#  LINGO ist ein Indexierungssystem mit Grundformreduktion, Kompositumzerlegung, 
-#  Mehrworterkennung und Relationierung.
-#
-#  Copyright (C) 2005  John Vorhauer
-#
-#  This program is free software; you can redistribute it and/or modify it under 
-#  the terms of the GNU General Public License as published by the Free Software 
-#  Foundation;  either version 2 of the License, or  (at your option)  any later
-#  version.
-#
-#  This program is distributed  in the hope  that it will be useful, but WITHOUT
-#  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
-#  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-#
-#  You should have received a copy of the  GNU General Public License along with 
-#  this program; if not, write to the Free Software Foundation, Inc., 
-#  51 Franklin St, Fifth Floor, Boston, MA 02110, USA
-#
-#  For more information visit http://www.lex-lingo.de or contact me at
-#  welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
-#
-#  Lex Lingo rules from here on
-
-
 STRING_SEPERATOR_PATTERN = /[; ,\|]/
 FILE_EXTENSION_PATTERN = /(\.[^.]+)$/
 
@@ -54,9 +30,11 @@ FILE_EXTENSION_PATTERN = /(\.[^.]+)$/
 CHAR_PUNCT    = '.'
 
 ISO8859_1_ALPHANUM = "0-9A-Za-z"
-WIN1252_EXTRA = "\x8A\x8C\x8E\x9A\x9C\x9E\x9F"
-ISO8859_1_EXTRA = "\xC0-\xCF\xD1-\xD6\xD8-\xDD\xDF-\xF6\xF8-\xFD\xFF"
-PRINTABLE_CHAR = "#{ISO8859_1_ALPHANUM}#{WIN1252_EXTRA}#{ISO8859_1_EXTRA}<>"
+UTF_8_CONTROLS = "\xc0-\xdf\xe0-\xef\xf0-\xf7\x80-\xbf"
+#WIN1252_EXTRA = "\x8A\x8C\x8E\x9A\x9C\x9E\x9F"
+#ISO8859_1_EXTRA = "\xC0-\xCF\xD1-\xD6\xD8-\xDD\xDF-\xF6\xF8-\xFD\xFF"
+#PRINTABLE_CHAR = "#{ISO8859_1_ALPHANUM}#{WIN1252_EXTRA}#{ISO8859_1_EXTRA}<>"
+PRINTABLE_CHAR = "#{ISO8859_1_ALPHANUM}#{UTF_8_CONTROLS}<>"
 
 
 #

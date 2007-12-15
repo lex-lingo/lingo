@@ -117,14 +117,14 @@ END_OF_TEXT
 
   def test_singleword_crypt
     expect = {
-      "45ce936374c89e8f09b9fb4f702801601c5a87d9"=>"4b0e",
-      "3ac77f4e6fe2da8828542589ccbd6378de88649a"=>"5108",
+      "d8ac4360a5f707d518212e27dcba9dd42d980f96"=>"5108",
       "81463f9c7e0ad40e329e83d3358232851d50ed9a"=>"4d08",
       "8da4a0c30c912543be2d88da64c0192e577efa9d"=>"1107",
-      "5d890032a9ec8b9a31974d65be8a7adfca510f27"=>"571e",
+      "2c24b4707e77c74abfb12748317693dc1e43c215"=>"571e",
+      "810ff7a76f39febcb1cf67993d4fb29819ce40a6"=>"5108",
       "a28b4ca84ac08aeef4e420445f94f632ad010a30"=>"1207",
-      "0582f43880cb2e6ce8a7f316a1031e3ff150794f"=>"4d03",
-      "196b884889c5c8356b9c9c799b9a36024f5c1224"=>"5108"
+      "1496f4febbc647f3ac74b0af11dadbd6322f6732"=>"4d03",
+      "b7501a62cb083be6730a7a179a4ab346d23efe53"=>"4b0e"
     }
     compare( 'tst-sw4', @singleword, expect )
 

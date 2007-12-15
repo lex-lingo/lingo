@@ -23,8 +23,6 @@
   ~/.lingo)
 * Allow for handling of documents in various encodings, not just the one the
   dictionaries are encoded in (maybe provide automatic encoding detection?).
-  Particularly, allow for UTF-8 encoded documents and dictionaries. (Probably
-  affects: Tokenizer, *.lang, const.rb)
 * Use OptionParser (optparse) or similar for command-line processing instead
   of custom-made routines.
 * Provide automatic encoding detection.

@@ -74,11 +74,11 @@ class TestAttendeeTextwriter < Test::Unit::TestCase
     ]
     @expect = [
       "00237*020: GERHARD. 025: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressour\
-cen. 056: Die intellektuelle Erschlie\337ung des Internet befindet sich in einer Krise. GERHARD ist derzeit weltweit der einzige.\n",
+cen. 056: Die intellektuelle Erschließung des Internet befindet sich in einer Krise. GERHARD ist derzeit weltweit der einzige.\n",
       "00238*020: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen. 025: das D\
 FG-Projekt GERHARD.\n",
       "00239*020: Information Retrieval und Dokumentmanagement im Multimedia-Zeitalter. 056: \"Das Buch ist ein praxisbezogenes VADEMECUM\
- f\374r alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.\n"
+ für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.\n"
     ]
     meet({'ext'=>'csv', 'lir-format'=>nil}, false)
 
