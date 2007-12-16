@@ -43,34 +43,8 @@ private
     #  Konfiguration bereitstellen
     @@config = LingoConfig.new(prog, cmdline)
 
-    #  Protokoll-Stufe ermitteln
-    begin
-      @protocol_level = (Lingo::config['meeting/protocol']=="false" ? 1 : 2)
-      attendee_config = Lingo::config['meeting/attendees']
-    rescue
-      raise "Fehler in der .cfg-Datei bei 'meeting/protocol' oder 'meeting/attendees'"
-    end
-
-
-
-#    extend_attendee_config
-#    p @@config['meeting']['attendees']
-
     #  Meeting einberufen
     @@meeting = Meeting.new
-  end
-
-
-  def extend_attendee_config
-    #  Attendee-Namen setzen
-    @@config['meeting/attendees'].each do |att_cfg|
-      name, values = att_cfg.to_a[0]
-      values['name'] = name.capitalize
-
-      #  Attendee-Daten ergänzen
-      data = @@config['language']['attendees'][name.downcase]
-      values.update( @@config['language']['attendees'][name.downcase] ) unless data.nil?
-    end
   end
 
 
@@ -97,9 +71,11 @@ public
     attendees = @@config['meeting/attendees']
     @@meeting.invite(attendees)
 
-    protocol = @@config['meeting/protocol']
-    protocol_level = ((protocol.nil? || eval( protocol ) == false) ? 1 : 2)
-    @@meeting.start(protocol_level)
+    protocol = 0
+    protocol += 1 if (@@config['cmdline/status'] || false)
+    protocol += 2 if (@@config['cmdline/perfmon'] || false)
+
+    @@meeting.start(protocol)
   end
 end
 

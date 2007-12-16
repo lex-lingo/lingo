@@ -38,6 +38,18 @@ PRINTABLE_CHAR = "#{ISO8859_1_ALPHANUM}#{UTF_8_CONTROLS}<>"
 
 
 #
+#    status vars
+#
+STA_FORMAT_INT = '  %-20s = %d'
+STA_FORMAT_FLT = '  %-20s = %6.5f'
+STA_NUM_COMMANDS = 'Received Commands'
+STA_NUM_OBJECTS  = 'Received Objects '
+STA_TIM_COMMANDS = 'Time to control  '
+STA_TIM_OBJECTS  = 'Time to process  '
+STA_PER_OBJECT   = 'Time per object  '
+STA_PER_COMMAND  = 'Time per command '
+
+#
 #    stream commands
 #
 STR_CMD_TALK  = 'TALK'
@@ -49,6 +61,8 @@ STR_CMD_FILE  = 'FILE'
 STR_CMD_EOL   = 'EOL'
 STR_CMD_RECORD   = 'RECORD'
 STR_CMD_EOF   = 'EOF'
+STR_CMD_REPORT_STATUS = 'REPSTA'
+STR_CMD_REPORT_TIME = 'REPTIM'
 
 #
 #    class StringA attributes

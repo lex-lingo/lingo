@@ -17,7 +17,7 @@
 #  51 Franklin St, Fifth Floor, Boston, MA 02110, USA
 #
 #  For more information visit http://www.lex-lingo.de or contact me at
-#  welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
+#  welcomeATlex-lingoDOTde near 50Â°55'N+6Â°55'E.
 #
 #  Lex Lingo rules from here on
 
@@ -58,11 +58,11 @@ public
   #  Einladen aller Teilnehmer
   def invite( invitation_list )
 
-    #  Daten für Verlinkung der Teilnehmer vorbereiten  
+    #  Daten fÃ¼r Verlinkung der Teilnehmer vorbereiten  
     supplier = Hash.new( [] )
     subscriber = Hash.new( [] )
 
-    # Daten für automatische Verlinkung vorbereiten
+    # Daten fÃ¼r automatische Verlinkung vorbereiten
     last_link_out = ''
     auto_link_number = 0 
     
@@ -87,7 +87,7 @@ public
       end
       last_link_out = config['out']
       
-      #  Attendee-Daten ergänzen
+      #  Attendee-Daten ergÃ¤nzen
       data = Lingo.config["language/attendees/#{config['name'].downcase}"]
       config.update( data ) unless data.nil?
 
@@ -114,31 +114,36 @@ public
     end
   end
 
-
-  #    protocol = 0    Keinerlei Ausgaben
-  #    protocol = 1    Normales Protokoll
-  #    protocol = 2    Protokoll mit Statistik
+  # => protocol = 0   keep quiet, i.e. for testing
+  # => protocol = 1   report status
+  # => protocol = 2   report performance
+  # => protocol = 3   report status and performance
   def start( protocol )
-    #  Besprechung starten
+    
+    #  prepare meeting
+    @attendees.first.listen( AgendaItem.new( STR_CMD_REPORT_STATUS ) ) if (protocol & 1) != 0
+    @attendees.first.listen( AgendaItem.new( STR_CMD_REPORT_TIME ) ) if (protocol & 2) != 0
+
+    #  hold meeting
     start_time = Time.new
     @attendees.first.listen( AgendaItem.new( STR_CMD_TALK ) )
-
-    #    Besprechung beenden
     end_time = Time.new
-    if protocol == 2
-      puts "Erbitte Sitzungsprotokoll..."
+
+    #  end meeting, create protocol
+    if (protocol & 3) != 0
+      puts "Require protocol..."
       puts '-'*61
       @attendees.first.listen( AgendaItem.new( STR_CMD_STATUS ) )
-    end
 
-    #    Dauer der Sitzung
-    if protocol > 0
-      duration, units = (end_time-start_time), 'sec.'
-      duration, units = (duration/60.0), 'min.' if duration > 60
-      duration, units = (duration/60.0), 'std.' if duration > 60
+      #  duration of meeting
+      duration, unit = (end_time-start_time), 'second'
+      duration, unit = (duration/60.0), 'minute' if duration > 60
+      duration, unit = (duration/60.0), 'hour' if duration > 60
+      unit += 's' if duration > 1
   
-      printf "%s\nDie Dauer der Sitzung war %5.2f %s\n", '-'*61, duration, units
+      printf "%s\nThe duration of the meeting was %5.2f %s\n", '-'*61, duration, unit
     end
+    
   end
 
 

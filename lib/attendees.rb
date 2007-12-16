@@ -74,7 +74,9 @@ class Attendee
   include Reportable
 
   @@library_config = nil
-
+  @@report_status = false
+  @@report_time = false
+  
 private
 
   def initialize(config)
@@ -97,6 +99,7 @@ private
     @attendee_can_process = self.class.method_defined?(:process)
     
     @skip_this_command = false
+    @start_of_processing = nil
   end
 
 
@@ -111,18 +114,43 @@ public
   def listen(obj)
     
     unless obj.is_a?(AgendaItem)
-      #    Informationen zum aktuellen Tagesordnungspunkt (TOP) verarbeiten
+      
       if @attendee_can_process
-        inc('Objekte empfangen')
-        process(obj) 
+        inc(STA_NUM_OBJECTS)
+        
+        unless @@report_time
+          process(obj) 
+        else
+          @start_of_processing = Time.new
+          process(obj) 
+          add(STA_TIM_OBJECTS, Time.new - @start_of_processing)
+        end
       else
         forward(obj)
       end
+
     else
+
+      case obj.cmd
+      when STR_CMD_REPORT_STATUS
+        @@report_status = true
+        return
+      when STR_CMD_REPORT_TIME
+        @@report_time = true
+        return
+      end
+      
       #    Neuen TOP verarbeiten
       if @attendee_can_control
-        inc('TOPs empfangen')
-        control(obj.cmd, obj.param) 
+        inc(STA_NUM_COMMANDS)
+
+        unless @@report_time
+          control(obj.cmd, obj.param)
+        else
+          @start_of_processing = Time.new
+          control(obj.cmd, obj.param)
+          add(STA_TIM_COMMANDS, Time.new - @start_of_processing)
+        end
       end
 
       #    Spezialbehandlung für einige TOPs nach Verarbeitung
@@ -131,8 +159,17 @@ public
       when STR_CMD_TALK then nil
       #    Standardprotokollinformationen ausgeben
       when STR_CMD_STATUS
-        printf "\nTeilnehmer <%s> verbunden von '%s' nach '%s' berichtet...\n", @config['name'], @config['in'], @config['out']          
-        report.to_a.sort.each { |info| puts "   #{info[0]} = #{info[1]}" }
+        if @@report_time
+          puts 'Performance of %-12s for processing a single item in msec: command %6.5f, object %6.5f' % [
+            @config['name'],
+            get(STA_TIM_COMMANDS) * 1000.0 / get(STA_NUM_COMMANDS),
+            get(STA_TIM_OBJECTS) * 1000.0 / get(STA_NUM_OBJECTS)]
+        end
+        if @@report_status
+          printf "Attendee <%s> was connected from '%s' to '%s' reporting...\n", @config['name'], @config['in'], @config['out']
+          report.to_a.sort.each { |info| puts " #{info[0]} = #{info[1]}" }
+          puts
+        end
         forward(obj.cmd, obj.param)
       else
         if @skip_this_command
@@ -146,7 +183,9 @@ public
 
 
   def talk(obj)
+    time_for_sub = Time.new if @@report_time
     @subscriber.each { |attendee| attendee.listen(obj) }
+    @start_of_processing += (Time.new - time_for_sub) if @@report_time
   end
 
 

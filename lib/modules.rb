@@ -54,6 +54,10 @@ module Reportable
     @counters[counter] = value
   end
 
+  def get(counter)
+    @counters[counter]
+  end
+
 
   def report
     rep = Hash.new

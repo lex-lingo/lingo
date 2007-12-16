@@ -9,6 +9,11 @@ command-line-options:
     default: false
     comment: >
       Gibt im Anschluss an die Verarbeitung einen Status aus
+  perfmon:
+    opt: '-p'
+    default: false
+    comment: >
+      Gibt im Anschluss an die Verarbeitung einen detaillierter Performancestatus aus
   ocr-max:
     opt: '-o'
     value:
@@ -20,7 +25,7 @@ command-line-options:
     value:
     default: de
     comment: >
-      Gibt die zu verarbeitende Sprache an
+      Set the language for processing, i.e. '-l en' for loading en.lang 
   config:
     opt: '-c'
     value:
