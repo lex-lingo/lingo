@@ -24,6 +24,63 @@
 
 require 'yaml'
 
+#  LingoConfig will hold the complete comfiguration information, which will 
+#  control lingos processing flow.
+#  The complete configuration will hold three sets of information
+#
+#  1. Language specific configuration information (refer to @keys['language'])
+#     ------------------------------------------------------------------------
+#     LingoConfig will load the configuration file, i.e. de.lang
+#     You can tell lingo to use a specific language definition file
+#     by using the -l command line option follow by the language shortcut.
+#     For example if you call 'ruby lingo.rb -l en <file_to_process>' lingo 
+#     will load the file en.lang. If you ommit the -l option, then lingo will
+#     use the default value, which is documented in the lingo.opt file in the
+#     language section, i.e.
+#       language:
+#         opt: '-l'
+#         value: 
+#         default: de
+#         comment: >
+#           Set the language for processing, i.e. '-l en' for loading en.lang 
+#
+#  2. Processing specific configuration information (refer to @keys['meeting'])
+#     -------------------------------------------------------------------------
+#     LingoConfig will load the configuration file lingo.cfg by default.
+#     You can tell lingo to use an other configuration file
+#     by using the -c command line option follow by the configuration name.
+#     For example if you call 'ruby lingo.rb -c test <file_to_process>' lingo 
+#     will load the file test.cfg. If you ommit the -c option, then lingo will
+#     use the default configuration, which is documented in the lingo.opt file
+#     in the config section, i.e.
+#       config:
+#         opt: '-c'
+#         value:
+#         default: lingo.cfg
+#         comment: >
+#           Set the configuration for processing, i.e. '-c test' for loading test.cfg
+#
+#  3. Command line options (refer to @keys['cmdline'])
+#     ------------------------------------------------
+#     You can add any additional command line option to modify the flow of lingo.
+#     Define a new section in lingo.opt and find the results in @keys['cmdline'].
+#     For example, if you want to control the Decomposer with a command line option
+#     to change the 'min-word-size' value, then just define a '-m' option in lingo.opt
+#       minwordsize:
+#         opt: '-m'
+#         value:
+#         default: 7
+#         comment: >
+#           Set the minimum word length for the Decomposer composition recognition.
+#
+#     Then modify in de.lang the part 
+#       compositum:
+#         min-word-size: "7"
+#     to
+#       compositum:
+#         min-word-size: "$(minwordsize)"
+#     and your done.
+
 class LingoConfig
 
 private
