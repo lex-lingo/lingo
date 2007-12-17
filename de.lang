@@ -100,21 +100,26 @@ language:
   attendees:
     tokenizer:
       regulars:
-        #    macros for charset composition (UTF-8 controls and follows)
-        - _U8C_: '\xc0-\xdf\xe0-\xef\xf0-\xf7'
-        - _U8F_: '\x80-\xbf'
-        - _UTF8_: '0-9A-Za-z_U8C__U8F_'
-        #    Akzeptiert werden alle Sonderzeichen
-        - _CHR_: '_UTF8_'
+        #    Define printable characters for tokenizer for utf-8 charsets
+        - _digit_: '[0-9]'
+        #    Define Basic Latin printable characters for UTF-8 encoding from U+0000 to U+007f
+        - _baslat_: '[A-Za-z]'
+        #    Define Latin-1 Supplement printable characters for UTF-8 encoding from U+0080 to U+00ff
+        - _lat1sp_: '\xc3[\x80-\x96\x98-\xb6\xb8-\xbf]'
+        #    Define Latin Extended-A printable characters for UTF-8 encoding from U+0100 to U+017f
+        - _latexa_: '[\xc4-\xc5][\x80-\xbf]'
+        #    Define Latin Extended-B printable characters for UTF-8 encoding from U+0180 to U+024f
+        - _latexb_: '[\xc6-\xc8][\x80-\xbf]|\xc9[\x80-\x8f]'
+        #    Define IPA Extension printable characters for UTF-8 encoding from U+024f to U+02af
+        - _ipaext_: '\xc9[\xa0-\xbf]|\xca[\xa0-\xaf]'
+        #    collect all UTF-8 printable charachters in unicode range U+0000 to U+02af
+        - _utf8ch_: '_baslat_|_lat1sp_|_latexa_|_latexb_|_ipaext_'
         - NUMS:  '[+-]?(\d{4,}|\d{1,3}(\.\d{3,3})*)(\.|(,\d+)?%?)'
         - URLS:  '((mailto:|(news|http|https|ftp|ftps)://)\S+|^(www(\.\S+)+)|\S+([\._]\S+)+@\S+(\.\S+)+)'
-        - ABRV:  '(([_CHR_]+\.)+)[_CHR_]+'
-#        - ABRS:  '(([_CHR_]{1,1}\.)+)(?!\.\.)'
-#        - OTHR:  '[óÑ!\"#$%&()*\+,\-\./:;<=>?@\[\\\]^_`{|}~¥]'
-#        - WORD:  '[_CHR_\d\-]*[_CHR_\d]+'
-        - WORD:  '[_CHR_\d\-]+'
-        - PUNC:  '[!,\.:;?]'
-        - OTHR:  '[óÑ!\"#$%&()*\+,\-\./:;<=>?@\[\\\]^_`{|}~¥]'
+        - ABRV:  '(((_utf8ch_)+\.)+)(_utf8ch_)+'
+        - WORD:  '(_utf8ch_|_digit_|\-)+'
+        - PUNC:  '([!,\.:;?]|\xc2[\xa1\xbf])'
+        - OTHR:  '([\"#$%&\x27()*\+\-/<=>@\[\\\]^_{|}~]|\xc2[\xa2-\xac\xae-\xbe]|\xc3[\x97\xb7])'
         - HELP:  '[^ ]*'
 
     variator:

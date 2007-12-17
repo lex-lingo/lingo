@@ -175,7 +175,7 @@ private
     @separator = @config['separator']
 
     #  Objektvariablen initialisieren
-    @legal_word = '[' + PRINTABLE_CHAR + Regexp.escape( '- &()[].,' ) + ']+'  # TODO: v1.60 - ',' bei TxtFile zulassen; in const.rb einbauen
+    @legal_word = '(?:' + PRINTABLE_CHAR + '|[' + Regexp.escape( '- /&()[].,' ) + '])+'  # TODO: v1.60 - ',' bei TxtFile zulassen; in const.rb einbauen
     @line_pattern = Regexp.new('^'+@legal_word+'$')
     @position = 0
   end
@@ -206,7 +206,6 @@ public
         next if line =~ /^\s*\043/ || line.strip == ''  #  Kommentarzeilen und leere Zeilen überspringen
         
         #  Ungültige Zeilen protokollieren
-
         unless line =~ @line_pattern
           fail_msg = "Fehler beim schreiben der Reject-Datei '#{@pn_reject.to_s}'"
           reject_file.puts line

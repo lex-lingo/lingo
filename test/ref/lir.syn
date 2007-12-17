@@ -1,7 +1,7 @@
 00002*analytik
 00004*query language
 00006*analytik
-00024*automation deutschaufsatz schulaufsatz
+00024*automation deutsch / aufsatz deutschaufsatz schulaufsatz
 00028*aufgabenstellung aufgabentyp
 00029*alteration modifikation <änderung> veränderung
 00034*auswechslung tausch <austausch> äußere erscheinung
@@ -36,10 +36,11 @@
 00171*äußere erscheinung
 00174*aufgabenstellung aufgabentyp
 00176*arbeitsplatzcomputer
-00177*erwerbsarbeit
+00177*erwerbsarbeit unternehmen / abteilung
 00179*auskunft <auskunftsdienst> auskunfts- und informationstätigkeit auskunftstätigkeit
 00180*mathematische analysis
 00182*aktivum alter mensch betagter tätigkeitsform
+00187*kleingruppe / betrieb team / betrieb
 00197*argumentation aufgabenstellung aufgabentyp erwerbsarbeit
 00206*individuelle arbeitsweise
 00207*aktualisierung
@@ -50,16 +51,16 @@
 00220*auskunft <auskunftsdienst> auskunfts- und informationstätigkeit auskunftstätigkeit
 00227*erwerbsarbeit
 00229*dauerbeobachtungsfähigkeit dauerüberwachungsfähigkeit konzentration <psychologie> vigilanz wachsamkeit
-00233*analytik deutschaufsatz schulaufsatz
+00233*analytik deutsch / aufsatz deutschaufsatz schulaufsatz
 00239*archivierungssystem aussicht elektronisches archivierungssystem
-00240*deutschaufsatz schulaufsatz
+00240*deutsch / aufsatz deutschaufsatz schulaufsatz
 00241*analytik aufgabenstellung aufgabentyp
 00248*erwerbsarbeit folge fortwirken nachwirkung <auswirkung> spezies
 00250*ausblick
 00252*erwerbsarbeit
 00254*aktualisierung
 00257*steinartefakt
-00258*arbeitsprodukt
+00258*arbeitsprodukt kleingruppe / betrieb team / betrieb
 00260*aktueller bezug bezugsquelle erwerbsarbeit gegenwartsbezug zeitnähe
 00261*individuelle arbeitsweise
 00271*mathematische analysis
@@ -68,24 +69,24 @@
 00278*bezugsquelle
 00284*erwerbsarbeit
 00285*verfasser
-00286*verfasser
+00286*kleingruppe / betrieb team / betrieb verfasser
 00288*auswechslung tausch <austausch>
 00289*analytik erwerbsarbeit
 00290*auskunftshaftung erwerbsarbeit
-00291*aufgabenstellung aufgabentyp deutschaufsatz schulaufsatz
+00291*aufgabenstellung aufgabentyp deutsch / aufsatz deutschaufsatz schulaufsatz
 00292*automation
 00293*similarity search
 00294*arbeitsumgebung auskunftshaftung
 00296*abschiedsfeier verabschiedung
 00297*erwerbsarbeit
 00301*analoges signal
-00303*anwendungsgebiet arbeitsplatz aufgabenstellung aufgabentyp erwerbsarbeit
-00305*benutzer bezugsquelle
-00308*anwendungsgebiet verfasser
+00303*anwendung / bereich anwendungsgebiet arbeitsplatz aufgabenstellung aufgabentyp erwerbsarbeit
+00305*benutzer bezugsquelle unternehmen / abteilung
+00308*anwendung / bereich anwendungsgebiet verfasser
 00309*analytik
 00310*aufgabenstellung aufgabentyp aussicht erwerbsarbeit verfasser verlauf
 00312*aufgabenstellung aufgabentyp gehörlosensprache taubstummensprache
-00320*analytik
+00320*analytik arbeit / aufwand
 00321*spezies
 00323*analytik
 00324*erwerbsarbeit innere anschauung

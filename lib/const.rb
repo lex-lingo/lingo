@@ -29,12 +29,29 @@ FILE_EXTENSION_PATTERN = /(\.[^.]+)$/
 
 CHAR_PUNCT    = '.'
 
-ISO8859_1_ALPHANUM = "0-9A-Za-z"
-UTF_8_CONTROLS = "\xc0-\xdf\xe0-\xef\xf0-\xf7\x80-\xbf"
+
+#    Define printable characters for tokenizer for utf-8 charsets
+UTF_8_DIGIT = '[0-9]'
+#    Define Basic Latin printable characters for UTF-8 encoding from U+0000 to U+007f
+UTF_8_BASLAT = '[A-Za-z]'
+#    Define Latin-1 Supplement printable characters for UTF-8 encoding from U+0080 to U+00ff
+UTF_8_LAT1SP = '\xc3[\x80-\x96\x98-\xb6\xb8-\xbf]'
+#    Define Latin Extended-A printable characters for UTF-8 encoding from U+0100 to U+017f
+UTF_8_LATEXA = '[\xc4-\xc5][\x80-\xbf]'
+#    Define Latin Extended-B printable characters for UTF-8 encoding from U+0180 to U+024f
+UTF_8_LATEXB = '[\xc6-\xc8][\x80-\xbf]|\xc9[\x80-\x8f]'
+#    Define IPA Extension printable characters for UTF-8 encoding from U+024f to U+02af
+UTF_8_IPAEXT = '\xc9[\xa0-\xbf]|\xca[\xa0-\xaf]'
+#    collect all UTF-8 printable charachters in unicode range U+0000 to U+02af
+UTF_8_CHAR = "#{UTF_8_DIGIT}|#{UTF_8_BASLAT}|#{UTF_8_LAT1SP}|#{UTF_8_LATEXA}|#{UTF_8_LATEXB}|#{UTF_8_IPAEXT}"
+
+#ISO8859_1_ALPHANUM = "0-9A-Za-z"
+#UTF_8_CONTROLS = "\xc0-\xdf\xe0-\xef\xf0-\xf7\x80-\xbf"
 #WIN1252_EXTRA = "\x8A\x8C\x8E\x9A\x9C\x9E\x9F"
 #ISO8859_1_EXTRA = "\xC0-\xCF\xD1-\xD6\xD8-\xDD\xDF-\xF6\xF8-\xFD\xFF"
 #PRINTABLE_CHAR = "#{ISO8859_1_ALPHANUM}#{WIN1252_EXTRA}#{ISO8859_1_EXTRA}<>"
-PRINTABLE_CHAR = "#{ISO8859_1_ALPHANUM}#{UTF_8_CONTROLS}<>"
+#PRINTABLE_CHAR = "#{ISO8859_1_ALPHANUM}#{UTF_8_CONTROLS}<>"
+PRINTABLE_CHAR = "#{UTF_8_CHAR}|[<>]"
 
 
 #
