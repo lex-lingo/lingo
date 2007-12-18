@@ -28,7 +28,15 @@
 * Provide automatic encoding detection.
 * Provide automatic language detection (as fine-grained as possible).
 * Make lingo run faster!? (benchmark - profile - optimize)
-* Make sure the Crypter is sufficiently secure.
-* Provide a DSL for configuration -- in addition to or instead of the current
+* Replace SDBM by DBM (more platform-independent, no 1k limit on record size);
+  maybe QDBM/Tokyo Cabinet or even CDB for faster access.
+* In-memory (volatile) vs. on-disk (persistent) dictionaries. It should be
+  possible to simply use the Lingo API without caring about dictionary storage.
+* That being said, provide an easy-to-use Lingo API -- just 'require "lingo"'
+  and go for it!
+* In addition to that, provide sensible string extensions: String#tokenize,
+  String#lemmatize, ...
+* Provide a DSL for configuration -- in addition to, or instead of, the current
   YAML format.
+* Make sure the Crypter is sufficiently secure.
 * Use RSpec for testing.
