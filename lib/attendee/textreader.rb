@@ -118,18 +118,20 @@ private
 
   #  Gibt eine Datei zeilenweise in den Ausgabekanal
   def spool(filename)
-    FileTest.exist?(filename) || forward(STR_CMD_ERR, "Datei #{filename} nicht gefunden")
+    unless stdin?(filename)
+      FileTest.exist?(filename) || forward(STR_CMD_ERR, "Datei #{filename} nicht gefunden")
 
-    inc('Anzahl Dateien')
-    add('Anzahl Bytes', File.stat(filename).size)
+      inc('Anzahl Dateien')
+      add('Anzahl Bytes', File.stat(filename).size)
+    end
 
     forward(STR_CMD_FILE, filename)
 
-    File.open(filename).each_line { |line| 
+    (stdin?(filename) ? $stdin : File.open(filename)).each_line { |line|
       inc('Anzahl Zeilen')
       line.chomp!
       line.gsub!(/\303\237/, "ß")
-### HACK      
+### HACK
       if @is_LIR_file && line =~ @rec_pat
         forward(STR_CMD_RECORD, $1)
       else
@@ -139,5 +141,9 @@ private
 
     forward(STR_CMD_EOF, filename)
   end
-  
+
+  def stdin?(filename)
+    %w[STDIN -].include?(filename)
+  end
+
 end

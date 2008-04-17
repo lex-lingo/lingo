@@ -142,17 +142,12 @@ private
 
 
   def load_yaml_file(file_name, file_ext)
-    tree = nil
-    
-    if file_name =~ /\./
-      yaml_file = file_name.sub(/\.([^\.]+)$/, file_ext)
-    else
-      yaml_file = file_name + file_ext
-    end
-    usage("Datei #{yaml_file} nicht vorhanden") unless File.exist?(yaml_file)
+    yaml_file = file_name.sub(/\.[^\.]+$/, '') << file_ext
+    yaml_file = File.join(File.dirname(__FILE__), '..', yaml_file) unless file_name.include?('/')
 
-    File.open(yaml_file) { |file| tree = YAML.load(file) }
-    tree
+    usage("Datei #{yaml_file} nicht vorhanden") unless File.readable?(yaml_file)
+
+    YAML.load_file(yaml_file)
   end
 
 

@@ -60,11 +60,8 @@ public
     @@meeting
   end
 
-  def Lingo.error(txt)
-    puts
-    puts txt
-    puts
-    exit
+  def Lingo.error(msg)
+    abort msg
   end
 
   def talk
