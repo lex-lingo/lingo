@@ -92,9 +92,15 @@ protected
       @lir = true
     when STR_CMD_FILE
       @no_sep = true
-      @filename = par.sub(/(\.[^.]+)?$/, '.'+@ext)
-      @file = File.new(@filename,'w')
-      inc('Anzahl Dateien')
+
+      if stdout?(@ext)
+        @filename = @ext
+        @file = $stdout
+      else
+        @filename = par.sub(/(\.[^.]+)?$/, '.'+@ext)
+        @file = File.new(@filename,'w')
+        inc('Anzahl Dateien')
+      end
       
       @lir_rec_no = ''
       @lir_rec_buf = Array.new
@@ -115,8 +121,11 @@ protected
       
     when STR_CMD_EOF
       flush_lir_buffer if @lir
-      @file.close
-      add('Anzahl Bytes', File.stat(@filename).size)
+
+      unless stdout?(@filename)
+        @file.close
+        add('Anzahl Bytes', File.stat(@filename).size)
+      end
     end
   end
 
@@ -148,6 +157,10 @@ private
      end
     @lir_rec_no = ''
     @lir_rec_buf.clear
+  end
+
+  def stdout?(filename)
+    %w[STDOUT -].include?(filename)
   end
 
 end

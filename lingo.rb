@@ -55,6 +55,9 @@ public
     @@config
   end
 
+  def Lingo.call(config = 'lingo-call.cfg')
+    new('lingo.rb', ['-c', config])
+  end
 
   def Lingo.meeting
     @@meeting
@@ -74,6 +77,20 @@ public
 
     @@meeting.start(protocol)
   end
+
+  def talk_to_me(str, &block)
+    out = StringIO.new
+
+    old_stdout, $stdout = $stdout, out
+    old_stdin,  $stdin  = $stdin,  StringIO.new(str)
+
+    Dir.chdir(File.dirname(__FILE__)) { talk }
+
+    $stdout, $stdin = old_stdout, old_stdin
+
+    out.string.split("\n").map(&block).flatten.sort.uniq
+  end
+
 end
 
 if $0 == __FILE__
