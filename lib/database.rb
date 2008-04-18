@@ -464,7 +464,7 @@ public
       @dbm.close
       @dbm = nil
     else
-      Lingo.error( "DbmFile #{@dbm_name} nicht geöffnet" )
+      #Lingo.error( "DbmFile #{@dbm_name} nicht geöffnet" )
     end
   end
 

@@ -146,6 +146,9 @@ public
     
   end
 
+  def cleanup
+    Dictionary.close!
+  end
 
   def reset
     @attendees = Array.new

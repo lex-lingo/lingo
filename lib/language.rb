@@ -106,6 +106,8 @@ class Dictionary
   include Cachable
   include Reportable
 
+  @@opened = []
+
 private
   def initialize(config, dictionary_config)
     init_reportable
@@ -125,6 +127,8 @@ private
     @sources = config['source'].collect { |src|
       LexicalHash.new( src )
     }
+
+    @@opened << self
   
     #  Parameter aus de.lang:language/dictionary auslesen
     @suffixes = []
@@ -142,6 +146,12 @@ private
   end
 
 public
+  def Dictionary.close!
+    @@opened.each { |dict|
+      dict.close
+    }
+  end
+
   def close
     @sources.each do |src|
       src.close 

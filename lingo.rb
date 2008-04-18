@@ -78,6 +78,8 @@ public
     protocol += 2 if (@@config['cmdline/perfmon'] || false)
 
     @@meeting.start(protocol)
+
+    @@meeting.cleanup
   end
 
   def talk_to_me(str, &block)
