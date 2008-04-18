@@ -56,7 +56,9 @@ public
   end
 
   def Lingo.call(config = 'lingo-call.cfg')
-    new('lingo.rb', ['-c', config])
+    lingo = new('lingo.rb', ['-c', config])
+    lingo.talk_to_me('')  # just to build the dicts
+    lingo
   end
 
   def Lingo.meeting
