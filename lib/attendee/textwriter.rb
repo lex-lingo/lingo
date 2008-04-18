@@ -73,7 +73,7 @@ ergibt die Ausgabe in der Datei <tt>test.vec</tt>
 =end
 
 
-class Textwriter < Attendee
+class Attendee::Textwriter < Attendee
 
 protected
 

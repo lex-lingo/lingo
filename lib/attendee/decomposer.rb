@@ -69,7 +69,7 @@ ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
 =end
 
 
-class Decomposer < Attendee
+class Attendee::Decomposer < Attendee
 
 protected
 

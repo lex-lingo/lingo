@@ -74,7 +74,7 @@ ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
 =end
 
 
-class Multiworder < BufferedAttendee
+class Attendee::Multiworder < BufferedAttendee
 
 protected
 

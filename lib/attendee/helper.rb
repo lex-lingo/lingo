@@ -29,7 +29,7 @@ Für den praktischen Einsatz ist er nicht vorgesehen.
 =end
 
 
-class Helper < Attendee
+class Attendee::Helper < Attendee
 
 protected
 

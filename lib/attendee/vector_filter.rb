@@ -75,7 +75,7 @@ ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
 =end
 
 
-class Vector_filter < Attendee
+class Attendee::Vector_filter < Attendee
 
 protected
 

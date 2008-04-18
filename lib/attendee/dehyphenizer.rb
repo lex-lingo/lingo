@@ -67,7 +67,7 @@ ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
 =end
 
 
-class Dehyphenizer < BufferedAttendee
+class Attendee::Dehyphenizer < BufferedAttendee
 
 protected
 

@@ -94,7 +94,7 @@ ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
 =end
 
 
-class Tokenizer < Attendee
+class Attendee::Tokenizer < Attendee
 
 protected
 

@@ -101,7 +101,7 @@ ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
 
 
 
-class Sequencer < BufferedAttendee
+class Attendee::Sequencer < BufferedAttendee
 
 protected
 

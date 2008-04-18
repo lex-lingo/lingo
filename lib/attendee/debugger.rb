@@ -83,7 +83,7 @@ ergibt die Ausgabe
 =end
  
  
-class Debugger < Attendee
+class Attendee::Debugger < Attendee
 
 protected
 

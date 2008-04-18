@@ -92,7 +92,7 @@ ergibt die Ausgabe mit <tt>lingo -c t2 lir.txt</tt>
 =end
 
 
-class Textreader < Attendee
+class Attendee::Textreader < Attendee
 
 protected
 

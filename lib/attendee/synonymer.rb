@@ -66,7 +66,7 @@ ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
 =end
 
 
-class Synonymer < Attendee
+class Attendee::Synonymer < Attendee
 
 protected
 

@@ -64,7 +64,7 @@ ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
 =end
 
 
-class Noneword_filter < Attendee
+class Attendee::Noneword_filter < Attendee
 
 protected
 
