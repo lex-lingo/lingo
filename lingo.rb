@@ -92,7 +92,8 @@ public
 
     $stdout, $stdin = old_stdout, old_stdin
 
-    out.string.split("\n").map(&block).flatten.sort.uniq
+    res = out.string.split("\n")
+    block ? res.map(&block) : res.sort.uniq
   end
 
 end
