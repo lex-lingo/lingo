@@ -139,7 +139,7 @@ private
       typ.downcase!
       sufli.split.each {|suf|
         su, ex = suf.split('/')
-        fix = [Regexp.new(su+'$'), ex.nil? ? '*' : ex, typ]
+        fix = [Regexp.new(su+'$', 'i'), ex.nil? ? '*' : ex, typ]
         (typ=='f' ? @infixes : @suffixes) << fix
       }
     } if dictionary_config.has_key?( 'suffix' )
