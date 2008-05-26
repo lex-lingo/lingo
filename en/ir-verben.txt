@@ -1,6 +1,8 @@
-# Rechtschreibwörterbuch der unregelmäßigen Verben
-# lingo-Format: WordClass
-# Zeilen: 261
+#
+#  Wörterbuch der unregelmäßigen Verben
+#  
+#  Stand: 26.05.08 / Thomas Müller
+
 ate=eat #v
 awoke=awake #v
 awoken=awake #v
