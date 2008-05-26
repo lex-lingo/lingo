@@ -1,7 +1,10 @@
-# Rechtschreibwörterbuch
-# Quelle: WordNet
-# lingo-Format: WordClass
-# Zeilen: 37.319 
+#
+#  englischsprachiges Wörterbuch
+#  Quelle: WordNet WordNet 3.0 Copyright 2006 by Princeton University
+#  URL: http://wordnet.princeton.edu/
+#
+#  Stand: 26.05.08 / Thomas Müller
+#  
 aachen=aachen #s
 aaium=aaium #s
 aaland=aaland #s
