@@ -93,10 +93,10 @@ protected
 
       #  alle Lexicals des Wortes
       lexis = obj.lexicals
-      #  alle Lexical-Wortformen, um gleichlautende Synonyme zu filtern
-      forms = lexis.collect { |lex| lex.form }
       #  alle gefundenen Synonyme
       synos = []
+      #  multiworder optimization
+      key_ref = %r{\A#{Regexp.escape(KEY_REF)}\d+}o
 
       lexis.each do |lex|
         #  Synonyme für Teile eines Kompositum ausschließen
@@ -105,10 +105,7 @@ protected
         next if lex.attr==LA_SYNONYM
         
         @dic.select(lex.form).each do |syn| 
-          #  Gleichlautende Synonyme ausschließen
-          next if syn =~ /^\*(\d+)/
-          next unless forms.index(syn.form).nil?
-          synos << syn
+          synos << syn unless syn =~ key_ref
         end
       end
       obj.lexicals += synos.sort.uniqual

@@ -14837,3 +14837,5 @@ azur <farbe>=himmelsblau
 azurit=kupferlasur
 azyklische bewegung=acyclische bewegung
 azyklizität=acyclicity
+rennen=laufen
+rennen=wettrennen
