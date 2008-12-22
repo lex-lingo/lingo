@@ -24,7 +24,7 @@ class TestAttendeeSynonymer < Test::Unit::TestCase
 
   def test_all
     @input = [wd('Kerlchen|IDF', 'kerlchen|s')]
-    @expect = [wd('Kerlchen|IDF', 'kerlchen|s', 'zwerg-nase|y')]
+    @expect = [wd('Kerlchen|IDF', 'kerlchen|s', 'kerlchen|y', 'zwerg-nase|y')]
     meet({'source'=>'sys-syn,tst-syn', 'check'=>'-,MUL', 'mode'=>'all'})
   end
 
