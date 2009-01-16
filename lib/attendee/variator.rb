@@ -129,7 +129,11 @@ protected
         #  Variiertes Wort im Wörterbuch suchen
         word = @dic.find_word(var)
         word = @gra.find_compositum(var) if word.attr == WA_UNKNOWN
-        next if word.attr == WA_UNKNOWN
+        next if word.attr == WA_UNKNOWN || (
+          word.attr == WA_KOMPOSITUM && word.lexicals.any? { |lex|
+            lex.attr[0..0] == LA_TAKEITASIS
+          }
+        )
 
         #  Das erste erkannte Wort beendet die Suche
         inc('Anzahl gefundener Wörter')
