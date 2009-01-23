@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 #  LINGO ist ein Indexierungssystem mit Grundformreduktion, Kompositumzerlegung, 
 #  Mehrworterkennung und Relationierung.
 #

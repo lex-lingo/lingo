@@ -105,21 +105,21 @@ language:
         #    Define Basic Latin printable characters for UTF-8 encoding from U+0000 to U+007f
         - _baslat_: '[A-Za-z]'
         #    Define Latin-1 Supplement printable characters for UTF-8 encoding from U+0080 to U+00ff
-        - _lat1sp_: '\xc3[\x80-\x96\x98-\xb6\xb8-\xbf]'
+        - _lat1sp_: '[\xc3\x80-\xc3\x96\xc3\x98-\xc3\xb6\xc3\xb8-\xc3\xbf]'
         #    Define Latin Extended-A printable characters for UTF-8 encoding from U+0100 to U+017f
-        - _latexa_: '[\xc4-\xc5][\x80-\xbf]'
+        - _latexa_: '[\xc4\x80-\xc4\xbf\xc5\x80-\xc5\xbf]'
         #    Define Latin Extended-B printable characters for UTF-8 encoding from U+0180 to U+024f
-        - _latexb_: '[\xc6-\xc8][\x80-\xbf]|\xc9[\x80-\x8f]'
+        - _latexb_: '[\xc6\x80-\xc6\xbf\xc7\x80-\xc7\xbf\xc8\x80-\xc8\xbf\xc9\x80-\xc9\x8f]'
         #    Define IPA Extension printable characters for UTF-8 encoding from U+024f to U+02af
-        - _ipaext_: '\xc9[\xa0-\xbf]|\xca[\xa0-\xaf]'
+        - _ipaext_: '[\xc9\xa0-\xc9\xbf\xca\xa0-\xca\xaf]'
         #    collect all UTF-8 printable charachters in unicode range U+0000 to U+02af
         - _utf8ch_: '_baslat_|_lat1sp_|_latexa_|_latexb_|_ipaext_'
         - NUMS:  '[+-]?(\d{4,}|\d{1,3}(\.\d{3,3})*)(\.|(,\d+)?%?)'
         - URLS:  '((mailto:|(news|http|https|ftp|ftps)://)\S+|^(www(\.\S+)+)|\S+([\._]\S+)+@\S+(\.\S+)+)'
         - ABRV:  '(((_utf8ch_)+\.)+)(_utf8ch_)+'
         - WORD:  '(_utf8ch_|_digit_|\-)+'
-        - PUNC:  '([!,\.:;?]|\xc2[\xa1\xbf])'
-        - OTHR:  '([\"#$%&\x27()*\+\-/<=>@\[\\\]^_{|}~]|\xc2[\xa2-\xac\xae-\xbe]|\xc3[\x97\xb7])'
+        - PUNC:  '([!,\.:;?]|[\xc2\xa1\xc2\xbf])'
+        - OTHR:  '([\"#$%&\x27()*\+\-/<=>@\[\\\]^_{|}~]|[\xc2\xa2-\xc2\xac\xc2\xae-\xc2\xbe]|[\xc3\x97\xc2\xb7])'
         - HELP:  '[^ ]*'
 
     variator:

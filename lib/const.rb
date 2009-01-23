@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 #  LINGO ist ein Indexierungssystem mit Grundformreduktion, Kompositumzerlegung, 
 #  Mehrworterkennung und Relationierung.
 #
@@ -35,13 +37,13 @@ UTF_8_DIGIT = '[0-9]'
 #    Define Basic Latin printable characters for UTF-8 encoding from U+0000 to U+007f
 UTF_8_BASLAT = '[A-Za-z]'
 #    Define Latin-1 Supplement printable characters for UTF-8 encoding from U+0080 to U+00ff
-UTF_8_LAT1SP = '\xc3[\x80-\x96\x98-\xb6\xb8-\xbf]'
+UTF_8_LAT1SP = '[\xc3\x80-\xc3\x96\xc3\x98-\xc3\xb6\xc3\xb8-\xc3\xbf]'
 #    Define Latin Extended-A printable characters for UTF-8 encoding from U+0100 to U+017f
-UTF_8_LATEXA = '[\xc4-\xc5][\x80-\xbf]'
+UTF_8_LATEXA = '[\xc4\x80-\xc4\xbf\xc5\x80-\xc5\xbf]'
 #    Define Latin Extended-B printable characters for UTF-8 encoding from U+0180 to U+024f
-UTF_8_LATEXB = '[\xc6-\xc8][\x80-\xbf]|\xc9[\x80-\x8f]'
+UTF_8_LATEXB = '[\xc6\x80-\xc6\xbf\xc7\x80-\xc7\xbf\xc8\x80-\xc8\xbf\xc9\x80-\xc9\x8f]'
 #    Define IPA Extension printable characters for UTF-8 encoding from U+024f to U+02af
-UTF_8_IPAEXT = '\xc9[\xa0-\xbf]|\xca[\xa0-\xaf]'
+UTF_8_IPAEXT = '[\xc9\xa0-\xc9\xbf\xca\xa0-\xca\xaf]'
 #    collect all UTF-8 printable charachters in unicode range U+0000 to U+02af
 UTF_8_CHAR = "#{UTF_8_DIGIT}|#{UTF_8_BASLAT}|#{UTF_8_LAT1SP}|#{UTF_8_LATEXA}|#{UTF_8_LATEXB}|#{UTF_8_IPAEXT}"
 

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'test/unit'
 require 'lingo'
 
@@ -54,7 +56,7 @@ class Test::Unit::TestCase
 
   def initialize(fname)
     old_init(fname)
-    @name = $1.downcase if self.class.to_s =~ /TestAttendee(.*)/
+    @attendee = $1.downcase if self.class.to_s =~ /TestAttendee(.*)/
     @output = Array.new
 
     Lingo.new('lingo.rb', [])
@@ -62,7 +64,7 @@ class Test::Unit::TestCase
 
 
   def meet(att_cfg, check=true)
-    std_cfg = {'name'=>@name.capitalize}
+    std_cfg = {'name'=>@attendee.capitalize}
     std_cfg.update({'in'=>'lines'}) unless @input.nil?
     std_cfg.update({'out'=>'output'}) unless @output.nil?
 
@@ -70,7 +72,7 @@ class Test::Unit::TestCase
     Lingo::meeting.reset
     inv_list = []
     inv_list << {'helper'=>{'name'=>'Helper', 'out'=>'lines', 'spool_from'=>@input}} unless @input.nil?
-    inv_list << {@name=>std_cfg.update( att_cfg )}
+    inv_list << {@attendee=>std_cfg.update( att_cfg )}
     inv_list << {'helper'=>{'name'=>'Helper', 'in'=>'output', 'dump_to'=>@output}} unless @output.nil?
     Lingo::meeting.invite( inv_list )
     Lingo::meeting.start( 0 )

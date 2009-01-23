@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 #  LINGO ist ein Indexierungssystem mit Grundformreduktion, Kompositumzerlegung, 
 #  Mehrworterkennung und Relationierung.
 #
@@ -113,6 +115,17 @@ class Crypter
 
 private
 
+if RUBY_VERSION >= '1.9'
+  def crypt(k, v)
+    c, i = '-' * v.size, k.size
+    (0...c.size).each { |j|
+      i -= 1
+      c[j] = (v[j].ord ^ k[i].ord).chr
+      i = k.size if i == 0
+    }
+    c
+  end
+else
   def crypt(k, v)
     c = '-' * v.size
     i = k.size
@@ -123,6 +136,7 @@ private
     }
     c
   end
+end
   
 end
 #

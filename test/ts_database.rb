@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 #  LINGO ist ein Indexierungssystem mit Grundformreduktion, Kompositumzerlegung, 
 #  Mehrworterkennung und Relationierung.
 #
@@ -245,7 +247,8 @@ END_OF_TEXT
   
   def compare( id, input, output )
     txtfile = Lingo.config['language/dictionary/databases/' + id + '/name']
-    File.open( txtfile, 'w' ) { |file| file.puts input, ' ' * id[-1] }
+    length = RUBY_VERSION >= '1.9' ? id[-1, 1].ord : id[-1]
+    File.open( txtfile, 'w' ) { |file| file.puts input, ' ' * length }
     dbm = DbmFile.new( id )
     dbm.open
     store = dbm.to_h

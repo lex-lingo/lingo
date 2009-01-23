@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 #  LINGO ist ein Indexierungssystem mit Grundformreduktion, Kompositumzerlegung, 
 #  Mehrworterkennung und Relationierung.
 #
@@ -72,6 +74,8 @@ class String
   def from_x
     str, q, first = '', 0, false
     each_byte { |byte|
+      byte = byte.chr
+
       # Our hex chars are 2 bytes wide, so we have to keep track
       # of whether it's the first or the second of the two.
       #
