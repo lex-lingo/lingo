@@ -146,6 +146,7 @@ private
       end
     }.each { |str| forward(str) }
     
+    @word_count = 0 if @sort == 'sto_rel'
   end
   
 end
