@@ -1,69 +1,55 @@
-= Lingo - Linguistisches Lego
-Lingo ist ein freies Indexierungssystem für Forschung und Lehre. 
-Die wesentlichen Funktionen von Lingo sind
-* Grundformidentifizierung bzw. -reduzierung mitttels einfacher Suffixliste
-* algorythmische Kompositumzerlegung
-* lexikalische wörterbuchbasierte Relationierung und Mehrworterkennung
-* generische Mehrwort bzw. Sequenzerkennung auf Basis von Wortklassenfolgen
+= Lingo - linguistic Lego
+Lingo is an open source indexing system for research and teachings.
+The main functions of Lingo are
+* identification of (i.e. reduction to) basic word form by means of a simple suffix list
+* algorithmic decomposition
+* dictionary-based lexical synonymisation and identification of phrases
+* generic identification of phrases / word sequences based on succession of word classes
   
 = Credits
-Lingo ist eine gemeinschaftliche Entwicklung von Klaus Lepsky und John Vorhauer.
+Lingo is a collective development by Klaus Lepsky and John Vorhauer
+
+== Introduction
+Lingo is linguistic Lego. If texts should be object to a linguistic analysis, then Lingo can be used for almost every purpose that the heart desires.
+Lingo is a system that allows to assemble a network of unlimited functionality from modules with limited functions. This network is built by configuration files.
+A small example:
+
+meeting:
+  protocol: '$(status)'
+  attendees:
+    - textreader:     { out: lines, files: 'readme' }
+    - debugger:       { in: lines, eval: 'true', ceval: 'cmd!="EOL"', prompt: '<debug>: '}
+
+Lingo is told to invite two attendees. And Lingo wants them to talk to each other, hence the name Lingo (=the technical language).
+
+The first attendee is the *textreader*. It can read files and communicate its content to other attendees. For this purpose the *textreader* is given the output channel *lines* (out: lines). Everything that the textreader has to say is steered through this channel. That is almost it for the *textreader*. It will do nothing further until Lingo will tell the first attendee to speak. Then the textreader will open the file README (files parameter) and babbles the content to the world via the *lines* channel.
+The second attendee *debugger* does nothing else than to put everything on the console that comes into its input channel (in: lines). If you write the lingo configuration which is shown above as an example into the file README.cfg and then run "lingo -c readme", the result will look like this:
+
+<debug>:  *FILE('readme')
+<debug>:  "= Lingo - linguistic Lego"
+...
+<debug>:  "Lingo is linguistic Lego. If texts should be object to a linguistic analysis, then Lingo can be used for almost every "
+<debug>:  "purpose that the heart desires."
+...
+<debug>:  *EOF('readme')
 
 
-== Einführung
-Lingo ist linguistisches Lego. Sollen Texte einer linguistischen Analyse unterzogen werden, 
-so kann man mit Lingo alles bewerkstelligen, was das Herz begehrt.
-Lingo ist eine Systematik die es erlaubt, einzelne Bausteine mit begrenzter Funktion zu einen Netzwerk mit 
-unbegrenzter Funktion zusammen zu bauen. Gebaut werden diese Netzwerk für Lingo in Konfigurationsdateien.
-Ein kleines Beispiel: 
+What we see are lines with asterisk (*) and lines without. And that is just fine! Because Lingo distinguishes between command and data. The *textreader* did not only read the content of the file, but also communicated through the commands when a file begins and when it ends. This can (and will) be an important piece of information for other attendees that will be added later.
 
-  <lingo>
-    <attendee name='textreader' out='lines' files='README.txt'/>
-    <attendee name='debugger' in='lines'/>
-  </lingo>
+Well, with this almost everything about Lingo is said :o)
 
-Lingo wird angewiesen, zwei Attendees (Teilnehmer) einzuladen. Und Lingo möchte, dass sie miteinander sprechen. 
-Daher kommt ja auch der Name Lingo (=die Fachsprache). 
+Maybe yet a little overview about possible attendees that can be used for solving a specific problem (for more information see the documentation of the specific attendee).
 
-Der erste Teilnehmer ist der *Textreader*. Er kann Dateien lesen und anderen Teilnehmern den Inhalt mitteilen.
-Dazu wird dem *Textreader* der Ausgabekanal *lines* (out='lines') erzeugt. Alles, was der Textreader zu sagen hat, 
-wird über diesen Kanal geschleust. Das war's fast für den *Textreader*. Der tut jetzt erst einmal nichts, bis Lingo den 
-ersten Teilnehmer aufordern wird, zu reden. Dann öffnet der *Textreader* die Datei README.txt (files-Parameter)
-und plappert den Inhalt über den *lines*-Kanal in die Welt hinaus. Der zweite Teilnehmer *debugger* macht nichts
-anderes, als alles, was über seinen Eingabekanal herein kommt (in='lines'), auf der Konsole auszugeben. Schreibt man 
-die obige Lingo-Konfiguration in die Datei README.XML und ruft anschließend <tt>ruby lingo.rb -c readme</tt> auf, 
-so schaut das Ergebnis dieser ersten Lingo-Konfiguration in etwa so aus:
+<b>textreader</b>::  reads files and puts their content into the channels line by line.
+<b>tokenizer</b>::  dissects linesinto defined character strings of the class "token".
+<b>stopworder</b>::  marks tokens that are listed in the stopword list as stopwords.
+<b>wordsearcher</b>::  identifies tokens and makes them objects of the class "word". To do this right it looks into the dictionionary.
+<b>synonymer</b>::  extends objects of the class "word" by synonyms.
+<b>noneword_filter</b>::  filters out everything and lets through only those character strings that are unknown.
+<b>vector_filter</b>::  filters out everything and lets through only those character strings that considered useful for indexing.
+<b>textwriter</b>::  writes anything that it receives into a file.
+<b>debugger</b>::  shows everything for debugging.
+<b>variator</b>::  tries to correct spelling errors and the like
+<b>sequencer</b>::  identifies phrases (word sequences) based on succession of word classes.
 
-  <debug>:  CMD: FILE (README.txt)
-  <debug>:  "= Lingo"
-  <debug>:  "== Einf\374hrung"
-  <debug>:  "Lingo ist linguistisches Lego. Sollen Texte einer linguistischen Analyse unterzogen werden, "
-  <debug>:  "so kann man mit Lingo alles bewerkstelligen, was das Herz begehrt."
-     ....
-  <debug>:  CMD: EOF (README.txt)
-  
-  ----------------------------------------
-  Die Dauer der Sitzung war  0.00 sec.
-
-Was wir sehen, sind Zeilen mit CMD: und Zeilen ohne. Und das ist auch gut so! Lingo unterscheidet nämlich zwischen 
-Kommando und Daten. Der *Textreader* hat nicht nur den Inhalt der Datei gelesen, sondern auch zusätzlich über die
-Kommandos mitgeteilt, wann welche Datei anfängt und wann sie zuende ist. Dies kann (und wird) eine wichtige Information 
-für andere Teilnehmer werden, die später hinzukommen.
-
-So, damit ist zu Lingo eigentlich alles gesagt :o)
-
-Vielleicht noch eine kleine Übersicht über mögliche Teilnehmer, die man zur Lösung seines speziellen Problems heranziehen 
-kann (für weitere Informationen sei auf die jeweilige Dokumentation des Teilnehmers verwiesen):
-
-<b>Textreader</b>::  Liest Dateien und gibt deren Inhalt zeilenweise in die Kanäle.
-<b>Tokenizer</b>::    Zerlegt Zeilen in definierte Zeichenketten der Klasse Token.
-<b>Stopworder</b>::  Markiert Token, die in der Stopwort-Liste enthalten sind, als Stopwort.
-<b>Wordsearcher</b>::  Macht aus Token Objekte der Klasse Word. Ums richtig zu machen schaut er dabei noch in Wörterbücher, versucht Flexionen zu berücksichtigen und wenn alles nichts hilft, testet er auch noch auf Komposita.
-<b>Synonymer</b>::  Erweitert Objekte der Klasse Word um Synonyme, die zu deren Grundform gefunden werden.
-<b>Noneword_filter</b>::  Filtert alles raus und gibt nur unbekannte Wörter weiter.
-<b>Vector_filter</b>::  Filtert alles raus und gibt nur die Zeichenketten weiter, die für die Indexierung als Vektor zu gebrauchen sind.
-<b>Textwriter</b>::  Gibt alles, was er bekommt, in eine Datei aus.
-<b>Debugger</b>::  Zeigt alles zur Fehleranalyse an.
-<b>Ocr_variator</b>::  Versucht Fehler zu beheben, die durch das Einscannen von Texten entstehen können.
-
-Weiterhin kann für den Einstieg nicht schaden, einen Blick in die Konfigurationen rubyling.xml und ocr.xml zu werfen.
+Furthermore it can be useful to look at the configurations lingo-en.cfg and en.lang.
