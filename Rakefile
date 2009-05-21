@@ -37,6 +37,7 @@ TEST_DATA = FileList.new( '??/test_*.txt', 'test/lir*.txt', 'test/mul.txt', 'tes
 RELEASE = FileList.new( 'README', 'ChangeLog', 'COPYING', 'Rakefile', 'TODO' )
 LIR_FILES = FileList.new( 'lir.cfg', 'txt/lir.txt' )
 LP_FILES = FileList.new( 'lingo-lp.cfg', 'lir-lp.cfg' )
+PORTER_FILES = FileList.new( 'porter/*' )
 
 
 #desc 'Default: proceed to testing lab...'
@@ -55,7 +56,7 @@ end
 #
 # => :package
 #
-#task :package => [ :testall, :rdoc ]
+task :package => [ :testall, :rdoc ]
 
 desc 'Packettierung von Lingo'
 Rake::PackageTask.new( PACKAGE_NAME, LINGO_VERSION ) do |pkg|
@@ -63,7 +64,7 @@ Rake::PackageTask.new( PACKAGE_NAME, LINGO_VERSION ) do |pkg|
     pkg.package_files.include( LINGO_CORE, LINGO_CONF, LINGO_DOCU, LINGO_INFO )
     pkg.package_files.include( LANG_DE, LANG_EN )
     pkg.package_files.include( TEST_CORE, TEST_DATA )
-    pkg.package_files.include( RELEASE, LIR_FILES, LP_FILES )
+    pkg.package_files.include( RELEASE, LIR_FILES, PORTER_FILES )
 end
 
 
@@ -72,7 +73,7 @@ Rake::PackageTask.new( PACKAGE_NAME + '-lp', LINGO_VERSION ) do |pkg|
     pkg.need_zip = true
     pkg.package_files.include( LINGO_CORE, LINGO_CONF, LINGO_DOCU )
     pkg.package_files.include( LANG_DE, LANG_EN )
-    pkg.package_files.include( RELEASE, LIR_FILES )
+    pkg.package_files.include( RELEASE, LIR_FILES, LP_FILES, PORTER_FILES )
 end
 
 
