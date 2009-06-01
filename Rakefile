@@ -7,7 +7,7 @@ require 'rake/packagetask'
 require 'rake/rdoctask'
 
 PACKAGE_NAME = 'lingo'
-LINGO_VERSION = '1.6.7'
+LINGO_VERSION = '1.6.8'
 PACKAGE_PATH = 'pkg/'+PACKAGE_NAME+'-'+LINGO_VERSION+'.zip'
 
 # => CLEAN-FILES
