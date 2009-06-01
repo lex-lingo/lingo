@@ -67,10 +67,9 @@ language:
       #
       #    ts_database (TxtFiles werden automatisch erzeugt!)
       sys-lx1: { name: de/lingo-dic.txt, txt-format: WordClass }   #  TEST: wird automatisch erstellt
-      sys-lx2: { name: de/lingo-gpl.txt, txt-format: WordClass }   #  TEST: wird automatisch erstellt
       tst-sw1: { name: test/de/singleword.txt, txt-format: SingleWord }   #  TEST: wird automatisch erstellt
       tst-sw2: { name: test/de/singleword.txt, txt-format: SingleWord, def-wc: '*' }   #  TEST: wird automatisch erstellt
-      tst-sw3: { name: test/de/singleword.txt, txt-format: SingleWord, use-lex: 'sys-lx1,sys-lx2' }   #  TEST: wird automatisch erstellt
+      tst-sw3: { name: test/de/singleword.txt, txt-format: SingleWord, use-lex: 'sys-lx1' }   #  TEST: wird automatisch erstellt
       tst-sw4: { name: test/de/singleword.txt, txt-format: SingleWord, crypt }   #  TEST: wird automatisch erstellt
       tst-kv1: { name: test/de/keyvalue.txt, txt-format: KeyValue }   #  TEST: wird automatisch erstellt
       tst-kv2: { name: test/de/keyvalue.txt, txt-format: KeyValue, separator: '*' }   #  TEST: wird automatisch erstellt
