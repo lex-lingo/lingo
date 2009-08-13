@@ -7,7 +7,7 @@ require 'rake/packagetask'
 require 'rake/rdoctask'
 
 PACKAGE_NAME = 'lingo'
-LINGO_VERSION = '1.6.8'
+LINGO_VERSION = '1.6.9'
 PACKAGE_PATH = 'pkg/'+PACKAGE_NAME+'-'+LINGO_VERSION+'.zip'
 
 # => CLEAN-FILES
@@ -36,7 +36,6 @@ TEST_DATA = FileList.new( '??/test_*.txt', 'test/lir*.txt', 'test/mul.txt', 'tes
 
 RELEASE = FileList.new( 'README', 'ChangeLog', 'COPYING', 'Rakefile', 'TODO' )
 LIR_FILES = FileList.new( 'lir.cfg', 'txt/lir.txt' )
-LP_FILES = FileList.new( 'lingo-lp.cfg', 'lir-lp.cfg' )
 PORTER_FILES = FileList.new( 'porter/*' )
 
 
@@ -65,15 +64,6 @@ Rake::PackageTask.new( PACKAGE_NAME, LINGO_VERSION ) do |pkg|
     pkg.package_files.include( LANG_DE, LANG_EN )
     pkg.package_files.include( TEST_CORE, TEST_DATA )
     pkg.package_files.include( RELEASE, LIR_FILES, PORTER_FILES )
-end
-
-
-desc 'Packettierung von Lingo-LP'
-Rake::PackageTask.new( PACKAGE_NAME + '-lp', LINGO_VERSION ) do |pkg|
-    pkg.need_zip = true
-    pkg.package_files.include( LINGO_CORE, LINGO_CONF, LINGO_DOCU )
-    pkg.package_files.include( LANG_DE, LANG_EN )
-    pkg.package_files.include( RELEASE, LIR_FILES, LP_FILES, PORTER_FILES )
 end
 
 
