@@ -118,7 +118,7 @@ language:
         #    collect all UTF-8 printable charachters in unicode range U+0000 to U+02af
         - _utf8ch_: '_baslat_|_lat1sp_|_latexa_|_latexb_|_ipaext_'
         - NUMS:  '[+-]?(\d{4,}|\d{1,3}(\.\d{3,3})*)(\.|(,\d+)?%?)'
-        - URLS:  '((mailto:|(news|http|https|ftp|ftps)://)\S+|^(www(\.\S+)+)|\S+([\._]\S+)+@\S+(\.\S+)+)'
+        - URLS:  '((mailto:|(news|http|https|ftp|ftps)://)\S+|^(www(\.\S+)+)|[^\s.]+([\._]\S+)+@\S+(\.\S+)+)'
         - ABRV:  '(((_utf8ch_)+\.)+)(_utf8ch_)+'
         - WORD:  '(_utf8ch_|_digit_|\-)+'
         #- PUNC:  '([!,\.:;?]|[\xc2\xa1\xc2\xbf])'
