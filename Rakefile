@@ -38,6 +38,8 @@ RELEASE = FileList.new( 'README', 'ChangeLog', 'COPYING', 'Rakefile', 'TODO' )
 LIR_FILES = FileList.new( 'lir.cfg', 'txt/lir.txt' )
 PORTER_FILES = FileList.new( 'porter/*' )
 
+DEV_NULL = RUBY_PLATFORM =~ /mswin|mingw/ ? 'NUL:' : '/dev/null'
+
 
 #desc 'Default: proceed to testing lab...'
 task :default => :test
@@ -106,7 +108,7 @@ desc 'Vollständiges Testen der Lingo-Prozesse anhand einer Textdatei'
 task :test_txt => [] do
 
     # => Testlauf mit normaler Textdatei
-    system( "ruby lingo.rb -c test txt/artikel.txt" ) || exit
+    system( "ruby lingo.rb -c test txt/artikel.txt >#{DEV_NULL}" ) or exit 1
 
     # => Für jede vorhandene _ref-Dateien sollen die Ergebnisse verglichen werden
     continue = true
@@ -116,7 +118,7 @@ task :test_txt => [] do
       system( "diff -b #{ref} #{org}" ) || (continue = false)
     end
 
-    exit unless continue
+    exit 2 unless continue
 end
 
 
@@ -128,7 +130,7 @@ desc 'Vollständiges Testen der Lingo-Prozesse anhand einer LIR-Datei'
 task :test_lir => [] do
 
     # => Testlauf mit LIR-Datei
-    system( "ruby lingo.rb -c lir txt/lir.txt" ) || exit
+    system( "ruby lingo.rb -c lir txt/lir.txt >#{DEV_NULL}" ) or exit 1
 
     # => Für jede vorhandene _ref-Dateien sollen die Ergebnisse verglichen werden
     continue = true
@@ -138,7 +140,7 @@ task :test_lir => [] do
       system( "diff -b #{ref} #{org}" ) || (continue = false)
     end
 
-    exit unless continue
+    exit 2 unless continue
 end
 
 
