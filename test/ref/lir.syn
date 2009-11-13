@@ -11,7 +11,8 @@
 00049*adaptation adaption akkommodation
 00052*adaptation adaption akkommodation
 00053*erwerbsarbeit
-00055*prestige spezies
+00054*propadien
+00055*aufgabe prestige spezies
 00058*analytik
 00059*arbeitsprodukt
 00064*formalerschließung formalkatalogisierung katalogisat <titelaufnahme> titelaufnahme
@@ -70,7 +71,7 @@
 00284*erwerbsarbeit
 00285*verfasser
 00286*kleingruppe / betrieb team / betrieb verfasser
-00288*auswechslung tausch <austausch>
+00288*auswechslung propadien tausch <austausch>
 00289*analytik erwerbsarbeit
 00290*auskunftshaftung erwerbsarbeit
 00291*aufgabenstellung aufgabentyp deutsch / aufsatz deutschaufsatz schulaufsatz
@@ -79,6 +80,7 @@
 00294*arbeitsumgebung auskunftshaftung
 00296*abschiedsfeier verabschiedung
 00297*erwerbsarbeit
+00298*propadien
 00301*analoges signal
 00303*anwendung / bereich anwendungsgebiet arbeitsplatz aufgabenstellung aufgabentyp erwerbsarbeit
 00305*benutzer bezugsquelle unternehmen / abteilung
