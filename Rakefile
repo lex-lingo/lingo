@@ -6,6 +6,11 @@ require 'rake/testtask'
 require 'rake/packagetask'
 require 'rake/rdoctask'
 
+require 'rbconfig'
+
+require 'diff/lcs'
+require 'diff/lcs/ldiff'
+
 PACKAGE_NAME = 'lingo'
 LINGO_VERSION = '1.6.10'
 PACKAGE_PATH = 'pkg/'+PACKAGE_NAME+'-'+LINGO_VERSION+'.zip'
@@ -38,6 +43,7 @@ RELEASE = FileList.new( 'README', 'ChangeLog', 'COPYING', 'Rakefile', 'TODO' )
 LIR_FILES = FileList.new( 'lir.cfg', 'txt/lir.txt' )
 PORTER_FILES = FileList.new( 'porter/*' )
 
+RUBY_CMD = Config::CONFIG.values_at('RUBY_INSTALL_NAME', 'EXEEXT').join
 DEV_NULL = RUBY_PLATFORM =~ /mswin|mingw/ ? 'NUL:' : '/dev/null'
 
 
@@ -108,17 +114,17 @@ desc 'Vollständiges Testen der Lingo-Prozesse anhand einer Textdatei'
 task :test_txt => [] do
 
     # => Testlauf mit normaler Textdatei
-    system( "ruby lingo.rb -c test txt/artikel.txt >#{DEV_NULL}" ) or exit 1
+    system( "#{RUBY_CMD} lingo.rb -c test txt/artikel.txt >#{DEV_NULL}" ) or exit 1
 
     # => Für jede vorhandene _ref-Dateien sollen die Ergebnisse verglichen werden
-    continue = true
+    continue = 0
     Dir[ 'test/ref/artikel.*' ].each do |ref|
       org = ref.gsub(/test\/ref/, 'txt')
       puts '#' * 60 + "  Teste #{org}"
-      system( "diff -b #{ref} #{org}" ) || (continue = false)
+      continue += Diff::LCS::Ldiff.run(ARGV.clear << org << ref)
     end
 
-    exit 2 unless continue
+    exit 2 unless continue.zero?
 end
 
 
@@ -130,17 +136,17 @@ desc 'Vollständiges Testen der Lingo-Prozesse anhand einer LIR-Datei'
 task :test_lir => [] do
 
     # => Testlauf mit LIR-Datei
-    system( "ruby lingo.rb -c lir txt/lir.txt >#{DEV_NULL}" ) or exit 1
+    system( "#{RUBY_CMD} lingo.rb -c lir txt/lir.txt >#{DEV_NULL}" ) or exit 1
 
     # => Für jede vorhandene _ref-Dateien sollen die Ergebnisse verglichen werden
-    continue = true
+    continue = 0
     Dir[ 'test/ref/lir.*' ].each do |ref|
       org = ref.gsub(/test\/ref/, 'txt')
       puts '#' * 60 + "  Teste #{org}"
-      system( "diff -b #{ref} #{org}" ) || (continue = false)
+      continue += Diff::LCS::Ldiff.run(ARGV.clear << org << ref)
     end
 
-    exit 2 unless continue
+    exit 2 unless continue.zero?
 end
 
 
