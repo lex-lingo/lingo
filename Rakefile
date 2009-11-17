@@ -33,7 +33,7 @@ LANG_EN = FileList.new( 'en.lang', 'en/lingo-*.txt', 'en/user-dic.txt', 'txt/art
 
 LINGO_CORE = FileList.new( 'lingo.rb', 'lib/*.rb', 'lib/attendee/*.rb' )
 LINGO_CONF = FileList.new( 'lingo.cfg', 'lingo.opt', 'lingo-en.cfg' )
-LINGO_DOCU = FileList.new( 'doc/*' )
+LINGO_DOCU = FileList.new( 'doc/**/*' )
 LINGO_INFO = FileList.new( 'info/gpl-hdr.txt', 'info/*.png' )
 
 TEST_CORE = FileList.new( 'test.cfg', 'test/ts_*.rb', 'test/attendee/*.rb' )
