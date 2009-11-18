@@ -10894,6 +10894,7 @@ bibliophilie=bibliophilie #s
 bibliophobie=bibliophobie #s
 bibliothekar=bibliothekar #s
 bibliothekarin=bibliothekarin #s
+bibliothekarisch=bibliothekarisch #a
 bibliothek=bibliothek #s
 biblisch=biblisch #a
 bidirektional=bidirektional #a
