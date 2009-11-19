@@ -25,14 +25,12 @@ Lingo is told to invite two attendees. And Lingo wants them to talk to each othe
 The first attendee is the *textreader*. It can read files and communicate its content to other attendees. For this purpose the *textreader* is given the output channel *lines* (out: lines). Everything that the textreader has to say is steered through this channel. That is almost it for the *textreader*. It will do nothing further until Lingo will tell the first attendee to speak. Then the textreader will open the file README (files parameter) and babbles the content to the world via the *lines* channel.
 The second attendee *debugger* does nothing else than to put everything on the console that comes into its input channel (in: lines). If you write the lingo configuration which is shown above as an example into the file README.cfg and then run "lingo -c readme", the result will look like this:
 
-<debug>:  *FILE('readme')
-<debug>:  "= Lingo - linguistic Lego"
-...
-<debug>:  "Lingo is linguistic Lego. If texts should be object to a linguistic analysis, then Lingo can be used for almost every "
-<debug>:  "purpose that the heart desires."
-...
-<debug>:  *EOF('readme')
-
+  <debug>:  *FILE('readme')
+  <debug>:  "= Lingo - linguistic Lego"
+  ...
+  <debug>:  "Lingo is linguistic Lego. If texts should be object to a linguistic analysis, then Lingo can be used for almost every purpose that the heart desires."
+  ...
+  <debug>:  *EOF('readme')
 
 What we see are lines with asterisk (*) and lines without. And that is just fine! Because Lingo distinguishes between command and data. The *textreader* did not only read the content of the file, but also communicated through the commands when a file begins and when it ends. This can (and will) be an important piece of information for other attendees that will be added later.
 

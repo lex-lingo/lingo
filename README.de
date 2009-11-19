@@ -20,22 +20,20 @@ meeting:
     - textreader:     { out: lines, files: 'readme.de' }
     - debugger:       { in: lines, eval: 'true', ceval: 'cmd!="EOL"', prompt: '<debug>: '}
 
-Lingo wird angewiesen, zwei Attendees (Teilnehmer) einzuladen. Und Lingo möchte, dass sie miteinander sprechen. 
-Daher kommt ja auch der Name Lingo (=die Fachsprache). 
+Lingo wird angewiesen, zwei Attendees (Teilnehmer) einzuladen. Und Lingo möchte, dass die beiden miteinander sprechen, daher der Name Lingo (=die Fachsprache).
 
 Der erste Teilnehmer ist der *Textreader*. Er kann Dateien lesen und anderen Teilnehmern den Inhalt mitteilen. Dazu wird dem *Textreader* der Ausgabekanal *lines* (out='lines') erzeugt. Alles, was der Textreader zu sagen hat, wird über diesen Kanal geschleust. Das war's fast für den *Textreader*. Der tut jetzt erst einmal nichts, bis Lingo den ersten Teilnehmer aufordern wird, zu reden. Dann öffnet der *Textreader* die Datei README.de (files-Parameter) und plappert den Inhalt über den *lines*-Kanal in die Welt hinaus.
 Der zweite Teilnehmer *debugger* macht nichts anderes, als alles, was über seinen Eingabekanal herein kommt (in='lines'), auf der Konsole auszugeben. Schreibt man die obige Lingo-Konfiguration in die Datei README.cfg und ruft anschließend "lingo -c readme" auf, so schaut das Ergebnis dieser ersten Lingo-Konfiguration in etwa so aus:
 
-<debug>:  *FILE('readme.de')
-<debug>:  "= Lingo - Linguistisches Lego"
-...
-<debug>:  "Lingo ist linguistisches Lego. Sollen Texte einer linguistischen Analyse unterzogen werden, "
-<debug>:  "so kann man mit Lingo alles bewerkstelligen, was das Herz begehrt."
-...
-<debug>:  *EOF('readme.de')
+  <debug>:  *FILE('readme.de')
+  <debug>:  "= Lingo - Linguistisches Lego"
+  ...
+  <debug>:  "Lingo ist linguistisches Lego. Sollen Texte einer linguistischen Analyse unterzogen werden, "
+  <debug>:  "so kann man mit Lingo alles bewerkstelligen, was das Herz begehrt."
+  ...
+  <debug>:  *EOF('readme.de')
 
-Was wir sehen, sind Zeilen mit Sternchen (*) und Zeilen ohne. Und das ist auch gut so! Lingo unterscheidet nämlich zwischen 
-Kommando und Daten. Der *Textreader* hat nicht nur den Inhalt der Datei gelesen, sondern auch zusätzlich über die Kommandos mitgeteilt, wann welche Datei anfängt und wann sie zuende ist. Dies kann (und wird) eine wichtige Information für andere Teilnehmer werden, die später hinzukommen.
+Was wir sehen, sind Zeilen mit Sternchen (*) und Zeilen ohne. Und das ist auch gut so! Lingo unterscheidet nämlich zwischen Kommando und Daten. Der *Textreader* hat nicht nur den Inhalt der Datei gelesen, sondern auch zusätzlich über die Kommandos mitgeteilt, wann welche Datei anfängt und wann sie zuende ist. Dies kann (und wird) eine wichtige Information für andere Teilnehmer werden, die später hinzukommen.
 
 So, damit ist zu Lingo eigentlich alles gesagt :o)
 

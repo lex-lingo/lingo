@@ -22,7 +22,7 @@
 00033*religion, christlich
 00034*beschreibung, kurz indexierungssystem, verbal sprache, skandinavisch
 00036*ansatz, wichtig indexierungsmodell, statistisch termgewicht, vorgeschlagen
-00038*bibliothek, viele buch, ganz diskussion, merkwürdig indexierung, breit katalog, gedruckt mangel, zunehmend moderne, wirklich schlagwort, hilfreich zeit, langsam
+00038*bibliothek, viele buch, ganz diskussion, merkwürdig indexierung, breit katalog, gedruckt mangel, zunehmend moderne, wirklich sacherschließung, bibliothekarisch schlagwort, hilfreich zeit, langsam
 00039*begriff, viele bibliographie, deutsch bibliothek, deutsch thesaurus, allgemein verzeichnis, wöchentlich
 00040*anmerkung, kritisch indexierung, maschinell indexierung, verbindlich
 00041*indexierung, automatisch
@@ -109,7 +109,7 @@
 00155*ausgabe, gedruckt information, gewünscht inhaltserschließung, gut maß, besonders prüfung, kritisch speicherkapazität, groß
 00156*grundlage, linguistisch
 00158*indexierung, automatisch
-00159*indexierung, automatisch
+00159*indexierung, automatisch inhaltserschließung, bibliothekarisch
 00161*indexierung, automatisch
 00162*bibliothekskatalog, groß
 00163*aspekt, qualitativ sacherschließung, verbal
@@ -127,6 +127,7 @@
 00183*enzyklopädie, interaktiv
 00185*begriff, weit indexierung, automatisch indexierung, intellektuell indexierungsverfahren, automatisch klassifikation, automatisch klärung, terminologisch
 00186*dokument, klassifiziert dokumentklassifikation, automatisch einführung, kurz indexierung, automatisch klassifikation, automatisch relation, statistisch thema, folgend
+00187*arbeitsgruppe, bibliothekarisch
 00191*erschließung, automatisch klassifikation, hierarchisch klassifikation, thematisch hierarchisch ordnungsstruktur, gewonnen prioritätsklasse, benachbart textklassifikation, automatisch thematisch textklassifikation, thematisch wichtigkeitsstufe, entstanden
 00192*datenbank, groß facettenklassifikation, universell fachwort, wichtig indexierung, automatisch klassifikationssystem, vorgegeben sprache, deutsch titel, beliebig verfahren, beschrieben
 00193*indexierung, numerisch zugang, schnell
@@ -139,10 +140,10 @@
 00201*bibliothek, wissenschaftlich bibliothekskongreß, deutsch
 00204*konferenz, international
 00205*bibliothek, deutsch
-00206*bibliothekarisch, konventionell forschungsgemeinschaft, deutsch indexierung, automatisch projekt, durchgeführt
+00206*forschungsgemeinschaft, deutsch indexierung, automatisch projekt, durchgeführt sacherschließung, bibliothekarisch sacherschließung, konventionell bibliothekarisch
 00207*begriff, verändert bezeichnung, taxonomisch erreger, dazugehörig indexdatei, vorgegeben nachschlagewerk, verschieden name, wissenschaftlich objekt, biologisch rationalisierung, weit stellung, systematisch
 00208*anpassung, strukturell bereich, folgend katalog, elektronisch problem, allgemein vokabular, universell überarbeitung, grundsätzlich
-00209*ergebnis, unbefriedigend indexierung, maschinell katalog, konventionell suche, sachlich umfeld, semantisch umfeldsuche, semantisch
+00209*ergebnis, unbefriedigend indexierung, maschinell katalog, konventionell online-katalog, bibliothekarisch suche, sachlich umfeld, semantisch umfeldsuche, semantisch
 00210*bild, entsprechend möglichkeit, technisch speicher, effektiv system, verschieden voraussetzung, alle
 00211*fachinformation, sozialwissenschaftlich
 00212*informationssuche, effizient rangliste, individuell typ, beliebig verfahren, verschieden
@@ -186,11 +187,11 @@
 00258*darstellung, gut fachgesellschaft, wissenschaftlich material, spezifisch methode, technisch verfügbarkeit, gut
 00259*version, neu
 00260*aktualität, mangelnd anbieter, kommerziell beitrag, folgend erschließung, automatisch internetquell, gefunden link-sammlung, thematisch maß, erheblich stärker maß, stärker netz, gesamt quell, erschlossen suchmaschine, divers verfahren, verschieden
-00261*forschungsgemeinschaft, deutsch indexierung, automatisch projekt, durchgeführt
+00261*forschungsgemeinschaft, deutsch indexierung, automatisch projekt, durchgeführt sacherschließung, bibliothekarisch
 00264*indexierung, automatisch relevanz, statistisch suchergebnis, sortiert
 00265*datenverarbeitung, elektronisch dokumentationsmethode, wenig fachsprache, starr philosophie-dokumentation, elektronisch
 00267*dokumenterschließung, automatisch indexierung, automatisch milos-verfahren, erweitert projekt, gefördert titeldaten, angereichert
-00268*publikation, elektronisch trend, aktuell
+00268*publikation, elektronisch sicht, bibliothekarisch trend, aktuell
 00269*visualisierungstechnik, innovativ
 00270*inhaltserschließung, verbal literaturbericht, kommentiert
 00271*sacherschließung, verbal
@@ -206,12 +207,12 @@
 00283*schnittstelle, technisch
 00284*arbeit, vollständig darstellung, begrifflich darstellung, einfach begrifflich wörterbuch, umfassend zusammenhängen, systematisch
 00285*kriterien, verschieden verteilung, zeitlich wissenschaftskommunikation, formal
-00286*ergebnis, konsistent indexierung, einheitlich indexsystem, angegangen konstruktion, unterschiedlich oberfläche, einheitlich schnittmenge, gemeinsam schnittmenge, klein gemeinsam suchergebnis, inkonsistent suchschlüssel, unterschiedlich verbreitung, zunehmend
+00286*datenbank, bibliothekarisch ergebnis, konsistent indexierung, einheitlich indexsystem, angegangen konstruktion, unterschiedlich oberfläche, einheitlich schnittmenge, gemeinsam schnittmenge, klein gemeinsam suchergebnis, inkonsistent suchschlüssel, unterschiedlich verbreitung, zunehmend
 00287*datei, groß ergebnismenge, größer gruppierung, automatisch information, smart internetquell, verschieden nachricht, aktuell nachricht, einzeln nachricht, zusammengestellt sprache, deutsch suche, begriffen suche, gewählt begriffen version, angepaßt
 00288*austausch, alle kommunikativ austausch, kommunikativ daten, viele datenspeicher, elektronisch erde, ganz informationsverlust, ungewollt objekt, intern patent, international schatz, gigantisch schlüssel, entscheidend speicher, auffindbar sprache, zahlreich sprecher, viele suchoption, weit technologie, alle teil, groß terminologie, gemeinsam terminologie, professionell unternehmen, global weltwissen, gesamt technisch weltwissen, technisch wirkung, integrativ wissen, unser
 00289*suchwerkzeug, jeweilig
 00290*antwort, konkret arbeit, viel aufwand, hoch technologisch aufwand, technologisch auskunft, genau bewertung, intern dateiformat, kryptisch datenbankservermelden, mächtig dokument, ständig verfügbar dokument, verfügbar entscheidung, intuitiv hyperlink, richtig intelligenz, human katalog, inhaltlich sortierend katalog, sortierend konzept, gut kriterien, inhaltlich linkverbindung, gut maschine, automatisch projekt, kalifornisch recherche, automatisch relevanz, inhaltlich roboter, unentwegt seite, alle seite, viele sportergebnis, neu studie, früh suchsystem, alle suchtechnologie, konventionell surfer, unzählig verarbeitung, maschinell verarbeitung, rein maschinell verfahren, mathematisch welt, heterogen wort, alle wort, enthalten
-00291*anforderung, neu anforderung, völlig neu belastung, stärker bibliothek, wenig bibliothekskatalog, allgemein bibliotheksmaterial, besonders bibliotheksmaterial, herkömmlich darstellung, ausführlich dokument, elektronisch dokument, neu elektronisch festlegung, inhaltlich festlegung, vielfach inhaltlich frage, alle gesamtindex, früh handschrift, mittelalterlich handschriftenkatalog, gedruckt handschriftenkatalog, gefördert informationsgewinn, erheblich katalog, gedruckt katalogsystem, jeweilig kreis, eng material, verschieden problem, entstehend technisch problem, technisch richtlinie, gültig wirkung, tiefgreifend
+00291*anforderung, neu anforderung, völlig neu belastung, stärker bibliothek, wenig bibliothekskatalog, allgemein bibliotheksmaterial, besonders bibliotheksmaterial, herkömmlich darstellung, ausführlich dokument, elektronisch dokument, neu elektronisch erschließung, bibliothekarisch festlegung, inhaltlich festlegung, vielfach inhaltlich frage, alle gesamtindex, früh handschrift, mittelalterlich handschriftenkatalog, gedruckt handschriftenkatalog, gefördert informationsgewinn, erheblich katalog, gedruckt katalogsystem, jeweilig kreis, eng material, verschieden problem, entstehend technisch problem, technisch regelwerk, bibliothekarisch richtlinie, gültig wirkung, tiefgreifend
 00292*akzeptanz, merklich ansatz, verschieden automatisierung, zunehmend informationsflut, steigend inhaltserschließung, automatisch interesse, wachsend produkt, neu vertriebene, kommerziell zugriffsverfahren, effizient zukunft, nah
 00293*indexierung, maschinell prozeß, iterativ sicht, technisch untersuchung, phonologisch verfahren, anwendbar verfahren, maschinell anwendbar ähnlichkeitssuche, phonetisch
 00294*anfrage, schriftlich anspruch, verändert bibliothek, viele bibliotheksbenutzer, extern form, allgemein frage, gestellt frage, häufig gestellt maß, besonders problem, häufig recherchemöglichkeit, hervorragend umfeld, universitär
@@ -232,7 +233,7 @@
 00309*datenbank, relational forschungsgemeinschaft, deutsch projekt, gefördert
 00310*aktionsmuster, sequentiell aufgabe, allgemein auswertung, rechnerisch forschungsfrage, allgemein interpretation, zusammenfassend komplex, inhaltlich phasenmodell, dynamisch schritt, folgend suchmaschinennutzer, unerfahren teilnehmer, neun untergruppe, unerfahren web-rechercheaufgabe, offen wissensart, unterschiedlich
 00312*abschluß, relativ aufgabe, weit einstieg, verbal gebrauch, reichlich hilfetext, englisch literatur, erschienen theologisch literatur, theologisch projekt, durchgeführt klein projekt, klein sacherschließen, verbal sacherschließung, doppelt verbal sacherschließung, verbal sacherschließung, zusätzlich verbal sprache, englisch teil, größer
-00313*anteil, unerheblich fernleihe, vermeidbar indexierung, automatisch kostenverursachen, mittelbar kostenverursachen, unmittelbar neubeschaffung, vermeidbar schaden, aufgeführt schaden, entstehend schadensweise, banal schreibweise, korrekt schreibweise, zutreffend sein, dahingestellt sinn, volkswirtschaftlich titelaufnahme, defizitär titelaufnahme, gesucht weg, vermeidbar
+00313*anteil, unerheblich diskussion, bibliothekarisch fernleihe, vermeidbar indexierung, automatisch kostenverursachen, mittelbar kostenverursachen, unmittelbar neubeschaffung, vermeidbar schaden, aufgeführt schaden, entstehend schadensweise, banal schreibweise, korrekt schreibweise, zutreffend sein, dahingestellt sinn, volkswirtschaftlich titelaufnahme, defizitär titelaufnahme, gesucht weg, vermeidbar
 00314*grundlagenartikel, unser information, wichtig information, wirklich wichtig
 00315*aspekt, neu gesellschaft, international sektion, deutsch
 00317*anforderung, speziell anwendungskontext, real erschließung, automatisch inhaltlich erschließung, inhaltlich gesichtspunkt, qualitativ indexierung, automatisch methode, anerkannt system, grundsätzlich unterschiedlich system, lernend system, unterschiedlich verfahren, neu verfahren, traditionell
@@ -244,7 +245,7 @@
 00323*aspekt, pragmatisch dimension, neu ergebnis, wissenschaftlich information, möglich informationssystem, wissenschaftlich position, philosophisch repräsentationsstruktur, entwickelt verfahren, klassisch
 00324*anschauung, herrschend bibliothek, modern bogen, systematisch disziplin, alle epochenübergreifend, gezielt erscheinungsform, verschieden forschung, künftig forschungsdialog, deutsch funktion, enzyklopädisch gleichbleiben, prinzipiell identitätsfindung, national informationsaustausch, umfassend informationsverarbeitung, enzyklopädisch institut, rührig kulturgeschichte, europäisch masse, wachsend medientechnik, spezifisch modell, europäisch neuzeit, früh person, einzeln philosoph, französisch standard, existierend technisch standard, technisch umschau, thematisch werk, enzyklopädisch wirkung, ähnlich wissenssammlung, enzyklopädisch zivilisation, wissenschaftlich überblick, enzyklopädisch überblicksbeiträge, historisch
 00325*forschungsleistung, sozialwissenschaftlich soziologe, antwortend soziologe, deutsch untersuchung, durchgeführt
-00326*bibliothekarisch, deutsch indexierung, automatisch information, intelligent netz, heterogen sicht, integrativ thema, folgend trend, folgend
+00326*ausbildungseinrichtung, bibliothekarisch ausbildungseinrichtung, deutsch bibliothekarisch indexierung, automatisch information, intelligent netz, heterogen sicht, integrativ thema, folgend trend, folgend
 00329*indexierung, adaptiv indexierungsmethode, konzeptuell konzeptrahmen, gebunden tiefenanalyse, selektiv wissensstruktur, relevant zielgruppe, unterschiedlich
 00330*adresse, alt automat, groß begriff, eingegeben begriff, selten begriff, viele beiträge, neu beiträge, ruppig bildersuchen, eigen browserfenster, neu browserführen, überall darstellung, einheitlich datei, deutsch datei, verlinkt datenbanksuche, eigen dokument, aufgesucht dokument, elektronisch dokument, findend dokument, frisch aufgesucht dorado, wahr durchforschen, alles einblick, klein ergebnis, erstaunlich fall, hartnäckig forum, jeweilig frage, allgemein frage, deutsch gestellt frage, gestellt frage, wirklich hilfe, groß hilfe, praktisch idee, olympisch indiz, neu inhalt, häufig wechselnd inhalt, klassisch inhalt, viele inhalt, wechselnd insel, riesig intelligenz, künstlich intelligenz, maschinell internet-anbieter, groß kind, vermißt kollegialität, unermüdlich können, grundsätzlich maschine, weit multimedia-inhalt, kommend nachlese, stündlich netz, ganz netz, unsichtbar netzfreund, alle nichtkommerziell, uralt rahmenlos, möglichst rolle, untergeordnet schleuse, lieb schleuse, viel lieb seite, angemeldet seite, durchsucht seite, einfach seite, gefunden seite, gespeichert seite, jeweilig seite, weit server, kooperierend server, viele kooperierend sorge, groß speicher, eigen speicher, weit suchmaschine, beliebt suchmaschine, deutsch suchmaschine, groß suchseite, englisch suchseite, sehenswert englisch telefonbuchsuche, deutsch text, gefunden treff, viele verweis, einheitlich wettstreit, international wille, gut wissen, alles wort, alle vorkommend wort, vorkommend wortgruppe, geschlossen wortgruppe, spät geschlossen wortlaut, genau wunderwelt, offen wunderwerk, technisch übersetzung, maschinell
 00331*bibliothek, öffentlich erschließungsmethode, herkömmlich indexieren, maschinell indexierung, maschinell methode, verschieden sachbuchbestand, typisch titel, relevant
