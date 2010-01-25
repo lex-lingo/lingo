@@ -156,7 +156,7 @@ class TestLexicalHash < Test::Unit::TestCase
     ds = LexicalHash.new( 'sys-mul' )
     assert_equal([lx('abelscher ring ohne nullteiler|m')], ds['abelscher ring ohne nullteiler'])
     assert_equal(['*4'], ds['abelscher ring ohne'])
-    assert_equal([lx('alleinreisende frau|m')], ds['alleinreisende frau'])
+    assert_equal([lx('alleinreisende frau|m')], ds['alleinreisend frau'])
     assert_equal([lx('abschaltbarer leistungshalbleiter|m')], ds['abschaltbarer leistungshalbleiter'])
     assert_equal(nil, ds['abschaltbar leistungshalbleiter'])
     ds.close
