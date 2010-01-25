@@ -43,8 +43,16 @@ RELEASE = [ 'README', 'ChangeLog', 'COPYING', 'Rakefile', 'TODO' ]
 LIR_FILES = [ 'lir.cfg', 'txt/lir.txt' ]
 PORTER_FILES = [ 'porter/*' ]
 
-RUBY_CMD = Config::CONFIG.values_at('RUBY_INSTALL_NAME', 'EXEEXT').join
-DEV_NULL = RUBY_PLATFORM =~ /mswin|mingw/ ? 'NUL:' : '/dev/null'
+RUBY_CMD = Config::CONFIG['RUBY_INSTALL_NAME']
+
+if RUBY_PLATFORM =~ /mswin|mingw/
+  DEV_NULL = 'NUL:'
+  EXEEXT = Config::CONFIG['EXEEXT']
+  RUBY_CMD << EXEEXT
+  ZIP_COMMANDS = [ 'zip', '7z a' ]
+else
+  DEV_NULL = '/dev/null'
+end
 
 
 #desc 'Default: proceed to testing lab...'
@@ -68,6 +76,17 @@ task :package => [ :testall, :rdoc ]
 desc 'Packettierung von Lingo'
 Rake::PackageTask.new( PACKAGE_NAME, LINGO_VERSION ) do |pkg|
     pkg.need_zip = true
+
+    pkg.zip_command = ZIP_COMMANDS.find { |cmd|
+      cmd = cmd[/\S+/] << EXEEXT
+      break cmd if File.executable?(cmd)
+
+      ENV['PATH'].split(File::PATH_SEPARATOR).find { |dir|
+        cand = File.join(File.expand_path(dir), cmd)
+        break cand if File.executable?(cand)
+      }
+    } || ZIP_COMMANDS.first if defined?(ZIP_COMMANDS)
+
     pkg.package_files.include( LINGO_CORE, LINGO_CONF, LINGO_DOCU, LINGO_INFO )
     pkg.package_files.include( LANG_DE, LANG_EN )
     pkg.package_files.include( TEST_CORE, TEST_DATA )
