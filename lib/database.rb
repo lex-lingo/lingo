@@ -625,9 +625,10 @@ public
           # => Kompositum suchen, wenn Wort nicht erkannt
           if result.attr == WA_UNKNOWN
             result = @grammar.find_compositum( wordform )
+            compo = result.compo_form
           end
           
-          result.norm
+          compo ? compo.form : result.norm
         end.join( ' ' )
         
         skey = gkey.split
