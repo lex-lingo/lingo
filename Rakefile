@@ -28,20 +28,20 @@ CLOBBER.exclude( PACKAGE_PATH )
 
 # => LINGO-FILES
 # => Diese Dateien benötigt Lingo um zu funktionieren
-LANG_DE = FileList.new( 'de.lang', 'de/lingo-*.txt', 'de/user-dic.txt', 'txt/artikel.txt' )
-LANG_EN = FileList.new( 'en.lang', 'en/lingo-*.txt', 'en/user-dic.txt', 'txt/artikel-en.txt' )
+LANG_DE = [ 'de.lang', 'de/lingo-*.txt', 'de/user-dic.txt', 'txt/artikel.txt' ]
+LANG_EN = [ 'en.lang', 'en/lingo-*.txt', 'en/user-dic.txt', 'txt/artikel-en.txt' ]
 
-LINGO_CORE = FileList.new( 'lingo.rb', 'lib/*.rb', 'lib/attendee/*.rb' )
-LINGO_CONF = FileList.new( 'lingo.cfg', 'lingo.opt', 'lingo-en.cfg' )
-LINGO_DOCU = FileList.new( 'doc/**/*' )
-LINGO_INFO = FileList.new( 'info/gpl-hdr.txt', 'info/*.png' )
+LINGO_CORE = [ 'lingo.rb', 'lib/*.rb', 'lib/attendee/*.rb' ]
+LINGO_CONF = [ 'lingo.cfg', 'lingo.opt', 'lingo-en.cfg' ]
+LINGO_DOCU = [ 'doc/**/*' ]
+LINGO_INFO = [ 'info/gpl-hdr.txt', 'info/*.png' ]
 
-TEST_CORE = FileList.new( 'test.cfg', 'test/ts_*.rb', 'test/attendee/*.rb' )
-TEST_DATA = FileList.new( '??/test_*.txt', 'test/lir*.txt', 'test/mul.txt', 'test/ref/*', 'test/de/*' )
+TEST_CORE = [ 'test.cfg', 'test/ts_*.rb', 'test/attendee/*.rb' ]
+TEST_DATA = [ '??/test_*.txt', 'test/lir*.txt', 'test/mul.txt', 'test/ref/*', 'test/de/*' ]
 
-RELEASE = FileList.new( 'README', 'ChangeLog', 'COPYING', 'Rakefile', 'TODO' )
-LIR_FILES = FileList.new( 'lir.cfg', 'txt/lir.txt' )
-PORTER_FILES = FileList.new( 'porter/*' )
+RELEASE = [ 'README', 'ChangeLog', 'COPYING', 'Rakefile', 'TODO' ]
+LIR_FILES = [ 'lir.cfg', 'txt/lir.txt' ]
+PORTER_FILES = [ 'porter/*' ]
 
 RUBY_CMD = Config::CONFIG.values_at('RUBY_INSTALL_NAME', 'EXEEXT').join
 DEV_NULL = RUBY_PLATFORM =~ /mswin|mingw/ ? 'NUL:' : '/dev/null'
