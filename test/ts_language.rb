@@ -84,8 +84,12 @@ class TestLexicalHash < Test::Unit::TestCase
 
   
   def test_params
+    old_stderr, $stderr = $stderr, StringIO.new('')
+
     #  Datenquelle nicht in Konfiguration enthalten
     assert_raise(SystemExit) { LexicalHash.new( 'nonsens' ) }
+  ensure
+    $stderr = old_stderr
   end
   
   #  TODO: Crypt testen...

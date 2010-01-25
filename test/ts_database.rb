@@ -27,6 +27,12 @@
 require 'test/unit'
 require 'lingo'
 
+class Txt2DbmConverter
+  alias_method :original_initialize, :initialize
+  def initialize(id, verbose = false)
+    original_initialize(id, verbose)
+  end
+end
 
 ################################################################################
 #
