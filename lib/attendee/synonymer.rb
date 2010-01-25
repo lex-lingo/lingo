@@ -95,6 +95,7 @@ protected
 
       #  alle Lexicals des Wortes
       lexis = obj.lexicals
+      lexis = [obj] if lexis.empty? && obj.attr==WA_UNKNOWN
       #  alle gefundenen Synonyme
       synos = []
       #  multiworder optimization
