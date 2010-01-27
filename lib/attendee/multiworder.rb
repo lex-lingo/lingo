@@ -89,6 +89,14 @@ protected
     mul_mod = get_key('mode', 'all')
     @mul_dic = Dictionary.new({'source'=>mul_src, 'mode'=>mul_mod}, @@library_config)
 
+    # combine lexical variants?
+    #
+    #   false = old behaviour
+    #   true  = first match
+    #   'all' = all matches
+    @combine  = get_key('combine', false)
+    @all_keys = @combine.is_a?(String) && @combine.downcase == 'all'
+
     #  Lexikalisierungs-Wörterbuch aus angegebenen Quellen ermitteln
     lex_src = nil
     mul_src.each { |src|
@@ -238,21 +246,44 @@ private
   #  Prüft einen definiert langen Schlüssel ab Position 0 im Buffer
   def check_multiword_key( len )
     return [] if number_of_valid_tokens_in_buffer < len
-    
+
     #  Wortformen aus der Wortliste auslesen
-    sequence = @buffer.collect do |obj|
-      if obj.kind_of?(StringA)
-        next nil if obj.form == CHAR_PUNCT
-        word = @lex_dic.find_word( obj.form )
-        word = @lex_gra.find_compositum( obj.form ) if word.attr == WA_UNKNOWN
-        (word.lexicals.size>0) ? word.lexicals[0].form : word.form
-      else
-        obj
-      end
-    end.compact
-    #  Schlüssel für Mehrwortwörterbuch ermitteln
-    key = sequence[0...len].join(' ').downcase
-    @mul_dic.select( key )
+    sequence = @buffer.map { |obj|
+      next [obj] unless obj.is_a?(StringA)
+
+      form = obj.form
+      next if form == CHAR_PUNCT
+
+      word = @lex_dic.find_word(form)
+      word = @lex_gra.find_compositum(form) if word.attr == WA_UNKNOWN
+
+      lexicals = word.lexicals
+      lexicals.empty? ? [word.form] : lexicals.map { |lex| lex.form }
+    }.compact[0, len]
+
+    if @combine
+      keys, muls = [], []
+
+      sequence.each { |forms|
+        keys = forms.map { |form|
+          keys.empty? ? form : keys.map { |key| "#{key} #{form}" }
+        }.flatten
+      }
+
+      keys.each { |key|
+        mul = @mul_dic.select(key.downcase)
+
+        unless mul.empty?
+          muls.concat(mul)
+          break unless @all_keys
+        end
+      }
+
+      muls.uniq
+    else
+      key = sequence.map { |forms| forms.first }.join(' ')
+      @mul_dic.select(key.downcase)
+    end
   end
 
 
