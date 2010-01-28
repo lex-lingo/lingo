@@ -92,25 +92,7 @@ protected
       inc('Anzahl gesuchter Wörter')
 
       #    finde die Synonyme für alle Lexicals des Wortes
-
-      #  alle Lexicals des Wortes
-      lexis = obj.lexicals
-      lexis = [obj] if lexis.empty? && obj.attr==WA_UNKNOWN
-      #  alle gefundenen Synonyme
-      synos = []
-      #  multiworder optimization
-      key_ref = %r{\A#{Regexp.escape(KEY_REF)}\d+}o
-
-      lexis.each do |lex|
-        #  Synonyme für Teile eines Kompositum ausschließen
-        next if obj.attr==WA_KOMPOSITUM && lex.attr!=LA_KOMPOSITUM
-        #  Synonyme für Synonyme ausschließen
-        next if lex.attr==LA_SYNONYM
-        
-        @dic.select(lex.form).each do |syn| 
-          synos << syn unless syn =~ key_ref
-        end
-      end
+      synos = @dic.find_synonyms(obj)
       obj.lexicals += synos.sort.uniqual
 
       inc('Anzahl erweiteter Wörter') if synos.size>0

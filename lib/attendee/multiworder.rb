@@ -110,6 +110,12 @@ protected
     lex_mod = get_key('lex-mode', lex_mod || 'first')
     @lex_dic = Dictionary.new({'source'=>lex_src.split(STRING_SEPERATOR_PATTERN), 'mode'=>lex_mod}, @@library_config)
     @lex_gra = Grammar.new({'source'=>lex_src.split(STRING_SEPERATOR_PATTERN), 'mode'=>lex_mod}, @@library_config)
+
+    if @combine && has_key?('use-syn')
+      syn_src = get_array('use-syn')
+      syn_mod = get_key('syn-mode', 'all')
+      @syn_dic = Dictionary.new({'source'=>syn_src, 'mode'=>syn_mod}, @@library_config)
+    end
     
     @number_of_expected_tokens_in_buffer = 3
     @eof_handling = false
@@ -258,8 +264,11 @@ private
       word = @lex_dic.find_word(form)
       word = @lex_gra.find_compositum(form) if word.attr == WA_UNKNOWN
 
-      lexicals = word.lexicals
-      lexicals.empty? ? [word.form] : lexicals.map { |lex| lex.form }
+      lexicals = word.lexicals.dup
+      lexicals << word if lexicals.empty?
+      lexicals += @syn_dic.find_synonyms(word) if @syn_dic
+
+      lexicals.map { |lex| lex.form }
     }.compact[0, len]
 
     if @combine
