@@ -98,17 +98,18 @@ protected
     @all_keys = @combine.is_a?(String) && @combine.downcase == 'all'
 
     #  Lexikalisierungs-Wörterbuch aus angegebenen Quellen ermitteln
-    lex_src = nil
+    lex_src, lex_mod = nil, nil
     mul_src.each { |src|
-      this_src = @@library_config['databases'][src]['use-lex']
+      this_src, this_mod = @@library_config['databases'][src].values_at('use-lex', 'lex-mode')
       if lex_src.nil? || lex_src==this_src
-        lex_src = this_src
+        lex_src, lex_mod = this_src, this_mod
       else
         forward(STR_CMD_WARN, "Die Mehrwortwörterbücher #{mul_src.join(',')} sind mit unterschiedlichen Wörterbüchern lexikalisiert worden")
       end
     }
-    @lex_dic = Dictionary.new({'source'=>lex_src.split(STRING_SEPERATOR_PATTERN), 'mode'=>'first'}, @@library_config)
-    @lex_gra = Grammar.new({'source'=>lex_src.split(STRING_SEPERATOR_PATTERN), 'mode'=>'first'}, @@library_config)
+    lex_mod = get_key('lex-mode', lex_mod || 'first')
+    @lex_dic = Dictionary.new({'source'=>lex_src.split(STRING_SEPERATOR_PATTERN), 'mode'=>lex_mod}, @@library_config)
+    @lex_gra = Grammar.new({'source'=>lex_src.split(STRING_SEPERATOR_PATTERN), 'mode'=>lex_mod}, @@library_config)
     
     @number_of_expected_tokens_in_buffer = 3
     @eof_handling = false

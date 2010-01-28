@@ -583,16 +583,17 @@ private
     end
 
     #  Lexikalisierungen für Mehrwortgruppen vorbereiten
-    lexical_dictionary = @config['use-lex']
+    lex_dic = @config['use-lex']
+    lex_mod = @config['lex-mode']
 
     begin
       @lexicalize = true
-      @dictionary = Dictionary.new( {'source'=>lexical_dictionary.split(STRING_SEPERATOR_PATTERN)}, Lingo::config['language/dictionary'] )
-      @grammar = Grammar.new( {'source'=>lexical_dictionary.split(STRING_SEPERATOR_PATTERN)}, Lingo::config['language/dictionary'] )
+      @dictionary = Dictionary.new( {'source'=>lex_dic.split(STRING_SEPERATOR_PATTERN), 'mode'=>lex_mod}, Lingo::config['language/dictionary'] )
+      @grammar = Grammar.new( {'source'=>lex_dic.split(STRING_SEPERATOR_PATTERN), 'mode'=>lex_mod}, Lingo::config['language/dictionary'] )
     rescue RuntimeError
 
-      Lingo.error( "Auf das Wörterbuch (#{lexical_dictionary}) für die Lexikalisierung der Mehrwortgruppen in (#{@config['name']}) konnte nicht zugegriffen werden" )
-    end unless lexical_dictionary.nil?
+      Lingo.error( "Auf das Wörterbuch (#{lex_dic}) für die Lexikalisierung der Mehrwortgruppen in (#{@config['name']}) konnte nicht zugegriffen werden" )
+    end unless lex_dic.nil?
 
     self
   end
