@@ -71,7 +71,7 @@ end
 #
 # => :package
 #
-task :package => [ :testall, :rdoc ]
+task :package => [ :testall, :rdoc, :clean ]
 
 desc 'Packettierung von Lingo'
 Rake::PackageTask.new( PACKAGE_NAME, LINGO_VERSION ) do |pkg|

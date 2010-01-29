@@ -65,22 +65,22 @@ class TestAttendeeTextwriter < Test::Unit::TestCase
       ai('RECORD|00237'),
       '020: GERHARD.',
       '025: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.',
-      '056: Die intellektuelle Erschließung des Internet befindet sich in einer Krise. GERHARD ist derzeit weltweit der einzige.',
+      "056: Die intellektuelle Erschließung des Internet befindet sich in einer Krise. GERHARD ist derzeit weltweit der einzige.\r",
       ai('RECORD|00238'),
       '020: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.',
-      '025: das DFG-Projekt GERHARD.',
+      "025: das DFG-Projekt GERHARD.\r",
       ai('RECORD|00239'),
       '020: Information Retrieval und Dokumentmanagement im Multimedia-Zeitalter.',
-      '056: "Das Buch ist ein praxisbezogenes VADEMECUM für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.',
+      "056: \"Das Buch ist ein praxisbezogenes VADEMECUM für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.\r",
       ai('EOF|test/lir.txt')
     ]
     @expect = [
       "00237*020: GERHARD. 025: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressour\
-cen. 056: Die intellektuelle Erschließung des Internet befindet sich in einer Krise. GERHARD ist derzeit weltweit der einzige.\n",
+cen. 056: Die intellektuelle Erschließung des Internet befindet sich in einer Krise. GERHARD ist derzeit weltweit der einzige.\r\n",
       "00238*020: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen. 025: das D\
-FG-Projekt GERHARD.\n",
+FG-Projekt GERHARD.\r\n",
       "00239*020: Information Retrieval und Dokumentmanagement im Multimedia-Zeitalter. 056: \"Das Buch ist ein praxisbezogenes VADEMECUM\
- für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.\n"
+ für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.\r\n"
     ]
     meet({'ext'=>'csv', 'lir-format'=>nil}, false)
 
