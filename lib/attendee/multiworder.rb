@@ -264,11 +264,13 @@ private
       word = @lex_dic.find_word(form)
       word = @lex_gra.find_compositum(form) if word.attr == WA_UNKNOWN
 
-      lexicals = word.lexicals.dup
+      lexicals = word.attr == WA_KOMPOSITUM ?
+        [word.lexicals.first] : word.lexicals.dup
+
       lexicals << word if lexicals.empty?
       lexicals += @syn_dic.find_synonyms(word) if @syn_dic
 
-      lexicals.map { |lex| lex.form }
+      lexicals.map { |lex| lex.form }.uniq
     }.compact[0, len]
 
     if @combine
