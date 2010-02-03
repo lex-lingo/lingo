@@ -220,7 +220,7 @@ public
         next if line =~ /^\s*\043/ || line.strip == ''  #  Kommentarzeilen und leere Zeilen überspringen
         
         #  Ungültige Zeilen protokollieren
-        unless line =~ @line_pattern
+        unless line.length < 4096 && line =~ @line_pattern
           fail_msg = "Fehler beim schreiben der Reject-Datei '#{@pn_reject.to_s}'"
           reject_file.puts line
           next
