@@ -12,7 +12,7 @@ require 'diff/lcs'
 require 'diff/lcs/ldiff'
 
 PACKAGE_NAME = 'lingo'
-LINGO_VERSION = '1.6.10'
+LINGO_VERSION = '1.6.11'
 PACKAGE_PATH = 'pkg/'+PACKAGE_NAME+'-'+LINGO_VERSION+'.zip'
 
 # => CLEAN-FILES
