@@ -71,7 +71,7 @@ end
 #
 # => :package
 #
-task :package => [ :testall, :rdoc, :clean ]
+task :package => [ :testall, :clean, :checkdoc ]
 
 desc 'Packettierung von Lingo'
 Rake::PackageTask.new( PACKAGE_NAME, LINGO_VERSION ) do |pkg|
@@ -104,6 +104,11 @@ Rake::RDocTask.new do |doc|
     doc.options = [ '--charset', 'UTF-8' ]
     doc.rdoc_dir = 'doc'
     doc.rdoc_files.include( 'README', 'ChangeLog', 'TODO', 'lib/attendee/*.rb' )
+end
+
+task :checkdoc do
+  docfile = File.join(File.dirname(__FILE__), 'doc', 'index.html')
+  abort "Run 'rake rdoc' first." unless File.exists?(docfile)
 end
 
 
