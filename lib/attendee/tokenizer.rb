@@ -109,7 +109,12 @@ protected
     macros = Hash.new
     @rules = regulars.collect { |rule|
       name = rule.keys[0]
-      expr = rule.values[0].gsub(/(_\w+?_)/) { macros[$1] }
+      expr = rule.values[0].gsub(/_(\w+?)_/) {
+        macros[$&] || begin
+          Object.const_get("UTF_8_#{$1.upcase}")
+        rescue NameError
+        end
+      }
       
       if name =~ /^_\w+_$/    #    is a macro
         macros[name] = expr if name =~ /^_\w+_$/

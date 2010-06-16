@@ -115,7 +115,7 @@ class Crypter
 
 private
 
-if RUBY_VERSION >= '1.9'
+if ISITRUBY19
   def crypt(k, v)
     c, i = '-' * v.size, k.size
     (0...c.size).each { |j|

@@ -253,7 +253,7 @@ END_OF_TEXT
   
   def compare( id, input, output )
     txtfile = Lingo.config['language/dictionary/databases/' + id + '/name']
-    length = RUBY_VERSION >= '1.9' ? id[-1, 1].ord : id[-1]
+    length = ISITRUBY19 ? id[-1, 1].ord : id[-1]
     input = input.gsub(/\r?\n/, "\r\n")
     input << "\r\n" unless input =~ /\n\z/
     File.open( txtfile, 'w' ) { |file| file.puts input, ' ' * length + "\r\n" }
