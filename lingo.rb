@@ -84,16 +84,14 @@ public
   end
 
   def talk_to_me(str, &block)
-    out = StringIO.new
-
-    old_stdout, $stdout = $stdout, out
-    old_stdin,  $stdin  = $stdin,  StringIO.new(str)
+    old_stdout, $stdout = $stdout, stdout = StringIO.new
+    old_stdin,  $stdin  = $stdin,  stdin  = StringIO.new(str)
 
     Dir.chdir(File.dirname(__FILE__)) { talk }
 
     $stdout, $stdin = old_stdout, old_stdin
 
-    res = out.string.split("\n")
+    res = stdout.string.split("\n")
     block ? res.map(&block) : res.sort.uniq
   end
 

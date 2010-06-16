@@ -48,7 +48,7 @@ RUBY_CMD = Config::CONFIG['RUBY_INSTALL_NAME']
 if RUBY_PLATFORM =~ /mswin|mingw/
   DEV_NULL = 'NUL:'
   EXEEXT = Config::CONFIG['EXEEXT']
-  RUBY_CMD << EXEEXT
+  RUBY_CMD += EXEEXT
   ZIP_COMMANDS = [ 'zip', '7z a' ]
 else
   DEV_NULL = '/dev/null'
