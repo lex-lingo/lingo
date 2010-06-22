@@ -1,11 +1,9 @@
 #! /usr/bin/ruby
 
 # Usage:
-#
 #   ruby lingoweb.rb [-p <port>]
 #
 # or:
-#
 #   rackup [-p <port>] lingoweb.rb
 
 require 'rubygems'
@@ -25,37 +23,53 @@ LANGS = Dir["#{LINGO}/*.lang"].map { |path|
 
 abort "No *.lang with corresponding #{CFG % '<lang>'}!" if LANGS.empty?
 
-CREDS = if File.readable?(AUTH)
-  File.read(AUTH).chomp.split(':', 2)
+if File.readable?(AUTH)
+  CREDS = File.read(AUTH).chomp.split(':', 2)
 else
-  require 'highline/import'
+  if STDIN.tty?
+    require 'highline/import'
 
-  user = ask('Enter user name [Leave empty to allow anyone]: ')
-
-  unless user.empty?
-    pass = ask('Enter password: ') { |q| q.echo = false }
-
-    File.open(AUTH, 'w') { |f| f.puts [user, pass].join(':') }
-    [user, pass]
-  else
-    []
+    user = ask('Enter user name [Leave empty to allow anyone]: ')
+    pass = ask('Enter password: ') { |q| q.echo = false } unless user.empty?
   end
+
+  CREDS = pass ? [user, pass] : []
+
+  File.open(AUTH, 'w') { |f| f.puts CREDS.join(':') }
 end
 
-use(Rack::Auth::Basic) { |*creds| creds == CREDS } unless CREDS.empty?
+use Rack::Auth::Basic do |*creds|
+  creds == CREDS
+end unless CREDS.empty?
 
 before do
-  @in   = params[:in]
+  @in   = params[:in] || ''
   @lang = params[:lang]
   @lang = LANGS.first unless LANGS.include?(@lang)
 
   @success = true
 end
 
-[:get, :post].each { |method| send(method, '/') { doit } }
+get '' do
+  redirect url_for('/')
+end
+
+get '/' do
+  doit
+end
+
+post '/' do
+  doit
+end
+
+helpers do
+  def url_for(path)
+    "#{request.script_name}#{path}"
+  end
+end
 
 def doit
-  if @lang && @in && !@in.empty?
+  unless @in.empty?
     @cmd = CMD % [CFG % @lang, @lang]
 
     Dir.chdir(LINGO) {
@@ -89,53 +103,59 @@ __END__
   <style type="text/css">
     a img     { border: none; }
     form      { white-space: nowrap; }
-    fieldset  { display: inline; width: 47.7%; }
-    textarea  { width: 98.9%; height: 30em; }
+    fieldset  { display: inline; width: 47%; }
+    textarea  { width: 98.9%; height: 30em; background-color: white; }
     #footer   { border-style: solid; border-color: black; border-width: 1px 0; padding: 2px 4px; }
     #footer a { font-weight: bold; }
     a:link, a:visited { text-decoration: none; color: #F35327; }
-    fieldset, #footer { background-color: #F0F0F0; }
+    fieldset, #footer { background-color: #DFDFDF; }
     fieldset.error    { background-color: #FDB331; }
   </style>
 </head>
 <body>
-  <a href="http://lex-lingo.de">
-    <img src="http://4.bp.blogspot.com/_1bYyjxDS6YA/RvfpL2_LjbI/AAAAAAAAADY/XOKwKgE6pRg/s1600/lingo.png"
-         alt="lingo - &quot;linguistisches lego&quot;" />
-  </a>
+  <div id="header">
+    <a href="http://lex-lingo.de">
+      <img src="http://4.bp.blogspot.com/_1bYyjxDS6YA/RvfpL2_LjbI/AAAAAAAAADY/XOKwKgE6pRg/s1600/lingo.png"
+           alt="lingo - &quot;linguistisches lego&quot;" />
+    </a>
+  </div>
 
-  <form action="/" method="post">
-    <fieldset><legend><strong>Input</strong></legend>
-      <textarea name="in"><%= @in %></textarea>
-    </fieldset>
+  <div id="main">
+    <form action="<%= url_for '/' %>" method="post">
+      <div>
+        <fieldset><legend><strong>Input</strong></legend>
+          <textarea name="in" rows="20" cols="50"><%= @in %></textarea>
+        </fieldset>
 
-  <% if @success %>
-    <fieldset><legend><strong>Output</strong></legend>
-      <textarea readonly="readonly"><%= @out %></textarea>
-    </fieldset>
-  <% else %>
-    <fieldset class="error"><legend><strong>Error</strong></legend>
-      <textarea readonly="readonly"><%= @err %></textarea>
-    </fieldset>
-  <% end %>
+      <% if @success %>
+        <fieldset><legend><strong>Output</strong></legend>
+          <textarea readonly="readonly" rows="20" cols="50"><%= @out %></textarea>
+        </fieldset>
+      <% else %>
+        <fieldset class="error"><legend><strong>Error</strong></legend>
+          <textarea readonly="readonly" rows="20" cols="50"><%= @err %></textarea>
+        </fieldset>
+      <% end %>
+
+        <br />
+
+        <strong>Language</strong> = <select name="lang">
+        <% for lang in LANGS %>
+          <option value="<%= lang %>"<%= ' selected="selected"' if lang == @lang %>><%= lang %></option>
+        <% end %>
+        </select>
+
+        <br />
+        <br />
+
+        <input type="submit" value="Start processing..."></input> |
+        <input type="reset" value="Reset form"></input> |
+        <a href="<%= url_for '/' %>">New request</a>
+      </div>
+    </form>
 
     <br />
-
-    <strong>Language</strong> = <select name="lang">
-    <% for lang in LANGS %>
-      <option value="<%= lang %>"<%= 'selected="selected"' if lang == @lang %>><%= lang %></option>
-    <% end %>
-    </select>
-
-    <br />
-    <br />
-
-    <input type="submit" value="Start processing..."></input> |
-    <input type="reset" value="Reset form"></input> |
-    <a href="/">New request</a>
-  </form>
-
-  <br />
+  </div>
 
   <div id="footer">
     <em>powered by</em> <a href="http://lex-lingo.de">lingo</a>
