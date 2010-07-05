@@ -34810,6 +34810,7 @@ linearisierung=linearisierung #s
 linearität=linearität #s
 linear=linear #a
 lineatur=lineatur #s
+lingo=lingo #e
 lingual=lingual #a
 linguistik=linguistik #s
 linguistisch=linguistisch #a
