@@ -20906,6 +20906,7 @@ fletschen=fletschen #v
 fleucht=fleuchen #v
 flexibel=flexibel #a
 flexibilität=flexibilität #s
+flexibl=flexibel #a
 flexion=flexion #s
 flichtst=flechten #v
 flicken=flicken #v
