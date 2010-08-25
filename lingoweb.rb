@@ -99,7 +99,7 @@ __END__
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="content-type" content="application/xhtml+xml; charset=utf-8" />
-  <title>lingo - "linguistisches lego"</title>
+  <title>lingo-web - "automatic indexing online"</title>
   <style type="text/css">
     a img     { border: none; }
     form      { white-space: nowrap; }
@@ -116,10 +116,11 @@ __END__
   <div id="header">
     <a href="http://lex-lingo.de">
       <img src="http://4.bp.blogspot.com/_1bYyjxDS6YA/RvfpL2_LjbI/AAAAAAAAADY/XOKwKgE6pRg/s1600/lingo.png"
-           alt="lingo - &quot;linguistisches lego&quot;" />
+           alt="lingo" />
     </a>
   </div>
-
+<center><b>Willkommen bei lingo-web !</b> Lingo-web bietet die M&ouml;glichkeit, die Funktionsweise von <a href="http://lex-lingo.de">lingo</a> zu testen.<br>Lingo ist ein frei verf&uuml;gbares System zur linguistisch und statistisch basierten automatischen Indexierung des Deutschen und Englischen.</center>
+<br>
   <div id="main">
     <form action="<%= url_for '/' %>" method="post">
       <div>
@@ -157,6 +158,29 @@ __END__
     <br />
   </div>
 
+<b>Legende</b>:
+<br>
+s -- Substantiv<br>
+a -- Adjektiv<br>
+v -- Verb<br>
+e -- Eigenname<br>
+w -- Wortklasse ohne Suffixe<br>
+t -- Wortklasse ohne Suffixe (z. B. Hochfrequenzterme)<br>
+y -- Synonym<br>
+q (=SEQ) -- Sequenz (algorithmisch erkannter Mehrwortbegriff)<br>
+m (=MUL) -- Mehrwortbegriff<br>
+k (=KOM) -- Kompositum<br>
++ -- Kompositum-Bestandteil<br>
+x+ -- unbekanntes Kompositum-Bestandteil einer Bindestrich-Konstruktion<br>
+? -- unbekanntes Wort<br>
+MU? -- Mehrwortbestandteil (unbekanntes Wort)<br>
+HELP -- z.B. unbekannte Sonderzeichen<br>
+ABRV -- m&ouml;gliche Abk. mit eingeschlossenem Punkt (z.B. "Ausst.Kat")<br>
+PUNC -- Satzzeichen etc.<br>
+OTHR -- Sonstiges Zeichen<br>
+URLS -- urls<br>
+NUMS -- Zahlen<br>
+<br>
   <div id="footer">
     <em>powered by</em> <a href="http://lex-lingo.de">lingo</a>
     <em>and</em> <a href="http://www.sinatrarb.com">sinatra</a>
