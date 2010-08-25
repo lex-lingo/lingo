@@ -99,7 +99,7 @@ __END__
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="content-type" content="application/xhtml+xml; charset=utf-8" />
-  <title>lingo-web - "automatic indexing online"</title>
+  <title>lingo-web - automatic indexing online</title>
   <style type="text/css">
     a img      { border: none; }
     form       { white-space: nowrap; }
