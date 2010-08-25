@@ -101,12 +101,16 @@ __END__
   <meta http-equiv="content-type" content="application/xhtml+xml; charset=utf-8" />
   <title>lingo-web - "automatic indexing online"</title>
   <style type="text/css">
-    a img     { border: none; }
-    form      { white-space: nowrap; }
-    fieldset  { display: inline; width: 47%; }
-    textarea  { width: 98.9%; height: 30em; background-color: white; }
-    #footer   { border-style: solid; border-color: black; border-width: 1px 0; padding: 2px 4px; }
-    #footer a { font-weight: bold; }
+    a img      { border: none; }
+    form       { white-space: nowrap; }
+    fieldset   { display: inline; width: 47%; }
+    textarea   { width: 98.9%; height: 30em; background-color: white; }
+    #welcome   { font-size: 90%; color: #333333; margin-bottom: 0.5em; text-align: center; }
+    #legend    { font-size: 75%; color: #333333; margin-bottom: 0.5em; }
+    #legend th { font-size: 110%; font-weight: normal; font-family: monospace; text-align: left; }
+    #legend td { padding-left: 1em; }
+    #footer    { border-style: solid; border-color: black; border-width: 1px 0; padding: 2px 4px; }
+    #footer a  { font-weight: bold; }
     a:link, a:visited { text-decoration: none; color: #F35327; }
     fieldset, #footer { background-color: #DFDFDF; }
     fieldset.error    { background-color: #FDB331; }
@@ -115,12 +119,18 @@ __END__
 <body>
   <div id="header">
     <a href="http://lex-lingo.de">
-      <img src="http://4.bp.blogspot.com/_1bYyjxDS6YA/RvfpL2_LjbI/AAAAAAAAADY/XOKwKgE6pRg/s1600/lingo.png"
-           alt="lingo" />
+      <img src="http://4.bp.blogspot.com/_1bYyjxDS6YA/RvfpL2_LjbI/AAAAAAAAADY/XOKwKgE6pRg/s1600/lingo.png" alt="lingo" />
     </a>
   </div>
-<center><b>Willkommen bei lingo-web !</b> Lingo-web bietet die M&ouml;glichkeit, die Funktionsweise von <a href="http://lex-lingo.de">lingo</a> zu testen.<br>Lingo ist ein frei verf&uuml;gbares System zur linguistisch und statistisch basierten automatischen Indexierung des Deutschen und Englischen.</center>
-<br>
+
+  <div id="welcome">
+    <strong>Willkommen bei lingo-web!</strong>
+    Lingo-web bietet die Möglichkeit, die Funktionsweise von
+    <a href="http://lex-lingo.de">lingo</a> zu testen.<br />
+    Lingo ist ein frei verfügbares System zur linguistisch und statistisch
+    basierten automatischen Indexierung des Deutschen und Englischen.
+  </div>
+
   <div id="main">
     <form action="<%= url_for '/' %>" method="post">
       <div>
@@ -158,29 +168,32 @@ __END__
     <br />
   </div>
 
-<b>Legende</b>:
-<br>
-s -- Substantiv<br>
-a -- Adjektiv<br>
-v -- Verb<br>
-e -- Eigenname<br>
-w -- Wortklasse ohne Suffixe<br>
-t -- Wortklasse ohne Suffixe (z. B. Hochfrequenzterme)<br>
-y -- Synonym<br>
-q (=SEQ) -- Sequenz (algorithmisch erkannter Mehrwortbegriff)<br>
-m (=MUL) -- Mehrwortbegriff<br>
-k (=KOM) -- Kompositum<br>
-+ -- Kompositum-Bestandteil<br>
-x+ -- unbekanntes Kompositum-Bestandteil einer Bindestrich-Konstruktion<br>
-? -- unbekanntes Wort<br>
-MU? -- Mehrwortbestandteil (unbekanntes Wort)<br>
-HELP -- z.B. unbekannte Sonderzeichen<br>
-ABRV -- m&ouml;gliche Abk. mit eingeschlossenem Punkt (z.B. "Ausst.Kat")<br>
-PUNC -- Satzzeichen etc.<br>
-OTHR -- Sonstiges Zeichen<br>
-URLS -- urls<br>
-NUMS -- Zahlen<br>
-<br>
+  <div id="legend">
+    <strong>Legende</strong>:
+    <table>
+      <tr><th>s</th><td>Substantiv</td></tr>
+      <tr><th>a</th><td>Adjektiv</td></tr>
+      <tr><th>v</th><td>Verb</td></tr>
+      <tr><th>e</th><td>Eigenname</td></tr>
+      <tr><th>w</th><td>Wortklasse ohne Suffixe</td></tr>
+      <tr><th>t</th><td>Wortklasse ohne Suffixe (z.B. Hochfrequenzterme)</td></tr>
+      <tr><th>y</th><td>Synonym</td></tr>
+      <tr><th>q (=SEQ)</th><td>Sequenz (algorithmisch erkannter Mehrwortbegriff)</td></tr>
+      <tr><th>m (=MUL)</th><td>Mehrwortbegriff</td></tr>
+      <tr><th>k (=KOM)</th><td>Kompositum</td></tr>
+      <tr><th>+</th><td>Kompositum-Bestandteil</td></tr>
+      <tr><th>x+</th><td>unbekannter Kompositum-Bestandteil einer Bindestrich-Konstruktion</td></tr>
+      <tr><th>?</th><td>unbekanntes Wort</td></tr>
+      <tr><th>MU?</th><td>Mehrwortbestandteil (unbekanntes Wort)</td></tr>
+      <tr><th>HELP</th><td>z.B. unbekanntes Sonderzeichen</td></tr>
+      <tr><th>ABRV</th><td>mögliche Abk. mit eingeschlossenem Punkt (z.B. "Ausst.Kat")</td></tr>
+      <tr><th>PUNC</th><td>Satzzeichen etc.</td></tr>
+      <tr><th>OTHR</th><td>Sonstiges Zeichen</td></tr>
+      <tr><th>URLS</th><td>URL</td></tr>
+      <tr><th>NUMS</th><td>Zahl</td></tr>
+    </table>
+  </div>
+
   <div id="footer">
     <em>powered by</em> <a href="http://lex-lingo.de">lingo</a>
     <em>and</em> <a href="http://www.sinatrarb.com">sinatra</a>
