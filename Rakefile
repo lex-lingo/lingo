@@ -8,6 +8,7 @@ require 'rake/rdoctask'
 
 require 'rbconfig'
 
+require 'rubygems'
 require 'diff/lcs'
 require 'diff/lcs/ldiff'
 
