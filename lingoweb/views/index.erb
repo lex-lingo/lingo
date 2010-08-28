@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="content-type" content="application/xhtml+xml; charset=utf-8" />
+  <title>lingo-web - <%= t 'Automatic indexing online', 'Automatische Indexierung Online' %></title>
+  <link rel="stylesheet" type="text/css" href="<%= url_for '/lingoweb.css' %>" />
+</head>
+<body>
+  <div id="header">
+    <a href="http://lex-lingo.de"><img src="<%= url_for '/lingo.png' %>" alt="lingo" /></a>
+  </div>
+
+  <div id="welcome">
+    <strong><%= t 'Welcome to lingo-web!', 'Willkommen bei lingo-web!' %></strong>
+    <%= t %q{
+      Lingo-web provides the opportunity to test the functionality of
+      <a href="http://lex-lingo.de">lingo</a>.<br />
+      Lingo is an open source indexing system for research and teaching.
+    }, %q{
+      Lingo-web bietet die Möglichkeit, die Funktionsweise von
+      <a href="http://lex-lingo.de">lingo</a> zu testen.<br />
+      Lingo ist ein frei verfügbares System zur linguistisch und statistisch
+      basierten automatischen Indexierung des Deutschen und Englischen.
+    } %>
+  </div>
+
+  <div id="main">
+    <form action="<%= url_for '/' %>" method="post">
+      <div>
+        <fieldset><legend><strong><%= t 'Input', 'Eingabe' %></strong></legend>
+          <textarea name="in" rows="20" cols="50"><%= @in %></textarea>
+        </fieldset>
+
+      <% if @success %>
+        <fieldset><legend><strong><%= t 'Output', 'Ausgabe' %></strong></legend>
+          <textarea readonly="readonly" rows="20" cols="50"><%= @out %></textarea>
+        </fieldset>
+      <% else %>
+        <fieldset class="error"><legend><strong><%= t 'Error', 'Fehler' %></strong></legend>
+          <textarea readonly="readonly" rows="20" cols="50"><%= @err %></textarea>
+        </fieldset>
+      <% end %>
+
+        <br />
+
+        <strong><%= t 'Language', 'Sprache' %></strong> = <select name="lang">
+        <% for lang in LANGS %>
+          <option value="<%= lang %>"<%= ' selected="selected"' if lang == @lang %>><%= lang %></option>
+        <% end %>
+        </select>
+
+        <br />
+        <br />
+
+        <input type="submit" value="<%= t 'Start processing...', 'Verarbeitung starten...' %>"></input> |
+        <input type="reset" value="<%= t 'Reset form', 'Formular zurücksetzen' %>"></input> |
+        <a href="<%= url_for '/' %>"><%= t 'New request', 'Neue Anfrage' %></a>
+      </div>
+    </form>
+
+    <br />
+  </div>
+
+  <div id="legend">
+    <strong><%= t 'Legend', 'Legende' %></strong>:
+    <table>
+      <tr><th>s       </th><td><%= t 'Noun',                                                    'Substantiv' %></td></tr>
+      <tr><th>a       </th><td><%= t 'Adjective',                                               'Adjektiv' %></td></tr>
+      <tr><th>v       </th><td><%= t 'Verb',                                                    'Verb' %></td></tr>
+      <tr><th>e       </th><td><%= t 'Proper name',                                             'Eigenname' %></td></tr>
+      <tr><th>w       </th><td><%= t 'Word class without suffixes',                             'Wortklasse ohne Suffixe' %></td></tr>
+      <tr><th>t       </th><td><%= t 'Word class without suffixes (e.g. high frequency terms)', 'Wortklasse ohne Suffixe (z.B. Hochfrequenzterme)' %></td></tr>
+      <tr><th>y       </th><td><%= t 'Synonym',                                                 'Synonym' %></td></tr>
+      <tr><th>q (=SEQ)</th><td><%= t 'Sequence (algorithmically identified phrase)',            'Sequenz (algorithmisch erkannter Mehrwortbegriff)' %></td></tr>
+      <tr><th>m (=MUL)</th><td><%= t 'Phrase',                                                  'Mehrwortbegriff' %></td></tr>
+      <tr><th>k (=KOM)</th><td><%= t 'Compound',                                                'Kompositum' %></td></tr>
+      <tr><th>+       </th><td><%= t 'Part of a compound',                                      'Kompositum-Bestandteil' %></td></tr>
+      <tr><th>x+      </th><td><%= t 'Unknown part of a hyphenated compound',                   'unbekannter Kompositum-Bestandteil einer Bindestrich-Konstruktion' %></td></tr>
+      <tr><th>?       </th><td><%= t 'Unknown word',                                            'unbekanntes Wort' %></td></tr>
+      <tr><th>MU?     </th><td><%= t 'Part of a phrase (unknown word)',                         'Mehrwortbestandteil (unbekanntes Wort)' %></td></tr>
+      <tr><th>HELP    </th><td><%= t 'e.g. Special characters',                                 'z.B. unbekanntes Sonderzeichen' %></td></tr>
+      <tr><th>ABRV    </th><td><%= t 'Possible abbreviation with a full stop in the middle',    'mögliche Abk. mit eingeschlossenem Punkt (z.B. "Ausst.Kat")' %></td></tr>
+      <tr><th>PUNC    </th><td><%= t 'Punctuation etc.',                                        'Satzzeichen etc.' %></td></tr>
+      <tr><th>OTHR    </th><td><%= t 'Other character',                                         'Sonstiges Zeichen' %></td></tr>
+      <tr><th>URLS    </th><td><%= t 'URL',                                                     'URL' %></td></tr>
+      <tr><th>NUMS    </th><td><%= t 'Number',                                                  'Zahl' %></td></tr>
+    </table>
+  </div>
+
+  <div id="footer">
+    <em>powered by</em> <a href="http://lex-lingo.de">lingo</a>
+    <em>and</em> <a href="http://www.sinatrarb.com">sinatra</a>
+  </div>
+</body>
+</html>

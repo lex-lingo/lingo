@@ -1,0 +1,70 @@
+a img {
+  border:           none;
+}
+
+form {
+  white-space:      nowrap;
+}
+
+fieldset {
+  display:          inline;
+  width:            47%;
+}
+
+textarea {
+  width:            98.9%;
+  height:           30em;
+  background-color: white;
+}
+
+#welcome {
+  font-size:        90%;
+  color:            #333333;
+  margin-bottom:    0.5em;
+  text-align:       center;
+}
+
+#legend {
+  font-size:        75%;
+  color:            #333333;
+  margin-bottom:    0.5em;
+}
+
+#legend table {
+  margin-left:      2em;
+}
+
+#legend th {
+  font-size:        110%;
+  font-weight:      normal;
+  font-family:      monospace;
+  text-align:       left;
+}
+
+#legend td {
+  padding-left:     1em;
+}
+
+#footer {
+  border-style:     solid;
+  border-color:     black;
+  border-width:     1px 0;
+  padding:          2px 4px;
+}
+
+#footer a {
+  font-weight:      bold;
+}
+
+a:link, a:visited {
+  text-decoration:  none;
+  color:            #F35327;
+}
+
+fieldset, #footer {
+  background-color: #DFDFDF;
+}
+
+fieldset.error {
+  background-color: #FDB331;
+}
