@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 require 'test/unit'
-require 'lingo'
+require './lingo'
 
 ################################################################################
 #

@@ -26,10 +26,10 @@
 
 require 'sdbm'
 require 'digest/sha1'
-require 'lib/const'
-require 'lib/types'
-require 'lib/utilities'
-require 'lib/modules'
+require './lib/const'
+require './lib/types'
+require './lib/utilities'
+require './lib/modules'
 
 
 ################################################################################

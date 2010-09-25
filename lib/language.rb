@@ -24,10 +24,10 @@
 #  Lex Lingo rules from here on
 
 
-require 'lib/const'
-require 'lib/modules'
-require 'lib/database'
-#require 'lib/utilities'
+require './lib/const'
+require './lib/modules'
+require './lib/database'
+#require './lib/utilities'
 
 =begin rdoc
 == LexicalHash

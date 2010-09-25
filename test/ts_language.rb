@@ -26,7 +26,7 @@
 
 require 'test/unit'
 require 'fileutils'
-require 'lingo'
+require './lingo'
 
 include FileUtils::Verbose
 

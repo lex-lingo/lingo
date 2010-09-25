@@ -66,10 +66,10 @@ was macht die abgeleitet klasse
 =end
 
 
-require 'lib/modules'
-require 'lib/language'
-require 'lib/const'
-require 'lib/types'
+require './lib/modules'
+require './lib/language'
+require './lib/const'
+require './lib/types'
 
 
 class Attendee

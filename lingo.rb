@@ -26,8 +26,8 @@
 
 
 #require 'English'
-require 'lib/config'
-require 'lib/meeting'
+require './lib/config'
+require './lib/meeting'
 
 
 class Lingo

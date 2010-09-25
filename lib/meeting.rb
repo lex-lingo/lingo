@@ -24,24 +24,24 @@
 #  Lex Lingo rules from here on
 
 
-require 'lib/attendees'
+require './lib/attendees'
 
-require 'lib/attendee/abbreviator'
-require 'lib/attendee/debugger'
-require 'lib/attendee/decomposer'
-require 'lib/attendee/dehyphenizer'
-require 'lib/attendee/multiworder'
-require 'lib/attendee/noneword_filter'
-require 'lib/attendee/objectfilter'
-require 'lib/attendee/variator'
-require 'lib/attendee/sequencer'
-require 'lib/attendee/synonymer'
-require 'lib/attendee/textreader'
-require 'lib/attendee/textwriter'
-require 'lib/attendee/tokenizer'
-require 'lib/attendee/vector_filter'
-require 'lib/attendee/wordsearcher'
-require 'lib/attendee/helper'
+require './lib/attendee/abbreviator'
+require './lib/attendee/debugger'
+require './lib/attendee/decomposer'
+require './lib/attendee/dehyphenizer'
+require './lib/attendee/multiworder'
+require './lib/attendee/noneword_filter'
+require './lib/attendee/objectfilter'
+require './lib/attendee/variator'
+require './lib/attendee/sequencer'
+require './lib/attendee/synonymer'
+require './lib/attendee/textreader'
+require './lib/attendee/textwriter'
+require './lib/attendee/tokenizer'
+require './lib/attendee/vector_filter'
+require './lib/attendee/wordsearcher'
+require './lib/attendee/helper'
 
 
 
