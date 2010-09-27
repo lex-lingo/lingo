@@ -432,7 +432,7 @@ private
     @dbm = nil
 
     #  Aktualität prüfen
-    Txt2DbmConverter.new( id ).convert if read_mode && !DbmFile.uptodate?( id )
+    Txt2DbmConverter.new( id ).convert if (read_mode && (!DbmFile.uptodate?( id )))
     
     #  Verschlüsselung vorbereiten
     @crypter = Lingo.config['language/dictionary/databases/' + id].has_key?( 'crypt' ) ? Crypter.new : nil

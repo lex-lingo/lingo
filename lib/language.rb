@@ -145,6 +145,7 @@ private
         (typ=='f' ? @infixes : @suffixes) << fix
       }
     } if dictionary_config.has_key?( 'suffix' )
+
   end
 
 public

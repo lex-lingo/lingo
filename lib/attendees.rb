@@ -162,10 +162,10 @@ public
       #    Standardprotokollinformationen ausgeben
       when STR_CMD_STATUS
         if @@report_time
-          puts 'Performance of %-12s for processing a single item in msec: command %6.5f, object %6.5f' % [
+          puts 'Perf: %-15s => %6d commands in %9.5f ms (%9.5f ms/cmd),  %6d objects in %9.5f ms (%9.5f ms/obj)' % [
             @config['name'],
-            get(STA_TIM_COMMANDS) * 1000.0 / get(STA_NUM_COMMANDS),
-            get(STA_TIM_OBJECTS) * 1000.0 / get(STA_NUM_OBJECTS)]
+            get(STA_NUM_COMMANDS), get(STA_TIM_COMMANDS) / 1000.0, get(STA_TIM_COMMANDS) * 1000.0 / get(STA_NUM_COMMANDS),
+            get(STA_NUM_OBJECTS), get(STA_TIM_OBJECTS) * 1000.0, get(STA_TIM_OBJECTS) * 1000.0 / get(STA_NUM_OBJECTS)]
         end
         if @@report_status
           printf "Attendee <%s> was connected from '%s' to '%s' reporting...\n", @config['name'], @config['in'], @config['out']
