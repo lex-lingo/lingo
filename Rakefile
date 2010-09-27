@@ -9,8 +9,8 @@ require 'rake/rdoctask'
 require 'rbconfig'
 
 require 'rubygems'
-require 'diff/lcs'
-require 'diff/lcs/ldiff'
+require './lib/diff/lcs'
+require './lib/diff/lcs/ldiff'
 
 PACKAGE_NAME = 'lingo'
 LINGO_VERSION = '1.6.11'
