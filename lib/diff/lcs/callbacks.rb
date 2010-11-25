@@ -14,7 +14,7 @@
 #++
 # Contains definitions for all default callback objects.
 
-require 'diff/lcs/change'
+require './lib/diff/lcs/change'
 
 module Diff::LCS
     # This callback object implements the default set of callback events, which

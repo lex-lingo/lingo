@@ -148,7 +148,7 @@ module Diff
   end
 end
 
-require 'diff/lcs/callbacks'
+require './lib/diff/lcs/callbacks'
 
 module Diff::LCS
     # Returns an Array containing the longest common subsequence(s) between

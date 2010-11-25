@@ -14,7 +14,7 @@
 #++
 # Contains Diff::LCS::Hunk for bin/ldiff.
 
-require 'diff/lcs/block'
+require './lib/diff/lcs/block'
 
   # A Hunk is a group of Blocks which overlap because of the context
   # surrounding each block. (So if we're not using context, every hunk will

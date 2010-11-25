@@ -2,7 +2,7 @@
 
 require 'optparse'
 require 'ostruct'
-require 'diff/lcs/hunk'
+require './lib/diff/lcs/hunk'
 
   # == ldiff Usage
   #   ldiff [options] oldfile newfile

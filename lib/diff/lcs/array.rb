@@ -14,7 +14,7 @@
 #++
 # Includes Diff::LCS into the Array built-in class.
 
-require 'diff/lcs'
+require './lib/diff/lcs'
 
 class Array
   include Diff::LCS
