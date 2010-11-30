@@ -129,7 +129,7 @@ private
 
     forward(STR_CMD_FILE, filename)
 
-    (stdin?(filename) ? $stdin : File.open(filename)).each_line { |line|
+    (stdin?(filename) ? $stdin.set_encoding(ENC) : File.open(filename, :encoding => ENC)).each_line { |line|
       inc('Anzahl Zeilen')
       line.chomp!
       line.gsub!(/\303\237/, "ß")

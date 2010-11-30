@@ -149,7 +149,7 @@ private
 
     usage("Datei #{yaml_file} nicht vorhanden") unless File.readable?(yaml_file)
 
-    YAML.load_file(yaml_file)
+    File.open(yaml_file, :encoding => ENC) { |f| YAML.load(f) }
   end
 
 

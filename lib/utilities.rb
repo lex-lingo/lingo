@@ -121,7 +121,7 @@ class File
       obj_type = (File.stat(obj).directory?) ? 'dir' : 'file'
       if obj_type == 'file'
         found_index = 0
-        File.open(obj) { |file|
+        File.open(obj, :encoding => ENC) { |file|
           (1..50).each { |i|
             found_index += 1 if file.gets =~ db_re 
           } 
@@ -181,4 +181,42 @@ class Pathname
       end
     end
   end
+end
+
+unless ISITRUBY19
+
+class String
+
+  def encode!(*args); self; end
+
+end
+
+class IO
+
+  def set_encoding(*args); self; end
+
+end
+
+class << File
+
+  alias_method :_lingo_original_open, :open
+
+  def open(*args, &block)
+    args.pop if args.last.is_a?(Hash)
+    _lingo_original_open(*args, &block)
+  end
+
+end
+
+class Pathname
+
+  alias_method :_lingo_original_each_line, :each_line
+
+  def each_line(*args, &block)
+    args.pop if args.last.is_a?(Hash)
+    _lingo_original_each_line(*args, &block)
+  end
+
+end
+
 end

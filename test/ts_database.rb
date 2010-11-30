@@ -256,7 +256,7 @@ END_OF_TEXT
     length = ISITRUBY19 ? id[-1, 1].ord : id[-1]
     input = input.gsub(/\r?\n/, "\r\n")
     input << "\r\n" unless input =~ /\n\z/
-    File.open( txtfile, 'w' ) { |file| file.puts input, ' ' * length + "\r\n" }
+    File.open( txtfile, 'w', :encoding => ENC ) { |file| file.puts input, ' ' * length + "\r\n" }
     dbm = DbmFile.new( id )
     dbm.open
     store = dbm.to_h

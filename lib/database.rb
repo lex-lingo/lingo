@@ -208,12 +208,12 @@ public
     begin
       #  Reject-Datei öffnen
       fail_msg = "Fehler beim öffnen der Reject-Datei '#{@pn_reject.to_s}'"
-      reject_file = @pn_reject.open( 'w' )
+      reject_file = @pn_reject.open( 'w', :encoding => ENC )
 
       #  Alle Zeilen der Quelldatei verarbeiten    
       fail_msg = "Fehler beim öffnen der Wörterbuch-Quelldatei '#{@pn_source.to_s}'"
 
-      @pn_source.each_line do |raw_line|
+      @pn_source.each_line($/, :encoding => ENC) do |raw_line|
         @position += raw_line.size          #  Position innerhalb der Datei aktualisieren
         line = raw_line.chomp.downcase        #  Zeile normieren
 
@@ -455,7 +455,14 @@ public
   end
 
   def to_h
-    @dbm.to_hash
+    hash = {}
+
+    @dbm.each { |key, val|
+      [key, val].each { |x| x.encode!(ENC) }
+      hash[key.freeze] = val
+    } if @dbm
+
+    hash
   end
 
   def clear
@@ -488,21 +495,11 @@ public
 
     val = nil
     unless @dbm.nil? #|| @dbm.closed?
-      #  Entschlüsselung behandeln
-      if @crypter.nil?
-        val = @dbm[key]
-      else
-        val = @dbm[@crypter.digest( key )]
-        val = @crypter.decode( key, val ) unless val.nil?
-      end
+      val = _get(key)
 
       #  Äquvalenzklassen behandeln
-#      val = @dbm[val] if val =~ INDEX_PATTERN
-#      val = val.split( FLD_SEP  ) unless val.nil?
-      
-      #  Äquvalenzklassen behandeln
       val = val.split( FLD_SEP ).collect do |v|
-        (v =~ INDEX_PATTERN) ? @dbm[v] : v
+        (v =~ INDEX_PATTERN) ? _get(v) : v
       end.compact.join( FLD_SEP ).split( FLD_SEP ) unless val.nil?
     end
 
@@ -522,13 +519,8 @@ public
       store( key, values )
       #  in String wandeln
       values = values.join( FLD_SEP )
-      #  Verschlüsselung behandeln
-      if @crypter.nil?
-        @dbm[key] = (values.size<950) ? values : values[0...950]
-      else
-        k, v = @crypter.encode(key, values)
-        @dbm[k] = (v.size<950) ? v : v[0...950]
-      end
+
+      _set(key, values)
     end
   end
 
@@ -538,6 +530,22 @@ public
       src = Pathname.new( filename.downcase )
       @dbm[SYS_KEY] = [src.size, src.mtime].join( FLD_SEP )
     end
+  end
+
+  private
+
+  def _get(key)
+    if val = @dbm[@crypter ? @crypter.digest(key) : key]
+      val.encode!(ENC)
+      val = @crypter.decode(key, val) if @crypter
+    end
+
+    val
+  end
+
+  def _set(key, val)
+    key, val = @crypter.encode(key, val) if @crypter
+    @dbm[key] = (val.size < 950) ? val : val[0, 950]
   end
 
 end
