@@ -169,16 +169,12 @@ class Word < StringA
   #    Gibt genau die Grundform der Wortklasse zurück, die der RegExp des Übergabe-Parameters 
   #    entspricht, z.B. <tt>word.get_wc(/a/) = ['abgeschoben', '#a']</tt>
   def get_class(wc_re)
-    if @lexicals.size>0
-      @lexicals.collect { |lex|
-        if lex.attr =~ Regexp.new(wc_re)
-          lex
-        else
-          nil
-        end
-      }.compact
+    wc_re = Regexp.new(wc_re) unless wc_re.is_a?(Regexp)
+
+    unless @lexicals.empty?
+      @lexicals.select { |lex| lex.attr =~ wc_re }
     else
-      []
+      attr =~ wc_re ? [self] : []
     end
   end
 

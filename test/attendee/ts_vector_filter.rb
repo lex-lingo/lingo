@@ -12,6 +12,7 @@ class TestAttendeeVector_filter < Test::Unit::TestCase
     @input = [
       ai('FILE|test'),
       wd('Testwort|IDF', 'substantiv|s', 'adjektiv|a', 'verb|v', 'eigenname|e', 'mehrwortbegriff|m'),
+      wd('unknown|?'),
       ai('EOF|test')
     ]
   end
@@ -36,7 +37,7 @@ class TestAttendeeVector_filter < Test::Unit::TestCase
 
 
   def test_sort_term_rel
-    @expect = [ai('FILE|test'), '1.00000 adjektiv', '1.00000 eigenname', '1.00000 substantiv', '1.00000 verb', ai('EOF|test')]
+    @expect = [ai('FILE|test'), '0.50000 adjektiv', '0.50000 eigenname', '0.50000 substantiv', '0.50000 verb', ai('EOF|test')]
     meet({'lexicals'=>'[save]', 'sort'=>'term_rel'})
   end
 
@@ -47,8 +48,18 @@ class TestAttendeeVector_filter < Test::Unit::TestCase
 
 
   def test_sort_sto_rel
-    @expect = [ai('FILE|test'), 'adjektiv {1.00000}', 'eigenname {1.00000}', 'substantiv {1.00000}', 'verb {1.00000}', ai('EOF|test')]
+    @expect = [ai('FILE|test'), 'adjektiv {0.50000}', 'eigenname {0.50000}', 'substantiv {0.50000}', 'verb {0.50000}', ai('EOF|test')]
     meet({'lexicals'=>'[save]', 'sort'=>'sto_rel'})
+  end
+
+  def test_nonword
+    @expect = [ai('FILE|test'), 'unknown', ai('EOF|test')]
+    meet({'lexicals'=>'\?'})
+  end
+
+  def test_nonword_sort_term_abs
+    @expect = [ai('FILE|test'), '1 unknown', ai('EOF|test')]
+    meet({'lexicals'=>'\?', 'sort'=>'term_abs'})
   end
 
 end
