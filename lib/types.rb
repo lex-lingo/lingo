@@ -125,6 +125,10 @@ end
 #
 class Word < StringA
 
+  def self.new_lexical(form, attr, lex_attr)
+    new(form, attr) << Lexical.new(form, lex_attr)
+  end
+
   #    Exakte Representation der originären Zeichenkette, so wie sie im Satz 
   #    gefunden wurde, z.B. <tt>form = "RubyLing"</tt>
   
@@ -154,6 +158,10 @@ class Word < StringA
     else
       puts "Falscher Typ bei Zuweisung"
     end
+  end
+
+  def attrs
+    lexicals.map { |lex| lex.attr }
   end
 
   #    für Compositum
@@ -194,6 +202,11 @@ class Word < StringA
     else
       nil
     end
+  end
+
+
+  def unknown?
+    [WA_UNKNOWN, WA_UNKMULPART].include?(attr)
   end
 
 

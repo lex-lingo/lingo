@@ -23,13 +23,23 @@
 #
 #  Lex Lingo rules from here on
 
-class WordSequence 
-  attr_reader :classes, :format
-private
+class WordSequence
+
+  attr_reader :classes, :format, :string
 
   def initialize(wordclasses, format)
-    @classes = wordclasses.upcase
-    @format = format
+    @string  = wordclasses.downcase
+    @classes = @string.split(//)
+    @format  = format
+  end
+
+  def scan(sequence)
+    pos = 0
+
+    while pos = sequence.index(string, pos)
+      yield pos, format.dup, classes
+      pos += 1
+    end
   end
 
 end
@@ -128,39 +138,41 @@ protected
 
 
   def process_buffer
-    return if @buffer.size==0
+    return if @buffer.empty?
 
-    #  Sequence aus der Wortliste auslesen
-    @sequence = @buffer.collect { |obj|
-      res = '#'
-      if obj.kind_of?(Word)
-        lex = obj.lexicals[0]
-        if obj.attr!=WA_UNKNOWN && obj.attr!=WA_UNKMULPART # && lex.attr!=LA_VERB
-          res = lex.attr
-        end
-      end
-      res
-    }.join.upcase
+    sequences(@buffer.map { |obj|
+      obj.is_a?(Word) && !obj.unknown? ? obj.attrs : ['#']
+    }).uniq.each { |sequence|
+      @seq_strings.each { |wordseq|
+        wordseq.scan(sequence) { |pos, form, classes|
+          inc('Anzahl erkannter Sequenzen')
 
-    #    Muster erkennen
-    @seq_strings.each { |wordseq|
-      pos = 0
-      until (pos = @sequence.index(wordseq.classes, pos)).nil?
-        #  got a match
-        inc('Anzahl erkannter Sequenzen')
-        form = wordseq.format
-        lexis = []
-        (0...wordseq.classes.size).each { |j|
-          lex = @buffer[pos+j].lexicals[0]
-          form = form.gsub((j+1).to_s, lex.form)
-          lexis << lex
+          classes.each_with_index { |wc, index|
+            @buffer[pos + index].lexicals.find { |lex|
+              form.gsub!(index.succ.to_s, lex.form) if lex.attr == wc
+            } or break
+          } or next
+
+          deferred_insert(pos, Word.new_lexical(form, WA_SEQUENCE, LA_SEQUENCE))
         }
-        word = Word.new(form, WA_SEQUENCE) << Lexical.new(form, LA_SEQUENCE)
-        deferred_insert(pos, word)
-        pos += 1
-      end
-    }  
-    forward_buffer    
+      }
+    }
+
+    forward_buffer
+  end
+
+  private
+
+  def sequences(map)
+    res = map.shift
+
+    map.each { |classes|
+      temp = []
+      res.each { |wc1| classes.each { |wc2| temp << (wc1 + wc2) } }
+      res = temp
+    }
+
+    res
   end
 
 end
