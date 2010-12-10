@@ -148,8 +148,12 @@ class Word < StringA
     self
   end
   
-  def lexicals
-    @lexicals
+  def lexicals(compound_parts = true)
+    if !compound_parts && attr == WA_KOMPOSITUM
+      @lexicals.select { |lex| lex.attr == LA_KOMPOSITUM }
+    else
+      @lexicals
+    end
   end
 
   def lexicals=(lexis)
@@ -160,8 +164,8 @@ class Word < StringA
     end
   end
 
-  def attrs
-    lexicals.map { |lex| lex.attr }
+  def attrs(compound_parts = true)
+    lexicals(compound_parts).map { |lex| lex.attr }
   end
 
   #    für Compositum

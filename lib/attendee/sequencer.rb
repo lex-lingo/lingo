@@ -141,7 +141,7 @@ protected
     return if @buffer.empty?
 
     sequences(@buffer.map { |obj|
-      obj.is_a?(Word) && !obj.unknown? ? obj.attrs : ['#']
+      obj.is_a?(Word) && !obj.unknown? ? obj.attrs(false) : ['#']
     }).uniq.each { |sequence|
       @seq_strings.each { |wordseq|
         wordseq.scan(sequence) { |pos, form, classes|
