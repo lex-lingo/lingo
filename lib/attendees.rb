@@ -244,81 +244,55 @@ end
 
 
 #==============================================================================
-#    BufferedAttendee 
+#    BufferedAttendee
 #==============================================================================
-
-class BufferInsert
-  attr_reader :position, :object
-
-private
-
-  def initialize(pos, obj)
-    @position = pos
-    @object = obj
-  end
-
-end
-
-
 
 class BufferedAttendee < Attendee
 
-private
+  BufferInsert = Struct.new(:position, :object)
 
   def initialize(config)
     #  In den Buffer werden alle Objekte geschrieben, bis process_buffer? == true ist
     @buffer = []
-    #  deferred_inserts beeinflussen nicht die Buffer-Größe, sondern werden an einer 
+
+    #  deferred_inserts beeinflussen nicht die Buffer-Größe, sondern werden an einer
     #  bestimmten Stelle in den Datenstrom eingefügt
     @deferred_inserts = []
+
     super
   end
 
-protected
-  
+  protected
+
   def process(obj)
     @buffer.push(obj)
-    if process_buffer?
-      process_buffer
-    end
+    process_buffer if process_buffer?
   end
 
-private
-  
+  private
+
   def forward_buffer
     #  Aufgeschobene Einfügungen in Buffer kopieren
-    @deferred_inserts.sort! { |x,y| y.position <=> x.position }
-    @deferred_inserts.each do |ins|
-      case ins.position
-      when 0        then  @buffer.unshift(ins.object)
-      when @buffer.size-1  then  @buffer.push(ins.object)
-      else
-        @buffer = @buffer[0...ins.position] + [ins.object] + @buffer[ins.position..-1]
-      end
-    end
+    @deferred_inserts.sort_by { |ins| ins.position }.each { |ins|
+      @buffer.insert(ins.position, ins.object)
+    }
     @deferred_inserts.clear
 
     #  Buffer weiterleiten
-    @buffer.each do |obj|
-      forward(obj)
-    end
+    @buffer.each { |obj| forward(obj) }
     @buffer.clear
   end
 
-  
   def process_buffer?
     true
   end
-  
 
   def process_buffer
     #  to be defined by child class
   end
 
-
   def deferred_insert(pos, obj)
     @deferred_inserts << BufferInsert.new(pos, obj)
-  end  
-  
-end
+  end
 
+end

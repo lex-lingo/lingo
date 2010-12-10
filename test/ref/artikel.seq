@@ -1,9 +1,9 @@
-52 indexierung, automatisch
-18 erschließung, homogen
+55 indexierung, automatisch
+19 erschließung, homogen
+16 beschreibung, inhaltlich
 16 indexieren, automatisch
 16 vokabularverbesserung, deutlich
-10 beschreibung, inhaltlich
-9 erschließung, intellektuell
+10 erschließung, intellektuell
 9 normierung, sprachlich
 8 aufwand, erheblich
 8 bibliothek, deutsch
@@ -15,11 +15,13 @@
 7 namensform, identisch
 6 analyse, automatisch
 6 kollektion, erschlossen
+6 kollektion, indexierend
 6 namensform, unterschiedlich
 6 normierung, fehlend
 6 rahmenbedingung, normierend
 6 rahmenbedingung, streng normierend
 6 suche, frei
+5 friedhof, jüdisch
 5 generierung, automatisch
 5 normierung, begrifflich
 4 bestand, zurückliegend
@@ -30,7 +32,6 @@
 4 erschließungssituation, unbefriedigend
 4 erschließungssystem, unterschiedlich
 4 form, bevorzugt
-4 friedhof, jüdisch
 4 galerie, virtuell
 4 inhalt, gleich
 4 kollektion, derartig
@@ -38,6 +39,7 @@
 4 künstler, unterschiedlich
 4 möglichkeit, skizziert
 4 normierung, automatisch
+4 normierung, genau
 4 objektbeschreibung, sprachlich
 4 rahmenbedingung, eng
 4 schreibweise, alternativ
@@ -45,11 +47,15 @@
 4 schritt, vermutlich schwer
 4 suche, alle
 4 suche, erfolgreich
+4 teilfunktion, folgend
 4 teilkollektion, erschlossen
 4 teilkollektion, unterschiedlich erschlossen
+4 teilmenge, groß
+4 teilmenge, wenig groß
 4 term, verwendet
 4 terminologiekontrolle, völlig
 4 these, einig
+4 verweisungsstruktur, dazugehörig
 4 vorzug, unschätzbar
 4 zahl, ausreichend
 4 zielsetzung, allgemein
@@ -63,11 +69,13 @@
 3 einsatz, abgestimmt
 3 ermittlung, intellektuell
 3 klassifizierung, automatisch
+3 namensform, alternativ
 3 quell, terminologisch
 3 schlagwort, bestimmt
 3 suche, kontrolliert
 3 verfahren, automatisch
 3 vokabular, kontrolliert
+3 vokabular, normiert
 2 alttitelbestand, groß
 2 ansatz, derartig
 2 aufwand, gering
@@ -76,20 +84,27 @@
 2 auseinandersetzung, stark intellektuell
 2 beschreibung, genormt
 2 beschreibung, konsistent
+2 beschreibung, vorliegend
 2 beschreibungselement, kontrolliert
 2 beschreibungselement, sprachlich kontrolliert
+2 bezeichnung, äquivalent
 2 bildbeschreibung, bekannt
 2 diskussionsfokus, aktuell
 2 dokument, erschlossen
+2 dokument, thematisch ähnlich
+2 dokument, ähnlich
 2 dokumentbeschreibung, vorhanden
+2 dokumentbeschreibung, vorliegend
 2 dokumentkollektion, verarbeitend
 2 ebene, thematisch
 2 erschließung, fehlend
 2 erschließung, verläßlich
 2 erschließungsinstrument, orientiert
 2 erschließungssituation, heterogen
+2 form, substantivisch
 2 funktionalität, genannt
 2 funktionsumfang, erreicht
+2 funktionsumfang, vollständig
 2 grundform, sprachlich standardisiert
 2 grundform, standardisiert
 2 indexterm, normiert
@@ -102,14 +117,12 @@
 2 intellektuelle, stark
 2 katalogorientieren, alle
 2 kategorie, alle
-2 kollektion, indexierend
 2 komponente, frei
+2 kontext, gebraucht
 2 malerei, venezianisch
 2 mehrwortgruppe, erkannt
 2 menge, ausreichend
-2 namensform, alternativ
 2 namensvariante, alle
-2 normierung, genau
 2 nutzen, potentiell
 2 objekt, alle
 2 pflege, kontinuierlich
@@ -118,6 +131,7 @@
 2 quell, lexikalisch
 2 quell, verwendend terminologisch
 2 rahmenumgebung, derartig
+2 relation, bereitgestellt
 2 ressource, terminologisch
 2 richtlinie, lokal
 2 rolle, erheblich
@@ -127,6 +141,7 @@
 2 standard, gemeinsam
 2 sucherfolg, absteigend
 2 teil, erheblich
+2 term, verwendend
 2 term, vorhanden
 2 terminologie, umfangreich
 2 terminologie, vorhanden
@@ -139,8 +154,6 @@
 2 verfahren, intellektuell
 2 verfahren, statistisch
 2 verfahren, statistisch arbeitend
-2 verweisungsstruktur, dazugehörig
-2 vokabular, normiert
 2 voraussetzung, ungenannt
 2 werk, alle
 1 alternative, unterschiedlich
@@ -161,18 +174,17 @@
 1 beschreibungsmerkmal, zufällig getroffen
 1 bestand, erschlossen
 1 bestand, unterschiedlich erschlossen
-1 bezeichnung, äquivalent
+1 bezeichnung, viel äquivalent
 1 beziehung, hierarchisch
 1 bibliothekartag, deutsch
 1 daten, heterogen
 1 dokument, alle
-1 dokument, ähnlich
 1 dokumentbeschreibung, inhaltlich
-1 dokumentbeschreibung, vorliegend
 1 dokumentmenge, groß
 1 einbindungsmöglichkeit, fehlend
 1 einschränkung, fachlich
 1 einschränkung, stark fachlich
+1 eintrag, folgend
 1 entnahme, intellektuell
 1 erfassungsstandard, einheitlich
 1 erkennungslauf, derartig
@@ -189,7 +201,6 @@
 1 frauenkirche, jüdisch
 1 funktionalität, linguistisch
 1 funktionalität, statistisch
-1 funktionsumfang, vollständig
 1 gesamtheit, enthalten
 1 grundform, grammatikalisch
 1 heterogenität, groß
@@ -229,7 +240,6 @@
 1 quell, vorhanden terminologisch
 1 rahmen, methodisch
 1 rahmenbedingung, technisch
-1 relation, bereitgestellt
 1 ressource, gering personell
 1 ressource, personell
 1 ressource, stehend terminologisch
@@ -246,9 +256,7 @@
 1 suchkonstellation, alle
 1 synonymbeziehung, ausgewiesen
 1 tafelbild, mittelalterlich
-1 teilfunktion, folgend
 1 term, entnommen
-1 term, verwendend
 1 termbasis, ausreichend
 1 terminologie, genormt
 1 terminologie, kontrolliert

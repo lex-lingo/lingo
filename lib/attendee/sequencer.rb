@@ -1,21 +1,21 @@
 # encoding: utf-8
 
-#  LINGO ist ein Indexierungssystem mit Grundformreduktion, Kompositumzerlegung, 
+#  LINGO ist ein Indexierungssystem mit Grundformreduktion, Kompositumzerlegung,
 #  Mehrworterkennung und Relationierung.
 #
 #  Copyright (C) 2005  John Vorhauer
 #
-#  This program is free software; you can redistribute it and/or modify it under 
-#  the terms of the GNU General Public License as published by the Free Software 
+#  This program is free software; you can redistribute it and/or modify it under
+#  the terms of the GNU General Public License as published by the Free Software
 #  Foundation;  either version 2 of the License, or  (at your option)  any later
 #  version.
 #
 #  This program is distributed  in the hope  that it will be useful, but WITHOUT
-#  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+#  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 #  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 #
-#  You should have received a copy of the  GNU General Public License along with 
-#  this program; if not, write to the Free Software Foundation, Inc., 
+#  You should have received a copy of the  GNU General Public License along with
+#  this program; if not, write to the Free Software Foundation, Inc.,
 #  51 Franklin St, Fifth Floor, Boston, MA 02110, USA
 #
 #  For more information visit http://www.lex-lingo.de or contact me at
@@ -44,19 +44,18 @@ class WordSequence
 
 end
 
-
 =begin rdoc
 == Sequencer
-Der Sequencer ist von seiner Funktion her ähnlich dem Multiworder. Der Multiworder 
+Der Sequencer ist von seiner Funktion her ähnlich dem Multiworder. Der Multiworder
 nutzt zur Erkennung von Mehrwortgruppen spezielle Wörterbücher, der Sequencer hingegen
 definierte Folgen von Wortklassen. Mit dem Sequencer können Indexterme generiert werden,
-die sich über mehrere Wörter erstrecken. 
+die sich über mehrere Wörter erstrecken.
 Die Textfolge "automatische Indexierung und geniale Indexierung"
 wird bisher in die Indexterme "automatisch", "Indexierung" und "genial" zerlegt.
-Über die Konfiguration kann der Sequencer Mehrwortgruppen identifizieren, die 
+Über die Konfiguration kann der Sequencer Mehrwortgruppen identifizieren, die
 z.B. aus einem Adjektiv und einem Substantiv bestehen. Mit der o.g. Textfolge würde
 dann auch "Indexierung, automatisch" und "Indexierung, genial" als Indexterm erzeugt
-werden. Welche Wortklassenfolgen erkannt werden sollen und wie die Ausgabe aussehen 
+werden. Welche Wortklassenfolgen erkannt werden sollen und wie die Ausgabe aussehen
 soll, wird dem Sequencer über seine Konfiguration mitgeteilt.
 
 === Mögliche Verlinkung
@@ -64,26 +63,26 @@ Erwartet:: Daten vom Typ *Word* z.B. von Wordsearcher, Decomposer, Ocr_variator,
 Erzeugt:: Daten vom Typ *Word* (mit Attribut WA_SEQUENCE). Je erkannter Mehrwortgruppe wird ein zusätzliches Word-Objekt in den Datenstrom eingefügt. Z.B. für Ocr_variator, Sequencer, Noneword_filter, Vector_filter
 
 === Parameter
-Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der Voreinstellung). 
+Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der Voreinstellung).
 Alle anderen Parameter müssen zwingend angegeben werden.
 <b>in</b>:: siehe allgemeine Beschreibung des Attendee
 <b>out</b>:: siehe allgemeine Beschreibung des Attendee
-<b><i>stopper</i></b>:: (Standard: TA_PUNCTUATION, TA_OTHER) Gibt die Begrenzungen an, zwischen 
-                        denen der Sequencer suchen soll, i.d.R. Satzzeichen und Sonderzeichen, 
+<b><i>stopper</i></b>:: (Standard: TA_PUNCTUATION, TA_OTHER) Gibt die Begrenzungen an, zwischen
+                        denen der Sequencer suchen soll, i.d.R. Satzzeichen und Sonderzeichen,
                         weil sie kaum in einer Mehrwortgruppen vorkommen.
 
 === Konfiguration
-Der Sequencer benötigt zur Identifikation von Mehrwortgruppen Regeln, nach denen er 
-arbeiten soll. Die benötigten Regeln werden nicht als Parameter, sondern in der 
+Der Sequencer benötigt zur Identifikation von Mehrwortgruppen Regeln, nach denen er
+arbeiten soll. Die benötigten Regeln werden nicht als Parameter, sondern in der
 Sprachkonfiguration hinterlegt, die sich standardmäßig in der Datei
 <tt>de.lang</tt> befindet (YAML-Format).
   language:
     attendees:
       sequencer:
         sequences: [ [AS, "2, 1"], [AK, "2, 1"] ]
-Hiermit werden dem Sequencer zwei Regeln mitgeteilt: Er soll Adjektiv-Substantiv- (AS) und 
+Hiermit werden dem Sequencer zwei Regeln mitgeteilt: Er soll Adjektiv-Substantiv- (AS) und
 Adjektiv-Kompositum-Folgen (AK) erkennen. Zusätzlich ist angegeben, in welchem Format die
-dadurch ermittelte Wortfolge ausgegeben werden soll. In diesem Beispiel also zuerst das 
+dadurch ermittelte Wortfolge ausgegeben werden soll. In diesem Beispiel also zuerst das
 Substantiv und durch Komma getrennt das Adjektiv.
 
 === Beispiele
@@ -111,31 +110,26 @@ ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
   out> *EOF('test.txt')
 =end
 
-
-
 class Attendee::Sequencer < BufferedAttendee
 
-protected
+  protected
 
   def init
     #  Parameter verwerten
-    @stopper = get_array('stopper', TA_PUNCTUATION+','+TA_OTHER).collect {|s| s.upcase }
-    @seq_strings = get_key('sequences')
-    @seq_strings.collect! { |e| WordSequence.new(e[0], e[1]) }
-    forward(STR_CMD_ERR, 'Konfiguration ist leer') if @seq_strings.size==0
-  end
+    @stopper = get_array('stopper', TA_PUNCTUATION + ',' + TA_OTHER).map { |s| s.upcase }
+    @seq_strings = get_key('sequences').map { |e| WordSequence.new(*e) }
 
+    forward(STR_CMD_ERR, 'Konfiguration ist leer') if @seq_strings.empty?
+  end
 
   def control(cmd, par)
     #  Jedes Control-Object ist auch Auslöser der Verarbeitung
-    process_buffer
+    process_buffer if [STR_CMD_RECORD, STR_CMD_EOF].include?(cmd)
   end
-
 
   def process_buffer?
-    @buffer[-1].kind_of?(StringA) && @stopper.include?(@buffer[-1].attr.upcase)
+    (item = @buffer.last).is_a?(StringA) && @stopper.include?(item.attr.upcase)
   end
-
 
   def process_buffer
     return if @buffer.empty?
