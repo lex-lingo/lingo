@@ -1,87 +1,138 @@
-= Release Dokumentation
+= Revision history for lingo
 
+== 1.6.12 [2010-11-22]
 
-== Lingo 1.66 18.08.2007
+* Ruby 1.9 compatibility, finally.
+* Added lingoweb.rb, a plain & simple web frontend for Lingo.
+* Added DIFF-LCS gem directly to Lingo distribution.
+
+== 1.6.11 [2010-02-04]
+
+* Redirect Lingo output to <tt>/dev/null</tt> during testing. Indicate error
+  with appropriate exit code.
+* Replace usage of command-line diff with cross-plattform Ruby implementation
+  (requires diff-lcs[http://raa.ruby-lang.org/project/diff-lcs/]).
+* Provide alternatives to standard zip command on windows platforms.
+* Use +UNK+ itself if it doesn't have any lexicals.
+* Use compo form instead of word form when lexicalizing compositum entry for
+  multiword dictionaries.
+* LexicalHash#[] must use target (not source) form.
+* Optionally, try to find matches for all lexicals a word has.
+* Make '-' a PRINTABLE_CHAR.
+* Allow synonyms to be considered for multiword matching.
+* Don't use compositum parts.
+* Introduced some (more or less arbitrary) line length limit. We can only
+  store values of a certain length anyway (with SDBM). Entries exceeding this
+  limit will be rejected and logged in the .rev file.
+
+== 1.6.10 [2009-11-09]
+
+* Prevent "infinite" backtracking in regular expressions.
+
+== 1.6.9 [2009-08-13]
+
+* Updated configs.
+
+== 1.6.8 [2009-06-01]
+
+* Partly reverted Ruby 1.9 compatibility where it clashed with the 1.8 series.
+
+== 1.6.7 [2009-05-21]
+
+* Initiale Bereitstellung von Lingo in Subversion
+* BUGFIX: Token wurden durch den Caching-Mechanismus in ihrer Schreibweise
+  verändert (Groß-/Kleinschreibung).
+* Englische Wörterbücher, ein Beispiel-Artikel und eine Konfiguration für das
+  Englische wurden aufgenommen. Aufruf mit lingo.rb -c lingo-en.cfg -l en <datei>.
+* Integration der Testumgebung für Entwickler.
+* Die Attendees in den Lingo-Konfigurationsdateien werden automatisch
+  verkettet. Dies erspart mühsame Verlinkung von Hand und macht die
+  Konfiguration lesbarer.
+* Modified parameters for Tokenizer and building of databases to handle UTF-8
+  correctly. Printable characters from the ASCII charset and every UTF character
+  greater than x80 is now recognized as a non word breaking character. so now
+  diacritical characters are handled well.
+* Added a command line option '-p' for lingo.rb for making detailed
+  performance mesurements possible for each single attendee.
+* Allow Lingo.new to be called from a different directory. (Still need to
+  Dir.chdir to #talk because of the dictionaries...).
+* Allow Textreader to read from STDIN.
+* Allow Lingo to be called from an external library or program; pass a string
+  and get an array back.
+* Allow Textwriter to write to STDOUT.
+* Match suffixes case-insensitively.
+* Don't exclude synonyms that are eponymous with the original word.
+* Don't stop variating hyphenated words if any component was taken as-is.
+* Basic Ruby 1.9 compatibility.
+* Words should be counted per record, not per document, in LIR mode.
+* Added Porter stemmer.
+
+== 1.6.6 [2007-08-18]
 
 * <b>Englische Wörterbücher ergänzt</b>
 
   Lingo kann nun auch Englisch. Dazu muss beim Aufruf von Lingo die Option "-l en"
   angegeben werden. Ein englischer Artikel ist unter txt/artikel-en.txt zu finden.
 
-  
-== Lingo 1.65 18.09.2006
+== 1.6.5 [2006-09-18]
 
 * <b>Eckige Klammern als darstellbare Zeichen eingebaut</b>
 
-  
-== Lingo 1.64 29.05.2006
+== 1.6.4 [2006-05-29]
 
 * <b>Neuer Attendee Dehyphenizer</b>
 
   Zur Behandlung von Bindestrichen am Zeilenende wurde der Dehyphenizer
   eingeführt.
 
-  
-== Lingo 1.63 23.05.2006
+== 1.6.3 [2006-05-23]
 
 * <b>GPL-Wörterbuch</b>
 
   Das Systemwörterbuch ist vollständig unter GPL gestellt.
 
-  
-== Lingo 1.62 12.05.2006
+== 1.6.2 [2006-05-12]
 
 * <b>Pfad- und Dateibehandlung</b>
 
   Kleine Fehlerbehebung in der Pfadgenerierung im Textwriter.
-  
+
 * <b>Return-Codes</b>
-  
+
   Bei Aufruf der Hilfe oder bei Fehlersituationen, die intern abgefangen werden,
-  wird der Return-Code 1 gesetzt, um somit bessere Steuerung in der 
+  wird der Return-Code 1 gesetzt, um somit bessere Steuerung in der
   Batchverarbeitung zu ermöglichen.
 
-  
-== Lingo 1.61 22.03.2006
+== 1.6.1 [2006-03-22]
 
 * <b>Fehlerkorrektur im Multiworder</b>
 
   Der Multiworder hat sich in einem seltenen Spezialfall nicht korrekt verhalten. Das
   ist bereinigt.
-  
 
-== Lingo 1.60 20.03.2006 Wörterbuch-Angleichungen
+== 1.6.0 [2006-03-20]
 
 * <b>Wörterbücher umbenannt</b>
 
-  Die standardmäßig mitgelieferten Wörterbücher sind umbenannt worden in lingo-xxx.txt 
+  Die standardmäßig mitgelieferten Wörterbücher sind umbenannt worden in lingo-xxx.txt
   und haben als einheitlichen Separator zwischen Schlüssel und Werten das '='-Zeichen.
-  
+
 * <b>Bereinigungen durchgeführt</b>
 
   Aus dem Code sind viele alte Programmschnipsel entfernt worden.
 
-
-== Lingo 1.60rc2b 20.03.2006 Wörterbuch-Angleichungen
+== 1.6.0rc2b [2006-03-20]
 
 * <b>Wörterbücher umbenannt</b>
 
   Die standardmäßig mitgelieferten Wörterbücher sind umbenannt worden in lingo-xxx.txt und
   haben als einheitlichen Separator zwischen Schlüssel und Werten das '='-Zeichen.
-  
-== Lingo 1.60rc2b 20.03.2006 Wörterbuch-Angleichungen
 
-* <b>Wörterbücher umbenannt</b>
-
-  Die standardmäßig mitgelieferten Wörterbücher sind umbenannt worden in lingo-xxx.txt und
-  haben als einheitlichen Separator zwischen Schlüssel und Werten das '='-Zeichen.
-  
 * <b>Bereinigungen durchgeführt</b>
 
   Aus dem Code sind viele alte Programmschnipsel entfernt worden.
 
-
-== Lingo 1.60rc2 13.03.2006 Multiworder-Nachlieferung
+== 1.6.0rc2a [2006-03-13]
 
 * <b>Fehlerkorrektur Multiworder</b>
 
@@ -91,62 +142,60 @@
 * <b>Punkt-Behandlung vollständig überarbeitet (Abbreviator wieder im Einsatz!) => TEIL 2</b>
 
   ...hatte ich doch vergessen zu erwähnen, dass als Voraussetzung für das Funktionieren
-  der neu eingeführten Punkt-Behandlung ZWINGEND die Tokenizer-Regel 'ABRS' in der 
+  der neu eingeführten Punkt-Behandlung ZWINGEND die Tokenizer-Regel 'ABRS' in der
   <tt>de.lang</tt> auskommentiert werden muss ?:o\
 
-
-== Lingo 1.60rc2 09.03.2006
+== 1.6.0rc2 [2006-03-09]
 
 * <b>Vorsicht bei CFG-Dateien!</b>
 
-  Multiworder und Sequencer vertragen beide einen 'stopper'-Parameter, der in der 
+  Multiworder und Sequencer vertragen beide einen 'stopper'-Parameter, der in der
   Regel mit 'PUNCT,OTH_C' vorbelegt ist. Dies soll Token identifizieren, die durch
-  die Regel gleichen Namens im Tokenizer erkannt wurden. Diese Regeln sind jedoch 
+  die Regel gleichen Namens im Tokenizer erkannt wurden. Diese Regeln sind jedoch
   umbenannt worden (weiß nicht mit welcher Version) in 'PUNC' und 'OTHR'. Daher bitte
   die entsprechenden Einträge ändern auf 'PUNC,OTHR'.
-  
+
 * <b>Punkt-Behandlung vollständig überarbeitet (Abbreviator wieder im Einsatz!)</b>
 
-  Die Behandlung des Zeichen '.' wurde komplett neu designet. Das Zeichen '.' kommt 
+  Die Behandlung des Zeichen '.' wurde komplett neu designet. Das Zeichen '.' kommt
   grundsätzlich in drei verschiedenen Kontexten vor:
-  
+
   1. Als Punkt hinter einer Zahl (1. = Erster, 2. = Zweiter,...)
   2. Als Abkürzungspunkt
   3. Der Satzendepunkt
-  
-  Der 1. Fall ist sehr sicher durch eine Tokenizer-Regel zu identifizieren und 
-  wird daher hier nicht weiter betrachtet. Dabei wird kein Punkt-Token erzeugt, 
+
+  Der 1. Fall ist sehr sicher durch eine Tokenizer-Regel zu identifizieren und
+  wird daher hier nicht weiter betrachtet. Dabei wird kein Punkt-Token erzeugt,
   sondern der Punkt im Stammwort mitgegeben (z.B. <1.>).
-  
-  Zwischen dem 2. und dem 3. Fall macht der Tokenizer keine Unterscheidung mehr. 
-  Der Punkt wird als eigenständiges Token erkannt und in den Verarbeitungsstrom 
+
+  Zwischen dem 2. und dem 3. Fall macht der Tokenizer keine Unterscheidung mehr.
+  Der Punkt wird als eigenständiges Token erkannt und in den Verarbeitungsstrom
   weitergereicht. Der Abbreviator versucht nun Abkürzungen anhand von Punkt-Token
-  zu erkennen. Taucht ein Punkt im Zeichenstrom auf, dann wird das vorhergehende Word 
-  im Abkürzungswörterbuch nachgeschlagen. Wird das Wort dort gefunden, wird das 
-  Punkt-Token aus dem Zeichenstrom entfernt und die Abkürzung als identifiziert 
+  zu erkennen. Taucht ein Punkt im Zeichenstrom auf, dann wird das vorhergehende Word
+  im Abkürzungswörterbuch nachgeschlagen. Wird das Wort dort gefunden, wird das
+  Punkt-Token aus dem Zeichenstrom entfernt und die Abkürzung als identifiziert
   weitergereicht.
-  
-  Bleibt neben dem Satzendepunkt noch der Abkürzungspunkt z.B. in Personennamen 
-  (John F. Kennedy). Diese müssen vom Multiworder zuverlässig als Teil einer 
-  Mehrwortgruppe erkannt und ggf. ebenfalls entfernt werden. Die zusätzlich 
+
+  Bleibt neben dem Satzendepunkt noch der Abkürzungspunkt z.B. in Personennamen
+  (John F. Kennedy). Diese müssen vom Multiworder zuverlässig als Teil einer
+  Mehrwortgruppe erkannt und ggf. ebenfalls entfernt werden. Die zusätzlich
   aufgebohrtet Testroutinen zeigten ein zuverlässiges Verhalten.
 
-
-== Lingo 1.60rc1 27.02.2006
+== 1.6.0rc1 [2006-02-27]
 
 * <b>Grundlegende architektonische Überarbeitung</b>
 
   Die über ein Jahr gewachsene Struktur von Lingo wurde grundlich überarbeitet.
   Detailliertere Dokumentation folgt.
-  
+
 * <b>Abbreviator entfernt</b>
 
-  Den Attendee Abbreviator gibt es nicht mehr. Seine Funktion wird vom Wordsearcher 
-  mit übernommen. Wenn ein Wort nicht erkannt wird, so prüft der Wordsearcher das 
-  Wort erneut mit abschließendem Punkt, wenn das nächste Token im Zeichenstrom 
-  tatsächlich ein Punkt ist. In diesem Fall wird das Punkt-Token aus dem Datenstrom 
+  Den Attendee Abbreviator gibt es nicht mehr. Seine Funktion wird vom Wordsearcher
+  mit übernommen. Wenn ein Wort nicht erkannt wird, so prüft der Wordsearcher das
+  Wort erneut mit abschließendem Punkt, wenn das nächste Token im Zeichenstrom
+  tatsächlich ein Punkt ist. In diesem Fall wird das Punkt-Token aus dem Datenstrom
   entfernt.
-  
+
 * <b>Ocr_variator heißt jetzt Variator</b>
 
   Kleine kosmetische Anpassung. Der Ocr-Bezug stimmt zwar historisch gesehen noch,
@@ -155,46 +204,44 @@
 * <b>Decomposer mit zusätzlicher Validitätsprüfung und Kennzeichnung</b>
 
   Der Decomposer kann bei Bedarf Komposita einer zusätzlichen Prüfung unterziehen.
-  Ist der Schlüssel <tt>de.lang:language/dictionary/compositum/skip-sequences</tt> 
+  Ist der Schlüssel <tt>de.lang:language/dictionary/compositum/skip-sequences</tt>
   angegeben, der z.B. in der Form <tt>skip-sequences: [ VS ]</tt> definiert wird,
-  wird zusätzlich geprüft, ob das Kompositum mit seinen Teilen diesen Wortklassen 
+  wird zusätzlich geprüft, ob das Kompositum mit seinen Teilen diesen Wortklassen
   entspricht. Hiernach werden Komposita verworfen, die aus Verb-Substantiv-Kombination
   bestehen. Die Angabe des Parameters ist optional.
-  Zusätzlich werden bei Angabe des Schlüssels <tt>de.lang:language/dictionary/compositum/append-wordclass</tt>, 
-  der i.d.R einen ein Zeichen langen String enthält, die durch Zerlegung erkannten 
-  Wortstämme markiert, in dem ihre Wortklasse das über diesen Schlüssel definierte 
+  Zusätzlich werden bei Angabe des Schlüssels <tt>de.lang:language/dictionary/compositum/append-wordclass</tt>,
+  der i.d.R einen ein Zeichen langen String enthält, die durch Zerlegung erkannten
+  Wortstämme markiert, in dem ihre Wortklasse das über diesen Schlüssel definierte
   Zeichen angehangen bekommt.
 
 * <b>Install.rb nicht mehr notwendig</b>
 
-  Die Umwandlung von Text-Dateien in SDBM-Dateien erfolgt nicht mehr über Install, 
-  sondern durch 'jeden' Lingoaufruf implizit. Beim öffnen der SDBM-Datei wird 
-  automatisch die Aktualität geprüft und bei Bedarf eine erneute Übersetzung 
-  angestartet. 
-  
-  
+  Die Umwandlung von Text-Dateien in SDBM-Dateien erfolgt nicht mehr über Install,
+  sondern durch 'jeden' Lingoaufruf implizit. Beim öffnen der SDBM-Datei wird
+  automatisch die Aktualität geprüft und bei Bedarf eine erneute Übersetzung
+  angestartet.
 
-== Lingo 1.50 08.12.2005
+== 1.5.0 [2005-12-08]
 
 * <b>Sprachkonfiguration aktualisiert</b>
 
   Die Konfigurationsdatei de.lang ist an produktive Erfahrungen angepasst worden.
-  Insbesondere werden jetzt alle Sonderzeichen der Zeichensätze ISO-8859-1 und 
-  Windows-1252 vollständig erkannt, ohne dass laufend Zeichen nachgepflegt werden 
+  Insbesondere werden jetzt alle Sonderzeichen der Zeichensätze ISO-8859-1 und
+  Windows-1252 vollständig erkannt, ohne dass laufend Zeichen nachgepflegt werden
   müssen.
-  
+
 * <b>Cachable arbeitet jetzt mit Duplikaten</b>
 
-  Objekte, die in den Cache von Datasource, Dictionary oder Grammer übernommen 
-  wurden, wurden auch immer als Referenz ausgelesen. Die hatte zur Folge, dass 
-  wenn Cacheinhalte im späteren Verlauf der Lingo-Kette verändert wurden, diese 
-  Veränderung auch alle nachfolgen aus dem Cache gelesenen Objekte betraf. 
-  D.h.: Wird das Wort <von|?> in den Cache geschrieben, so werden alle 
+  Objekte, die in den Cache von Datasource, Dictionary oder Grammer übernommen
+  wurden, wurden auch immer als Referenz ausgelesen. Die hatte zur Folge, dass
+  wenn Cacheinhalte im späteren Verlauf der Lingo-Kette verändert wurden, diese
+  Veränderung auch alle nachfolgen aus dem Cache gelesenen Objekte betraf.
+  D.h.: Wird das Wort <von|?> in den Cache geschrieben, so werden alle
   nachfolgenden Suchanfragen aus dem Cache bedient. So weit so gut. Wenn ein
-  Attendee nach Cacheauslesen der Meinung ist, er müsste für das Objekt das Attribut 
-  z.B. auf 'MU?' (Teil einer Mehrwortgruppe) ändern, dann wurde dadurch auch das 
-  Element im Cache geändert. Nachfolgende Suchanfragen erhielten somit <von|MU?> als 
-  Antwort. Ab jetzt werden nur noch Kopien des Originals in den Cache übernommen, 
+  Attendee nach Cacheauslesen der Meinung ist, er müsste für das Objekt das Attribut
+  z.B. auf 'MU?' (Teil einer Mehrwortgruppe) ändern, dann wurde dadurch auch das
+  Element im Cache geändert. Nachfolgende Suchanfragen erhielten somit <von|MU?> als
+  Antwort. Ab jetzt werden nur noch Kopien des Originals in den Cache übernommen,
   so das eine versehentliche Veränderung ausgeschlossen wird.
 
 * <b>String hat attr-Methode</b>
@@ -202,21 +249,19 @@
   Die Methode _select_ der Klasse _Dictionary_ gibt die gefundenen Lexicals sortiert
   zurück. Bei der Verarbeitung von Mehrwortwörterbüchern kann jedoch auch z.B. '*5'
   als Antwort gegeben werden, was dem Multiworder mitteilt, dass es eine Mehrwortgruppe
-  der Länge 5 gibt, die mit genau den drei nachgefragten Wörtern beginnt und der 
-  Multiworder eine weitere Abfrage machen soll. Klappt alles wunderbar, nur dass _select_ 
-  nicht in der Lage ist ein Array aus Lexicals und Strings anhand des attr-Wertes zu 
-  sortieren. Jetzt hat die Klasse String eines attr-Wert '' bekommen und die Sortierung 
+  der Länge 5 gibt, die mit genau den drei nachgefragten Wörtern beginnt und der
+  Multiworder eine weitere Abfrage machen soll. Klappt alles wunderbar, nur dass _select_
+  nicht in der Lage ist ein Array aus Lexicals und Strings anhand des attr-Wertes zu
+  sortieren. Jetzt hat die Klasse String eines attr-Wert '' bekommen und die Sortierung
   funktioniert wieder.
-  
+
 * <b>Neues Synonym-Wörterbuch</b>
 
-  Ein sehr gut gepflegtes Synonym-Wörterbuch ist als Beispiel mit aufgenommen worden. 
-  Wie beim Mehrwortwörterbuch system_mul.txt sind jedoch nur Einträge mit dem 
+  Ein sehr gut gepflegtes Synonym-Wörterbuch ist als Beispiel mit aufgenommen worden.
+  Wie beim Mehrwortwörterbuch system_mul.txt sind jedoch nur Einträge mit dem
   Anfangsbuchstabe 'a' enthalten.
 
-
-    
-== Lingo 1.5rc2 06.12.2005
+== 1.5.0rc2 [2005-12-06]
 
 * <b>Fehlerkorrekturen und Anpassungen</b>
 
@@ -226,48 +271,47 @@
   - System_dic mit Stopwörtern versehen
   - Bei install.rb `...` durch system()-Aufruf getauscht
   - Browser bei install.rb über Parameter -b konfigurierbar
-  - Kleinere Anpassungen  
-    
-    
-== Lingo 1.5rc 27.11.2005
+  - Kleinere Anpassungen
+
+== 1.5.0rc [2005-11-27]
 
 * <b>Kompositumerkennung redesigned</b>
 
-  Neben den Klassen für Datenzugriff auf unterster Ebene (Datasource) und dem 
-  Wörterbuchzugriff (Dictionary) gibt es nun auch eine Klasse für grammatikalische 
+  Neben den Klassen für Datenzugriff auf unterster Ebene (Datasource) und dem
+  Wörterbuchzugriff (Dictionary) gibt es nun auch eine Klasse für grammatikalische
   Spezialitäten (Grammar), welche die Kompositumerkennung aufgenommen hat.
-  
+
 * <b>Testroutinen ausgebaut</b>
 
   Alle bisher per Mail gemeldeten Fehlersituationen sind in die Testroutinen eingebaut
-  worden, so dass sie bei zukünftigen Versionen direkt mit getestet werden. Also 
+  worden, so dass sie bei zukünftigen Versionen direkt mit getestet werden. Also
   weiterhin fleißig per Mail z.B. an error@lex-lingo.de melden.
-  
+
 * <b>_Stopworder_ getilgt</b>
 
-  Der _Stopworder_ hat seine Schuldigkeit getan. Sein Konzept ist von gestern. 
-  Weil er auch durch normale Wörterbuchsuche abbildbar ist, wird hier auf die 
-  weitere Pflege verzichtet. <b>Bitte in den Konfig-Dateien berücksichtigen! und 
+  Der _Stopworder_ hat seine Schuldigkeit getan. Sein Konzept ist von gestern.
+  Weil er auch durch normale Wörterbuchsuche abbildbar ist, wird hier auf die
+  weitere Pflege verzichtet. <b>Bitte in den Konfig-Dateien berücksichtigen! und
   WICHTIG: Stopwörter im Wörterbuch ggf. nachpflegen!</b>
 
 * <b>Neuer Attendee _Abbreviator_</b>
 
-  Bisher hat der Tokenizer per Konfiguration eine Liste von Abkürzungen mitgeteilt 
-  bekommen, die er in einer Textzeile als Token erkennen und in den Datenstrom 
-  einfliessen lassen sollte. Die Pflege dieser Konfigurationsdaten fiel vollends 
-  aus dem sonst stringenten Wörterbuchkonzept heraus. Daher wurde dies Funktion in 
-  den Abbreviator ausgelagert, der sich die bekannten Abkürzungen aus einem eigenen 
+  Bisher hat der Tokenizer per Konfiguration eine Liste von Abkürzungen mitgeteilt
+  bekommen, die er in einer Textzeile als Token erkennen und in den Datenstrom
+  einfliessen lassen sollte. Die Pflege dieser Konfigurationsdaten fiel vollends
+  aus dem sonst stringenten Wörterbuchkonzept heraus. Daher wurde dies Funktion in
+  den Abbreviator ausgelagert, der sich die bekannten Abkürzungen aus einem eigenen
   Wörterbuch holt. <b>Bitte in den Konfig-Dateien berücksichtigen!</b>
 
 * <b>Datenformate in <tt>de.lang</tt> vereinfacht</b>
 
-  Die Datenformate für den _Tokenizer_ und die _Suffix_e haben sich in der 
+  Die Datenformate für den _Tokenizer_ und die _Suffix_e haben sich in der
   Sprachkonfigurationsdatei de.lang geändert. Sofern eine alte de.lang-Datei mit dieser
   Version zusammen laufen soll, <b>bitte in den Konfig-Dateien berücksichtigen!</b>
 
 * <b>Attendees überarbeitet</b>
 
-  Das Verhalten der Attendees wurde homogenisiert. Als zusätzliche Klasse wurde 
+  Das Verhalten der Attendees wurde homogenisiert. Als zusätzliche Klasse wurde
   der BufferedAttendee eingeführt, der den Eingabe-Strom zwischen speichern kann
   und den angestauten Buffer mit einem mal verarbeiten kann. Dies ist insbesondere
   förderlich für die Attendees Multiworder und Sequencer, die eine Kette von Objekten
@@ -275,68 +319,60 @@
 
 * <b>Dokumentation erstellt</b>
 
-  Für alle Attendees gibt es jetzt reichlich Dokumentation, die mit doc/index.html 
+  Für alle Attendees gibt es jetzt reichlich Dokumentation, die mit doc/index.html
   aufgerufen werden kann. Weitere Dokumentation muss noch folgen...
 
-  
-
-== Lingo 1.42 11.10.2005
+== 1.4.2 [2005-10-11]
 
 * <b>Bugfix im _Sequencer_</b>
 
   Der _Sequencer_ sorgte für Fehlfunktionen, wenn er aus dem _Multiworder_
   Worter unerwarteten Typs erhielt.
-  
 
-
-== Lingo 1.41 29.09.2005
+== 1.4.1 [2005-09-29]
 
 * <b>_Synonymer_ verarbeitet jetzt WIRKLICH mehrere Wörterbücher</b>
 
-  Aus einem mir bislang unbekannten Grund sind die in der letzten Version gemachten 
+  Aus einem mir bislang unbekannten Grund sind die in der letzten Version gemachten
   Änderungen nicht übernommen worden. Ist bereinigt.
 
 * <b><i>Vector_filter</i> mit geändertem +sort+-Parameter</b>
 
-  Der +sort+-Parameter konnte vormals die Werte +normal+, +count+ und +term+ annehmen. 
+  Der +sort+-Parameter konnte vormals die Werte +normal+, +count+ und +term+ annehmen.
   Die Werte +count+ und +term+ wurden durch die Bezeichnungen +term_abs+ und +term_rel+
-  ersetzt. Zusätzlich hinzugekommen sind die Werte +sto_abs+ und +sto_rel+, welche mit 
-  den o.g. korrespondieren, der Zahlenwert jedoch in geschweiften Klammern hinter dem 
+  ersetzt. Zusätzlich hinzugekommen sind die Werte +sto_abs+ und +sto_rel+, welche mit
+  den o.g. korrespondieren, der Zahlenwert jedoch in geschweiften Klammern hinter dem
   Wort stehen. Dies ist notwendig für das _LIR_-Format.
 
 * <b>Für zukünftige Meldungen!</b>
 
-  Besteht ein Änderungsbedarf aufgrund eines Fehlers oder der Wunsch einer 
+  Besteht ein Änderungsbedarf aufgrund eines Fehlers oder der Wunsch einer
   Funktionserweiterung? Mailt mir eure Wünsche an <tt>rfc@lex-lingo.de</tt>
-  
 
-
-== Lingo 1.40 25.09.2005
+== 1.4.0 [2005-09-25]
 
 * <b>Neuer Attendee _Sequencer_</b>
 
-  Der _Sequencer_ erkennt Mehrwortgruppen, die nicht über ein Wörterbuch vorgegeben 
-  werden müssen, sondern über ihre Wortklassen erkannt werden. Steht z.B. in 
+  Der _Sequencer_ erkennt Mehrwortgruppen, die nicht über ein Wörterbuch vorgegeben
+  werden müssen, sondern über ihre Wortklassen erkannt werden. Steht z.B. in
   <tt>de.lang:language/attendees/sequencer/sequences: [ [AS, "2, 1"], [AK, "2, 1"] ]</tt>
   so werden Wortfolgen der Art Adjektiv-Subjektiv und Adjektiv-Kompositum erkannt
   und in der in Gänsefüsschen angegebenen Form als Indexeintrag bereitgestellt.
-  So wird 'geniale Indexierung' als 'indexierung, genial' in Form eines zusätzlichen 
+  So wird 'geniale Indexierung' als 'indexierung, genial' in Form eines zusätzlichen
   Wortes in den Ausgabestrom eingefügt mit Attribut +SEQ+ und der Wortklasse +q+.
-  
+
 * <b>Bugfixing Kompositum-Caching</b>
 
-  Beim zweiten Auftreten eines Kompositums wurde das Kompositum als nicht 
-  erkanntes Wort weiterverarbeitet. Der Fehler im Chahing-Mechanismus ist 
+  Beim zweiten Auftreten eines Kompositums wurde das Kompositum als nicht
+  erkanntes Wort weiterverarbeitet. Der Fehler im Chahing-Mechanismus ist
   behoben, so dass die _LIR_-Verarbeitung wieder korrekt läuft.
 
 * <b>_Synonymer_ verarbeitet mehrere Wörterbücher</b>
 
-  Mit Angabe des Parameters <tt>mode=all</tt> kann der _Synonymer_ jetzt auch mehrere 
+  Mit Angabe des Parameters <tt>mode=all</tt> kann der _Synonymer_ jetzt auch mehrere
   Wörterbücher verarbeiten.
 
-
-
-== Lingo 1.31 18.08.2005
+== 1.3.1 [2005-08-18]
 
 * <b>Neuer Attendee _Objectfilter_</b>
 
@@ -345,59 +381,53 @@
   vornehmen. Das Attribut +objects+ ist eine Ruby-Bedingung, die, wenn sie als
   +false+ ausgewertet wird, dass aktuelle Objekt filtert.
 
-
-
-== Lingo 1.30 03.08.2005
+== 1.3.0 [2005-08-03]
 
 * <b>Neuer Attendee _Compositizer_</b>
 
   Die Kompositumzerlegung war bisher im Attendee _Wordsearcher_ enthalten. Dadurch
-  wurden für die Zerlegung immer die gleichen Wörterbücher benutzt, die auf für 
+  wurden für die Zerlegung immer die gleichen Wörterbücher benutzt, die auf für
   die Wortsuche verwendet wurden. Durch die Trennung ist eine separate Angabe
   von Wörterbüchern möglich.
 
 * <b>Testing</b>
 
-  Ausführliche Testroutinen sind erstellt worden, welche die Folge-Releases 
-  deutlich stabiler machen werden. Innerhalb einer Sekunde sind sämtlich 
+  Ausführliche Testroutinen sind erstellt worden, welche die Folge-Releases
+  deutlich stabiler machen werden. Innerhalb einer Sekunde sind sämtlich
   Attendees durchgetestet. Die durchgeführten Tests basieren auf Fehlermeldungen
   und Anregungen aus vergangenen E-Mails. Sie können jederzeit erweitert werden.
   In diesem Zusammenhand ist auf die Basisklasse aller Attendees (vorher Lingo)
-  neu erstellt worden. In Verbindung mit der Einführung von YAML als 
+  neu erstellt worden. In Verbindung mit der Einführung von YAML als
   Konfigurationssprache wurden diese automatischen Tests erst möglich.
-  
+
 * <b>YAML</b>
 
   Bei YAML unbedingt darauf achten, dass keine TABs verwendet werden. YAML ist
-  da sehr empfindlich. 
+  da sehr empfindlich.
 
-
-
-== Lingo 1.21 03.07.2005
+== 1.2.1 [2005-07-03]
 
 * <b>Fehlerkorrektur _LIR_-Absturz</b>
 
-  Bei der Suche nach Mehrwortsynonymen wurden auch interne Steuercodes 
+  Bei der Suche nach Mehrwortsynonymen wurden auch interne Steuercodes
   an weitere Attendees weitergeben, die damit nichts anfangen konnten.
   _Synonymer_ filter jetzt bei der Suche interne Steuercodes heraus.
-  
 
-
-== Lingo 1.20 02.07.2005
+== 1.2.0 [2005-07-02]
 
 * <b><i>Vector_Filter</i> mit Term-Frequenz</b>
 
   Wird beim Attendee <i>Vector_filter</i> das Attribut <tt>sort='term'</tt> angegeben,
-  wird statt der absoluten Zahl (wie bei <tt>sort='count'</tt>) die Term-Frequenz 
-  eines Wortes ermittelt. Die Term-Frequenz bezieht sich auf die Anzahl Worte in der 
-  Datei. Diese wiederum können über das Attribut <tt>no-count</tt> gesteuert werden. 
-  Das Attribut entscheidet darüber, welche Wort-Typen nicht in die Gesamtwortanzahl 
-  der Worte in der Datei berücksichtigt werden. Default hierfür ist 
+  wird statt der absoluten Zahl (wie bei <tt>sort='count'</tt>) die Term-Frequenz
+  eines Wortes ermittelt. Die Term-Frequenz bezieht sich auf die Anzahl Worte in der
+  Datei. Diese wiederum können über das Attribut <tt>no-count</tt> gesteuert werden.
+  Das Attribut entscheidet darüber, welche Wort-Typen nicht in die Gesamtwortanzahl
+  der Worte in der Datei berücksichtigt werden. Default hierfür ist
   <tt>no-count='PUNCT,OTH_C'</tt>.
 
 * <b>Kompositum-Zerlegung mit weiterer Einschränkung</b>
 
-  Ein weiterer Parameter ist für die Kompositumzerlegung hinzugekommen. Als 
+  Ein weiterer Parameter ist für die Kompositumzerlegung hinzugekommen. Als
   Attribute des Tags <tt>XML:dictionary/compositum</tt> können jetzt angegeben werden:
 
     Attribut          Default    Funktion
@@ -412,198 +442,191 @@
     min-part-size        1      Jeder Wortteil muss mindestens so groß sein
     max-parts            4      Es darf höchstens so viele Wortteile geben.
 
-  
 * <b>Install-Routine um Linux-Kommandos erweitert</b>
 
-  Die Install-Routine sollte jetzt alle Aufgaben sowohl auf Windows wie auch Linux 
+  Die Install-Routine sollte jetzt alle Aufgaben sowohl auf Windows wie auch Linux
   komplett abschließen können.
 
 * <b>Zu lange Datensätze</b>
 
-  Trotz anderweitiger Meinung haben Klaus und ich gemeint, Datensätze größer 
-  1024 Bytes werden nicht benötigt. Kam halt anders. SDBM kann keine Sätze 
-  größer 1k speichern, weshalb die Informationen derzeit ziemlich q&d auf 1k 
+  Trotz anderweitiger Meinung haben Klaus und ich gemeint, Datensätze größer
+  1024 Bytes werden nicht benötigt. Kam halt anders. SDBM kann keine Sätze
+  größer 1k speichern, weshalb die Informationen derzeit ziemlich q&d auf 1k
   getrimmt werden.
-  
-  
-== Lingo 1.11 18.06.2005
+
+== 1.1.1 [2005-06-18]
 
 * <b>Test-Routinen erweitert</b>
 
-  Insbesondere die Sortierung von Lexicals wurde noch einmal intensiv unter die 
+  Insbesondere die Sortierung von Lexicals wurde noch einmal intensiv unter die
   Lupe genommen. Dabei sind ein paar kleine Dinge noch begradigt worden.
 
 * <b>Install-Routine bereinigt</b>
 
-  Install.rb soll in Richtung Plattformunabhängigkeit weiterentwickelt werden, so 
+  Install.rb soll in Richtung Plattformunabhängigkeit weiterentwickelt werden, so
   dass auch Linux nicht zu kurz kommt. Da fehlen noch ein paar Kommandos, aber
   die Routine wird euch zu gegebener Zeit fragen :o)
   !!Einzelne Datenbanken können jetzt angesprochen werden!!
-  Mit 'install -data -r rdk' werden z.B. alle Datenbanken, die rdk im Namen 
+  Mit 'install -data -r rdk' werden z.B. alle Datenbanken, die rdk im Namen
   enthalten, gelöscht und mit 'install -data rdk' auch wieder hergestellt. Das sollte
   die Pflege der Datenbanken deutlich erleichtern.
-  
+
 * <b>VORSICHT: KNOWN ERROR</b>
 
   Die Datenbanken werden im Verzeichnis de/store gespeichert. Unter Linux scheint
   das Erstellen des Verzeichnisses noch nicht die richtigen Rechte mitzugeben.
-  Teste ich noch unter Linux, bis dahin bitte das Unterverzeichnis vor dem Aufruf 
+  Teste ich noch unter Linux, bis dahin bitte das Unterverzeichnis vor dem Aufruf
   von Install von Hand anlegen!
-  
-== Lingo 1.10 18.06.2005
+
+== 1.1.0 [2005-06-18]
 
 * <b>Umstellung der Versionsnummernsystematik</b>
 
   Damit auch Patches und Bugfixes nicht als herrenloses Archiv ausgetauscht
   werden müssen und jeden besser in Erinnerung verbleibt, wann welche Funktions-
-  erweiterung dazu kam, gelten für die Veränderungen in den Versionsnummern 
+  erweiterung dazu kam, gelten für die Veränderungen in den Versionsnummern
   folgende Regeln:
-    X.00  Die erste Stelle kennzeichnet einen grundlegenden architektonischen
-          Umbau von Lingo, wie z.B. den Wechsel von Rubyling auf Lingo. Im Zweifel
-          zählt hierzu auch eine zehnmalige Funktionserweiterung :o) 
-    0.X0  Die zweite Stelle kennzeichnet eine Funktionserweiterung, wie z.B. die
-          Verarbeitung von Mehrwortgruppen.
-    0.0X  Die letzte Stelle ist für Bugfixes vorbehalten.
+    X.0.0  Die erste Stelle kennzeichnet einen grundlegenden architektonischen
+           Umbau von Lingo, wie z.B. den Wechsel von Rubyling auf Lingo. Im Zweifel
+           zählt hierzu auch eine zehnmalige Funktionserweiterung :o)
+    0.X.0  Die zweite Stelle kennzeichnet eine Funktionserweiterung, wie z.B. die
+           Verarbeitung von Mehrwortgruppen.
+    0.0.X  Die letzte Stelle ist für Bugfixes vorbehalten.
   Gegebenenfalls kann der Versionsnummer noch ein kleiner Buchstabe folgen, der
   anzeigt, dass sich lediglich an der Dokumentation etwas geändert hat.
-  Gestartet wird mit der 1.10 (Erweiterung um Mehrworterkennung), die im 
+  Gestartet wird mit der 1.1.0 (Erweiterung um Mehrworterkennung), die im
   wesentlichen der Vorversion (alte Systematik) entspricht.
-  
-== Lingo 1.04 17.06.2005
+
+== 1.0.4 [2005-06-17]
 
 * <b>Datenbankformat und -zugriff vereinheitlicht</b>
 
-  Bisher gab es drei verschiedene Datenformate für Wörterbücher, Synonyme und 
-  Mehrwortgruppen. Alle drei Typen finden sich nun in einem universellen Format 
-  wieder. 
-  Ebenso wurde der Zugriff auf die Daten modifiziert. Wurden vorher je nach Typ 
+  Bisher gab es drei verschiedene Datenformate für Wörterbücher, Synonyme und
+  Mehrwortgruppen. Alle drei Typen finden sich nun in einem universellen Format
+  wieder.
+  Ebenso wurde der Zugriff auf die Daten modifiziert. Wurden vorher je nach Typ
   einmal eine Liste der erkannten Grundformen (Lexical) als Ergebnis erzeugt und ein
-  anderes mal nur eine Zeichenkette zurück gegeben, werden jetzt alle Zugriffe auf 
-  die Daten als Lexical-Liste generiert. Dies hatte Auswirkungen auf die 
-  Synonymerkennung, da bisher die die Wortklasse 'y' aus dem Programm und nicht 
+  anderes mal nur eine Zeichenkette zurück gegeben, werden jetzt alle Zugriffe auf
+  die Daten als Lexical-Liste generiert. Dies hatte Auswirkungen auf die
+  Synonymerkennung, da bisher die die Wortklasse 'y' aus dem Programm und nicht
   aus den Datendateien kam.
-  
+
 * <b>Multiworder verarbeitet mehrere Datenbanken</b>
 
   Die Verarbeitung von mehreren Datenbanken für einen Zugriff wird normalerweise
-  in der Klasse Dictionary erledigt. Da der Multiworder jedoch die Funktionen der 
-  Dictionary-Klasse nicht benötigt, greift er direkt auf die Klasse DataSource zu, 
-  welche diese Funktion nicht besitzt. Daher musste die Verarbeitung mehrerer 
+  in der Klasse Dictionary erledigt. Da der Multiworder jedoch die Funktionen der
+  Dictionary-Klasse nicht benötigt, greift er direkt auf die Klasse DataSource zu,
+  welche diese Funktion nicht besitzt. Daher musste die Verarbeitung mehrerer
   Datendateien im Multiworder selbst erfolgen.
 
-== Lingo 1.03 21.05.2005 (an <tt>Install.rb</tt> am Anfang denken!)
+== 1.0.3 [2005-05-21]
 
 * <b>Multiworder fertig!</b>
 
   Mit dem neuen Attendee Multiworder werden Mehrwortgruppen locker und schnell
   erkannt. Erkannte Gruppen werden als als zusätzliches (Dummy-)Wort mit in den
-  Datenstrom eingespeist. Die Geschwindigkeit wird dadurch erreicht, dass die 
-  Mehrwortgruppen in Ihren jeweiligen Grundformen gespeichert werden. Das ist 
-  genau dass, was der Multiworder frei Haus geliefert bekommt. Das klappt 
-  wunderbar, wenn für den Multiworder-Lauf und die Ersterstellung des 
-  Mehrwörterbuches die gleichen Wörterbücher verwendet werden. 
+  Datenstrom eingespeist. Die Geschwindigkeit wird dadurch erreicht, dass die
+  Mehrwortgruppen in Ihren jeweiligen Grundformen gespeichert werden. Das ist
+  genau dass, was der Multiworder frei Haus geliefert bekommt. Das klappt
+  wunderbar, wenn für den Multiworder-Lauf und die Ersterstellung des
+  Mehrwörterbuches die gleichen Wörterbücher verwendet werden.
   Soll heißen, wenn zu einem späteren Zeitpunkt zusätzliche Wörterbücher hinzu
-  gezogen werden, kann eine erneute Erstellung der Mehrwörterbuches Sinn 
+  gezogen werden, kann eine erneute Erstellung der Mehrwörterbuches Sinn
   machen, um die Erkennungsquote zu verbessern.
-  Diese Version arbeitet mit einem abgespeckten Mehrwörterbuch. 
-  
+  Diese Version arbeitet mit einem abgespeckten Mehrwörterbuch.
+
 * <b>Install.rb weiter ausgebaut</b>
 
   Die einzelnen Installationsphasen können jetzt auch einzeln aufgerufen werden.
   Mit den Optionen -data, -test und -docu können die jeweiligen Phasen wiederholt
   werden. Mit der zusätzlichen Option -r kann auch alles wieder rückgängig gemacht
   werden.
-  
-  
-== Lingo 1.02 30.04.2005
+
+== 1.0.2 [2005-04-30]
 
 * <b>Install.rb</b>
 
   Nach dem Download sollte als erstes ruby install.rb aufgerufen werden.
-  Dadurch werden notwendige Vorarbeiten erledigt, z.B. Erstellung der 
+  Dadurch werden notwendige Vorarbeiten erledigt, z.B. Erstellung der
   Dokumentatio in /doc oder der Datenbasis in /de
-  
+
 * <b>Forget MySQL</b>
 
-  Als erstes filebasiertes Datenzugriffssystem wurd SDBM integriert. Darüber
+  Als erstes filebasiertes Datenzugriffssystem wurde SDBM integriert. Darüber
   wird MySQL überflüssig. Alle relevanten Daten liegen im Unterverzeichnis /de.
   Siehe auch de.xml:<datasource>. Vor der ersten Nutzung sollten die SDBM-
   Dateien mit ruby dbm.rb erzeugt werden. (wird durch install.rb erledigt)
-  
+
 * <b>Sortierung im Vector_filter verbessert</b>
 
   Bei sort='count' wird jetzt nicht nur nach Häufigkeit sortiert sondern
   auch innerhalb der Häufigkeit nach Alphabet.
-  
-  
-== Lingo 1.01 26.04.2005
+
+== 1.0.1 [2005-04-26]
 
 * <b>Kompatibilität zur LIR</b>
 
   LIR-Formate können jetzt gelesen und CSV-Format geschrieben werden.
   Anpassungen in Textreader und Textwriter. Siehe auch lir.xml
-  
+
 * <b>Bug-Fix in Synonymer</b>
 
   Schweren Fehler entfernt. Wordklassen, die nicht geprüft werden sollten,
   wurden kastriert.
-  
+
 * <b>Kompositumverarbeitung im Vector_filter</b>
 
   Neben der Kompositum-Grundform werden jetzt auch die Grundformen der Wort-
   Teile mit eingesackt.
-  
-  
-== Lingo 1.00 26.04.2005
+
+== 1.0.0 [2005-04-26]
 
 * <b>Dokumentation erstellt</b>
 
   Sie ist zwar noch teilweise verteilt, aber sie ist da, z.B. in doc/index.html oder
   in Config.doc. Einigermaßen fertig (war ich nach der Erstellung). Bitte um
   Feedback was besser geht und was fehlt.
-  
+
 * <b>Attendees überarbeitet</b>
 
   Sehen jetzt noch einfacher aus. Brauchen nur noch die Methoden
   init - Zur Bereitstellung von Parametern und Konfiguration für die anderen Meth.
   control - Zur Verarbeitung von Kommandos
   process - Zur Ver- und Bearbeitung von zugestellten Objekten
-  
+
 * <b>Dictionary aufgesplittet</b>
 
-  Da es mittlerweile drei Attendees gibt, die Datenbankzugriff brauchen, ist das 
+  Da es mittlerweile drei Attendees gibt, die Datenbankzugriff brauchen, ist das
   Dictionary eine Hauptklasse geworden. Dazu gibt es eine rudimentärere Klasse,
   auf die das Dictionary sich für den Datenzugriff stützt: Datasource.
   Diese Klasse nutzt die vollen Möglichkeiten eines eigenen Datencaches, welches
   die Performance noch einmal deutlich verbessert hat.
-  
+
 * <b>Konfiguration aufgesplittet</b>
 
-  Ja ja, mein Lieblingsthema, aber ohne eine saubere Konfigurationsmöglichkeit ist 
+  Ja ja, mein Lieblingsthema, aber ohne eine saubere Konfigurationsmöglichkeit ist
   Lingo leider nix Wert. Gibt jetzt
   lingo.xml  -  Zur Konfiguration der Kommandozeilenoptionen
   de.xml    -  Enthält die sprachrelevante Konfiguration
   <ablauf>.xml - Enthält die Lingo-Konfiguration, z.B. rubyling.xml oder ocr.xml
   Mit ruby lingo.rb -c <ablauf> kann jeweils eine andere Konfig. gezogen werden.
 
-== Lingo 0.98 16.04.2005
+== 0.9.8 [2005-04-16]
 
 * <b>Class Config überarbeiten</b>
 
-  Klar, immer die wichtigen Dinge zuerst. Die über die Kommandozeile 
+  Klar, immer die wichtigen Dinge zuerst. Die über die Kommandozeile
   erwarteten Parameter sind über lingo.xcl konfigurierbar. In Lingo.xml
   kann man auf die Kommandozeilen-Parameter als Variable zurückgreifen.
-  Doku anschauen, lohnt sich... 
+  Doku anschauen, lohnt sich...
 
-
-== Lingo 0.9 01.04.2005
+== 0.9.0 [2005-04-01]
 
 * <b>Noneword_variator</b>
 
   Auftragsarbeit von Klaus eingebaut.
 
-
-== Lingo 0.8b 30.03.2005
+== 0.8.0b [2005-03-30]
 
 * <b>Lingo ist Rubyling, nur besser</b>
 
@@ -613,45 +636,43 @@
 
   Konfiguration vollständig überarbeitet. Lingo.cfg heißt jetzt lingo.xml. Mit dieser
   Endung ist sie leichter mit SciTe editierbar. Die Klasse LingoConfig kann jetzt (fast)
-  generische XML-Syntax verarbeiten. Die Werte werden auf sehr einfache Weise 
+  generische XML-Syntax verarbeiten. Die Werte werden auf sehr einfache Weise
   im Code bereitgestellt. Hinzu kommt, dass die Aufruf-Parameter ebenfalls über
   diesen Weg zur Verfügung stehen. Dokumentation muss folgen :o)
 
-
-== Rubyling 1.41 18.03.2005
+== 1.4.1 [2005-03-18] (Rubyling)
 
 * <b>Load_wbs.rb stabilisiert</b>
 
   Programm zeigte keine Reaktion mehr auf Laptop nach Standby. Daher stoppen
   und starten des MySQL-Dienstes eingebaut. Load_wbs.rb von Archiv rubyling_de
   nach rubyling verschoben (Version aus rubyling_de im nächsten Release entfernen!)
-  
+
 * <b>Rubyling Parameter korrigiert</b>
 
-  Für Programmtests waren Parameter im Programm verdrahtet. Kommandozeile wurde 
+  Für Programmtests waren Parameter im Programm verdrahtet. Kommandozeile wurde
   ignoriert.
 
+== 1.4.0 [2005-03-18] (Rubyling)
 
-== Rubyling 1.4 18.03.2005
-
-* Interne Klassenhierarchie umgebaut</b>
+* <b>Interne Klassenhierarchie umgebaut</b>
 
   In der Datei word.rb sind nun die Klassen unterschieden nach Token, Lexical und
   Word inkl. weiterer Hilfsklassen.
-  
+
 * <b>Synonymverarbeitung eingebaut</b>
 
   Erkannte Worte werden zusätzlich auf Synonyme hin geprüft. Die Liste der Grundformen
-  des Wortes wird dann um die gefundenen Synonyme erweitert. Die Synonym-Wörterbücher 
+  des Wortes wird dann um die gefundenen Synonyme erweitert. Die Synonym-Wörterbücher
   sind wie gewohnt in ruby.cfg unter database/synonym konfigurierbar. Derzeit wird
-  openthesaurus als einziges Wörterbuch benutzt. Um openthesaurus zu nutzen, sei 
+  openthesaurus als einziges Wörterbuch benutzt. Um openthesaurus zu nutzen, sei
   das Archiv rubyling_de(v1.0) wärmstens empfohlen.
-  
+
 * <b>Nicht erkannte Wörter</b>
 
-  Als zusätzliche Datei wird jetzt auch noch eine Endung .non erzeugt, die alle 
+  Als zusätzliche Datei wird jetzt auch noch eine Endung .non erzeugt, die alle
   nicht erkannten Wörter beinhaltet
-  
+
 * <b>Schnelle Installation</b>
 
   Die Umgebung von Rubyling ist jetzt auf drei Archive verteilt. Bitte weitere
@@ -665,36 +686,34 @@
     rubyling_de(v1.0)   /rubyling/de   Wörterbücher und Programm zum DB-Aufbau
     rubyling_txt(v1.0)  /rubyling/txt  Texte zum testen
 
-
-== Rubyling 1.3 01.02.2005
+== 1.3.0 [2005-02] (Rubyling)
 
 * <b>Inline-Dokumentation erstellt</b>
 
   Mit Prozedur make_doc.cmd HTML-Seiten erstellen, dann doc\index.html aufrufen
-  
+
 * <b>Konfiguration komplett überarbeitet</b>
 
   Eine zentrale Konfigurationsdatei ruby.cfg enthält im XML-Style alle Parameter,
   z.B. "<parm1 value='15'/>" in Ruby durch $CFG['parm1'] abfragbar. ruby-token.txt
   und ruby-suffix.txt sind nicht mewhr notwendig.
-  
+
 * <b>Reduzierung der linguistisch relevanten Klassen auf zwei Klassen</b>
 
   TextFile erweitert die Klasse File und ermöglicht die Datei-Verarbeitung auf
   Tokenbasis.
   Dictionary enthält mit der Methode search() die zentrale Schnittstelle für die
   Wörterbuch-Recherche (inkl. Stopwörtern, Suffixbehandlung und Kompositumzerlegung).
-  
-* Rubyling erkennt bei Aufruf automatisch (jetzt richtig) das Dateiobjekt und 
+
+* Rubyling erkennt bei Aufruf automatisch (jetzt richtig) das Dateiobjekt und
   unterscheidet Textdatei, Verzeichnis und DB-Datei (z.B. lir.txt). In den ersten
   beiden Fällen werden je Textdatei drei Ausgabedateien erstellt, die eine weitere
-  Verbesserung der Verarbeitung ermöglichen: 
-    .tok = Textfile in Token je Zeile zerlegt; 
+  Verbesserung der Verarbeitung ermöglichen:
+    .tok = Textfile in Token je Zeile zerlegt;
     .dic = Token mit Auflösung nach Wörterbuchzugriff;
     .vec = Inhaltsvektor der Datei.
 
-
 == Rubyling x.x vor dem 01.02.2005
 
-* Diverse Versionen, von denen Klaus meint, sie hätten noch keine eins vor dem Punkt 
+* Diverse Versionen, von denen Klaus meint, sie hätten noch keine eins vor dem Punkt
   verdient :o(
