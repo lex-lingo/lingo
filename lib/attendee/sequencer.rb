@@ -134,6 +134,8 @@ class Attendee::Sequencer < BufferedAttendee
   def process_buffer
     return if @buffer.empty?
 
+    matches = Hash.new { |h, k| h[k] = [] }
+
     sequences(@buffer.map { |obj|
       obj.is_a?(Word) && !obj.unknown? ? obj.attrs(false) : ['#']
     }).uniq.each { |sequence|
@@ -147,8 +149,14 @@ class Attendee::Sequencer < BufferedAttendee
             } or break
           } or next
 
-          deferred_insert(pos, Word.new_lexical(form, WA_SEQUENCE, LA_SEQUENCE))
+          matches[pos] << form
         }
+      }
+    }
+
+    matches.sort.each { |pos, forms|
+      forms.uniq.each { |form|
+        deferred_insert(pos, Word.new_lexical(form, WA_SEQUENCE, LA_SEQUENCE))
       }
     }
 
