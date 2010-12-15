@@ -4,9 +4,9 @@
 
 == General considerations
 
-* New code *should* meet the guidelines outlined in the RubyStyleGuide
-  <http://www.rubygarden.org/Ruby/page/show/RubyStyleGuide>, existing code
-  will be adjusted along the way.
+* New code *should* meet the guidelines outlined in the
+  RubyStyleGuide[http://www.rubygarden.org/Ruby/page/show/RubyStyleGuide],
+  existing code will be adjusted along the way.
 * New comments and documentation and stuff *should* be in English, existing
   texts will be translated as time allows. Use Ri18n or Ruby-GetText for the
   UI (to not loose existing translations).

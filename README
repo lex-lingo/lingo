@@ -1,53 +1,104 @@
-= Lingo - linguistic Lego
-Lingo is an open source indexing system for research and teachings.
-The main functions of Lingo are
-* identification of (i.e. reduction to) basic word form by means of a simple suffix list
+= Lingo - A full-featured automatic indexing system
+
+Lingo is an open source indexing system for research and teachings. The main
+functions of Lingo are
+
+* identification of (i.e. reduction to) basic word form by means of dictionaries
+  and suffix lists
 * algorithmic decomposition
-* dictionary-based lexical synonymisation and identification of phrases
-* generic identification of phrases / word sequences based on succession of word classes
-  
-= Credits
-Lingo is a collective development by Klaus Lepsky and John Vorhauer
+* dictionary-based synonymisation and identification of phrases
+* generic identification of phrases/word sequences based on patterns of word
+  classes
+
 
 == Introduction
-Lingo is linguistic Lego. If texts should be object to a linguistic analysis, then Lingo can be used for almost every purpose that the heart desires.
-Lingo is a system that allows to assemble a network of unlimited functionality from modules with limited functions. This network is built by configuration files.
+
+If texts should be object to a linguistic analysis, then Lingo can be used for
+almost every purpose that the heart desires. Lingo is a system that allows
+to assemble a network of unlimited functionality from modules with limited
+functions. This network is built by configuration files.
+
 A small example:
 
-meeting:
-  protocol: '$(status)'
-  attendees:
-    - textreader:     { out: lines, files: 'readme' }
-    - debugger:       { in: lines, eval: 'true', ceval: 'cmd!="EOL"', prompt: '<debug>: '}
+  meeting:
+    protocol: '$(status)'
+    attendees:
+      - textreader: { files: 'README' }
+      - debugger:   { eval: 'true', ceval: 'cmd!="EOL"', prompt: '<debug>: ' }
 
-Lingo is told to invite two attendees. And Lingo wants them to talk to each other, hence the name Lingo (=the technical language).
+Lingo is told to invite two attendees. And Lingo wants them to talk to each
+other, hence the name Lingo (= the technical language).
 
-The first attendee is the *textreader*. It can read files and communicate its content to other attendees. For this purpose the *textreader* is given the output channel *lines* (out: lines). Everything that the textreader has to say is steered through this channel. That is almost it for the *textreader*. It will do nothing further until Lingo will tell the first attendee to speak. Then the textreader will open the file README (files parameter) and babbles the content to the world via the *lines* channel.
-The second attendee *debugger* does nothing else than to put everything on the console that comes into its input channel (in: lines). If you write the lingo configuration which is shown above as an example into the file README.cfg and then run "lingo -c readme", the result will look like this:
+The first attendee is the +textreader+. It can read files and communicate its
+content to other attendees. For this purpose the +textreader+ is given an output
+channel. Everything that the +textreader+ has to say is steered through this
+channel. It will do nothing further until Lingo will tell the first attendee to
+speak. Then the +textreader+ will open the file README (<tt>files</tt> parameter)
+and babbles the content to the world via its output channel.
 
-  <debug>:  *FILE('readme')
-  <debug>:  "= Lingo - linguistic Lego"
+The second attendee +debugger+ does nothing else than to put everything on the
+console that comes into its input channel. If you write the Lingo configuration
+which is shown above as an example into the file readme.cfg and then run
+<tt>lingo -c readme -l en</tt>, the result will look something like this:
+
+  <debug>:  *FILE('README')
+  <debug>:  "= Lingo - ..."
   ...
-  <debug>:  "Lingo is linguistic Lego. If texts should be object to a linguistic analysis, then Lingo can be used for almost every purpose that the heart desires."
+  <debug>:  "If texts should be object to a linguistic analysis, then Lingo can be used for"
+  <debug>:  "almost every purpose that the heart desires. Lingo is a system that allows"
   ...
-  <debug>:  *EOF('readme')
+  <debug>:  *EOF('README')
 
-What we see are lines with asterisk (*) and lines without. And that is just fine! Because Lingo distinguishes between command and data. The *textreader* did not only read the content of the file, but also communicated through the commands when a file begins and when it ends. This can (and will) be an important piece of information for other attendees that will be added later.
+What we see are lines with asterisk (*) and lines without. And that is just
+fine! Because Lingo distinguishes between command and data. The +textreader+
+did not only read the content of the file, but also communicated through the
+commands when a file begins and when it ends. This can (and will) be an
+important piece of information for other attendees that will be added later.
 
 Well, with this almost everything about Lingo is said :o)
 
-Maybe yet a little overview about possible attendees that can be used for solving a specific problem (for more information see the documentation of the specific attendee).
+Maybe yet a little overview about possible attendees that can be used for
+solving a specific problem (for more information see the documentation of the
+specific attendee).
 
-<b>textreader</b>::  reads files and puts their content into the channels line by line.
-<b>tokenizer</b>::  dissects linesinto defined character strings of the class "token".
-<b>stopworder</b>::  marks tokens that are listed in the stopword list as stopwords.
-<b>wordsearcher</b>::  identifies tokens and makes them objects of the class "word". To do this right it looks into the dictionionary.
-<b>synonymer</b>::  extends objects of the class "word" by synonyms.
-<b>noneword_filter</b>::  filters out everything and lets through only those character strings that are unknown.
-<b>vector_filter</b>::  filters out everything and lets through only those character strings that considered useful for indexing.
-<b>textwriter</b>::  writes anything that it receives into a file.
-<b>debugger</b>::  shows everything for debugging.
-<b>variator</b>::  tries to correct spelling errors and the like
-<b>sequencer</b>::  identifies phrases (word sequences) based on succession of word classes.
+<tt>textreader</tt>::      Reads files and puts their content into the channels
+                           line by line.
+<tt>tokenizer</tt>::       Dissects lines into defined character strings of the
+                           class Token.
+<tt>abbreviator</tt>::     Identifies abbreviations and produces the long form
+                           if listed in a dictionary.
+<tt>wordsearcher</tt>::    Identifies tokens and makes them objects of the class
+                           Word. To do this right it looks into the dictionary.
+<tt>decomposer</tt>::      Tests any character strings not identified by the
+                           +wordsearcher+ for being compounds.
+<tt>synonymer</tt>::       Extends objects of the class Word by synonyms.
+<tt>noneword_filter</tt>:: Filters out everything and lets through only those
+                           character strings that are unknown.
+<tt>vector_filter</tt>::   Filters out everything and lets through only those
+                           character strings that considered useful for indexing.
+<tt>textwriter</tt>::      Writes anything that it receives into a file.
+<tt>debugger</tt>::        Shows everything for debugging.
+<tt>variator</tt>::        Tries to correct spelling errors and the like.
+<tt>multiworder</tt>::     Identifies phrases (word sequences) based on a
+                           multiword dictionary.
+<tt>sequencer</tt>::       Identifies phrases (word sequences) based on patterns
+                           of word classes.
 
-Furthermore it can be useful to look at the configurations lingo-en.cfg and en.lang.
+Furthermore, it can be useful to look at the configuration files
+<tt>lingo.cfg</tt> and <tt>en.lang</tt>.
+
+
+== Credits
+
+Lingo is based on a collective development by Klaus Lepsky and John Vorhauer.
+
+=== Authors
+
+* John Vorhauer <mailto:john@vorhauer.de>
+* Jens Wille <mailto:jens.wille@uni-koeln.de>
+
+=== Contributors
+
+* Klaus Lepsky <mailto:klaus@lepsky.de>
+* Jan-Helge Jacobs <mailto:plancton@web.de>
+* Thomas Müller <mailto:thomas.mueller@fh-koeln.de>
