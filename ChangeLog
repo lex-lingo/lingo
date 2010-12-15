@@ -1,5 +1,14 @@
 = Revision history for lingo
 
+== 1.7.0 [2010-12-15]
+
+* More Ruby 1.9 compatibility.
+* Extended VectorFilter to double as enhanced Non(e)wordFilter.
+* Fixed Sequencer to recognize additional word classes beyond the first.
+* Fixed Sequencer to not prematurely flush the buffer, which led to a
+  decreased recognition rate.
+* Housekeeping.
+
 == 1.6.12 [2010-11-22]
 
 * Ruby 1.9 compatibility, finally.

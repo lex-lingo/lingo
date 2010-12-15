@@ -12,7 +12,7 @@ require './lib/diff/lcs'
 require './lib/diff/lcs/ldiff'
 
 PACKAGE_NAME  = 'lingo'
-LINGO_VERSION = '1.6.12'
+LINGO_VERSION = '1.7.0'
 PACKAGE_PATH  = "pkg/#{PACKAGE_NAME}-#{LINGO_VERSION}"
 
 # Diese Dateien werden mit dem Aufruf von 'rake clean' gelöscht
