@@ -1,97 +1,97 @@
-00002*analytik
-00004*query language
-00006*analytik
-00024*automation deutsch / aufsatz deutschaufsatz schulaufsatz
-00028*aufgabenstellung aufgabentyp
-00029*alteration modifikation <änderung> veränderung
-00034*auswechslung tausch <austausch> äußere erscheinung
-00038*erwerbsarbeit
-00047*verfasser
-00048*prestige verfasser
-00049*adaptation adaption akkommodation
-00052*adaptation adaption akkommodation
-00053*erwerbsarbeit
-00054*propadien
-00055*aufgabe prestige spezies
-00058*analytik
-00059*arbeitsprodukt
-00064*formalerschließung formalkatalogisierung katalogisat <titelaufnahme> titelaufnahme
-00067*archivwesen repertorium <archiv>
-00078*archivwesen erwerbsarbeit repertorium <archiv>
-00079*analytik
-00081*analytik
-00093*aufgabenstellung aufgabentyp erwerbsarbeit
-00105*folge fortwirken nachwirkung <auswirkung>
-00128*dependenz unselbstständigkeit unselbständigkeit
-00133*ausbreitungsmodell ausbreitungsrechnung
-00134*analytik
-00135*erwerbsarbeit
-00137*adaptation adaption akkommodation alteration modifikation <änderung> veränderung
-00142*analytik erwerbsarbeit
-00148*mathematische analysis
-00150*archivwesen repertorium <archiv>
-00152*automation
-00154*arbeitsumgebung
-00165*analytik
-00166*beginn
-00171*äußere erscheinung
-00174*aufgabenstellung aufgabentyp
-00176*arbeitsplatzcomputer
-00177*erwerbsarbeit unternehmen / abteilung
-00179*auskunft <auskunftsdienst> auskunfts- und informationstätigkeit auskunftstätigkeit
-00180*mathematische analysis
-00182*aktivum alter mensch betagter tätigkeitsform
-00187*kleingruppe / betrieb team / betrieb
-00197*argumentation aufgabenstellung aufgabentyp erwerbsarbeit
-00206*individuelle arbeitsweise
-00207*aktualisierung
-00208*adaptation adaption akkommodation aufforderung zu straftaten entsprechung spezies öffentliche aufforderung zu straftaten
-00209*prestige
-00213*anwendungsbereich dependenz erwerbsarbeit unselbstständigkeit unselbständigkeit
-00216*analytik
-00220*auskunft <auskunftsdienst> auskunfts- und informationstätigkeit auskunftstätigkeit
-00227*erwerbsarbeit
-00229*dauerbeobachtungsfähigkeit dauerüberwachungsfähigkeit konzentration <psychologie> vigilanz wachsamkeit
-00233*analytik deutsch / aufsatz deutschaufsatz schulaufsatz
-00239*archivierungssystem aussicht elektronisches archivierungssystem
-00240*deutsch / aufsatz deutschaufsatz schulaufsatz
-00241*analytik aufgabenstellung aufgabentyp
-00248*erwerbsarbeit folge fortwirken nachwirkung <auswirkung> spezies
-00250*ausblick
-00252*erwerbsarbeit
-00254*aktualisierung
-00257*steinartefakt
-00258*arbeitsprodukt kleingruppe / betrieb team / betrieb
-00260*aktueller bezug bezugsquelle erwerbsarbeit gegenwartsbezug zeitnähe
-00261*individuelle arbeitsweise
-00271*mathematische analysis
-00272*verwaltung
-00277*aktualisieren beginn erwerbsarbeit evidenzhaltung laufendhaltung
-00278*bezugsquelle
-00284*erwerbsarbeit
-00285*verfasser
-00286*kleingruppe / betrieb team / betrieb verfasser
-00288*auswechslung propadien tausch <austausch>
-00289*analytik erwerbsarbeit
-00290*auskunftshaftung erwerbsarbeit
-00291*aufgabenstellung aufgabentyp deutsch / aufsatz deutschaufsatz schulaufsatz
-00292*automation
-00293*similarity search
-00294*arbeitsumgebung auskunftshaftung
-00296*abschiedsfeier verabschiedung
-00297*erwerbsarbeit
-00298*propadien
-00301*analoges signal
-00303*anwendung / bereich anwendungsgebiet arbeitsplatz aufgabenstellung aufgabentyp erwerbsarbeit
-00305*benutzer bezugsquelle unternehmen / abteilung
-00308*anwendung / bereich anwendungsgebiet verfasser
-00309*analytik
-00310*aufgabenstellung aufgabentyp aussicht erwerbsarbeit verfasser verlauf
-00312*aufgabenstellung aufgabentyp gehörlosensprache taubstummensprache
-00320*analytik arbeit / aufwand
-00321*spezies
-00323*analytik
-00324*erwerbsarbeit innere anschauung
-00326*ausbildungsstätte
-00329*argumentation
-00330*archivwesen aufforderung zu straftaten genealogie gänsefüßchen musikalischer ausdruck query repertorium <archiv> spezies ältestenamt äußere erscheinung öffentliche aufforderung zu straftaten
+00002*1 analytik
+00004*1 query language
+00006*1 analytik
+00024*1 automation 1 deutsch / aufsatz 1 deutschaufsatz 1 schulaufsatz
+00028*1 aufgabenstellung 1 aufgabentyp
+00029*1 alteration 1 modifikation <änderung> 1 veränderung
+00034*1 auswechslung 1 tausch <austausch> 1 äußere erscheinung
+00038*1 erwerbsarbeit
+00047*1 verfasser
+00048*1 prestige 1 verfasser
+00049*1 adaptation 1 adaption 1 akkommodation
+00052*1 adaptation 1 adaption 1 akkommodation
+00053*1 erwerbsarbeit
+00054*1 propadien
+00055*1 aufgabe 1 prestige 1 spezies
+00058*1 analytik
+00059*1 arbeitsprodukt
+00064*1 formalerschließung 1 formalkatalogisierung 1 katalogisat <titelaufnahme> 1 titelaufnahme
+00067*1 archivwesen 1 repertorium <archiv>
+00078*1 archivwesen 1 erwerbsarbeit 1 repertorium <archiv>
+00079*1 analytik
+00081*1 analytik
+00093*1 aufgabenstellung 1 aufgabentyp 1 erwerbsarbeit
+00105*1 folge 1 fortwirken 1 nachwirkung <auswirkung>
+00128*1 dependenz 1 unselbstständigkeit 1 unselbständigkeit
+00133*1 ausbreitungsmodell 1 ausbreitungsrechnung
+00134*1 analytik
+00135*1 erwerbsarbeit
+00137*1 adaptation 1 adaption 1 akkommodation 1 alteration 1 modifikation <änderung> 1 veränderung
+00142*2 erwerbsarbeit 1 analytik
+00148*1 mathematische analysis
+00150*1 archivwesen 1 repertorium <archiv>
+00152*1 automation
+00154*1 arbeitsumgebung
+00165*2 analytik
+00166*1 beginn
+00171*1 äußere erscheinung
+00174*1 aufgabenstellung 1 aufgabentyp
+00176*1 arbeitsplatzcomputer
+00177*1 erwerbsarbeit 1 unternehmen / abteilung
+00179*1 auskunft <auskunftsdienst> 1 auskunfts- und informationstätigkeit 1 auskunftstätigkeit
+00180*2 mathematische analysis
+00182*1 aktivum 1 alter mensch 1 betagter 1 tätigkeitsform
+00187*1 kleingruppe / betrieb 1 team / betrieb
+00197*1 argumentation 1 aufgabenstellung 1 aufgabentyp 1 erwerbsarbeit
+00206*1 individuelle arbeitsweise
+00207*1 aktualisierung
+00208*1 adaptation 1 adaption 1 akkommodation 1 aufforderung zu straftaten 1 entsprechung 1 spezies 1 öffentliche aufforderung zu straftaten
+00209*1 prestige
+00213*1 anwendungsbereich 1 dependenz 1 erwerbsarbeit 1 unselbstständigkeit 1 unselbständigkeit
+00216*1 analytik
+00220*1 auskunft <auskunftsdienst> 1 auskunfts- und informationstätigkeit 1 auskunftstätigkeit
+00227*1 erwerbsarbeit
+00229*1 dauerbeobachtungsfähigkeit 1 dauerüberwachungsfähigkeit 1 konzentration <psychologie> 1 vigilanz 1 wachsamkeit
+00233*2 analytik 2 deutsch / aufsatz 2 deutschaufsatz 2 schulaufsatz
+00239*1 archivierungssystem 1 aussicht 1 elektronisches archivierungssystem
+00240*1 deutsch / aufsatz 1 deutschaufsatz 1 schulaufsatz
+00241*1 analytik 1 aufgabenstellung 1 aufgabentyp
+00248*1 erwerbsarbeit 1 folge 1 fortwirken 1 nachwirkung <auswirkung> 1 spezies
+00250*1 ausblick
+00252*2 erwerbsarbeit
+00254*1 aktualisierung
+00257*1 steinartefakt
+00258*1 arbeitsprodukt 1 kleingruppe / betrieb 1 team / betrieb
+00260*2 bezugsquelle 1 aktueller bezug 1 erwerbsarbeit 1 gegenwartsbezug 1 zeitnähe
+00261*1 individuelle arbeitsweise
+00271*1 mathematische analysis
+00272*1 verwaltung
+00277*1 aktualisieren 1 beginn 1 erwerbsarbeit 1 evidenzhaltung 1 laufendhaltung
+00278*1 bezugsquelle
+00284*1 erwerbsarbeit
+00285*1 verfasser
+00286*2 kleingruppe / betrieb 2 team / betrieb 1 verfasser
+00288*1 auswechslung 1 propadien 1 tausch <austausch>
+00289*2 erwerbsarbeit 1 analytik
+00290*1 auskunftshaftung 1 erwerbsarbeit
+00291*1 aufgabenstellung 1 aufgabentyp 1 deutsch / aufsatz 1 deutschaufsatz 1 schulaufsatz
+00292*1 automation
+00293*1 similarity search
+00294*2 auskunftshaftung 1 arbeitsumgebung
+00296*1 abschiedsfeier 1 verabschiedung
+00297*1 erwerbsarbeit
+00298*1 propadien
+00301*1 analoges signal
+00303*2 arbeitsplatz 1 anwendung / bereich 1 anwendungsgebiet 1 aufgabenstellung 1 aufgabentyp 1 erwerbsarbeit
+00305*1 benutzer 1 bezugsquelle 1 unternehmen / abteilung
+00308*4 verfasser 1 anwendung / bereich 1 anwendungsgebiet
+00309*1 analytik
+00310*3 verfasser 2 aufgabenstellung 2 aufgabentyp 1 aussicht 1 erwerbsarbeit 1 verlauf
+00312*1 aufgabenstellung 1 aufgabentyp 1 gehörlosensprache 1 taubstummensprache
+00320*1 analytik 1 arbeit / aufwand
+00321*1 spezies
+00323*1 analytik
+00324*1 erwerbsarbeit 1 innere anschauung
+00326*1 ausbildungsstätte
+00329*1 argumentation
+00330*1 archivwesen 1 aufforderung zu straftaten 1 genealogie 1 gänsefüßchen 1 musikalischer ausdruck 1 query 1 repertorium <archiv> 1 spezies 1 ältestenamt 1 äußere erscheinung 1 öffentliche aufforderung zu straftaten
