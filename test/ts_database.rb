@@ -82,12 +82,12 @@ END_OF_TEXT
     expect = {
       'wort1'=>'#s',
       'wort2'=>'#s',
-      'juristische personen'=>'#m',
-      'höher schneller weiter'=>'#m',
-      'höher schneller weiter größer'=>'#m',
-      'ganz großer und blöder quatsch'=>'#m',
-      'ganz großer und blöder mist'=>'#m',
-      'ganz großer und blöder schwach sinn'=>'#m'
+      'juristische personen'=>'#s',
+      'höher schneller weiter'=>'#s',
+      'höher schneller weiter größer'=>'#s',
+      'ganz großer und blöder quatsch'=>'#s',
+      'ganz großer und blöder mist'=>'#s',
+      'ganz großer und blöder schwach sinn'=>'#s'
     }
     compare( 'tst-sw1', @singleword, expect )
   end
@@ -97,12 +97,12 @@ END_OF_TEXT
     expect = {
       'wort1'=>'#*',
       'wort2'=>'#*',
-      'juristische personen'=>'#m',
-      'höher schneller weiter'=>'#m',
-      'höher schneller weiter größer'=>'#m',
-      'ganz großer und blöder quatsch'=>'#m',
-      'ganz großer und blöder mist'=>'#m',
-      'ganz großer und blöder schwach sinn'=>'#m'
+      'juristische personen'=>'#*',
+      'höher schneller weiter'=>'#*',
+      'höher schneller weiter größer'=>'#*',
+      'ganz großer und blöder quatsch'=>'#*',
+      'ganz großer und blöder mist'=>'#*',
+      'ganz großer und blöder schwach sinn'=>'#*'
     }
     compare( 'tst-sw2', @singleword, expect )
   end
@@ -112,12 +112,12 @@ END_OF_TEXT
     expect = {
       'wort1'=>'#s',
       'wort2'=>'#s',
-      'ganz groß und blöd mist'=>'ganz großer und blöder mist#m',
-      'juristisch person'=>'juristische personen#m',
-      'höher schnell weit'=>'*4|höher schneller weiter#m',
-      'ganz groß und blöd quatsch'=>'ganz großer und blöder quatsch#m',
-      'höher schnell weit größer'=>'höher schneller weiter größer#m',
-      'ganz groß und blöd schwach sinn'=>'ganz großer und blöder schwach sinn#m',
+      'ganz groß und blöd mist'=>'ganz großer und blöder mist#s',
+      'juristisch person'=>'juristische personen#s',
+      'höher schnell weit'=>'*4|höher schneller weiter#s',
+      'ganz groß und blöd quatsch'=>'ganz großer und blöder quatsch#s',
+      'höher schnell weit größer'=>'höher schneller weiter größer#s',
+      'ganz groß und blöd schwach sinn'=>'ganz großer und blöder schwach sinn#s',
       'ganz groß und'=>'*5|*6'
     }
     compare( 'tst-sw3', @singleword, expect )
@@ -126,26 +126,26 @@ END_OF_TEXT
 
   def test_singleword_crypt
     expect = {
-      "d8ac4360a5f707d518212e27dcba9dd42d980f96"=>"5108",
-      "81463f9c7e0ad40e329e83d3358232851d50ed9a"=>"4d08",
+      "d8ac4360a5f707d518212e27dcba9dd42d980f96"=>"5116",
+      "81463f9c7e0ad40e329e83d3358232851d50ed9a"=>"4d16",
       "8da4a0c30c912543be2d88da64c0192e577efa9d"=>"1107",
-      "2c24b4707e77c74abfb12748317693dc1e43c215"=>"571e",
-      "810ff7a76f39febcb1cf67993d4fb29819ce40a6"=>"5108",
+      "2c24b4707e77c74abfb12748317693dc1e43c215"=>"5700",
+      "810ff7a76f39febcb1cf67993d4fb29819ce40a6"=>"5116",
       "a28b4ca84ac08aeef4e420445f94f632ad010a30"=>"1207",
-      "1496f4febbc647f3ac74b0af11dadbd6322f6732"=>"4d03",
-      "b7501a62cb083be6730a7a179a4ab346d23efe53"=>"4b0e"
+      "1496f4febbc647f3ac74b0af11dadbd6322f6732"=>"4d1d",
+      "b7501a62cb083be6730a7a179a4ab346d23efe53"=>"4b10"
     }
     compare( 'tst-sw4', @singleword, expect )
 
     expect = {
       'wort1'=>'#s',
       'wort2'=>'#s',
-      'juristische personen'=>'#m',
-      'höher schneller weiter'=>'#m',
-      'höher schneller weiter größer'=>'#m',
-      'ganz großer und blöder quatsch'=>'#m',
-      'ganz großer und blöder mist'=>'#m',
-      'ganz großer und blöder schwach sinn'=>'#m'
+      'juristische personen'=>'#s',
+      'höher schneller weiter'=>'#s',
+      'höher schneller weiter größer'=>'#s',
+      'ganz großer und blöder quatsch'=>'#s',
+      'ganz großer und blöder mist'=>'#s',
+      'ganz großer und blöder schwach sinn'=>'#s'
     }
     dbm = DbmFile.new( 'tst-sw4' )
     dbm.open

@@ -262,9 +262,7 @@ private
   end
 
   def convert_line( line, key, val )
-    key = key.strip
-    val = ['#' + ((key =~ / /) ? LA_MULTIWORD : @wordclass)]
-    [key, val]
+    [key.strip, %W[##{@wordclass}]]
   end
 end
 

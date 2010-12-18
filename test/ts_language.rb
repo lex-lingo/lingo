@@ -147,7 +147,7 @@ class TestLexicalHash < Test::Unit::TestCase
   def test_singleword
     ds = LexicalHash.new( 'tst-sgw' )
     assert_equal([lx('substantiv|s')], ds['substantiv'])
-    assert_equal([lx('mehr wort gruppe|m')], ds['mehr wort gruppe'])
+    assert_equal([lx('mehr wort gruppe|s')], ds['mehr wort gruppe'])
     assert_equal(nil, ds['nicht vorhanden'])
     ds.close
   end
