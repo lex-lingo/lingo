@@ -107,6 +107,20 @@ END_OF_TEXT
     compare( 'tst-sw2', @singleword, expect )
   end
 
+  def test_singleword_defmulwc
+    expect = {
+      'wort1'=>'#s',
+      'wort2'=>'#s',
+      'juristische personen'=>'#m',
+      'höher schneller weiter'=>'#m',
+      'höher schneller weiter größer'=>'#m',
+      'ganz großer und blöder quatsch'=>'#m',
+      'ganz großer und blöder mist'=>'#m',
+      'ganz großer und blöder schwach sinn'=>'#m'
+    }
+    compare( 'tst-sw5', @singleword, expect )
+  end
+
   
   def test_singleword_uselex
     expect = {

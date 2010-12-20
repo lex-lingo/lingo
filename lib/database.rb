@@ -254,19 +254,23 @@ Eine Zeile <tt>"Fachbegriff\n"</tt> wird gewandelt in <tt>[ 'fachbegriff', ['#s'
 Die Wortklasse kann über den Parameter <tt>def-wc</tt> beeinflusst werden.
 =end
 class TxtFile_Singleword < TxtFile
-private
-  def initialize( id )
+
+  def initialize(id)
     super
-    @wordclass = @config.fetch( 'def-wc', 's' ).downcase
-    @line_pattern = Regexp.new('^(' + @legal_word + ')$')
+
+    @wc     = @config.fetch('def-wc',     's').downcase
+    @mul_wc = @config.fetch('def-mul-wc', @wc).downcase
+
+    @line_pattern = %r{^(#{@legal_word})$}
   end
 
-  def convert_line( line, key, val )
-    [key.strip, %W[##{@wordclass}]]
+  private
+
+  def convert_line(line, key, val)
+    [key = key.strip, %W[##{key =~ /\s/ ? @mul_wc : @wc}]]
   end
+
 end
-
-
 
 =begin rdoc
 == TxtFile_Keyvalue
