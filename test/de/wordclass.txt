@@ -1,9 +1,0 @@
-
-      Wort1=Projektion1#h
-      Wort2=Projektion2#i
-      Wort3=Projektion3#e
-      Wort1=Projektion4 #e
-      Wort1=#s
-      Wort2=
-    
-                                                 

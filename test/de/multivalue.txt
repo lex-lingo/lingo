@@ -1,7 +1,0 @@
-
-      Hasen;Nasen;Vasen;Rasen
-      Gold;Edelmetall;Mehrwert
-      Rasen;Gras;Grüne Fläche
-      Rasen;Rennen;Wettrennen
-    
-                                                 

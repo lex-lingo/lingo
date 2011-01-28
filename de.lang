@@ -59,25 +59,11 @@ language:
       tst-dic: { name: de/test_dic.txt, txt-format: WordClass }   #  TEST: Lesen von zwei Quellen
       tst-syn: { name: de/test_syn.txt, txt-format: MultiValue, def-wc: 'y' } # TEST: Mehrere Datenquellen
       tst-syn2: { name: de/test_syn2.txt, txt-format: MultiValue, def-wc: 'y', use-lex: 'sys-dic' } # TEST: Mehrere Datenquellen
-      tst-mul: { name: de/test_mul.txt, use-lex: 'sys-dic', def-wc: m } # TEST: Mehrere Multiwörterb¸cher
-      tst-mu2: { name: de/test_mul2.txt, use-lex: 'sys-dic', def-wc: m } # TEST: Mehrere Multiwörterb¸cher
+      tst-mul: { name: de/test_mul.txt, use-lex: 'sys-dic', def-wc: m } # TEST: Mehrere Multiwörterbücher
+      tst-mu2: { name: de/test_mul2.txt, use-lex: 'sys-dic', def-wc: m } # TEST: Mehrere Multiwörterbücher
       tst-sto: { name: de/test_store.txt, txt-format: WordClass } #  TEST: korrespondierende Store-Datei nicht vorhanden
       tst-cry: { name: de/test_cry.txt, txt-format: WordClass, crypt } #  TEST: Verschlüsselung
       tst-sgw: { name: de/test_singleword.txt, txt-format: SingleWord } #  TEST: SingleWord-Format
-      #
-      #    ts_database (TxtFiles werden automatisch erzeugt!)
-      sys-lx1: { name: de/lingo-dic.txt, txt-format: WordClass }   #  TEST: wird automatisch erstellt
-      tst-sw1: { name: test/de/singleword.txt, txt-format: SingleWord }   #  TEST: wird automatisch erstellt
-      tst-sw2: { name: test/de/singleword.txt, txt-format: SingleWord, def-wc: '*' }   #  TEST: wird automatisch erstellt
-      tst-sw3: { name: test/de/singleword.txt, txt-format: SingleWord, use-lex: 'sys-lx1' }   #  TEST: wird automatisch erstellt
-      tst-sw4: { name: test/de/singleword.txt, txt-format: SingleWord, crypt }   #  TEST: wird automatisch erstellt
-      tst-sw5: { name: test/de/singleword.txt, txt-format: SingleWord, def-mul-wc: 'm' }   #  TEST: wird automatisch erstellt
-      tst-kv1: { name: test/de/keyvalue.txt, txt-format: KeyValue }   #  TEST: wird automatisch erstellt
-      tst-kv2: { name: test/de/keyvalue.txt, txt-format: KeyValue, separator: '*' }   #  TEST: wird automatisch erstellt
-      tst-kv3: { name: test/de/keyvalue.txt, txt-format: KeyValue, separator: '*', def-wc: 's' }   #  TEST: wird automatisch erstellt
-      tst-wc1: { name: test/de/wordclass.txt, txt-format: WordClass, separator: '=' }   #  TEST: wird automatisch erstellt
-      tst-mv1: { name: test/de/multivalue.txt, txt-format: MultiValue, separator: ';'  }   #  TEST: wird automatisch erstellt
-      tst-mk1: { name: test/de/multikey.txt, txt-format: MultiKey }   #  TEST: wird automatisch erstellt
 
     compositum:
       min-word-size: "7"
