@@ -25,10 +25,9 @@
 #
 #  Lex Lingo rules from here on
 
-
 require 'yaml'
 
-#  LingoConfig will hold the complete comfiguration information, which will 
+#  LingoConfig will hold the complete comfiguration information, which will
 #  control lingos processing flow.
 #  The complete configuration will hold three sets of information
 #
@@ -37,23 +36,23 @@ require 'yaml'
 #     LingoConfig will load the configuration file, i.e. de.lang
 #     You can tell lingo to use a specific language definition file
 #     by using the -l command line option follow by the language shortcut.
-#     For example if you call 'ruby lingo.rb -l en <file_to_process>' lingo 
+#     For example if you call 'ruby lingo.rb -l en <file_to_process>' lingo
 #     will load the file en.lang. If you ommit the -l option, then lingo will
 #     use the default value, which is documented in the lingo.opt file in the
 #     language section, i.e.
 #       language:
 #         opt: '-l'
-#         value: 
+#         value:
 #         default: de
 #         comment: >
-#           Set the language for processing, i.e. '-l en' for loading en.lang 
+#           Set the language for processing, i.e. '-l en' for loading en.lang
 #
 #  2. Processing specific configuration information (refer to @keys['meeting'])
 #     -------------------------------------------------------------------------
 #     LingoConfig will load the configuration file lingo.cfg by default.
 #     You can tell lingo to use an other configuration file
 #     by using the -c command line option follow by the configuration name.
-#     For example if you call 'ruby lingo.rb -c test <file_to_process>' lingo 
+#     For example if you call 'ruby lingo.rb -c test <file_to_process>' lingo
 #     will load the file test.cfg. If you ommit the -c option, then lingo will
 #     use the default configuration, which is documented in the lingo.opt file
 #     in the config section, i.e.
@@ -77,7 +76,7 @@ require 'yaml'
 #         comment: >
 #           Set the minimum word length for the Decomposer composition recognition.
 #
-#     Then modify in de.lang the part 
+#     Then modify in de.lang the part
 #       compositum:
 #         min-word-size: "7"
 #     to
@@ -87,134 +86,121 @@ require 'yaml'
 
 class LingoConfig
 
-private
-
-  def initialize(prog=$0, cmdline=$*)
+  def initialize(prog = $0, cmdline = $*)
     @keys = {}
-    
+
     @options = load_yaml_file(prog, '.opt')
     @keys['cmdline'] = parse_cmdline(cmdline, @options)
-    usage('') if @keys['cmdline']['usage']
-    
-    @keys.update(load_yaml_file(@keys['cmdline']['language'], '.lang'))
-    @keys.update(load_yaml_file(@keys['cmdline']['config'], '.cfg'))
 
-    patch_keys(@keys['language'])
-    patch_keys(@keys['meeting'])
+    usage('') if @keys['cmdline']['usage']
+
+    { 'language' => '.lang', 'config' => '.cfg' }.each { |key, ext|
+      @keys.update(load_yaml_file(@keys['cmdline'][key], ext))
+    }
+
+    %w[language meeting].each { |key| patch_keys(@keys[key]) }
   end
 
+  def [](key)
+    raise 'Keine Konfiguration geladen!' unless @keys
+    key_to_nodes(key).inject(@keys) { |value, node| value[node] }
+  end
+
+  def []=(key, value)
+    nodes = key_to_nodes(key); node = nodes.pop
+    (self[nodes_to_key(nodes)] ||= {})[node] = value
+  end
+
+  private
+
+  def key_to_nodes(key)
+    key.downcase.split('/')
+  end
+
+  def nodes_to_key(nodes)
+    nodes.join('/')
+  end
 
   def parse_cmdline(cmdline, hash)
-    keys = Hash.new
-    non_hyphen_opt = nil
+    keys, non_hyphen_opt = {}, nil
 
-    #  Alle Hyphen-Parameter auslesen
-    hash['command-line-options'].each_pair { |option, attr|
-
-      if attr['opt'].nil?
-        non_hyphen_opt = option
+    hash['command-line-options'].each { |opt, att|
+      unless att['opt']
+        non_hyphen_opt = opt
         next
       end
 
-      #  Option in der Kommandozeile suchen
-      idx = cmdline.index(attr['opt'])
-      if idx.nil?
-        #  Nicht angegeben, Defaultwert verwenden
-        keys[option] = attr['default'] || false
+      unless idx = cmdline.index(att['opt'])
+        keys[opt] = att['default'] || false
       else
-        #  Option angegeben, Wert ermitteln
-        if attr.has_key?('value')
-          usage("Option #{opt} verlangt die Angabe eines Wertes!") if (cmdline.size<=idx || cmdline[idx+1][0]==45) # '-'
+        val = cmdline.delete_at(idx)
 
-          keys[option] = cmdline[idx+1]
-          cmdline.delete_at(idx+1)
+        keys[opt] = if att.has_key?('value')
+          idx += 1
+
+          if cmdline.size < idx || cmdline[idx][0] == ?-
+            usage("Option #{opt} verlangt die Angabe eines Wertes!")
+          else
+            val
+          end
         else
-          keys[option] = true
+          true
         end
-        cmdline.delete_at(idx)
       end
 
-    } unless hash.nil?
+    } if hash
 
-    opts = cmdline.collect { |p| p if p[0]==45 }.compact.join('|')
-    usage("Unbekannte Optionen (#{opts})!") unless opts==''
+    opts = cmdline.map { |opt| opt if opt[0] == ?- }.compact.join('|')
+    usage("Unbekannte Optionen (#{opts})!") unless opts.empty?
 
     keys[non_hyphen_opt] = cmdline.join('|')
-    
+
     keys
   end
 
+  def load_yaml_file(name, ext)
+    file = name.sub(/(?:\.[^.]+)?\z/, ext)
+    file = File.join(File.dirname(__FILE__), '..', file) unless name.include?('/')
 
-  def load_yaml_file(file_name, file_ext)
-    yaml_file = file_name.sub(/\.[^\.]+$/, '') << file_ext
-    yaml_file = File.join(File.dirname(__FILE__), '..', yaml_file) unless file_name.include?('/')
+    usage("Datei #{file} nicht vorhanden") unless File.readable?(file)
 
-    usage("Datei #{yaml_file} nicht vorhanden") unless File.readable?(yaml_file)
-
-    File.open(yaml_file, :encoding => ENC) { |f| YAML.load(f) }
+    File.open(file, :encoding => ENC) { |f| YAML.load(f) }
   end
-
 
   def patch_keys(cont)
-    case 
-    when cont.is_a?(Hash)
-      cont.each_pair do |k,v|
-        case
-          when v.is_a?(String)
-            cont[k].gsub!(   %r|\$\((.+?)\)|   ) { @keys['cmdline'][$1] }
-          when v.is_a?(Hash) || v.is_a?(Array)
-            patch_keys(v)
-        end
-      end
-    when cont.is_a?(Array)
-      cont.each do |v|
-        case
-          when v.is_a?(String)
-            cont[cont.index(v)].gsub!(   %r|\$\((.+?)\)|   ) { @keys['cmdline'][$1] }
-          when v.is_a?(Hash) || v.is_a?(Array)
-            patch_keys(v)
-        end
-      end
+    case cont
+      when Array, is_hash = Hash
+        cont.send(is_hash ? :each_value : :each) { |val|
+          case val
+            when nil
+              # ignore
+            when String
+              val.gsub!(/\$\((.+?)\)/) { @keys['cmdline'][$1] }
+            when Array, Hash
+              patch_keys(val)
+            else
+              raise TypeError, "String, Array or Hash expected, got #{val.class}"
+          end
+        }
+      else
+        raise TypeError, "Array or Hash expected, got #{cont.class}"
     end
   end
-
 
   def usage(text)
-    width = 79
-    puts '-'*width
-    puts text
-    puts '-'*width
+    sep1, sep2 = %w[- =].map { |char| char * 79 }
 
-    exit( 1 ) if @options.nil?
-    
-    puts "USAGE: #{$0}"
-    puts '='*width
+    puts sep1, text, sep1 unless text.empty?
 
-    @options['command-line-options'].each_pair { |opt, att|
-      printf "%-8s %2s %3s %s", opt[0..7], att['opt'], att.has_key?( 'value' ) ? 'val' : '', att['comment']
-    }
-    puts '='*width
-    exit( 1 )
-  end
+    abort unless @options
 
+    puts "USAGE: #{$0}", sep2, @options['command-line-options'].map { |opt, att|
+      '%-8s %2s %3s %s' % [
+        opt[0..7], att['opt'], att.has_key?('value') ? 'val' : '', att['comment']
+      ]
+    }, sep2
 
-public
-
-  #  muss ein ergebnis != nil zurückgeben, sonst fehler
-  def [](key)
-    if @keys.nil?
-      raise "Keine Konfiguration geladen!"
-    else
-      value = @keys
-    end
-    parent_node = '/'
-
-    #  Pfad entlang gehen
-    key.downcase.split('/').each do |node|
-      value = value[node]
-      parent_node = node
-    end
-    value
+    abort
   end
 
 end
