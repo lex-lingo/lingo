@@ -1,9 +1,9 @@
 # encoding: utf-8
 
-require 'rake/clean'
-require './lib/lingo/version'
-
 __DIR__ = File.expand_path('..', __FILE__)
+
+require 'rake/clean'
+require File.join(__DIR__, %w[lib lingo version])
 
 PACKAGE_NAME = 'lingo'
 PACKAGE_PATH = File.join(__DIR__, 'pkg', "#{PACKAGE_NAME}-#{Lingo::VERSION}")
@@ -20,28 +20,23 @@ begin
 
   Hen.lay! {{
     :rubyforge => {
-      :package  => PACKAGE_NAME,
-      :project  => PACKAGE_NAME,
-      :rdoc_dir => nil
+      :package => PACKAGE_NAME
     },
 
     :gem => {
-      :name              => PACKAGE_NAME,
-      :version           => Lingo::VERSION,
-      :summary           => 'The full-featured automatic indexing system',
-      :authors           => ['John Vorhauer', 'Jens Wille'],
-      :email             => ['john@vorhauer.de', 'jens.wille@uni-koeln.de'],
-      :homepage          => 'http://lex-lingo.de',
-      :files             => FileList['lib/**/*.rb', 'bin/*'].to_a,
-      :extra_files       => FileList[
-        '[A-Z]*', '.rspec', 'spec/**/*.rb',
+      :name         => PACKAGE_NAME,
+      :version      => Lingo::VERSION,
+      :summary      => 'The full-featured automatic indexing system',
+      :authors      => ['John Vorhauer', 'Jens Wille'],
+      :email        => ['john@vorhauer.de', 'jens.wille@uni-koeln.de'],
+      :homepage     => 'http://lex-lingo.de',
+      :extra_files  => FileList[
         'lingo.rb', 'lingo{,-all,-call}.cfg', 'lingo.opt', 'doc/**/*',
         '{de,en}.lang', '{de,en}/{lingo-*,user-dic}.txt', 'txt/artikel{,-en}.txt',
         'info/gpl-hdr.txt', 'info/*.png', 'lir.cfg', 'txt/lir.txt', 'porter/*',
-        'test.cfg', 'test/ts_*.rb', 'test/attendee/*.rb', '{de,en}/test_*.txt',
-        'test/lir*.txt', 'test/mul.txt', 'test/ref/*', 'test/{de,en}/*'
+        'test.cfg', '{de,en}/test_*.txt'
       ].to_a,
-      :dependencies      => [['ruby-nuggets', '>= 0.6.7']]
+      :dependencies => [['ruby-nuggets', '>= 0.6.7']]
     }
   }}
 rescue LoadError => err

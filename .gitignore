@@ -1,5 +1,7 @@
 doc
+doc.local
 pkg
 store
+.gh-pages
 *.rev
 *.auth
