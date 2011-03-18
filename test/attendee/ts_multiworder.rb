@@ -63,6 +63,113 @@ class TestAttendeeMultiworder < Test::Unit::TestCase
     meet({'source'=>'tst-mul'})
   end
 
+  def test_multiple_prefix
+    @input = [
+      ai('FILE|mul.txt'),
+      wd('Abelsches|IDF', 'abelsch|a'), wd('Schema|IDF', 'schema|s'), tk('.|PUNC'),
+      ai('EOF|mul.txt')
+    ]
+    @expect = [
+      ai('FILE|mul.txt'),
+      wd('Abelsches Schema|MUL', 'abelsches schema|m'),
+      wd('Abelsches|IDF', 'abelsch|a'), wd('Schema|IDF', 'schema|s'), tk('.|PUNC'),
+      ai('EOF|mul.txt')
+    ]
+    meet({'source'=>'tst-mul'})
+
+    @input = [
+      ai('FILE|mul.txt'),
+      wd('Tolles|IDF', 'toll|a'), wd('abelsches|IDF', 'abelsch|a'), wd('Schema|IDF', 'schema|s'), tk('.|PUNC'),
+      ai('EOF|mul.txt')
+    ]
+    @expect = [
+      ai('FILE|mul.txt'),
+      wd('Tolles abelsches Schema|MUL', 'tolles abelsches schema|m'),
+      wd('Tolles|IDF', 'toll|a'), wd('abelsches|IDF', 'abelsch|a'), wd('Schema|IDF', 'schema|s'), tk('.|PUNC'),
+      ai('EOF|mul.txt')
+    ]
+    meet({'source'=>'tst-mul'})
+
+    @input = [
+      ai('FILE|mul.txt'),
+      wd('Super|IDF', 'super|a'), wd('tolles|IDF', 'toll|a'), wd('abelsches|IDF', 'abelsch|a'), wd('Schema|IDF', 'schema|s'), tk('.|PUNC'),
+      ai('EOF|mul.txt')
+    ]
+    @expect = [
+      ai('FILE|mul.txt'),
+      wd('Super tolles abelsches Schema|MUL', 'super tolles abelsches schema|m'),
+      wd('Super|IDF', 'super|a'), wd('tolles|IDF', 'toll|a'), wd('abelsches|IDF', 'abelsch|a'), wd('Schema|IDF', 'schema|s'), tk('.|PUNC'),
+      ai('EOF|mul.txt')
+    ]
+    meet({'source'=>'tst-mul'})
+
+    @input = [
+      ai('FILE|mul.txt'),
+      wd('Extra|IDF', 'extra|a'), wd('super|IDF', 'super|a'), wd('tolles|IDF', 'toll|a'), wd('abelsches|IDF', 'abelsch|a'), wd('Schema|IDF', 'schema|s'), tk('.|PUNC'),
+      ai('EOF|mul.txt')
+    ]
+    @expect = [
+      ai('FILE|mul.txt'),
+      wd('Extra super tolles abelsches Schema|MUL', 'extra super tolles abelsches schema|m'),
+      wd('Extra|IDF', 'extra|a'), wd('super|IDF', 'super|a'), wd('tolles|IDF', 'toll|a'), wd('abelsches|IDF', 'abelsch|a'), wd('Schema|IDF', 'schema|s'), tk('.|PUNC'),
+      ai('EOF|mul.txt')
+    ]
+    meet({'source'=>'tst-mul'})
+  end
+
+  def test_multiple_suffix
+    @input = [
+      ai('FILE|mul.txt'),
+      wd('Abelsches|IDF', 'abelsch|a'), wd('Schema|IDF', 'schema|s'), tk('.|PUNC'),
+      ai('EOF|mul.txt')
+    ]
+    @expect = [
+      ai('FILE|mul.txt'),
+      wd('Abelsches Schema|MUL', 'abelsches schema|m'),
+      wd('Abelsches|IDF', 'abelsch|a'), wd('Schema|IDF', 'schema|s'), tk('.|PUNC'),
+      ai('EOF|mul.txt')
+    ]
+    meet({'source'=>'tst-mul'})
+
+    @input = [
+      ai('FILE|mul.txt'),
+      wd('Abelsches|IDF', 'abelsch|a'), wd('Schema|IDF', 'schema|s'), wd('toll|IDF', 'toll|a'), tk('.|PUNC'),
+      ai('EOF|mul.txt')
+    ]
+    @expect = [
+      ai('FILE|mul.txt'),
+      wd('Abelsches Schema toll|MUL', 'abelsches schema toll|m'),
+      wd('Abelsches|IDF', 'abelsch|a'), wd('Schema|IDF', 'schema|s'), wd('toll|IDF', 'toll|a'), tk('.|PUNC'),
+      ai('EOF|mul.txt')
+    ]
+    meet({'source'=>'tst-mul'})
+
+    @input = [
+      ai('FILE|mul.txt'),
+      wd('Abelsches|IDF', 'abelsch|a'), wd('Schema|IDF', 'schema|s'), wd('toll|IDF', 'toll|a'), wd('super|IDF', 'super|a'), tk('.|PUNC'),
+      ai('EOF|mul.txt')
+    ]
+    @expect = [
+      ai('FILE|mul.txt'),
+      wd('Abelsches Schema toll super|MUL', 'abelsches schema toll super|m'),
+      wd('Abelsches|IDF', 'abelsch|a'), wd('Schema|IDF', 'schema|s'), wd('toll|IDF', 'toll|a'), wd('super|IDF', 'super|a'), tk('.|PUNC'),
+      ai('EOF|mul.txt')
+    ]
+    meet({'source'=>'tst-mul'})
+
+    @input = [
+      ai('FILE|mul.txt'),
+      wd('Abelsches|IDF', 'abelsch|a'), wd('Schema|IDF', 'schema|s'), wd('toll|IDF', 'toll|a'), wd('super|IDF', 'super|a'), wd('extra|IDF', 'extra|a'), tk('.|PUNC'),
+      ai('EOF|mul.txt')
+    ]
+    @expect = [
+      ai('FILE|mul.txt'),
+      wd('Abelsches Schema toll super extra|MUL', 'abelsches schema toll super extra|m'),
+      wd('Abelsches|IDF', 'abelsch|a'), wd('Schema|IDF', 'schema|s'), wd('toll|IDF', 'toll|a'), wd('super|IDF', 'super|a'), wd('extra|IDF', 'extra|a'), tk('.|PUNC'),
+      ai('EOF|mul.txt')
+    ]
+    meet({'source'=>'tst-mul'})
+  end
 
   def test_ending_count
     @input = [

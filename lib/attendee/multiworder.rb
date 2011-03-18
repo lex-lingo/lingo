@@ -247,7 +247,7 @@ private
         res =~ /^\*(\d+)/
         $1.to_i
       end
-    end.sort
+    end.sort.reverse
   end
   
   
