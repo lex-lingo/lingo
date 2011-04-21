@@ -106,6 +106,7 @@ protected
     @files = get_array('files')
     @rec_pat = Regexp.new(get_key('lir-record-pattern', ''))
     @is_LIR_file = has_key?('lir-record-pattern')
+    @chomp = get_key('chomp', true)
   end
 
 
@@ -132,7 +133,7 @@ private
 
     (stdin?(filename) ? $stdin.set_encoding(ENC) : File.open(filename, :encoding => ENC)).each_line { |line|
       inc('Anzahl Zeilen')
-      line.chomp!
+      line.chomp! if @chomp
       line.gsub!(/\303\237/, "ß")
 ### HACK
       if @is_LIR_file && line =~ @rec_pat

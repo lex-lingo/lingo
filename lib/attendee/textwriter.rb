@@ -83,9 +83,8 @@ protected
   def init
     @ext = get_key('ext', 'txt2')
     @lir = get_key('lir-format', false)
-    @sep = eval("\"#{@config['sep'] || ' '}\"")
-    @sep = ' ' if @lir
-    @no_sep = true
+    @sep = @lir ? ' ' : eval("\"#{@config['sep'] || ' '}\"")
+    @no_sep, @no_puts = true, false
   end
 
 
@@ -118,7 +117,7 @@ protected
     when STR_CMD_EOL
       @no_sep = true
       unless @lir
-        @file.puts # unless @sep=="\n"
+        @file.puts unless @no_puts # unless @sep=="\n"
         inc('Anzahl Zeilen')
       end
       
@@ -151,13 +150,13 @@ protected
 private
   
   def flush_lir_buffer
-     unless @lir_rec_no.empty? || @lir_rec_buf.empty?
-       if @sep =~ /\n/
-         @file.print '*', @lir_rec_no, "\n", @lir_rec_buf.join(@sep), "\n"
-       else
-         @file.print @lir_rec_no, '*', @lir_rec_buf.join(@sep), "\n"
-       end
-     end
+    unless @lir_rec_no.empty? || @lir_rec_buf.empty?
+      if @sep =~ /\n/
+        @file.print '*', @lir_rec_no, "\n", @lir_rec_buf.join(@sep), "\n"
+      else
+        @file.print @lir_rec_no, '*', @lir_rec_buf.join(@sep), "\n"
+      end
+    end
     @lir_rec_no = ''
     @lir_rec_buf.clear
   end
@@ -168,4 +167,33 @@ private
 
 end
 
+class Attendee::Formatter < Attendee::Textwriter
 
+  protected
+
+  def init
+    super
+
+    @format = get_key('format', '%s')
+    @map    = get_key('map', Hash.new { |h, k| h[k] = k })
+
+    @no_puts = true
+  end
+
+  def process(obj)
+    str = obj.to_s
+
+    if obj.is_a?(Word) || obj.is_a?(Token)
+      str = obj.form
+
+      if obj.respond_to?(:lexicals)
+        lex = obj.lexicals.first
+        att = @map[lex.attr] if lex
+        str = @format % [str, lex.form, att] if att
+      end
+    end
+
+    @lir ? @lir_rec_buf << str : @file.print(str)
+  end
+
+end

@@ -106,9 +106,13 @@ protected
     regulars = get_key('regulars', '')
     forward(STR_CMD_ERR, 'regulars nicht definiert') if regulars.nil?
 
+    @space = get_key('space', false)
+
     #  Mit _xxx_ gekennzeichnete Makros anwenden und Expressions ergänzen und umwandeln
-    macros = Hash.new
-    @rules = regulars.collect { |rule|
+    macros = {}
+    @rules = [['SPAC', /^\s+/]]
+
+    regulars.each { |rule|
       name = rule.keys[0]
       expr = rule.values[0].gsub(/_(\w+?)_/) {
         macros[$&] || begin
@@ -116,15 +120,14 @@ protected
         rescue NameError
         end
       }
-      
+
       if name =~ /^_\w+_$/    #    is a macro
         macros[name] = expr if name =~ /^_\w+_$/
-        nil
       else
-        [name, Regexp.new('^'+expr)]
+        @rules << [name, Regexp.new('^'+expr)]
       end
-    }.compact
-    
+    }
+
     #  Der Tokenizer gibt jedes Zeilenende als Information weiter, sofern es sich 
     #  nicht um die Verarbeitung einer LIR-Datei handelt. Im Falle einer normalen Datei
     #  wird der Dateiname gespeichert und als Kennzeichen für die Erzeugung von 
@@ -144,7 +147,7 @@ protected
   def process(obj)
     if obj.is_a?(String)
       inc('Anzahl Zeilen')
-      tokenize(obj.strip).each { |token|
+      tokenize(obj).each { |token|
         inc('Anzahl Muster '+token.attr)
         inc('Anzahl Token')
         forward(token) 
@@ -166,8 +169,8 @@ private
       @rules.each { |rule|
         name, expr = rule
         if textline =~ expr
-          token << Token.new($~[0], name)
-          textline = $'.strip
+          token << Token.new($~[0], name) if name != 'SPAC' || @space
+          textline = $'
           break
         end
       }
