@@ -1,23 +1,23 @@
 #
-#      Systemwörterbuch lingo-dic.txt
-#      enthält deutsche Grundformen mit Wortklassen
+# Systemwörterbuch lingo-dic.txt
+# enthält deutsche Grundformen mit Wortklassen
 #
-#      #s = Substantiv
-#      #a = Adjektiv
-#      #v = Verbe
-#      #e = Eigenname
-#      #t = Takeitasis
-#      #w = Wortform
-#
-#
-#      This program is free software; you can redistribute it and/or modify
-#      it under the terms of the GNU General Public License as published by
-#      the Free Software Foundation; either version 2 of the License= or (at
-#      your option) any later version.
+# #s = Substantiv
+# #a = Adjektiv
+# #v = Verbe
+# #e = Eigenname
+# #t = Takeitasis
+# #w = Wortform
 #
 #
-#      Stand: 26.05.08
-#      aktuelle Version: http://rubyforge.org/projects/lingo/
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published
+# by the Free Software Foundation; either version 2 of the License= or (at
+# your option) any later version.
+#
+#
+# Stand: 26.05.08
+# aktuelle Version: http://rubyforge.org/projects/lingo/
 aachen=aachen #e
 aal=aal #s
 aalen=aalen #e
