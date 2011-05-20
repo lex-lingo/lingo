@@ -25,6 +25,12 @@
 #
 #  Lex Lingo rules from here on
 
+%w[rubygems filemagic mime/types hpricot pdf-reader].each { |lib|
+  begin
+    require lib
+  rescue LoadError
+  end
+}
 
 =begin rdoc
 == Textreader
@@ -108,6 +114,11 @@ protected
     @rec_pat = Regexp.new(get_key('lir-record-pattern', ''))
     @is_LIR_file = has_key?('lir-record-pattern')
     @chomp = get_key('chomp', true)
+    @filter = get_key('filter', false)
+
+    if @filter && Object.const_defined?(:FileMagic)
+      @fm = FileMagic.fm(:mime, :simplified => true)
+    end
   end
 
 
@@ -132,7 +143,7 @@ private
 
     forward(STR_CMD_FILE, filename)
 
-    (stdin?(filename) ? $stdin.set_encoding(ENC) : File.open(filename, :encoding => ENC)).each_line { |line|
+    filter(filename) { |line|
       inc('Anzahl Zeilen')
       line.chomp! if @chomp
       line.gsub!(/\303\237/, "ß")
@@ -147,8 +158,83 @@ private
     forward(STR_CMD_EOF, filename)
   end
 
+  def filter(filename, &block)
+    file = stdin?(filename) ? $stdin.set_encoding(ENC) :
+           File.open(filename, 'rb', :encoding => ENC)
+
+    file = case file_type(filename, file)
+      when /html/ then filter_html(file)
+      when /xml/  then filter_html(file, true)
+      when /pdf/  then filter_pdf(file, &block) or return
+      else file
+    end if @filter
+
+    file.each_line(&block)
+  end
+
+  def filter_pdf(file, &block)
+    if Object.const_defined?(:PDF) && PDF.const_defined?(:Reader)
+      PDFFilter.filter(file, &block)
+      nil
+    else
+      warn "PDF filter not available. Please install `pdf-reader'."
+      file
+    end
+  end
+
+  def filter_html(file, xml = false)
+    if Object.const_defined?(:Hpricot)
+      Hpricot(file, :xml => xml).inner_text
+    else
+      warn "#{xml ? 'X' : 'HT'}ML filter not available. Please install `hpricot'."
+      file
+    end
+  end
+
+  def file_type(filename, file)
+    if @fm && file.respond_to?(:rewind)
+      type = @fm.buffer(file.read(256))
+      file.rewind
+      type
+    elsif Object.const_defined?(:MIME) && MIME.const_defined?(:Types)
+      if type = MIME::Types.of(filename).first
+        type.content_type
+      else
+        warn 'Filters not available. File type could not be determined.'
+        nil
+      end
+    else
+      warn "Filters not available. Please install `ruby-filemagic' or `mime-types'."
+      nil
+    end
+  end
+
   def stdin?(filename)
     %w[STDIN -].include?(filename)
+  end
+
+  class PDFFilter
+
+    def self.filter(file, &block)
+      PDF::Reader.new.parse(file, new(&block))
+    end
+
+    def initialize(&block)
+      @block = block
+    end
+
+    def show_text(string, *params)
+      @block[string << '|']
+    end
+
+    alias_method :super_show_text,                 :show_text
+    alias_method :move_to_next_line_and_show_text, :show_text
+    alias_method :set_spacing_next_line_show_text, :show_text
+
+    def show_text_with_positioning(params, *)
+      params.each { |param| show_text(param) if param.is_a?(String) }
+    end
+
   end
 
 end
