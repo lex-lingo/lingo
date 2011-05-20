@@ -102,43 +102,6 @@ class String
 
 end
 
-
-#    Erweiterung der Klasse File
-class File
-
-  #    File.change_ext( _fileName_, _aString_ ) -> _fileName_
-  #
-  #    Tauscht bei einem bestehenden Dateinamen die Endung aus.
-  #
-  #    File.change_ext('C:\dev\rubyling.rb', 'save') -> 'C:\dev\rubyling.save'
-  def File.change_ext(fileName, ext)
-    fileName =~ /^(.*\.)[^\.]+$/
-    $1+ext
-  end
-  
-
-  def File.obj_type(obj)
-    db_re = Regexp.new($CFG['db-file-index-pattern'])
-    begin
-      obj_type = (File.stat(obj).directory?) ? 'dir' : 'file'
-      if obj_type == 'file'
-        found_index = 0
-        File.open(obj, :encoding => ENC) { |file|
-          (1..50).each { |i|
-            found_index += 1 if file.gets =~ db_re 
-          } 
-        }
-        obj_type = 'db' if found_index > 3
-      end
-      rescue StandardError
-        obj_type = nil
-    end
-    obj_type
-  end
-  
-end
-
-
 class Array
 
   def uniq2
