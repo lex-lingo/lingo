@@ -105,13 +105,17 @@ protected
   def init
     #  Regular Expressions für Token-Erkennung einlesen
     regulars = get_key('regulars', '')
-    forward(STR_CMD_ERR, 'regulars nicht definiert') if regulars.nil?
+    forward(STR_CMD_ERR, 'regulars nicht definiert') unless regulars
 
     @space = get_key('space', false)
+    @tags = get_key('tags', true)
+
+    # default rules
+    @rules = [['SPAC', /^\s+/]]
+    @rules << ['HTML', /^<[^>]+>/] unless @tags
 
     #  Mit _xxx_ gekennzeichnete Makros anwenden und Expressions ergänzen und umwandeln
     macros = {}
-    @rules = [['SPAC', /^\s+/]]
 
     regulars.each { |rule|
       name = rule.keys[0]
@@ -139,8 +143,9 @@ protected
 
   def control(cmd, param)
     case cmd
-        when STR_CMD_FILE then @filename = param
-        when STR_CMD_LIR  then @filename = nil
+      when STR_CMD_FILE then @filename = param
+      when STR_CMD_LIR  then @filename = nil
+      when STR_CMD_EOF  then @cont = false
     end
   end
 
@@ -148,35 +153,54 @@ protected
   def process(obj)
     if obj.is_a?(String)
       inc('Anzahl Zeilen')
-      tokenize(obj).each { |token|
+
+      tokenize(obj) { |form, attr|
+        token = Token.new(form, attr)
+
         inc('Anzahl Muster '+token.attr)
         inc('Anzahl Token')
-        forward(token) 
+
+        forward(token)
       }
-      forward(STR_CMD_EOL, @filename) unless @filename.nil?
+
+      forward(STR_CMD_EOL, @filename) if @filename
     else
       forward(obj)
     end
   end
 
-
 private
 
   #  tokenize("Eine Zeile.")  ->  [:Eine/WORD:, :Zeile/WORD:, :./PUNC:]
   def tokenize(textline)
-    rule = name = expr = nil
-    token = []
+    if @cont
+      name = 'HTML'
+
+      if textline =~ /^[^<>]*>/
+        yield $~[0], name
+        textline = $'
+        @cont = false
+      else
+        yield textline, name
+        return
+      end
+    else
+      if textline =~ /<[^<>]*$/
+        yield $~[0], name
+        textline = $`
+        @cont = true
+      end
+    end unless @tags
+
     until textline.empty?
-      @rules.each { |rule|
-        name, expr = rule
+      @rules.each { |name, expr|
         if textline =~ expr
-          token << Token.new($~[0], name) if name != 'SPAC' || @space
+          yield $~[0], name if name != 'SPAC' || @space
           textline = $'
           break
         end
       }
     end
-    token
   end
 
 end
