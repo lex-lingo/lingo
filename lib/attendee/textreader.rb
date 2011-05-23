@@ -115,10 +115,6 @@ protected
     @is_LIR_file = has_key?('lir-record-pattern')
     @chomp = get_key('chomp', true)
     @filter = get_key('filter', false)
-
-    if @filter && Object.const_defined?(:FileMagic)
-      @fm = FileMagic.fm(:mime, :simplified => true)
-    end
   end
 
 
@@ -162,7 +158,7 @@ private
     file = stdin?(filename) ? $stdin.set_encoding(ENC) :
            File.open(filename, 'rb', :encoding => ENC)
 
-    file = case file_type(filename, file)
+    file = case @filter == true ? file_type(filename, file) : @filter.to_s
       when /html/ then filter_html(file)
       when /xml/  then filter_html(file, true)
       when /pdf/  then filter_pdf(file, &block) or return
@@ -192,8 +188,8 @@ private
   end
 
   def file_type(filename, file)
-    if @fm && file.respond_to?(:rewind)
-      type = @fm.buffer(file.read(256))
+    if Object.const_defined?(:FileMagic) && file.respond_to?(:rewind)
+      type = FileMagic.fm(:mime, :simplified => true).buffer(file.read(256))
       file.rewind
       type
     elsif Object.const_defined?(:MIME) && MIME.const_defined?(:Types)
