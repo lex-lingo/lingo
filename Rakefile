@@ -4,7 +4,7 @@ require 'rake'
 require 'rake/clean'
 require 'rake/testtask'
 require 'rake/packagetask'
-require 'rake/rdoctask'
+require 'rdoc/task'
 
 require 'rbconfig'
 
