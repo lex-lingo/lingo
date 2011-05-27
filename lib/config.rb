@@ -87,14 +87,12 @@ require 'yaml'
 class LingoConfig
 
   def initialize(prog = $0, cmdline = $*)
-    @keys = {}
-
-    @options = load_yaml_file(prog, '.opt')
-    @keys['cmdline'] = parse_cmdline(cmdline, @options)
+    @options = load_yaml_file(prog, 'opt')
+    parse_cmdline(cmdline)
 
     usage('') if @keys['cmdline']['usage']
 
-    { 'language' => '.lang', 'config' => '.cfg' }.each { |key, ext|
+    { 'language' => 'lang', 'config' => 'cfg' }.each { |key, ext|
       @keys.update(load_yaml_file(@keys['cmdline'][key], ext))
     }
 
@@ -102,7 +100,6 @@ class LingoConfig
   end
 
   def [](key)
-    raise 'Keine Konfiguration geladen!' unless @keys
     key_to_nodes(key).inject(@keys) { |value, node| value[node] }
   end
 
@@ -121,10 +118,10 @@ class LingoConfig
     nodes.join('/')
   end
 
-  def parse_cmdline(cmdline, hash)
+  def parse_cmdline(cmdline)
     keys, non_hyphen_opt = {}, nil
 
-    hash['command-line-options'].each { |opt, att|
+    @options['command-line-options'].each { |opt, att|
       unless att['opt']
         non_hyphen_opt = opt
         next
@@ -133,33 +130,30 @@ class LingoConfig
       unless idx = cmdline.index(att['opt'])
         keys[opt] = att['default'] || false
       else
-        val = cmdline.delete_at(idx)
+        cmdline.delete_at(idx)
 
         keys[opt] = if att.has_key?('value')
-          idx += 1
-
-          if cmdline.size < idx || cmdline[idx][0] == ?-
+          if cmdline.size <= idx || cmdline[idx] =~ /\A-/
             usage("Option #{opt} verlangt die Angabe eines Wertes!")
           else
-            val
+            cmdline.delete_at(idx)
           end
         else
           true
         end
       end
+    }
 
-    } if hash
-
-    opts = cmdline.map { |opt| opt if opt[0] == ?- }.compact.join('|')
+    opts = cmdline.grep(/\A-/).join('|')
     usage("Unbekannte Optionen (#{opts})!") unless opts.empty?
 
     keys[non_hyphen_opt] = cmdline.join('|')
 
-    keys
+    @keys = { 'cmdline' => keys }
   end
 
   def load_yaml_file(name, ext)
-    file = name.sub(/(?:\.[^.]+)?\z/, ext)
+    file = name.sub(/(?:\.[^.]+)?\z/, '.' << ext)
     file = File.join(File.dirname(__FILE__), '..', file) unless name.include?('/')
 
     usage("Datei #{file} nicht vorhanden") unless File.readable?(file)
@@ -172,7 +166,7 @@ class LingoConfig
       when Array, is_hash = Hash
         cont.send(is_hash ? :each_value : :each) { |val|
           case val
-            when nil
+            when nil, false, true
               # ignore
             when String
               val.gsub!(/\$\((.+?)\)/) { @keys['cmdline'][$1] }
