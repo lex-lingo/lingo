@@ -67,12 +67,12 @@ end
 
 desc 'Test against reference file (TXT)'
 task 'test:txt' do
-  test_ref('artikel', 'test')
+  chdir(__DIR__) { test_ref('artikel', 'test') }
 end
 
 desc 'Test against reference file (LIR)'
 task 'test:lir' do
-  test_ref('lir')
+  chdir(__DIR__) { test_ref('lir') }
 end
 
 desc 'Run all tests on packaged distribution'
@@ -86,17 +86,16 @@ def test_ref(name, cfg = name)
   require './lib/diff/lcs'
   require './lib/diff/lcs/ldiff'
 
-  continue = 0
+  cmd = %W[lingo.rb -c #{cfg} txt/#{name}.txt]
+  continue, msg = 0, ["Command failed: #{cmd.join(' ')}"]
 
-  Dir.chdir(__DIR__) {
-    Process.ruby(*%W[lingo.rb -c #{cfg} txt/#{name}.txt]) { |_, _, *ios|
-      ios.each { |io| io.read }
-    }.success? or abort
+  Process.ruby(*cmd) { |_, _, *ios|
+    ios.each { |io| msg << io.read }
+  }.success? or abort msg.join("\n\n")
 
-    Dir["test/ref/#{name}.*"].each { |ref|
-      puts "#{'#' * 60} #{org = ref.sub(/test\/ref/, 'txt')}"
-      continue += Diff::LCS::Ldiff.run(ARGV.clear << org << ref)
-    }
+  Dir["test/ref/#{name}.*"].each { |ref|
+    puts "#{'#' * 60} #{org = ref.sub(/test\/ref/, 'txt')}"
+    continue += Diff::LCS::Ldiff.run(ARGV.clear << org << ref)
   }
 
   exit continue + 1 unless continue.zero?
