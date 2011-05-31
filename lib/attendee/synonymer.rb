@@ -95,7 +95,7 @@ protected
 
       #    finde die Synonyme für alle Lexicals des Wortes
       synos = @dic.find_synonyms(obj)
-      obj.lexicals += synos.sort.uniqual
+      obj.lexicals += synos.sort.uniq
 
       inc('Anzahl erweiteter Wörter') if synos.size>0
       add('Anzahl gefundener Synonyme', synos.size)

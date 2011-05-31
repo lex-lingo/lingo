@@ -182,16 +182,16 @@ class Attendee::Formatter < Attendee::Textwriter
   end
 
   def process(obj)
-    str = obj.to_s
-
     if obj.is_a?(Word) || obj.is_a?(Token)
       str = obj.form
 
       if obj.respond_to?(:lexicals)
-        lex = obj.lexicals.first
+        lex = obj.lexicals.first  # TODO
         att = @map[lex.attr] if lex
         str = @format % [str, lex.form, att] if att
       end
+    else
+      str = obj.to_s
     end
 
     @lir ? @lir_rec_buf << str : @file.print(str)

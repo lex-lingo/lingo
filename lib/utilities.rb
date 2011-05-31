@@ -102,40 +102,6 @@ class String
 
 end
 
-class Array
-
-  def uniq2
-    if self.size > 1
-      this = nil
-      (self.size-1).downto(1) {|i|
-        if self[i]==this
-          self.delete_at(i)
-        else
-          this = self[i]
-        end
-      }
-    end
-    self
-  end
-  
-  def uniqual
-    result = self.dup
-    if result.size > 1
-      this = result[-1]
-      (result.size-2).downto(0) {|i|
-        if result[i]==this
-          result.delete_at(i)
-        else
-          this = result[i]
-        end
-      }
-    end
-    result
-  end
-  
-end
-
-
 class Pathname
   def create_path
     here = Pathname.new( '.' )

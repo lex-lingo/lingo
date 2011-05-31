@@ -61,6 +61,16 @@ class StringA
     to_s
   end
 
+  def hash
+    to_s.hash
+  end
+
+  def eql?(other)
+    self.class.equal?(other.class) && to_s == other.to_s
+  end
+
+  alias_method :==, :eql?
+
 end
 
 #
@@ -118,6 +128,7 @@ class Lexical < StringA
   def to_str;  @form + '#' + @attr;  end  
 #v
   def to_s;  '(' + super + ')';  end  
+
 end
 
 
@@ -160,7 +171,7 @@ class Word < StringA
 
   def lexicals=(lexis)
     if lexis.is_a?(Array)
-      @lexicals = lexis.sort.uniq2
+      @lexicals = lexis.sort.uniq
     else
       puts "Falscher Typ bei Zuweisung"
     end

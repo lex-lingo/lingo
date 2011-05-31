@@ -95,7 +95,7 @@ public
       when /^([^#]+)$/        then Lexical.new( $1, @wordclass )
       else  str
       end
-    end.compact.sort.uniqual unless record.nil?
+    end.compact.sort.uniq unless record.nil?
 
     #  Ergebnis zurückgeben
     inc('data found') unless record.nil?
@@ -224,22 +224,15 @@ public
   #    Sucht alle Wörterbücher durch und gibt den ersten Treffer zurück (+mode = first+), oder alle Treffer (+mode = all+)
   def select(string)
     lexicals = []
-    
-    @sources.each do |src|
-      unless (lexis=src[string]).nil?
+
+    @sources.each { |src|
+      if lexis = src[string]
         lexicals += lexis
         break unless @all_sources
       end
-    end
+    }
 
-#v TODO: v1.5.1
-#v    lexicals.sort.uniqual
-# TODO: anders lösen
-    lex = lexicals.collect { |i| i.is_a?(Lexical) ? i : nil }.compact.sort.uniqual
-    txt = lexicals.collect { |i| i.is_a?(String) ? i : nil }.compact.sort.uniq
-#  p lex+txt
-    lex+txt
-#v
+    lexicals.sort.uniq
   end
 
 
