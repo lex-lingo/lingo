@@ -265,13 +265,10 @@ class AgendaItem
   include Comparable
   attr_reader :cmd, :param
 
-private
-
   def initialize(cmd, param='')
     @cmd = cmd || ''
     @param = param || ''
   end
-
 
   def <=>(other)
     return 1 unless other.is_a?(AgendaItem)
@@ -281,9 +278,6 @@ private
       self.cmd<=>other.cmd
     end
   end
-
-
-public
 
   def inspect
     "*#{cmd.upcase}('#{param}')"
