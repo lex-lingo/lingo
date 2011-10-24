@@ -1,14 +1,17 @@
 = Revision history for lingo
 
-== 1.7.1 [unreleased]
+== 1.7.1 [2011-10-24]
 
+* Multiworder actually finds the *longest* matching multiword group.
 * Multiword entries in SingleWord dictionaries now respect <tt>def-wc</tt>;
   new parameter <tt>def-mul-wc</tt> to control the word class for multiword
   entries (defaults to <tt>def-wc</tt>). Use <tt>def-mul-wc: 'm'</tt> in your
   <tt>.lang</tt> to restore the previous behaviour.
-
 * New Attendee::Formatter for configurable output formatting as an alternative
   to Attendee::Textwriter.
+* New basic input filters to enable indexing of HTML/XML (and PDF?) files.
+* Updated the system dictionary.
+* Switched license to Affero GPL.
 
 == 1.7.0 [2010-12-15]
 
