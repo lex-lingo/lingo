@@ -21,9 +21,9 @@ class TestAttendeeWordsearcher < Test::Unit::TestCase
     @input = [tk('Dies|WORD'), tk('ist|WORD'), tk('ein|WORD'), tk('Test|WORD'), tk('.|PUNC'), ai('EOL|')]
     @expect = [
       wd('Dies|IDF', 'dies|w'),
-      wd('ist|IDF', 'ist|t'),
-      wd('ein|IDF', 'ein|t'),
-      wd('Test|IDF', 'test|s'),
+      wd('ist|IDF', 'sein|v'),
+      wd('ein|IDF', 'einen|v', 'ein|w'),
+      wd('Test|IDF', 'test|s', 'testen|v'),
       tk('.|PUNC'),
       ai('EOL|')
     ]
@@ -35,9 +35,9 @@ class TestAttendeeWordsearcher < Test::Unit::TestCase
     @input = [tk('Dies|WORD'), tk('ist|WORD'), tk('ein|WORD'), tk('Test|WORD'), tk('.|PUNC'), ai('EOL|')]
     @expect = [
       wd('Dies|IDF', 'dies|w'),
-      wd('ist|IDF', 'ist|t'),
-      wd('ein|IDF', 'ein|t'),
-      wd('Test|IDF', 'test|s'),
+      wd('ist|IDF', 'sein|v'),
+      wd('ein|IDF', 'einen|v', 'ein|w'),
+      wd('Test|IDF', 'test|s', 'testen|v'),
       tk('.|PUNC'),
       ai('EOL|')
     ]

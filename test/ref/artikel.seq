@@ -12,7 +12,6 @@
 3 generierung, automatisch
 3 namensform, identisch
 3 normierung, sprachlich
-2 bild, alle
 2 grundform, sprachlich standardisiert
 2 grundform, standardisiert
 2 information, weit
@@ -20,33 +19,29 @@
 2 klassifizierung, automatisch
 2 kollektion, heterogen erschlossen
 2 malerei, venezianisch
-2 namensform, alternativ
 2 normierung, begrifflich
 2 quell, terminologisch
 2 ressource, terminologisch
 2 suche, kontrolliert
-2 verfahren, automatisch
 2 vokabular, kontrolliert
 2 vokabular, normiert
-1 alternative, unterschiedlich
 1 alttitelbestand, groß
 1 analyse, automatisch
 1 analyse, statistisch
-1 angel, los
+1 angel, lose
 1 ansatz, derartig
-1 anstieg, stark
 1 anteil, intellektuell
 1 antwort, möglich
-1 art, konkret
 1 aufwand, erheblich
 1 aufwand, gering
 1 aufwand, organisatorisch
 1 aufwand, relativ gering
 1 auseinandersetzung, intellektuell
 1 auseinandersetzung, stark intellektuell
+1 ausnutzung, unter
 1 basis, terminologisch
 1 beharrungsvermögen, groß
-1 bekannte, alle
+1 berücksichtigung, unter
 1 beschreibung, einheitlich
 1 beschreibung, formal
 1 beschreibung, genormt
@@ -64,12 +59,13 @@
 1 bestand, erschlossen
 1 bestand, unterschiedlich erschlossen
 1 bestand, zurückliegend
-1 bezeichnung, viel äquivalent
 1 bezeichnung, äquivalent
 1 beziehung, hierarchisch
 1 bibliothek, deutsch
 1 bibliothekartag, deutsch
-1 bildbeschreibung, bekannt
+1 bild, allem
+1 bild, aller
+1 bildbeschreibung, bekannte
 1 daten, heterogen
 1 diskussionsfokus, aktuell
 1 dokument, alle
@@ -95,7 +91,7 @@
 1 erschließung, fehlend
 1 erschließung, gemeinsam inhaltlich
 1 erschließung, normiert intellektuell
-1 erschließung, verläßlich
+1 erschließung, verlässlich
 1 erschließungsansatz, beschrieben
 1 erschließungselement, frei
 1 erschließungsinstrument, orientiert
@@ -107,7 +103,7 @@
 1 erschließungssituation, unbefriedigend
 1 erschließungssystem, unterschiedlich
 1 erschließungswelt, heterogen
-1 fall, selten
+1 fall, unser
 1 form, bevorzugt
 1 form, substantivisch
 1 form, ähnlich
@@ -118,11 +114,11 @@
 1 funktionalität, statistisch
 1 funktionsumfang, erreicht
 1 funktionsumfang, vollständig
-1 gesamtheit, enthalten
 1 grundform, grammatikalisch
 1 heterogenität, groß
+1 heute, aller
 1 hilfe, maschinell
-1 indexieren, automatisch
+1 hilfsmittel, automatisch
 1 indexierungssystem, automatisch
 1 indexierungsverfahren, automatisch
 1 indexterm, brauchbar
@@ -144,8 +140,8 @@
 1 intellektuelle, normiert
 1 intellektuelle, stark
 1 katalogmerkmal, typisch
-1 katalogorientieren, alle
-1 kategorie, alle
+1 katalogorientieren, allen
+1 kategorie, allen
 1 klassifikation, existierend
 1 kollektion, charakterisiert
 1 kollektion, derartig
@@ -168,15 +164,18 @@
 1 möglichkeit, einzig
 1 möglichkeit, realistisch
 1 möglichkeit, skizziert
+1 namensform, alternativ
+1 namensform, alternative
+1 namensform, mehrere
 1 namensform, unterschiedlich
-1 namensform, unterschiedlich alternativ
+1 namensform, unterschiedlich alternative
 1 namensform, verwendend
 1 namensvariante, alle
 1 normdatei, bibliothekarisch
 1 normierung, fehlend
 1 normierung, genau
 1 nutzen, potentiell
-1 objekt, alle
+1 objekt, aller
 1 objektbeschreibung, hergestellt
 1 objektbeschreibung, normiert
 1 objektbeschreibung, sprachlich
@@ -188,7 +187,7 @@
 1 quell, lexikalisch
 1 quell, verwendend terminologisch
 1 quell, vorhanden terminologisch
-1 rahmen, methodisch
+1 rahm, methodisch
 1 rahmenbedingung, eng
 1 rahmenbedingung, normierend
 1 rahmenbedingung, streng normierend
@@ -208,12 +207,6 @@
 1 schreibweise, bevorzugt
 1 schritt, schwer
 1 schritt, vermutlich schwer
-1 sein, aufwendig
-1 sein, fachlich orientiert
-1 sein, möglich
-1 sein, orientiert
-1 sein, wenig aufwendig
-1 sein, zweckmäßig
 1 standard, gemeinsam
 1 steiger, leicht
 1 stilmerkmal, spezifisch
@@ -249,14 +242,9 @@
 1 variante, erkannt
 1 variante, möglich
 1 verarbeitung, automatisch
-1 verbundsystem, größer
+1 verbundsystem, groß
 1 vereinheitlichung, erfolgt grammatikalisch
 1 vereinheitlichung, grammatikalisch
-1 verfahren, alle
-1 verfahren, arbeitend
-1 verfahren, intellektuell
-1 verfahren, statistisch
-1 verfahren, statistisch arbeitend
 1 verweisungsstruktur, dazugehörig
 1 verwendung, gemeinsam
 1 vokabular, genormt
@@ -266,7 +254,7 @@
 1 vorzug, unschätzbar
 1 weg, einfach
 1 wendung, fest
-1 werk, alle
+1 werk, aller
 1 wörterbuchquell, unterschiedlich
 1 zahl, ausreichend
 1 zahl, gering

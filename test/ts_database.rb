@@ -129,9 +129,9 @@ END_OF_TEXT
       'wort2'=>'#s',
       'ganz groß und blöd mist'=>'ganz großer und blöder mist#s',
       'juristisch person'=>'juristische personen#s',
-      'höher schnell weit'=>'*4|höher schneller weiter#s',
+      'hoch schnell weit'=>'*4|höher schneller weiter#s',
       'ganz groß und blöd quatsch'=>'ganz großer und blöder quatsch#s',
-      'höher schnell weit größer'=>'höher schneller weiter größer#s',
+      'hoch schnell weit groß'=>'höher schneller weiter größer#s',
       'ganz groß und blöd schwach sinn'=>'ganz großer und blöder schwach sinn#s',
       'ganz groß und'=>'*5|*6'
     }

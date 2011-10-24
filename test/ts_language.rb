@@ -168,8 +168,8 @@ class TestLexicalHash < Test::Unit::TestCase
   def test_wordclass
     ds = LexicalHash.new( 'sys-dic' )
     assert_equal([lx('a-dur|s')], ds['a-dur'])
-    assert_equal([lx('aalen|e')], ds['aalen'])
-    assert_equal([lx('abarbeiten|v'), lx('abarbeitend|a')], ds['abarbeitend'])
+    assert_equal([lx('aalen|v'), lx('aalen|e')], ds['aalen'])
+    assert_equal([lx('abarbeitend|a')], ds['abarbeitend'])
     ds.close
   end
 
@@ -323,7 +323,7 @@ class TestDictionary < Test::Unit::TestCase
   
   def test_select_with_suffix
     dic = Dictionary.new({'source'=>['sys-dic']}, @dictionary_config)
-    assert_equal([lx('mauer|s'), lx('mauern|v')], dic.select_with_suffix('mauern'))
+    assert_equal([lx('mauern|v')], dic.select_with_suffix('mauern'))
     assert_equal([lx('hase|s')], dic.select_with_suffix('hasen'))
     assert_equal([lx('schön|a')], dic.select_with_suffix('schönster'))
     assert_equal([lx('segnen|v')], dic.select_with_suffix('segnet'))
@@ -473,11 +473,11 @@ class TestGrammar < Test::Unit::TestCase
       gra.find_compositum('client-server-system') 
     )
     assert_equal( 
-      wd('benutzerforschung|KOM', 'benutzerforschung|k', 'benutzer|s+', 'forschung|s+'),
+      wd('benutzerforschung|KOM', 'benutzerforschung|k', 'erforschung|s+', 'benutzen|v+'),
       gra.find_compositum('benutzerforschung') 
     )
     assert_equal( 
-      wd('clustersuche|KOM', 'clustersuche|k', 'cluster|s+', 'suche|s+'), 
+      wd('clustersuche|KOM', 'clustersuche|k', 'cluster|s+', 'suche|s+', 'suchen|v+'), 
       gra.find_compositum('clustersuche') 
     )
     gra.close
