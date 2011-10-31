@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>lingo Application documentation (v1.7.1)</title>
+<title>Class: TxtFile_Wordclass</title>
 
 <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
 
@@ -20,7 +20,7 @@
 <script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
 
 
-<body>
+<body id="top" class="class">
 <nav id="metadata">
   <nav id="home-section" class="section">
   <h3 class="section-header">
@@ -42,6 +42,42 @@
   <ul id="search-results" class="initially-hidden"></ul>
 </nav>
 
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/database.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link"><a href="TxtFile.html">TxtFile</a>
+  
+</nav>
+
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-c-new">::new</a>
+    
+    <li><a href="#method-i-convert_line">#convert_line</a>
+    
+  </ul>
+</nav>
+
+  </div>
 
   <div id="project-metadata">
     <nav id="fileindex-section" class="section project-section">
@@ -201,157 +237,120 @@
   </div>
 </nav>
 
-<div id="documentation" class="description">
+<div id="documentation">
+  <h1 class="class">class TxtFile_Wordclass</h1>
+
+  <div id="description" class="description">
+    
+<h2 id="label-TxtFile_Wordclass"><a href="TxtFile_Wordclass.html">TxtFile_Wordclass</a></h2>
+
+<p>Abgeleitet von <a href="TxtFile.html">TxtFile</a> behandelt die Klasse
+Dateien mit dem Format <code>WordClass</code>. Eine Zeile
+<code>&quot;essen,essen #v essen #o esse #s\n&quot;</code> wird gewandelt
+in <code>[ 'essen', ['esse#s', 'essen#v', 'essen#o'] ]</code>. Der Trenner
+zwischen Schlüssel und Projektion kann über den Parameter
+<code>separator</code> geändert werden.</p>
+
+  </div><!-- description -->
+
   
-<h1 id="label-Lingo+-+A+full-featured+automatic+indexing+system"><a href="Lingo.html">Lingo</a> - A full-featured automatic indexing system</h1>
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
 
-<p><a href="Lingo.html">Lingo</a> is an open source indexing system for
-research and teachings. The main functions of <a
-href="Lingo.html">Lingo</a> are</p>
-<ul><li>
-<p>identification of (i.e. reduction to) basic word form by means of
-dictionaries and suffix lists</p>
-</li><li>
-<p>algorithmic decomposition</p>
-</li><li>
-<p>dictionary-based synonymisation and identification of phrases</p>
-</li><li>
-<p>generic identification of phrases/word sequences based on patterns of word
-classes</p>
-</li></ul>
+    
 
-<h2 id="label-Introduction">Introduction</h2>
+    
 
-<p>If texts should be object to a linguistic analysis, then <a
-href="Lingo.html">Lingo</a> can be used for almost every purpose that the
-heart desires. <a href="Lingo.html">Lingo</a> is a system that allows to
-assemble a network of unlimited functionality from modules with limited
-functions. This network is built by configuration files.</p>
+    
 
-<p>A small example:</p>
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
 
-<pre>meeting:
-  protocol: '$(status)'
-  attendees:
-    - textreader: { files: 'README' }
-    - debugger:   { eval: 'true', ceval: 'cmd!=&quot;EOL&quot;', prompt: '&lt;debug&gt;: ' }</pre>
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(id)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
 
-<p><a href="Lingo.html">Lingo</a> is told to invite two attendees. And <a
-href="Lingo.html">Lingo</a> wants them to talk to each other, hence the
-name <a href="Lingo.html">Lingo</a> (= the technical language).</p>
+        <div class="method-description">
+          
+          
+          
 
-<p>The first attendee is the <code>textreader</code>. It can read files and
-communicate its content to other attendees. For this purpose the
-<code>textreader</code> is given an output channel. Everything that the
-<code>textreader</code> has to say is steered through this channel. It will
-do nothing further until <a href="Lingo.html">Lingo</a> will tell the first
-attendee to speak. Then the <code>textreader</code> will open the file <a
-href="README.html">README</a> (<code>files</code> parameter) and babbles
-the content to the world via its output channel.</p>
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/database.rb, line 279</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">id</span>)
+  <span class="ruby-keyword">super</span>
 
-<p>The second attendee <code>debugger</code> does nothing else than to put
-everything on the console that comes into its input channel. If you write
-the <a href="Lingo.html">Lingo</a> configuration which is shown above as an
-example into the file readme.cfg and then run <code>lingo -c readme -l
-en</code>, the result will look something like this:</p>
+  <span class="ruby-ivar">@separator</span> = <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">'separator'</span>, <span class="ruby-string">','</span>)
+  <span class="ruby-ivar">@line_pattern</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">'^('</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@legal_word</span> <span class="ruby-operator">+</span> <span class="ruby-string">')'</span> <span class="ruby-operator">+</span> <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">escape</span>(<span class="ruby-ivar">@separator</span>) <span class="ruby-operator">+</span> <span class="ruby-string">'((?:'</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@legal_word</span> <span class="ruby-operator">+</span> <span class="ruby-string">'\043\w)+)$'</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new-source -->
+          
+        </div>
 
-<pre>&lt;debug&gt;:  *FILE('README')
-&lt;debug&gt;:  &quot;= Lingo - ...&quot;
-...
-&lt;debug&gt;:  &quot;If texts should be object to a linguistic analysis, then Lingo can be used for&quot;
-&lt;debug&gt;:  &quot;almost every purpose that the heart desires. Lingo is a system that allows&quot;
-...
-&lt;debug&gt;:  *EOF('README')</pre>
+        
 
-<p>What we see are lines with asterisk (*) and lines without. And that is just
-fine! Because <a href="Lingo.html">Lingo</a> distinguishes between command
-and data. The <code>textreader</code> did not only read the content of the
-file, but also communicated through the commands when a file begins and
-when it ends. This can (and will) be an important piece of information for
-other attendees that will be added later.</p>
+        
+      </div><!-- new-method -->
 
-<p>Well, with this almost everything about <a href="Lingo.html">Lingo</a> is
-said :o)</p>
+    
+    </section><!-- public-class-method-details -->
+  
+     <section id="private-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Private Instance Methods</h3>
 
-<p>Maybe yet a little overview about possible attendees that can be used for
-solving a specific problem (for more information see the documentation of
-the specific attendee).</p>
-<dl class="rdoc-list note-list"><dt><code>textreader</code>
-<dd>
-<p>Reads files and puts their content into the channels line by line.</p>
-</dd><dt><code>tokenizer</code>
-<dd>
-<p>Dissects lines into defined character strings of the class <a
-href="Token.html">Token</a>.</p>
-</dd><dt><code>abbreviator</code>
-<dd>
-<p>Identifies abbreviations and produces the long form if listed in a
-dictionary.</p>
-</dd><dt><code>wordsearcher</code>
-<dd>
-<p>Identifies tokens and makes them objects of the class <a
-href="Word.html">Word</a>. To do this right it looks into the dictionary.</p>
-</dd><dt><code>decomposer</code>
-<dd>
-<p>Tests any character strings not identified by the <code>wordsearcher</code>
-for being compounds.</p>
-</dd><dt><code>synonymer</code>
-<dd>
-<p>Extends objects of the class <a href="Word.html">Word</a> by synonyms.</p>
-</dd><dt><code>noneword_filter</code>
-<dd>
-<p>Filters out everything and lets through only those character strings that
-are unknown.</p>
-</dd><dt><code>vector_filter</code>
-<dd>
-<p>Filters out everything and lets through only those character strings that
-considered useful for indexing.</p>
-</dd><dt><code>textwriter</code>
-<dd>
-<p>Writes anything that it receives into a file.</p>
-</dd><dt><code>debugger</code>
-<dd>
-<p>Shows everything for debugging.</p>
-</dd><dt><code>variator</code>
-<dd>
-<p>Tries to correct spelling errors and the like.</p>
-</dd><dt><code>multiworder</code>
-<dd>
-<p>Identifies phrases (word sequences) based on a multiword dictionary.</p>
-</dd><dt><code>sequencer</code>
-<dd>
-<p>Identifies phrases (word sequences) based on patterns of word classes.</p>
-</dd></dl>
+    
+      <div id="method-i-convert_line" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">convert_line</span><span
+            class="method-args">(line, key, val)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
 
-<p>Furthermore, it can be useful to look at the configuration files
-<code>lingo.cfg</code> and <code>en.lang</code>.</p>
+        <div class="method-description">
+          
+          
+          
 
-<h2 id="label-Credits">Credits</h2>
+          
+          <div class="method-source-code" id="convert_line-source">
+            <pre><span class="ruby-comment"># File lib/database.rb, line 288</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">convert_line</span>(<span class="ruby-identifier">line</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
+  <span class="ruby-identifier">key</span>, <span class="ruby-identifier">valstr</span> = <span class="ruby-identifier">key</span>.<span class="ruby-identifier">strip</span>, <span class="ruby-identifier">val</span>.<span class="ruby-identifier">strip</span>
+  <span class="ruby-identifier">val</span> = <span class="ruby-identifier">valstr</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\s+\0043/</span>, <span class="ruby-string">'#'</span>).<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/\S.+?\s*\0043\w/</span>)
+  <span class="ruby-identifier">val</span> = <span class="ruby-identifier">val</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">str</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">str</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^(.+)\0043(.)/</span>
+    (<span class="ruby-node">$1</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">key</span> <span class="ruby-operator">?</span> <span class="ruby-string">''</span> <span class="ruby-operator">:</span> <span class="ruby-node">$1</span>) <span class="ruby-operator">+</span> <span class="ruby-string">'#'</span> <span class="ruby-operator">+</span> <span class="ruby-node">$2</span>
+  <span class="ruby-keyword">end</span>
+  [<span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- convert_line-source -->
+          
+        </div>
 
-<p><a href="Lingo.html">Lingo</a> is based on a collective development by
-Klaus Lepsky and John Vorhauer.</p>
+        
 
-<h3 id="label-Authors">Authors</h3>
-<ul><li>
-<p>John Vorhauer &lt;<a
-href="mailto:john@vorhauer.de">john@vorhauer.de</a>&gt;</p>
-</li><li>
-<p>Jens Wille &lt;<a
-href="mailto:jens.wille@uni-koeln.de">jens.wille@uni-koeln.de</a>&gt;</p>
-</li></ul>
+        
+      </div><!-- convert_line-method -->
 
-<h3 id="label-Contributors">Contributors</h3>
-<ul><li>
-<p>Klaus Lepsky &lt;<a href="mailto:klaus@lepsky.de">klaus@lepsky.de</a>&gt;</p>
-</li><li>
-<p>Jan-Helge Jacobs &lt;<a
-href="mailto:plancton@web.de">plancton@web.de</a>&gt;</p>
-</li><li>
-<p>Thomas Müller &lt;<a
-href="mailto:thomas.mueller@fh-koeln.de">thomas.mueller@fh-koeln.de</a>&gt;</p>
-</li></ul>
+    
+    </section><!-- private-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
 
-</div>
+</div><!-- documentation -->
 
 
 <footer id="validator-badges">
