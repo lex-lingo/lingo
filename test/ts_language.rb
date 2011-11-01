@@ -173,7 +173,14 @@ class TestLexicalHash < Test::Unit::TestCase
     ds.close
   end
 
-  
+  def test_case
+    ds = LexicalHash.new('sys-dic')
+    assert_equal([lx('abänderung|s')], ds['abänderung'])
+    assert_equal([lx('abänderung|s')], ds['Abänderung'])
+    assert_equal([lx('abänderung|s')], ds['ABÄNDERUNG'])
+    ds.close
+  end
+
   def test_multivalue
     ds = LexicalHash.new( 'sys-syn' )
 #    assert_equal([lx('abrollen', LA_SYNONYM), lx('abschaffen', LA_SYNONYM), lx('abwickeln', LA_SYNONYM), lx('auflösen (geschäft)','y')], ds['abwickeln'])

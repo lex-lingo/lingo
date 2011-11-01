@@ -25,22 +25,18 @@
 #
 #  Lex Lingo rules from here on
 
-
+require 'unicode'
 require 'pathname'
 
 #
 #    Util stellt Hilfsroutinen bereit, die der Denke des Autors besser entsprechen.
 #
 
-
-
-
 #    Erweiterung der Klasse String.
 class String
-  alias old_downcase downcase
 
-  def downcase # utf-8 downcase
-    self.old_downcase.tr('ÄÖÜÁÂÀÉÊÈÍÎÌÓÔÒÚÛÙÝ', 'äöüáâàéêèíîìóôòúûùý')
+  def downcase
+    Unicode.downcase(self)
   end
 
 end
