@@ -39,7 +39,7 @@ require 'pathname'
 class String
   alias old_split split
   alias old_downcase downcase
-  
+
   #    _str_.split( _anInteger_ ) -> _anArray_
   #
   #    Die Methode split wird um eine Aufruf-Variante erweitert, z.B.
@@ -52,48 +52,10 @@ class String
       old_split(*par)
     end
   end
-  
-  
+
   def downcase # utf-8 downcase
     self.old_downcase.tr('ÄÖÜÁÂÀÉÊÈÍÎÌÓÔÒÚÛÙÝ', 'äöüáâàéêèíîìóôòúûùý')
   end
-  
-  
-  HEX_CHARS = '0123456789abcdef'.freeze
-
-  def to_x
-    hex = ''
-    each_byte { |byte|
-      # To get a hex representation for a char we just utilize
-      # the quotient and the remainder of division by base 16.
-      q, r = byte.divmod(16)
-      hex << HEX_CHARS[q] << HEX_CHARS[r]
-    }
-    hex
-  end
-  
-  
-  def from_x
-    str, q, first = '', 0, false
-    each_byte { |byte|
-      byte = byte.chr
-
-      # Our hex chars are 2 bytes wide, so we have to keep track
-      # of whether it's the first or the second of the two.
-      #
-      # NOTE: inject with each_slice(2) would be a natural fit,
-      # but it's kind of slow...
-      if first = !first
-        q = HEX_CHARS.index(byte)
-      else
-        # Now we got both parts, so let's do the
-        # inverse of divmod(16): q * 16 + r
-        str << q * 16 + HEX_CHARS.index(byte)
-      end
-    }
-    str
-  end
-
 
   #  als patch für dictionary.select.sort.uniqual
   def attr
