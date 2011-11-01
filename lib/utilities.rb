@@ -43,11 +43,6 @@ class String
     self.old_downcase.tr('ÄÖÜÁÂÀÉÊÈÍÎÌÓÔÒÚÛÙÝ', 'äöüáâàéêèíîìóôòúûùý')
   end
 
-  #  als patch für dictionary.select.sort.uniqual
-  def attr
-    ''
-  end
-
 end
 
 class Pathname
