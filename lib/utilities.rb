@@ -37,21 +37,7 @@ require 'pathname'
 
 #    Erweiterung der Klasse String.
 class String
-  alias old_split split
   alias old_downcase downcase
-
-  #    _str_.split( _anInteger_ ) -> _anArray_
-  #
-  #    Die Methode split wird um eine Aufruf-Variante erweitert, z.B.
-  #
-  #    <tt>"Wortklasse".split(4) -> ["Wort", "klasse"]</tt> 
-  def split(*par)
-    if par.size == 1 && par[0].kind_of?(Fixnum)
-      [slice(0...par[0]), slice(par[0]..self.size-1)]
-    else
-      old_split(*par)
-    end
-  end
 
   def downcase # utf-8 downcase
     self.old_downcase.tr('ÄÖÜÁÂÀÉÊÈÍÎÌÓÔÒÚÛÙÝ', 'äöüáâàéêèíîìóôòúûùý')

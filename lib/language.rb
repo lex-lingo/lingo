@@ -457,10 +457,12 @@ private
         if string =~ /^(.+)-([^-]+)$/
             return test_compositum($1, '-', $2, level, has_tail)
         else
+            length = string.length
+
             #  Wortteilungen testen
-            1.upto(string.size-1) do |p|
+            1.upto(length - 1) do |p|
                 #   String teilen und testen
-                fr_str, ba_str = string.split(p)
+                fr_str, ba_str = string.slice(0...p), string.slice(p...length)
                 stats, lexis, seqs = test_compositum(fr_str, '', ba_str, level, has_tail)
 
                 unless lexis.empty?
