@@ -62,6 +62,7 @@ desc 'Run ALL tests'
 task 'test:all' => [:test, 'test:txt', 'test:lir']
 
 Rake::TestTask.new(:test) do |t|
+  t.ruby_opts << '-rubygems'
   t.test_files = FileList.new('test/ts_*.rb', 'test/attendee/ts_*.rb')
 end
 
