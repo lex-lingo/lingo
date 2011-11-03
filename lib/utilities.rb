@@ -26,31 +26,13 @@
 #  Lex Lingo rules from here on
 
 require 'unicode'
-require 'pathname'
 
-#
-#    Util stellt Hilfsroutinen bereit, die der Denke des Autors besser entsprechen.
-#
-
-#    Erweiterung der Klasse String.
 class String
 
   def downcase
     Unicode.downcase(self)
   end
 
-end
-
-class Pathname
-  def create_path
-    here = Pathname.new( '.' )
-    self.split[0].each_filename do |path|
-      here += path
-      unless here.directory?
-        here.mkdir(0777)
-      end
-    end
-  end
 end
 
 unless ISITRUBY19

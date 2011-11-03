@@ -26,11 +26,10 @@
 #
 #  Lex Lingo rules from here on
 
-
-#require 'English'
+require 'pathname'
+require 'fileutils'
 require './lib/config'
 require './lib/meeting'
-
 
 class Lingo
 

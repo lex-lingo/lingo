@@ -417,7 +417,7 @@ class DbmFile
     @crypter = Lingo.config["language/dictionary/databases/#{id}"].has_key?('crypt') ? Crypter.new : nil
 
     # Store-Ordner anlegen
-    Pathname.new(@dbm_name).create_path
+    FileUtils.mkdir_p(File.dirname(@dbm_name))
   end
 
   # Überprüft die Aktualität des DbmFile
