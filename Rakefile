@@ -97,7 +97,7 @@ def test_ref(name, cfg = name)
 
   Dir["test/ref/#{name}.*"].each { |ref|
     puts "#{'#' * 60} #{org = ref.sub(/test\/ref/, 'txt')}"
-    continue += Diff::LCS::Ldiff.run(ARGV.clear << org << ref)
+    continue += Diff::LCS::Ldiff.run(ARGV.clear << '-a' << org << ref)
   }
 
   exit continue + 1 unless continue.zero?
