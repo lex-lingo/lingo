@@ -36,7 +36,8 @@ begin
         'info/gpl-hdr.txt', 'info/*.png', 'lir.cfg', 'txt/lir.txt', 'porter/*',
         'test.cfg', '{de,en}/test_*.txt'
       ].to_a,
-      :dependencies => [['ruby-nuggets', '>= 0.6.7']]
+      :dependencies => ['unicode'],
+      :development_dependencies => [['ruby-nuggets', '>= 0.6.7'], ['diff-lcs', '>= 1.1.3'], 'open4']
     }
   }}
 rescue LoadError => err
