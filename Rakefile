@@ -91,7 +91,7 @@ def test_ref(name, cfg = name)
   cmd = %W[lingo.rb -c #{cfg} txt/#{name}.txt]
   continue, msg = 0, ["Command failed: #{cmd.join(' ')}"]
 
-  Process.ruby(*cmd) { |_, _, *ios|
+  Process.ruby(*cmd.unshift('-rubygems')) { |_, _, *ios|
     ios.each { |io| msg << io.read }
   }.success? or abort msg.join("\n\n")
 
