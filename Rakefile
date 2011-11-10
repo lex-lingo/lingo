@@ -84,8 +84,8 @@ end
 def test_ref(name, cfg = name)
   require 'nuggets/util/ruby'
 
-  require './lib/diff/lcs'
-  require './lib/diff/lcs/ldiff'
+  require 'diff/lcs'
+  require 'diff/lcs/ldiff'
 
   cmd = %W[lingo.rb -c #{cfg} txt/#{name}.txt]
   continue, msg = 0, ["Command failed: #{cmd.join(' ')}"]
