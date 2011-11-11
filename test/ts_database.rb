@@ -249,6 +249,7 @@ Wort2=
   end
 
   def compare(config, input, output = nil)
+    FileUtils.mkdir_p(File.dirname(TEST_FILE))
     File.open(TEST_FILE, 'w', :encoding => ENC) { |f| f.puts input }
 
     DbmFile.open(set_config('tst', config.merge('name' => TEST_FILE))) { |dbm|
