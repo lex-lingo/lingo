@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 require 'test/unit'
-require './lingo'
+require 'lingo'
 
 class Txt2DbmConverter
   alias_method :original_initialize, :initialize
