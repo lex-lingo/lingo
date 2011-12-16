@@ -29,46 +29,10 @@ require 'unicode'
 
 class String
 
+  alias_method :_lingo_original_downcase, :downcase
+
   def downcase
     Unicode.downcase(self)
   end
-
-end
-
-unless ISITRUBY19
-
-class String
-
-  def encode!(*args); self; end
-
-end
-
-class IO
-
-  def set_encoding(*args); self; end
-
-end
-
-class << File
-
-  alias_method :_lingo_original_open, :open
-
-  def open(*args, &block)
-    args.pop if args.last.is_a?(Hash)
-    _lingo_original_open(*args, &block)
-  end
-
-end
-
-class Pathname
-
-  alias_method :_lingo_original_each_line, :each_line
-
-  def each_line(*args, &block)
-    args.pop if args.last.is_a?(Hash)
-    _lingo_original_each_line(*args, &block)
-  end
-
-end
 
 end

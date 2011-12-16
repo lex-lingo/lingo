@@ -25,7 +25,7 @@
 #
 #  Lex Lingo rules from here on
 
-%w[rubygems filemagic mime/types hpricot pdf-reader].each { |lib|
+%w[filemagic mime/types hpricot pdf-reader].each { |lib|
   begin
     require lib
   rescue LoadError

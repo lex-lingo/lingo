@@ -26,10 +26,9 @@
 #  Lex Lingo rules from here on
 
 
-require './lib/const'
-require './lib/modules'
-require './lib/database'
-#require './lib/utilities'
+require_relative 'const'
+require_relative 'modules'
+require_relative 'database'
 
 =begin rdoc
 == LexicalHash
@@ -472,8 +471,8 @@ private
                     else
                          #  => ganzes Kompositum
                         return [stats, lexis, seqs]
-                     end        
-                 end
+                    end
+                end
              end
             
              #  alle Wortteilungen durchprobiert und noch immer kein definitives Kompositum erkannt. Dann nehme besten Vorschlag.

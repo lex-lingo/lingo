@@ -25,27 +25,24 @@
 #
 #  Lex Lingo rules from here on
 
+require_relative 'attendees'
 
-require './lib/attendees'
-
-require './lib/attendee/abbreviator'
-require './lib/attendee/debugger'
-require './lib/attendee/decomposer'
-require './lib/attendee/dehyphenizer'
-require './lib/attendee/multiworder'
-require './lib/attendee/noneword_filter'
-require './lib/attendee/objectfilter'
-require './lib/attendee/variator'
-require './lib/attendee/sequencer'
-require './lib/attendee/synonymer'
-require './lib/attendee/textreader'
-require './lib/attendee/textwriter'
-require './lib/attendee/tokenizer'
-require './lib/attendee/vector_filter'
-require './lib/attendee/wordsearcher'
-require './lib/attendee/helper'
-
-
+require_relative 'attendee/abbreviator'
+require_relative 'attendee/debugger'
+require_relative 'attendee/decomposer'
+require_relative 'attendee/dehyphenizer'
+require_relative 'attendee/multiworder'
+require_relative 'attendee/noneword_filter'
+require_relative 'attendee/objectfilter'
+require_relative 'attendee/variator'
+require_relative 'attendee/sequencer'
+require_relative 'attendee/synonymer'
+require_relative 'attendee/textreader'
+require_relative 'attendee/textwriter'
+require_relative 'attendee/tokenizer'
+require_relative 'attendee/vector_filter'
+require_relative 'attendee/wordsearcher'
+require_relative 'attendee/helper'
 
 class Meeting
 

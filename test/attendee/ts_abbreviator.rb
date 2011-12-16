@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-require './test/attendee/globals'
+require_relative 'globals'
 
 ################################################################################
 #

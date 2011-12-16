@@ -63,7 +63,6 @@ desc 'Run ALL tests'
 task 'test:all' => [:test, 'test:txt', 'test:lir']
 
 Rake::TestTask.new(:test) do |t|
-  t.ruby_opts << '-rubygems'
   t.test_files = FileList.new('test/ts_*.rb', 'test/attendee/ts_*.rb')
 end
 
@@ -91,7 +90,7 @@ def test_ref(name, cfg = name)
   cmd = %W[lingo.rb -c #{cfg} txt/#{name}.txt]
   continue, msg = 0, ["Command failed: #{cmd.join(' ')}"]
 
-  Process.ruby(*cmd.unshift('-rubygems')) { |_, _, *ios|
+  Process.ruby(*cmd) { |_, _, *ios|
     ios.each { |io| msg << io.read }
   }.success? or abort msg.join("\n\n")
 

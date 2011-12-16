@@ -67,20 +67,19 @@ was macht die abgeleitet klasse
 
 =end
 
-
-require './lib/modules'
-require './lib/language'
-require './lib/const'
-require './lib/types'
-
+require_relative 'modules'
+require_relative 'language'
+require_relative 'const'
+require_relative 'types'
 
 class Attendee
+
   include Reportable
 
   @@library_config = nil
   @@report_status = false
   @@report_time = false
-  
+
 private
 
   def initialize(config)

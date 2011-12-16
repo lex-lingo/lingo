@@ -1,5 +1,9 @@
 = Revision history for lingo
 
+== 1.8.0 [unreleased]
+
+* Ruby 1.8 officially no longer supported! Use Lingo 1.7.x instead.
+
 == 1.7.1 [2011-10-24]
 
 * Multiworder actually finds the *longest* matching multiword group.

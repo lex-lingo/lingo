@@ -27,13 +27,11 @@
 
 require 'sdbm'
 require 'digest/sha1'
-require './lib/const'
-require './lib/types'
-require './lib/utilities'
-require './lib/modules'
 
-# ShowPercent ermöglicht die Fortschrittsanzeige beim konvertieren der
-# Wörterbücher
+require_relative 'const'
+require_relative 'types'
+require_relative 'utilities'
+require_relative 'modules'
 
 class ShowPercent
 
@@ -134,28 +132,11 @@ class Crypter
 
   private
 
-if ISITRUBY19
   def crypt(k, v)
-    c, i = '-' * v.size, k.size
-    (0...c.size).each { |j|
-      i -= 1
-      c[j] = (v[j].ord ^ k[i].ord).chr
-      i = k.size if i == 0
-    }
+    c, y = '', k.codepoints.reverse_each.cycle
+    v.each_codepoint { |x| c << (x ^ y.next).chr(ENC) }
     c
   end
-else
-  def crypt(k, v)
-    c = '-' * v.size
-    i = k.size
-    (0...c.size).each { |j|
-      i-=1
-      c[j]=v[j]^k[i]
-      i==0 && i=k.size
-    }
-    c
-  end
-end
 
 end
 
