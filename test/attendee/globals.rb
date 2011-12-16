@@ -56,10 +56,11 @@ class Test::Unit::TestCase
 
   def initialize(fname)
     old_init(fname)
+
     @attendee = $1.downcase if self.class.to_s =~ /TestAttendee(.*)/
     @output = Array.new
 
-    Lingo.new('lingo.rb', [])
+    Lingo.new
   end
 
 

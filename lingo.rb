@@ -1,4 +1,3 @@
-#! /usr/bin/ruby
-
 require_relative 'lib/lingo'
-Lingo.new.talk if $0 == __FILE__
+
+Lingo.new(*ARGV).talk if $0 == __FILE__

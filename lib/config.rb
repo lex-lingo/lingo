@@ -86,11 +86,51 @@ require 'yaml'
 
 class LingoConfig
 
-  def initialize(prog = $0, cmdline = $*)
-    @options = load_yaml_file(prog, 'opt')
-    parse_cmdline(cmdline)
+  OPTIONS = {
+    'files' => {
+      'value'   => nil,
+      'comment' => 'Interpretiert die restlichen Angaben als Dateinamen/-muster'
+    },
+    'status' => {
+      'opt'     => '-s',
+      'default' => false,
+      'comment' => 'Gibt im Anschluss an die Verarbeitung einen Status aus'
+    },
+    'perfmon' => {
+      'opt'     => '-p',
+      'default' => false,
+      'comment' => 'Gibt im Anschluss an die Verarbeitung einen detaillierten Performancestatus aus'
+    },
+    'ocr-max' => {
+      'opt'     => '-o',
+      'value'   => nil,
+      'default' => '10000',
+      'comment' => 'Beschränkt die Anzahl der zu untersuchenden OCR-Variationen'
+    },
+    'language' => {
+      'opt'     => '-l',
+      'value'   => nil,
+      'default' => 'de',
+      'comment' => 'Set the language for processing, i.e. `-l en\' for loading en.lang'
+    },
+    'config' => {
+      'opt'     => '-c',
+      'value'   => nil,
+      'default' => 'lingo.cfg',
+      'comment' => 'Gibt eine zusätzliche Konfigurationsdatei an'
+    },
+    'usage' => {
+      'opt'     => '-h',
+      'comment' => 'Erklärt die Optionen des Programms'
+    }
+  }
 
-    usage('') if @keys['cmdline']['usage']
+  def initialize(*args)
+    @options = OPTIONS.dup
+
+    parse_args(args)
+
+    usage if @keys['cmdline']['usage']
 
     { 'language' => 'lang', 'config' => 'cfg' }.each { |key, ext|
       @keys.update(load_yaml_file(@keys['cmdline'][key], ext))
@@ -118,25 +158,25 @@ class LingoConfig
     nodes.join('/')
   end
 
-  def parse_cmdline(cmdline)
+  def parse_args(args)
     keys, non_hyphen_opt = {}, nil
 
-    @options['command-line-options'].each { |opt, att|
+    @options.each { |opt, att|
       unless att['opt']
         non_hyphen_opt = opt
         next
       end
 
-      unless idx = cmdline.index(att['opt'])
+      unless idx = args.index(att['opt'])
         keys[opt] = att['default'] || false
       else
-        cmdline.delete_at(idx)
+        args.delete_at(idx)
 
         keys[opt] = if att.has_key?('value')
-          if cmdline.size <= idx || cmdline[idx] =~ /\A-/
+          if args.size <= idx || args[idx] =~ /\A-/
             usage("Option #{opt} verlangt die Angabe eines Wertes!")
           else
-            cmdline.delete_at(idx)
+            args.delete_at(idx)
           end
         else
           true
@@ -144,17 +184,18 @@ class LingoConfig
       end
     }
 
-    opts = cmdline.grep(/\A-/).join('|')
-    usage("Unbekannte Optionen (#{opts})!") unless opts.empty?
+    unless (opts = args.grep(/\A-/)).empty?
+      usage("Unbekannte Optionen: #{opts.join(', ')}")
+    end
 
-    keys[non_hyphen_opt] = cmdline.join('|')
+    keys[non_hyphen_opt] = args.join('|')
 
     @keys = { 'cmdline' => keys }
   end
 
   def load_yaml_file(name, ext)
     file = name.sub(/(?:\.[^.]+)?\z/, '.' << ext)
-    file = File.join(File.dirname(__FILE__), '..', file) unless name.include?('/')
+    file = File.join(Lingo::BASE, file) unless name.include?('/')
 
     usage("Datei #{file} nicht vorhanden") unless File.readable?(file)
 
@@ -181,18 +222,16 @@ class LingoConfig
     end
   end
 
-  def usage(text)
+  def usage(text = nil)
     sep1, sep2 = %w[- =].map { |char| char * 79 }
 
-    puts sep1, text, sep1 unless text.empty?
+    puts sep1, text, sep1 if text
 
-    abort unless @options
-
-    puts "USAGE: #{$0}", sep2, @options['command-line-options'].map { |opt, att|
+    puts "USAGE: #{$0}", sep2, @options.map { |opt, att|
       '%-8s %2s %3s %s' % [
-        opt[0..7], att['opt'], att.has_key?('value') ? 'val' : '', att['comment']
+        opt[0, 8], att['opt'], att.has_key?('value') ? 'val' : '', att['comment']
       ]
-    }, sep2
+    }, sep2 if @options
 
     abort
   end

@@ -16,7 +16,7 @@ class TestDatabase < Test::Unit::TestCase
   TEST_GLOB = "#{File.dirname(TEST_FILE)}/{,store/}#{File.basename(TEST_FILE, '.txt')}*"
 
   def setup
-    Lingo.new('lingo.rb', [])
+    Lingo.new
 
     @singleword = <<-EOT
 Wort1

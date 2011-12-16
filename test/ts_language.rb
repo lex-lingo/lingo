@@ -79,7 +79,7 @@ end
 class TestLexicalHash < Test::Unit::TestCase
 
   def setup
-    Lingo.new('lingo.rb', [])
+    Lingo.new
     @database_config = Lingo.config['language/dictionary/databases']
   end
 
@@ -200,7 +200,7 @@ end
 class TestDictionary < Test::Unit::TestCase
 
   def setup
-    Lingo.new('lingo.rb', [])
+    Lingo.new
     @dictionary_config = Lingo.config['language/dictionary']
   end
 
@@ -365,7 +365,7 @@ end
 class TestGrammar < Test::Unit::TestCase
 
   def setup
-    Lingo.new('lingo.rb', [])
+    Lingo.new
     @dictionary_config = Lingo.config['language/dictionary']
   end
 

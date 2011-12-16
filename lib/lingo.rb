@@ -33,67 +33,70 @@ require_relative 'meeting'
 
 class Lingo
 
-private
+  BASE = File.expand_path('../..', __FILE__)
 
   @@config = nil
 
-  def initialize(prog=$0, cmdline=$*)
+  class << self
 
-    $stdin.sync = true
-    $stdout.sync = true
+    def config
+      new unless @@config
+      @@config
+    end
 
-    #  Konfiguration bereitstellen
-    @@config = LingoConfig.new(prog, cmdline)
+    def call(cfg = 'lingo-call.cfg', args = [])
+      lingo = new('-c', cfg, *args)
+      lingo.talk_to_me('')  # just to build the dicts
+      lingo
+    end
 
-    #  Meeting einberufen
-    @@meeting = Meeting.new
+    def meeting
+      @@meeting
+    end
+
+    def error(msg)
+      abort(msg)
+    end
+
   end
 
-
-public
-
-  def Lingo.config
-    Lingo.new( 'lingo.rb', [] ) if @@config.nil?
-    @@config
-  end
-
-  def Lingo.call(config = 'lingo-call.cfg')
-    lingo = new('lingo.rb', ['-c', config])
-    lingo.talk_to_me('')  # just to build the dicts
-    lingo
-  end
-
-  def Lingo.meeting
-    @@meeting
-  end
-
-  def Lingo.error(msg)
-    abort msg
+  def initialize(*args)
+    $stdin.sync = $stdout.sync = true
+    @@config, @@meeting = LingoConfig.new(*args), Meeting.new
   end
 
   def talk
-    attendees = @@config['meeting/attendees']
-    @@meeting.invite(attendees)
+    @@meeting.invite(@@config['meeting/attendees'])
 
-    protocol = 0
-    protocol += 1 if (@@config['cmdline/status'] || false)
-    protocol += 2 if (@@config['cmdline/perfmon'] || false)
+    protocol  = 0
+    protocol += 1 if @@config['cmdline/status']
+    protocol += 2 if @@config['cmdline/perfmon']
 
     @@meeting.start(protocol)
 
     @@meeting.cleanup
   end
 
-  def talk_to_me(str, &block)
-    old_stdout, $stdout = $stdout, stdout = StringIO.new
-    old_stdin,  $stdin  = $stdin,  _      = StringIO.new(str)
+  def talk_to_me(str)
+    begin
+      stdin,  $stdin  = $stdin,        StringIO.new(str)
+      stdout, $stdout = $stdout, out = StringIO.new
 
-    Dir.chdir(File.dirname(__FILE__)) { talk }
+      Dir.chdir(BASE) { talk }
+    ensure
+      $stdin, $stdout = stdin, stdout
+    end
 
-    $stdout, $stdin = old_stdout, old_stdin
+    res = out.string.split($/)
 
-    res = stdout.string.split($/)
-    block ? res.map(&block) : res.sort.uniq
+    if block_given?
+      res.map!(&Proc.new)
+    else
+      res.sort!
+      res.uniq!
+    end
+
+    res
   end
 
 end
