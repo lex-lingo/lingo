@@ -1,4 +1,4 @@
-#! /usr/bin/ruby
+#! /usr/bin/env ruby
 
 # Usage:
 #   ruby lingoweb.rb [-p <port>]
@@ -6,15 +6,13 @@
 # or:
 #   rackup [-p <port>] lingoweb.rb
 
-require 'rubygems'
 require 'sinatra'
-require 'open4'
+require 'nuggets/util/ruby'
 
 LINGOWEB = File.expand_path('..', __FILE__)
 LINGO    = File.dirname(LINGOWEB)
 AUTH     = File.join(LINGOWEB, 'lingoweb.auth')
 
-CMD = '/usr/bin/ruby lingo.rb -c %s -l %s'
 CFG = File.join(LINGOWEB, 'lingoweb-%s.cfg')
 
 LANGS = Dir["#{LINGO}/*.lang"].map { |path|
@@ -78,17 +76,11 @@ end
 
 def doit
   unless @in.empty?
-    @cmd = CMD % [CFG % @lang, @lang]
+    cmd = %W[lingo.rb -c #{CFG % @lang} -l #{@lang}]
 
-    Dir.chdir(LINGO) {
-      @success = Open4.popen4(@cmd) { |pid, stdin, stdout, stderr|
-        stdin.puts @in
-        stdin.close
-
-        @out = stdout.read
-        @err = stderr.read
-      }.success?
-    }
+    Dir.chdir(LINGO) { @success = Process.ruby(*cmd) { |_, i, o, e|
+      IO.interact({ @in => i }, { o => @out = '', e => @err = '' })
+    }.success?  }
   end
 
   erb :index
