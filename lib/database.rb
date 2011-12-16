@@ -33,12 +33,10 @@ require_relative 'types'
 require_relative 'utilities'
 require_relative 'modules'
 
-class ShowPercent
+class ShowProgress
 
-  def initialize(verbose = true)
-    @verbose = verbose
-
-    format = ' [%3d%%]'
+  def initialize(msg, active = true)
+    @active, format = active, ' [%3d%%]'
 
     # To get the length of the formatted string we have
     # to actually substitute the place-holder(s).
@@ -50,36 +48,37 @@ class ShowPercent
 
     @format = format       + back
     @clear  = ' ' * length + back
+
+    print msg, ': '
   end
 
-  def start(max)
+  def start(msg, max)
     @max, @count, @next_step = max, 0, 0
-    show
+    print msg, ' '
+    step
   end
 
-  def stop
+  def stop(msg)
     print @clear
+    print msg, "\n"
   end
 
-  def inc(increment)
-    @count += increment
-    show if show?
+  def tick(value)
+    @count = value
+    step if @count >= @next_step
   end
 
-  def set(absolute)
-    @count = absolute
-    show if show?
-  end
+  private
 
-  def show
+  def step
     percent = 100 * @count / @max
     @next_step = (percent + 1) * @max / 100
 
-    print @format % percent if @verbose
+    print @format % percent
   end
 
-  def show?
-    @count >= @next_step
+  def print(*args)
+    $stderr.print(*args) if @active
   end
 
 end
@@ -540,10 +539,7 @@ class Txt2DbmConverter
     @destination = DbmFile.new(id, false)
 
     #    Ausgabesteuerung
-    if @verbose = verbose
-      @perc = ShowPercent.new(@verbose)
-      print @config['name'], ': '
-    end
+    @progress = ShowProgress.new(@config['name'], verbose)
 
     #  Lexikalisierungen für Mehrwortgruppen vorbereiten
     lex_dic = @config['use-lex']
@@ -559,16 +555,13 @@ class Txt2DbmConverter
   end
 
   def convert
-    if @verbose
-      print 'convert '
-      @perc.start(@source.size)
-    end
+    @progress.start('convert', @source.size)
 
     @destination.open
     @destination.clear
 
     @source.each do |key, value|
-      @perc.set(@source.position) if @verbose        #  Status ausgeben
+      @progress.tick(@source.position)
 
       #  Behandle Mehrwortschlüssel
       if @lexicalize && key =~ / /
@@ -617,10 +610,7 @@ class Txt2DbmConverter
 
     @destination.close
 
-    if @verbose
-      @perc.stop
-      puts 'ok '
-    end
+    @progress.stop('ok')
 
     self
   end
