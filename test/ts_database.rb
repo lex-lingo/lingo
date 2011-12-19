@@ -5,8 +5,8 @@ require 'lingo'
 
 class Txt2DbmConverter
   alias_method :original_initialize, :initialize
-  def initialize(id, verbose = false)
-    original_initialize(id, verbose)
+  def initialize(id, lingo, verbose = false)
+    original_initialize(id, lingo, verbose)
   end
 end
 
@@ -16,7 +16,7 @@ class TestDatabase < Test::Unit::TestCase
   TEST_GLOB = "#{File.dirname(TEST_FILE)}/{,store/}#{File.basename(TEST_FILE, '.txt')}*"
 
   def setup
-    Lingo.new
+    @lingo = Lingo.new
 
     @singleword = <<-EOT
 Wort1
@@ -252,7 +252,7 @@ Wort2=
     FileUtils.mkdir_p(File.dirname(TEST_FILE))
     File.open(TEST_FILE, 'w', :encoding => ENC) { |f| f.puts input }
 
-    DbmFile.open(set_config('tst', config.merge('name' => TEST_FILE))) { |dbm|
+    DbmFile.open(set_config('tst', config.merge('name' => TEST_FILE)), @lingo) { |dbm|
       if block_given?
         yield dbm
       else
@@ -268,7 +268,7 @@ Wort2=
 
   def set_config(id, config)
     id = "_test_#{id}_"
-    Lingo.config["language/dictionary/databases/#{id}"] = config
+    @lingo.config["language/dictionary/databases/#{id}"] = config
     id
   end
 

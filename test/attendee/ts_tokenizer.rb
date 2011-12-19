@@ -6,7 +6,7 @@ require_relative 'globals'
 #
 #    Attendee Tokenizer
 #
-class TestAttendeeTokenizer < Test::Unit::TestCase
+class TestAttendeeTokenizer < LingoTestCase
 
   def test_basic
     @input = ["Dies ist ein Test."]

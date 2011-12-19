@@ -37,8 +37,8 @@ begin
         'test.cfg', '{de,en}/test_*.txt'
       ].to_a,
       :required_ruby_version    => '>= 1.9',
-      :dependencies             => ['unicode'],
-      :development_dependencies => [['ruby-nuggets', '>= 0.8.0'], ['diff-lcs', '>= 1.1.3'], 'open4']
+      :dependencies             => [['ruby-nuggets', '>= 0.8.0'], 'unicode'],
+      :development_dependencies => [['diff-lcs', '>= 1.1.3'], 'open4']
     }
   }}
 rescue LoadError => err

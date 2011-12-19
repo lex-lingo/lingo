@@ -110,7 +110,7 @@ protected
   #  TODO: lir-record-pattern abkürzen
   #  Interpretation der Parameter
   def init
-    @files = get_array('files')
+    @files = Array(get_key('files', '-'))
     @rec_pat = Regexp.new(get_key('lir-record-pattern', ''))
     @is_LIR_file = has_key?('lir-record-pattern')
     @chomp = get_key('chomp', true)

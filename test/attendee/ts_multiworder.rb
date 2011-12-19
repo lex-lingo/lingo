@@ -6,7 +6,7 @@ require_relative 'globals'
 #
 #    Attendee Multiworder
 #
-class TestAttendeeMultiworder < Test::Unit::TestCase
+class TestAttendeeMultiworder < LingoTestCase
 
   def test_basic
     @input = [

@@ -81,7 +81,7 @@ protected
     #  Wörterbuch bereitstellen
     src = get_array('source')
     mod = get_key('mode', 'all')
-    @grammar = Grammar.new({'source'=>src, 'mode'=>mod}, @@library_config)
+    @grammar = Grammar.new({'source'=>src, 'mode'=>mod}, @lingo)
   end
 
 

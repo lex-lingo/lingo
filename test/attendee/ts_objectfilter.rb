@@ -6,7 +6,7 @@ require_relative 'globals'
 #
 #    Attendee Objectfilter
 #
-class TestAttendeeObjectfilter < Test::Unit::TestCase
+class TestAttendeeObjectfilter < LingoTestCase
 
   def test_basic
     @input = [wd('Eins|IDF'), wd('zwei|?'), wd('Drei|IDF'), wd('vier|?'), ai('EOF|')]

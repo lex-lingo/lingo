@@ -82,8 +82,8 @@ protected
     #  Wörterbuch bereitstellen
     src = get_array('source')
     mod = get_key('mode', 'all')
-    @dic = Dictionary.new({'source'=>src, 'mode'=>mod}, @@library_config)
-    @gra = Grammar.new({'source'=>src, 'mode'=>mod}, @@library_config)
+    @dic = Dictionary.new({'source'=>src, 'mode'=>mod}, @lingo)
+    @gra = Grammar.new({'source'=>src, 'mode'=>mod}, @lingo)
     
     @number_of_expected_tokens_in_buffer = 2
     @eof_handling = false

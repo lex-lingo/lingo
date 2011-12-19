@@ -6,7 +6,7 @@ require_relative 'globals'
 #
 #    Attendee Wordsearcher
 #
-class TestAttendeeWordsearcher < Test::Unit::TestCase
+class TestAttendeeWordsearcher < LingoTestCase
 
   def setup
     @test_synonyms = [

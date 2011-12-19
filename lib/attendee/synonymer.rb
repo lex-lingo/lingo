@@ -78,7 +78,7 @@ protected
     #  Wörterbuch bereitstellen
     src = get_array('source')
     mod = get_key('mode', 'all')
-    @dic = Dictionary.new({'source'=>src, 'mode'=>mod}, @@library_config)
+    @dic = Dictionary.new({'source'=>src, 'mode'=>mod}, @lingo)
 
     @skip = get_array('skip', WA_UNKNOWN).collect {|s| s.upcase }
   end

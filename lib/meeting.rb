@@ -25,6 +25,9 @@
 #
 #  Lex Lingo rules from here on
 
+require 'benchmark'
+require 'nuggets/numeric/duration'
+
 require_relative 'attendees'
 
 require_relative 'attendee/abbreviator'
@@ -46,114 +49,89 @@ require_relative 'attendee/helper'
 
 class Meeting
 
-private
-
-  #  Meeting initialisieren
-  def initialize
-    @attendees = Array.new
+  def initialize(lingo)
+    @lingo = lingo
+    reset
   end
 
+  def run(attendees, *reports)
+    invite(attendees)
+    start(*reports)
+  ensure
+    cleanup
+  end
 
-public
-
-  #  Einladen aller Teilnehmer
-  def invite( invitation_list )
-
-    #  Daten für Verlinkung der Teilnehmer vorbereiten  
-    supplier = Hash.new( [] )
-    subscriber = Hash.new( [] )
+  def invite(invitation_list)
+    #  Daten für Verlinkung der Teilnehmer vorbereiten
+    supplier   = Hash.new { |h, k| h[k] = [] }
+    subscriber = Hash.new { |h, k| h[k] = [] }
 
     # Daten für automatische Verlinkung vorbereiten
-    last_link_out = ''
-    auto_link_number = 0 
-    
-    #  Teilnehmer einzeln einladen    
-    invitation_list.each do |cfg|
+    last_link_out, auto_link_number = '', 0
+
+    #  Teilnehmer einzeln einladen
+    invitation_list.each { |cfg|
       #  att = {'attendee' => {'name'=>'Attendee', 'in'=>'nase', 'out'=>'ohr', 'param'=>'hase'}}
-      config = cfg.values[ 0 ]
-      config['name'] = cfg.keys[ 0 ].capitalize
+      config = cfg.values[0]
+      config['name'] = cfg.keys[0].capitalize
 
       #  Link-Parameter standardisieren
-      [ 'in', 'out' ].each do |key|
-        config[ key ] ||= ''
-        config[ key ].downcase!
-      end
+      %w[in out].each { |key|
+        config[key] ||= ''
+        config[key].downcase!
+      }
 
-      # Automatisch verlinken  
-      if config['in'] == ''
-        config['in'] = last_link_out
-      end
-      if config['out'] == ''
-        config['out'] = 'auto_link_out_' + (auto_link_number += 1).to_s
-      end
+      # Automatisch verlinken
+      config['in'] = last_link_out if config['in'].empty?
+      config['out'] = "auto_link_out_#{auto_link_number += 1}" if config['out'].empty?
       last_link_out = config['out']
-      
+
       #  Attendee-Daten ergänzen
-      data = Lingo.config["language/attendees/#{config['name'].downcase}"]
-      config.update( data ) unless data.nil?
+      data = @lingo.config["language/attendees/#{config['name'].downcase}"]
+      config.update(data) if data
 
       #  Teilnehmer-Objekt erzeugen
-      attendee = eval("Attendee::#{config['name']}.new(config)" )
-      exit if attendee.nil?
+      attendee = Attendee.const_get(config['name']).new(config, @lingo) or exit
       @attendees << attendee
 
-      #  Supplier und Subscriber merken      
-      config[ 'in' ].split( STRING_SEPERATOR_PATTERN ).each do |interest|
-        subscriber[ interest ] += [ attendee ]
-      end
-      config[ 'out' ].split( STRING_SEPERATOR_PATTERN ).each do |theme|
-        supplier[ theme ] += [ attendee ]
-      end
-    end
+      #  Supplier und Subscriber merken
+      config['in'].split(STRING_SEPERATOR_PATTERN).each { |interest|
+        subscriber[interest] << attendee
+      }
+      config['out'].split(STRING_SEPERATOR_PATTERN).each { |theme|
+        supplier[theme] << attendee
+      }
+    }
 
     #  Teilnehmer verlinken
-    supplier.each do |supp|
-      channel, attendees = supp
-      attendees.each do |att|
-        att.add_subscriber( subscriber[ channel ] )
-      end
-    end
+    supplier.each { |channel, attendees| attendees.each { |att|
+      att.add_subscriber(subscriber[channel])
+    } }
   end
 
-  # => protocol = 0   keep quiet, i.e. for testing
-  # => protocol = 1   report status
-  # => protocol = 2   report performance
-  # => protocol = 3   report status and performance
-  def start( protocol )
-    
-    #  prepare meeting
-    @attendees.first.listen( AgendaItem.new( STR_CMD_REPORT_STATUS ) ) if (protocol & 1) != 0
-    @attendees.first.listen( AgendaItem.new( STR_CMD_REPORT_TIME ) ) if (protocol & 2) != 0
+  def start(report_status = false, report_time = false)
+    @lingo.report_status = report_status
+    @lingo.report_time   = report_time
 
-    #  hold meeting
-    start_time = Time.new
-    @attendees.first.listen( AgendaItem.new( STR_CMD_TALK ) )
-    end_time = Time.new
+    time = Benchmark.realtime {
+      @attendees.first.listen(AgendaItem.new(STR_CMD_TALK))
+    }
 
-    #  end meeting, create protocol
-    if (protocol & 3) != 0
-      puts "Require protocol..."
-      puts '-'*61
-      @attendees.first.listen( AgendaItem.new( STR_CMD_STATUS ) )
-
-      #  duration of meeting
-      duration, unit = (end_time-start_time), 'second'
-      duration, unit = (duration/60.0), 'minute' if duration > 60
-      duration, unit = (duration/60.0), 'hour' if duration > 60
-      unit += 's' if duration > 1
-  
-      printf "%s\nThe duration of the meeting was %5.2f %s\n", '-'*61, duration, unit
+    if report_status || report_time
+      $stderr.puts "Require protocol...\n#{separator = '-' * 61}"
+      @attendees.first.listen(AgendaItem.new(STR_CMD_STATUS))
+      $stderr.puts "#{separator}\nThe duration of the meeting was #{time.to_hms(2)}"
     end
-    
-  end
-
-  def cleanup
-    Dictionary.close!
   end
 
   def reset
-    @attendees = Array.new
+    @attendees = []
+  end
+
+  private
+
+  def cleanup
+    @lingo.dictionaries.each(&:close)
   end
 
 end
-

@@ -156,18 +156,18 @@ class TxtFile
 
   attr_reader :position
 
-  def TxtFile.filename(id)
+  def TxtFile.filename(id, lingo)
     #  Konfiguration der Datenbank auslesen
-    config = Lingo.config['language/dictionary/databases/' + id]
+    config = lingo.config['language/dictionary/databases/' + id]
     raise "Es gibt in 'language/dictionary/databases' keine Datenbank mit der Kurzform '#{id}'" unless config && config.has_key?('name')
 
     #  Pfade für Quelldatei und für ungültige Zeilen
     config['name']
   end
 
-  def initialize(id)
+  def initialize(id, lingo)
     #  Konfiguration der Datenbank auslesen
-    @config = Lingo.config['language/dictionary/databases/' + id]
+    @config = lingo.config['language/dictionary/databases/' + id]
 
     #  Pfade für Quelldatei und für ungültige Zeilen
     @pn_source = Pathname.new(@config['name'])
@@ -233,7 +233,7 @@ end
 
 class TxtFile_Singleword < TxtFile
 
-  def initialize(id)
+  def initialize(id, lingo)
     super
 
     @wc     = @config.fetch('def-wc',     's').downcase
@@ -259,7 +259,7 @@ end
 
 class TxtFile_Keyvalue < TxtFile
 
-  def initialize(id)
+  def initialize(id, lingo)
     super
 
     @separator = @config.fetch('separator', '*')
@@ -285,7 +285,7 @@ end
 
 class TxtFile_Wordclass < TxtFile
 
-  def initialize(id)
+  def initialize(id, lingo)
     super
 
     @separator = @config.fetch('separator', ',')
@@ -314,7 +314,7 @@ end
 
 class TxtFile_Multivalue < TxtFile
 
-  def initialize(id)
+  def initialize(id, lingo)
     super
 
     @separator = @config.fetch('separator', ';')
@@ -339,7 +339,7 @@ end
 
 class TxtFile_Multikey < TxtFile
 
-  def initialize(id)
+  def initialize(id, lingo)
     super
 
     @separator = @config.fetch('separator', ';')
@@ -373,8 +373,8 @@ class DbmFile
   class << self
 
     # Erzeugt den Dateinamen des DbmFiles anhang der Konfiguration
-    def filename(id)
-      dir, name = File.split(TxtFile.filename(id))
+    def filename(id, lingo)
+      dir, name = File.split(TxtFile.filename(id, lingo))
       File.join(dir, 'store', name.sub(/\.txt\z/, ''))
     end
 
@@ -385,16 +385,18 @@ class DbmFile
 
   end
 
-  def initialize(id, read_mode = true)
+  def initialize(id, lingo, read_mode = true)
+    @lingo = lingo
+
     init_cachable
 
-    @id, @dbm_name, @dbm = id, self.class.filename(id), nil
+    @id, @dbm_name, @dbm = id, self.class.filename(id, lingo), nil
 
     # Aktualität prüfen
-    Txt2DbmConverter.new(id).convert if read_mode && !uptodate?
+    Txt2DbmConverter.new(id, lingo).convert if read_mode && !uptodate?
 
     # Verschlüsselung vorbereiten
-    @crypter = Lingo.config["language/dictionary/databases/#{id}"].has_key?('crypt') ? Crypter.new : nil
+    @crypter = lingo.config["language/dictionary/databases/#{id}"].has_key?('crypt') ? Crypter.new : nil
 
     # Store-Ordner anlegen
     FileUtils.mkdir_p(File.dirname(@dbm_name))
@@ -411,7 +413,7 @@ class DbmFile
     return false unless source_key
 
     # Mit Werten der Quelldatei vergleichen
-    !(txt_file = Pathname.new(TxtFile.filename(@id))).exist? ||
+    !(txt_file = Pathname.new(TxtFile.filename(@id, @lingo))).exist? ||
       source_key == "#{txt_file.size}#{FLD_SEP}#{txt_file.mtime}"
   end
 
@@ -518,9 +520,9 @@ end
 
 class Txt2DbmConverter
 
-  def initialize(id, verbose = true)
+  def initialize(id, lingo, verbose = true)
     #  Konfiguration der Datenbanken auslesen
-    @config = Lingo::config['language/dictionary/databases/' + id]
+    @config = lingo.config['language/dictionary/databases/' + id]
     @index = 0
 
     #  Objekt für Quelldatei erzeugen
@@ -533,10 +535,10 @@ class Txt2DbmConverter
       when 'multikey'   then TxtFile_Multikey
       else
         Lingo.error("Unbekanntes Textformat '#{config['txt-format'].downcase}' bei '#{'language/dictionary/databases/' + id}'")
-    end.new(id)
+    end.new(id, lingo)
 
     #  Zielobjekt erzeugen
-    @destination = DbmFile.new(id, false)
+    @destination = DbmFile.new(id, lingo, false)
 
     #    Ausgabesteuerung
     @progress = ShowProgress.new(@config['name'], verbose)
@@ -547,8 +549,8 @@ class Txt2DbmConverter
 
     begin
       @lexicalize = true
-      @dictionary = Dictionary.new({ 'source' => lex_dic.split(STRING_SEPERATOR_PATTERN), 'mode' => lex_mod }, Lingo::config['language/dictionary'])
-      @grammar = Grammar.new({ 'source' => lex_dic.split(STRING_SEPERATOR_PATTERN), 'mode' => lex_mod }, Lingo::config['language/dictionary'])
+      @dictionary = Dictionary.new({ 'source' => lex_dic.split(STRING_SEPERATOR_PATTERN), 'mode' => lex_mod }, lingo)
+      @grammar = Grammar.new({ 'source' => lex_dic.split(STRING_SEPERATOR_PATTERN), 'mode' => lex_mod }, lingo)
     rescue RuntimeError
       Lingo.error("Auf das Wörterbuch (#{lex_dic}) für die Lexikalisierung der Mehrwortgruppen in (#{@config['name']}) konnte nicht zugegriffen werden")
     end if lex_dic

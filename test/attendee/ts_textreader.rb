@@ -6,7 +6,7 @@ require_relative 'globals'
 #
 #    Attendee Textreader
 #
-class TestAttendeeTextreader < Test::Unit::TestCase
+class TestAttendeeTextreader < LingoTestCase
 
   def test_lir_file
     @expect = [

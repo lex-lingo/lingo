@@ -6,7 +6,7 @@ require_relative 'globals'
 #
 #    Attendee Textwriter
 #
-class TestAttendeeTextwriter < Test::Unit::TestCase
+class TestAttendeeTextwriter < LingoTestCase
 
   def setup
     @data = [

@@ -72,7 +72,7 @@ class Attendee::Wordsearcher < Attendee
     #  Wörterbuch bereitstellen
     src = get_array('source')
     mod = get_key('mode', 'all')
-    @dic = Dictionary.new({'source'=>src, 'mode'=>mod}, @@library_config)
+    @dic = Dictionary.new({'source'=>src, 'mode'=>mod}, @lingo)
   end
 
 

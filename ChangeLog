@@ -3,6 +3,11 @@
 == 1.8.0 [unreleased]
 
 * Ruby 1.8 officially no longer supported! Use Lingo 1.7.x instead.
+* Textreader can read from STDIN if no files given; leave out the 'files'
+  parameter in the config for this to trigger.
+* Status/performance details as well as progress information are now
+  printed on STDERR instead of STDOUT in order to not mix with regular
+	output.
 
 == 1.7.1 [2011-10-24]
 

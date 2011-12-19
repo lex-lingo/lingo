@@ -6,7 +6,7 @@ require_relative 'globals'
 #
 #    Attendee Vector_filter
 #
-class TestAttendeeVector_filter < Test::Unit::TestCase
+class TestAttendeeVector_filter < LingoTestCase
 
   def setup
     @input = [

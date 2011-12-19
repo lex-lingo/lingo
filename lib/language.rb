@@ -42,19 +42,19 @@ class LexicalHash
 
 private
 
-  def initialize( id )
+  def initialize(id, lingo)
     init_reportable
     init_cachable
     report_prefix( id )
     
     #  Parameter aus de.lang:language/dictionary/databases auslesen
-    config = Lingo.config['language/dictionary/databases/' + id]
+    config = lingo.config['language/dictionary/databases/' + id]
     Lingo.error( "LexicalHash kann Datenquelle mit ID '#{id}' in de.lang:language/dictionary/databases' nicht finden" ) if config.nil?
     
     @wordclass = config.fetch( 'def-wc', LA_UNKNOWN )
 
     #  Store erzeugen
-    @source = DbmFile.new( id )
+    @source = DbmFile.new(id, lingo)
     @source.open
   end
 
@@ -106,18 +106,15 @@ end
 
 
 class Dictionary
+
   include Cachable
   include Reportable
 
-  @@opened = []
-
-private
-  def initialize(config, dictionary_config)
+  def initialize(config, lingo)
     init_reportable
     init_cachable
-    
-    #  Parameter aus de.lang:language/dictionary/databases auslesen
-#    config = Lingo.config['language/dictionary/databases/' + id]
+
+    dictionary_config = lingo.dictionary_config
 
     #  Parameter prüfen
     raise "Keine Sprach-Konfiguration angegeben!" if dictionary_config.nil?
@@ -127,16 +124,14 @@ private
     #  Parameter auslesen
     @all_sources = (config['mode'].nil? || config['mode'].downcase=='all')
 
-    @sources = config['source'].collect { |src|
-      LexicalHash.new( src )
-    }
+    @sources = config['source'].map { |src| LexicalHash.new(src, lingo) }
 
-    @@opened << self
-  
+    lingo.dictionaries << self
+
     #  Parameter aus de.lang:language/dictionary auslesen
     @suffixes = []
     @infixes = []
-    
+
     dictionary_config['suffix'].each {|arr|
       typ, sufli = arr
       typ.downcase!
@@ -146,32 +141,15 @@ private
         (typ=='f' ? @infixes : @suffixes) << fix
       }
     } if dictionary_config.has_key?( 'suffix' )
-
-  end
-
-public
-  def Dictionary.close!
-    @@opened.each { |dict|
-      dict.close
-    }
   end
 
   def close
-    @sources.each do |src|
-      src.close 
-    end
-  end    
-
-
-  alias_method :report_dictionary, :report
-  def report
-    rep = report_dictionary
-    @sources.each { |src|
-      rep.update(src.report)
-    }
-    rep
+    @sources.each(&:close)
   end
 
+  def report
+    super.tap { |rep| @sources.each { |src| rep.update(src.report) } }
+  end
 
   #    _dic_.find_word( _aString_ ) -> _aNewWord_
   #
@@ -333,15 +311,15 @@ private
     #   initialize(config, dictionary_config) -> _Grammar_
     #   config = Attendee-spezifische Parameter 
     #   dictionary_config = Datenbankkonfiguration aus de.lang
-    def initialize(config, dictionary_config)
+    def initialize(config, lingo)
         init_reportable
         init_cachable
     
-        @dictionary = Dictionary.new(config, dictionary_config)
+        @dictionary = Dictionary.new(config, lingo)
     
         #   Sprachspezifische Einstellungen für Kompositumverarbeitung laden (die nachfolgenden Werte können in der
         #   Konfigurationsdatei de.lang nach belieben angepasst werden)
-        comp = dictionary_config['compositum']
+        comp = lingo.dictionary_config['compositum']
     
         #   Ein Wort muss mindestens 8 Zeichen lang sein, damit überhaupt eine Prüfung stattfindet.
         @comp_min_word_size = (comp['min-word-size'] || '8').to_i

@@ -6,7 +6,7 @@ require_relative 'globals'
 #
 #    Attendee Abbreviator
 #
-class TestAttendeeAbbreviator < Test::Unit::TestCase
+class TestAttendeeAbbreviator < LingoTestCase
 
   def test_basic
     @input = [

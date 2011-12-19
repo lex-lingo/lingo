@@ -6,7 +6,7 @@ require_relative 'globals'
 #
 #    Attendee Variator
 #
-class TestAttendeeVariator < Test::Unit::TestCase
+class TestAttendeeVariator < LingoTestCase
 
   def test_basic
     @input = [wd('fchwarz|?'), wd('fchilling|?'), wd('iehwarzfchilling|?'), wd('fchiiiirg|?')]

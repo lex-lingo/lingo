@@ -94,8 +94,8 @@ protected
     filter.each { |s| @check[s.upcase] = true }
   
     #  Wörterbuchzugriff
-    @dic = Dictionary.new({'source'=>src, 'mode'=>mod}, @@library_config)
-    @gra = Grammar.new({'source'=>src, 'mode'=>mod}, @@library_config)
+    @dic = Dictionary.new({'source'=>src, 'mode'=>mod}, @lingo)
+    @gra = Grammar.new({'source'=>src, 'mode'=>mod}, @lingo)
     
     #  Optimierungen
     if @max_var == 0

@@ -6,7 +6,7 @@ require_relative 'globals'
 #
 #    Attendee Decomposer
 #
-class TestAttendeeDecomposer < Test::Unit::TestCase
+class TestAttendeeDecomposer < LingoTestCase
 
   def test_basic
     @input = [

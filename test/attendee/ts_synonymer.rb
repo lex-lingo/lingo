@@ -6,7 +6,7 @@ require_relative 'globals'
 #
 #    Attendee Synonymer
 #
-class TestAttendeeSynonymer < Test::Unit::TestCase
+class TestAttendeeSynonymer < LingoTestCase
 
   def test_basic
     @input = [wd('abtastzeiten|IDF', 'abtastzeit|s')]

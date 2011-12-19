@@ -50,19 +50,14 @@ end
 #
 #    TestCase erweitern für Attendee-Tests
 #
-class Test::Unit::TestCase
-
-  alias old_init initialize
+class LingoTestCase < Test::Unit::TestCase
 
   def initialize(fname)
-    old_init(fname)
+    super
 
     @attendee = $1.downcase if self.class.to_s =~ /TestAttendee(.*)/
-    @output = Array.new
-
-    Lingo.new
+    @lingo, @output = Lingo.new, []
   end
-
 
   def meet(att_cfg, check=true)
     std_cfg = {'name'=>@attendee.capitalize}
@@ -70,13 +65,13 @@ class Test::Unit::TestCase
     std_cfg.update({'out'=>'output'}) unless @output.nil?
 
     @output.clear
-    Lingo::meeting.reset
+    @lingo.meeting.reset
     inv_list = []
     inv_list << {'helper'=>{'name'=>'Helper', 'out'=>'lines', 'spool_from'=>@input}} unless @input.nil?
     inv_list << {@attendee=>std_cfg.update( att_cfg )}
     inv_list << {'helper'=>{'name'=>'Helper', 'in'=>'output', 'dump_to'=>@output}} unless @output.nil?
-    Lingo::meeting.invite( inv_list )
-    Lingo::meeting.start( 0 )
+    @lingo.meeting.invite(inv_list)
+    @lingo.meeting.start
 
     assert_equal(@expect, @output) if check
   end

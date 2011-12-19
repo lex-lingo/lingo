@@ -89,7 +89,7 @@ protected
     #  Wörterbuch bereitstellen
     mul_src = get_array('source')
     mul_mod = get_key('mode', 'all')
-    @mul_dic = Dictionary.new({'source'=>mul_src, 'mode'=>mul_mod}, @@library_config)
+    @mul_dic = Dictionary.new({'source'=>mul_src, 'mode'=>mul_mod}, @lingo)
 
     # combine lexical variants?
     #
@@ -100,9 +100,9 @@ protected
     @all_keys = @combine.is_a?(String) && @combine.downcase == 'all'
 
     #  Lexikalisierungs-Wörterbuch aus angegebenen Quellen ermitteln
-    lex_src, lex_mod = nil, nil
+    lex_src, lex_mod, databases = nil, nil, @lingo.dictionary_config['databases']
     mul_src.each { |src|
-      this_src, this_mod = @@library_config['databases'][src].values_at('use-lex', 'lex-mode')
+      this_src, this_mod = databases[src].values_at('use-lex', 'lex-mode')
       if lex_src.nil? || lex_src==this_src
         lex_src, lex_mod = this_src, this_mod
       else
@@ -110,13 +110,13 @@ protected
       end
     }
     lex_mod = get_key('lex-mode', lex_mod || 'first')
-    @lex_dic = Dictionary.new({'source'=>lex_src.split(STRING_SEPERATOR_PATTERN), 'mode'=>lex_mod}, @@library_config)
-    @lex_gra = Grammar.new({'source'=>lex_src.split(STRING_SEPERATOR_PATTERN), 'mode'=>lex_mod}, @@library_config)
+    @lex_dic = Dictionary.new({'source'=>lex_src.split(STRING_SEPERATOR_PATTERN), 'mode'=>lex_mod}, @lingo)
+    @lex_gra = Grammar.new({'source'=>lex_src.split(STRING_SEPERATOR_PATTERN), 'mode'=>lex_mod}, @lingo)
 
     if @combine && has_key?('use-syn')
       syn_src = get_array('use-syn')
       syn_mod = get_key('syn-mode', 'all')
-      @syn_dic = Dictionary.new({'source'=>syn_src, 'mode'=>syn_mod}, @@library_config)
+      @syn_dic = Dictionary.new({'source'=>syn_src, 'mode'=>syn_mod}, @lingo)
     end
     
     @number_of_expected_tokens_in_buffer = 3

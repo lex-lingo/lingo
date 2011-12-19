@@ -6,7 +6,7 @@ require_relative 'globals'
 #
 #    Attendee Sequencer
 #
-class TestAttendeeSequencer < Test::Unit::TestCase
+class TestAttendeeSequencer < LingoTestCase
 
   def test_basic
     @input = [

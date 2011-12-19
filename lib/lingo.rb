@@ -30,28 +30,20 @@ require 'fileutils'
 
 require_relative 'config'
 require_relative 'meeting'
+require_relative 'lingo/version'
 
 class Lingo
 
   BASE = File.expand_path('../..', __FILE__)
 
-  @@config = nil
-
   class << self
 
-    def config
-      new unless @@config
-      @@config
+    def talk
+      new.talk
     end
 
     def call(cfg = 'lingo-call.cfg', args = [])
-      lingo = new('-c', cfg, *args)
-      lingo.talk_to_me('')  # just to build the dicts
-      lingo
-    end
-
-    def meeting
-      @@meeting
+      new(['-c', cfg, *args]).tap { |lingo| lingo.talk_to_me('') }
     end
 
     def error(msg)
@@ -60,21 +52,17 @@ class Lingo
 
   end
 
+  attr_reader :config, :meeting, :dictionaries
+
+  attr_accessor :report_status, :report_time
+
   def initialize(*args)
     $stdin.sync = $stdout.sync = true
-    @@config, @@meeting = LingoConfig.new(*args), Meeting.new
+    @config, @meeting, @dictionaries = LingoConfig.new(*args), Meeting.new(self), []
   end
 
   def talk
-    @@meeting.invite(@@config['meeting/attendees'])
-
-    protocol  = 0
-    protocol += 1 if @@config['cmdline/status']
-    protocol += 2 if @@config['cmdline/perfmon']
-
-    @@meeting.start(protocol)
-
-    @@meeting.cleanup
+    meeting.run(config['meeting/attendees'], config['status'], config['perfmon'])
   end
 
   def talk_to_me(str)
@@ -97,6 +85,10 @@ class Lingo
     end
 
     res
+  end
+
+  def dictionary_config
+    @dictionary_config ||= config['language/dictionary']
   end
 
 end
