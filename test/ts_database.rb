@@ -3,7 +3,7 @@
 require 'test/unit'
 require 'lingo'
 
-class Txt2DbmConverter
+class Lingo::Txt2DbmConverter
   alias_method :original_initialize, :initialize
   def initialize(id, lingo, verbose = false)
     original_initialize(id, lingo, verbose)
@@ -250,14 +250,14 @@ Wort2=
 
   def compare(config, input, output = nil)
     FileUtils.mkdir_p(File.dirname(TEST_FILE))
-    File.open(TEST_FILE, 'w', :encoding => ENC) { |f| f.puts input }
+    File.open(TEST_FILE, 'w', :encoding => Lingo::ENC) { |f| f.puts input }
 
-    DbmFile.open(set_config('tst', config.merge('name' => TEST_FILE)), @lingo) { |dbm|
+    Lingo::DbmFile.open(set_config('tst', config.merge('name' => TEST_FILE)), @lingo) { |dbm|
       if block_given?
         yield dbm
       else
         store = dbm.to_h
-        store.delete(SYS_KEY)
+        store.delete(Lingo::SYS_KEY)
 
         assert_equal(output, store)
       end

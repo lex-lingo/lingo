@@ -25,6 +25,7 @@
 #
 #  Lex Lingo rules from here on
 
+class Lingo
 
 =begin rdoc
 == Variator
@@ -184,4 +185,6 @@ private
     variation_list + add_variations
   end
   
+end
+
 end

@@ -25,6 +25,7 @@
 #
 #  Lex Lingo rules from here on
 
+class Lingo
 
 =begin rdoc
 == Noneword_filter
@@ -101,4 +102,6 @@ protected
     end
   end
   
+end
+
 end

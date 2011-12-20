@@ -25,6 +25,7 @@
 #
 #  Lex Lingo rules from here on
 
+class Lingo
 
 =begin rdoc
 == Decomposer
@@ -98,5 +99,7 @@ protected
     end
     forward(obj)
   end
+
+end
 
 end

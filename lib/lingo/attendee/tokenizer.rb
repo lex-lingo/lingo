@@ -25,6 +25,7 @@
 #
 #  Lex Lingo rules from here on
 
+class Lingo
 
 =begin rdoc
 == Tokenizer
@@ -121,7 +122,7 @@ protected
       name = rule.keys[0]
       expr = rule.values[0].gsub(/_(\w+?)_/) {
         macros[$&] || begin
-          Object.const_get("UTF_8_#{$1.upcase}")
+          Lingo.const_get("UTF_8_#{$1.upcase}")
         rescue NameError
         end
       }
@@ -202,5 +203,7 @@ private
       }
     end
   end
+
+end
 
 end

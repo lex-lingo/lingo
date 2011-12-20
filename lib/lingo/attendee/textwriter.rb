@@ -25,6 +25,7 @@
 #
 #  Lex Lingo rules from here on
 
+class Lingo
 
 =begin rdoc
 == Textwriter
@@ -196,5 +197,7 @@ class Attendee::Formatter < Attendee::Textwriter
 
     @lir ? @lir_rec_buf << str : @file.print(str)
   end
+
+end
 
 end

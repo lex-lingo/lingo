@@ -25,17 +25,22 @@
 #
 #  Lex Lingo rules from here on
 
+class Lingo
 
 =begin rdoc
-== Wordsearcher
-Der Wordsearcher ist das Herzstück von Lingo. Er macht die Hauptarbeit und versucht 
-alle Token die nach einem sinnvollen Wort aussehen, in den ihm angegebenen 
-Wörterbüchern zu finden und aufzulösen. Dabei werden die im Wörterbuch gefundenen
-Grundformen inkl. Wortklassen an das Word-Objekt angehängt.
+== Abbreviator
+Die Erkennung von Abkürzungen kann auf vielfältige Weise erfolgen. In jedem Fall 
+sollte eine sichere Unterscheidung von einem Satzende-Punkt möglich sein.
+Der in Lingo gewählte Ansatz befreit den Tokenizer von dieser Arbeit und konzentriert
+die Erkennung in diesem Attendee.
+Sobald der Abbreviator im Datenstrom auf ein Punkt trifft (Token = <tt>:./PUNC:</tt>), 
+prüft er das vorhergehende Token auf eine gültige Abkürzung im Abkürzungs-Wörterbuch.
+Wird es als Abkürzung erkannt, dann wird das Token in ein Word gewandelt und das 
+Punkt-Token aus dem Zeichenstrom entfernt.
 
 === Mögliche Verlinkung
-Erwartet:: Daten vom Typ *Token* (andere werden einfach durchgereicht) z.B. von Tokenizer, Abbreviator
-Erzeugt:: Daten vom Typ *Word* für erkannte Wörter z.B. für Synonymer, Decomposer, Ocr_variator, Multiworder, Sequencer, Noneword_filter, Vector_filter
+Erwartet:: Daten des Typs *Token* z.B. von Tokenizer
+Erzeugt:: Leitet Token weiter und wandelt erkannte Abkürzungen in den Typ *Word* z.B. für Wordsearcher
 
 === Parameter
 Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der Voreinstellung). 
@@ -49,24 +54,26 @@ Alle anderen Parameter müssen zwingend angegeben werden.
 Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration <tt>t1.cfg</tt>
   meeting:
     attendees:
-      - textreader:   { out: lines, files: '$(files)' }
-      - tokenizer:    { in: lines, out: token }
-      - abbreviator:  { in: token, out: abbrev, source: 'sys-abk' }
-      - wordsearcher: { in: abbrev, out: words, source: 'sys-dic' }
-      - debugger:     { in: words, prompt: 'out>' }
+      - textreader:  { out: lines, files: '$(files)' }
+      - tokenizer:   { in: lines, out: token }
+      - abbreviator: { in: token, out: abbrev, source: 'sys-abk' }
+      - debugger:    { in: abbrev, prompt: 'out>' }
 ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
   out> *FILE('test.txt')
-  out> <Dies = [(dies/w)]>
-  out> <ist = [(sein/v)]>
+  out> :Dies/WORD:
+  out> :ist/WORD:
   out> <ggf. = [(gegebenenfalls/w)]>
-  out> <eine = [(einen/v), (ein/w)]> 
-  out> <Abk³rzung = [(abk³rzung/s)]>
+  out> :eine/WORD:
+  out> :Abk³rzung/WORD:
   out> :./PUNC:
   out> *EOL('test.txt')
-  out> *EOF('test.txt')
+  out> *EOF('test.txt')  
 =end
 
-class Attendee::Wordsearcher < Attendee
+
+class Attendee::Abbreviator < BufferedAttendee
+
+protected
 
   def init
     #  Wörterbuch bereitstellen
@@ -77,20 +84,41 @@ class Attendee::Wordsearcher < Attendee
 
 
   def control(cmd, par)
-    @dic.report.each_pair { |key, value|
-      set(key, value) 
-    } if cmd == STR_CMD_STATUS
+    @dic.report.each_pair { |key, value| set(key, value) } if cmd == STR_CMD_STATUS
+
+    #  Jedes Control-Object ist auch Auslöser der Verarbeitung
+    process_buffer
   end
 
 
-  def process(obj)
-    if obj.is_a?(Token) && obj.attr == TA_WORD
-      inc('Anzahl gesuchter Wörter')
-      word = @dic.find_word(obj.form)
-      inc('Anzahl gefundener Wörter') unless word.attr == WA_UNKNOWN
-      obj = word
+private
+
+  def process_buffer?
+    @buffer[-1].kind_of?(Token) && @buffer[-1].form == CHAR_PUNCT
+  end
+
+
+  def process_buffer
+    if @buffer.size < 2
+      forward_buffer
+      return
     end
-    forward(obj)
+
+    #  Wort vor dem Punkt im Abkürzungswörterbuch suchen
+    if @buffer[-2].kind_of?(Token)
+      inc('Anzahl gesuchter Abkürzungen')
+      abbr = @dic.find_word(@buffer[-2].form)
+      if abbr.attr == WA_IDENTIFIED
+        inc('Anzahl gefundener Abkürzungen')
+        abbr.form += CHAR_PUNCT
+        @buffer[-2] = abbr
+        @buffer.delete_at(-1)
+      end
+    end
+    
+    forward_buffer
   end
+  
+end
 
 end

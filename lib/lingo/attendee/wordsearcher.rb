@@ -25,17 +25,18 @@
 #
 #  Lex Lingo rules from here on
 
+class Lingo
 
 =begin rdoc
-== Synonymer
-Der Synonymer untersucht die von anderen Attendees ermittelten Grundformen eines Wortes
-und sucht in den angegebenen Wörterbüchern nach Relationen zu anderen Grundformen.
-Gefundene Relationen erweitern die Liste des Word-Objektes und werden zur späteren 
-Identifizierung mit der Wortklasse 'y' gekennzeichnet.
+== Wordsearcher
+Der Wordsearcher ist das Herzstück von Lingo. Er macht die Hauptarbeit und versucht 
+alle Token die nach einem sinnvollen Wort aussehen, in den ihm angegebenen 
+Wörterbüchern zu finden und aufzulösen. Dabei werden die im Wörterbuch gefundenen
+Grundformen inkl. Wortklassen an das Word-Objekt angehängt.
 
 === Mögliche Verlinkung
-Erwartet:: Daten vom Typ *Word* z.B. von Wordsearcher, Decomposer, Ocr_variator, Multiworder
-Erzeugt:: Daten vom Typ *Word* (ggf. um Relationen ergänzt) z.B. für Decomposer, Ocr_variator, Multiworder, Sequencer, Noneword_filter, Vector_filter
+Erwartet:: Daten vom Typ *Token* (andere werden einfach durchgereicht) z.B. von Tokenizer, Abbreviator
+Erzeugt:: Daten vom Typ *Word* für erkannte Wörter z.B. für Synonymer, Decomposer, Ocr_variator, Multiworder, Sequencer, Noneword_filter, Vector_filter
 
 === Parameter
 Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der Voreinstellung). 
@@ -44,8 +45,6 @@ Alle anderen Parameter müssen zwingend angegeben werden.
 <b>out</b>:: siehe allgemeine Beschreibung des Attendee
 <b>source</b>:: siehe allgemeine Beschreibung des Dictionary
 <b><i>mode</i></b>:: (Standard: all) siehe allgemeine Beschreibung des Dictionary
-<b><i>skip</i></b>:: (Standard: WA_UNKNOWN [siehe strings.rb]) Veranlasst den Synonymer 
-                     Wörter mit diesem Attribut zu überspringen.
 
 === Beispiele
 Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration <tt>t1.cfg</tt>
@@ -55,52 +54,46 @@ Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration <tt>t1
       - tokenizer:    { in: lines, out: token }
       - abbreviator:  { in: token, out: abbrev, source: 'sys-abk' }
       - wordsearcher: { in: abbrev, out: words, source: 'sys-dic' }
-      - synonymer:    { in: words, out: synos, source: 'sys-syn' }
       - debugger:     { in: words, prompt: 'out>' }
 ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
   out> *FILE('test.txt')
-  out> <Dies = [(dies/w), (das/y), (dies/y)]>
-  out> <ist = [(sein/v), ((sich) befinden/y), (dasein/y), (existenz/y), (sein/y), (vorhandensein/y)]>
-  out> <ggf. = [(gegebenenfalls/w), (bei bedarf/y), (gegebenenfalls/y), (ggf./y), (notfalls/y)]>
-  out> <eine = [(einen/v), (ein/w)]>
-  out> <Abk³rzung = [(abk³rzung/s), (abbreviation/y), (abbreviatur/y), (abk³rzung/y), (akronym/y), (kurzbezeichnung/y)]>
+  out> <Dies = [(dies/w)]>
+  out> <ist = [(sein/v)]>
+  out> <ggf. = [(gegebenenfalls/w)]>
+  out> <eine = [(einen/v), (ein/w)]> 
+  out> <Abk³rzung = [(abk³rzung/s)]>
   out> :./PUNC:
   out> *EOL('test.txt')
   out> *EOF('test.txt')
 =end
 
-
-class Attendee::Synonymer < Attendee
-
-protected
+class Attendee::Wordsearcher < Attendee
 
   def init
     #  Wörterbuch bereitstellen
     src = get_array('source')
     mod = get_key('mode', 'all')
     @dic = Dictionary.new({'source'=>src, 'mode'=>mod}, @lingo)
-
-    @skip = get_array('skip', WA_UNKNOWN).collect {|s| s.upcase }
   end
 
 
   def control(cmd, par)
-    @dic.report.each_pair { |k, v| set( k, v ) } if cmd == STR_CMD_STATUS
+    @dic.report.each_pair { |key, value|
+      set(key, value) 
+    } if cmd == STR_CMD_STATUS
   end
 
 
   def process(obj)
-    if obj.is_a?(Word) && @skip.index(obj.attr).nil?
+    if obj.is_a?(Token) && obj.attr == TA_WORD
       inc('Anzahl gesuchter Wörter')
-
-      #    finde die Synonyme für alle Lexicals des Wortes
-      synos = @dic.find_synonyms(obj)
-      obj.lexicals += synos.sort.uniq
-
-      inc('Anzahl erweiteter Wörter') if synos.size>0
-      add('Anzahl gefundener Synonyme', synos.size)
+      word = @dic.find_word(obj.form)
+      inc('Anzahl gefundener Wörter') unless word.attr == WA_UNKNOWN
+      obj = word
     end
     forward(obj)
   end
+
+end
 
 end

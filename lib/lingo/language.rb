@@ -25,10 +25,11 @@
 #
 #  Lex Lingo rules from here on
 
-
 require_relative 'const'
 require_relative 'modules'
 require_relative 'database'
+
+class Lingo
 
 =begin rdoc
 == LexicalHash
@@ -36,6 +37,7 @@ Die Klasse LexicalHash ermöglicht den Zugriff auf die Lingodatenbanken. Im Gege
 Klasse DbmFile, welche nur Strings als Ergebnis zurück gibt, wird hier als Ergebnis ein
 Array von Lexical-Objekten zurück gegeben.
 =end
+
 class LexicalHash
   include Cachable
   include Reportable
@@ -550,5 +552,7 @@ private
         return [stats, lexis.sort, seqs.join ]
     
     end
+
+end
 
 end

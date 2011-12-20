@@ -28,8 +28,8 @@
 require 'pathname'
 require 'fileutils'
 
-require_relative 'config'
-require_relative 'meeting'
+require_relative 'lingo/config'
+require_relative 'lingo/meeting'
 require_relative 'lingo/version'
 
 class Lingo
@@ -58,7 +58,7 @@ class Lingo
 
   def initialize(*args)
     $stdin.sync = $stdout.sync = true
-    @config, @meeting, @dictionaries = LingoConfig.new(*args), Meeting.new(self), []
+    @config, @meeting, @dictionaries = Config.new(*args), Meeting.new(self), []
   end
 
   def talk

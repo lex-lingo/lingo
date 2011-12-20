@@ -34,7 +34,7 @@ class TestAttendeeTextwriter < LingoTestCase
     @expect = [ "Dies,ist,eine,Zeile,.\n", "Dies,ist,eine,zweite,Zeile,.\n" ]
     meet({'ext'=>'tst',  'sep'=>','}, false)
 
-    @output = File.open('test/test.tst', :encoding => ENC).readlines
+    @output = File.open('test/test.tst', :encoding => Lingo::ENC).readlines
     assert_equal(@expect, @output)
   end
 
@@ -44,7 +44,7 @@ class TestAttendeeTextwriter < LingoTestCase
     @expect = [ "Dies-ist-eine-Zeile-.\n", "Dies-ist-eine-zweite-Zeile-.\n" ]
     meet({'ext'=>'yip',  'sep'=>'-'}, false)
 
-    @output = File.open('test/test.yip', :encoding => ENC).readlines
+    @output = File.open('test/test.yip', :encoding => Lingo::ENC).readlines
     assert_equal(@expect, @output)
   end
 
@@ -54,7 +54,7 @@ class TestAttendeeTextwriter < LingoTestCase
     @expect = [ "Dies\n", "ist\n", "eine\n", "Zeile\n", ".\n", "Dies\n", "ist\n", "eine\n", "zweite\n", "Zeile\n", ".\n" ]
     meet({'sep'=>"\n"}, false)
 
-    @output = File.open('test/test.txt2', :encoding => ENC).readlines
+    @output = File.open('test/test.txt2', :encoding => Lingo::ENC).readlines
     assert_equal(@expect, @output)
   end
 
@@ -84,7 +84,7 @@ FG-Projekt GERHARD.\r\n",
     ]
     meet({'ext'=>'csv', 'lir-format'=>nil}, false)
 
-    @output = File.open('test/lir.csv', :encoding => ENC).readlines
+    @output = File.open('test/lir.csv', :encoding => Lingo::ENC).readlines
     assert_equal(@expect, @output)
   end
 
@@ -94,7 +94,7 @@ FG-Projekt GERHARD.\r\n",
     @expect = [ "Nonwörter\n", "Nonsense" ]
     meet({'ext'=>'non', 'sep'=>"\n"}, false)
 
-    @output = File.open('test/text.non', :encoding => ENC).readlines
+    @output = File.open('test/text.non', :encoding => Lingo::ENC).readlines
     assert_equal(@expect, @output)
   end
 

@@ -25,43 +25,85 @@
 #
 #  Lex Lingo rules from here on
 
+class Lingo
 
 =begin rdoc
-== Helper
-Der Helper hilft bei automatischen Testreihen vor Releasefreigabe von Lingo. 
-Für den praktischen Einsatz ist er nicht vorgesehen.
+== Reportable
+Das Modul Reportable ermöglicht das setzen und hochzählen von statistischen Werten.
 =end
+module Reportable
 
-
-class Attendee::Helper < Attendee
-
-protected
-
-  def init
-    case
-      when has_key?('spool_from')
-        @spool_from = get_key('spool_from')
-        @spooler = true
-      when has_key?('dump_to')
-        @dump_to = get_key('dump_to')
-        @spooler = false
-      else
-        forward(STR_CMD_ERR, 'Weder dump_to noch spool_from-Attribut abgegeben')
-    end
-  end
-
-  
-  def control(cmd, param)
-    if @spooler
-      @spool_from.each { |obj| forward(obj) } if cmd==STR_CMD_TALK
-    else
-      @dump_to << AgendaItem.new(cmd, param)
-    end
+  def init_reportable
+    @counters = Hash.new(0)
+    @prefix = ''
   end
 
 
-  def process(obj)
-    @dump_to << obj unless @spooler
+  def report_prefix(prefix)
+    @prefix = prefix
   end
-  
+
+
+  def inc(counter)
+    @counters[counter] += 1
+  end
+
+
+  def add(counter, value)
+    @counters[counter] += value
+  end
+
+
+  def set(counter, value)
+    @counters[counter] = value
+  end
+
+  def get(counter)
+    @counters[counter]
+  end
+
+
+  def report
+    rep = Hash.new
+    @counters.each_pair { |stat, value|
+      name = (@prefix=='') ? stat : @prefix+': '+stat
+      rep[name] = value
+    }
+    rep
+  end
+
+end
+
+
+
+=begin rdoc
+== Cachable
+Das Modul Cachable ermöglicht das Verwerten von zwischengespeicherten Ergebnisse
+für einen schnelleren Zugriff.
+=end
+module Cachable
+
+  def init_cachable
+    @cache = Hash.new(false)
+  end
+
+
+  def hit?(key)
+    @cache.has_key?(key)
+  end
+
+
+  def store(key, value)
+    res = value.nil? ? nil : value.dup
+    @cache[key] = res
+    value
+  end
+
+
+  def retrieve(key)
+    value = @cache[key]
+    value.nil? ? nil : value.dup
+  end
+end
+
 end

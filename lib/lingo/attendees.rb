@@ -25,6 +25,12 @@
 #
 #  Lex Lingo rules from here on
 
+require_relative 'modules'
+require_relative 'language'
+require_relative 'const'
+require_relative 'types'
+
+class Lingo
 
 =begin rdoc
 == Attendee
@@ -66,11 +72,6 @@ was macht die abgeleitet klasse
 - schreibt verarbeitungsstatistiken
 
 =end
-
-require_relative 'modules'
-require_relative 'language'
-require_relative 'const'
-require_relative 'types'
 
 class Attendee
 
@@ -284,5 +285,7 @@ class BufferedAttendee < Attendee
   def deferred_insert(pos, obj)
     @deferred_inserts << BufferInsert.new(pos, obj)
   end
+
+end
 
 end

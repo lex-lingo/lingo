@@ -25,6 +25,8 @@
 #
 #  Lex Lingo rules from here on
 
+class Lingo
+
 ENC = 'UTF-8'
 
 STRING_SEPERATOR_PATTERN = /[; ,\|]/
@@ -126,3 +128,5 @@ FLD_SEP = '|'
 IDX_REF = '^'
 KEY_REF = '*'
 SYS_KEY = '~'
+
+end

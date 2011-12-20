@@ -26,12 +26,14 @@
 #  Lex Lingo rules from here on
 
 require 'yaml'
-require_relative 'lingo/cli'
+require_relative 'cli'
 
-class LingoConfig
+class Lingo
+
+class Config
 
   def initialize(*args)
-    @cli, @opts = Lingo::CLI.new, {}
+    @cli, @opts = CLI.new, {}
 
     @cli.execute(*args)
     @cli.options.each { |key, val| @opts[key.to_s] = val }
@@ -77,11 +79,13 @@ class LingoConfig
 
   def load_yaml_file(name, ext)
     file = name.sub(/(?:\.[^.]+)?\z/, '.' << ext)
-    file = File.join(Lingo::BASE, file) unless name.include?('/')
+    file = File.join(BASE, file) unless name.include?('/')
 
     @cli.quit("File not found: #{file}") unless File.readable?(file)
 
     File.open(file, :encoding => ENC) { |f| YAML.load(f) }
   end
+
+end
 
 end

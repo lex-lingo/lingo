@@ -32,6 +32,8 @@
   end
 }
 
+class Lingo
+
 =begin rdoc
 == Textreader
 Der Textreader ist eine klassische Datenquelle. Er liest eine oder mehrere Dateien  
@@ -232,5 +234,7 @@ private
     end
 
   end
+
+end
 
 end

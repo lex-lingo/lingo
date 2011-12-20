@@ -25,6 +25,7 @@
 #
 #  Lex Lingo rules from here on
 
+class Lingo
 
 =begin rdoc
 == Dehyphenizer
@@ -169,4 +170,6 @@ private
     @buffer.collect { |token| (token.form == CHAR_PUNCT) ? nil : 1 }.compact.size
   end
   
+end
+
 end

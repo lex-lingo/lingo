@@ -25,7 +25,7 @@
 #
 #  Lex Lingo rules from here on
 
-
+class Lingo
 
 #
 #    Die Klasse StringA ist die Basisklasse für weitere Klassen, die im Rahmen der 
@@ -285,4 +285,4 @@ class AgendaItem
 
 end
 
-
+end

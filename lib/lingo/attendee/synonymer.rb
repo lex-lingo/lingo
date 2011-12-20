@@ -25,21 +25,18 @@
 #
 #  Lex Lingo rules from here on
 
+class Lingo
 
 =begin rdoc
-== Abbreviator
-Die Erkennung von Abkürzungen kann auf vielfältige Weise erfolgen. In jedem Fall 
-sollte eine sichere Unterscheidung von einem Satzende-Punkt möglich sein.
-Der in Lingo gewählte Ansatz befreit den Tokenizer von dieser Arbeit und konzentriert
-die Erkennung in diesem Attendee.
-Sobald der Abbreviator im Datenstrom auf ein Punkt trifft (Token = <tt>:./PUNC:</tt>), 
-prüft er das vorhergehende Token auf eine gültige Abkürzung im Abkürzungs-Wörterbuch.
-Wird es als Abkürzung erkannt, dann wird das Token in ein Word gewandelt und das 
-Punkt-Token aus dem Zeichenstrom entfernt.
+== Synonymer
+Der Synonymer untersucht die von anderen Attendees ermittelten Grundformen eines Wortes
+und sucht in den angegebenen Wörterbüchern nach Relationen zu anderen Grundformen.
+Gefundene Relationen erweitern die Liste des Word-Objektes und werden zur späteren 
+Identifizierung mit der Wortklasse 'y' gekennzeichnet.
 
 === Mögliche Verlinkung
-Erwartet:: Daten des Typs *Token* z.B. von Tokenizer
-Erzeugt:: Leitet Token weiter und wandelt erkannte Abkürzungen in den Typ *Word* z.B. für Wordsearcher
+Erwartet:: Daten vom Typ *Word* z.B. von Wordsearcher, Decomposer, Ocr_variator, Multiworder
+Erzeugt:: Daten vom Typ *Word* (ggf. um Relationen ergänzt) z.B. für Decomposer, Ocr_variator, Multiworder, Sequencer, Noneword_filter, Vector_filter
 
 === Parameter
 Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der Voreinstellung). 
@@ -48,29 +45,33 @@ Alle anderen Parameter müssen zwingend angegeben werden.
 <b>out</b>:: siehe allgemeine Beschreibung des Attendee
 <b>source</b>:: siehe allgemeine Beschreibung des Dictionary
 <b><i>mode</i></b>:: (Standard: all) siehe allgemeine Beschreibung des Dictionary
+<b><i>skip</i></b>:: (Standard: WA_UNKNOWN [siehe strings.rb]) Veranlasst den Synonymer 
+                     Wörter mit diesem Attribut zu überspringen.
 
 === Beispiele
 Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration <tt>t1.cfg</tt>
   meeting:
     attendees:
-      - textreader:  { out: lines, files: '$(files)' }
-      - tokenizer:   { in: lines, out: token }
-      - abbreviator: { in: token, out: abbrev, source: 'sys-abk' }
-      - debugger:    { in: abbrev, prompt: 'out>' }
+      - textreader:   { out: lines, files: '$(files)' }
+      - tokenizer:    { in: lines, out: token }
+      - abbreviator:  { in: token, out: abbrev, source: 'sys-abk' }
+      - wordsearcher: { in: abbrev, out: words, source: 'sys-dic' }
+      - synonymer:    { in: words, out: synos, source: 'sys-syn' }
+      - debugger:     { in: words, prompt: 'out>' }
 ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
   out> *FILE('test.txt')
-  out> :Dies/WORD:
-  out> :ist/WORD:
-  out> <ggf. = [(gegebenenfalls/w)]>
-  out> :eine/WORD:
-  out> :Abk³rzung/WORD:
+  out> <Dies = [(dies/w), (das/y), (dies/y)]>
+  out> <ist = [(sein/v), ((sich) befinden/y), (dasein/y), (existenz/y), (sein/y), (vorhandensein/y)]>
+  out> <ggf. = [(gegebenenfalls/w), (bei bedarf/y), (gegebenenfalls/y), (ggf./y), (notfalls/y)]>
+  out> <eine = [(einen/v), (ein/w)]>
+  out> <Abk³rzung = [(abk³rzung/s), (abbreviation/y), (abbreviatur/y), (abk³rzung/y), (akronym/y), (kurzbezeichnung/y)]>
   out> :./PUNC:
   out> *EOL('test.txt')
-  out> *EOF('test.txt')  
+  out> *EOF('test.txt')
 =end
 
 
-class Attendee::Abbreviator < BufferedAttendee
+class Attendee::Synonymer < Attendee
 
 protected
 
@@ -79,43 +80,30 @@ protected
     src = get_array('source')
     mod = get_key('mode', 'all')
     @dic = Dictionary.new({'source'=>src, 'mode'=>mod}, @lingo)
+
+    @skip = get_array('skip', WA_UNKNOWN).collect {|s| s.upcase }
   end
 
 
   def control(cmd, par)
-    @dic.report.each_pair { |key, value| set(key, value) } if cmd == STR_CMD_STATUS
-
-    #  Jedes Control-Object ist auch Auslöser der Verarbeitung
-    process_buffer
+    @dic.report.each_pair { |k, v| set( k, v ) } if cmd == STR_CMD_STATUS
   end
 
 
-private
+  def process(obj)
+    if obj.is_a?(Word) && @skip.index(obj.attr).nil?
+      inc('Anzahl gesuchter Wörter')
 
-  def process_buffer?
-    @buffer[-1].kind_of?(Token) && @buffer[-1].form == CHAR_PUNCT
-  end
+      #    finde die Synonyme für alle Lexicals des Wortes
+      synos = @dic.find_synonyms(obj)
+      obj.lexicals += synos.sort.uniq
 
-
-  def process_buffer
-    if @buffer.size < 2
-      forward_buffer
-      return
+      inc('Anzahl erweiteter Wörter') if synos.size>0
+      add('Anzahl gefundener Synonyme', synos.size)
     end
-
-    #  Wort vor dem Punkt im Abkürzungswörterbuch suchen
-    if @buffer[-2].kind_of?(Token)
-      inc('Anzahl gesuchter Abkürzungen')
-      abbr = @dic.find_word(@buffer[-2].form)
-      if abbr.attr == WA_IDENTIFIED
-        inc('Anzahl gefundener Abkürzungen')
-        abbr.form += CHAR_PUNCT
-        @buffer[-2] = abbr
-        @buffer.delete_at(-1)
-      end
-    end
-    
-    forward_buffer
+    forward(obj)
   end
-  
+
+end
+
 end

@@ -33,6 +33,8 @@ require_relative 'types'
 require_relative 'utilities'
 require_relative 'modules'
 
+class Lingo
+
 class ShowProgress
 
   def initialize(msg, active = true)
@@ -616,5 +618,7 @@ class Txt2DbmConverter
 
     self
   end
+
+end
 
 end

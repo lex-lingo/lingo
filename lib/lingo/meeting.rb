@@ -47,6 +47,8 @@ require_relative 'attendee/vector_filter'
 require_relative 'attendee/wordsearcher'
 require_relative 'attendee/helper'
 
+class Lingo
+
 class Meeting
 
   def initialize(lingo)
@@ -133,5 +135,7 @@ class Meeting
   def cleanup
     @lingo.dictionaries.each(&:close)
   end
+
+end
 
 end

@@ -25,6 +25,8 @@
 #
 #  Lex Lingo rules from here on
 
+class Lingo
+
 =begin rdoc
 == WordSequence
 =end
@@ -187,5 +189,7 @@ class Attendee::Sequencer < BufferedAttendee
 
     res
   end
+
+end
 
 end

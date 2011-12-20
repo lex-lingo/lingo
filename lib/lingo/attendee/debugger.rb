@@ -25,6 +25,7 @@
 #
 #  Lex Lingo rules from here on
 
+class Lingo
 
 =begin rdoc
 == Debugger
@@ -111,3 +112,4 @@ protected
   
 end
 
+end

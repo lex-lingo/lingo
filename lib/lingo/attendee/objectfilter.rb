@@ -25,6 +25,7 @@
 #
 #  Lex Lingo rules from here on
 
+class Lingo
 
 =begin rdoc
 == Objectfilter
@@ -83,4 +84,6 @@ protected
     forward(obj) if eval(@obj_eval)
   end
   
+end
+
 end

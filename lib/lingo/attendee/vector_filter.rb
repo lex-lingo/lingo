@@ -25,6 +25,7 @@
 #
 #  Lex Lingo rules from here on
 
+class Lingo
 
 =begin rdoc
 == Vector_filter
@@ -151,4 +152,6 @@ private
     @word_count = 0 if @sort == 'sto_rel'
   end
   
+end
+
 end
