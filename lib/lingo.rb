@@ -25,6 +25,7 @@
 #
 #  Lex Lingo rules from here on
 
+require 'stringio'
 require 'pathname'
 require 'fileutils'
 
@@ -38,12 +39,12 @@ class Lingo
 
   class << self
 
-    def talk
-      new.talk
+    def talk(*args)
+      new(*args).talk
     end
 
-    def call(cfg = 'lingo-call.cfg', args = [])
-      new(['-c', cfg, *args]).tap { |lingo| lingo.talk_to_me('') }
+    def call(cfg = File.join(BASE, 'lingo-call.cfg'), args = [])
+      Call.new(['-c', cfg, *args]).tap { |lingo| lingo.talk('') }
     end
 
     def error(msg)
@@ -57,7 +58,6 @@ class Lingo
   attr_accessor :report_status, :report_time
 
   def initialize(*args)
-    $stdin.sync = $stdout.sync = true
     @config, @meeting, @dictionaries = Config.new(*args), Meeting.new(self), []
   end
 
@@ -65,30 +65,37 @@ class Lingo
     meeting.run(config['meeting/attendees'], config['status'], config['perfmon'])
   end
 
-  def talk_to_me(str)
-    begin
-      stdin,  $stdin  = $stdin,        StringIO.new(str)
-      stdout, $stdout = $stdout, out = StringIO.new
-
-      Dir.chdir(BASE) { talk }
-    ensure
-      $stdin, $stdout = stdin, stdout
-    end
-
-    res = out.string.split($/)
-
-    if block_given?
-      res.map!(&Proc.new)
-    else
-      res.sort!
-      res.uniq!
-    end
-
-    res
-  end
-
   def dictionary_config
     @dictionary_config ||= config['language/dictionary']
+  end
+
+  class Call < Lingo
+
+    def initialize(args = [])
+      super(args, StringIO.new, StringIO.new, StringIO.new)
+    end
+
+    def talk(str)
+      config.stdin.reopen(str)
+
+      Dir.chdir(BASE) { super() }
+
+      res = %w[stdout stderr].map! { |key|
+        config.send(key).
+          tap { |io| io.rewind }.
+          readlines.each(&:chomp!)
+      }.flatten!
+
+      if block_given?
+        res.map!(&Proc.new)
+      else
+        res.sort!
+        res.uniq!
+      end
+
+      res
+    end
+
   end
 
 end

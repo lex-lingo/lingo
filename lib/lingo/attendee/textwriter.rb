@@ -77,10 +77,9 @@ ergibt die Ausgabe in der Datei <tt>test.vec</tt>
   0.01923 umleitung
 =end
 
-
 class Attendee::Textwriter < Attendee
 
-protected
+  protected
 
   def init
     @ext = get_key('ext', 'txt2')
@@ -88,7 +87,6 @@ protected
     @sep = @lir ? ' ' : eval("\"#{@config['sep'] || ' '}\"")
     @no_sep, @no_puts = true, false
   end
-
 
   def control(cmd, par)
     case cmd
@@ -99,30 +97,30 @@ protected
 
       if stdout?(@ext)
         @filename = @ext
-        @file = $stdout
+        @file = @lingo.config.stdout
       else
         @filename = par.sub(/(\.[^.]+)?$/, '.'+@ext)
         @file = File.new(@filename,'w')
         inc('Anzahl Dateien')
       end
-      
+
       @lir_rec_no = ''
       @lir_rec_buf = Array.new
-      
+
     when STR_CMD_RECORD
       @no_sep = true
       if @lir
         flush_lir_buffer
         @lir_rec_no = par
       end
-      
+
     when STR_CMD_EOL
       @no_sep = true
       unless @lir
         @file.puts unless @no_puts # unless @sep=="\n"
         inc('Anzahl Zeilen')
       end
-      
+
     when STR_CMD_EOF
       flush_lir_buffer if @lir
 
@@ -132,7 +130,6 @@ protected
       end
     end
   end
-
 
   def process(obj)
     if @lir

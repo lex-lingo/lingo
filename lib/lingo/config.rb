@@ -67,6 +67,18 @@ class Config
     (self[nodes_to_key(nodes)] ||= {})[node] = value
   end
 
+  def stdin
+    @cli.stdin
+  end
+
+  def stdout
+    @cli.stdout
+  end
+
+  def stderr
+    @cli.stderr
+  end
+
   private
 
   def key_to_nodes(key)

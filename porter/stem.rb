@@ -52,8 +52,7 @@ def checkSingleRule(word, condition, matchExp, replacement)
     while /\*(\w)/.match(evalCondition)
       char = $1
       if char.downcase == char
-        puts "unbekannter Buchstabe %s in Regel: %" % [char, condition]
-        exit
+        abort "unbekannter Buchstabe %s in Regel: %" % [char, condition]
       end
       
       bool = (stem[-1..-1].upcase == char)
@@ -85,15 +84,12 @@ def checkAllRules(word, rules)
   actualRuleSet = sequence.pop.to_s
 
   begin
-#    puts "processing rule set %s" % actualRuleSet
-
     label = nil
 
     rules[actualRuleSet].each do |rule|
       unless /^(\(.+\)){0,1}\s*(\S*)\s*->\s*(\S*?)\s*(?:goto\((\S+)\))*\s*$/.match(rule)
         unless /^\s*goto\s*\(\s*(\S+)\s*\)$/.match(rule)
-          puts "ungültige Regel: %s" % rule
-          exit
+          abort "ungültige Regel: %s" % rule
         else
           label = $1
           break
@@ -133,9 +129,9 @@ p checkAllRules(word, $rules)
 def test(word, stem)
   result = checkAllRules(word, $rules)
   if stem != result
-    puts "Falsches Wort %s, Stem %s, Result %s" % [word, stem, result]
+    warn "Falsches Wort %s, Stem %s, Result %s" % [word, stem, result]
   else
-    puts "Korrekt: Wort %s, Stem %s" % [word, stem]
+    warn "Korrekt: Wort %s, Stem %s" % [word, stem]
   end
 end
 

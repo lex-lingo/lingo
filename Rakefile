@@ -91,8 +91,8 @@ def test_ref(name, cfg = name)
   cmd = %W[lingo.rb -c #{cfg} txt/#{name}.txt]
   continue, msg = 0, ["Command failed: #{cmd.join(' ')}"]
 
-  Process.ruby(*cmd) { |_, _, *ios|
-    ios.each { |io| msg << io.read }
+  Process.ruby(*cmd) { |_, _, o, e|
+    IO.interact({}, { o => msg, e => msg })
   }.success? or abort msg.join("\n\n")
 
   Dir["test/ref/#{name}.*"].each { |ref|

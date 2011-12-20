@@ -173,7 +173,7 @@ class Word < StringA
     if lexis.is_a?(Array)
       @lexicals = lexis.sort.uniq
     else
-      puts "Falscher Typ bei Zuweisung"
+      raise 'Falscher Typ bei Zuweisung'
     end
   end
 

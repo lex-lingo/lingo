@@ -101,13 +101,13 @@ protected
   
   def control(cmd, par)
     if cmd!=STR_CMD_STATUS
-      puts "#{@prompt} #{AgendaItem.new(cmd, par).inspect}" if eval(@cmd_eval)
+      @lingo.config.stderr.puts "#{@prompt} #{AgendaItem.new(cmd, par).inspect}" if eval(@cmd_eval)
     end
   end
   
   
   def process(obj)
-    puts "#{@prompt} #{obj.inspect}" if eval(@obj_eval)
+    @lingo.config.stderr.puts "#{@prompt} #{obj.inspect}" if eval(@obj_eval)
   end
   
 end

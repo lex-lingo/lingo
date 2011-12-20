@@ -37,8 +37,8 @@ class Lingo
 
 class ShowProgress
 
-  def initialize(msg, active = true)
-    @active, format = active, ' [%3d%%]'
+  def initialize(msg, active = true, out = $stderr)
+    @active, @out, format = active, out, ' [%3d%%]'
 
     # To get the length of the formatted string we have
     # to actually substitute the place-holder(s).
@@ -80,7 +80,7 @@ class ShowProgress
   end
 
   def print(*args)
-    $stderr.print(*args) if @active
+    @out.print(*args) if @active
   end
 
 end
@@ -543,7 +543,7 @@ class Txt2DbmConverter
     @destination = DbmFile.new(id, lingo, false)
 
     #    Ausgabesteuerung
-    @progress = ShowProgress.new(@config['name'], verbose)
+    @progress = ShowProgress.new(@config['name'], verbose, lingo.config.stderr)
 
     #  Lexikalisierungen für Mehrwortgruppen vorbereiten
     lex_dic = @config['use-lex']

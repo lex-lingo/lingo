@@ -138,7 +138,7 @@ class Attendee
       #    Standardprotokollinformationen ausgeben
       when STR_CMD_STATUS
         if @lingo.report_time
-          $stderr.puts 'Perf: %-15s => %7d commands in %s (%s/cmd),  %8d objects in %s (%s/obj)' % [
+          @lingo.config.stderr.puts 'Perf: %-15s => %7d commands in %s (%s/cmd),  %8d objects in %s (%s/obj)' % [
             @config['name'],
             get(STA_NUM_COMMANDS),
             seconds_to_str(get(STA_TIM_COMMANDS)),
@@ -149,7 +149,7 @@ class Attendee
           ]
         end
         if @lingo.report_status
-          $stderr.puts "Attendee <%s> was connected from '%s' to '%s' reporting...\n" % @config.values_at(*%w[name in out]),
+          @lingo.config.stderr.puts "Attendee <%s> was connected from '%s' to '%s' reporting...\n" % @config.values_at(*%w[name in out]),
             report.sort.map { |info| " #{info[0]} = #{info[1]}" }, nil
         end
         forward(obj.cmd, obj.param)

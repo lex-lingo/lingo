@@ -157,8 +157,9 @@ private
   end
 
   def filter(filename, &block)
-    file = stdin?(filename) ? $stdin.set_encoding(ENC) :
-           File.open(filename, 'rb', :encoding => ENC)
+    file = stdin?(filename) ?
+      @lingo.config.stdin.set_encoding(ENC) :
+      File.open(filename, 'rb', :encoding => ENC)
 
     file = case @filter == true ? file_type(filename, file) : @filter.to_s
       when /html/ then filter_html(file)

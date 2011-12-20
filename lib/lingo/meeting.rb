@@ -120,9 +120,9 @@ class Meeting
     }
 
     if report_status || report_time
-      $stderr.puts "Require protocol...\n#{separator = '-' * 61}"
+      @lingo.config.stderr.puts "Require protocol...\n#{separator = '-' * 61}"
       @attendees.first.listen(AgendaItem.new(STR_CMD_STATUS))
-      $stderr.puts "#{separator}\nThe duration of the meeting was #{time.to_hms(2)}"
+      @lingo.config.stderr.puts "#{separator}\nThe duration of the meeting was #{time.to_hms(2)}"
     end
   end
 
