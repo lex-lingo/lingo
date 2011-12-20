@@ -168,6 +168,7 @@ class Lingo
     def init
       super
 
+      @ext    = get_key('ext', '-')
       @format = get_key('format', '%s')
       @map    = get_key('map', Hash.new { |h, k| h[k] = k })
 
