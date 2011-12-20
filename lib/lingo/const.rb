@@ -1,5 +1,6 @@
 # encoding: utf-8
 
+#--
 # LINGO ist ein Indexierungssystem mit Grundformreduktion, Kompositumzerlegung,
 # Mehrworterkennung und Relationierung.
 #
@@ -24,6 +25,7 @@
 # welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
 #
 # Lex Lingo rules from here on
+#++
 
 class Lingo
 

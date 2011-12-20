@@ -1,5 +1,6 @@
 # encoding: utf-8
 
+#--
 # LINGO ist ein Indexierungssystem mit Grundformreduktion, Kompositumzerlegung,
 # Mehrworterkennung und Relationierung.
 #
@@ -24,183 +25,181 @@
 # welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
 #
 # Lex Lingo rules from here on
+#++
 
 class Lingo
 
-=begin rdoc
-== Tokenizer
-Der Tokenizer zerlegt eine Textzeile in einzelne Token. Dies ist notwendig,
-damit nachfolgende Attendees die Textdatei häppchenweise verarbeiten können.
+  # Der Tokenizer zerlegt eine Textzeile in einzelne Token. Dies ist notwendig,
+  # damit nachfolgende Attendees die Textdatei häppchenweise verarbeiten können.
+  #
+  # === Mögliche Verlinkung
+  # Erwartet:: Daten des Typs *String* (Textzeilen) z.B. von Textreader
+  # Erzeugt:: Daten des Typs *Token* z.B. für Abbreviator, Wordsearcher
+  #
+  # === Parameter
+  # Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der Voreinstellung).
+  # Alle anderen Parameter müssen zwingend angegeben werden.
+  # <b>in</b>:: siehe allgemeine Beschreibung des Attendee.
+  # <b>out</b>:: siehe allgemeine Beschreibung des Attendee
+  #
+  # === Konfiguration
+  # Der Tokenizer benötigt zur Identifikation einzelner Token Regeln, nach denen er
+  # arbeiten soll. Die benötigten Regeln werden aufgrund des Umfangs nicht als Parameter,
+  # sondern in der Sprachkonfiguration hinterlegt, die sich standardmäßig in der Datei
+  # <tt>de.lang</tt> befindet (YAML-Format).
+  #   language:
+  #     attendees:
+  #       tokenizer:
+  #         regulars:
+  #           - _CHR_: '\wÄÖÜÁÂÀÉÊÈÍÎÌÓÔÒÚÛÙÝäöüáâàéêèíîìóôòúûùý'
+  #           - NUMS:  '[+-]?(\d{4,}|\d{1,3}(\.\d{3,3})*)(\.|(,\d+)?%?)'
+  #           - URLS:  '((mailto:|(news|http|https|ftp|ftps)://)\S+|^(www(\.\S+)+)|\S+([\._]\S+)+@\S+(\.\S+)+)'
+  #           - ABRV:  '(([_CHR_]+\.)+)[_CHR_]+'
+  #           - ABRS:  '(([_CHR_]{1,1}\.)+)(?!\.\.)'
+  #           - WORD:  '[_CHR_\d]+'
+  #           - PUNC:  '[!,\.:;?]'
+  #           - OTHR:  '[!\"#$%&()*\+,\-\./:;<=>?@\[\\\]^_`{|}~´]'
+  #           - HELP:  '.*'
+  # Die Regeln werden in der angegebenen Reihenfolge abgearbeitet, solange bis ein Token
+  # erkannt wurde. Sollte keine Regel zutreffen, so greift die letzt Regel +HELP+ in jedem
+  # Fall.
+  # Regeln, deren Name in Unterstriche eingefasst sind, werden als Makro interpretiert.
+  # Makros werden genutzt, um lange oder sich wiederholende Bestandteile von Regeln
+  # einmalig zu definieren und in den Regeln über den Makronamen eine Auflösung zu forcieren.
+  # Makros werden selber nicht für die Erkennung von Token eingesetzt.
+  #
+  # === Generierte Kommandos
+  # Damit der nachfolgende Datenstrom einwandfrei verarbeitet werden kann, generiert der Tokenizer
+  # Kommandos, die mit in den Datenstrom eingefügt werden.
+  # <b>*EOL(<dateiname>)</b>:: Kennzeichnet das Ende einer Textzeile, da die Information ansonsten
+  # für nachfolgende Attendees verloren wäre.
+  #
+  # === Beispiele
+  # Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration <tt>t1.cfg</tt>
+  #   meeting:
+  #     attendees:
+  #       - textreader: { out: lines, files: '$(files)' }
+  #       - tokenizer:  { in: lines, out: token }
+  #       - debugger:   { in: token, prompt: 'out>' }
+  # ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
+  #   out> *FILE('test.txt')
+  #   out> :Dies/WORD:
+  #   out> :ist/WORD:
+  #   out> :eine/WORD:
+  #   out> :Zeile/WORD:
+  #   out> :./PUNC:
+  #   out> *EOL('test.txt')
+  #   out> :Dies/WORD:
+  #   out> :ist/WORD:
+  #   out> :noch/WORD:
+  #   out> :eine/WORD:
+  #   out> :./PUNC:
+  #   out> *EOL('test.txt')
+  #   out> *EOF('test.txt')
 
-=== Mögliche Verlinkung
-Erwartet:: Daten des Typs *String* (Textzeilen) z.B. von Textreader
-Erzeugt:: Daten des Typs *Token* z.B. für Abbreviator, Wordsearcher
+  class Attendee::Tokenizer < Attendee
 
-=== Parameter
-Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der Voreinstellung).
-Alle anderen Parameter müssen zwingend angegeben werden.
-<b>in</b>:: siehe allgemeine Beschreibung des Attendee.
-<b>out</b>:: siehe allgemeine Beschreibung des Attendee
+    protected
 
-=== Konfiguration
-Der Tokenizer benötigt zur Identifikation einzelner Token Regeln, nach denen er
-arbeiten soll. Die benötigten Regeln werden aufgrund des Umfangs nicht als Parameter,
-sondern in der Sprachkonfiguration hinterlegt, die sich standardmäßig in der Datei
-<tt>de.lang</tt> befindet (YAML-Format).
-  language:
-    attendees:
-      tokenizer:
-        regulars:
-          - _CHR_: '\wÄÖÜÁÂÀÉÊÈÍÎÌÓÔÒÚÛÙÝäöüáâàéêèíîìóôòúûùý'
-          - NUMS:  '[+-]?(\d{4,}|\d{1,3}(\.\d{3,3})*)(\.|(,\d+)?%?)'
-          - URLS:  '((mailto:|(news|http|https|ftp|ftps)://)\S+|^(www(\.\S+)+)|\S+([\._]\S+)+@\S+(\.\S+)+)'
-          - ABRV:  '(([_CHR_]+\.)+)[_CHR_]+'
-          - ABRS:  '(([_CHR_]{1,1}\.)+)(?!\.\.)'
-          - WORD:  '[_CHR_\d]+'
-          - PUNC:  '[!,\.:;?]'
-          - OTHR:  '[!\"#$%&()*\+,\-\./:;<=>?@\[\\\]^_`{|}~´]'
-          - HELP:  '.*'
-Die Regeln werden in der angegebenen Reihenfolge abgearbeitet, solange bis ein Token
-erkannt wurde. Sollte keine Regel zutreffen, so greift die letzt Regel +HELP+ in jedem
-Fall.
-Regeln, deren Name in Unterstriche eingefasst sind, werden als Makro interpretiert.
-Makros werden genutzt, um lange oder sich wiederholende Bestandteile von Regeln
-einmalig zu definieren und in den Regeln über den Makronamen eine Auflösung zu forcieren.
-Makros werden selber nicht für die Erkennung von Token eingesetzt.
+    def init
+      # Regular Expressions für Token-Erkennung einlesen
+      regulars = get_key('regulars', '')
+      forward(STR_CMD_ERR, 'regulars nicht definiert') unless regulars
 
-=== Generierte Kommandos
-Damit der nachfolgende Datenstrom einwandfrei verarbeitet werden kann, generiert der Tokenizer
-Kommandos, die mit in den Datenstrom eingefügt werden.
-<b>*EOL(<dateiname>)</b>:: Kennzeichnet das Ende einer Textzeile, da die Information ansonsten
-für nachfolgende Attendees verloren wäre.
+      @space = get_key('space', false)
+      @tags = get_key('tags', true)
 
-=== Beispiele
-Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration <tt>t1.cfg</tt>
-  meeting:
-    attendees:
-      - textreader: { out: lines, files: '$(files)' }
-      - tokenizer:  { in: lines, out: token }
-      - debugger:   { in: token, prompt: 'out>' }
-ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
-  out> *FILE('test.txt')
-  out> :Dies/WORD:
-  out> :ist/WORD:
-  out> :eine/WORD:
-  out> :Zeile/WORD:
-  out> :./PUNC:
-  out> *EOL('test.txt')
-  out> :Dies/WORD:
-  out> :ist/WORD:
-  out> :noch/WORD:
-  out> :eine/WORD:
-  out> :./PUNC:
-  out> *EOL('test.txt')
-  out> *EOF('test.txt')
-=end
+      # default rules
+      @rules = [['SPAC', /^\s+/]]
+      @rules << ['HTML', /^<[^>]+>/] unless @tags
 
-class Attendee::Tokenizer < Attendee
+      # Mit _xxx_ gekennzeichnete Makros anwenden und Expressions ergänzen und umwandeln
+      macros = {}
 
-protected
+      regulars.each { |rule|
+        name = rule.keys[0]
+        expr = rule.values[0].gsub(/_(\w+?)_/) {
+          macros[$&] || begin
+            Lingo.const_get("UTF_8_#{$1.upcase}")
+          rescue NameError
+          end
+        }
 
-  def init
-    # Regular Expressions für Token-Erkennung einlesen
-    regulars = get_key('regulars', '')
-    forward(STR_CMD_ERR, 'regulars nicht definiert') unless regulars
-
-    @space = get_key('space', false)
-    @tags = get_key('tags', true)
-
-    # default rules
-    @rules = [['SPAC', /^\s+/]]
-    @rules << ['HTML', /^<[^>]+>/] unless @tags
-
-    # Mit _xxx_ gekennzeichnete Makros anwenden und Expressions ergänzen und umwandeln
-    macros = {}
-
-    regulars.each { |rule|
-      name = rule.keys[0]
-      expr = rule.values[0].gsub(/_(\w+?)_/) {
-        macros[$&] || begin
-          Lingo.const_get("UTF_8_#{$1.upcase}")
-        rescue NameError
+        if name =~ /^_\w+_$/    # is a macro
+          macros[name] = expr if name =~ /^_\w+_$/
+        else
+          @rules << [name, Regexp.new('^'+expr)]
         end
       }
 
-      if name =~ /^_\w+_$/    # is a macro
-        macros[name] = expr if name =~ /^_\w+_$/
-      else
-        @rules << [name, Regexp.new('^'+expr)]
-      end
-    }
-
-    # Der Tokenizer gibt jedes Zeilenende als Information weiter, sofern es sich
-    # nicht um die Verarbeitung einer LIR-Datei handelt. Im Falle einer normalen Datei
-    # wird der Dateiname gespeichert und als Kennzeichen für die Erzeugung von
-    # Zeilenende-Nachrichten herangezogen.
-    @filename = nil
-  end
-
-  def control(cmd, param)
-    case cmd
-      when STR_CMD_FILE then @filename = param
-      when STR_CMD_LIR  then @filename = nil
-      when STR_CMD_EOF  then @cont = false
+      # Der Tokenizer gibt jedes Zeilenende als Information weiter, sofern es sich
+      # nicht um die Verarbeitung einer LIR-Datei handelt. Im Falle einer normalen Datei
+      # wird der Dateiname gespeichert und als Kennzeichen für die Erzeugung von
+      # Zeilenende-Nachrichten herangezogen.
+      @filename = nil
     end
-  end
 
-  def process(obj)
-    if obj.is_a?(String)
-      inc('Anzahl Zeilen')
-
-      tokenize(obj) { |form, attr|
-        token = Token.new(form, attr)
-
-        inc('Anzahl Muster '+token.attr)
-        inc('Anzahl Token')
-
-        forward(token)
-      }
-
-      forward(STR_CMD_EOL, @filename) if @filename
-    else
-      forward(obj)
+    def control(cmd, param)
+      case cmd
+        when STR_CMD_FILE then @filename = param
+        when STR_CMD_LIR  then @filename = nil
+        when STR_CMD_EOF  then @cont = false
+      end
     end
-  end
 
-private
+    def process(obj)
+      if obj.is_a?(String)
+        inc('Anzahl Zeilen')
 
-  # tokenize("Eine Zeile.")  ->  [:Eine/WORD:, :Zeile/WORD:, :./PUNC:]
-  def tokenize(textline)
-    if @cont
-      name = 'HTML'
+        tokenize(obj) { |form, attr|
+          token = Token.new(form, attr)
 
-      if textline =~ /^[^<>]*>/
-        yield $~[0], name
-        textline = $'
-        @cont = false
+          inc('Anzahl Muster '+token.attr)
+          inc('Anzahl Token')
+
+          forward(token)
+        }
+
+        forward(STR_CMD_EOL, @filename) if @filename
       else
-        yield textline, name
-        return
+        forward(obj)
       end
-    else
-      if textline =~ /<[^<>]*$/
-        yield $~[0], name
-        textline = $`
-        @cont = true
-      end
-    end unless @tags
+    end
 
-    until textline.empty?
-      @rules.each { |name, expr|
-        if textline =~ expr
-          yield $~[0], name if name != 'SPAC' || @space
+    private
+
+    # tokenize("Eine Zeile.")  ->  [:Eine/WORD:, :Zeile/WORD:, :./PUNC:]
+    def tokenize(textline)
+      if @cont
+        name = 'HTML'
+
+        if textline =~ /^[^<>]*>/
+          yield $~[0], name
           textline = $'
-          break
+          @cont = false
+        else
+          yield textline, name
+          return
         end
-      }
-    end
-  end
+      else
+        if textline =~ /<[^<>]*$/
+          yield $~[0], name
+          textline = $`
+          @cont = true
+        end
+      end unless @tags
 
-end
+      until textline.empty?
+        @rules.each { |name, expr|
+          if textline =~ expr
+            yield $~[0], name if name != 'SPAC' || @space
+            textline = $'
+            break
+          end
+        }
+      end
+    end
+
+  end
 
 end

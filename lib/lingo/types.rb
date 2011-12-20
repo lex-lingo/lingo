@@ -1,5 +1,6 @@
 # encoding: utf-8
 
+#--
 # LINGO ist ein Indexierungssystem mit Grundformreduktion, Kompositumzerlegung,
 # Mehrworterkennung und Relationierung.
 #
@@ -24,255 +25,261 @@
 # welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
 #
 # Lex Lingo rules from here on
+#++
 
 class Lingo
 
-#
-# Die Klasse StringA ist die Basisklasse für weitere Klassen, die im Rahmen der
-# Objektstruktur eines Wortes benötigt werden. Die Klasse stellt eine Zeichenkette bereit,
-# die mit einem Attribut versehen werden kann.
-#
-class StringA
-  include Comparable
-  attr_accessor :form, :attr
+  # Die Klasse StringA ist die Basisklasse für weitere Klassen, die im Rahmen der
+  # Objektstruktur eines Wortes benötigt werden. Die Klasse stellt eine Zeichenkette bereit,
+  # die mit einem Attribut versehen werden kann.
 
-  def initialize(form, attr='-')
-    @form = form || ''
-    @attr = attr || ''
-    self
-  end
+  class StringA
 
-  def <=>(other)
-    return 1 if other.nil?
-    if @form==other.form
-      @attr<=>other.attr
-    else
-      @form<=>other.form
+    include Comparable
+
+    attr_accessor :form, :attr
+
+    def initialize(form, attr='-')
+      @form = form || ''
+      @attr = attr || ''
     end
+
+    def <=>(other)
+      return 1 if other.nil?
+      if @form==other.form
+        @attr<=>other.attr
+      else
+        @form<=>other.form
+      end
+    end
+
+    def to_s
+      @form + '/' + @attr
+    end
+
+    def inspect
+      to_s
+    end
+
+    def hash
+      to_s.hash
+    end
+
+    def eql?(other)
+      self.class.equal?(other.class) && to_s == other.to_s
+    end
+
+    alias_method :==, :eql?
+
   end
 
-  def to_s
-    @form + '/' + @attr
+  # Die Klasse Token, abgeleitet von der Klasse StringA, stellt den Container
+  # für ein einzelnes Wort eines Textes dar. Das Wort wird mit einem Attribut versehen,
+  # welches der Regel entspricht, die dieses Wort identifiziert hat.
+  #
+  # Steht z.B. in ruby.cfg eine Regel zur Erkennung einer Zahl, die mit NUM bezeichnet wird,
+  # so wird dies dem Token angeheftet, z.B. Token.new('100', 'NUM') -> #100/NUM#
+
+  class Token < StringA
+
+    def to_s
+      ':' + super + ':'
+    end
+
   end
 
-  def inspect
-    to_s
-  end
+  # Die Klasse Lexical, abgeleitet von der Klasse StringA, stellt den Container
+  # für eine Grundform eines Wortes bereit, welches mit der Wortklasse versehen ist.
+  #
+  # Wird z.B. aus dem Wörterbuch eine Grundform gelesen, so wird dies in Form eines
+  # Lexical-Objektes zurückgegeben, z.B. Lexical.new('Rennen', 'S') -> (rennen/s)
 
-  def hash
-    to_s.hash
-  end
+  class Lexical < StringA
 
-  def eql?(other)
-    self.class.equal?(other.class) && to_s == other.to_s
-  end
-
-  alias_method :==, :eql?
-
-end
-
-#
-# Die Klasse Token, abgeleitet von der Klasse StringA, stellt den Container
-# für ein einzelnes Wort eines Textes dar. Das Wort wird mit einem Attribut versehen,
-# welches der Regel entspricht, die dieses Wort identifiziert hat.
-#
-# Steht z.B. in ruby.cfg eine Regel zur Erkennung einer Zahl, die mit NUM bezeichnet wird,
-# so wird dies dem Token angeheftet, z.B. Token.new('100', 'NUM') -> #100/NUM#
-#
-class Token < StringA
-  def to_s;  ':' + super + ':';  end
-end
-
-#
-# Die Klasse Lexical, abgeleitet von der Klasse StringA, stellt den Container
-# für eine Grundform eines Wortes bereit, welches mit der Wortklasse versehen ist.
-#
-# Wird z.B. aus dem Wörterbuch eine Grundform gelesen, so wird dies in Form eines
-# Lexical-Objektes zurückgegeben, z.B. Lexical.new('Rennen', 'S') -> (rennen/s)
-#
-class Lexical < StringA
-
-  def <=>(other)
-#v TODO: v1.5.1
-    return 1 unless other.is_a?(Lexical)
-#v
-    if self.attr==other.attr
-      # gleiche attribute
-      self.form<=>other.form
-    else
-      case  # leeres attribut unterliegt
-      when self.attr==''    then  1
-      when  other.attr==''  then  -1
-      else  # vergleich der attribute
-        ss = LA_SORTORDER.index(self.attr) || -1 # ' -weavsk'
-        os = LA_SORTORDER.index(other.attr) || -1
-        case
-        when ss==-1 && os==-1  # beides unpriviligierte attribute (und nicht gleich)
-          self.attr<=>other.attr
-        when ss==-1 && os>-1  then  1
-        when ss>-1 && os==-1  then  -1
-        when ss>-1 && os>-1      # beides priviligierte attribute (und nicht gleich)
-          os<=>ss
+    def <=>(other)
+      #v TODO: v1.5.1
+      return 1 unless other.is_a?(Lexical)
+      #v
+      if self.attr==other.attr
+        # gleiche attribute
+        self.form<=>other.form
+      else
+        case  # leeres attribut unterliegt
+          when self.attr==''   then  1
+          when other.attr==''  then  -1
+          else  # vergleich der attribute
+            ss = LA_SORTORDER.index(self.attr) || -1 # ' -weavsk'
+            os = LA_SORTORDER.index(other.attr) || -1
+            case
+              when ss==-1 && os==-1  # beides unpriviligierte attribute (und nicht gleich)
+                self.attr<=>other.attr
+              when ss==-1 && os>-1  then  1
+              when ss>-1 && os==-1  then  -1
+              when ss>-1 && os>-1      # beides priviligierte attribute (und nicht gleich)
+                os<=>ss
+            end
         end
       end
     end
-  end
 
-#v TODO: v1.5.1
-  def to_a
-    [@form, @attr]
-  end
-
-  def to_str;  @form + '#' + @attr;  end
-#v
-  def to_s;  '(' + super + ')';  end
-
-end
-
-#
-# Die Klasse Word bündelt spezifische Eigenschaften eines Wortes mit den
-# dazu notwendigen Methoden.
-#
-class Word < StringA
-
-  def self.new_lexical(form, attr, lex_attr)
-    new(form, attr) << Lexical.new(form, lex_attr)
-  end
-
-  # Exakte Representation der originären Zeichenkette, so wie sie im Satz
-  # gefunden wurde, z.B. <tt>form = "RubyLing"</tt>
-
-  # Ergebnis der Wörterbuch-Suche. Sie stellt die Grundform des Wortes dar.
-  # Dabei kann es mehrere mögliche Grundformen geben, z.B. kann +abgeschoben+
-  # als Grundform das _Adjektiv_ +abgeschoben+ sein, oder aber das _Verb_
-  # +abschieben+.
-  #
-  # <tt>lemma = [['abgeschoben', '#a'], ['abschieben', '#v']]</tt>.
-  #
-  # <b>Achtung: Lemma wird nicht durch die Word-Klasse bestückt, sondern extern
-  # durch die Klasse Dictionary</b>
-
-  def initialize(form, attr=WA_UNSET)
-    super
-    @lexicals = Array.new
-    self
-  end
-
-  def lexicals(compound_parts = true)
-    if !compound_parts && attr == WA_KOMPOSITUM
-      @lexicals.select { |lex| lex.attr == LA_KOMPOSITUM }
-    else
-      @lexicals
+    #v TODO: v1.5.1
+    def to_a
+      [@form, @attr]
     end
-  end
 
-  def lexicals=(lexis)
-    if lexis.is_a?(Array)
-      @lexicals = lexis.sort.uniq
-    else
-      raise 'Falscher Typ bei Zuweisung'
+    def to_str
+      @form + '#' + @attr
     end
-  end
 
-  def attrs(compound_parts = true)
-    lexicals(compound_parts).map { |lex| lex.attr }
-  end
-
-  # für Compositum
-  def parts
-    1
-  end
-
-  def min_part_size
-    @form.size
-  end
-
-  # Gibt genau die Grundform der Wortklasse zurück, die der RegExp des Übergabe-Parameters
-  # entspricht, z.B. <tt>word.get_wc(/a/) = ['abgeschoben', '#a']</tt>
-  def get_class(wc_re)
-    wc_re = Regexp.new(wc_re) unless wc_re.is_a?(Regexp)
-
-    unless @lexicals.empty?
-      @lexicals.select { |lex| lex.attr =~ wc_re }
-    else
-      attr =~ wc_re ? [self] : []
+    #v
+    def to_s
+      '(' + super + ')'
     end
+
   end
 
-  def norm
-    if @attr == WA_IDENTIFIED
-      lexicals[0].form
-    else
-      @form
+  # Die Klasse Word bündelt spezifische Eigenschaften eines Wortes mit den
+  # dazu notwendigen Methoden.
+
+  class Word < StringA
+
+    def self.new_lexical(form, attr, lex_attr)
+      new(form, attr) << Lexical.new(form, lex_attr)
     end
-  end
 
-  def compo_form
-    if @attr==WA_KOMPOSITUM
-      get_class(LA_KOMPOSITUM)[0]
-    else
-      nil
+    # Exakte Representation der originären Zeichenkette, so wie sie im Satz
+    # gefunden wurde, z.B. <tt>form = "RubyLing"</tt>
+    #
+    # Ergebnis der Wörterbuch-Suche. Sie stellt die Grundform des Wortes dar.
+    # Dabei kann es mehrere mögliche Grundformen geben, z.B. kann +abgeschoben+
+    # als Grundform das _Adjektiv_ +abgeschoben+ sein, oder aber das _Verb_
+    # +abschieben+.
+    #
+    # <tt>lemma = [['abgeschoben', '#a'], ['abschieben', '#v']]</tt>.
+    #
+    # <b>Achtung: Lemma wird nicht durch die Word-Klasse bestückt, sondern extern
+    # durch die Klasse Dictionary</b>
+
+    def initialize(form, attr=WA_UNSET)
+      super
+      @lexicals = Array.new
     end
-  end
 
-  def unknown?
-    [WA_UNKNOWN, WA_UNKMULPART].include?(attr)
-  end
-
-  def <<(other)
-    case other
-      when Lexical  then @lexicals << other
-      when Array    then @lexicals += other
-    end
-    self
-  end
-
-  def <=>(other)
-    return 1 if other.nil?
-    if @form==other.form
-      if @attr==other.attr
-        @lexicals<=>other.lexicals
+    def lexicals(compound_parts = true)
+      if !compound_parts && attr == WA_KOMPOSITUM
+        @lexicals.select { |lex| lex.attr == LA_KOMPOSITUM }
       else
-        @attr<=>other.attr
+        @lexicals
       end
-    else
-      @form<=>other.form
     end
-  end
 
-  def to_s
-    s = '<' + @form
-    s << '|' + @attr unless @attr==WA_IDENTIFIED
-    s << ' = ' + @lexicals.inspect unless @lexicals.empty?
-    s << '>'
-  end
-
-end
-
-class AgendaItem
-
-  include Comparable
-
-  attr_reader :cmd, :param
-
-  def initialize(cmd, param='')
-    @cmd = cmd || ''
-    @param = param || ''
-  end
-
-  def <=>(other)
-    return 1 unless other.is_a?(AgendaItem)
-    if self.cmd==other.cmd
-      self.param<=>other.param
-    else
-      self.cmd<=>other.cmd
+    def lexicals=(lexis)
+      if lexis.is_a?(Array)
+        @lexicals = lexis.sort.uniq
+      else
+        raise 'Falscher Typ bei Zuweisung'
+      end
     end
+
+    def attrs(compound_parts = true)
+      lexicals(compound_parts).map { |lex| lex.attr }
+    end
+
+    # für Compositum
+    def parts
+      1
+    end
+
+    def min_part_size
+      @form.size
+    end
+
+    # Gibt genau die Grundform der Wortklasse zurück, die der RegExp des Übergabe-Parameters
+    # entspricht, z.B. <tt>word.get_wc(/a/) = ['abgeschoben', '#a']</tt>
+    def get_class(wc_re)
+      wc_re = Regexp.new(wc_re) unless wc_re.is_a?(Regexp)
+
+      unless @lexicals.empty?
+        @lexicals.select { |lex| lex.attr =~ wc_re }
+      else
+        attr =~ wc_re ? [self] : []
+      end
+    end
+
+    def norm
+      if @attr == WA_IDENTIFIED
+        lexicals[0].form
+      else
+        @form
+      end
+    end
+
+    def compo_form
+      if @attr==WA_KOMPOSITUM
+        get_class(LA_KOMPOSITUM)[0]
+      else
+        nil
+      end
+    end
+
+    def unknown?
+      [WA_UNKNOWN, WA_UNKMULPART].include?(attr)
+    end
+
+    def <<(other)
+      case other
+        when Lexical  then @lexicals << other
+        when Array    then @lexicals += other
+      end
+      self
+    end
+
+    def <=>(other)
+      return 1 if other.nil?
+      if @form==other.form
+        if @attr==other.attr
+          @lexicals<=>other.lexicals
+        else
+          @attr<=>other.attr
+        end
+      else
+        @form<=>other.form
+      end
+    end
+
+    def to_s
+      s = '<' + @form
+      s << '|' + @attr unless @attr==WA_IDENTIFIED
+      s << ' = ' + @lexicals.inspect unless @lexicals.empty?
+      s << '>'
+    end
+
   end
 
-  def inspect
-    "*#{cmd.upcase}('#{param}')"
-  end
+  class AgendaItem
 
-end
+    include Comparable
+
+    attr_reader :cmd, :param
+
+    def initialize(cmd, param='')
+      @cmd = cmd || ''
+      @param = param || ''
+    end
+
+    def <=>(other)
+      return 1 unless other.is_a?(AgendaItem)
+      if self.cmd==other.cmd
+        self.param<=>other.param
+      else
+        self.cmd<=>other.cmd
+      end
+    end
+
+    def inspect
+      "*#{cmd.upcase}('#{param}')"
+    end
+
+  end
 
 end
