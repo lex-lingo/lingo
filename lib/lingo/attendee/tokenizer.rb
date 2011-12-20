@@ -107,11 +107,14 @@ class Lingo
       forward(STR_CMD_ERR, 'regulars nicht definiert') unless regulars
 
       @space = get_key('space', false)
-      @tags = get_key('tags', true)
+      @tags  = get_key('tags',  true)
+      @wiki  = get_key('wiki',  true)
 
       # default rules
       @rules = [['SPAC', /^\s+/]]
-      @rules << ['HTML', /^<[^>]+>/] unless @tags
+      @rules << ['HTML', /^<[^>]+>/]       unless @tags
+      @rules << ['WIKI', /^\[\[.+?\]\]/]   unless @wiki
+      @rules.unshift(['WIKI', /^=+.+=+$/]) unless @wiki
 
       # Mit _xxx_ gekennzeichnete Makros anwenden und Expressions ergänzen und umwandeln
       macros = {}
@@ -143,7 +146,7 @@ class Lingo
       case cmd
         when STR_CMD_FILE then @filename = param
         when STR_CMD_LIR  then @filename = nil
-        when STR_CMD_EOF  then @cont = false
+        when STR_CMD_EOF  then @cont     = nil
       end
     end
 
@@ -170,24 +173,34 @@ class Lingo
 
     # tokenize("Eine Zeile.")  ->  [:Eine/WORD:, :Zeile/WORD:, :./PUNC:]
     def tokenize(textline)
-      if @cont
-        name = 'HTML'
+      case @cont
+        when 'HTML'
+          if textline =~ /^[^<>]*>/
+            yield $~[0], @cont
+            textline, @cont = $', nil
+          else
+            yield textline, @cont
+            return
+          end
+        when 'WIKI'
+          if textline =~ /^[^\[\]]*\]\]/
+            yield $~[0], @cont
+            textline, @cont = $', nil
+          else
+            yield textline, @cont
+            return
+          end
+        when nil
+          if !@tags && textline =~ /<[^<>]*$/
+            yield $~[0], @cont = 'HTML'
+            textline = $`
+          end
 
-        if textline =~ /^[^<>]*>/
-          yield $~[0], name
-          textline = $'
-          @cont = false
-        else
-          yield textline, name
-          return
-        end
-      else
-        if textline =~ /<[^<>]*$/
-          yield $~[0], name
-          textline = $`
-          @cont = true
-        end
-      end unless @tags
+          if !@wiki && textline =~ /\[\[[^\[\]]*$/
+            yield $~[0], @cont = 'WIKI'
+            textline = $`
+          end
+      end
 
       until textline.empty?
         @rules.each { |name, expr|
