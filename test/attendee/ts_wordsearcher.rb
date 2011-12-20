@@ -4,7 +4,7 @@ require_relative 'globals'
 
 ################################################################################
 #
-#    Attendee Wordsearcher
+# Attendee Wordsearcher
 #
 class TestAttendeeWordsearcher < LingoTestCase
 
@@ -15,7 +15,6 @@ class TestAttendeeWordsearcher < LingoTestCase
       lx('testversuch|y'), lx('trockentest|y'), lx('versuch|y')
     ]
   end
-
 
   def test_basic
     @input = [tk('Dies|WORD'), tk('ist|WORD'), tk('ein|WORD'), tk('Test|WORD'), tk('.|PUNC'), ai('EOL|')]
@@ -30,7 +29,6 @@ class TestAttendeeWordsearcher < LingoTestCase
     meet({'source'=>'sys-dic,sys-syn,sys-mul'})
   end
 
-
   def test_mode
     @input = [tk('Dies|WORD'), tk('ist|WORD'), tk('ein|WORD'), tk('Test|WORD'), tk('.|PUNC'), ai('EOL|')]
     @expect = [
@@ -43,7 +41,6 @@ class TestAttendeeWordsearcher < LingoTestCase
     ]
     meet({'source'=>'sys-syn,sys-dic', 'mode'=>'first'})
   end
-
 
   def test_two_sources_mode_first
     @input = [
@@ -63,7 +60,6 @@ class TestAttendeeWordsearcher < LingoTestCase
     meet({'source'=>'sys-dic,tst-dic', 'mode'=>'first'})
   end
 
-
   def test_two_sources_mode_first_flipped
     @input = [
       tk('Hasennasen|WORD'),
@@ -82,7 +78,6 @@ class TestAttendeeWordsearcher < LingoTestCase
     meet({'source'=>'tst-dic,sys-dic', 'mode'=>'first'})
   end
 
-
   def test_select_two_sources_mode_all
     @input = [
       tk('Hasennasen|WORD'),
@@ -100,7 +95,6 @@ class TestAttendeeWordsearcher < LingoTestCase
     ]
     meet({'source'=>'sys-dic,tst-dic', 'mode'=>'all'})
   end
-
 
   def test_select_two_sources_mode_def
     @input = [

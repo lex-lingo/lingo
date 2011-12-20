@@ -4,7 +4,7 @@ require_relative 'globals'
 
 ################################################################################
 #
-#    Attendee Textreader
+# Attendee Textreader
 #
 class TestAttendeeTextreader < LingoTestCase
 
@@ -26,7 +26,6 @@ class TestAttendeeTextreader < LingoTestCase
     meet({'files'=>'test/lir.txt', 'lir-record-pattern'=>'^\[(\d+)\.\]'})
   end
 
-
   def test_lir_file_another_pattern
     @expect = [
       ai('LIR-FORMAT|'), ai('FILE|test/lir2.txt'),
@@ -44,7 +43,6 @@ class TestAttendeeTextreader < LingoTestCase
     ]
     meet({'files'=>'test/lir2.txt', 'lir-record-pattern'=>'^\021(\d+)\022'})
   end
-
 
   def test_normal_file
     @expect = [

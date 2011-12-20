@@ -5,32 +5,32 @@ require 'lingo'
 
 ################################################################################
 #
-#    Hilfsroutinen für kurze Schreibweisen
+# Hilfsroutinen für kurze Schreibweisen
 
 def split( text )
   text =~ /^([^|]+)\|([^|]*)$/
   [$1.nil? ? '' : $1, $2.nil? ? '' : $2]
 end
 
-#    Erzeugt ein AgendaItem-Objekt
+# Erzeugt ein AgendaItem-Objekt
 def ai( text )
   c, p = split( text )
   Lingo::AgendaItem.new( c, p )
 end
 
-#    Erzeugt ein Token-Objekt
+# Erzeugt ein Token-Objekt
 def tk( text )
   f, a = split( text )
   Lingo::Token.new( f, a )
 end
 
-#    Erzeugt ein Lexical-Objekt
+# Erzeugt ein Lexical-Objekt
 def lx( text )
   f, a = split( text )
   Lingo::Lexical.new( f, a )
 end
 
-#    Erzeugt ein Word-Objekt
+# Erzeugt ein Word-Objekt
 def wd( text, *lexis )
   f, a = split( text )
   w = Lingo::Word.new( f, a )
@@ -44,11 +44,9 @@ end
 #
 ################################################################################
 
-
-
 ################################################################################
 #
-#    TestCase erweitern für Attendee-Tests
+# TestCase erweitern für Attendee-Tests
 #
 class LingoTestCase < Test::Unit::TestCase
 

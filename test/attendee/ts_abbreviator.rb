@@ -4,7 +4,7 @@ require_relative 'globals'
 
 ################################################################################
 #
-#    Attendee Abbreviator
+# Attendee Abbreviator
 #
 class TestAttendeeAbbreviator < LingoTestCase
 

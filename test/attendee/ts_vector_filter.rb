@@ -4,7 +4,7 @@ require_relative 'globals'
 
 ################################################################################
 #
-#    Attendee Vector_filter
+# Attendee Vector_filter
 #
 class TestAttendeeVector_filter < LingoTestCase
 
@@ -17,24 +17,20 @@ class TestAttendeeVector_filter < LingoTestCase
     ]
   end
 
-
   def test_basic
     @expect = [ai('FILE|test'), 'substantiv', ai('EOF|test')]
     meet({})
   end
-
 
   def test_lexicals
     @expect = [ai('FILE|test'), 'adjektiv', 'eigenname', 'substantiv', 'verb', ai('EOF|test')]
     meet({'lexicals'=>'[save]'})
   end
 
-
   def test_sort_term_abs
     @expect = [ai('FILE|test'), '1 adjektiv', '1 eigenname', '1 substantiv', '1 verb', ai('EOF|test')]
     meet({'lexicals'=>'[save]', 'sort'=>'term_abs'})
   end
-
 
   def test_sort_term_rel
     @expect = [ai('FILE|test'), '0.50000 adjektiv', '0.50000 eigenname', '0.50000 substantiv', '0.50000 verb', ai('EOF|test')]
@@ -45,7 +41,6 @@ class TestAttendeeVector_filter < LingoTestCase
     @expect = [ai('FILE|test'), 'adjektiv {1}', 'eigenname {1}', 'substantiv {1}', 'verb {1}', ai('EOF|test')]
     meet({'lexicals'=>'[save]', 'sort'=>'sto_abs'})
   end
-
 
   def test_sort_sto_rel
     @expect = [ai('FILE|test'), 'adjektiv {0.50000}', 'eigenname {0.50000}', 'substantiv {0.50000}', 'verb {0.50000}', ai('EOF|test')]

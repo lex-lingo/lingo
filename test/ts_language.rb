@@ -1,30 +1,29 @@
 # encoding: utf-8
 
-#  LINGO ist ein Indexierungssystem mit Grundformreduktion, Kompositumzerlegung,
-#  Mehrworterkennung und Relationierung.
+# LINGO ist ein Indexierungssystem mit Grundformreduktion, Kompositumzerlegung,
+# Mehrworterkennung und Relationierung.
 #
-#  Copyright (C) 2005-2007 John Vorhauer
-#  Copyright (C) 2007-2010 John Vorhauer, Jens Wille
+# Copyright (C) 2005-2007 John Vorhauer
+# Copyright (C) 2007-2011 John Vorhauer, Jens Wille
 #
-#  This program is free software; you can redistribute it and/or modify it under
-#  the terms of the GNU Affero General Public License as published by the Free
-#  Software Foundation; either version 3 of the License, or (at your option)
-#  any later version.
+# This program is free software; you can redistribute it and/or modify it under
+# the terms of the GNU Affero General Public License as published by the Free
+# Software Foundation; either version 3 of the License, or (at your option)
+# any later version.
 #
-#  This program is distributed in the hope that it will be useful, but WITHOUT
-#  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-#  FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
-#  details.
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+# details.
 #
-#  You should have received a copy of the GNU Affero General Public License along
-#  with this program; if not, write to the Free Software Foundation, Inc.,
-#  51 Franklin St, Fifth Floor, Boston, MA 02110, USA
+# You should have received a copy of the GNU Affero General Public License along
+# with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin St, Fifth Floor, Boston, MA 02110, USA
 #
-#  For more information visit http://www.lex-lingo.de or contact me at
-#  welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
+# For more information visit http://www.lex-lingo.de or contact me at
+# welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
 #
-#  Lex Lingo rules from here on
-
+# Lex Lingo rules from here on
 
 require 'test/unit'
 require 'lingo'
@@ -33,31 +32,31 @@ include FileUtils::Verbose
 
 ################################################################################
 #
-#    Hilfsroutinen für kurze Schreibweisen
+# Hilfsroutinen für kurze Schreibweisen
 def split( text )
   text =~ /^([^|]+)\|([^|]*)$/
   [$1.nil? ? '' : $1, $2.nil? ? '' : $2]
 end
 
-#    Erzeugt ein AgendaItem-Objekt  
+# Erzeugt ein AgendaItem-Objekt
 def ai( text )
   c, p = split( text )
   Lingo::AgendaItem.new( c, p )
 end
 
-#    Erzeugt ein Token-Objekt
+# Erzeugt ein Token-Objekt
 def tk( text )
   f, a = split( text )
   Lingo::Token.new( f, a )
 end
 
-#    Erzeugt ein Lexical-Objekt
+# Erzeugt ein Lexical-Objekt
 def lx( text )
   f, a = split( text )
   Lingo::Lexical.new( f, a )
 end
 
-#    Erzeugt ein Word-Objekt
+# Erzeugt ein Word-Objekt
 def wd( text, *lexis )
   f, a = split( text )
   w = Lingo::Word.new( f, a )
@@ -65,16 +64,14 @@ def wd( text, *lexis )
     f, a = split( text )
     w << Lingo::Lexical.new( f, a )
   end
-  w 
+  w
 end
 #
 ################################################################################
 
-
-
 ################################################################################
 #
-#    LexicalHash
+# LexicalHash
 #
 class TestLexicalHash < Test::Unit::TestCase
 
@@ -83,18 +80,17 @@ class TestLexicalHash < Test::Unit::TestCase
     @database_config = @lingo.config['language/dictionary/databases']
   end
 
-  
   def test_params
     old_stderr, $stderr = $stderr, StringIO.new('')
 
-    #  Datenquelle nicht in Konfiguration enthalten
+    # Datenquelle nicht in Konfiguration enthalten
     assert_raise(SystemExit) { Lingo::LexicalHash.new('nonsens', @lingo) }
   ensure
     $stderr = old_stderr
   end
-  
-  #  TODO: Crypt testen...
-  
+
+  # TODO: Crypt testen...
+
   def test_cache
     ds = Lingo::LexicalHash.new('sys-dic', @lingo)
     assert_equal([lx('regen|s'), lx('regen|v'), lx('rege|a')], ds['regen'])
@@ -103,47 +99,44 @@ class TestLexicalHash < Test::Unit::TestCase
     ds.close
   end
 
-  
   def test_report
     ds = Lingo::LexicalHash.new('tst-syn', @lingo)
-    ds['abwickeln']    #  source read
-    ds['abwickeln']    #  cache hit
-    ds['regen']      #  source read
-    ds['nonesens']    #  source read, nothing found
-    
+    ds['abwickeln']    # source read
+    ds['abwickeln']    # cache hit
+    ds['regen']      # source read
+    ds['nonesens']    # source read, nothing found
+
     expect = { \
       "tst-syn: cache hits" => 1, \
       "tst-syn: total requests" => 4, \
       "tst-syn: source reads" => 3, \
       "tst-syn: data found" => 2
     }
-    
+
     assert_equal(expect, ds.report)
     ds.close
   end
 
-
   def test_auto_create
     txt_file = @database_config['tst-sgw']['name']
     sto_file = txt_file.gsub(/^de[\/]/, 'de/store/').gsub(/\.txt/, '.pag')
-    
+
     ds = Lingo::LexicalHash.new('tst-sgw', @lingo)
     assert_equal([lx('substantiv|s')], ds['substantiv'])
     ds.close
 
-    #  Keine Store-Datei vorhanden, nur Text vorhanden
+    # Keine Store-Datei vorhanden, nur Text vorhanden
     File.delete(sto_file)
     ds = Lingo::LexicalHash.new('tst-sgw', @lingo)
     assert_equal([lx('substantiv|s')], ds['substantiv'])
     ds.close
 
-    #  Store vorhanden, aber Text ist neuer
+    # Store vorhanden, aber Text ist neuer
     ds = Lingo::LexicalHash.new('tst-sgw', @lingo)
     assert_equal([lx('substantiv|s')], ds['substantiv'])
     ds.close
   end
 
-  
   def test_singleword
     ds = Lingo::LexicalHash.new('tst-sgw', @lingo)
     assert_equal([lx('substantiv|s')], ds['substantiv'])
@@ -152,7 +145,6 @@ class TestLexicalHash < Test::Unit::TestCase
     ds.close
   end
 
-  
   def test_keyvalue
     ds = Lingo::LexicalHash.new('sys-mul', @lingo)
     assert_equal([lx('abelscher ring ohne nullteiler|m')], ds['abelscher ring ohne nullteiler'])
@@ -162,7 +154,6 @@ class TestLexicalHash < Test::Unit::TestCase
     assert_equal(nil, ds['abschaltbarer leistungshalbleiter'])
     ds.close
   end
-
 
   def test_wordclass
     ds = Lingo::LexicalHash.new('sys-dic', @lingo)
@@ -182,8 +173,8 @@ class TestLexicalHash < Test::Unit::TestCase
 
   def test_multivalue
     ds = Lingo::LexicalHash.new('sys-syn', @lingo)
-#    assert_equal([lx('abrollen', LA_SYNONYM), lx('abschaffen', LA_SYNONYM), lx('abwickeln', LA_SYNONYM), lx('auflösen (geschäft)','y')], ds['abwickeln'])
-#    assert_equal([lx('niederschlag', LA_SYNONYM), lx('regen', LA_SYNONYM), lx('schauer', LA_SYNONYM)], ds['regen'])
+# assert_equal([lx('abrollen', LA_SYNONYM), lx('abschaffen', LA_SYNONYM), lx('abwickeln', LA_SYNONYM), lx('auflösen (geschäft)','y')], ds['abwickeln'])
+# assert_equal([lx('niederschlag', LA_SYNONYM), lx('regen', LA_SYNONYM), lx('schauer', LA_SYNONYM)], ds['regen'])
     ds.close
   end
 
@@ -191,11 +182,9 @@ end
 #
 ################################################################################
 
-
-
 ################################################################################
 #
-#    Dictionary
+# Dictionary
 #
 class TestDictionary < Test::Unit::TestCase
 
@@ -204,11 +193,11 @@ class TestDictionary < Test::Unit::TestCase
   end
 
   def test_params
-    #  Keine Sprach-Konfiguration angegeben
+    # Keine Sprach-Konfiguration angegeben
     #assert_raise(RuntimeError) { Lingo::Dictionary.new({'source'=>['sys-dic']}, @lingo) }
-    #  Keine Parameter angegeben
+    # Keine Parameter angegeben
     assert_raise(RuntimeError) { Lingo::Dictionary.new(nil, @lingo) }
-    #  Falsche Parameter angegeben (Pflichtparameter ohne Defaultwert)
+    # Falsche Parameter angegeben (Pflichtparameter ohne Defaultwert)
     assert_raise(RuntimeError) { Lingo::Dictionary.new({'course'=>['sys-dic']}, @lingo) }
   end
 
@@ -222,10 +211,10 @@ class TestDictionary < Test::Unit::TestCase
 
   def test_report
     dic = Lingo::Dictionary.new({'source'=>['sys-dic']}, @lingo)
-    dic.select('abwickeln')    #  source read
-    dic.select('abwickeln')    #  cache hit
-    dic.select('regen')        #  source read
-    dic.select('nonesens')     #  source read, nothing found
+    dic.select('abwickeln')    # source read
+    dic.select('abwickeln')    # cache hit
+    dic.select('regen')        # source read
+    dic.select('nonesens')     # source read, nothing found
 
     expect = {
       "sys-dic: total requests" => 4,
@@ -233,11 +222,10 @@ class TestDictionary < Test::Unit::TestCase
       "sys-dic: cache hits" => 1,
       "sys-dic: source reads" => 3
     }
-    
+
     assert_equal(expect, dic.report)
     dic.close
   end
-
 
   def test_select_one_source
     dic = Lingo::Dictionary.new({'source'=>['sys-dic']}, @lingo)
@@ -247,64 +235,59 @@ class TestDictionary < Test::Unit::TestCase
     dic.close
   end
 
-  
   def test_select_two_sources_mode_first
     dic = Lingo::Dictionary.new({'source'=>['sys-dic', 'tst-dic'], 'mode'=>'first'}, @lingo)
-    #  in keiner Quelle vorhanden
+    # in keiner Quelle vorhanden
     assert_equal([], dic.select('hasennasen'))
-    #  nur in erster Quelle vorhanden
+    # nur in erster Quelle vorhanden
     assert_equal([lx('knaller|s')], dic.select('knaller'))
-    #  nur in zweiter Quelle vorhanden
+    # nur in zweiter Quelle vorhanden
     assert_equal([lx('super indexierungssystem|m')], dic.select('lex-lingo'))
-    #  in beiden Quellen vorhanden
+    # in beiden Quellen vorhanden
     assert_equal([lx('a-dur|s')], dic.select('a-dur'))
     dic.close
   end
 
-
   def test_select_two_sources_mode_first_flipped
     dic = Lingo::Dictionary.new({'source'=>['tst-dic','sys-dic'], 'mode'=>'first'}, @lingo)
-    #  in keiner Quelle vorhanden
+    # in keiner Quelle vorhanden
     assert_equal([], dic.select('hasennasen'))
-    #  nur in erster Quelle vorhanden
+    # nur in erster Quelle vorhanden
     assert_equal([lx('knaller|s')], dic.select('knaller'))
-    #  nur in zweiter Quelle vorhanden
+    # nur in zweiter Quelle vorhanden
     assert_equal([lx('super indexierungssystem|m')], dic.select('lex-lingo'))
-    #  in beiden Quellen vorhanden
+    # in beiden Quellen vorhanden
     assert_equal([lx('b-dur|s')], dic.select('a-dur'))
     dic.close
   end
 
-
   def test_select_two_sources_mode_all
     dic = Lingo::Dictionary.new({'source'=>['sys-dic','tst-dic'], 'mode'=>'all'}, @lingo)
-    #  in keiner Quelle vorhanden
+    # in keiner Quelle vorhanden
     assert_equal([], dic.select('hasennasen'))
-    #  nur in erster Quelle vorhanden
+    # nur in erster Quelle vorhanden
     assert_equal([lx('knaller|s')], dic.select('knaller'))
-    #  nur in zweiter Quelle vorhanden
+    # nur in zweiter Quelle vorhanden
     assert_equal([lx('super indexierungssystem|m')], dic.select('lex-lingo'))
-    #  in beiden Quellen vorhanden
+    # in beiden Quellen vorhanden
     assert_equal([lx('a-dur|s'), lx('b-dur|s')], dic.select('a-dur'))
     assert_equal([lx('aas|s')], dic.select('aas'))
     dic.close
   end
-
 
   def test_select_two_sources_mode_default
     dic = Lingo::Dictionary.new({'source'=>['sys-dic','tst-dic']}, @lingo)
-    #  in keiner Quelle vorhanden
+    # in keiner Quelle vorhanden
     assert_equal([], dic.select('hasennasen'))
-    #  nur in erster Quelle vorhanden
+    # nur in erster Quelle vorhanden
     assert_equal([lx('knaller|s')], dic.select('knaller'))
-    #  nur in zweiter Quelle vorhanden
+    # nur in zweiter Quelle vorhanden
     assert_equal([lx('super indexierungssystem|m')], dic.select('lex-lingo'))
-    #  in beiden Quellen vorhanden
+    # in beiden Quellen vorhanden
     assert_equal([lx('a-dur|s'), lx('b-dur|s')], dic.select('a-dur'))
     assert_equal([lx('aas|s')], dic.select('aas'))
     dic.close
   end
-
 
   def test_suffix_lexicals
     dic = Lingo::Dictionary.new({'source'=>['sys-dic']}, @lingo)
@@ -314,7 +297,6 @@ class TestDictionary < Test::Unit::TestCase
     assert_equal([lx('segnen|v'), lx('segneen|v')], dic.suffix_lexicals('segnet'))
     dic.close
   end
-  
 
   def test_infix_lexicals
     dic = Lingo::Dictionary.new({'source'=>['sys-dic']}, @lingo)
@@ -322,7 +304,6 @@ class TestDictionary < Test::Unit::TestCase
     dic.close
   end
 
-  
   def test_select_with_suffix
     dic = Lingo::Dictionary.new({'source'=>['sys-dic']}, @lingo)
     assert_equal([lx('mauern|v')], dic.select_with_suffix('mauern'))
@@ -331,7 +312,6 @@ class TestDictionary < Test::Unit::TestCase
     assert_equal([lx('segnen|v')], dic.select_with_suffix('segnet'))
     dic.close
   end
-  
 
   def test_select_with_infix
     dic = Lingo::Dictionary.new({'source'=>['sys-dic']}, @lingo)
@@ -339,24 +319,21 @@ class TestDictionary < Test::Unit::TestCase
     dic.close
   end
 
-  
   def test_find_word
     dic = Lingo::Dictionary.new({'source'=>['sys-dic']}, @lingo)
     assert_equal(wd('hasennasen|?'), dic.find_word('hasennasen'))
-    assert_equal(wd('hase|IDF', 'hase|s'), dic.find_word('hase'))    
+    assert_equal(wd('hase|IDF', 'hase|s'), dic.find_word('hase'))
     assert_equal(wd('haseses|IDF', 'hase|s'), dic.find_word('haseses'))
     dic.close
   end
-  
+
 end
 #
 ################################################################################
 
-
-
 ################################################################################
 #
-#    Grammer
+# Grammer
 #
 class TestGrammar < Test::Unit::TestCase
 
@@ -365,7 +342,7 @@ class TestGrammar < Test::Unit::TestCase
   end
 
   def test_params
-    #  Die gleichen Fälle wie bei Dictionary, daher nicht notwendig
+    # Die gleichen Fälle wie bei Dictionary, daher nicht notwendig
   end
 
   def test_cache
@@ -385,56 +362,54 @@ class TestGrammar < Test::Unit::TestCase
     gra.close
   end
 
-  
   def t1est_test_compositum
     gra = Lingo::Grammar.new({'source'=>['sys-dic']}, @lingo)
-    #  hinterer Teil ist ein Wort mit Suffix
+    # hinterer Teil ist ein Wort mit Suffix
     assert_equal([ [5, 6], [lx('hasenbraten|k'), lx('braten|s'), lx('hase|s'), lx('braten|v')] ],
-      gra.test_compositum('hasen', '', 'braten', 1, false) 
+      gra.test_compositum('hasen', '', 'braten', 1, false)
     )
-    #  hinterer Teil ist ein Wort mit Infix ohne Schwanz
-    assert_equal([ [5, 7], [lx('nasenlaufen|k'), lx('laufen|s'), lx('nase|s'), lx('laufen|v')] ], 
+    # hinterer Teil ist ein Wort mit Infix ohne Schwanz
+    assert_equal([ [5, 7], [lx('nasenlaufen|k'), lx('laufen|s'), lx('nase|s'), lx('laufen|v')] ],
       gra.test_compositum('nasen', '', 'laufens', 1, false)
     )
-    #  hinterer Teil ist ein Wort mit Infix mit Schwanz
-    assert_equal([ [5, 7], [lx('nasenlaufens|k'), lx('laufen|s'), lx('nase|s'), lx('laufen|v')] ], 
-      gra.test_compositum('nasen', '', 'laufens', 1, true) 
+    # hinterer Teil ist ein Wort mit Infix mit Schwanz
+    assert_equal([ [5, 7], [lx('nasenlaufens|k'), lx('laufen|s'), lx('nase|s'), lx('laufen|v')] ],
+      gra.test_compositum('nasen', '', 'laufens', 1, true)
     )
-    #  hinterer Teil ist ein Kompositum nach Bindestrich
-    assert_equal([ [7, 9, 6], [lx('arrafat-nachfolgebedarf|k'), lx('bedarf|s'), lx('nachfolge|s'), lx('arrafat|x')] ], 
-      gra.test_compositum('arrafat', '-', 'nachfolgebedarf', 1, false) 
+    # hinterer Teil ist ein Kompositum nach Bindestrich
+    assert_equal([ [7, 9, 6], [lx('arrafat-nachfolgebedarf|k'), lx('bedarf|s'), lx('nachfolge|s'), lx('arrafat|x')] ],
+      gra.test_compositum('arrafat', '-', 'nachfolgebedarf', 1, false)
     )
-    #  hinterer Teil ist ein TakeItAsIs nach Bindestrich
-    assert_equal([ [9, 7], [lx('nachfolge-arrafat|k'), lx('nachfolge|s'), lx('arrafat|x')] ], 
-      gra.test_compositum('nachfolge', '-', 'arrafat', 1, false) 
+    # hinterer Teil ist ein TakeItAsIs nach Bindestrich
+    assert_equal([ [9, 7], [lx('nachfolge-arrafat|k'), lx('nachfolge|s'), lx('arrafat|x')] ],
+      gra.test_compositum('nachfolge', '-', 'arrafat', 1, false)
     )
-    #  vorderer Teil ist ein Wort mit Suffix => siehe Hasenbraten
-    #  vorderer Teil ist ein Kompositum
-    assert_equal([ [6, 5, 6], [lx('morgenonkelmantel|k'), lx('mantel|s'), lx('morgen|s'), lx('onkel|s'), lx('morgen|w')] ], 
-      gra.test_compositum('morgenonkel', '', 'mantel', 1, false) 
+    # vorderer Teil ist ein Wort mit Suffix => siehe Hasenbraten
+    # vorderer Teil ist ein Kompositum
+    assert_equal([ [6, 5, 6], [lx('morgenonkelmantel|k'), lx('mantel|s'), lx('morgen|s'), lx('onkel|s'), lx('morgen|w')] ],
+      gra.test_compositum('morgenonkel', '', 'mantel', 1, false)
     )
-    #  vorderer Teil ist ein TakeItAsIs vor Bindestrich
-    assert_equal([ [7, 10], [lx('arrafat-nachfolger|k'), lx('nachfolger|s'), lx('arrafat|x')] ], 
+    # vorderer Teil ist ein TakeItAsIs vor Bindestrich
+    assert_equal([ [7, 10], [lx('arrafat-nachfolger|k'), lx('nachfolger|s'), lx('arrafat|x')] ],
       gra.test_compositum('arrafat', '-', 'nachfolger', 1, false)
     )
     gra.close
   end
 
-  
   def t1est_permute_compositum
     gra = Lingo::Grammar.new({'source'=>['sys-dic']}, @lingo)
-    #  bindestrichversion
-    assert_equal([ [7, 10], [lx('arrafat-nachfolger|k'), lx('nachfolger|s'), lx('arrafat|x')] ], 
-      gra.permute_compositum('arrafat-nachfolger', 1, false) 
+    # bindestrichversion
+    assert_equal([ [7, 10], [lx('arrafat-nachfolger|k'), lx('nachfolger|s'), lx('arrafat|x')] ],
+      gra.permute_compositum('arrafat-nachfolger', 1, false)
     )
-    #  bindestrichversion zwei-teilig
+    # bindestrichversion zwei-teilig
     assert_equal([ [6, 11], \
       [  lx('cd-rom-technologie|k'), \
         lx('cd-rom|s'), \
         lx('technologie|s')] ], \
       gra.permute_compositum('cd-rom-technologie', 1, false) \
     )
-    #  bindestrichversion drei-teilig
+    # bindestrichversion drei-teilig
     assert_equal([ [6, 7, 11], \
       [  lx('albert-ludwigs-universität|k'), \
         lx('universität|s'), \
@@ -442,7 +417,7 @@ class TestGrammar < Test::Unit::TestCase
         lx('ludwig|e')] ], \
       gra.permute_compositum('albert-ludwigs-universität', 1, false) \
     )
-    #  normal mit suggestion
+    # normal mit suggestion
     assert_equal([ [8, 9], \
       [  lx('benutzerforschung|k'), \
         lx('benutzer|s'), \
@@ -452,49 +427,46 @@ class TestGrammar < Test::Unit::TestCase
     gra.close
   end
 
-  
   def test_find_compositum
     gra = Lingo::Grammar.new({'source'=>['sys-dic']}, @lingo)
-    assert_equal( 
-      wd('informationswissenschaften|KOM', 'informationswissenschaft|k', 'information|s+', 'wissenschaft|s+'), 
+    assert_equal(
+      wd('informationswissenschaften|KOM', 'informationswissenschaft|k', 'information|s+', 'wissenschaft|s+'),
       gra.find_compositum('informationswissenschaften') \
     )
-    assert_equal( 
-      wd('cd-rom-technologie|KOM', 'cd-rom-technologie|k', 'technologie|s+', 'cd-rom|x+'), 
-      gra.find_compositum('cd-rom-technologie') 
+    assert_equal(
+      wd('cd-rom-technologie|KOM', 'cd-rom-technologie|k', 'technologie|s+', 'cd-rom|x+'),
+      gra.find_compositum('cd-rom-technologie')
     )
-    assert_equal( 
-      wd('albert-ludwigs-universität|KOM', 'albert-ludwigs-universität|k', 'albert|e+', 'ludwig|e+', 'universität|s+'), 
-      gra.find_compositum('albert-ludwigs-universität') 
+    assert_equal(
+      wd('albert-ludwigs-universität|KOM', 'albert-ludwigs-universität|k', 'albert|e+', 'ludwig|e+', 'universität|s+'),
+      gra.find_compositum('albert-ludwigs-universität')
     )
-    assert_equal( 
-      wd('client-server-system|KOM', 'client-server-system|k', 'client|s+', 'server|s+', 'system|s+'), 
-      gra.find_compositum('client-server-system') 
+    assert_equal(
+      wd('client-server-system|KOM', 'client-server-system|k', 'client|s+', 'server|s+', 'system|s+'),
+      gra.find_compositum('client-server-system')
     )
-    assert_equal( 
+    assert_equal(
       wd('benutzerforschung|KOM', 'benutzerforschung|k', 'erforschung|s+', 'benutzen|v+'),
-      gra.find_compositum('benutzerforschung') 
+      gra.find_compositum('benutzerforschung')
     )
-    assert_equal( 
-      wd('clustersuche|KOM', 'clustersuche|k', 'cluster|s+', 'suche|s+', 'suchen|v+'), 
-      gra.find_compositum('clustersuche') 
+    assert_equal(
+      wd('clustersuche|KOM', 'clustersuche|k', 'cluster|s+', 'suche|s+', 'suchen|v+'),
+      gra.find_compositum('clustersuche')
     )
     gra.close
   end
-  
-  
+
   def test_min_word_size
     gra = Lingo::Grammar.new({'source'=>['sys-dic']}, @lingo)
     assert_equal( wd('undsund|?'), gra.find_compositum('undsund'))
     gra.close
   end
 
-
   def test_max_parts
     gra = Lingo::Grammar.new({'source'=>['sys-dic']}, @lingo)
-    assert_equal( 
-      wd('baumsbaumsbaum|KOM', 'baumsbaumsbaum|k', 'baum|s+'), 
-      gra.find_compositum('baumsbaumsbaum') 
+    assert_equal(
+      wd('baumsbaumsbaum|KOM', 'baumsbaumsbaum|k', 'baum|s+'),
+      gra.find_compositum('baumsbaumsbaum')
     )
     assert_equal( Lingo::Word.new('baumsbaumsbaumsbaumsbaumsbaum', Lingo::WA_UNKNOWN), gra.find_compositum('baumsbaumsbaumsbaumsbaumsbaum'))
     gra.close

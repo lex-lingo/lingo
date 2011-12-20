@@ -4,7 +4,7 @@ require_relative 'globals'
 
 ################################################################################
 #
-#    Attendee Decomposer
+# Attendee Decomposer
 #
 class TestAttendeeDecomposer < LingoTestCase
 

@@ -4,7 +4,7 @@ require_relative 'globals'
 
 ################################################################################
 #
-#    Attendee Textwriter
+# Attendee Textwriter
 #
 class TestAttendeeTextwriter < LingoTestCase
 
@@ -28,7 +28,6 @@ class TestAttendeeTextwriter < LingoTestCase
     ]
   end
 
-
   def test_basic
     @input = @data
     @expect = [ "Dies,ist,eine,Zeile,.\n", "Dies,ist,eine,zweite,Zeile,.\n" ]
@@ -37,7 +36,6 @@ class TestAttendeeTextwriter < LingoTestCase
     @output = File.open('test/test.tst', :encoding => Lingo::ENC).readlines
     assert_equal(@expect, @output)
   end
-
 
   def test_complex
     @input = @data
@@ -48,7 +46,6 @@ class TestAttendeeTextwriter < LingoTestCase
     assert_equal(@expect, @output)
   end
 
-
   def test_crlf
     @input = @data
     @expect = [ "Dies\n", "ist\n", "eine\n", "Zeile\n", ".\n", "Dies\n", "ist\n", "eine\n", "zweite\n", "Zeile\n", ".\n" ]
@@ -57,7 +54,6 @@ class TestAttendeeTextwriter < LingoTestCase
     @output = File.open('test/test.txt2', :encoding => Lingo::ENC).readlines
     assert_equal(@expect, @output)
   end
-
 
   def test_lir_file
     @input = [
@@ -87,7 +83,6 @@ FG-Projekt GERHARD.\r\n",
     @output = File.open('test/lir.csv', :encoding => Lingo::ENC).readlines
     assert_equal(@expect, @output)
   end
-
 
   def test_nonewords
     @input = [ai('FILE|test/text.txt'), 'Nonwörter', 'Nonsense', ai('EOF|test/text.txt')]

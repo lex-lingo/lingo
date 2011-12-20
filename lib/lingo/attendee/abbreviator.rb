@@ -1,41 +1,41 @@
 # encoding: utf-8
 
-#  LINGO ist ein Indexierungssystem mit Grundformreduktion, Kompositumzerlegung,
-#  Mehrworterkennung und Relationierung.
+# LINGO ist ein Indexierungssystem mit Grundformreduktion, Kompositumzerlegung,
+# Mehrworterkennung und Relationierung.
 #
-#  Copyright (C) 2005-2007 John Vorhauer
-#  Copyright (C) 2007-2011 John Vorhauer, Jens Wille
+# Copyright (C) 2005-2007 John Vorhauer
+# Copyright (C) 2007-2011 John Vorhauer, Jens Wille
 #
-#  This program is free software; you can redistribute it and/or modify it under
-#  the terms of the GNU Affero General Public License as published by the Free
-#  Software Foundation; either version 3 of the License, or (at your option)
-#  any later version.
+# This program is free software; you can redistribute it and/or modify it under
+# the terms of the GNU Affero General Public License as published by the Free
+# Software Foundation; either version 3 of the License, or (at your option)
+# any later version.
 #
-#  This program is distributed in the hope that it will be useful, but WITHOUT
-#  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-#  FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
-#  details.
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+# details.
 #
-#  You should have received a copy of the GNU Affero General Public License along
-#  with this program; if not, write to the Free Software Foundation, Inc.,
-#  51 Franklin St, Fifth Floor, Boston, MA 02110, USA
+# You should have received a copy of the GNU Affero General Public License along
+# with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin St, Fifth Floor, Boston, MA 02110, USA
 #
-#  For more information visit http://www.lex-lingo.de or contact me at
-#  welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
+# For more information visit http://www.lex-lingo.de or contact me at
+# welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
 #
-#  Lex Lingo rules from here on
+# Lex Lingo rules from here on
 
 class Lingo
 
 =begin rdoc
 == Abbreviator
-Die Erkennung von Abkürzungen kann auf vielfältige Weise erfolgen. In jedem Fall 
+Die Erkennung von Abkürzungen kann auf vielfältige Weise erfolgen. In jedem Fall
 sollte eine sichere Unterscheidung von einem Satzende-Punkt möglich sein.
 Der in Lingo gewählte Ansatz befreit den Tokenizer von dieser Arbeit und konzentriert
 die Erkennung in diesem Attendee.
-Sobald der Abbreviator im Datenstrom auf ein Punkt trifft (Token = <tt>:./PUNC:</tt>), 
+Sobald der Abbreviator im Datenstrom auf ein Punkt trifft (Token = <tt>:./PUNC:</tt>),
 prüft er das vorhergehende Token auf eine gültige Abkürzung im Abkürzungs-Wörterbuch.
-Wird es als Abkürzung erkannt, dann wird das Token in ein Word gewandelt und das 
+Wird es als Abkürzung erkannt, dann wird das Token in ein Word gewandelt und das
 Punkt-Token aus dem Zeichenstrom entfernt.
 
 === Mögliche Verlinkung
@@ -43,7 +43,7 @@ Erwartet:: Daten des Typs *Token* z.B. von Tokenizer
 Erzeugt:: Leitet Token weiter und wandelt erkannte Abkürzungen in den Typ *Word* z.B. für Wordsearcher
 
 === Parameter
-Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der Voreinstellung). 
+Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der Voreinstellung).
 Alle anderen Parameter müssen zwingend angegeben werden.
 <b>in</b>:: siehe allgemeine Beschreibung des Attendee
 <b>out</b>:: siehe allgemeine Beschreibung des Attendee
@@ -67,29 +67,26 @@ ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
   out> :Abk³rzung/WORD:
   out> :./PUNC:
   out> *EOL('test.txt')
-  out> *EOF('test.txt')  
+  out> *EOF('test.txt')
 =end
-
 
 class Attendee::Abbreviator < BufferedAttendee
 
 protected
 
   def init
-    #  Wörterbuch bereitstellen
+    # Wörterbuch bereitstellen
     src = get_array('source')
     mod = get_key('mode', 'all')
     @dic = Dictionary.new({'source'=>src, 'mode'=>mod}, @lingo)
   end
 
-
   def control(cmd, par)
     @dic.report.each_pair { |key, value| set(key, value) } if cmd == STR_CMD_STATUS
 
-    #  Jedes Control-Object ist auch Auslöser der Verarbeitung
+    # Jedes Control-Object ist auch Auslöser der Verarbeitung
     process_buffer
   end
-
 
 private
 
@@ -97,14 +94,13 @@ private
     @buffer[-1].kind_of?(Token) && @buffer[-1].form == CHAR_PUNCT
   end
 
-
   def process_buffer
     if @buffer.size < 2
       forward_buffer
       return
     end
 
-    #  Wort vor dem Punkt im Abkürzungswörterbuch suchen
+    # Wort vor dem Punkt im Abkürzungswörterbuch suchen
     if @buffer[-2].kind_of?(Token)
       inc('Anzahl gesuchter Abkürzungen')
       abbr = @dic.find_word(@buffer[-2].form)
@@ -115,10 +111,10 @@ private
         @buffer.delete_at(-1)
       end
     end
-    
+
     forward_buffer
   end
-  
+
 end
 
 end

@@ -1,29 +1,29 @@
 # encoding: utf-8
 
-#  LINGO ist ein Indexierungssystem mit Grundformreduktion, Kompositumzerlegung,
-#  Mehrworterkennung und Relationierung.
+# LINGO ist ein Indexierungssystem mit Grundformreduktion, Kompositumzerlegung,
+# Mehrworterkennung und Relationierung.
 #
-#  Copyright (C) 2005-2007 John Vorhauer
-#  Copyright (C) 2007-2011 John Vorhauer, Jens Wille
+# Copyright (C) 2005-2007 John Vorhauer
+# Copyright (C) 2007-2011 John Vorhauer, Jens Wille
 #
-#  This program is free software; you can redistribute it and/or modify it under
-#  the terms of the GNU Affero General Public License as published by the Free
-#  Software Foundation; either version 3 of the License, or (at your option)
-#  any later version.
+# This program is free software; you can redistribute it and/or modify it under
+# the terms of the GNU Affero General Public License as published by the Free
+# Software Foundation; either version 3 of the License, or (at your option)
+# any later version.
 #
-#  This program is distributed in the hope that it will be useful, but WITHOUT
-#  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-#  FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
-#  details.
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+# details.
 #
-#  You should have received a copy of the GNU Affero General Public License along
-#  with this program; if not, write to the Free Software Foundation, Inc.,
-#  51 Franklin St, Fifth Floor, Boston, MA 02110, USA
+# You should have received a copy of the GNU Affero General Public License along
+# with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin St, Fifth Floor, Boston, MA 02110, USA
 #
-#  For more information visit http://www.lex-lingo.de or contact me at
-#  welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
+# For more information visit http://www.lex-lingo.de or contact me at
+# welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
 #
-#  Lex Lingo rules from here on
+# Lex Lingo rules from here on
 
 require_relative 'modules'
 require_relative 'language'
@@ -34,7 +34,7 @@ class Lingo
 
 =begin rdoc
 == Attendee
-Lingo ist als universelles Indexierungssystem entworfen worden. Seine Stärke liegt in der einfachen Konfigurierbarkeit für 
+Lingo ist als universelles Indexierungssystem entworfen worden. Seine Stärke liegt in der einfachen Konfigurierbarkeit für
 spezifische Aufgaben und in der schnelle Entwicklung weiterer Funktionen durch systematischen Kapselung der Komplexität auf
 kleine Verarbeitungseinheiten. Die kleinste Verarbeitungseinheit wird Attendee genannt. Um ein gewünschtes Verarbeitungsergebnis
 zu bekommen, werden die benötigten Attendees einfach in einer Reihe hinter einander geschaltet. Ein einfaches Beispiel hierfür ist
@@ -42,27 +42,26 @@ eine direkte Verbindung zwischen einem Textreader, einem Tokenizer und einem Tex
 Attendee abgeleitet.
 
 Der Textreader liest beispielsweise Zeilen aus einer Textdatei und leitet sie weiter an den Tokenizer. Der Tokenizer zerlegt eine
-Textzeile in einzelne Wörter und gibt diese weiter an den Textwriter, der diese in eine (andere) Datei schreibt. Über vielfältige 
+Textzeile in einzelne Wörter und gibt diese weiter an den Textwriter, der diese in eine (andere) Datei schreibt. Über vielfältige
 Konfigurationsmöglichkeiten kann das Verhalten der Attendees an die eigenen Bedürfnisse angepasst werden.
 
-Die Verkettung einzelner Attendees findet über die Schnittstellen +listen+ und +talk+ statt. An +listen+ können beliebige Objekte 
-zur Ver- und Bearbeitung übergeben werden. Nach der Verarbeitung werden sie mittels +talk+ an die verketteten Attendees weiter 
-gegeben. Objekte der Klasse AgendaItem dienen dabei der Steuerung der Verarbeitung und sind nicht Bestandteil der normalen 
-Verarbeitung. Beispiele für AgendaItems sind die Kommandos TALK (Aufforderung zum Start der Verarbeitung), WARN (zur Ausgabe von 
-Warnungen eines Attendees) und EOL (End of Line, Ende einer Textzeile nach Zerlegung in einzelne Wörter). Eine vollständige 
+Die Verkettung einzelner Attendees findet über die Schnittstellen +listen+ und +talk+ statt. An +listen+ können beliebige Objekte
+zur Ver- und Bearbeitung übergeben werden. Nach der Verarbeitung werden sie mittels +talk+ an die verketteten Attendees weiter
+gegeben. Objekte der Klasse AgendaItem dienen dabei der Steuerung der Verarbeitung und sind nicht Bestandteil der normalen
+Verarbeitung. Beispiele für AgendaItems sind die Kommandos TALK (Aufforderung zum Start der Verarbeitung), WARN (zur Ausgabe von
+Warnungen eines Attendees) und EOL (End of Line, Ende einer Textzeile nach Zerlegung in einzelne Wörter). Eine vollständige
 Übersicht benutzer AgendaItems (oder auf Stream Commands) steht in lib/const.rb mit dem Prefix STR_CMD_.
 
-Um die Entwicklung von neuen Attendees zu beschleunigen, wird durch die Vererbung sind bei wird die gesammte sind in der Regel nur 
-drei abstrakte Methoden zu implementieren: +init+, +control+ und +process+. Die Methode +init+ wird bei der Instanziierung eines 
-Objektes einmalig aufgerufen. Sie dient der Vorbereitung der Verarbeitung, z.B. durch das Öffnen und Bereitstellen von 
+Um die Entwicklung von neuen Attendees zu beschleunigen, wird durch die Vererbung sind bei wird die gesammte sind in der Regel nur
+drei abstrakte Methoden zu implementieren: +init+, +control+ und +process+. Die Methode +init+ wird bei der Instanziierung eines
+Objektes einmalig aufgerufen. Sie dient der Vorbereitung der Verarbeitung, z.B. durch das Öffnen und Bereitstellen von
 Wörterbüchern zur linguistischen Analyse. An die Methode +control+ werden alle eingehenden AgendaItems weitergeleitet. Dort erfolgt
-die Verarbeitungssteuerung, also z.B. bei STR_CMD_FILE das Öffnen einer Datei und bei STR_CMD_EOF respektive das Schließen. Die 
+die Verarbeitungssteuerung, also z.B. bei STR_CMD_FILE das Öffnen einer Datei und bei STR_CMD_EOF respektive das Schließen. Die
 echte Verarbeitung von Daten findet daher durch die Methode +process+ statt.
 
-  
 was macht attendee
 - verkettung der attendees anhand von konfigurationsinformationen
-- bereitstellung von globalen und spezifischen konfigurationsinformationen 
+- bereitstellung von globalen und spezifischen konfigurationsinformationen
 - behandlung von bestimmten übergreifenden Kommandos, z.B. STR_CMD_TALK, STR_CMD_STATUS, STR_CMD_WARN, STR_CMD_ERR
 - separierung und routing von kommando bzw. datenobjekten
 
@@ -118,7 +117,7 @@ class Attendee
         forward(obj)
       end
     else
-      #    Neuen TOP verarbeiten
+      # Neuen TOP verarbeiten
       if @attendee_can_control
         inc(STA_NUM_COMMANDS)
 
@@ -131,11 +130,11 @@ class Attendee
         end
       end
 
-      #    Spezialbehandlung für einige TOPs nach Verarbeitung
+      # Spezialbehandlung für einige TOPs nach Verarbeitung
       case obj.cmd
-      #    keine weitere Behandlung oder Weiterleitung
+      # keine weitere Behandlung oder Weiterleitung
       when STR_CMD_TALK then nil
-      #    Standardprotokollinformationen ausgeben
+      # Standardprotokollinformationen ausgeben
       when STR_CMD_STATUS
         if @lingo.report_time
           @lingo.config.stderr.puts 'Perf: %-15s => %7d commands in %s (%s/cmd),  %8d objects in %s (%s/obj)' % [
@@ -196,10 +195,10 @@ class Attendee
 
   def forward(obj, param=nil)
     if param.nil?
-      #    Information weiterreichen
+      # Information weiterreichen
       talk(obj)
     else
-      #    TOP weiterreichen (wenn keine Warnung oder Fehler)
+      # TOP weiterreichen (wenn keine Warnung oder Fehler)
       case obj
         when STR_CMD_WARN  then printf "+%s\n|   %s: %s\n+%s\n", '-'*60, @config['name'], param, '-'*60
         when STR_CMD_ERR  then printf "%s\n=   %s: %s\n%s\n", '='*61, @config['name'], param, '='*61;  exit( 1 )
@@ -209,9 +208,9 @@ class Attendee
     end
   end
 
-  #  ---------------------------------------------------
-  #    Konfigurationshilfsmethoden
-  #  ---------------------------------------------------
+  # ---------------------------------------------------
+  # Konfigurationshilfsmethoden
+  # ---------------------------------------------------
   def has_key?(key)
     !@config.nil? && @config.has_key?(key)
   end
@@ -225,17 +224,17 @@ class Attendee
     get_key(key, default).split(STRING_SEPERATOR_PATTERN)
   end
 
-  #  ---------------------------------------------------
-  #    Abstrakte Methoden
+  # ---------------------------------------------------
+  # Abstrakte Methoden
   #
-  #    init
-  #    control(cmd, param)
-  #    process(obj)
-  #  ---------------------------------------------------
+  # init
+  # control(cmd, param)
+  # process(obj)
+  # ---------------------------------------------------
 end
 
 #==============================================================================
-#    BufferedAttendee
+# BufferedAttendee
 #==============================================================================
 
 class BufferedAttendee < Attendee
@@ -243,11 +242,11 @@ class BufferedAttendee < Attendee
   BufferInsert = Struct.new(:position, :object)
 
   def initialize(config, lingo)
-    #  In den Buffer werden alle Objekte geschrieben, bis process_buffer? == true ist
+    # In den Buffer werden alle Objekte geschrieben, bis process_buffer? == true ist
     @buffer = []
 
-    #  deferred_inserts beeinflussen nicht die Buffer-Größe, sondern werden an einer
-    #  bestimmten Stelle in den Datenstrom eingefügt
+    # deferred_inserts beeinflussen nicht die Buffer-Größe, sondern werden an einer
+    # bestimmten Stelle in den Datenstrom eingefügt
     @deferred_inserts = []
 
     super
@@ -263,13 +262,13 @@ class BufferedAttendee < Attendee
   private
 
   def forward_buffer
-    #  Aufgeschobene Einfügungen in Buffer kopieren
+    # Aufgeschobene Einfügungen in Buffer kopieren
     @deferred_inserts.sort_by { |ins| ins.position }.each { |ins|
       @buffer.insert(ins.position, ins.object)
     }
     @deferred_inserts.clear
 
-    #  Buffer weiterleiten
+    # Buffer weiterleiten
     @buffer.each { |obj| forward(obj) }
     @buffer.clear
   end
@@ -279,7 +278,7 @@ class BufferedAttendee < Attendee
   end
 
   def process_buffer
-    #  to be defined by child class
+    # to be defined by child class
   end
 
   def deferred_insert(pos, obj)

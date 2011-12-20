@@ -1,29 +1,29 @@
 # encoding: utf-8
 
-#  LINGO ist ein Indexierungssystem mit Grundformreduktion, Kompositumzerlegung,
-#  Mehrworterkennung und Relationierung.
+# LINGO ist ein Indexierungssystem mit Grundformreduktion, Kompositumzerlegung,
+# Mehrworterkennung und Relationierung.
 #
-#  Copyright (C) 2005-2007 John Vorhauer
-#  Copyright (C) 2007-2011 John Vorhauer, Jens Wille
+# Copyright (C) 2005-2007 John Vorhauer
+# Copyright (C) 2007-2011 John Vorhauer, Jens Wille
 #
-#  This program is free software; you can redistribute it and/or modify it under
-#  the terms of the GNU Affero General Public License as published by the Free
-#  Software Foundation; either version 3 of the License, or (at your option)
-#  any later version.
+# This program is free software; you can redistribute it and/or modify it under
+# the terms of the GNU Affero General Public License as published by the Free
+# Software Foundation; either version 3 of the License, or (at your option)
+# any later version.
 #
-#  This program is distributed in the hope that it will be useful, but WITHOUT
-#  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-#  FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
-#  details.
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+# details.
 #
-#  You should have received a copy of the GNU Affero General Public License along
-#  with this program; if not, write to the Free Software Foundation, Inc.,
-#  51 Franklin St, Fifth Floor, Boston, MA 02110, USA
+# You should have received a copy of the GNU Affero General Public License along
+# with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin St, Fifth Floor, Boston, MA 02110, USA
 #
-#  For more information visit http://www.lex-lingo.de or contact me at
-#  welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
+# For more information visit http://www.lex-lingo.de or contact me at
+# welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
 #
-#  Lex Lingo rules from here on
+# Lex Lingo rules from here on
 
 %w[filemagic mime/types hpricot pdf-reader].each { |lib|
   begin
@@ -36,11 +36,11 @@ class Lingo
 
 =begin rdoc
 == Textreader
-Der Textreader ist eine klassische Datenquelle. Er liest eine oder mehrere Dateien  
-und gibt sie Zeilenweise in den Ausgabekanal. Der Start bzw. Wechsel einer Datei 
+Der Textreader ist eine klassische Datenquelle. Er liest eine oder mehrere Dateien
+und gibt sie Zeilenweise in den Ausgabekanal. Der Start bzw. Wechsel einer Datei
 wird dabei über den Kommandokanal angekündigt, ebenso wie das Ende.
 
-Der Textreader kann ebenfalls ein spezielles Dateiformat verarbeiten, welches zum 
+Der Textreader kann ebenfalls ein spezielles Dateiformat verarbeiten, welches zum
 Austausch mit dem LIR-System dient. Dabei enthält die Datei Record-basierte Informationen,
 die wie mehrere Dateien verarbeitet werden.
 
@@ -48,17 +48,17 @@ die wie mehrere Dateien verarbeitet werden.
 Erzeugt:: Daten des Typs *String* (Textzeile) z.B. für Tokenizer, Textwriter
 
 === Parameter
-Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der Voreinstellung). 
+Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der Voreinstellung).
 Alle anderen Parameter müssen zwingend angegeben werden.
 <b>out</b>:: siehe allgemeine Beschreibung des Attendee
-<b>files</b>:: Es können eine oder mehrere Dateien angegeben werden, die nacheinander 
-               eingelesen und zeilenweise weitergeleitet werden. Die Dateien werden mit 
+<b>files</b>:: Es können eine oder mehrere Dateien angegeben werden, die nacheinander
+               eingelesen und zeilenweise weitergeleitet werden. Die Dateien werden mit
                Komma voneinander getrennt, z.B.
                  files: 'readme.txt'
                  files: 'readme.txt,lingo.cfg'
-<b><i>lir-record-pattern</i></b>:: Mit diesem Parameter wird angegeben, woran der Anfang 
-                                   eines neuen Records erkannt werden kann und wie die 
-                                   Record-Nummer identifiziert wird. Das Format einer 
+<b><i>lir-record-pattern</i></b>:: Mit diesem Parameter wird angegeben, woran der Anfang
+                                   eines neuen Records erkannt werden kann und wie die
+                                   Record-Nummer identifiziert wird. Das Format einer
                                    LIR-Datei ist z.B.
                                      [00001.]
                                      020: ¬Die Aufgabenteilung zwischen Wortschatz und Grammatik.
@@ -68,11 +68,11 @@ Alle anderen Parameter müssen zwingend angegeben werden.
                                    Mit der Angabe von
                                      lir-record-pattern: "^\[(\d+)\.\]"
                                    werden die Record-Zeilen erkannt und jeweils die Record-Nummer +00001+,
-                                   bzw. +00002+ erkannt. 
+                                   bzw. +00002+ erkannt.
 
 === Generierte Kommandos
 Damit der nachfolgende Datenstrom einwandfrei verarbeitet werden kann, generiert der Textreader
-Kommandos, die mit in den Datenstrom eingefügt werden. 
+Kommandos, die mit in den Datenstrom eingefügt werden.
 <b>*FILE(<dateiname>)</b>:: Kennzeichnet den Beginn der Datei <dateiname>
 <b>*EOF(<dateiname>)</b>:: Kennzeichnet das Ende der Datei <dateiname>
 <b>*LIR_FORMAT('')</b>:: Kennzeichnet die Verarbeitung einer Datei im LIR-Format (nur bei LIR-Format).
@@ -103,14 +103,13 @@ ergibt die Ausgabe mit <tt>lingo -c t2 lir.txt</tt>
   out> *EOF('lir.txt')
 =end
 
-
 class Attendee::Textreader < Attendee
 
 protected
 
-  #   TODO: FILE und LIR-FILE
-  #  TODO: lir-record-pattern abkürzen
-  #  Interpretation der Parameter
+  # TODO: FILE und LIR-FILE
+  # TODO: lir-record-pattern abkürzen
+  # Interpretation der Parameter
   def init
     @files = Array(get_key('files', '-'))
     @rec_pat = Regexp.new(get_key('lir-record-pattern', ''))
@@ -119,7 +118,6 @@ protected
     @filter = get_key('filter', false)
   end
 
-
   def control(cmd, param)
     if cmd==STR_CMD_TALK
       forward(STR_CMD_LIR, '') if @is_LIR_file
@@ -127,10 +125,9 @@ protected
     end
   end
 
-
 private
 
-  #  Gibt eine Datei zeilenweise in den Ausgabekanal
+  # Gibt eine Datei zeilenweise in den Ausgabekanal
   def spool(filename)
     unless stdin?(filename)
       FileTest.exist?(filename) || forward(STR_CMD_ERR, "Datei #{filename} nicht gefunden")

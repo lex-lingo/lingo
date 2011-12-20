@@ -1,29 +1,29 @@
 # encoding: utf-8
 
-#  LINGO ist ein Indexierungssystem mit Grundformreduktion, Kompositumzerlegung,
-#  Mehrworterkennung und Relationierung.
+# LINGO ist ein Indexierungssystem mit Grundformreduktion, Kompositumzerlegung,
+# Mehrworterkennung und Relationierung.
 #
-#  Copyright (C) 2005-2007 John Vorhauer
-#  Copyright (C) 2007-2011 John Vorhauer, Jens Wille
+# Copyright (C) 2005-2007 John Vorhauer
+# Copyright (C) 2007-2011 John Vorhauer, Jens Wille
 #
-#  This program is free software; you can redistribute it and/or modify it under
-#  the terms of the GNU Affero General Public License as published by the Free
-#  Software Foundation; either version 3 of the License, or (at your option)
-#  any later version.
+# This program is free software; you can redistribute it and/or modify it under
+# the terms of the GNU Affero General Public License as published by the Free
+# Software Foundation; either version 3 of the License, or (at your option)
+# any later version.
 #
-#  This program is distributed in the hope that it will be useful, but WITHOUT
-#  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-#  FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
-#  details.
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+# details.
 #
-#  You should have received a copy of the GNU Affero General Public License along
-#  with this program; if not, write to the Free Software Foundation, Inc.,
-#  51 Franklin St, Fifth Floor, Boston, MA 02110, USA
+# You should have received a copy of the GNU Affero General Public License along
+# with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin St, Fifth Floor, Boston, MA 02110, USA
 #
-#  For more information visit http://www.lex-lingo.de or contact me at
-#  welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
+# For more information visit http://www.lex-lingo.de or contact me at
+# welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
 #
-#  Lex Lingo rules from here on
+# Lex Lingo rules from here on
 
 require 'sdbm'
 require 'digest/sha1'
@@ -159,29 +159,29 @@ class TxtFile
   attr_reader :position
 
   def TxtFile.filename(id, lingo)
-    #  Konfiguration der Datenbank auslesen
+    # Konfiguration der Datenbank auslesen
     config = lingo.config['language/dictionary/databases/' + id]
     raise "Es gibt in 'language/dictionary/databases' keine Datenbank mit der Kurzform '#{id}'" unless config && config.has_key?('name')
 
-    #  Pfade für Quelldatei und für ungültige Zeilen
+    # Pfade für Quelldatei und für ungültige Zeilen
     config['name']
   end
 
   def initialize(id, lingo)
-    #  Konfiguration der Datenbank auslesen
+    # Konfiguration der Datenbank auslesen
     @config = lingo.config['language/dictionary/databases/' + id]
 
-    #  Pfade für Quelldatei und für ungültige Zeilen
+    # Pfade für Quelldatei und für ungültige Zeilen
     @pn_source = Pathname.new(@config['name'])
     @pn_reject = Pathname.new(@config['name'].gsub(FILE_EXTENSION_PATTERN, '.rev'))
 
     Lingo.error("Quelldatei für id '#{id}' unter '" + @config['name'] + "' existiert nicht") unless @pn_source.exist?
 
-    #  Parameter standardisieren
+    # Parameter standardisieren
     @wordclass = @config.fetch('def-wc', '?').downcase
     @separator = @config['separator']
 
-    #  Objektvariablen initialisieren
+    # Objektvariablen initialisieren
     @legal_word = '(?:' + PRINTABLE_CHAR + '|[' + Regexp.escape('- /&()[].,') + '])+'  # TODO: v1.60 - ',' bei TxtFile zulassen; in const.rb einbauen
     @line_pattern = Regexp.new('^'+@legal_word+'$')
     @position = 0
@@ -205,14 +205,14 @@ class TxtFile
 
       next if line =~ /^\s*\043/ || line.strip == ''  # Kommentarzeilen und leere Zeilen überspringen
 
-      #  Ungültige Zeilen protokollieren
+      # Ungültige Zeilen protokollieren
       unless line.length < 4096 && line =~ @line_pattern
         fail_msg = "Fehler beim schreiben der Reject-Datei '#{@pn_reject.to_s}'"
         reject_file.puts line
         next
       end
 
-      #  Zeile in Werte konvertieren
+      # Zeile in Werte konvertieren
       yield convert_line(line, $1, $2)
     end
 
@@ -523,11 +523,11 @@ end
 class Txt2DbmConverter
 
   def initialize(id, lingo, verbose = true)
-    #  Konfiguration der Datenbanken auslesen
+    # Konfiguration der Datenbanken auslesen
     @config = lingo.config['language/dictionary/databases/' + id]
     @index = 0
 
-    #  Objekt für Quelldatei erzeugen
+    # Objekt für Quelldatei erzeugen
     @format = @config.fetch( 'txt-format', 'KeyValue' ).downcase
     @source = case @format
       when 'singleword' then TxtFile_Singleword
@@ -539,13 +539,13 @@ class Txt2DbmConverter
         Lingo.error("Unbekanntes Textformat '#{config['txt-format'].downcase}' bei '#{'language/dictionary/databases/' + id}'")
     end.new(id, lingo)
 
-    #  Zielobjekt erzeugen
+    # Zielobjekt erzeugen
     @destination = DbmFile.new(id, lingo, false)
 
-    #    Ausgabesteuerung
+    # Ausgabesteuerung
     @progress = ShowProgress.new(@config['name'], verbose, lingo.config.stderr)
 
-    #  Lexikalisierungen für Mehrwortgruppen vorbereiten
+    # Lexikalisierungen für Mehrwortgruppen vorbereiten
     lex_dic = @config['use-lex']
     lex_mod = @config['lex-mode']
 
@@ -567,9 +567,9 @@ class Txt2DbmConverter
     @source.each do |key, value|
       @progress.tick(@source.position)
 
-      #  Behandle Mehrwortschlüssel
+      # Behandle Mehrwortschlüssel
       if @lexicalize && key =~ / /
-        #  Schlüssel in Grundform wandeln
+        # Schlüssel in Grundform wandeln
         gkey = key.split(' ').map do |form|
 
           # => Wortform ohne Satzendepunkt benutzen
@@ -588,22 +588,22 @@ class Txt2DbmConverter
         end.join(' ')
 
         skey = gkey.split
-        #  Zusatzschlüssel einfügen, wenn Anzahl Wörter > 3
+        # Zusatzschlüssel einfügen, wenn Anzahl Wörter > 3
         @destination[skey[0...3].join(' ')] = [KEY_REF + skey.size.to_s] if skey.size > 3
 
         value = value.map { |v| v =~ /^\043/ ? key + v : v }
         key = gkey
       end
 
-      #  Format Sonderbehandlungen
+      # Format Sonderbehandlungen
       key.gsub!(/\.$/, '') if key
       case @format
-      when 'multivalue'    #  Äquvalenzklassen behandeln
+      when 'multivalue'    # Äquvalenzklassen behandeln
         key = IDX_REF + @index.to_s
         @index += 1
         @destination[key] = value
         value.each { |v| @destination[v] = [key] }
-      when 'multikey'      #  Äquvalenzklassen behandeln
+      when 'multikey'      # Äquvalenzklassen behandeln
         value.each { |v| @destination[v] = [key] }
       else
         @destination[key] = value

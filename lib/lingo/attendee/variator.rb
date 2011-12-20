@@ -1,36 +1,36 @@
 # encoding: utf-8
 
-#  LINGO ist ein Indexierungssystem mit Grundformreduktion, Kompositumzerlegung,
-#  Mehrworterkennung und Relationierung.
+# LINGO ist ein Indexierungssystem mit Grundformreduktion, Kompositumzerlegung,
+# Mehrworterkennung und Relationierung.
 #
-#  Copyright (C) 2005-2007 John Vorhauer
-#  Copyright (C) 2007-2011 John Vorhauer, Jens Wille
+# Copyright (C) 2005-2007 John Vorhauer
+# Copyright (C) 2007-2011 John Vorhauer, Jens Wille
 #
-#  This program is free software; you can redistribute it and/or modify it under
-#  the terms of the GNU Affero General Public License as published by the Free
-#  Software Foundation; either version 3 of the License, or (at your option)
-#  any later version.
+# This program is free software; you can redistribute it and/or modify it under
+# the terms of the GNU Affero General Public License as published by the Free
+# Software Foundation; either version 3 of the License, or (at your option)
+# any later version.
 #
-#  This program is distributed in the hope that it will be useful, but WITHOUT
-#  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-#  FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
-#  details.
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+# details.
 #
-#  You should have received a copy of the GNU Affero General Public License along
-#  with this program; if not, write to the Free Software Foundation, Inc.,
-#  51 Franklin St, Fifth Floor, Boston, MA 02110, USA
+# You should have received a copy of the GNU Affero General Public License along
+# with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin St, Fifth Floor, Boston, MA 02110, USA
 #
-#  For more information visit http://www.lex-lingo.de or contact me at
-#  welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
+# For more information visit http://www.lex-lingo.de or contact me at
+# welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
 #
-#  Lex Lingo rules from here on
+# Lex Lingo rules from here on
 
 class Lingo
 
 =begin rdoc
 == Variator
-Der Variator ermöglicht bei nicht erkannten Wörtern den listenbasierten 
-Austausch einzelner Wortteile einchließlich erneuter Wörterbuchsuche zur 
+Der Variator ermöglicht bei nicht erkannten Wörtern den listenbasierten
+Austausch einzelner Wortteile einchließlich erneuter Wörterbuchsuche zur
 Verbesserung der Worterkennungsquote.
 
 Ursprünglich wurde der Variator entwickelt, um die mangelnde Qualität bei der
@@ -42,7 +42,7 @@ Erwartet:: Daten vom Typ *Word* (andere werden einfach durchgereicht) z.B. von W
 Erzeugt:: Daten vom Typ *Word* zur Weiterleitung z.B. an Synonymer, Decomposer, Multiworder, Sequencer, Noneword_filter oder Vector_filter
 
 === Parameter
-Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der Voreinstellung). 
+Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der Voreinstellung).
 Alle anderen Parameter müssen zwingend angegeben werden.
 <b>in</b>:: siehe allgemeine Beschreibung des Attendee
 <b>out</b>:: siehe allgemeine Beschreibung des Attendee
@@ -72,66 +72,63 @@ ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
   out> *EOF('test.txt')
 =end
 
-
 class Attendee::Variator < Attendee
 
 protected
 
   def init
-    #  Parameter verarbeiten
+    # Parameter verarbeiten
     @marker  = get_key('marker', '*')
     @max_var = get_key('max-var', '10000').to_i
     filter = get_array('check', WA_UNKNOWN)
-    
+
     src = get_array('source')
     mod = get_key('mode', 'all')
 
-    #  Daten verarbeiten
+    # Daten verarbeiten
     @var_strings = get_key('variations')
     forward(STR_CMD_ERR, 'Ocr-variator: Konfiguration <ocr-variator> ist leer') if @var_strings.size==0
 
-    #  Initialisierungen
+    # Initialisierungen
     @check = Hash.new(false)
     filter.each { |s| @check[s.upcase] = true }
-  
-    #  Wörterbuchzugriff
+
+    # Wörterbuchzugriff
     @dic = Dictionary.new({'source'=>src, 'mode'=>mod}, @lingo)
     @gra = Grammar.new({'source'=>src, 'mode'=>mod}, @lingo)
-    
-    #  Optimierungen
+
+    # Optimierungen
     if @max_var == 0
       forward( STR_CMD_WARN, 'Ocr-variator: max-var ist 0, setze es auf 10.000' )
       @max_var = 10000
     end
   end
 
-
   def control(cmd, par)
-    #  Status wird abgefragt
+    # Status wird abgefragt
     if cmd == STR_CMD_STATUS
-      #  Eigenen Status um Status von Dictionary und Grammer erweitern
+      # Eigenen Status um Status von Dictionary und Grammer erweitern
       @dic.report.each_pair { | k, v | set( k, v ) }
       @gra.report.each_pair { | k, v | set( k, v ) }
     end
   end
 
-
   def process(obj)
-    #  Zu prüfende Wörter filtern
+    # Zu prüfende Wörter filtern
     if obj.is_a?(Word) && @check[obj.attr]
-      #  Statistik für Report
+      # Statistik für Report
       inc('Anzahl gesuchter Wörter')
 
-      #  Erzeuge Variationen einer Wortform
+      # Erzeuge Variationen einer Wortform
       variations = [obj.form]
       @var_strings.each do |switch|
         from, to = switch
         variations = variate(variations, from, to)
       end
 
-      #  Prüfe Variation auf bekanntes Wort
+      # Prüfe Variation auf bekanntes Wort
       variations[0...@max_var].each do |var|
-        #  Variiertes Wort im Wörterbuch suchen
+        # Variiertes Wort im Wörterbuch suchen
         word = @dic.find_word(var)
         word = @gra.find_compositum(var) if word.attr == WA_UNKNOWN
         next if word.attr == WA_UNKNOWN || (
@@ -140,51 +137,50 @@ protected
           }
         )
 
-        #  Das erste erkannte Wort beendet die Suche
+        # Das erste erkannte Wort beendet die Suche
         inc('Anzahl gefundener Wörter')
         word.form = @marker + var
         forward(word)
         return
       end
     end
-    
+
     forward(obj)
   end
 
-
 private
 
-  #  Variiere die Bestandteile eines Arrays gemäß den Austauschvorgaben.
+  # Variiere die Bestandteile eines Arrays gemäß den Austauschvorgaben.
   #
-  #  variate( 'Tiieh', 'ieh', 'sch' ) => ['Tiieh', 'Tisch']
+  # variate( 'Tiieh', 'ieh', 'sch' ) => ['Tiieh', 'Tisch']
   def variate(variation_list, from, to)
-    #  neue Varianten sammeln
+    # neue Varianten sammeln
     add_variations = []
     from_re = Regexp.new(from)
-    
-    #  alle Wörter in der variation_list permutieren
+
+    # alle Wörter in der variation_list permutieren
     variation_list.each do |wordform|
 
-      #  Wortform in Teile zerlegen und anschließend Dimension feststellen
+      # Wortform in Teile zerlegen und anschließend Dimension feststellen
       wordpart = " #{wordform} ".split( from_re )
       n = wordpart.size - 1
 
-      #  Austauschketten in Matrix hinterlegen
+      # Austauschketten in Matrix hinterlegen
       change = [from, to]
 
-      #  Austauschketten auf alle Teile anwenden
+      # Austauschketten auf alle Teile anwenden
       (1..(2**n-1)).each do |i|
         variation = wordpart[0]
-        #  i[x] = Wert des x.ten Bit von Integer i
+        # i[x] = Wert des x.ten Bit von Integer i
         (1..n).each { |j| variation += change[i[j-1]] + wordpart[j]  }
-        
+
         add_variations << variation.strip
       end
     end
-    
+
     variation_list + add_variations
   end
-  
+
 end
 
 end

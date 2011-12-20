@@ -7,7 +7,7 @@
   parameter in the config for this to trigger.
 * Status/performance details as well as progress information are now
   printed on STDERR instead of STDOUT in order to not mix with regular
-	output.
+  output.
 
 == 1.7.1 [2011-10-24]
 

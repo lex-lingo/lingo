@@ -4,7 +4,7 @@ require_relative 'globals'
 
 ################################################################################
 #
-#    Attendee Variator
+# Attendee Variator
 #
 class TestAttendeeVariator < LingoTestCase
 

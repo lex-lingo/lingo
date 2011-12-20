@@ -4,7 +4,7 @@ require_relative 'globals'
 
 ################################################################################
 #
-#    Attendee Objectfilter
+# Attendee Objectfilter
 #
 class TestAttendeeObjectfilter < LingoTestCase
 

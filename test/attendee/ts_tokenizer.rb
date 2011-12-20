@@ -1,10 +1,8 @@
 # encoding: utf-8
 
-require_relative 'globals'
-
 ################################################################################
 #
-#    Attendee Tokenizer
+# Attendee Tokenizer
 #
 class TestAttendeeTokenizer < LingoTestCase
 
@@ -13,7 +11,6 @@ class TestAttendeeTokenizer < LingoTestCase
     @expect = [tk('Dies|WORD'), tk('ist|WORD'), tk('ein|WORD'), tk('Test|WORD'), tk('.|PUNC')]
     meet({})
   end
-
 
   def test_complex
     @input = ["1964 www.vorhauer.de bzw. nasenbär, ()"]

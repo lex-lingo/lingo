@@ -1,29 +1,29 @@
 # encoding: utf-8
 
-#  LINGO ist ein Indexierungssystem mit Grundformreduktion, Kompositumzerlegung,
-#  Mehrworterkennung und Relationierung.
+# LINGO ist ein Indexierungssystem mit Grundformreduktion, Kompositumzerlegung,
+# Mehrworterkennung und Relationierung.
 #
-#  Copyright (C) 2005-2007 John Vorhauer
-#  Copyright (C) 2007-2011 John Vorhauer, Jens Wille
+# Copyright (C) 2005-2007 John Vorhauer
+# Copyright (C) 2007-2011 John Vorhauer, Jens Wille
 #
-#  This program is free software; you can redistribute it and/or modify it under
-#  the terms of the GNU Affero General Public License as published by the Free
-#  Software Foundation; either version 3 of the License, or (at your option)
-#  any later version.
+# This program is free software; you can redistribute it and/or modify it under
+# the terms of the GNU Affero General Public License as published by the Free
+# Software Foundation; either version 3 of the License, or (at your option)
+# any later version.
 #
-#  This program is distributed in the hope that it will be useful, but WITHOUT
-#  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-#  FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
-#  details.
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+# details.
 #
-#  You should have received a copy of the GNU Affero General Public License along
-#  with this program; if not, write to the Free Software Foundation, Inc.,
-#  51 Franklin St, Fifth Floor, Boston, MA 02110, USA
+# You should have received a copy of the GNU Affero General Public License along
+# with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin St, Fifth Floor, Boston, MA 02110, USA
 #
-#  For more information visit http://www.lex-lingo.de or contact me at
-#  welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
+# For more information visit http://www.lex-lingo.de or contact me at
+# welcomeATlex-lingoDOTde near 50°55'N+6°55'E.
 #
-#  Lex Lingo rules from here on
+# Lex Lingo rules from here on
 
 class Lingo
 
@@ -32,27 +32,27 @@ class Lingo
 Der Textwriter ermöglicht die Umleitung des Datenstroms in eine Textdatei. Dabei werden
 Objekte, die nicht vom Typ String sind in eine sinnvolle Textrepresentation gewandelt.
 Der Name der Ausgabedatei wird durch den Namen der Eingabedatei (des Textreaders) bestimmt.
-Es kann lediglich die Extension verändert werden. Der Textwriter kann auch das LIR-Format 
+Es kann lediglich die Extension verändert werden. Der Textwriter kann auch das LIR-Format
 erzeugen.
 
 === Mögliche Verlinkung
 Erwartet:: Daten verschiedenen Typs
 
 === Parameter
-Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der Voreinstellung). 
+Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der Voreinstellung).
 Alle anderen Parameter müssen zwingend angegeben werden.
 <b>in</b>:: siehe allgemeine Beschreibung des Attendee
 <b>out</b>:: siehe allgemeine Beschreibung des Attendee
 <b><i>ext</i></b>:: (Standard: txt2) Gibt die Dateinamen-Erweiertung für die Ausgabedatei an.
-                    Wird z.B. dem Textreader die Datei <tt>Dokument.txt</tt> angegeben und 
-                    über die Lingo-Konfiguration alle Indexwörter herausgefiltert, kann mit 
-                    <tt>ext: 'idx'</tt> der Textwriter veranlasst werden, die Indexwörter in 
+                    Wird z.B. dem Textreader die Datei <tt>Dokument.txt</tt> angegeben und
+                    über die Lingo-Konfiguration alle Indexwörter herausgefiltert, kann mit
+                    <tt>ext: 'idx'</tt> der Textwriter veranlasst werden, die Indexwörter in
                     die Datei <tt>Dokument.idx</tt> zu schreiben.
-<b><i>sep</i></b>:: (Standard: ' ') Gibt an, mit welchem Trennzeichen zwei aufeinanderfolgende 
-                    Objekte in der Ausgabedatei getrennt werden sollen. Gängige Werte sind auch 
+<b><i>sep</i></b>:: (Standard: ' ') Gibt an, mit welchem Trennzeichen zwei aufeinanderfolgende
+                    Objekte in der Ausgabedatei getrennt werden sollen. Gängige Werte sind auch
                     noch '\n', welches die Ausgabe jedes Objektes in eine Zeile ermöglicht.
-<b><i>lir-format</i></b>:: (Standard: false) Dieser Parameter hat keinen Wert. Wird er angegeben, 
-                           dann wird er als true ausgewertet. Damit ist es möglich, die Ausgabedatei 
+<b><i>lir-format</i></b>:: (Standard: false) Dieser Parameter hat keinen Wert. Wird er angegeben,
+                           dann wird er als true ausgewertet. Damit ist es möglich, die Ausgabedatei
                            im für LIR lesbarem Format zu erstellen.
 
 === Beispiele
@@ -145,9 +145,8 @@ class Attendee::Textwriter < Attendee
     end
   end
 
-
 private
-  
+
   def flush_lir_buffer
     unless @lir_rec_no.empty? || @lir_rec_buf.empty?
       if @sep =~ /\n/

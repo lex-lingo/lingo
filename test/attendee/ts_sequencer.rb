@@ -4,31 +4,31 @@ require_relative 'globals'
 
 ################################################################################
 #
-#    Attendee Sequencer
+# Attendee Sequencer
 #
 class TestAttendeeSequencer < LingoTestCase
 
   def test_basic
     @input = [
-      #  AS
+      # AS
       wd('Die|IDF', 'die|w'),
       wd('helle|IDF', 'hell|a'),
       wd('Sonne|IDF', 'sonne|s'),
       tk('.|PUNC'),
-      #  AK
+      # AK
       wd('Der|IDF', 'der|w'),
       wd('schöne|IDF', 'schön|a'),
       wd('Sonnenuntergang|KOM', 'sonnenuntergang|k', 'sonne|s+', 'untergang|s+'),
       ai('EOF|')
     ]
     @expect = [
-      #  AS
+      # AS
       wd('Die|IDF', 'die|w'),
       wd('sonne, hell|SEQ', 'sonne, hell|q'),
       wd('helle|IDF', 'hell|a'),
       wd('Sonne|IDF', 'sonne|s'),
       tk('.|PUNC'),
-      #  AK
+      # AK
       wd('Der|IDF', 'der|w'),
       wd('sonnenuntergang, schön|SEQ', 'sonnenuntergang, schön|q'),
       wd('schöne|IDF', 'schön|a'),
