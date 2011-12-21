@@ -5,7 +5,7 @@
 == General considerations
 
 * New code *should* meet the guidelines outlined in the
-  RubyStyleGuide[https://github.com/bbatsov/ruby-style-guide],  
+  RubyStyleGuide[https://github.com/bbatsov/ruby-style-guide],
   existing code will be adjusted along the way.
 * New comments and documentation and stuff *should* be in English, existing
   texts will be translated as time allows. Use Ri18n or Ruby-GetText for the
@@ -40,5 +40,5 @@
   YAML format.
 * Make sure the Crypter is sufficiently secure.
 * Use RSpec for testing.
-* Make Lingo capable to use multiple cores or even machines to boost performance by 
-  connecting Attendees through sockets and use separate processes 
+* Make Lingo capable to use multiple cores or even machines to boost performance
+  by connecting Attendees through sockets and use separate processes
