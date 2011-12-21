@@ -43,7 +43,7 @@ class WordSequence
     pos = 0
 
     while pos = sequence.index(string, pos)
-      yield pos, format, classes
+      yield pos, format.dup, classes
       pos += 1
     end
   end
@@ -136,8 +136,8 @@ class Attendee::Sequencer < BufferedAttendee
   def process_buffer?
     #   start buffer processing when stopper token are found or at unknown words
     item = @buffer.last
-    (item.is_a?(StringA) && @stopper.include?(item.attr.upcase)) || 
-    (item.is_a?(Word) && item.unknown?)  
+    (item.is_a?(StringA) && @stopper.include?(item.attr.upcase)) ||
+    (item.is_a?(Word) && item.unknown?)
   end
 
   def process_buffer
@@ -150,10 +150,9 @@ class Attendee::Sequencer < BufferedAttendee
         obj.is_a?(Word) && !obj.unknown? ? obj.attrs(false) : ['#']
       }).uniq.each { |sequence|
         @seq_strings.each { |wordseq|
-          wordseq.scan(sequence) { |pos, format, classes|
+          wordseq.scan(sequence) { |pos, form, classes|
             inc('Anzahl erkannter Sequenzen')
 
-            form = format.dup
             classes.each_with_index { |wc, index|
               @buffer[pos + index].lexicals.find { |lex|
                 form.gsub!(index.succ.to_s, lex.form) if lex.attr == wc
@@ -170,8 +169,8 @@ class Attendee::Sequencer < BufferedAttendee
           deferred_insert(pos, Word.new_lexical(form, WA_SEQUENCE, LA_SEQUENCE))
         }
       }
-
     end
+
     forward_buffer
   end
 
