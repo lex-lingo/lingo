@@ -43,7 +43,7 @@ class WordSequence
     pos = 0
 
     while pos = sequence.index(string, pos)
-      yield pos, format.dup, classes
+      yield pos, format, classes
       pos += 1
     end
   end
@@ -134,38 +134,44 @@ class Attendee::Sequencer < BufferedAttendee
   end
 
   def process_buffer?
-    (item = @buffer.last).is_a?(StringA) && @stopper.include?(item.attr.upcase)
+    #   start buffer processing when stopper token are found or at unknown words
+    item = @buffer.last
+    (item.is_a?(StringA) && @stopper.include?(item.attr.upcase)) || 
+    (item.is_a?(Word) && item.unknown?)  
   end
 
   def process_buffer
     return if @buffer.empty?
 
-    matches = Hash.new { |h, k| h[k] = [] }
+    unless @buffer.size < 2
+      matches = Hash.new { |h, k| h[k] = [] }
 
-    sequences(@buffer.map { |obj|
-      obj.is_a?(Word) && !obj.unknown? ? obj.attrs(false) : ['#']
-    }).uniq.each { |sequence|
-      @seq_strings.each { |wordseq|
-        wordseq.scan(sequence) { |pos, form, classes|
-          inc('Anzahl erkannter Sequenzen')
+      sequences(@buffer.map { |obj|
+        obj.is_a?(Word) && !obj.unknown? ? obj.attrs(false) : ['#']
+      }).uniq.each { |sequence|
+        @seq_strings.each { |wordseq|
+          wordseq.scan(sequence) { |pos, format, classes|
+            inc('Anzahl erkannter Sequenzen')
 
-          classes.each_with_index { |wc, index|
-            @buffer[pos + index].lexicals.find { |lex|
-              form.gsub!(index.succ.to_s, lex.form) if lex.attr == wc
-            } or break
-          } or next
+            form = format.dup
+            classes.each_with_index { |wc, index|
+              @buffer[pos + index].lexicals.find { |lex|
+                form.gsub!(index.succ.to_s, lex.form) if lex.attr == wc
+              } or break
+            } or next
 
-          matches[pos] << form
+            matches[pos] << form
+          }
         }
       }
-    }
 
-    matches.sort.each { |pos, forms|
-      forms.uniq.each { |form|
-        deferred_insert(pos, Word.new_lexical(form, WA_SEQUENCE, LA_SEQUENCE))
+      matches.sort.each { |pos, forms|
+        forms.uniq.each { |form|
+          deferred_insert(pos, Word.new_lexical(form, WA_SEQUENCE, LA_SEQUENCE))
+        }
       }
-    }
 
+    end
     forward_buffer
   end
 
