@@ -67,20 +67,19 @@ was macht die abgeleitet klasse
 
 =end
 
-
-require './lib/modules'
-require './lib/language'
-require './lib/const'
-require './lib/types'
-
+require_relative 'modules'
+require_relative 'language'
+require_relative 'const'
+require_relative 'types'
 
 class Attendee
+
   include Reportable
 
   @@library_config = nil
   @@report_status = false
   @@report_time = false
-  
+
 private
 
   def initialize(config)
@@ -164,10 +163,14 @@ public
       #    Standardprotokollinformationen ausgeben
       when STR_CMD_STATUS
         if @@report_time
-          puts 'Perf: %-15s => %6d commands in %9.5f ms (%9.5f ms/cmd),  %6d objects in %9.5f ms (%9.5f ms/obj)' % [
-            @config['name'],
-            get(STA_NUM_COMMANDS), get(STA_TIM_COMMANDS) / 1000.0, get(STA_TIM_COMMANDS) * 1000.0 / get(STA_NUM_COMMANDS),
-            get(STA_NUM_OBJECTS), get(STA_TIM_OBJECTS) * 1000.0, get(STA_TIM_OBJECTS) * 1000.0 / get(STA_NUM_OBJECTS)]
+          puts 'Perf: %-15s => %7d commands in %s (%s/cmd),  %8d objects in %s (%s/obj)' % 
+            [@config['name'],
+            get(STA_NUM_COMMANDS), 
+            seconds_to_str(get(STA_TIM_COMMANDS)),
+            seconds_to_str((get(STA_NUM_COMMANDS)==0) ? 0.0 : get(STA_TIM_COMMANDS) / get(STA_NUM_COMMANDS).to_f),
+            get(STA_NUM_OBJECTS), 
+            seconds_to_str(get(STA_TIM_OBJECTS)), 
+            seconds_to_str((get(STA_NUM_OBJECTS)==0) ? 0.0 : get(STA_TIM_OBJECTS) / get(STA_NUM_OBJECTS).to_f)]
         end
         if @@report_status
           printf "Attendee <%s> was connected from '%s' to '%s' reporting...\n", @config['name'], @config['in'], @config['out']
@@ -194,6 +197,26 @@ public
 
 
 private
+  
+  #  ---------------------------------------------------
+  #    Create intelligent output of performance times
+  #    measured with to command line option -p
+  #  ---------------------------------------------------
+
+  def seconds_to_str(float)
+    if float < 0.001
+      "%9.3f µs" % [float * 1000000.0]
+    elsif float < 1.0
+      "%9.3f ms" % [float * 1000.0]
+    elsif float < 60.0
+      "%9.3f s " % [float]
+    elsif float < 3600.0
+      "%9.3f m " % [float / 60.0]
+    else
+      "%9.3f h " % [float / 3600.0]
+    end
+  end
+
   
   def deleteCmd
     @skip_this_command = true
@@ -233,7 +256,7 @@ private
   def get_array(key, default=nil)
     get_key(key, default).split(STRING_SEPERATOR_PATTERN)
   end
-  
+
 
   #  ---------------------------------------------------
   #    Abstrakte Methoden
