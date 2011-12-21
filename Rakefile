@@ -28,7 +28,7 @@ begin
       :version      => Lingo::VERSION,
       :summary      => 'The full-featured automatic indexing system',
       :authors      => ['John Vorhauer', 'Jens Wille'],
-      :email        => ['john@vorhauer.de', 'jens.wille@uni-koeln.de'],
+      :email        => ['lingo@vorhauer.de', 'jens.wille@uni-koeln.de'],
       :homepage     => 'http://lex-lingo.de',
       :extra_files  => FileList[
         'lingo.rb', 'lingo{,-all,-call}.cfg', 'lingo.opt', 'doc/**/*',
