@@ -36,7 +36,7 @@ class Lingo
 
       opts.separator ''
 
-      opts.on('-l', '--language LANG', "Set the language for processing [Default: #{defaults[:language]}]") { |language|
+      opts.on('-l', '--language LANG', "Language for processing [Default: #{defaults[:language]}]") { |language|
         options[:language] = language
       }
 
@@ -48,6 +48,12 @@ class Lingo
 
       opts.on('-p', '--perfmon', 'Print performance details after processing') {
         options[:perfmon] = true
+      }
+
+      opts.separator ''
+
+      opts.on('-L', '--log FILE', 'Log file to print debug and status information to') { |log|
+        options[:log] = @stderr.reopen(File.open(log, 'a+', :encoding => ENC))
       }
     end
 
