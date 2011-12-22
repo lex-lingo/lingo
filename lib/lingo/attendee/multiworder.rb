@@ -272,7 +272,7 @@ class Lingo
         sequence.each { |forms|
           keys = forms.map { |form|
             keys.empty? ? form : keys.map { |key| "#{key} #{form}" }
-          }.flatten
+          }.flatten(1)
         }
 
         keys.each { |key|

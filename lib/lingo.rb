@@ -86,7 +86,7 @@ class Lingo
         config.send(key).
           tap { |io| io.rewind }.
           readlines.each(&:chomp!)
-      }.flatten!
+      }.flatten!(1)
 
       if block_given?
         res.map!(&Proc.new)
