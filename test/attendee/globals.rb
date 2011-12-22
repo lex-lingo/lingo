@@ -63,13 +63,13 @@ class LingoTestCase < Test::Unit::TestCase
     std_cfg.update({'out'=>'output'}) unless @output.nil?
 
     @output.clear
-    @lingo.meeting.reset
+    @lingo.reset
     inv_list = []
     inv_list << {'helper'=>{'name'=>'Helper', 'out'=>'lines', 'spool_from'=>@input}} unless @input.nil?
     inv_list << {@attendee=>std_cfg.update( att_cfg )}
     inv_list << {'helper'=>{'name'=>'Helper', 'in'=>'output', 'dump_to'=>@output}} unless @output.nil?
-    @lingo.meeting.invite(inv_list)
-    @lingo.meeting.start
+    @lingo.invite(inv_list)
+    @lingo.start
 
     assert_equal(@expect, @output) if check
   end

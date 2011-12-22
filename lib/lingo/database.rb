@@ -28,6 +28,8 @@
 #++
 
 require 'sdbm'
+require 'pathname'
+require 'fileutils'
 require 'digest/sha1'
 
 require_relative 'const'
@@ -508,7 +510,7 @@ class Lingo
 
   class Txt2DbmConverter
 
-    def initialize(id, lingo, verbose = true)
+    def initialize(id, lingo, verbose = lingo.config.stderr.tty?)
       # Konfiguration der Datenbanken auslesen
       @config = lingo.config['language/dictionary/databases/' + id]
       @index = 0
