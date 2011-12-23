@@ -46,7 +46,7 @@ rescue LoadError => err
 end
 
 CLEAN.include(
-  'txt/*.{mul,non,seq,syn,ve?,csv}',
+  'txt/*.{log,mul,non,seq,syn,ve?,csv}',
   'test/{test.*,text.non}',
   '{,test/}{de,en}/*.rev'
 )

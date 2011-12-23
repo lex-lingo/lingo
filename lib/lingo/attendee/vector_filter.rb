@@ -88,6 +88,10 @@ class Lingo
       @skip = get_array('skip', TA_PUNCTUATION+','+TA_OTHER).collect {|s| s.upcase }
       @vectors = Array.new
       @word_count = 0
+
+      if @debug = get_key('debug', false)
+        @prompt = get_key('prompt', 'lex:) ')
+      end
     end
 
     def control(cmd, par)
@@ -95,13 +99,15 @@ class Lingo
         when STR_CMD_EOL
           deleteCmd
         when STR_CMD_FILE, STR_CMD_RECORD, STR_CMD_EOF
-          sendVector
+          @debug ? @vectors.each { |str| forward(str) } : sendVector
           @vectors.clear
       end
     end
 
     def process(obj)
-      if obj.is_a?(Word)
+      if @debug
+        @vectors << "#{@prompt} #{obj.inspect}" if eval(@debug)
+      elsif obj.is_a?(Word)
         @word_count += 1 if @skip.index(obj.attr).nil?
         unless obj.lexicals.nil?
           lexis = obj.get_class(@lexis) #lexicals.collect { |lex| (lex.attr =~ @lexis) ? lex : nil }.compact # get_class(@lexis)
