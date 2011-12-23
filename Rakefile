@@ -18,7 +18,7 @@ PACKAGE_PATH  = "pkg/#{PACKAGE_NAME}-#{LINGO_VERSION}"
 # Diese Dateien werden mit dem Aufruf von 'rake clean' gelöscht
 # (temporäre Dateien, die nicht dauerhaft benötigt werden)
 CLEAN.include(
-  'txt/*.{mul,non,seq,syn,ve?,csv}',
+  'txt/*.{log,mul,non,seq,syn,ve?,csv}',
   'test/{test.*,text.non}',
   '{,test/}{de,en}/*.rev'
 )
