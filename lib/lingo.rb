@@ -187,3 +187,6 @@ class Lingo
   end
 
 end
+
+require 'nuggets/util/pluggable'
+Util::Pluggable.load_plugins_for(Lingo)
