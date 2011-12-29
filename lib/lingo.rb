@@ -29,6 +29,7 @@
 
 require 'stringio'
 require 'benchmark'
+require 'nuggets/env/user_home'
 require 'nuggets/numeric/duration'
 
 require_relative 'lingo/config'
@@ -53,7 +54,24 @@ require_relative 'lingo/version'
 
 class Lingo
 
-  BASE = File.expand_path('../..', __FILE__)
+  # The system-wide Lingo directory (+LINGO_BASE+).
+  BASE = ENV['LINGO_BASE'] || File.expand_path('../..', __FILE__)
+
+  # The user's personal Lingo directory (+LINGO_HOME+).
+  HOME = ENV['LINGO_HOME'] || File.join(ENV.user_home, '.lingo')
+
+  # The local Lingo directory (+LINGO_CURR+).
+  CURR = ENV['LINGO_CURR'] || '.'
+
+  # The search path for Lingo dictionary and configuration files.
+  PATH = ENV['LINGO_PATH'] || [CURR, HOME, BASE].join(File::PATH_SEPARATOR)
+
+  FIND_OPTIONS = {
+    config: { dir: 'config', ext: 'cfg'  },
+    dict:   { dir: 'dict',   ext: 'txt'  },
+    lang:   { dir: 'lang',   ext: 'lang' },
+    store:  { dir: 'store',  ext: nil    }
+  }
 
   class << self
 
@@ -61,12 +79,116 @@ class Lingo
       new(*args).talk
     end
 
-    def call(cfg = File.join(BASE, 'lingo-call.cfg'), args = [], &block)
+    def call(cfg = find(:config, 'lingo-call'), args = [], &block)
       Call.new(['-c', cfg, *args]).call(&block)
     end
 
     def error(msg)
       abort(msg)
+    end
+
+    def list(type, options = {})
+      options = options_for(type, options)
+      path    = path_for(options)
+
+      glob = file_with_ext('*', options)
+      glob = File.join('??', glob) if type == :dict
+
+      [].tap { |list| walk(path, options) { |dir|
+        Dir[File.join(dir, glob)].sort.each { |file|
+          pn = Pathname.new(file)
+          list << realpath_for(pn, path) if pn.file?
+        }
+      } }
+    end
+
+    def find(type, file, options = {})
+      if options.is_a?(Array)
+        path    = options
+        options = options_for(type)
+      else
+        options = options_for(type, options)
+        path    = path_for(options)
+      end
+
+      type = :file if type != :store
+      send("find_#{type}", file, path, options)
+    rescue RuntimeError, Errno::ENOENT => err
+      block_given? ? yield(err) : raise
+    end
+
+    def basename(type, file)
+      dir, name = File.split(file)
+      type != :dict ? name : File.join(File.basename(dir), name)
+    end
+
+    def basepath(type, file)
+      File.join(options_for(type)[:dir], basename(type, file))
+    end
+
+    private
+
+    def find_file(file, path, options)
+      pn = Pathname.new(file_with_ext(file, options)).cleanpath
+
+      walk(path, options) { |dir|
+        pn2 = pn.expand_path(dir)
+        pn = pn2 and break if pn2.exist?
+      } if pn.relative?
+
+      realpath_for(pn, path)
+    end
+
+    def find_store(file, path, options)
+      base = basename(:dict, find(:dict, file, path))
+
+      walk(path.reverse, options, false) { |dir|
+        Pathname.new(dir).ascend { |r|
+          break true if r.file?
+
+          return File.join(dir, base).tap { |s|
+            s.chomp!(File.extname(s))
+          } if r.writable?
+
+          break true if r.exist?
+        }
+      }
+
+      raise 'No writable store found in search path'
+    end
+
+    def options_for(type, options = {})
+      if find_options = FIND_OPTIONS[type]
+        options = find_options.merge(options)
+      else
+        raise ArgumentError, "Invalid type `#{type.inspect}'", caller(1)
+      end
+    end
+
+    def path_for(options)
+      options[:path] || PATH.split(File::PATH_SEPARATOR)
+    end
+
+    def file_with_ext(file, options)
+      ext = options[:ext]
+      ext && File.extname(file).empty? ? "#{file}.#{ext}" : file
+    end
+
+    def walk(path, options, legacy = true)
+      dirs = [options[:dir].to_s]
+      dirs << '' if legacy
+      dirs.uniq!
+
+      seen = Hash.new { |h, k| h[k] = true; false }
+
+      path.each { |d|
+        next if seen[d = File.expand_path(d)]
+        dirs.each { |i| yield File.join(d, i) } or break
+      }
+    end
+
+    def realpath_for(pn, path)
+      pn.realpath(path.first).to_s
     end
 
   end
@@ -84,6 +206,10 @@ class Lingo
 
   def dictionary_config
     @dictionary_config ||= config['language/dictionary']
+  end
+
+  def database_config(id)
+    dictionary_config['databases'][id]
   end
 
   def talk

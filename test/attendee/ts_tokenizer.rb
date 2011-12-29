@@ -4,7 +4,7 @@
 #
 # Attendee Tokenizer
 #
-class TestAttendeeTokenizer < LingoTestCase
+class TestAttendeeTokenizer < AttendeeTestCase
 
   def test_basic
     @input = ["Dies ist ein Test."]

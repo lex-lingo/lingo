@@ -1,12 +1,12 @@
 # encoding: utf-8
 
-require_relative 'globals'
+require_relative '../test_helper'
 
 ################################################################################
 #
 # Attendee Abbreviator
 #
-class TestAttendeeAbbreviator < LingoTestCase
+class TestAttendeeAbbreviator < AttendeeTestCase
 
   def test_basic
     @input = [

@@ -1,12 +1,12 @@
 # encoding: utf-8
 
-require_relative 'globals'
+require_relative '../test_helper'
 
 ################################################################################
 #
 # Attendee Textreader
 #
-class TestAttendeeTextreader < LingoTestCase
+class TestAttendeeTextreader < AttendeeTestCase
 
   def test_lir_file
     @expect = [

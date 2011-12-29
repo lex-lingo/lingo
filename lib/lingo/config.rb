@@ -40,9 +40,8 @@ class Lingo
       @cli.execute(*args)
       @cli.options.each { |key, val| @opts[key.to_s] = val }
 
-      { 'language' => 'lang', 'config' => 'cfg' }.each { |key, ext|
-        @opts.update(load_yaml_file(@opts[key], ext))
-      }
+      load_config('language', :lang)
+      load_config('config')
 
       Array(self['meeting/attendees']).each { |a|
         r = a['textreader'] or next
@@ -81,6 +80,10 @@ class Lingo
       @cli.stderr
     end
 
+    def quit(*args)
+      @cli.send(:quit, *args)
+    end
+
     private
 
     def key_to_nodes(key)
@@ -91,13 +94,9 @@ class Lingo
       nodes.join('/')
     end
 
-    def load_yaml_file(name, ext)
-      file = name.sub(/(?:\.[^.]+)?\z/, '.' << ext)
-      file = File.join(BASE, file) unless name.include?('/')
-
-      @cli.quit("File not found: #{file}") unless File.readable?(file)
-
-      File.open(file, :encoding => ENC) { |f| YAML.load(f) }
+    def load_config(key, type = key.to_sym)
+      file = Lingo.find(type, @opts[key], &method(:quit))
+      @opts.update(File.open(file, encoding: ENC, &YAML.method(:load)))
     end
 
   end

@@ -32,7 +32,6 @@ class Lingo
   ENC = 'UTF-8'
 
   STRING_SEPERATOR_PATTERN = /[; ,\|]/
-  FILE_EXTENSION_PATTERN   = /(\.[^.]+)$/
 
   # String-Konstanten im Datenstrom
   CHAR_PUNCT = '.'

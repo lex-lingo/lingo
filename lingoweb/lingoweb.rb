@@ -10,12 +10,12 @@ require 'sinatra'
 require 'nuggets/util/ruby'
 
 LINGOWEB = File.expand_path('..', __FILE__)
-LINGO    = File.dirname(LINGOWEB)
+LINGO    = File.join(File.dirname(LINGOWEB), 'lingo.rb')
 AUTH     = File.join(LINGOWEB, 'lingoweb.auth')
 
 CFG = File.join(LINGOWEB, 'lingoweb-%s.cfg')
 
-LANGS = Dir["#{LINGO}/*.lang"].map { |path|
+LANGS = Dir["#{File.dirname(LINGO)}/*.lang"].map { |path|
   lang = path[%r{.*/(\w+)\.}, 1]
   lang if File.readable?(CFG % lang)
 }.compact.sort
@@ -36,7 +36,7 @@ else
 
   CREDS = pass ? [user, pass] : []
 
-  File.open(AUTH, 'w') { |f| f.puts CREDS.join(':') }
+  File.write(AUTH, CREDS.join(':'))
 end
 
 use Rack::Auth::Basic do |*creds|
@@ -75,13 +75,9 @@ helpers do
 end
 
 def doit
-  unless @in.empty?
-    cmd = %W[lingo.rb -c #{CFG % @lang} -l #{@lang}]
-
-    Dir.chdir(LINGO) { @success = Process.ruby(*cmd) { |_, i, o, e|
-      IO.interact({ @in => i }, { o => @out = '', e => @err = '' })
-    }.success?  }
-  end
+  @success = Process.ruby(LINGO, '-c', CFG % @lang, '-l', @lang) { |_, i, o, e|
+    IO.interact({ @in => i }, { o => @out = '', e => @err = '' })
+  }.success? unless @in.empty?
 
   erb :index
 end

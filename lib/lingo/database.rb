@@ -156,32 +156,23 @@ class Lingo
 
     attr_reader :position
 
-    def TxtFile.filename(id, lingo)
-      # Konfiguration der Datenbank auslesen
-      config = lingo.config['language/dictionary/databases/' + id]
-      raise "Es gibt in 'language/dictionary/databases' keine Datenbank mit der Kurzform '#{id}'" unless config && config.has_key?('name')
-
-      # Pfade für Quelldatei und für ungültige Zeilen
-      config['name']
-    end
-
     def initialize(id, lingo)
       # Konfiguration der Datenbank auslesen
-      @config = lingo.config['language/dictionary/databases/' + id]
+      @config = lingo.database_config(id)
 
-      # Pfade für Quelldatei und für ungültige Zeilen
-      @pn_source = Pathname.new(@config['name'])
-      @pn_reject = Pathname.new(@config['name'].gsub(FILE_EXTENSION_PATTERN, '.rev'))
+      source_file = Lingo.find(:dict, name = @config['name'])
 
-      Lingo.error("Quelldatei für id '#{id}' unter '" + @config['name'] + "' existiert nicht") unless @pn_source.exist?
+      @pn_source = Pathname.new(source_file)
+      @pn_reject = Pathname.new(Lingo.find(:store, source_file) << '.rev')
 
-      # Parameter standardisieren
+      Lingo.error("No such source file `#{name}' for `#{id}'.") unless @pn_source.exist?
+
       @wordclass = @config.fetch('def-wc', '?').downcase
       @separator = @config['separator']
 
-      # Objektvariablen initialisieren
       @legal_word = '(?:' + PRINTABLE_CHAR + '|[' + Regexp.escape('- /&()[].,') + '])+'  # TODO: v1.60 - ',' bei TxtFile zulassen; in const.rb einbauen
       @line_pattern = Regexp.new('^'+@legal_word+'$')
+
       @position = 0
     end
 
@@ -358,19 +349,9 @@ class Lingo
 
     INDEX_PATTERN = %r{\A#{Regexp.escape(IDX_REF)}\d+\z}
 
-    class << self
-
-      # Erzeugt den Dateinamen des DbmFiles anhang der Konfiguration
-      def filename(id, lingo)
-        dir, name = File.split(TxtFile.filename(id, lingo))
-        File.join(dir, 'store', name.sub(/\.txt\z/, ''))
-      end
-
-      def open(*args)
-        dbm = new(*args)
-        dbm.open { yield dbm }
-      end
-
+    def self.open(*args)
+      dbm = new(*args)
+      dbm.open { yield dbm }
     end
 
     def initialize(id, lingo, read_mode = true)
@@ -378,31 +359,28 @@ class Lingo
 
       init_cachable
 
-      @id, @dbm_name, @dbm = id, self.class.filename(id, lingo), nil
+      config = lingo.database_config(id)
+      raise "No such database `#{id}'." unless config && config.has_key?('name')
 
-      # Aktualität prüfen
+      @id, @dbm = id, nil
+      @src_file = Lingo.find(:dict, config['name'])
+      @dbm_name = Lingo.find(:store, @src_file)
+
       Txt2DbmConverter.new(id, lingo).convert if read_mode && !uptodate?
 
-      # Verschlüsselung vorbereiten
-      @crypter = lingo.config["language/dictionary/databases/#{id}"].has_key?('crypt') ? Crypter.new : nil
+      @crypter = config.has_key?('crypt') ? Crypter.new : nil
 
-      # Store-Ordner anlegen
       FileUtils.mkdir_p(File.dirname(@dbm_name))
     end
 
     # Überprüft die Aktualität des DbmFile
     def uptodate?
       begin
-        source_key = open { @dbm[SYS_KEY] }
+        key = open { @dbm[SYS_KEY] }
       rescue RuntimeError
       end if File.exist?("#{@dbm_name}.pag")
 
-      # Dbm-Datei existiert nicht oder hat keinen Inhalt
-      return false unless source_key
-
-      # Mit Werten der Quelldatei vergleichen
-      !(txt_file = Pathname.new(TxtFile.filename(@id, @lingo))).exist? ||
-        source_key == "#{txt_file.size}#{FLD_SEP}#{txt_file.mtime}"
+      key && (!(pn = Pathname.new(@src_file)).exist? || key == source_key(pn))
     end
 
     def open
@@ -478,9 +456,7 @@ class Lingo
 
     def set_source_file(filename)
       return if closed?
-
-      src = Pathname.new(filename.downcase)
-      @dbm[SYS_KEY] = [src.size, src.mtime].join(FLD_SEP)
+      @dbm[SYS_KEY] = source_key(Pathname.new(Lingo.find(:dict, filename)))
     end
 
     private
@@ -497,6 +473,10 @@ class Lingo
       @dbm[key] = (val.length < 950) ? val : val[0, 950]
     end
 
+    def source_key(src)
+      [src.size, src.mtime].join(FLD_SEP)
+    end
+
   end
 
   # Die Klasse Txt2DbConverter steuert die Konvertierung von Wörterbuch-Quelldateien in
@@ -508,8 +488,7 @@ class Lingo
 
     def initialize(id, lingo, verbose = lingo.config.stderr.tty?)
       # Konfiguration der Datenbanken auslesen
-      @config = lingo.config['language/dictionary/databases/' + id]
-      @index = 0
+      @config, @index = lingo.database_config(id), 0
 
       # Objekt für Quelldatei erzeugen
       @format = @config.fetch( 'txt-format', 'KeyValue' ).downcase

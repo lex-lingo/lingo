@@ -1,58 +1,16 @@
 # encoding: utf-8
 
-require 'test/unit'
-require 'lingo'
+require_relative 'test_helper'
 
-include FileUtils::Verbose
-
-################################################################################
-#
-# Hilfsroutinen für kurze Schreibweisen
-def split( text )
-  text =~ /^([^|]+)\|([^|]*)$/
-  [$1.nil? ? '' : $1, $2.nil? ? '' : $2]
-end
-
-# Erzeugt ein AgendaItem-Objekt
-def ai( text )
-  c, p = split( text )
-  Lingo::AgendaItem.new( c, p )
-end
-
-# Erzeugt ein Token-Objekt
-def tk( text )
-  f, a = split( text )
-  Lingo::Token.new( f, a )
-end
-
-# Erzeugt ein Lexical-Objekt
-def lx( text )
-  f, a = split( text )
-  Lingo::Lexical.new( f, a )
-end
-
-# Erzeugt ein Word-Objekt
-def wd( text, *lexis )
-  f, a = split( text )
-  w = Lingo::Word.new( f, a )
-  lexis.each do |text|
-    f, a = split( text )
-    w << Lingo::Lexical.new( f, a )
-  end
-  w
-end
-#
-################################################################################
-
-################################################################################
-#
-# LexicalHash
-#
-class TestLexicalHash < Test::Unit::TestCase
+class TestLexicalHash < LingoTestCase
 
   def setup
     @lingo = Lingo.new
     @database_config = @lingo.config['language/dictionary/databases']
+  end
+
+  def teardown
+    cleanup_store
   end
 
   def test_params
@@ -94,7 +52,7 @@ class TestLexicalHash < Test::Unit::TestCase
 
   def test_auto_create
     txt_file = @database_config['tst-sgw']['name']
-    sto_file = txt_file.gsub(/^de[\/]/, 'de/store/').gsub(/\.txt/, '.pag')
+    sto_file = Lingo.find(:store, txt_file) << '.pag'
 
     ds = Lingo::LexicalHash.new('tst-sgw', @lingo)
     assert_equal([lx('substantiv|s')], ds['substantiv'])
@@ -154,14 +112,8 @@ class TestLexicalHash < Test::Unit::TestCase
   end
 
 end
-#
-################################################################################
 
-################################################################################
-#
-# Dictionary
-#
-class TestDictionary < Test::Unit::TestCase
+class TestDictionary < LingoTestCase
 
   def setup
     @lingo = Lingo.new
@@ -303,14 +255,8 @@ class TestDictionary < Test::Unit::TestCase
   end
 
 end
-#
-################################################################################
 
-################################################################################
-#
-# Grammer
-#
-class TestGrammar < Test::Unit::TestCase
+class TestGrammar < LingoTestCase
 
   def setup
     @lingo = Lingo.new
@@ -448,5 +394,3 @@ class TestGrammar < Test::Unit::TestCase
   end
 
 end
-#
-################################################################################

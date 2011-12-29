@@ -2,4 +2,4 @@
 
 require 'lingo'
 
-Dir.chdir(Lingo::BASE) { Lingo.talk }
+Lingo.talk

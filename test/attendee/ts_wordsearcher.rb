@@ -1,12 +1,12 @@
 # encoding: utf-8
 
-require_relative 'globals'
+require_relative '../test_helper'
 
 ################################################################################
 #
 # Attendee Wordsearcher
 #
-class TestAttendeeWordsearcher < LingoTestCase
+class TestAttendeeWordsearcher < AttendeeTestCase
 
   def setup
     @test_synonyms = [

@@ -48,11 +48,11 @@ end
 CLEAN.include(
   'txt/*.{log,mul,non,seq,syn,ve?,csv}',
   'test/{test.*,text.non}',
-  '{,test/}{de,en}/*.rev'
+  'store/*/*.rev'
 )
 
 CLOBBER.include(
-  '{,test/}{de,en}/store', 'doc' ,'pkg/*', PACKAGE_PATH + '.*'
+  'store', 'doc' ,'pkg/*', PACKAGE_PATH + '.*'
 )
 
 task :checkdoc do
@@ -69,12 +69,12 @@ end
 
 desc 'Test against reference file (TXT)'
 task 'test:txt' do
-  chdir(__DIR__) { test_ref('artikel', 'test') }
+  test_ref('artikel', 'test')
 end
 
 desc 'Test against reference file (LIR)'
 task 'test:lir' do
-  chdir(__DIR__) { test_ref('lir') }
+  test_ref('lir')
 end
 
 desc 'Run all tests on packaged distribution'

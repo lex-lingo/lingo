@@ -1,12 +1,12 @@
 # encoding: utf-8
 
-require_relative 'globals'
+require_relative '../test_helper'
 
 ################################################################################
 #
 # Attendee Variator
 #
-class TestAttendeeVariator < LingoTestCase
+class TestAttendeeVariator < AttendeeTestCase
 
   def test_basic
     @input = [wd('fchwarz|?'), wd('fchilling|?'), wd('iehwarzfchilling|?'), wd('fchiiiirg|?')]

@@ -1,7 +1,6 @@
 # encoding: utf-8
 
-require 'test/unit'
-require 'lingo'
+require_relative 'test_helper'
 
 class Lingo::Txt2DbmConverter
   alias_method :original_initialize, :initialize
@@ -10,10 +9,7 @@ class Lingo::Txt2DbmConverter
   end
 end
 
-class TestDatabase < Test::Unit::TestCase
-
-  TEST_FILE = 'test/de/test.txt'
-  TEST_GLOB = "#{File.dirname(TEST_FILE)}/{,store/}#{File.basename(TEST_FILE, '.txt')}*"
+class TestDatabase < LingoTestCase
 
   def setup
     @lingo = Lingo.new
@@ -263,13 +259,11 @@ Wort2=
       end
     }
   ensure
-    Dir[TEST_GLOB].each { |f| File.unlink(f) }
+    cleanup_store
   end
 
   def set_config(id, config)
-    id = "_test_#{id}_"
-    @lingo.config["language/dictionary/databases/#{id}"] = config
-    id
+    "_test_#{id}_".tap { |id| @lingo.config["language/dictionary/databases/#{id}"] = config }
   end
 
 end

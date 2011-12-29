@@ -1,12 +1,12 @@
 # encoding: utf-8
 
-require_relative 'globals'
+require_relative '../test_helper'
 
 ################################################################################
 #
 # Attendee Objectfilter
 #
-class TestAttendeeObjectfilter < LingoTestCase
+class TestAttendeeObjectfilter < AttendeeTestCase
 
   def test_basic
     @input = [wd('Eins|IDF'), wd('zwei|?'), wd('Drei|IDF'), wd('vier|?'), ai('EOF|')]

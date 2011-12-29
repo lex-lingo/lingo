@@ -1,12 +1,12 @@
 # encoding: utf-8
 
-require_relative 'globals'
+require_relative '../test_helper'
 
 ################################################################################
 #
 # Attendee Textwriter
 #
-class TestAttendeeTextwriter < LingoTestCase
+class TestAttendeeTextwriter < AttendeeTestCase
 
   def setup
     @data = [

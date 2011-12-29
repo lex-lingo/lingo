@@ -1,12 +1,12 @@
 # encoding: utf-8
 
-require_relative 'globals'
+require_relative '../test_helper'
 
 ################################################################################
 #
 # Attendee Synonymer
 #
-class TestAttendeeSynonymer < LingoTestCase
+class TestAttendeeSynonymer < AttendeeTestCase
 
   def test_basic
     @input = [wd('abtastzeiten|IDF', 'abtastzeit|s')]

@@ -1,12 +1,12 @@
 # encoding: utf-8
 
-require_relative 'globals'
+require_relative '../test_helper'
 
 ################################################################################
 #
 # Attendee Vector_filter
 #
-class TestAttendeeVector_filter < LingoTestCase
+class TestAttendeeVector_filter < AttendeeTestCase
 
   def setup
     @input = [
