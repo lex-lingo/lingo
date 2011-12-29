@@ -8,10 +8,10 @@ class Lingo
 
       def defaults
         super.merge(
-          :config   => 'lingo.cfg',
-          :language => 'de',
-          :status   => false,
-          :perfmon  => false
+          config:   'lingo.cfg',
+          language: 'de',
+          status:   false,
+          perfmon:  false
         )
       end
 
@@ -53,7 +53,7 @@ class Lingo
       opts.separator ''
 
       opts.on('-L', '--log FILE', 'Log file to print debug and status information to') { |log|
-        options[:log] = @stderr.reopen(File.open(log, 'a+', :encoding => ENC))
+        options[:log] = @stderr.reopen(File.open(log, 'a+', encoding: ENC))
       }
     end
 

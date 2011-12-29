@@ -155,7 +155,7 @@ class Lingo
     def filter(filename, &block)
       file = stdin?(filename) ?
         @lingo.config.stdin.set_encoding(ENC) :
-        File.open(filename, 'rb', :encoding => ENC)
+        File.open(filename, 'rb', encoding: ENC)
 
       file = case @filter == true ? file_type(filename, file) : @filter.to_s
         when /html/ then filter_html(file)
@@ -179,7 +179,7 @@ class Lingo
 
     def filter_html(file, xml = false)
       if Object.const_defined?(:Hpricot)
-        Hpricot(file, :xml => xml).inner_text
+        Hpricot(file, xml: xml).inner_text
       else
         warn "#{xml ? 'X' : 'HT'}ML filter not available. Please install `hpricot'."
         file
@@ -188,7 +188,7 @@ class Lingo
 
     def file_type(filename, file)
       if Object.const_defined?(:FileMagic) && file.respond_to?(:rewind)
-        type = FileMagic.fm(:mime, :simplified => true).buffer(file.read(256))
+        type = FileMagic.fm(:mime, simplified: true).buffer(file.read(256))
         file.rewind
         type
       elsif Object.const_defined?(:MIME) && MIME.const_defined?(:Types)

@@ -45,7 +45,7 @@ class Lingo
       @active, @out, format = active, out, ' [%3d%%]'
 
       # To get the length of the formatted string we have
-      # to actually substitute the place-holder(s).
+      # to actually substitute the placeholder.
       length = (format % 0).length
 
       # Now we know how far to "go back" to
@@ -59,7 +59,7 @@ class Lingo
     end
 
     def start(msg, max)
-      @max, @count, @next_step = max, 0, 0
+      @ratio, @count, @next_step = max / 100.0, 0, 0
       print msg, ' '
       step
     end
@@ -77,8 +77,8 @@ class Lingo
     private
 
     def step
-      percent = 100 * @count / @max
-      @next_step = (percent + 1) * @max / 100
+      percent = @count / @ratio
+      @next_step = (percent + 1) * @ratio
 
       print @format % percent
     end
@@ -120,14 +120,10 @@ class Lingo
 
         # Our hex chars are 2 bytes wide, so we have to keep track
         # of whether it's the first or the second of the two.
-        #
-        # NOTE: inject with each_slice(2) would be a natural fit,
-        # but it's kind of slow...
         if first = !first
           q = HEX_CHARS.index(byte)
         else
-          # Now we got both parts, so let's do the
-          # inverse of divmod(16): q * 16 + r
+          # Now we got both parts, so let's revert the divmod(16)
           str << q * 16 + HEX_CHARS.index(byte)
         end
       }
@@ -196,12 +192,12 @@ class Lingo
     def each
       # Reject-Datei öffnen
       fail_msg = "Fehler beim öffnen der Reject-Datei '#{@pn_reject.to_s}'"
-      reject_file = @pn_reject.open('w', :encoding => ENC)
+      reject_file = @pn_reject.open('w', encoding: ENC)
 
       # Alle Zeilen der Quelldatei verarbeiten
       fail_msg = "Fehler beim öffnen der Wörterbuch-Quelldatei '#{@pn_source.to_s}'"
 
-      @pn_source.each_line($/, :encoding => ENC) do |raw_line|
+      @pn_source.each_line($/, encoding: ENC) do |raw_line|
         @position += raw_line.size      # Position innerhalb der Datei aktualisieren
         line = raw_line.chomp.downcase  # Zeile normieren
 

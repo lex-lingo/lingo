@@ -12,33 +12,33 @@ if RUBY_PLATFORM =~ /msdos|mswin|djgpp|mingw|windows/i
   ZIP_COMMANDS = ['zip', '7z a']  # for hen's gem task
 end
 
-task :default => :spec
-task :package => [:checkdoc, 'test:all', :clean]
+task default: :spec
+task package: [:checkdoc, 'test:all', :clean]
 
 begin
   require 'hen'
 
   Hen.lay! {{
-    :rubyforge => {
-      :package => PACKAGE_NAME
+    rubyforge: {
+      package: PACKAGE_NAME
     },
 
-    :gem => {
-      :name         => PACKAGE_NAME,
-      :version      => Lingo::VERSION,
-      :summary      => 'The full-featured automatic indexing system',
-      :authors      => ['John Vorhauer', 'Jens Wille'],
-      :email        => ['lingo@vorhauer.de', 'jens.wille@uni-koeln.de'],
-      :homepage     => 'http://lex-lingo.de',
-      :extra_files  => FileList[
+    gem: {
+      name:         PACKAGE_NAME,
+      version:      Lingo::VERSION,
+      summary:      'The full-featured automatic indexing system',
+      authors:      ['John Vorhauer', 'Jens Wille'],
+      email:        ['lingo@vorhauer.de', 'jens.wille@uni-koeln.de'],
+      homepage:     'http://lex-lingo.de',
+      extra_files:  FileList[
         'lingo.rb', 'lingo{,-all,-call}.cfg', 'lingo.opt', 'doc/**/*',
         '{de,en}.lang', '{de,en}/{lingo-*,user-dic}.txt', 'txt/artikel{,-en}.txt',
         'info/gpl-hdr.txt', 'info/*.png', 'lir.cfg', 'txt/lir.txt', 'porter/*',
         'test.cfg', '{de,en}/test_*.txt'
       ].to_a,
-      :required_ruby_version    => '>= 1.9',
-      :dependencies             => [['ruby-nuggets', '>= 0.8.0'], 'unicode'],
-      :development_dependencies => [['diff-lcs', '>= 1.1.3'], 'open4']
+      required_ruby_version:    '>= 1.9',
+      dependencies:             [['ruby-nuggets', '>= 0.8.0'], 'unicode'],
+      development_dependencies: [['diff-lcs', '>= 1.1.3'], 'open4']
     }
   }}
 rescue LoadError => err
