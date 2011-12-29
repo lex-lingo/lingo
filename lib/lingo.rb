@@ -71,11 +71,15 @@ class Lingo
 
   end
 
-  attr_reader :config, :dictionaries, :report_status, :report_time
+  attr_reader :dictionaries, :report_status, :report_time
 
   def initialize(*args)
-    @config = Config.new(*args)
+    @config_args = args
     reset(false)
+  end
+
+  def config
+    @config ||= Config.new(*@config_args)
   end
 
   def dictionary_config
