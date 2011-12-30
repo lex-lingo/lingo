@@ -49,7 +49,6 @@ require_relative 'lingo/attendee/textwriter'
 require_relative 'lingo/attendee/tokenizer'
 require_relative 'lingo/attendee/vector_filter'
 require_relative 'lingo/attendee/wordsearcher'
-require_relative 'lingo/attendee/helper'
 require_relative 'lingo/version'
 
 class Lingo

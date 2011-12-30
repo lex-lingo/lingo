@@ -76,3 +76,38 @@ class AttendeeTestCase < LingoTestCase
   end
 
 end
+
+class Lingo
+
+  class Attendee::Helper < Attendee
+
+    protected
+
+    def init
+      case
+        when has_key?('spool_from')
+          @spool_from = get_key('spool_from')
+          @spooler = true
+        when has_key?('dump_to')
+          @dump_to = get_key('dump_to')
+          @spooler = false
+        else
+          forward(STR_CMD_ERR, 'Weder dump_to noch spool_from-Attribut abgegeben')
+      end
+    end
+
+    def control(cmd, param)
+      if @spooler
+        @spool_from.each { |obj| forward(obj) } if cmd==STR_CMD_TALK
+      else
+        @dump_to << AgendaItem.new(cmd, param)
+      end
+    end
+
+    def process(obj)
+      @dump_to << obj unless @spooler
+    end
+
+  end
+
+end
