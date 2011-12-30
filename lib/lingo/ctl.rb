@@ -74,6 +74,8 @@ EOT
       source = find(what, false)
       target = File.join(path_for_scope(:local), Lingo.basepath(what, source))
 
+      do_usage('Source and target are the same.') if source == target
+
       FileUtils.mkdir_p(File.dirname(target))
       FileUtils.cp(source, target, verbose: true)
     end

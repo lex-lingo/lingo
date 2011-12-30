@@ -1,7 +1,36 @@
 = Lingo - A full-featured automatic indexing system
 
+<b></b>
+* {Version}[rdoc-label:label-VERSION]
+* {Description}[rdoc-label:label-DESCRIPTION]
+  * {Introduction}[rdoc-label:label-Introduction]
+  * {Attendees}[rdoc-label:label-Attendees]
+  * {Filters}[rdoc-label:label-Filters]
+  * {Markup}[rdoc-label:label-Markup]
+  * {Inline annotation}[rdoc-label:label-Inline+annotation]
+  * {Plugins}[rdoc-label:label-Plugins]
+* {Example}[rdoc-label:label-EXAMPLE]
+* {Installation and Usage}[rdoc-label:label-INSTALLATION+AND+USAGE]
+  * {Dictionary and configuration file lookup}[rdoc-label:label-Dictionary+and+configuration+file+lookup]
+  * {Legacy version}[rdoc-label:label-Legacy+version]
+* {File formats}[rdoc-label:label-FILE+FORMATS]
+  * {Configuration}[rdoc-label:label-Configuration]
+  * {Language definition}[rdoc-label:label-Language+definition]
+  * {Dictionaries}[rdoc-label:label-Dictionaries]
+* {Issues and Contribution}[rdoc-label:label-ISSUES+AND+CONTRIBUTION]
+* {Links}[rdoc-label:label-LINKS]
+* {Credits}[rdoc-label:label-CREDITS]
+* {License and Copyright}[rdoc-label:label-LICENSE+AND+COPYRIGHT]
+
+== VERSION
+
+This documentation refers to Lingo version 1.8.0
+
+
+== DESCRIPTION
+
 Lingo is an open source indexing system for research and teachings. The main
-functions of Lingo are
+functions of Lingo are:
 
 * identification of (i.e. reduction to) basic word form by means of dictionaries
   and suffix lists
@@ -10,18 +39,15 @@ functions of Lingo are
 * generic identification of phrases/word sequences based on patterns of word
   classes
 
+=== Introduction
 
-== Introduction
-
-If texts should be object to a linguistic analysis, then Lingo can be used for
-almost every purpose that the heart desires. Lingo is a system that allows
-to assemble a network of unlimited functionality from modules with limited
-functions. This network is built by configuration files.
-
-A small example:
+If you want to perform linguistic analysis on some text, Lingo is there to
+support your endeavour with all its flexibility and extendability. Lingo
+enables you to assemble a network of practically unlimited functionality
+from modules with limited functions. This network is built by configuration
+files. Here's a minimal example:
 
   meeting:
-    protocol: '$(status)'
     attendees:
       - textreader: { files: 'README' }
       - debugger:   { eval: 'true', ceval: 'cmd!="EOL"', prompt: '<debug>: ' }
@@ -29,66 +55,230 @@ A small example:
 Lingo is told to invite two attendees. And Lingo wants them to talk to each
 other, hence the name Lingo (= the technical language).
 
-The first attendee is the +textreader+. It can read files and communicate its
-content to other attendees. For this purpose the +textreader+ is given an output
-channel. Everything that the +textreader+ has to say is steered through this
-channel. It will do nothing further until Lingo will tell the first attendee to
-speak. Then the +textreader+ will open the file README (<tt>files</tt> parameter)
-and babbles the content to the world via its output channel.
+The first attendee is the +textreader+ (Lingo::Attendee::Textreader). It can
+read files (as well as standard input) and communicate its content to other
+attendees. For this purpose the +textreader+ is given an output channel.
+Everything that the +textreader+ has to say is steered through this channel.
+It will do nothing further until Lingo will tell the first attendee to speak.
+Then the +textreader+ will open the file +README+ (<tt>files</tt> parameter)
+and babble the content to the world via its output channel.
 
-The second attendee +debugger+ does nothing else than to put everything on the
-console that comes into its input channel. If you write the Lingo configuration
-which is shown above as an example into the file readme.cfg and then run
-<tt>lingo -c readme -l en</tt>, the result will look something like this:
+The second attendee +debugger+ (Lingo::Attendee::Debugger) does nothing else
+than to put everything on the console (standard error, actually) that comes
+into its input channel. If you write the Lingo configuration which is shown
+above as an example into the file readme.cfg and then run <tt>lingo -c readme
+-l en</tt>, the result will look something like this:
 
   <debug>:  *FILE('README')
-  <debug>:  "= Lingo - ..."
+  <debug>:  "= Lingo - [...]"
   ...
-  <debug>:  "If texts should be object to a linguistic analysis, then Lingo can be used for"
-  <debug>:  "almost every purpose that the heart desires. Lingo is a system that allows"
+  <debug>:  "If you want to perform linguistic analysis on some text, [...]"
+  <debug>:  "support your endeavour with all its flexibility and [...]"
   ...
   <debug>:  *EOF('README')
 
-What we see are lines with asterisk (*) and lines without. And that is just
-fine! Because Lingo distinguishes between command and data. The +textreader+
-did not only read the content of the file, but also communicated through the
-commands when a file begins and when it ends. This can (and will) be an
-important piece of information for other attendees that will be added later.
+What we see are lines with an asterisk (*) and lines without. That's because
+Lingo distinguishes between commands and data. The +textreader+ did not only
+read the content of the file, but also communicated through the commands when
+a file begins and when it ends. This can (and will) be an important piece of
+information for other attendees that will be added later.
 
-Well, with this almost everything about Lingo is said :o)
+To try out Lingo's functionality without installing it first, have a look at
+{Lingo Web}[http://linux2.fbi.fh-koeln.de/lingoweb]. There you can enter some
+text and see the debug output Lingo generated, including tokenization, word
+identification, decomposition, etc.
 
-Maybe yet a little overview about possible attendees that can be used for
-solving a specific problem (for more information see the documentation of the
-specific attendee).
+=== Attendees
 
-<tt>textreader</tt>::      Reads files and puts their content into the channels
-                           line by line.
-<tt>tokenizer</tt>::       Dissects lines into defined character strings of the
-                           class Token.
-<tt>abbreviator</tt>::     Identifies abbreviations and produces the long form
-                           if listed in a dictionary.
-<tt>wordsearcher</tt>::    Identifies tokens and makes them objects of the class
-                           Word. To do this right it looks into the dictionary.
-<tt>decomposer</tt>::      Tests any character strings not identified by the
-                           +wordsearcher+ for being compounds.
-<tt>synonymer</tt>::       Extends objects of the class Word by synonyms.
-<tt>noneword_filter</tt>:: Filters out everything and lets through only those
-                           character strings that are unknown.
-<tt>vector_filter</tt>::   Filters out everything and lets through only those
-                           character strings that considered useful for indexing.
-<tt>textwriter</tt>::      Writes anything that it receives into a file.
-<tt>debugger</tt>::        Shows everything for debugging.
+Available attendees that can be used for solving a specific problem (for more
+information see each attendee's documentation):
+
+<tt>textreader</tt>::      Reads files and puts their content into the channels line by
+                           line. (Lingo::Attendee::Textreader)
+<tt>tokenizer</tt>::       Dissects lines into defined character strings, i.e. tokens.
+                           (Lingo::Attendee::Tokenizer)
+<tt>abbreviator</tt>::     Identifies abbreviations and produces the long form if listed
+                           in a dictionary. (Lingo::Attendee::Abbreviator)
+<tt>wordsearcher</tt>::    Identifies tokens and turns them into words for further
+                           processing. To do this right it looks into the dictionary.
+                           (Lingo::Attendee::Wordsearcher)
+<tt>decomposer</tt>::      Tests any character strings not identified by the +wordsearcher+
+                           for being compounds. (Lingo::Attendee::Decomposer)
+<tt>synonymer</tt>::       Extends words with synonyms. (Lingo::Attendee::Synonymer)
+<tt>noneword_filter</tt>:: Filters out everything and lets through only those tokens that
+                           are unknown. (Lingo::Attendee::Noneword_filter)
+<tt>vector_filter</tt>::   Filters out everything and lets through only those tokens that are
+                           considered useful for indexing. (Lingo::Attendee::Vector_filter)
+<tt>objectfilter</tt>::    Similar to the +vector_filter+. (Lingo::Attendee::Objectfilter)
+<tt>textwriter</tt>::      Writes anything that it receives into a file (or to standard
+                           output). (Lingo::Attendee::Textwriter)
+<tt>formatter</tt>::       Similar to the +textwriter+, but allows for custom output formats.
+                           (Lingo::Attendee::Formatter)
+<tt>debugger</tt>::        Shows everything for debugging. (Lingo::Attendee::Debugger)
 <tt>variator</tt>::        Tries to correct spelling errors and the like.
-<tt>multiworder</tt>::     Identifies phrases (word sequences) based on a
-                           multiword dictionary.
-<tt>sequencer</tt>::       Identifies phrases (word sequences) based on patterns
-                           of word classes.
+                           (Lingo::Attendee::Variator)
+<tt>dehyphenizer</tt>::    Tries to undo hyphenation. (Lingo::Attendee::Dehyphenizer)
+<tt>multiworder</tt>::     Identifies phrases (word sequences) based on a multiword
+                           dictionary. (Lingo::Attendee::Multiworder)
+<tt>sequencer</tt>::       Identifies phrases (word sequences) based on patterns of word
+                           classes. (Lingo::Attendee::Sequencer)
 
-Furthermore, it can be useful to look at the configuration files
+Furthermore, it may be useful to have a look at the configuration files
 <tt>lingo.cfg</tt> and <tt>en.lang</tt>.
 
+=== Filters
 
-== Credits
+TODO...
+
+=== Markup
+
+TODO...
+
+=== Inline annotation
+
+TODO...
+
+=== Plugins
+
+Lingo has a plugin system that allows you to implement additional features
+(e.g. add new attendees) or modify existing ones. Just create a file named
++lingo_plugin.rb+ in your Gem's +lib+ directory or any directory that's in
+<tt>$LOAD_PATH</tt>. You can also define an environment variable +LINGO_PLUGIN_PATH+
+with additional directories to load plugins from (<tt>*.rb</tt>).
+
+A dedicated API to support writing and integrating plugins will be added in
+the future.
+
+
+== EXAMPLE
+
+TODO...
+
+
+== INSTALLATION AND USAGE
+
+Since version 1.8.0, Lingo is available as a RubyGem. So a simple <tt>gem
+install lingo</tt> will install Lingo and its dependencies (you might want
+to run that command with administrator privileges, depending on your
+environment). Then you can call the +lingo+ executable to process your
+data. See <tt>lingo --help</tt> for starters.
+
+Please note that Lingo requires Ruby version 1.9 to run
+(1.9.3[http://ruby-lang.org/en/downloads/] is the currently recommended
+version). If you want to use Lingo on Ruby 1.8, please refer to the legacy
+version (see below).
+
+Prior to version 1.8.0, Lingo expected to be run from its installation
+directory. This is no longer necessary. But if you prefer that use case,
+you can either download and extract an
+{archive file}[http://github.com/lex-lingo/lingo/tags] or unpack the
+Gem archive (<tt>gem unpack lingo</tt>); or you can install the legacy
+version of Lingo (see below).
+
+=== Dictionary and configuration file lookup
+
+Lingo will search different locations to find dictionaries and configuration
+files. By default, these are the current directory, your personal Lingo
+directory (<tt>~/.lingo</tt>) and the installation directory (in that order).
+You can control this lookup path by either moving files up the chain (using
+the +lingoctl+ executable) or by setting various environment variables.
+
+With +lingoctl+ you can copy dictionaries and configuration files from your
+personal Lingo directory or the installation directory to the current
+directory so you can modify them and they will take precedence over the
+original ones. See <tt>lingoctl --help</tt> for usage information.
+
+In order to change the search path in itself, you can define the
++LINGO_PATH+ environment variable as a whole or its individual parts
++LINGO_CURR+ (the local Lingo directory), +LINGO_HOME+ (your personal
+Lingo directory), and +LINGO_BASE+ (the system-wide Lingo directory).
+
+Inside of any of these directories dictionaries and configuration files are
+typically organized in the following directory structure:
+
+<tt>config</tt>:: Configuration files (<tt>*.cfg</tt>).
+<tt>dict</tt>::   Dictionary source files (<tt>*.txt</tt>); in
+                  language-specific subdirectories (+de+, +en+, ...).
+<tt>lang</tt>::   Language definition files (<tt>*.lang</tt>).
+<tt>store</tt>::  Compiled dictionaries, generated from source files.
+
+But for compatibility reasons these naming conventions are not enforced.
+
+=== Legacy version
+
+As Lingo 1.8 introduced some major disruptions and no longer runs on Ruby 1.8,
+there is a maintenance branch for Lingo 1.7.x that will remain compatible with
+both Ruby 1.8 and the previous line of Lingo prior to 1.8. This branch will
+receive occasional bug fixes and minor feature updates. However, the bulk of
+the development efforts will be directed towards Lingo 1.8+.
+
+To install the legacy version, download and extract the ZIP archive from
+RubyForge[http://rubyforge.org/frs/?group_id=5663]. No additional dependencies
+are required. This version of Lingo works with both Ruby 1.8 (1.8.5 or greater)
+and 1.9.
+
+The executable is named +lingo.rb+. It's located at the root of the installation
+directory and may only be run from there. See <tt>ruby lingo.rb -h</tt> for
+usage instructions.
+
+Configuration and language definition files are also located at the root of the
+installation directory (<tt>*.cfg</tt> and <tt>*.lang</tt>, respectively).
+Dictionary source files are found in language-specific subdirectories (+de+,
++en+, ...) and are named <tt>*.txt</tt>. The compiled dictionaries are found
+beneath these subdirectories in a directory named <tt>store</tt>.
+
+
+== FILE FORMATS
+
+Lingo uses three different types of files to determine its behaviour.
+Configuration files control the details of the indexing process. Language
+definitions specify grammar rules and dictionaries available for indexing.
+Dictionaries, finally, hold the vocabulary used in indexing the input text.
+
+=== Configuration
+
+TODO...
+
+=== Language definition
+
+TODO...
+
+=== Dictionaries
+
+TODO...
+
+
+== ISSUES AND CONTRIBUTION
+
+If you find bugs or want to suggest new features, please write to the
+{mailing list}[mailto:lingo-users@rubyforge.org] or report them on
+GitHub[http://github.com/lex-lingo/lingo/issues]. Include your Ruby
+version (<tt>ruby --version</tt>) and the version of Lingo you are using
+(typically <tt>lingo --version</tt>, provided it's new enough to support
+that flag).
+
+If you want to contribute to Lingo, please fork the project on
+GitHub[http://github.com/lex-lingo/lingo] and submit a
+{pull request}[http://github.com/lex-lingo/lingo/pulls] (bonus points for
+topic branches) or clone the repository[http://github.com/lex-lingo/lingo]
+locally and send your formatted patch to the
+{developer list}[mailto:lingo-core@rubyforge.org].
+
+
+== LINKS
+
+<b></b>
+Website::           http://lex-lingo.de
+Demo::              http://linux2.fbi.fh-koeln.de/lingoweb
+Documentation::     http://lex-lingo.github.com/lingo
+Source code::       http://github.com/lex-lingo/lingo
+RubyGem::           http://rubygems.org/gems/lingo
+RubyForge project:: http://rubyforge.org/projects/lingo
+Mailing list::      http://rubyforge.org/mailman/listinfo/lingo-users
+Bug tracker::       http://github.com/lex-lingo/lingo/issues
+
+
+== CREDITS
 
 Lingo is based on a collective development by Klaus Lepsky and John Vorhauer.
 
@@ -102,3 +292,22 @@ Lingo is based on a collective development by Klaus Lepsky and John Vorhauer.
 * Klaus Lepsky <mailto:klaus@lepsky.de>
 * Jan-Helge Jacobs <mailto:plancton@web.de>
 * Thomas Müller <mailto:thomas.mueller@fh-koeln.de>
+
+
+== LICENSE AND COPYRIGHT
+
+Copyright (C) 2005-2007 John Vorhauer
+Copyright (C) 2007-2011 John Vorhauer, Jens Wille
+
+Lingo is free software: you can redistribute it and/or modify it under the
+terms of the GNU Affero General Public License as published by the Free
+Software Foundation, either version 3 of the License, or (at your option)
+any later version.
+
+Lingo is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+details.
+
+You should have received a copy of the GNU Affero General Public License along
+with Lingo. If not, see <http://www.gnu.org/licenses/>.

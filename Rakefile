@@ -37,7 +37,7 @@ begin
         'test.cfg', '{de,en}/test_*.txt'
       ].to_a,
       required_ruby_version:    '>= 1.9',
-      dependencies:             [['ruby-nuggets', '>= 0.8.1'], 'unicode'],
+      dependencies:             [['ruby-nuggets', '>= 0.8.2'], 'unicode'],
       development_dependencies: [['diff-lcs', '>= 1.1.3'], 'open4']
     }
   }}
