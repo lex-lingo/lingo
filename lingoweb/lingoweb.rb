@@ -12,8 +12,9 @@ require 'nuggets/util/ruby'
 LINGOWEB = File.expand_path('..', __FILE__)
 LINGO    = File.join(File.dirname(LINGOWEB), 'lingo.rb')
 AUTH     = File.join(LINGOWEB, 'lingoweb.auth')
+CFG      = File.join(LINGOWEB, 'lingoweb-%s.cfg')
 
-CFG = File.join(LINGOWEB, 'lingoweb-%s.cfg')
+require LINGO
 
 LANGS = Dir["#{File.dirname(LINGO)}/*.lang"].map { |path|
   lang = path[%r{.*/(\w+)\.}, 1]
