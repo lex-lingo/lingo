@@ -3,8 +3,8 @@ class Lingo
   module Version
 
     MAJOR = 1
-    MINOR = 7
-    TINY  = 1
+    MINOR = 8
+    TINY  = 0
 
     class << self
 

@@ -1,13 +1,17 @@
 = Revision history for Lingo
 
-== 1.8.0 [unreleased]
+== 1.8.0 [2012-01-01]
 
 * Ruby 1.8 officially no longer supported! Use Lingo 1.7.x instead.
+* Executable may be run from outside installation root directory now.
+  See README for further details.
+* Search path for dictionaries and configuration files; plugin system.
 * Textreader can read from STDIN if no files given; leave out the +files+
   parameter in the config for this to trigger.
 * Status/performance details as well as progress information are now
   printed on STDERR instead of STDOUT in order to not mix with regular
-  output.
+  output. Learned '--log' option to write such information to a file.
+* Additional internal refactorings. (To be continued...)
 
 == 1.7.1 [2011-10-24]
 
