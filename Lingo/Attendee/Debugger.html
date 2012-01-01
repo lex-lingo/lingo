@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>class Lingo::Attendee::Debugger - lingo Application documentation (v1.8.0)</title>
+
+<link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="../../index.html">Home</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/lingo/attendee/debugger.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link"><a href="../Attendee.html">Lingo::Attendee</a>
+  
+</nav>
+
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-i-control">#control</a>
+    
+    <li><a href="#method-i-init">#init</a>
+    
+    <li><a href="#method-i-process">#process</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="../../COPYING.html">COPYING</a>
+  
+    <li class="file"><a href="../../ChangeLog.html">ChangeLog</a>
+  
+    <li class="file"><a href="../../README.html">README</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../../Lingo.html">Lingo</a>
+  
+    <li><a href="../../Lingo/AgendaItem.html">Lingo::AgendaItem</a>
+  
+    <li><a href="../../Lingo/Attendee.html">Lingo::Attendee</a>
+  
+    <li><a href="../../Lingo/Attendee/Abbreviator.html">Lingo::Attendee::Abbreviator</a>
+  
+    <li><a href="../../Lingo/Attendee/Debugger.html">Lingo::Attendee::Debugger</a>
+  
+    <li><a href="../../Lingo/Attendee/Decomposer.html">Lingo::Attendee::Decomposer</a>
+  
+    <li><a href="../../Lingo/Attendee/Dehyphenizer.html">Lingo::Attendee::Dehyphenizer</a>
+  
+    <li><a href="../../Lingo/Attendee/Formatter.html">Lingo::Attendee::Formatter</a>
+  
+    <li><a href="../../Lingo/Attendee/Multiworder.html">Lingo::Attendee::Multiworder</a>
+  
+    <li><a href="../../Lingo/Attendee/Noneword_filter.html">Lingo::Attendee::Noneword_filter</a>
+  
+    <li><a href="../../Lingo/Attendee/Objectfilter.html">Lingo::Attendee::Objectfilter</a>
+  
+    <li><a href="../../Lingo/Attendee/Sequencer.html">Lingo::Attendee::Sequencer</a>
+  
+    <li><a href="../../Lingo/Attendee/Synonymer.html">Lingo::Attendee::Synonymer</a>
+  
+    <li><a href="../../Lingo/Attendee/Textreader.html">Lingo::Attendee::Textreader</a>
+  
+    <li><a href="../../Lingo/Attendee/Textreader/PDFFilter.html">Lingo::Attendee::Textreader::PDFFilter</a>
+  
+    <li><a href="../../Lingo/Attendee/Textwriter.html">Lingo::Attendee::Textwriter</a>
+  
+    <li><a href="../../Lingo/Attendee/Tokenizer.html">Lingo::Attendee::Tokenizer</a>
+  
+    <li><a href="../../Lingo/Attendee/Variator.html">Lingo::Attendee::Variator</a>
+  
+    <li><a href="../../Lingo/Attendee/Vector_filter.html">Lingo::Attendee::Vector_filter</a>
+  
+    <li><a href="../../Lingo/Attendee/Wordsearcher.html">Lingo::Attendee::Wordsearcher</a>
+  
+    <li><a href="../../Lingo/BufferedAttendee.html">Lingo::BufferedAttendee</a>
+  
+    <li><a href="../../Lingo/CLI.html">Lingo::CLI</a>
+  
+    <li><a href="../../Lingo/Cachable.html">Lingo::Cachable</a>
+  
+    <li><a href="../../Lingo/Call.html">Lingo::Call</a>
+  
+    <li><a href="../../Lingo/Compositum.html">Lingo::Compositum</a>
+  
+    <li><a href="../../Lingo/Config.html">Lingo::Config</a>
+  
+    <li><a href="../../Lingo/Crypter.html">Lingo::Crypter</a>
+  
+    <li><a href="../../Lingo/Ctl.html">Lingo::Ctl</a>
+  
+    <li><a href="../../Lingo/DbmFile.html">Lingo::DbmFile</a>
+  
+    <li><a href="../../Lingo/Dictionary.html">Lingo::Dictionary</a>
+  
+    <li><a href="../../Lingo/Grammar.html">Lingo::Grammar</a>
+  
+    <li><a href="../../Lingo/Lexical.html">Lingo::Lexical</a>
+  
+    <li><a href="../../Lingo/LexicalHash.html">Lingo::LexicalHash</a>
+  
+    <li><a href="../../Lingo/Reportable.html">Lingo::Reportable</a>
+  
+    <li><a href="../../Lingo/ShowProgress.html">Lingo::ShowProgress</a>
+  
+    <li><a href="../../Lingo/StringA.html">Lingo::StringA</a>
+  
+    <li><a href="../../Lingo/Token.html">Lingo::Token</a>
+  
+    <li><a href="../../Lingo/Txt2DbmConverter.html">Lingo::Txt2DbmConverter</a>
+  
+    <li><a href="../../Lingo/TxtFile.html">Lingo::TxtFile</a>
+  
+    <li><a href="../../Lingo/TxtFile_Keyvalue.html">Lingo::TxtFile_Keyvalue</a>
+  
+    <li><a href="../../Lingo/TxtFile_Multikey.html">Lingo::TxtFile_Multikey</a>
+  
+    <li><a href="../../Lingo/TxtFile_Multivalue.html">Lingo::TxtFile_Multivalue</a>
+  
+    <li><a href="../../Lingo/TxtFile_Singleword.html">Lingo::TxtFile_Singleword</a>
+  
+    <li><a href="../../Lingo/TxtFile_Wordclass.html">Lingo::TxtFile_Wordclass</a>
+  
+    <li><a href="../../Lingo/Version.html">Lingo::Version</a>
+  
+    <li><a href="../../Lingo/Word.html">Lingo::Word</a>
+  
+    <li><a href="../../Lingo/WordSequence.html">Lingo::WordSequence</a>
+  
+    <li><a href="../../String.html">String</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class Lingo::Attendee::Debugger</h1>
+
+  <div id="description" class="description">
+    
+<p>Die Attendees von <a href="../../Lingo.html">Lingo</a> übergeben Daten über
+ihre Kommunikationskanäle und entweder kommt bei einer komplexen
+Konfiguration hinten das gewünschte Ergebnis raus oder aber auch nicht. Für
+den letzeren Fall ist der <a href="Debugger.html">Debugger</a> primär
+gedacht. Er kann an beliebige Stelle in den Datenstrom eingeschleust
+werden, um Schritt für Schritt zu schauen, durch welchen <a
+href="../Attendee.html">Attendee</a> das Ergebnis verfälscht wird um so den
+Fehler einzugrenzen und schließlich zu lösen.</p>
+
+<p>Der <a href="Debugger.html">Debugger</a> wird jedoch auch gerne für die
+Verfolgung der Verarbeitung am Bildschirm verwendet.</p>
+
+<p>Achtung: Um Irritationen bei der Anwendung mehrerer <a
+href="Debugger.html">Debugger</a> zu vermeiden wird empfohlen, den <a
+href="Debugger.html">Debugger</a> in der Konfiguration immer unmittelbar
+nach dem <a href="../Attendee.html">Attendee</a> zu platzieren, dessen
+Ausgabe debugt werden soll. Ansonsten kann es zu scheinbar unerklärlichen
+Interferrenzen bei der Ausgabe kommen.</p>
+
+<h3 id="label-M%C3%B6gliche+Verlinkung">Mögliche Verlinkung</h3>
+<dl class="rdoc-list note-list"><dt>Erwartet
+<dd>
+<p>Daten beliebigen Typs</p>
+</dd></dl>
+
+<h3 id="label-Parameter">Parameter</h3>
+
+<p>Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der
+Voreinstellung). Alle anderen Parameter müssen zwingend angegeben werden.</p>
+<dl class="rdoc-list note-list"><dt><strong>in</strong>
+<dd>
+<p>siehe allgemeine Beschreibung des <a href="../Attendee.html">Attendee</a></p>
+</dd><dt><strong>out</strong>
+<dd>
+<p>siehe allgemeine Beschreibung des <a href="../Attendee.html">Attendee</a></p>
+</dd><dt><strong><em>eval</em></strong>
+<dd>
+<p>(Standard: true) Gibt eine Bedingung an, die erfüllt sein muss, damit ein
+Datenobjekt ausgegeben wird (siehe Beschreibung <a
+href="Objectfilter.html">Objectfilter</a>)</p>
+</dd><dt><strong><em>ceval</em></strong>
+<dd>
+<p>(Standard: true) Gibt eiune Bedingung an, die erfüllt sein muss, damit ein</p>
+</dd></dl>
+
+<pre>Kommandoobjekt ausgegeben wird.</pre>
+<dl class="rdoc-list note-list"><dt><strong><em>prompt</em></strong>
+<dd>
+<p>(Standard: ‘lex:) ’) Gibt an, mit welchem Prefix die Ausgabe versehen
+werden soll. Insbesondere wenn mit mehreren Debuggern gearbeitet wird,
+sollte dies genutzt werden.</p>
+</dd></dl>
+
+<h3 id="label-Beispiele">Beispiele</h3>
+
+<p>Bei der Verarbeitung der oben angegebenen Funktionsbeschreibung des
+Textwriters mit der Ablaufkonfiguration <code>t1.cfg</code></p>
+
+<pre>meeting:
+  attendees:
+    - textreader: { out: lines, files: '$(files)' }
+    - debugger:   { in: lines, prompt: 'LINES:) ' }
+    - tokenizer:  { in: lines, out: token }
+    - debugger:   { in: token, prompt: 'TOKEN:) ' }</pre>
+
+<p>ergibt die Ausgabe</p>
+
+<pre>LINES:)  *FILE('test.txt')
+TOKEN:)  *FILE('test.txt')
+LINES:)  &quot;Der Debugger kann was.&quot;
+TOKEN:)  :Der/WORD:
+TOKEN:)  :Debugger/WORD:
+TOKEN:)  :kann/WORD:
+TOKEN:)  :was/WORD:
+TOKEN:)  :./PUNC:
+TOKEN:)  *EOL('test.txt')
+LINES:)  &quot;Lingo auch :o)&quot;
+TOKEN:)  :Lingo/WORD:
+TOKEN:)  :auch/WORD:
+TOKEN:)  ::/PUNC:
+TOKEN:)  :o/WORD:
+TOKEN:)  :)/OTHR:
+TOKEN:)  *EOL('test.txt')
+LINES:)  *EOF('test.txt')
+TOKEN:)  *EOF('test.txt')</pre>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="protected-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Protected Instance Methods</h3>
+
+    
+      <div id="method-i-control" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">control</span><span
+            class="method-args">(cmd, par)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="control-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/debugger.rb, line 98</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">par</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">cmd!</span>=<span class="ruby-constant">STR_CMD_STATUS</span>
+    <span class="ruby-ivar">@lingo</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{@prompt} #{AgendaItem.new(cmd, par).inspect}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">eval</span>(<span class="ruby-ivar">@cmd_eval</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- control-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- control-method -->
+
+    
+      <div id="method-i-init" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">init</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="init-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/debugger.rb, line 92</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">init</span>
+  <span class="ruby-ivar">@obj_eval</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">'eval'</span>, <span class="ruby-string">'true'</span>)
+  <span class="ruby-ivar">@cmd_eval</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">'ceval'</span>, <span class="ruby-string">'true'</span>)
+  <span class="ruby-ivar">@prompt</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">'prompt'</span>, <span class="ruby-string">'lex:) '</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- init-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- init-method -->
+
+    
+      <div id="method-i-process" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">process</span><span
+            class="method-args">(obj)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="process-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/debugger.rb, line 104</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">process</span>(<span class="ruby-identifier">obj</span>)
+  <span class="ruby-ivar">@lingo</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{@prompt} #{obj.inspect}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">eval</span>(<span class="ruby-ivar">@obj_eval</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- process-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- process-method -->
+
+    
+    </section><!-- protected-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

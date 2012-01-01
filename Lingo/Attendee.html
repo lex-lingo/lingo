@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>class Lingo::Attendee - lingo Application documentation (v1.8.0)</title>
+
+<link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="../index.html">Home</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/lingo/attendees.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">Object
+  
+</nav>
+
+    <!-- Included Modules -->
+<nav id="includes-section" class="section">
+  <h3 class="section-header">Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><a class="include" href="Reportable.html">Lingo::Reportable</a>
+  
+  
+  </ul>
+</nav>
+
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-c-new">::new</a>
+    
+    <li><a href="#method-i-add_subscriber">#add_subscriber</a>
+    
+    <li><a href="#method-i-deleteCmd">#deleteCmd</a>
+    
+    <li><a href="#method-i-forward">#forward</a>
+    
+    <li><a href="#method-i-get_array">#get_array</a>
+    
+    <li><a href="#method-i-get_key">#get_key</a>
+    
+    <li><a href="#method-i-has_key-3F">#has_key?</a>
+    
+    <li><a href="#method-i-listen">#listen</a>
+    
+    <li><a href="#method-i-seconds_to_str">#seconds_to_str</a>
+    
+    <li><a href="#method-i-talk">#talk</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="../COPYING.html">COPYING</a>
+  
+    <li class="file"><a href="../ChangeLog.html">ChangeLog</a>
+  
+    <li class="file"><a href="../README.html">README</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../Lingo.html">Lingo</a>
+  
+    <li><a href="../Lingo/AgendaItem.html">Lingo::AgendaItem</a>
+  
+    <li><a href="../Lingo/Attendee.html">Lingo::Attendee</a>
+  
+    <li><a href="../Lingo/Attendee/Abbreviator.html">Lingo::Attendee::Abbreviator</a>
+  
+    <li><a href="../Lingo/Attendee/Debugger.html">Lingo::Attendee::Debugger</a>
+  
+    <li><a href="../Lingo/Attendee/Decomposer.html">Lingo::Attendee::Decomposer</a>
+  
+    <li><a href="../Lingo/Attendee/Dehyphenizer.html">Lingo::Attendee::Dehyphenizer</a>
+  
+    <li><a href="../Lingo/Attendee/Formatter.html">Lingo::Attendee::Formatter</a>
+  
+    <li><a href="../Lingo/Attendee/Multiworder.html">Lingo::Attendee::Multiworder</a>
+  
+    <li><a href="../Lingo/Attendee/Noneword_filter.html">Lingo::Attendee::Noneword_filter</a>
+  
+    <li><a href="../Lingo/Attendee/Objectfilter.html">Lingo::Attendee::Objectfilter</a>
+  
+    <li><a href="../Lingo/Attendee/Sequencer.html">Lingo::Attendee::Sequencer</a>
+  
+    <li><a href="../Lingo/Attendee/Synonymer.html">Lingo::Attendee::Synonymer</a>
+  
+    <li><a href="../Lingo/Attendee/Textreader.html">Lingo::Attendee::Textreader</a>
+  
+    <li><a href="../Lingo/Attendee/Textreader/PDFFilter.html">Lingo::Attendee::Textreader::PDFFilter</a>
+  
+    <li><a href="../Lingo/Attendee/Textwriter.html">Lingo::Attendee::Textwriter</a>
+  
+    <li><a href="../Lingo/Attendee/Tokenizer.html">Lingo::Attendee::Tokenizer</a>
+  
+    <li><a href="../Lingo/Attendee/Variator.html">Lingo::Attendee::Variator</a>
+  
+    <li><a href="../Lingo/Attendee/Vector_filter.html">Lingo::Attendee::Vector_filter</a>
+  
+    <li><a href="../Lingo/Attendee/Wordsearcher.html">Lingo::Attendee::Wordsearcher</a>
+  
+    <li><a href="../Lingo/BufferedAttendee.html">Lingo::BufferedAttendee</a>
+  
+    <li><a href="../Lingo/CLI.html">Lingo::CLI</a>
+  
+    <li><a href="../Lingo/Cachable.html">Lingo::Cachable</a>
+  
+    <li><a href="../Lingo/Call.html">Lingo::Call</a>
+  
+    <li><a href="../Lingo/Compositum.html">Lingo::Compositum</a>
+  
+    <li><a href="../Lingo/Config.html">Lingo::Config</a>
+  
+    <li><a href="../Lingo/Crypter.html">Lingo::Crypter</a>
+  
+    <li><a href="../Lingo/Ctl.html">Lingo::Ctl</a>
+  
+    <li><a href="../Lingo/DbmFile.html">Lingo::DbmFile</a>
+  
+    <li><a href="../Lingo/Dictionary.html">Lingo::Dictionary</a>
+  
+    <li><a href="../Lingo/Grammar.html">Lingo::Grammar</a>
+  
+    <li><a href="../Lingo/Lexical.html">Lingo::Lexical</a>
+  
+    <li><a href="../Lingo/LexicalHash.html">Lingo::LexicalHash</a>
+  
+    <li><a href="../Lingo/Reportable.html">Lingo::Reportable</a>
+  
+    <li><a href="../Lingo/ShowProgress.html">Lingo::ShowProgress</a>
+  
+    <li><a href="../Lingo/StringA.html">Lingo::StringA</a>
+  
+    <li><a href="../Lingo/Token.html">Lingo::Token</a>
+  
+    <li><a href="../Lingo/Txt2DbmConverter.html">Lingo::Txt2DbmConverter</a>
+  
+    <li><a href="../Lingo/TxtFile.html">Lingo::TxtFile</a>
+  
+    <li><a href="../Lingo/TxtFile_Keyvalue.html">Lingo::TxtFile_Keyvalue</a>
+  
+    <li><a href="../Lingo/TxtFile_Multikey.html">Lingo::TxtFile_Multikey</a>
+  
+    <li><a href="../Lingo/TxtFile_Multivalue.html">Lingo::TxtFile_Multivalue</a>
+  
+    <li><a href="../Lingo/TxtFile_Singleword.html">Lingo::TxtFile_Singleword</a>
+  
+    <li><a href="../Lingo/TxtFile_Wordclass.html">Lingo::TxtFile_Wordclass</a>
+  
+    <li><a href="../Lingo/Version.html">Lingo::Version</a>
+  
+    <li><a href="../Lingo/Word.html">Lingo::Word</a>
+  
+    <li><a href="../Lingo/WordSequence.html">Lingo::WordSequence</a>
+  
+    <li><a href="../String.html">String</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class Lingo::Attendee</h1>
+
+  <div id="description" class="description">
+    
+<p><a href="../Lingo.html">Lingo</a> ist als universelles Indexierungssystem
+entworfen worden. Seine Stärke liegt in der einfachen Konfigurierbarkeit
+für spezifische Aufgaben und in der schnelle Entwicklung weiterer
+Funktionen durch systematischen Kapselung der Komplexität auf kleine
+Verarbeitungseinheiten. Die kleinste Verarbeitungseinheit wird <a
+href="Attendee.html">Attendee</a> genannt. Um ein gewünschtes
+Verarbeitungsergebnis zu bekommen, werden die benötigten Attendees einfach
+in einer Reihe hinter einander geschaltet. Ein einfaches Beispiel hierfür
+ist eine direkte Verbindung zwischen einem <a
+href="Attendee/Textreader.html">Textreader</a>, einem <a
+href="Attendee/Tokenizer.html">Tokenizer</a> und einem <a
+href="Attendee/Textwriter.html">Textwriter</a>. Alle drei Klassen sind von
+der Klasse <a href="Attendee.html">Attendee</a> abgeleitet.</p>
+
+<p>Der <a href="Attendee/Textreader.html">Textreader</a> liest beispielsweise
+Zeilen aus einer Textdatei und leitet sie weiter an den <a
+href="Attendee/Tokenizer.html">Tokenizer</a>. Der <a
+href="Attendee/Tokenizer.html">Tokenizer</a> zerlegt eine Textzeile in
+einzelne Wörter und gibt diese weiter an den <a
+href="Attendee/Textwriter.html">Textwriter</a>, der diese in eine (andere)
+Datei schreibt. Über vielfältige Konfigurationsmöglichkeiten kann das
+Verhalten der Attendees an die eigenen Bedürfnisse angepasst werden.</p>
+
+<p>Die Verkettung einzelner Attendees findet über die Schnittstellen
+<code>listen</code> und <code>talk</code> statt. An <code>listen</code>
+können beliebige Objekte zur Ver- und Bearbeitung übergeben werden. Nach
+der Verarbeitung werden sie mittels <code>talk</code> an die verketteten
+Attendees weiter gegeben. Objekte der Klasse <a
+href="AgendaItem.html">AgendaItem</a> dienen dabei der Steuerung der
+Verarbeitung und sind nicht Bestandteil der normalen Verarbeitung.
+Beispiele für AgendaItems sind die Kommandos TALK (Aufforderung zum Start
+der Verarbeitung), WARN (zur Ausgabe von Warnungen eines Attendees) und EOL
+(End of Line, Ende einer Textzeile nach Zerlegung in einzelne Wörter). Eine
+vollständige Übersicht benutzer AgendaItems (oder auf Stream Commands)
+steht in lib/const.rb mit dem Prefix STR_CMD_.</p>
+
+<p>Um die Entwicklung von neuen Attendees zu beschleunigen, wird durch die
+Vererbung sind bei wird die gesammte sind in der Regel nur drei abstrakte
+Methoden zu implementieren: <code>init</code>, <code>control</code> und
+<code>process</code>. Die Methode <code>init</code> wird bei der
+Instanziierung eines Objektes einmalig aufgerufen. Sie dient der
+Vorbereitung der Verarbeitung, z.B. durch das Öffnen und Bereitstellen von
+Wörterbüchern zur linguistischen Analyse. An die Methode
+<code>control</code> werden alle eingehenden AgendaItems weitergeleitet.
+Dort erfolgt die Verarbeitungssteuerung, also z.B. bei STR_CMD_FILE das
+Öffnen einer Datei und bei STR_CMD_EOF respektive das Schließen. Die echte
+Verarbeitung von Daten findet daher durch die Methode <code>process</code>
+statt.</p>
+
+<p>was macht attendee</p>
+<ul><li>
+<p>verkettung der attendees anhand von konfigurationsinformationen</p>
+</li><li>
+<p>bereitstellung von globalen und spezifischen konfigurationsinformationen</p>
+</li><li>
+<p>behandlung von bestimmten übergreifenden Kommandos, z.B. STR_CMD_TALK,
+STR_CMD_STATUS, STR_CMD_WARN, STR_CMD_ERR</p>
+</li><li>
+<p>separierung und routing von kommando bzw. datenobjekten</p>
+</li></ul>
+
+<p>was macht die abgeleitet klasse</p>
+<ul><li>
+<p>verarbeitet und/oder transformiert datenobjekte</p>
+</li><li>
+<p>wird gesteuert durch kommandos</p>
+</li><li>
+<p>schreibt verarbeitungsstatistiken</p>
+</li></ul>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(config, lingo)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendees.rb, line 76</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">config</span>, <span class="ruby-identifier">lingo</span>)
+  <span class="ruby-ivar">@lingo</span> = <span class="ruby-identifier">lingo</span>
+
+  <span class="ruby-identifier">init_reportable</span>
+
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">lingo</span>.<span class="ruby-identifier">dictionary_config</span>
+  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Fehler in der .lang-Datei bei 'language/dictionary'&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@config</span>, <span class="ruby-ivar">@subscriber</span> = <span class="ruby-identifier">config</span>, []
+
+  <span class="ruby-identifier">init</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">method_defined?</span>(<span class="ruby-value">:init</span>)
+
+  <span class="ruby-ivar">@attendee_can_control</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">method_defined?</span>(<span class="ruby-value">:control</span>)
+  <span class="ruby-ivar">@attendee_can_process</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">method_defined?</span>(<span class="ruby-value">:process</span>)
+
+  <span class="ruby-ivar">@skip_this_command</span>, <span class="ruby-ivar">@start_of_processing</span> = <span class="ruby-keyword">false</span>, <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-add_subscriber" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">add_subscriber</span><span
+            class="method-args">(subscriber)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="add_subscriber-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendees.rb, line 97</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_subscriber</span>(<span class="ruby-identifier">subscriber</span>)
+  <span class="ruby-ivar">@subscriber</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">subscriber</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- add_subscriber-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- add_subscriber-method -->
+
+    
+      <div id="method-i-listen" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">listen</span><span
+            class="method-args">(obj)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="listen-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendees.rb, line 101</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">listen</span>(<span class="ruby-identifier">obj</span>)
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">AgendaItem</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@attendee_can_process</span>
+      <span class="ruby-identifier">inc</span>(<span class="ruby-constant">STA_NUM_OBJECTS</span>)
+
+      <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@lingo</span>.<span class="ruby-identifier">report_time</span>
+        <span class="ruby-identifier">process</span>(<span class="ruby-identifier">obj</span>)
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@start_of_processing</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-identifier">process</span>(<span class="ruby-identifier">obj</span>)
+        <span class="ruby-identifier">add</span>(<span class="ruby-constant">STA_TIM_OBJECTS</span>, <span class="ruby-constant">Time</span>.<span class="ruby-identifier">new</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@start_of_processing</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">obj</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-comment"># Neuen TOP verarbeiten</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@attendee_can_control</span>
+      <span class="ruby-identifier">inc</span>(<span class="ruby-constant">STA_NUM_COMMANDS</span>)
+
+      <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@lingo</span>.<span class="ruby-identifier">report_time</span>
+        <span class="ruby-identifier">control</span>(<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">param</span>)
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@start_of_processing</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-identifier">control</span>(<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">param</span>)
+        <span class="ruby-identifier">add</span>(<span class="ruby-constant">STA_TIM_COMMANDS</span>, <span class="ruby-constant">Time</span>.<span class="ruby-identifier">new</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@start_of_processing</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># Spezialbehandlung für einige TOPs nach Verarbeitung</span>
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">cmd</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-constant">STR_CMD_TALK</span>
+        <span class="ruby-comment"># keine weitere Behandlung oder Weiterleitung</span>
+        <span class="ruby-keyword">nil</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-constant">STR_CMD_STATUS</span>
+        <span class="ruby-comment"># Standardprotokollinformationen ausgeben</span>
+
+        <span class="ruby-keyword">if</span> <span class="ruby-ivar">@lingo</span>.<span class="ruby-identifier">report_time</span>
+          <span class="ruby-ivar">@lingo</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-string">'Perf: %-15s =&gt; %7d commands in %s (%s/cmd),  %8d objects in %s (%s/obj)'</span> <span class="ruby-operator">%</span> [
+            <span class="ruby-ivar">@config</span>[<span class="ruby-string">'name'</span>],
+            <span class="ruby-identifier">get</span>(<span class="ruby-constant">STA_NUM_COMMANDS</span>),
+            <span class="ruby-identifier">seconds_to_str</span>(<span class="ruby-identifier">get</span>(<span class="ruby-constant">STA_TIM_COMMANDS</span>)),
+            <span class="ruby-identifier">seconds_to_str</span>((<span class="ruby-identifier">get</span>(<span class="ruby-constant">STA_NUM_COMMANDS</span>)<span class="ruby-operator">==</span><span class="ruby-value">0</span>) <span class="ruby-operator">?</span> <span class="ruby-value">0.0</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">get</span>(<span class="ruby-constant">STA_TIM_COMMANDS</span>) <span class="ruby-operator">/</span> <span class="ruby-identifier">get</span>(<span class="ruby-constant">STA_NUM_COMMANDS</span>).<span class="ruby-identifier">to_f</span>),
+            <span class="ruby-identifier">get</span>(<span class="ruby-constant">STA_NUM_OBJECTS</span>),
+            <span class="ruby-identifier">seconds_to_str</span>(<span class="ruby-identifier">get</span>(<span class="ruby-constant">STA_TIM_OBJECTS</span>)),
+            <span class="ruby-identifier">seconds_to_str</span>((<span class="ruby-identifier">get</span>(<span class="ruby-constant">STA_NUM_OBJECTS</span>)<span class="ruby-operator">==</span><span class="ruby-value">0</span>) <span class="ruby-operator">?</span> <span class="ruby-value">0.0</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">get</span>(<span class="ruby-constant">STA_TIM_OBJECTS</span>) <span class="ruby-operator">/</span> <span class="ruby-identifier">get</span>(<span class="ruby-constant">STA_NUM_OBJECTS</span>).<span class="ruby-identifier">to_f</span>)
+          ]
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-keyword">if</span> <span class="ruby-ivar">@lingo</span>.<span class="ruby-identifier">report_status</span>
+          <span class="ruby-ivar">@lingo</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Attendee &lt;%s&gt; was connected from '%s' to '%s' reporting...\n&quot;</span> <span class="ruby-operator">%</span> <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">values_at</span>(*<span class="ruby-node">%w[name in out]</span>),
+            <span class="ruby-identifier">report</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">info</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot; #{info[0]} = #{info[1]}&quot;</span> }, <span class="ruby-keyword">nil</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">param</span>)
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-ivar">@skip_this_command</span>
+          <span class="ruby-ivar">@skip_this_command</span> = <span class="ruby-keyword">false</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">param</span>)
+        <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- listen-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- listen-method -->
+
+    
+      <div id="method-i-talk" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">talk</span><span
+            class="method-args">(obj)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="talk-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendees.rb, line 166</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">talk</span>(<span class="ruby-identifier">obj</span>)
+  <span class="ruby-identifier">time_for_sub</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@lingo</span>.<span class="ruby-identifier">report_time</span>
+  <span class="ruby-ivar">@subscriber</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">attendee</span><span class="ruby-operator">|</span> <span class="ruby-identifier">attendee</span>.<span class="ruby-identifier">listen</span>(<span class="ruby-identifier">obj</span>) }
+  <span class="ruby-ivar">@start_of_processing</span> <span class="ruby-operator">+=</span> (<span class="ruby-constant">Time</span>.<span class="ruby-identifier">new</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">time_for_sub</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@lingo</span>.<span class="ruby-identifier">report_time</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- talk-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- talk-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+     <section id="private-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Private Instance Methods</h3>
+
+    
+      <div id="method-i-deleteCmd" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">deleteCmd</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="deleteCmd-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendees.rb, line 193</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">deleteCmd</span>
+  <span class="ruby-ivar">@skip_this_command</span> = <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- deleteCmd-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- deleteCmd-method -->
+
+    
+      <div id="method-i-forward" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">forward</span><span
+            class="method-args">(obj, param=nil)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="forward-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendees.rb, line 197</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">obj</span>, <span class="ruby-identifier">param</span>=<span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">param</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-comment"># Information weiterreichen</span>
+    <span class="ruby-identifier">talk</span>(<span class="ruby-identifier">obj</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-comment"># TOP weiterreichen (wenn keine Warnung oder Fehler)</span>
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">obj</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-constant">STR_CMD_WARN</span>  <span class="ruby-keyword">then</span> <span class="ruby-identifier">printf</span> <span class="ruby-string">&quot;+%s\n|   %s: %s\n+%s\n&quot;</span>, <span class="ruby-string">'-'</span>*<span class="ruby-value">60</span>, <span class="ruby-ivar">@config</span>[<span class="ruby-string">'name'</span>], <span class="ruby-identifier">param</span>, <span class="ruby-string">'-'</span>*<span class="ruby-value">60</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-constant">STR_CMD_ERR</span>  <span class="ruby-keyword">then</span> <span class="ruby-identifier">printf</span> <span class="ruby-string">&quot;%s\n=   %s: %s\n%s\n&quot;</span>, <span class="ruby-string">'='</span>*<span class="ruby-value">61</span>, <span class="ruby-ivar">@config</span>[<span class="ruby-string">'name'</span>], <span class="ruby-identifier">param</span>, <span class="ruby-string">'='</span>*<span class="ruby-value">61</span>;  <span class="ruby-identifier">exit</span>( <span class="ruby-value">1</span> )
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">talk</span>(<span class="ruby-constant">AgendaItem</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">obj</span>, <span class="ruby-identifier">param</span>))
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- forward-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- forward-method -->
+
+    
+      <div id="method-i-get_array" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_array</span><span
+            class="method-args">(key, default=nil)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_array-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendees.rb, line 224</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_array</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span>=<span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">get_key</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span>).<span class="ruby-identifier">split</span>(<span class="ruby-constant">STRING_SEPERATOR_PATTERN</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_array-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_array-method -->
+
+    
+      <div id="method-i-get_key" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_key</span><span
+            class="method-args">(key, default=nil)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_key-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendees.rb, line 219</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_key</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span>=<span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">forward</span>(<span class="ruby-constant">STR_CMD_ERR</span>, <span class="ruby-node">&quot;Attribut #{key} nicht gesetzt&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">default</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">key</span>)
+  <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_key-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_key-method -->
+
+    
+      <div id="method-i-has_key-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">has_key?</span><span
+            class="method-args">(key)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <hr style="height: 10px">
+
+<p>Konfigurationshilfsmethoden</p>
+<hr style="height: 10px">
+          
+
+          
+          <div class="method-source-code" id="has_key-3F-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendees.rb, line 215</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">key</span>)
+  <span class="ruby-operator">!</span><span class="ruby-ivar">@config</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">key</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- has_key-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- has_key-3F-method -->
+
+    
+      <div id="method-i-seconds_to_str" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">seconds_to_str</span><span
+            class="method-args">(float)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <hr style="height: 10px">
+
+<p>Create intelligent output of performance times measured with command line
+option -p</p>
+<hr style="height: 10px">
+          
+
+          
+          <div class="method-source-code" id="seconds_to_str-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendees.rb, line 179</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">seconds_to_str</span>(<span class="ruby-identifier">float</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">float</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0.001</span>
+    <span class="ruby-string">&quot;%9.3f µs&quot;</span> <span class="ruby-operator">%</span> [<span class="ruby-identifier">float</span> * <span class="ruby-value">1000000.0</span>]
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">float</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">1.0</span>
+    <span class="ruby-string">&quot;%9.3f ms&quot;</span> <span class="ruby-operator">%</span> [<span class="ruby-identifier">float</span> * <span class="ruby-value">1000.0</span>]
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">float</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">60.0</span>
+    <span class="ruby-string">&quot;%9.3f s &quot;</span> <span class="ruby-operator">%</span> [<span class="ruby-identifier">float</span>]
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">float</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">3600.0</span>
+    <span class="ruby-string">&quot;%9.3f m &quot;</span> <span class="ruby-operator">%</span> [<span class="ruby-identifier">float</span> <span class="ruby-operator">/</span> <span class="ruby-value">60.0</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-string">&quot;%9.3f h &quot;</span> <span class="ruby-operator">%</span> [<span class="ruby-identifier">float</span> <span class="ruby-operator">/</span> <span class="ruby-value">3600.0</span>]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- seconds_to_str-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- seconds_to_str-method -->
+
+    
+    </section><!-- private-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

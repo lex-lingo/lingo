@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>module Lingo::Version - lingo Application documentation (v1.8.0)</title>
+<title>module Lingo::Cachable - lingo Application documentation (v1.8.0)</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -47,7 +47,7 @@
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
   <ul>
-    <li>lib/lingo/version.rb
+    <li>lib/lingo/modules.rb
   </ul>
 </nav>
 
@@ -64,9 +64,13 @@
 
   <ul class="link-list">
     
-    <li><a href="#method-c-to_a">::to_a</a>
+    <li><a href="#method-i-hit-3F">#hit?</a>
     
-    <li><a href="#method-c-to_s">::to_s</a>
+    <li><a href="#method-i-init_cachable">#init_cachable</a>
+    
+    <li><a href="#method-i-retrieve">#retrieve</a>
+    
+    <li><a href="#method-i-store">#store</a>
     
   </ul>
 </nav>
@@ -196,10 +200,13 @@
 </nav>
 
 <div id="documentation">
-  <h1 class="module">module Lingo::Version</h1>
+  <h1 class="module">module Lingo::Cachable</h1>
 
   <div id="description" class="description">
     
+<p>Das Modul <a href="Cachable.html">Cachable</a> ermöglicht das Verwerten von
+zwischengespeicherten Ergebnisse für einen schnelleren Zugriff.</p>
+
   </div><!-- description -->
 
   
@@ -211,42 +218,49 @@
     
 
     
-    <!-- Constants -->
-    <section id="constants-list" class="section">
-      <h3 class="section-header">Constants</h3>
-      <dl>
-      
-        <dt id="MAJOR">MAJOR
-        
-        <dd class="description">
-        
-      
-        <dt id="MINOR">MINOR
-        
-        <dd class="description">
-        
-      
-        <dt id="TINY">TINY
-        
-        <dd class="description">
-        
-      
-      </dl>
-    </section>
-    
 
     
 
     <!-- Methods -->
     
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
-      <h3 class="section-header">Public Class Methods</h3>
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
 
     
-      <div id="method-c-to_a" class="method-detail ">
+      <div id="method-i-hit-3F" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">to_a</span><span
+          <span class="method-name">hit?</span><span
+            class="method-args">(key)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="hit-3F-source">
+            <pre><span class="ruby-comment"># File lib/lingo/modules.rb, line 80</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">hit?</span>(<span class="ruby-identifier">key</span>)
+  <span class="ruby-ivar">@cache</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">key</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- hit-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- hit-3F-method -->
+
+    
+      <div id="method-i-init_cachable" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">init_cachable</span><span
             class="method-args">()</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
@@ -254,56 +268,89 @@
 
         <div class="method-description">
           
-          <p>Returns array representation.</p>
+          
           
 
           
-          <div class="method-source-code" id="to_a-source">
-            <pre><span class="ruby-comment"># File lib/lingo/version.rb, line 12</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_a</span>
-  [<span class="ruby-constant">MAJOR</span>, <span class="ruby-constant">MINOR</span>, <span class="ruby-constant">TINY</span>]
+          <div class="method-source-code" id="init_cachable-source">
+            <pre><span class="ruby-comment"># File lib/lingo/modules.rb, line 76</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">init_cachable</span>
+  <span class="ruby-ivar">@cache</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">false</span>)
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- to_a-source -->
+          </div><!-- init_cachable-source -->
           
         </div>
 
         
 
         
-      </div><!-- to_a-method -->
+      </div><!-- init_cachable-method -->
 
     
-      <div id="method-c-to_s" class="method-detail ">
+      <div id="method-i-retrieve" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">to_s</span><span
-            class="method-args">()</span>
+          <span class="method-name">retrieve</span><span
+            class="method-args">(key)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
 
         <div class="method-description">
           
-          <p>Short-cut for version string.</p>
+          
           
 
           
-          <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/lingo/version.rb, line 17</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
-  <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">'.'</span>)
+          <div class="method-source-code" id="retrieve-source">
+            <pre><span class="ruby-comment"># File lib/lingo/modules.rb, line 90</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">retrieve</span>(<span class="ruby-identifier">key</span>)
+  <span class="ruby-identifier">value</span> = <span class="ruby-ivar">@cache</span>[<span class="ruby-identifier">key</span>]
+  <span class="ruby-identifier">value</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">dup</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- to_s-source -->
+          </div><!-- retrieve-source -->
           
         </div>
 
         
 
         
-      </div><!-- to_s-method -->
+      </div><!-- retrieve-method -->
 
     
-    </section><!-- public-class-method-details -->
+      <div id="method-i-store" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">store</span><span
+            class="method-args">(key, value)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="store-source">
+            <pre><span class="ruby-comment"># File lib/lingo/modules.rb, line 84</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">store</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>)
+  <span class="ruby-identifier">res</span> = <span class="ruby-identifier">value</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">dup</span>
+  <span class="ruby-ivar">@cache</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">res</span>
+  <span class="ruby-identifier">value</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- store-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- store-method -->
+
+    
+    </section><!-- public-instance-method-details -->
   
   </section><!-- 5Buntitled-5D -->
 

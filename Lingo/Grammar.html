@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>class Lingo::Grammar - lingo Application documentation (v1.8.0)</title>
+
+<link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="../index.html">Home</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/lingo/language.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">Object
+  
+</nav>
+
+    <!-- Included Modules -->
+<nav id="includes-section" class="section">
+  <h3 class="section-header">Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><a class="include" href="Cachable.html">Lingo::Cachable</a>
+  
+  
+  
+    <li><a class="include" href="Reportable.html">Lingo::Reportable</a>
+  
+  
+  </ul>
+</nav>
+
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-c-new">::new</a>
+    
+    <li><a href="#method-i-close">#close</a>
+    
+    <li><a href="#method-i-find_compositum">#find_compositum</a>
+    
+    <li><a href="#method-i-is_valid-3F">#is_valid?</a>
+    
+    <li><a href="#method-i-permute_compositum">#permute_compositum</a>
+    
+    <li><a href="#method-i-report">#report</a>
+    
+    <li><a href="#method-i-report_grammar">#report_grammar</a>
+    
+    <li><a href="#method-i-test_compositum">#test_compositum</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="../COPYING.html">COPYING</a>
+  
+    <li class="file"><a href="../ChangeLog.html">ChangeLog</a>
+  
+    <li class="file"><a href="../README.html">README</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../Lingo.html">Lingo</a>
+  
+    <li><a href="../Lingo/AgendaItem.html">Lingo::AgendaItem</a>
+  
+    <li><a href="../Lingo/Attendee.html">Lingo::Attendee</a>
+  
+    <li><a href="../Lingo/Attendee/Abbreviator.html">Lingo::Attendee::Abbreviator</a>
+  
+    <li><a href="../Lingo/Attendee/Debugger.html">Lingo::Attendee::Debugger</a>
+  
+    <li><a href="../Lingo/Attendee/Decomposer.html">Lingo::Attendee::Decomposer</a>
+  
+    <li><a href="../Lingo/Attendee/Dehyphenizer.html">Lingo::Attendee::Dehyphenizer</a>
+  
+    <li><a href="../Lingo/Attendee/Formatter.html">Lingo::Attendee::Formatter</a>
+  
+    <li><a href="../Lingo/Attendee/Multiworder.html">Lingo::Attendee::Multiworder</a>
+  
+    <li><a href="../Lingo/Attendee/Noneword_filter.html">Lingo::Attendee::Noneword_filter</a>
+  
+    <li><a href="../Lingo/Attendee/Objectfilter.html">Lingo::Attendee::Objectfilter</a>
+  
+    <li><a href="../Lingo/Attendee/Sequencer.html">Lingo::Attendee::Sequencer</a>
+  
+    <li><a href="../Lingo/Attendee/Synonymer.html">Lingo::Attendee::Synonymer</a>
+  
+    <li><a href="../Lingo/Attendee/Textreader.html">Lingo::Attendee::Textreader</a>
+  
+    <li><a href="../Lingo/Attendee/Textreader/PDFFilter.html">Lingo::Attendee::Textreader::PDFFilter</a>
+  
+    <li><a href="../Lingo/Attendee/Textwriter.html">Lingo::Attendee::Textwriter</a>
+  
+    <li><a href="../Lingo/Attendee/Tokenizer.html">Lingo::Attendee::Tokenizer</a>
+  
+    <li><a href="../Lingo/Attendee/Variator.html">Lingo::Attendee::Variator</a>
+  
+    <li><a href="../Lingo/Attendee/Vector_filter.html">Lingo::Attendee::Vector_filter</a>
+  
+    <li><a href="../Lingo/Attendee/Wordsearcher.html">Lingo::Attendee::Wordsearcher</a>
+  
+    <li><a href="../Lingo/BufferedAttendee.html">Lingo::BufferedAttendee</a>
+  
+    <li><a href="../Lingo/CLI.html">Lingo::CLI</a>
+  
+    <li><a href="../Lingo/Cachable.html">Lingo::Cachable</a>
+  
+    <li><a href="../Lingo/Call.html">Lingo::Call</a>
+  
+    <li><a href="../Lingo/Compositum.html">Lingo::Compositum</a>
+  
+    <li><a href="../Lingo/Config.html">Lingo::Config</a>
+  
+    <li><a href="../Lingo/Crypter.html">Lingo::Crypter</a>
+  
+    <li><a href="../Lingo/Ctl.html">Lingo::Ctl</a>
+  
+    <li><a href="../Lingo/DbmFile.html">Lingo::DbmFile</a>
+  
+    <li><a href="../Lingo/Dictionary.html">Lingo::Dictionary</a>
+  
+    <li><a href="../Lingo/Grammar.html">Lingo::Grammar</a>
+  
+    <li><a href="../Lingo/Lexical.html">Lingo::Lexical</a>
+  
+    <li><a href="../Lingo/LexicalHash.html">Lingo::LexicalHash</a>
+  
+    <li><a href="../Lingo/Reportable.html">Lingo::Reportable</a>
+  
+    <li><a href="../Lingo/ShowProgress.html">Lingo::ShowProgress</a>
+  
+    <li><a href="../Lingo/StringA.html">Lingo::StringA</a>
+  
+    <li><a href="../Lingo/Token.html">Lingo::Token</a>
+  
+    <li><a href="../Lingo/Txt2DbmConverter.html">Lingo::Txt2DbmConverter</a>
+  
+    <li><a href="../Lingo/TxtFile.html">Lingo::TxtFile</a>
+  
+    <li><a href="../Lingo/TxtFile_Keyvalue.html">Lingo::TxtFile_Keyvalue</a>
+  
+    <li><a href="../Lingo/TxtFile_Multikey.html">Lingo::TxtFile_Multikey</a>
+  
+    <li><a href="../Lingo/TxtFile_Multivalue.html">Lingo::TxtFile_Multivalue</a>
+  
+    <li><a href="../Lingo/TxtFile_Singleword.html">Lingo::TxtFile_Singleword</a>
+  
+    <li><a href="../Lingo/TxtFile_Wordclass.html">Lingo::TxtFile_Wordclass</a>
+  
+    <li><a href="../Lingo/Version.html">Lingo::Version</a>
+  
+    <li><a href="../Lingo/Word.html">Lingo::Word</a>
+  
+    <li><a href="../Lingo/WordSequence.html">Lingo::WordSequence</a>
+  
+    <li><a href="../String.html">String</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class Lingo::Grammar</h1>
+
+  <div id="description" class="description">
+    
+<p>Die Klasse <a href="Grammar.html">Grammar</a> beinhaltet grammatikalische
+Spezialitäten einer Sprache. Derzeit findet die Kompositumerkennung hier
+ihren Platz, die mit der Methode <a
+href="Grammar.html#method-i-find_compositum">#find_compositum</a>
+aufgerufen werden kann. Die Klasse <a href="Grammar.html">Grammar</a> wird
+genau wie ein <a href="Dictionary.html">Dictionary</a> initialisiert. Das
+bei der Initialisierung angegebene Wörterbuch ist Grundlage für die
+Erkennung der Kompositumteile.</p>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(config, lingo)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>initialize(config, dictionary_config) -&gt; <em><a
+href="Grammar.html">Grammar</a></em> config = Attendee-spezifische
+Parameter dictionary_config = Datenbankkonfiguration aus de.lang</p>
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/lingo/language.rb, line 300</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">config</span>, <span class="ruby-identifier">lingo</span>)
+  <span class="ruby-identifier">init_reportable</span>
+  <span class="ruby-identifier">init_cachable</span>
+
+  <span class="ruby-ivar">@dictionary</span> = <span class="ruby-constant">Dictionary</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">config</span>, <span class="ruby-identifier">lingo</span>)
+
+  <span class="ruby-comment"># Sprachspezifische Einstellungen für Kompositumverarbeitung laden (die nachfolgenden Werte können in der</span>
+  <span class="ruby-comment"># Konfigurationsdatei de.lang nach belieben angepasst werden)</span>
+  <span class="ruby-identifier">comp</span> = <span class="ruby-identifier">lingo</span>.<span class="ruby-identifier">dictionary_config</span>[<span class="ruby-string">'compositum'</span>]
+
+  <span class="ruby-comment"># Ein Wort muss mindestens 8 Zeichen lang sein, damit überhaupt eine Prüfung stattfindet.</span>
+  <span class="ruby-ivar">@comp_min_word_size</span> = (<span class="ruby-identifier">comp</span>[<span class="ruby-string">'min-word-size'</span>] <span class="ruby-operator">||</span> <span class="ruby-string">'8'</span>).<span class="ruby-identifier">to_i</span>
+
+  <span class="ruby-comment"># Die durchschnittliche Länge der Kompositum-Wortteile muss mindestens 4 Zeichen lang sein, sonst ist es kein</span>
+  <span class="ruby-comment"># gültiges Kompositum.</span>
+  <span class="ruby-ivar">@comp_min_avg_part_size</span> = (<span class="ruby-identifier">comp</span>[<span class="ruby-string">'min-avg-part-size'</span>] <span class="ruby-operator">||</span> <span class="ruby-string">'4'</span>).<span class="ruby-identifier">to_i</span>
+
+  <span class="ruby-comment"># Der kürzeste Kompositum-Wortteil muss mindestens 1 Zeichen lang sein</span>
+  <span class="ruby-ivar">@comp_min_part_size</span> = (<span class="ruby-identifier">comp</span>[<span class="ruby-string">'min-part-size'</span>] <span class="ruby-operator">||</span> <span class="ruby-string">'1'</span>).<span class="ruby-identifier">to_i</span>
+
+  <span class="ruby-comment"># Ein Kompositum darf aus höchstens 4 Wortteilen bestehen</span>
+  <span class="ruby-ivar">@comp_max_parts</span> = (<span class="ruby-identifier">comp</span>[<span class="ruby-string">'max-parts'</span>] <span class="ruby-operator">||</span> <span class="ruby-string">'4'</span>).<span class="ruby-identifier">to_i</span>
+
+  <span class="ruby-comment"># Die Wortklasse eines Kompositum-Wortteils kann separat gekennzeichnet werden, um sie von Wortklassen normaler Wörter</span>
+  <span class="ruby-comment"># unterscheiden zu können z.B. Hausmeister =&gt; ['haus/s', 'meister/s'] oder Hausmeister =&gt; ['haus/s+', 'meister/s+'] mit</span>
+  <span class="ruby-comment"># append-wordclass = '+'</span>
+  <span class="ruby-ivar">@append_wc</span> = <span class="ruby-identifier">comp</span>.<span class="ruby-identifier">fetch</span>( <span class="ruby-string">'append-wordclass'</span>, <span class="ruby-string">''</span> )
+
+  <span class="ruby-comment"># Bestimmte Sequenzen können als ungültige Komposita erkannt werden, z.B. ist ein Kompositum aus zwei Adjetiven kein</span>
+  <span class="ruby-comment"># Kompositum, also skip-sequence = 'aa'</span>
+  <span class="ruby-ivar">@sequences</span> = <span class="ruby-identifier">comp</span>.<span class="ruby-identifier">fetch</span>( <span class="ruby-string">'skip-sequences'</span>, [] ).<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">sq</span><span class="ruby-operator">|</span> <span class="ruby-identifier">sq</span>.<span class="ruby-identifier">downcase</span> }
+
+  <span class="ruby-comment"># Liste der Vorschläge für eine Zerlegung</span>
+  <span class="ruby-ivar">@suggestions</span> = []
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-close" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">close</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="close-source">
+            <pre><span class="ruby-comment"># File lib/lingo/language.rb, line 336</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">close</span>
+  <span class="ruby-ivar">@dictionary</span>.<span class="ruby-identifier">close</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- close-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- close-method -->
+
+    
+      <div id="method-i-find_compositum" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">find_compositum</span><span
+            class="method-args">(string, level=1, has_tail=false)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p><a
+href="Grammar.html#method-i-find_compositum">#find_compositum</a>(string)
+-&gt; word wenn level=1 <a
+href="Grammar.html#method-i-find_compositum">#find_compositum</a>(string)
+-&gt; [lexicals, stats] wenn level!=1</p>
+
+<p><a href="Grammar.html#method-i-find_compositum">#find_compositum</a>
+arbeitet in verschiedenen Leveln, da die Methode auch rekursiv aufgerufen
+wird. Ein Level größer 1 entspricht daher einem rekursiven Aufruf</p>
+          
+
+          
+          <div class="method-source-code" id="find_compositum-source">
+            <pre><span class="ruby-comment"># File lib/lingo/language.rb, line 353</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">find_compositum</span>(<span class="ruby-identifier">string</span>, <span class="ruby-identifier">level</span>=<span class="ruby-value">1</span>, <span class="ruby-identifier">has_tail</span>=<span class="ruby-keyword">false</span>)
+  <span class="ruby-comment"># Prüfen, ob string bereits auf Kompositum getestet wurde. Wenn ja, dann Ergebnis des letztes Aufrufs zurück geben.</span>
+  <span class="ruby-identifier">key</span> = <span class="ruby-identifier">string</span>.<span class="ruby-identifier">downcase</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">level</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">hit?</span>(<span class="ruby-identifier">key</span>)
+    <span class="ruby-identifier">inc</span>(<span class="ruby-string">'cache hits'</span>)
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">retrieve</span>(<span class="ruby-identifier">key</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Ergebnis vorbelegen</span>
+  <span class="ruby-identifier">comp</span> = <span class="ruby-constant">Word</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">string</span>, <span class="ruby-constant">WA_UNKNOWN</span>)
+
+  <span class="ruby-comment"># Validitätsprüfung: nur Strings mit Mindestlänge auf Kompositum prüfen</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">string</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-ivar">@comp_min_word_size</span>
+    <span class="ruby-identifier">inc</span>(<span class="ruby-string">'String zu kurz'</span>)
+    <span class="ruby-keyword">return</span> (<span class="ruby-identifier">level</span><span class="ruby-operator">==</span><span class="ruby-value">1</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">comp</span> <span class="ruby-operator">:</span> [[],[],<span class="ruby-string">''</span>]
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Kompositumerkennung initialisieren</span>
+  <span class="ruby-identifier">inc</span>(<span class="ruby-string">'Komposita geprüft'</span>)
+  <span class="ruby-identifier">stats</span>, <span class="ruby-identifier">lexis</span>, <span class="ruby-identifier">seqs</span> = <span class="ruby-identifier">permute_compositum</span>(<span class="ruby-identifier">string</span>.<span class="ruby-identifier">downcase</span>, <span class="ruby-identifier">level</span>, <span class="ruby-identifier">has_tail</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">level</span><span class="ruby-operator">==</span><span class="ruby-value">1</span>
+    <span class="ruby-comment"># Auf Level 1 Kompositum zurück geben</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">lexis</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">is_valid?</span>( <span class="ruby-identifier">string</span>, <span class="ruby-identifier">stats</span>, <span class="ruby-identifier">lexis</span>, <span class="ruby-identifier">seqs</span> )
+      <span class="ruby-identifier">inc</span>(<span class="ruby-string">'Komposita erkannt'</span>)
+      <span class="ruby-identifier">comp</span>.<span class="ruby-identifier">attr</span> = <span class="ruby-constant">WA_KOMPOSITUM</span>
+      <span class="ruby-identifier">comp</span>.<span class="ruby-identifier">lexicals</span> = <span class="ruby-identifier">lexis</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">lex</span><span class="ruby-operator">|</span>
+        (<span class="ruby-identifier">lex</span>.<span class="ruby-identifier">attr</span><span class="ruby-operator">==</span><span class="ruby-constant">LA_KOMPOSITUM</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">lex</span> <span class="ruby-operator">:</span> <span class="ruby-constant">Lexical</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">lex</span>.<span class="ruby-identifier">form</span>, <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">attr</span><span class="ruby-operator">+</span><span class="ruby-ivar">@append_wc</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">store</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">comp</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Validitätsprüfung</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">lexis</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">is_valid?</span>(<span class="ruby-identifier">string</span>, <span class="ruby-identifier">stats</span>, <span class="ruby-identifier">lexis</span>, <span class="ruby-identifier">seqs</span>)
+    [<span class="ruby-identifier">stats</span>, <span class="ruby-identifier">lexis</span>, <span class="ruby-identifier">seqs</span>]
+  <span class="ruby-keyword">else</span>
+    [[],[],<span class="ruby-string">''</span>]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- find_compositum-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- find_compositum-method -->
+
+    
+      <div id="method-i-report" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">report</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="report-source">
+            <pre><span class="ruby-comment"># File lib/lingo/language.rb, line 342</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">report</span>
+  <span class="ruby-identifier">rep</span> = <span class="ruby-identifier">report_grammar</span>
+  <span class="ruby-identifier">rep</span>.<span class="ruby-identifier">update</span>(<span class="ruby-ivar">@dictionary</span>.<span class="ruby-identifier">report</span>)
+  <span class="ruby-identifier">rep</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- report-source -->
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="Grammar.html#method-i-report_grammar">report_grammar</a>
+        </div>
+        
+
+        
+      </div><!-- report-method -->
+
+    
+      <div id="method-i-report_grammar" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">report_grammar</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="Grammar.html#method-i-report">report</a>
+        </div>
+        
+      </div><!-- report_grammar-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+     <section id="private-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Private Instance Methods</h3>
+
+    
+      <div id="method-i-is_valid-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">is_valid?</span><span
+            class="method-args">(string, stats, lexis, seqs)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="is_valid-3F-source">
+            <pre><span class="ruby-comment"># File lib/lingo/language.rb, line 397</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">is_valid?</span>(<span class="ruby-identifier">string</span>, <span class="ruby-identifier">stats</span>, <span class="ruby-identifier">lexis</span>, <span class="ruby-identifier">seqs</span>)
+  <span class="ruby-identifier">is_valid</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-identifier">is_valid</span> <span class="ruby-operator">&amp;&amp;=</span> (<span class="ruby-identifier">stats</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-ivar">@comp_max_parts</span>)
+  <span class="ruby-identifier">is_valid</span> <span class="ruby-operator">&amp;&amp;=</span> (<span class="ruby-identifier">stats</span>.<span class="ruby-identifier">sort</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">&gt;=</span> <span class="ruby-ivar">@comp_min_part_size</span>)
+  <span class="ruby-identifier">is_valid</span> <span class="ruby-operator">&amp;&amp;=</span> (<span class="ruby-identifier">string</span>.<span class="ruby-identifier">size</span><span class="ruby-operator">/</span><span class="ruby-identifier">stats</span>.<span class="ruby-identifier">size</span>) <span class="ruby-operator">&gt;=</span> <span class="ruby-ivar">@comp_min_avg_part_size</span>
+  <span class="ruby-identifier">is_valid</span> <span class="ruby-operator">&amp;&amp;=</span> <span class="ruby-ivar">@sequences</span>.<span class="ruby-identifier">index</span>( <span class="ruby-identifier">seqs</span> ).<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@sequences</span>.<span class="ruby-identifier">empty?</span>
+  <span class="ruby-identifier">is_valid</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- is_valid-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- is_valid-3F-method -->
+
+    
+      <div id="method-i-permute_compositum" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">permute_compositum</span><span
+            class="method-args">(string, level, has_tail)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>permute_string( <em>a<a href="../String.html">String</a></em> ) -&gt; 
+[lexicals, stats, seqs]</p>
+          
+
+          
+          <div class="method-source-code" id="permute_compositum-source">
+            <pre><span class="ruby-comment"># File lib/lingo/language.rb, line 407</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">permute_compositum</span>(<span class="ruby-identifier">string</span>, <span class="ruby-identifier">level</span>, <span class="ruby-identifier">has_tail</span>)
+  <span class="ruby-ivar">@suggestions</span>[<span class="ruby-identifier">level</span>] = [] <span class="ruby-keyword">if</span> <span class="ruby-ivar">@suggestions</span>[<span class="ruby-identifier">level</span>].<span class="ruby-identifier">nil?</span>
+
+  <span class="ruby-comment"># Finde letzten Bindesstrich im Wort</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">string</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r^(.+)-([^-]+)$/</span>
+    <span class="ruby-identifier">test_compositum</span>(<span class="ruby-node">$1</span>, <span class="ruby-string">'-'</span>, <span class="ruby-node">$2</span>, <span class="ruby-identifier">level</span>, <span class="ruby-identifier">has_tail</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">length</span> = <span class="ruby-identifier">string</span>.<span class="ruby-identifier">length</span>
+
+    <span class="ruby-comment"># Wortteilungen testen</span>
+    <span class="ruby-value">1</span>.<span class="ruby-identifier">upto</span>(<span class="ruby-identifier">length</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+      <span class="ruby-comment"># String teilen und testen</span>
+      <span class="ruby-identifier">fr_str</span>, <span class="ruby-identifier">ba_str</span> = <span class="ruby-identifier">string</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-identifier">p</span>), <span class="ruby-identifier">string</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-identifier">p</span><span class="ruby-operator">...</span><span class="ruby-identifier">length</span>)
+      <span class="ruby-identifier">stats</span>, <span class="ruby-identifier">lexis</span>, <span class="ruby-identifier">seqs</span> = <span class="ruby-identifier">test_compositum</span>(<span class="ruby-identifier">fr_str</span>, <span class="ruby-string">''</span>, <span class="ruby-identifier">ba_str</span>, <span class="ruby-identifier">level</span>, <span class="ruby-identifier">has_tail</span>)
+
+      <span class="ruby-keyword">unless</span> <span class="ruby-identifier">lexis</span>.<span class="ruby-identifier">empty?</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">lexis</span>[<span class="ruby-value">-1</span>].<span class="ruby-identifier">attr</span><span class="ruby-operator">==</span><span class="ruby-constant">LA_TAKEITASIS</span>
+          <span class="ruby-comment"># =&gt; halbes Kompositum</span>
+          <span class="ruby-ivar">@suggestions</span>[<span class="ruby-identifier">level</span>] <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">stats</span>, <span class="ruby-identifier">lexis</span>, <span class="ruby-identifier">seqs</span>]
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-comment"># =&gt; ganzes Kompositum</span>
+          <span class="ruby-keyword">return</span> [<span class="ruby-identifier">stats</span>, <span class="ruby-identifier">lexis</span>, <span class="ruby-identifier">seqs</span>]
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># alle Wortteilungen durchprobiert und noch immer kein definitives Kompositum erkannt. Dann nehme besten Vorschlag.</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@suggestions</span>[<span class="ruby-identifier">level</span>].<span class="ruby-identifier">empty?</span>
+      [[],[],<span class="ruby-string">''</span>]
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">stats</span>, <span class="ruby-identifier">lexis</span>, <span class="ruby-identifier">seqs</span> = <span class="ruby-ivar">@suggestions</span>[<span class="ruby-identifier">level</span>][<span class="ruby-value">0</span>]
+      <span class="ruby-ivar">@suggestions</span>[<span class="ruby-identifier">level</span>].<span class="ruby-identifier">clear</span>
+      [<span class="ruby-identifier">stats</span>, <span class="ruby-identifier">lexis</span>, <span class="ruby-identifier">seqs</span>]
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- permute_compositum-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- permute_compositum-method -->
+
+    
+      <div id="method-i-test_compositum" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_compositum</span><span
+            class="method-args">(front_string, infix, back_string, level, has_tail)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p><a href="Grammar.html#method-i-test_compositum">#test_compositum</a>()
+-&gt;  [stats, lexicals, seq]</p>
+
+<p>Testet einen definiert zerlegten <a href="../String.html">String</a> auf
+Kompositum</p>
+          
+
+          
+          <div class="method-source-code" id="test_compositum-source">
+            <pre><span class="ruby-comment"># File lib/lingo/language.rb, line 447</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_compositum</span>(<span class="ruby-identifier">front_string</span>, <span class="ruby-identifier">infix</span>, <span class="ruby-identifier">back_string</span>, <span class="ruby-identifier">level</span>, <span class="ruby-identifier">has_tail</span>)
+  <span class="ruby-comment"># Statistik merken für Validitätsprüfung</span>
+  <span class="ruby-identifier">stats</span> = [<span class="ruby-identifier">front_string</span>.<span class="ruby-identifier">size</span>, <span class="ruby-identifier">back_string</span>.<span class="ruby-identifier">size</span>]
+  <span class="ruby-identifier">seqs</span> = [<span class="ruby-string">'?'</span>, <span class="ruby-string">'?'</span>]
+
+  <span class="ruby-comment"># zuerst hinteren Teil auflösen</span>
+  <span class="ruby-comment"># 1. Möglichkeit:  Wort mit oder ohne Suffix</span>
+  <span class="ruby-identifier">back_lexicals</span> = <span class="ruby-ivar">@dictionary</span>.<span class="ruby-identifier">select_with_suffix</span>(<span class="ruby-identifier">back_string</span>)
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">back_lexicals</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-identifier">back_form</span> = <span class="ruby-identifier">has_tail</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">back_string</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">back_lexicals</span>.<span class="ruby-identifier">sort</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">form</span>
+    <span class="ruby-identifier">seqs</span>[<span class="ruby-value">1</span>] = <span class="ruby-identifier">back_lexicals</span>.<span class="ruby-identifier">sort</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">attr</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># 2. Möglichkeit:  Wort mit oder ohne Infix, wenn es nicht der letzte Teil des Wortes ist</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">back_lexicals</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">has_tail</span>
+    <span class="ruby-identifier">back_lexicals</span> = <span class="ruby-ivar">@dictionary</span>.<span class="ruby-identifier">select_with_infix</span>(<span class="ruby-identifier">back_string</span>)
+    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">back_lexicals</span>.<span class="ruby-identifier">empty?</span>
+      <span class="ruby-identifier">back_form</span> = <span class="ruby-identifier">back_string</span>
+      <span class="ruby-identifier">seqs</span>[<span class="ruby-value">1</span>] = <span class="ruby-identifier">back_lexicals</span>.<span class="ruby-identifier">sort</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">attr</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># 3. Möglichkeit:  Selber ein Kompositum (nur im Bindestrich-Fall!)</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">back_lexicals</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">infix</span><span class="ruby-operator">==</span><span class="ruby-string">'-'</span>
+    <span class="ruby-identifier">back_stats</span>, <span class="ruby-identifier">back_lexicals</span>, <span class="ruby-identifier">back_seqs</span> = <span class="ruby-identifier">find_compositum</span>(<span class="ruby-identifier">back_string</span>, <span class="ruby-identifier">level</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>, <span class="ruby-identifier">has_tail</span>)
+    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">back_lexicals</span>.<span class="ruby-identifier">empty?</span>
+      <span class="ruby-identifier">back_form</span> = <span class="ruby-identifier">back_lexicals</span>.<span class="ruby-identifier">sort</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">form</span>
+      <span class="ruby-identifier">seqs</span>[<span class="ruby-value">1</span>] = <span class="ruby-identifier">back_seqs</span>
+      <span class="ruby-identifier">stats</span> = <span class="ruby-identifier">stats</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">0</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">back_stats</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># 4. Möglichkeit:  Take it as is [Nimm's, wie es ist] (nur im Bindestrich-Fall!)</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">back_lexicals</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">infix</span><span class="ruby-operator">==</span><span class="ruby-string">'-'</span>
+    <span class="ruby-identifier">back_lexicals</span> = [<span class="ruby-constant">Lexical</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">back_string</span>, <span class="ruby-constant">LA_TAKEITASIS</span>)]
+    <span class="ruby-identifier">back_form</span> = <span class="ruby-identifier">back_string</span>
+    <span class="ruby-identifier">seqs</span>[<span class="ruby-value">1</span>] = <span class="ruby-identifier">back_lexicals</span>.<span class="ruby-identifier">sort</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">attr</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># wenn immer noch nicht erkannt, dann sofort zurück</span>
+  <span class="ruby-keyword">return</span> [[],[],<span class="ruby-string">''</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">back_lexicals</span>.<span class="ruby-identifier">empty?</span>
+
+  <span class="ruby-comment"># dann vorderen Teil auflösen</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># 1. Möglichkeit:  Wort mit oder ohne Infix</span>
+  <span class="ruby-identifier">front_lexicals</span> = <span class="ruby-ivar">@dictionary</span>.<span class="ruby-identifier">select_with_infix</span>(<span class="ruby-identifier">front_string</span>)
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">front_lexicals</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-identifier">front_form</span> = <span class="ruby-identifier">front_string</span>
+    <span class="ruby-identifier">seqs</span>[<span class="ruby-value">0</span>] = <span class="ruby-identifier">front_lexicals</span>.<span class="ruby-identifier">sort</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">attr</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># 2. Möglichkeit:  Selber ein Kompositum</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">front_lexicals</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-identifier">front_stats</span>, <span class="ruby-identifier">front_lexicals</span>, <span class="ruby-identifier">front_seqs</span> = <span class="ruby-identifier">find_compositum</span>(<span class="ruby-identifier">front_string</span>, <span class="ruby-identifier">level</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>, <span class="ruby-keyword">true</span>)
+    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">front_lexicals</span>.<span class="ruby-identifier">empty?</span>
+      <span class="ruby-identifier">front_form</span> = <span class="ruby-identifier">front_lexicals</span>.<span class="ruby-identifier">sort</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">form</span>
+      <span class="ruby-identifier">seqs</span>[<span class="ruby-value">0</span>] = <span class="ruby-identifier">front_seqs</span>
+      <span class="ruby-identifier">stats</span> = <span class="ruby-identifier">front_stats</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">stats</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>]
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># 3. Möglichkeit:  Take it as is [Nimm's, wie es ist] (nur im Bindestrich-Fall!)</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">front_lexicals</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">infix</span><span class="ruby-operator">==</span><span class="ruby-string">'-'</span>
+    <span class="ruby-identifier">front_lexicals</span> = [<span class="ruby-constant">Lexical</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">front_string</span>, <span class="ruby-constant">LA_TAKEITASIS</span>)]
+    <span class="ruby-identifier">seqs</span>[<span class="ruby-value">0</span>] = <span class="ruby-identifier">front_lexicals</span>.<span class="ruby-identifier">sort</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">attr</span>
+    <span class="ruby-identifier">front_form</span> = <span class="ruby-identifier">front_string</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># wenn immer noch nicht erkannt, dann sofort zurück</span>
+  <span class="ruby-keyword">return</span> [[],[],<span class="ruby-string">''</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">front_lexicals</span>.<span class="ruby-identifier">empty?</span>
+
+  <span class="ruby-comment"># Kompositum gefunden, Grundform bilden</span>
+  <span class="ruby-identifier">lexis</span> = (<span class="ruby-identifier">front_lexicals</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">back_lexicals</span>).<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">lex</span><span class="ruby-operator">|</span>
+    (<span class="ruby-identifier">lex</span>.<span class="ruby-identifier">attr</span><span class="ruby-operator">==</span><span class="ruby-constant">LA_KOMPOSITUM</span>) <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">lex</span>
+  }.<span class="ruby-identifier">compact</span>
+  <span class="ruby-identifier">lexis</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Lexical</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">front_form</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">infix</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">back_form</span>, <span class="ruby-constant">LA_KOMPOSITUM</span>)
+
+  [<span class="ruby-identifier">stats</span>, <span class="ruby-identifier">lexis</span>.<span class="ruby-identifier">sort</span>, <span class="ruby-identifier">seqs</span>.<span class="ruby-identifier">join</span> ]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- test_compositum-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- test_compositum-method -->
+
+    
+    </section><!-- private-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

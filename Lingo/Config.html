@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>class Lingo::Config - lingo Application documentation (v1.8.0)</title>
+
+<link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="../index.html">Home</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/lingo/config.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">Object
+  
+</nav>
+
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-c-new">::new</a>
+    
+    <li><a href="#method-i-5B-5D">#[]</a>
+    
+    <li><a href="#method-i-5B-5D-3D">#[]=</a>
+    
+    <li><a href="#method-i-key_to_nodes">#key_to_nodes</a>
+    
+    <li><a href="#method-i-load_config">#load_config</a>
+    
+    <li><a href="#method-i-nodes_to_key">#nodes_to_key</a>
+    
+    <li><a href="#method-i-quit">#quit</a>
+    
+    <li><a href="#method-i-stderr">#stderr</a>
+    
+    <li><a href="#method-i-stdin">#stdin</a>
+    
+    <li><a href="#method-i-stdout">#stdout</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="../COPYING.html">COPYING</a>
+  
+    <li class="file"><a href="../ChangeLog.html">ChangeLog</a>
+  
+    <li class="file"><a href="../README.html">README</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../Lingo.html">Lingo</a>
+  
+    <li><a href="../Lingo/AgendaItem.html">Lingo::AgendaItem</a>
+  
+    <li><a href="../Lingo/Attendee.html">Lingo::Attendee</a>
+  
+    <li><a href="../Lingo/Attendee/Abbreviator.html">Lingo::Attendee::Abbreviator</a>
+  
+    <li><a href="../Lingo/Attendee/Debugger.html">Lingo::Attendee::Debugger</a>
+  
+    <li><a href="../Lingo/Attendee/Decomposer.html">Lingo::Attendee::Decomposer</a>
+  
+    <li><a href="../Lingo/Attendee/Dehyphenizer.html">Lingo::Attendee::Dehyphenizer</a>
+  
+    <li><a href="../Lingo/Attendee/Formatter.html">Lingo::Attendee::Formatter</a>
+  
+    <li><a href="../Lingo/Attendee/Multiworder.html">Lingo::Attendee::Multiworder</a>
+  
+    <li><a href="../Lingo/Attendee/Noneword_filter.html">Lingo::Attendee::Noneword_filter</a>
+  
+    <li><a href="../Lingo/Attendee/Objectfilter.html">Lingo::Attendee::Objectfilter</a>
+  
+    <li><a href="../Lingo/Attendee/Sequencer.html">Lingo::Attendee::Sequencer</a>
+  
+    <li><a href="../Lingo/Attendee/Synonymer.html">Lingo::Attendee::Synonymer</a>
+  
+    <li><a href="../Lingo/Attendee/Textreader.html">Lingo::Attendee::Textreader</a>
+  
+    <li><a href="../Lingo/Attendee/Textreader/PDFFilter.html">Lingo::Attendee::Textreader::PDFFilter</a>
+  
+    <li><a href="../Lingo/Attendee/Textwriter.html">Lingo::Attendee::Textwriter</a>
+  
+    <li><a href="../Lingo/Attendee/Tokenizer.html">Lingo::Attendee::Tokenizer</a>
+  
+    <li><a href="../Lingo/Attendee/Variator.html">Lingo::Attendee::Variator</a>
+  
+    <li><a href="../Lingo/Attendee/Vector_filter.html">Lingo::Attendee::Vector_filter</a>
+  
+    <li><a href="../Lingo/Attendee/Wordsearcher.html">Lingo::Attendee::Wordsearcher</a>
+  
+    <li><a href="../Lingo/BufferedAttendee.html">Lingo::BufferedAttendee</a>
+  
+    <li><a href="../Lingo/CLI.html">Lingo::CLI</a>
+  
+    <li><a href="../Lingo/Cachable.html">Lingo::Cachable</a>
+  
+    <li><a href="../Lingo/Call.html">Lingo::Call</a>
+  
+    <li><a href="../Lingo/Compositum.html">Lingo::Compositum</a>
+  
+    <li><a href="../Lingo/Config.html">Lingo::Config</a>
+  
+    <li><a href="../Lingo/Crypter.html">Lingo::Crypter</a>
+  
+    <li><a href="../Lingo/Ctl.html">Lingo::Ctl</a>
+  
+    <li><a href="../Lingo/DbmFile.html">Lingo::DbmFile</a>
+  
+    <li><a href="../Lingo/Dictionary.html">Lingo::Dictionary</a>
+  
+    <li><a href="../Lingo/Grammar.html">Lingo::Grammar</a>
+  
+    <li><a href="../Lingo/Lexical.html">Lingo::Lexical</a>
+  
+    <li><a href="../Lingo/LexicalHash.html">Lingo::LexicalHash</a>
+  
+    <li><a href="../Lingo/Reportable.html">Lingo::Reportable</a>
+  
+    <li><a href="../Lingo/ShowProgress.html">Lingo::ShowProgress</a>
+  
+    <li><a href="../Lingo/StringA.html">Lingo::StringA</a>
+  
+    <li><a href="../Lingo/Token.html">Lingo::Token</a>
+  
+    <li><a href="../Lingo/Txt2DbmConverter.html">Lingo::Txt2DbmConverter</a>
+  
+    <li><a href="../Lingo/TxtFile.html">Lingo::TxtFile</a>
+  
+    <li><a href="../Lingo/TxtFile_Keyvalue.html">Lingo::TxtFile_Keyvalue</a>
+  
+    <li><a href="../Lingo/TxtFile_Multikey.html">Lingo::TxtFile_Multikey</a>
+  
+    <li><a href="../Lingo/TxtFile_Multivalue.html">Lingo::TxtFile_Multivalue</a>
+  
+    <li><a href="../Lingo/TxtFile_Singleword.html">Lingo::TxtFile_Singleword</a>
+  
+    <li><a href="../Lingo/TxtFile_Wordclass.html">Lingo::TxtFile_Wordclass</a>
+  
+    <li><a href="../Lingo/Version.html">Lingo::Version</a>
+  
+    <li><a href="../Lingo/Word.html">Lingo::Word</a>
+  
+    <li><a href="../Lingo/WordSequence.html">Lingo::WordSequence</a>
+  
+    <li><a href="../String.html">String</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class Lingo::Config</h1>
+
+  <div id="description" class="description">
+    
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(*args)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/lingo/config.rb, line 36</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-ivar">@cli</span>, <span class="ruby-ivar">@opts</span> = <span class="ruby-constant">CLI</span>.<span class="ruby-identifier">new</span>, {}
+
+  <span class="ruby-ivar">@cli</span>.<span class="ruby-identifier">execute</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-ivar">@cli</span>.<span class="ruby-identifier">options</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@opts</span>[<span class="ruby-identifier">key</span>.<span class="ruby-identifier">to_s</span>] = <span class="ruby-identifier">val</span> }
+
+  <span class="ruby-identifier">load_config</span>(<span class="ruby-string">'language'</span>, <span class="ruby-value">:lang</span>)
+  <span class="ruby-identifier">load_config</span>(<span class="ruby-string">'config'</span>)
+
+  <span class="ruby-constant">Array</span>(<span class="ruby-keyword">self</span>[<span class="ruby-string">'meeting/attendees'</span>]).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">r</span> = <span class="ruby-identifier">a</span>[<span class="ruby-string">'textreader'</span>] <span class="ruby-keyword">or</span> <span class="ruby-keyword">next</span>
+
+    <span class="ruby-identifier">f</span> = <span class="ruby-ivar">@cli</span>.<span class="ruby-identifier">files</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">i</span> = <span class="ruby-identifier">r</span>[<span class="ruby-string">'files'</span>]
+      <span class="ruby-identifier">r</span>[<span class="ruby-string">'files'</span>] = <span class="ruby-identifier">i</span>.<span class="ruby-identifier">strip</span> <span class="ruby-operator">==</span> <span class="ruby-string">'$(files)'</span> <span class="ruby-operator">?</span>
+        <span class="ruby-identifier">f</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">split</span>(<span class="ruby-constant">STRING_SEPERATOR_PATTERN</span>)
+    <span class="ruby-keyword">elsif</span> <span class="ruby-operator">!</span><span class="ruby-identifier">f</span>.<span class="ruby-identifier">empty?</span>
+      <span class="ruby-identifier">r</span>[<span class="ruby-string">'files'</span>] = <span class="ruby-identifier">f</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">break</span>
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-5B-5D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">[]</span><span
+            class="method-args">(key)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="5B-5D-source">
+            <pre><span class="ruby-comment"># File lib/lingo/config.rb, line 61</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">[]</span>(<span class="ruby-identifier">key</span>)
+  <span class="ruby-identifier">key_to_nodes</span>(<span class="ruby-identifier">key</span>).<span class="ruby-identifier">inject</span>(<span class="ruby-ivar">@opts</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">value</span>, <span class="ruby-identifier">node</span><span class="ruby-operator">|</span> <span class="ruby-identifier">value</span>[<span class="ruby-identifier">node</span>] }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- 5B-5D-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- 5B-5D-method -->
+
+    
+      <div id="method-i-5B-5D-3D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">[]=</span><span
+            class="method-args">(key, value)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="5B-5D-3D-source">
+            <pre><span class="ruby-comment"># File lib/lingo/config.rb, line 65</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">[]=</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>)
+  <span class="ruby-identifier">nodes</span> = <span class="ruby-identifier">key_to_nodes</span>(<span class="ruby-identifier">key</span>); <span class="ruby-identifier">node</span> = <span class="ruby-identifier">nodes</span>.<span class="ruby-identifier">pop</span>
+  (<span class="ruby-keyword">self</span>[<span class="ruby-identifier">nodes_to_key</span>(<span class="ruby-identifier">nodes</span>)] <span class="ruby-operator">||=</span> {})[<span class="ruby-identifier">node</span>] = <span class="ruby-identifier">value</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- 5B-5D-3D-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- 5B-5D-3D-method -->
+
+    
+      <div id="method-i-quit" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">quit</span><span
+            class="method-args">(*args)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="quit-source">
+            <pre><span class="ruby-comment"># File lib/lingo/config.rb, line 82</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">quit</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-ivar">@cli</span>.<span class="ruby-identifier">send</span>(<span class="ruby-value">:quit</span>, *<span class="ruby-identifier">args</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- quit-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- quit-method -->
+
+    
+      <div id="method-i-stderr" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">stderr</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="stderr-source">
+            <pre><span class="ruby-comment"># File lib/lingo/config.rb, line 78</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">stderr</span>
+  <span class="ruby-ivar">@cli</span>.<span class="ruby-identifier">stderr</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- stderr-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- stderr-method -->
+
+    
+      <div id="method-i-stdin" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">stdin</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="stdin-source">
+            <pre><span class="ruby-comment"># File lib/lingo/config.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">stdin</span>
+  <span class="ruby-ivar">@cli</span>.<span class="ruby-identifier">stdin</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- stdin-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- stdin-method -->
+
+    
+      <div id="method-i-stdout" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">stdout</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="stdout-source">
+            <pre><span class="ruby-comment"># File lib/lingo/config.rb, line 74</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">stdout</span>
+  <span class="ruby-ivar">@cli</span>.<span class="ruby-identifier">stdout</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- stdout-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- stdout-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+     <section id="private-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Private Instance Methods</h3>
+
+    
+      <div id="method-i-key_to_nodes" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">key_to_nodes</span><span
+            class="method-args">(key)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="key_to_nodes-source">
+            <pre><span class="ruby-comment"># File lib/lingo/config.rb, line 88</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">key_to_nodes</span>(<span class="ruby-identifier">key</span>)
+  <span class="ruby-identifier">key</span>.<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">'/'</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- key_to_nodes-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- key_to_nodes-method -->
+
+    
+      <div id="method-i-load_config" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">load_config</span><span
+            class="method-args">(key, type = key.to_sym)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="load_config-source">
+            <pre><span class="ruby-comment"># File lib/lingo/config.rb, line 96</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">load_config</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">type</span> = <span class="ruby-identifier">key</span>.<span class="ruby-identifier">to_sym</span>)
+  <span class="ruby-identifier">file</span> = <span class="ruby-constant">Lingo</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">type</span>, <span class="ruby-ivar">@opts</span>[<span class="ruby-identifier">key</span>], &amp;<span class="ruby-identifier">method</span>(<span class="ruby-value">:quit</span>))
+  <span class="ruby-ivar">@opts</span>.<span class="ruby-identifier">update</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">encoding</span><span class="ruby-operator">:</span> <span class="ruby-constant">ENC</span>, &amp;<span class="ruby-constant">YAML</span>.<span class="ruby-identifier">method</span>(<span class="ruby-value">:load</span>)))
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- load_config-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- load_config-method -->
+
+    
+      <div id="method-i-nodes_to_key" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">nodes_to_key</span><span
+            class="method-args">(nodes)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="nodes_to_key-source">
+            <pre><span class="ruby-comment"># File lib/lingo/config.rb, line 92</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">nodes_to_key</span>(<span class="ruby-identifier">nodes</span>)
+  <span class="ruby-identifier">nodes</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">'/'</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- nodes_to_key-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- nodes_to_key-method -->
+
+    
+    </section><!-- private-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

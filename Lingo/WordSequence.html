@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>module Lingo::Version - lingo Application documentation (v1.8.0)</title>
+<title>class Lingo::WordSequence - lingo Application documentation (v1.8.0)</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -20,7 +20,7 @@
 <script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
 
 
-<body id="top" class="module">
+<body id="top" class="class">
 <nav id="metadata">
   <nav id="home-section" class="section">
   <h3 class="section-header">
@@ -47,7 +47,7 @@
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
   <ul>
-    <li>lib/lingo/version.rb
+    <li>lib/lingo/attendee/sequencer.rb
   </ul>
 </nav>
 
@@ -56,7 +56,13 @@
 
   <div id="class-metadata">
     
-    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">Object
+  
+</nav>
+
     
     <!-- Method Quickref -->
 <nav id="method-list-section" class="section">
@@ -64,9 +70,9 @@
 
   <ul class="link-list">
     
-    <li><a href="#method-c-to_a">::to_a</a>
+    <li><a href="#method-c-new">::new</a>
     
-    <li><a href="#method-c-to_s">::to_s</a>
+    <li><a href="#method-i-scan">#scan</a>
     
   </ul>
 </nav>
@@ -196,7 +202,7 @@
 </nav>
 
 <div id="documentation">
-  <h1 class="module">module Lingo::Version</h1>
+  <h1 class="class">class Lingo::WordSequence</h1>
 
   <div id="description" class="description">
     
@@ -211,30 +217,53 @@
     
 
     
-    <!-- Constants -->
-    <section id="constants-list" class="section">
-      <h3 class="section-header">Constants</h3>
-      <dl>
-      
-        <dt id="MAJOR">MAJOR
-        
-        <dd class="description">
-        
-      
-        <dt id="MINOR">MINOR
-        
-        <dd class="description">
-        
-      
-        <dt id="TINY">TINY
-        
-        <dd class="description">
-        
-      
-      </dl>
-    </section>
-    
 
+    
+    <!-- Attributes -->
+    <section id="attribute-method-details" class="method-section section">
+      <h3 class="section-header">Attributes</h3>
+
+      
+      <div id="attribute-i-classes" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">classes</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-format" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">format</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-string" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">string</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+    </section><!-- attribute-method-details -->
     
 
     <!-- Methods -->
@@ -243,67 +272,80 @@
       <h3 class="section-header">Public Class Methods</h3>
 
     
-      <div id="method-c-to_a" class="method-detail ">
+      <div id="method-c-new" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">to_a</span><span
-            class="method-args">()</span>
+          <span class="method-name">new</span><span
+            class="method-args">(wordclasses, format)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
 
         <div class="method-description">
           
-          <p>Returns array representation.</p>
+          
           
 
           
-          <div class="method-source-code" id="to_a-source">
-            <pre><span class="ruby-comment"># File lib/lingo/version.rb, line 12</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_a</span>
-  [<span class="ruby-constant">MAJOR</span>, <span class="ruby-constant">MINOR</span>, <span class="ruby-constant">TINY</span>]
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/sequencer.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">wordclasses</span>, <span class="ruby-identifier">format</span>)
+  <span class="ruby-ivar">@string</span>  = <span class="ruby-identifier">wordclasses</span>.<span class="ruby-identifier">downcase</span>
+  <span class="ruby-ivar">@classes</span> = <span class="ruby-ivar">@string</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">%r/</span>)
+  <span class="ruby-ivar">@format</span>  = <span class="ruby-identifier">format</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- to_a-source -->
+          </div><!-- new-source -->
           
         </div>
 
         
 
         
-      </div><!-- to_a-method -->
-
-    
-      <div id="method-c-to_s" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">to_s</span><span
-            class="method-args">()</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Short-cut for version string.</p>
-          
-
-          
-          <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/lingo/version.rb, line 17</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
-  <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">'.'</span>)
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- to_s-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- to_s-method -->
+      </div><!-- new-method -->
 
     
     </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-scan" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">scan</span><span
+            class="method-args">(sequence) { |pos, dup, classes| ... }</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="scan-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/sequencer.rb, line 41</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">scan</span>(<span class="ruby-identifier">sequence</span>)
+  <span class="ruby-identifier">pos</span> = <span class="ruby-value">0</span>
+
+  <span class="ruby-keyword">while</span> <span class="ruby-identifier">pos</span> = <span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">string</span>, <span class="ruby-identifier">pos</span>)
+    <span class="ruby-keyword">yield</span> <span class="ruby-identifier">pos</span>, <span class="ruby-identifier">format</span>.<span class="ruby-identifier">dup</span>, <span class="ruby-identifier">classes</span>
+    <span class="ruby-identifier">pos</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- scan-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- scan-method -->
+
+    
+    </section><!-- public-instance-method-details -->
   
   </section><!-- 5Buntitled-5D -->
 

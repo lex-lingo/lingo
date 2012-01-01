@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>module Lingo::Version - lingo Application documentation (v1.8.0)</title>
+<title>class Lingo::Token - lingo Application documentation (v1.8.0)</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -20,7 +20,7 @@
 <script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
 
 
-<body id="top" class="module">
+<body id="top" class="class">
 <nav id="metadata">
   <nav id="home-section" class="section">
   <h3 class="section-header">
@@ -47,7 +47,7 @@
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
   <ul>
-    <li>lib/lingo/version.rb
+    <li>lib/lingo/types.rb
   </ul>
 </nav>
 
@@ -56,7 +56,13 @@
 
   <div id="class-metadata">
     
-    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link"><a href="StringA.html">Lingo::StringA</a>
+  
+</nav>
+
     
     <!-- Method Quickref -->
 <nav id="method-list-section" class="section">
@@ -64,9 +70,7 @@
 
   <ul class="link-list">
     
-    <li><a href="#method-c-to_a">::to_a</a>
-    
-    <li><a href="#method-c-to_s">::to_s</a>
+    <li><a href="#method-i-to_s">#to_s</a>
     
   </ul>
 </nav>
@@ -196,10 +200,21 @@
 </nav>
 
 <div id="documentation">
-  <h1 class="module">module Lingo::Version</h1>
+  <h1 class="class">class Lingo::Token</h1>
 
   <div id="description" class="description">
     
+<p>Die Klasse <a href="Token.html">Token</a>, abgeleitet von der Klasse <a
+href="StringA.html">StringA</a>, stellt den Container für ein einzelnes
+Wort eines Textes dar. Das Wort wird mit einem Attribut versehen, welches
+der Regel entspricht, die dieses Wort identifiziert hat.</p>
+
+<p>Steht z.B. in ruby.cfg eine Regel zur Erkennung einer Zahl, die mit NUM
+bezeichnet wird, so wird dies dem <a href="Token.html">Token</a>
+angeheftet, z.B. <a
+href="StringA.html#method-c-new">Lingo::StringA.new</a>(‘100’, ‘NUM’) -&gt;
+#100/NUM#</p>
+
   </div><!-- description -->
 
   
@@ -211,69 +226,16 @@
     
 
     
-    <!-- Constants -->
-    <section id="constants-list" class="section">
-      <h3 class="section-header">Constants</h3>
-      <dl>
-      
-        <dt id="MAJOR">MAJOR
-        
-        <dd class="description">
-        
-      
-        <dt id="MINOR">MINOR
-        
-        <dd class="description">
-        
-      
-        <dt id="TINY">TINY
-        
-        <dd class="description">
-        
-      
-      </dl>
-    </section>
-    
 
     
 
     <!-- Methods -->
     
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
-      <h3 class="section-header">Public Class Methods</h3>
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
 
     
-      <div id="method-c-to_a" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">to_a</span><span
-            class="method-args">()</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Returns array representation.</p>
-          
-
-          
-          <div class="method-source-code" id="to_a-source">
-            <pre><span class="ruby-comment"># File lib/lingo/version.rb, line 12</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_a</span>
-  [<span class="ruby-constant">MAJOR</span>, <span class="ruby-constant">MINOR</span>, <span class="ruby-constant">TINY</span>]
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- to_a-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- to_a-method -->
-
-    
-      <div id="method-c-to_s" class="method-detail ">
+      <div id="method-i-to_s" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">to_s</span><span
@@ -284,14 +246,14 @@
 
         <div class="method-description">
           
-          <p>Short-cut for version string.</p>
+          
           
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/lingo/version.rb, line 17</span>
+            <pre><span class="ruby-comment"># File lib/lingo/types.rb, line 84</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
-  <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">'.'</span>)
+  <span class="ruby-string">':'</span> <span class="ruby-operator">+</span> <span class="ruby-keyword">super</span> <span class="ruby-operator">+</span> <span class="ruby-string">':'</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- to_s-source -->
           
@@ -303,7 +265,7 @@
       </div><!-- to_s-method -->
 
     
-    </section><!-- public-class-method-details -->
+    </section><!-- public-instance-method-details -->
   
   </section><!-- 5Buntitled-5D -->
 

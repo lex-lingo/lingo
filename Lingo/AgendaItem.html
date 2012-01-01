@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>module Lingo::Version - lingo Application documentation (v1.8.0)</title>
+<title>class Lingo::AgendaItem - lingo Application documentation (v1.8.0)</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -20,7 +20,7 @@
 <script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
 
 
-<body id="top" class="module">
+<body id="top" class="class">
 <nav id="metadata">
   <nav id="home-section" class="section">
   <h3 class="section-header">
@@ -47,7 +47,7 @@
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
   <ul>
-    <li>lib/lingo/version.rb
+    <li>lib/lingo/types.rb
   </ul>
 </nav>
 
@@ -56,17 +56,37 @@
 
   <div id="class-metadata">
     
-    
-    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">Object
+  
+</nav>
+
+    <!-- Included Modules -->
+<nav id="includes-section" class="section">
+  <h3 class="section-header">Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><span class="include">Comparable</span>
+  
+  
+  </ul>
+</nav>
+
     <!-- Method Quickref -->
 <nav id="method-list-section" class="section">
   <h3 class="section-header">Methods</h3>
 
   <ul class="link-list">
     
-    <li><a href="#method-c-to_a">::to_a</a>
+    <li><a href="#method-c-new">::new</a>
     
-    <li><a href="#method-c-to_s">::to_s</a>
+    <li><a href="#method-i-3C-3D-3E">#&lt;=&gt;</a>
+    
+    <li><a href="#method-i-inspect">#inspect</a>
     
   </ul>
 </nav>
@@ -196,7 +216,7 @@
 </nav>
 
 <div id="documentation">
-  <h1 class="module">module Lingo::Version</h1>
+  <h1 class="class">class Lingo::AgendaItem</h1>
 
   <div id="description" class="description">
     
@@ -211,30 +231,40 @@
     
 
     
-    <!-- Constants -->
-    <section id="constants-list" class="section">
-      <h3 class="section-header">Constants</h3>
-      <dl>
-      
-        <dt id="MAJOR">MAJOR
-        
-        <dd class="description">
-        
-      
-        <dt id="MINOR">MINOR
-        
-        <dd class="description">
-        
-      
-        <dt id="TINY">TINY
-        
-        <dd class="description">
-        
-      
-      </dl>
-    </section>
-    
 
+    
+    <!-- Attributes -->
+    <section id="attribute-method-details" class="method-section section">
+      <h3 class="section-header">Attributes</h3>
+
+      
+      <div id="attribute-i-cmd" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">cmd</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-param" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">param</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+    </section><!-- attribute-method-details -->
     
 
     <!-- Methods -->
@@ -243,67 +273,109 @@
       <h3 class="section-header">Public Class Methods</h3>
 
     
-      <div id="method-c-to_a" class="method-detail ">
+      <div id="method-c-new" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">to_a</span><span
-            class="method-args">()</span>
+          <span class="method-name">new</span><span
+            class="method-args">(cmd, param='')</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
 
         <div class="method-description">
           
-          <p>Returns array representation.</p>
+          
           
 
           
-          <div class="method-source-code" id="to_a-source">
-            <pre><span class="ruby-comment"># File lib/lingo/version.rb, line 12</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_a</span>
-  [<span class="ruby-constant">MAJOR</span>, <span class="ruby-constant">MINOR</span>, <span class="ruby-constant">TINY</span>]
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/lingo/types.rb, line 264</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">param</span>=<span class="ruby-string">''</span>)
+  <span class="ruby-ivar">@cmd</span> = <span class="ruby-identifier">cmd</span> <span class="ruby-operator">||</span> <span class="ruby-string">''</span>
+  <span class="ruby-ivar">@param</span> = <span class="ruby-identifier">param</span> <span class="ruby-operator">||</span> <span class="ruby-string">''</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- to_a-source -->
+          </div><!-- new-source -->
           
         </div>
 
         
 
         
-      </div><!-- to_a-method -->
-
-    
-      <div id="method-c-to_s" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">to_s</span><span
-            class="method-args">()</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Short-cut for version string.</p>
-          
-
-          
-          <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/lingo/version.rb, line 17</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
-  <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">'.'</span>)
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- to_s-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- to_s-method -->
+      </div><!-- new-method -->
 
     
     </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-3C-3D-3E" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">&lt;=&gt;</span><span
+            class="method-args">(other)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="3C-3D-3E-source">
+            <pre><span class="ruby-comment"># File lib/lingo/types.rb, line 269</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">&lt;=&gt;</span>(<span class="ruby-identifier">other</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-value">1</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">AgendaItem</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">cmd</span><span class="ruby-operator">==</span><span class="ruby-identifier">other</span>.<span class="ruby-identifier">cmd</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">param</span><span class="ruby-operator">&lt;=&gt;</span><span class="ruby-identifier">other</span>.<span class="ruby-identifier">param</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">cmd</span><span class="ruby-operator">&lt;=&gt;</span><span class="ruby-identifier">other</span>.<span class="ruby-identifier">cmd</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- 3C-3D-3E-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- 3C-3D-3E-method -->
+
+    
+      <div id="method-i-inspect" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">inspect</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="inspect-source">
+            <pre><span class="ruby-comment"># File lib/lingo/types.rb, line 278</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">inspect</span>
+  <span class="ruby-node">&quot;*#{cmd.upcase}('#{param}')&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- inspect-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- inspect-method -->
+
+    
+    </section><!-- public-instance-method-details -->
   
   </section><!-- 5Buntitled-5D -->
 

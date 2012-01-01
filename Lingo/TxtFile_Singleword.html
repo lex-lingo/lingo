@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>module Lingo::Version - lingo Application documentation (v1.8.0)</title>
+<title>class Lingo::TxtFile_Singleword - lingo Application documentation (v1.8.0)</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -20,7 +20,7 @@
 <script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
 
 
-<body id="top" class="module">
+<body id="top" class="class">
 <nav id="metadata">
   <nav id="home-section" class="section">
   <h3 class="section-header">
@@ -47,7 +47,7 @@
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
   <ul>
-    <li>lib/lingo/version.rb
+    <li>lib/lingo/database.rb
   </ul>
 </nav>
 
@@ -56,7 +56,13 @@
 
   <div id="class-metadata">
     
-    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link"><a href="TxtFile.html">Lingo::TxtFile</a>
+  
+</nav>
+
     
     <!-- Method Quickref -->
 <nav id="method-list-section" class="section">
@@ -64,9 +70,9 @@
 
   <ul class="link-list">
     
-    <li><a href="#method-c-to_a">::to_a</a>
+    <li><a href="#method-c-new">::new</a>
     
-    <li><a href="#method-c-to_s">::to_s</a>
+    <li><a href="#method-i-convert_line">#convert_line</a>
     
   </ul>
 </nav>
@@ -196,10 +202,16 @@
 </nav>
 
 <div id="documentation">
-  <h1 class="module">module Lingo::Version</h1>
+  <h1 class="class">class Lingo::TxtFile_Singleword</h1>
 
   <div id="description" class="description">
     
+<p>Abgeleitet von <a href="TxtFile.html">TxtFile</a> behandelt die Klasse
+Dateien mit dem Format <code>SingleWord</code>. Eine Zeile
+<code>&quot;Fachbegriff\n&quot;</code> wird gewandelt in <code>[
+'fachbegriff', ['#s'] ]</code>. Die Wortklasse kann über den Parameter
+<code>def-wc</code> beeinflusst werden.</p>
+
   </div><!-- description -->
 
   
@@ -211,29 +223,6 @@
     
 
     
-    <!-- Constants -->
-    <section id="constants-list" class="section">
-      <h3 class="section-header">Constants</h3>
-      <dl>
-      
-        <dt id="MAJOR">MAJOR
-        
-        <dd class="description">
-        
-      
-        <dt id="MINOR">MINOR
-        
-        <dd class="description">
-        
-      
-        <dt id="TINY">TINY
-        
-        <dd class="description">
-        
-      
-      </dl>
-    </section>
-    
 
     
 
@@ -243,67 +232,78 @@
       <h3 class="section-header">Public Class Methods</h3>
 
     
-      <div id="method-c-to_a" class="method-detail ">
+      <div id="method-c-new" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">to_a</span><span
-            class="method-args">()</span>
+          <span class="method-name">new</span><span
+            class="method-args">(id, lingo)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
 
         <div class="method-description">
           
-          <p>Returns array representation.</p>
+          
           
 
           
-          <div class="method-source-code" id="to_a-source">
-            <pre><span class="ruby-comment"># File lib/lingo/version.rb, line 12</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_a</span>
-  [<span class="ruby-constant">MAJOR</span>, <span class="ruby-constant">MINOR</span>, <span class="ruby-constant">TINY</span>]
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 224</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">lingo</span>)
+  <span class="ruby-keyword">super</span>
+
+  <span class="ruby-ivar">@wc</span>     = <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">'def-wc'</span>,     <span class="ruby-string">'s'</span>).<span class="ruby-identifier">downcase</span>
+  <span class="ruby-ivar">@mul_wc</span> = <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">'def-mul-wc'</span>, <span class="ruby-ivar">@wc</span>).<span class="ruby-identifier">downcase</span>
+
+  <span class="ruby-ivar">@line_pattern</span> = <span class="ruby-node">%r{^(#{@legal_word})$}</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- to_a-source -->
+          </div><!-- new-source -->
           
         </div>
 
         
 
         
-      </div><!-- to_a-method -->
-
-    
-      <div id="method-c-to_s" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">to_s</span><span
-            class="method-args">()</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Short-cut for version string.</p>
-          
-
-          
-          <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/lingo/version.rb, line 17</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
-  <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">'.'</span>)
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- to_s-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- to_s-method -->
+      </div><!-- new-method -->
 
     
     </section><!-- public-class-method-details -->
+  
+     <section id="private-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Private Instance Methods</h3>
+
+    
+      <div id="method-i-convert_line" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">convert_line</span><span
+            class="method-args">(line, key, val)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="convert_line-source">
+            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 235</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">convert_line</span>(<span class="ruby-identifier">line</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
+  [<span class="ruby-identifier">key</span> = <span class="ruby-identifier">key</span>.<span class="ruby-identifier">strip</span>, <span class="ruby-node">%W[##{key =~ /\s/ ? @mul_wc : @wc}]</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- convert_line-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- convert_line-method -->
+
+    
+    </section><!-- private-instance-method-details -->
   
   </section><!-- 5Buntitled-5D -->
 
