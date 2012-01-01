@@ -19,10 +19,6 @@ begin
   require 'hen'
 
   Hen.lay! {{
-    rubyforge: {
-      package: PACKAGE_NAME
-    },
-
     gem: {
       name:         PACKAGE_NAME,
       version:      Lingo::VERSION,
