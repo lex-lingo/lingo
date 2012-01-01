@@ -17,7 +17,7 @@
   * {Configuration}[rdoc-label:label-Configuration]
   * {Language definition}[rdoc-label:label-Language+definition]
   * {Dictionaries}[rdoc-label:label-Dictionaries]
-* {Issues and Contribution}[rdoc-label:label-ISSUES+AND+CONTRIBUTION]
+* {Issues and Contributions}[rdoc-label:label-ISSUES+AND+CONTRIBUTIONS]
 * {Links}[rdoc-label:label-LINKS]
 * {Credits}[rdoc-label:label-CREDITS]
 * {License and Copyright}[rdoc-label:label-LICENSE+AND+COPYRIGHT]
@@ -128,15 +128,22 @@ Furthermore, it may be useful to have a look at the configuration files
 
 === Filters
 
-TODO...
+Lingo is able to read HTML, XML, and PDF.
+
+TODO: Examples.
 
 === Markup
 
-TODO...
+Lingo is able to parse HTML/XML and MediaWiki markup.
+
+TODO: Examples.
 
 === Inline annotation
 
-TODO...
+Lingo is able to annotate input text inline, instead of printing results to
+external files.
+
+TODO: Examples.
 
 === Plugins
 
@@ -152,7 +159,8 @@ the future.
 
 == EXAMPLE
 
-TODO...
+TODO: Full-fledged example to show off Lingo's features and provide a basis
+for further discussion.
 
 
 == INSTALLATION AND USAGE
@@ -233,7 +241,8 @@ beneath these subdirectories in a directory named <tt>store</tt>.
 Lingo uses three different types of files to determine its behaviour.
 Configuration files control the details of the indexing process. Language
 definitions specify grammar rules and dictionaries available for indexing.
-Dictionaries, finally, hold the vocabulary used in indexing the input text.
+Dictionaries, finally, hold the vocabulary used in indexing the input text
+and producing the results.
 
 === Configuration
 
@@ -248,7 +257,7 @@ TODO...
 TODO...
 
 
-== ISSUES AND CONTRIBUTION
+== ISSUES AND CONTRIBUTIONS
 
 If you find bugs or want to suggest new features, please write to the
 {mailing list}[mailto:lingo-users@rubyforge.org] or report them on
@@ -297,7 +306,7 @@ Lingo is based on a collective development by Klaus Lepsky and John Vorhauer.
 == LICENSE AND COPYRIGHT
 
 Copyright (C) 2005-2007 John Vorhauer
-Copyright (C) 2007-2011 John Vorhauer, Jens Wille
+Copyright (C) 2007-2012 John Vorhauer, Jens Wille
 
 Lingo is free software: you can redistribute it and/or modify it under the
 terms of the GNU Affero General Public License as published by the Free
