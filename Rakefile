@@ -26,6 +26,17 @@ begin
       authors:      ['John Vorhauer', 'Jens Wille'],
       email:        ['lingo@vorhauer.de', 'jens.wille@uni-koeln.de'],
       homepage:     'http://lex-lingo.de',
+      description:  <<-EOT,
+Lingo is an open source indexing system for research and teachings.
+The main functions of Lingo are:
+
+* identification of (i.e. reduction to) basic word form by means of
+  dictionaries and suffix lists
+* algorithmic decomposition
+* dictionary-based synonymisation and identification of phrases
+* generic identification of phrases/word sequences based on patterns
+  of word classes
+      EOT
       extra_files:  FileList[
         'lingo.rb', 'lingo{,-all,-call}.cfg', 'lingo.opt', 'doc/**/*',
         '{de,en}.lang', '{de,en}/{lingo-*,user-dic}.txt', 'txt/artikel{,-en}.txt',
