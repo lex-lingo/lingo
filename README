@@ -19,6 +19,7 @@
   * {Dictionaries}[rdoc-label:label-Dictionaries]
 * {Issues and Contributions}[rdoc-label:label-ISSUES+AND+CONTRIBUTIONS]
 * {Links}[rdoc-label:label-LINKS]
+* {Literature}[rdoc-label:label-LITERATURE]
 * {Credits}[rdoc-label:label-CREDITS]
 * {License and Copyright}[rdoc-label:label-LICENSE+AND+COPYRIGHT]
 
@@ -286,6 +287,16 @@ RubyGem::           http://rubygems.org/gems/lingo
 RubyForge project:: http://rubyforge.org/projects/lingo
 Mailing list::      http://rubyforge.org/mailman/listinfo/lingo-users
 Bug tracker::       http://github.com/lex-lingo/lingo/issues
+
+
+== LITERATURE
+
+<b></b>
+* Lepsky, K., Vorhauer, J.: <em>Lingo: ein open source System für die automatische Indexierung deutschsprachiger Dokumente</em>. (German) In: ABI Technik 26, 2006. S. 18-29.
+* Gödert, W., Lepsky, K., Nagelschmidt, M.: <em>Informationserschließung und Automatisches Indexieren: ein Lehr- und Arbeitsbuch</em>. (German) Berlin etc.: Springer, 2012. Link[http://dx.doi.org/10.1007/978-3-642-23513-9]
+* Nohr, H.: <em>Grundlagen der automatischen Indexierung: ein Lehrbuch</em>. (German) Berlin: Logos, 2005. Link[http://logos-verlag.de/cgi-bin/buch/isbn/0121]
+* Hausser, R.: <em>Grundlagen der Computerlinguistik. Mensch-Maschine-Kommunikation in natürlicher Sprache</em>. (German) Berlin etc.: Springer, 2000. Link[http://zentralblatt-math.org/zbmath/search/?an=0956.68141]
+* Salton, G., McGill, M.: <em>Introduction to modern information retrieval</em>. (English) New York etc.: McGraw-Hill, 1983. Link[http://zentralblatt-math.org/zbmath/search/?an=0523.68084]
 
 
 == CREDITS
