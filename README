@@ -151,7 +151,8 @@ Lingo has a plugin system that allows you to implement additional features
 (e.g. add new attendees) or modify existing ones. Just create a file named
 +lingo_plugin.rb+ in your Gem's +lib+ directory or any directory that's in
 <tt>$LOAD_PATH</tt>. You can also define an environment variable +LINGO_PLUGIN_PATH+
-with additional directories to load plugins from (<tt>*.rb</tt>).
+(by default <tt>~/.lingo/plugins</tt>) with additional directories to load
+plugins from (<tt>*.rb</tt>).
 
 A dedicated API to support writing and integrating plugins will be added in
 the future.

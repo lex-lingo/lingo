@@ -5,7 +5,7 @@
 # Mehrworterkennung und Relationierung.
 #
 # Copyright (C) 2005-2007 John Vorhauer
-# Copyright (C) 2007-2011 John Vorhauer, Jens Wille
+# Copyright (C) 2007-2012 John Vorhauer, Jens Wille
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU Affero General Public License as published by the Free
@@ -64,6 +64,8 @@ class Lingo
 
   # The search path for Lingo dictionary and configuration files.
   PATH = ENV['LINGO_PATH'] || [CURR, HOME, BASE].join(File::PATH_SEPARATOR)
+
+  ENV['LINGO_PLUGIN_PATH'] ||= File.join(HOME, 'plugins')
 
   FIND_OPTIONS = {
     config: { dir: 'config', ext: 'cfg'  },
