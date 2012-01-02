@@ -1,6 +1,5 @@
 require 'optparse'
 require 'fileutils'
-require 'nuggets/enumerable/minmax'
 
 class Lingo
 
@@ -8,10 +7,12 @@ class Lingo
 
     extend self
 
-    PROG, VERSION = $0, '0.0.1'
-    PROGNAME = File.basename(PROG)
+    PROG, VERSION, OPTWIDTH = $0, '0.0.1', 18
+    PROGNAME, OPTIONS = File.basename(PROG), {}
 
-    COMMANDS = {}
+    COMMANDS, ALIASES = {}, Hash.new { |_, k|
+      COMMANDS.has_key?(k) ? k : 'usage'
+    }
 
     { config: %w[configuration],
       lang:   %w[language],
@@ -28,26 +29,26 @@ class Lingo
       ] if what != :store
 
       %w[list find copy].each { |method|
-        class_eval %Q{def do_#{method}#{what}; #{method}(:#{what}); end}
+        next unless COMMANDS.has_key?(name = "#{method}#{what}")
+        class_eval %Q{def do_#{name}; #{method}(:#{what}); end}
+        ALIASES["#{method[0]}#{what[0]}"] = name
       }
     }
 
-    COMMANDS.update(
-      'path'    => 'Print search path for dictionaries and configurations',
-      'help'    => 'Print help for available commands',
-      'version' => 'Print Lingo version number'
-    )
+    { path:    'Print search path for dictionaries and configurations',
+      help:    'Print help for available commands',
+      version: 'Print Lingo version number' }.each { |what, description|
+      COMMANDS[name = what.to_s] = description; ALIASES[name[0]] = name
+    }
 
     USAGE = <<EOT
 Usage: #{PROG} <command> [arguments] [options]
        #{PROG} [-h|--help] [--version]
 EOT
 
-    OPTIONS = {}
-
     def do
       parse_options
-      send("do_#{COMMANDS.has_key?(command = ARGV.shift) ? command : 'usage'}")
+      send("do_#{ALIASES[ARGV.shift]}")
     end
 
     private
@@ -88,18 +89,21 @@ EOT
     def do_help(opts = nil)
       no_args
 
-      msg = %w[Commands:]
-      msg.unshift(opts) if opts
+      msg = opts ? [opts, 'Commands:'] : []
 
-      max = COMMANDS.keys.max(:length)
+      aliases = Hash.new { |h, k| h[k] = [] }
+      ALIASES.each { |k, v| aliases[v] << k }
 
-      COMMANDS.each { |command, description|
-        description = [*description]
-        msg << "  %-#{max}s - %s" % [command, description.shift]
+      COMMANDS.each { |c, (d, *e)|
+        a = aliases[c]
+        c = "#{c} (#{a.join(', ')})" unless a.empty?
 
-        description.each { |extra|
-          msg <<  "  %#{max}s   + %s" % [' ', extra]
-        } unless opts
+        if opts
+          msg << "    %-#{OPTWIDTH}s %s" % [c, d]
+        else
+          msg << "#{c}" << "  - #{d}"
+          e.each { |i| msg <<  "  + #{i}" }
+        end
       }
 
       abort msg.join("\n")
@@ -113,12 +117,11 @@ EOT
     end
 
     def do_usage(msg = nil)
-      msg = msg ? "#{PROGNAME}: #{msg}\n\n" : ''
-      abort msg << USAGE
+      abort "#{"#{PROGNAME}: #{msg}\n\n" if msg}#{USAGE}"
     end
 
     def parse_options
-      OptionParser.new(USAGE, 14) { |opts|
+      OptionParser.new(USAGE, OPTWIDTH) { |opts|
         opts.separator ''
         opts.separator 'Scope options:'
 
