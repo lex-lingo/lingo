@@ -29,6 +29,7 @@
 
 require 'stringio'
 require 'benchmark'
+require 'nuggets/file/ext'
 require 'nuggets/env/user_home'
 require 'nuggets/numeric/duration'
 
@@ -145,13 +146,9 @@ class Lingo
 
       walk(path.reverse, options, false) { |dir|
         Pathname.new(dir).ascend { |r|
-          break true if r.file?
-
-          return File.join(dir, base).tap { |s|
-            s.chomp!(File.extname(s))
-          } if r.writable?
-
-          break true if r.exist?
+          break  true                                 if r.file?
+          return File.chomp_ext(File.join(dir, base)) if r.writable?
+          break  true                                 if r.exist?
         }
       }
 
