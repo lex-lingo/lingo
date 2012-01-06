@@ -5,7 +5,7 @@
 # Mehrworterkennung und Relationierung.
 #
 # Copyright (C) 2005-2007 John Vorhauer
-# Copyright (C) 2007-2011 John Vorhauer, Jens Wille
+# Copyright (C) 2007-2012 John Vorhauer, Jens Wille
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU Affero General Public License as published by the Free
@@ -43,9 +43,8 @@ class Lingo
     include Reportable
 
     def initialize(id, lingo)
-      init_reportable
+      init_reportable(id)
       init_cachable
-      report_prefix( id )
 
       # Parameter aus de.lang:language/dictionary/databases auslesen
       config = lingo.config['language/dictionary/databases/' + id]

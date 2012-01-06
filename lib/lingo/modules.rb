@@ -5,7 +5,7 @@
 # Mehrworterkennung und Relationierung.
 #
 # Copyright (C) 2005-2007 John Vorhauer
-# Copyright (C) 2007-2011 John Vorhauer, Jens Wille
+# Copyright (C) 2007-2012 John Vorhauer, Jens Wille
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU Affero General Public License as published by the Free
@@ -29,17 +29,12 @@
 
 class Lingo
 
-  # Das Modul Reportable ermöglicht das setzen und hochzählen von statistischen Werten.
+  # Provides counters.
 
   module Reportable
 
-    def init_reportable
-      @counters = Hash.new(0)
-      @prefix = ''
-    end
-
-    def report_prefix(prefix)
-      @prefix = prefix
+    def init_reportable(prefix = nil)
+      @counters, @prefix = Hash.new(0), prefix ? "#{prefix}: " : ''
     end
 
     def inc(counter)
@@ -59,18 +54,12 @@ class Lingo
     end
 
     def report
-      rep = Hash.new
-      @counters.each_pair { |stat, value|
-        name = (@prefix=='') ? stat : @prefix+': '+stat
-        rep[name] = value
-      }
-      rep
+      @counters.each_with_object({}) { |(k, v), r| r["#{@prefix}#{k}"] = v }
     end
 
   end
 
-  # Das Modul Cachable ermöglicht das Verwerten von zwischengespeicherten Ergebnisse
-  # für einen schnelleren Zugriff.
+  # Provides a simple caching mechanism.
 
   module Cachable
 
@@ -83,13 +72,17 @@ class Lingo
     end
 
     def store(key, value)
-      res = value.nil? ? nil : value.dup
-      @cache[key] = res
+      @cache[key] = cache_value(value)
       value
     end
 
     def retrieve(key)
-      value = @cache[key]
+      cache_value(@cache[key])
+    end
+
+    private
+
+    def cache_value(value)
       value.nil? ? nil : value.dup
     end
 
