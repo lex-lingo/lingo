@@ -5,7 +5,7 @@
 # Mehrworterkennung und Relationierung.
 #
 # Copyright (C) 2005-2007 John Vorhauer
-# Copyright (C) 2007-2011 John Vorhauer, Jens Wille
+# Copyright (C) 2007-2012 John Vorhauer, Jens Wille
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU Affero General Public License as published by the Free
@@ -31,6 +31,16 @@ require 'sdbm'
 require 'pathname'
 require 'fileutils'
 require 'digest/sha1'
+
+[%w[gdbm], %w[cdb cdb-full]].each { |l, g|
+  next if ENV["LINGO_NO_#{l.upcase}"]
+
+  begin
+    gem g if g
+    require l
+  rescue LoadError
+  end
+}
 
 require_relative 'const'
 require_relative 'types'
@@ -192,7 +202,7 @@ class Lingo
         @position += raw_line.size      # Position innerhalb der Datei aktualisieren
         line = raw_line.chomp.downcase  # Zeile normieren
 
-        next if line =~ /^\s*\043/ || line.strip == ''  # Kommentarzeilen und leere Zeilen überspringen
+        next if line =~ /^\s*#/ || line.strip == ''  # Kommentarzeilen und leere Zeilen überspringen
 
         # Ungültige Zeilen protokollieren
         unless line.length < 4096 && line =~ @line_pattern
@@ -274,16 +284,16 @@ class Lingo
       super
 
       @separator = @config.fetch('separator', ',')
-      @line_pattern = Regexp.new('^(' + @legal_word + ')' + Regexp.escape(@separator) + '((?:' + @legal_word + '\043\w)+)$')
+      @line_pattern = Regexp.new('^(' + @legal_word + ')' + Regexp.escape(@separator) + '((?:' + @legal_word + '#\w)+)$')
     end
 
     private
 
     def convert_line(line, key, val)
       key, valstr = key.strip, val.strip
-      val = valstr.gsub(/\s+\043/, '#').scan(/\S.+?\s*\043\w/)
+      val = valstr.gsub(/\s+#/, '#').scan(/\S.+?\s*#\w/)
       val = val.map do |str|
-        str =~ /^(.+)\043(.)/
+        str =~ /^(.+)#(.)/
         ($1 == key ? '' : $1) + '#' + $2
       end
       [key, val]
@@ -314,7 +324,7 @@ class Lingo
 
   # Abgeleitet von TxtFile behandelt die Klasse Dateien mit dem Format <tt>MultiKey</tt>.
   # Eine Zeile <tt>"Triumph;Sieg;Erfolg\n"</tt> wird gewandelt in <tt>[ 'triumph', ['sieg', 'erfolg'] ]</tt>.
-  # Die Sonderbehandlung erfolgt in der Klasse Txt2DbmConverter, wo daraus Schlüssel-Werte-Paare in der Form
+  # Die Sonderbehandlung erfolgt in der Methode Database#convert, wo daraus Schlüssel-Werte-Paare in der Form
   # <tt>[ 'sieg', ['triumph'] ]</tt> und <tt>[ 'erfolg', ['triumph'] ]</tt> erzeugt werden.
   # Der Trenner zwischen Schlüssel und Projektion kann über den Parameter <tt>separator</tt> geändert werden.
 
@@ -336,250 +346,281 @@ class Lingo
 
   end
 
-  # Die Klasse DbmFile stellt eine einheitliche Schnittstelle auf Lingo-Datenbanken bereit.
+  # Die Klasse Database stellt eine einheitliche Schnittstelle auf Lingo-Datenbanken bereit.
   # Die Identifizierung der Datenbank erfolgt über die ID der Datenbank, so wie sie in der
   # Sprachkonfigurationsdatei <tt>de.lang</tt> unter <tt>language/dictionary/databases</tt>
   # hinterlegt ist.
   #
   # Das Lesen und Schreiben der Datenbank erfolgt über die Funktionen []() und []=().
 
-  class DbmFile
+  class Database
 
     include Cachable
 
     INDEX_PATTERN = %r{\A#{Regexp.escape(IDX_REF)}\d+\z}
 
-    def self.open(*args)
-      dbm = new(*args)
-      dbm.open { yield dbm }
+    def self.open(*args, &block)
+      new(*args).open(&block)
     end
 
-    def initialize(id, lingo, read_mode = true)
-      @lingo = lingo
+    def initialize(id, lingo)
+      @config = lingo.database_config(id)
+      raise "No such database `#{id}'." unless @config && @config.has_key?('name')
 
+      @id, @lingo = id, lingo
+      @crypter    = Crypter.new if @config.has_key?('crypt')
+
+      # @db: closed?, close, each, [], []=
+      extend(Object.const_defined?(:CDB)  ? CDB  :
+             Object.const_defined?(:GDBM) ? GDBM : SDBM)
+
+      init
       init_cachable
-
-      config = lingo.database_config(id)
-      raise "No such database `#{id}'." unless config && config.has_key?('name')
-
-      @id, @dbm = id, nil
-      @src_file = Lingo.find(:dict, config['name'])
-      @dbm_name = Lingo.find(:store, @src_file)
-
-      Txt2DbmConverter.new(id, lingo).convert if read_mode && !uptodate?
-
-      @crypter = config.has_key?('crypt') ? Crypter.new : nil
-
-      FileUtils.mkdir_p(File.dirname(@dbm_name))
+      convert unless uptodate?
     end
 
-    # Überprüft die Aktualität des DbmFile
-    def uptodate?
-      begin
-        key = open { @dbm[SYS_KEY] }
-      rescue RuntimeError
-      end if File.exist?("#{@dbm_name}.pag")
-
-      key && (!(pn = Pathname.new(@src_file)).exist? || key == source_key(pn))
+    def closed?
+      @db.nil? || _closed?
     end
 
     def open
-      if closed?
-        @dbm = SDBM.open(@dbm_name)
-        block_given? ? yield : self
-      else
-        Lingo.error("DbmFile #{@dbm_name} bereits geöffnet")
-      end
+      @db = _open if closed?
+      block_given? ? yield(self) : self
     ensure
-      close if @dbm && block_given?
+      close if @db && block_given?
     end
 
-    def to_h
-      hash = {}
-
-      @dbm.each { |key, val|
-        [key, val].each { |x| x.encode!(ENC) }
-        hash[key.freeze] = val
-      } unless closed?
-
-      hash
-    end
-
-    def clear
-      files = %w[pag dir].map { |ext| "#{@dbm_name}.#{ext}" }
-
-      if closed?
-        files.each { |file| File.delete(file) if File.exist?(file) }
-      else
-        close
-        files.each { |file| File.delete(file) }
-        open
-      end
+    def close
+      @db.close unless closed?
+      @db = nil
 
       self
     end
 
-    def close
-      unless closed?
-        @dbm.close
-        @dbm = nil
-
-        self
-      else
-        #Lingo.error("DbmFile #{@dbm_name} nicht geöffnet")
-      end
-    end
-
-    def closed?
-      @dbm.nil? || @dbm.closed?
+    def to_h
+      {}.tap { |hash| @db.each { |key, val|
+        hash[key.force_encoding(ENC).freeze] = val.force_encoding(ENC)
+      } unless closed? }
     end
 
     def [](key)
-      return if closed?
+      val = _val(key) unless closed?
+      return unless val
 
-      if val = _get(key)
-        # Äquvalenzklassen behandeln
-        val.split(FLD_SEP).map { |v|
-          v =~ INDEX_PATTERN ? _get(v) : v
-        }.compact.join(FLD_SEP).split(FLD_SEP)
-      end
+      # Äquvalenzklassen behandeln
+      val.split(FLD_SEP).map { |v|
+        v =~ INDEX_PATTERN ? _val(v) : v
+      }.compact.join(FLD_SEP).split(FLD_SEP)
     end
 
     def []=(key, val)
       return if closed?
 
-      val += retrieve(key) if hit?(key)
+      val = val.dup
+      val.concat(retrieve(key)) if hit?(key)
 
-      store(key, val = val.sort.uniq)
-      _set(key, val.join(FLD_SEP))
-    end
+      val.sort!
+      val.uniq!
+      store(key, val)
 
-    def set_source_file(filename)
-      return if closed?
-      @dbm[SYS_KEY] = source_key(Pathname.new(Lingo.find(:dict, filename)))
+      val = val.join(FLD_SEP)
+      key, val = @crypter.encode(key, val) if @crypter
+
+      _set(key, val)
     end
 
     private
 
+    def init
+      @src_file = Lingo.find(:dict, @config['name'])
+      @dbm_name = Lingo.find(:store, @src_file)
+      FileUtils.mkdir_p(File.dirname(@dbm_name))
+    end
+
+    def uptodate?(file = @dbm_name)
+      src = Pathname.new(@src_file)
+      @source_key = lambda { [src.size, src.mtime].join(FLD_SEP) }
+
+      sys_key = open { @db[SYS_KEY] } if File.exist?(file)
+      sys_key && (!src.exist? || sys_key == @source_key.call)
+    end
+
+    def uptodate!
+      @db[SYS_KEY] = @source_key.call
+    end
+
+    def create
+      _clear
+      open { |db| yield db }
+    end
+
+    def _clear
+      File.delete(@dbm_name) if File.exist?(@dbm_name)
+    end
+
+    def _open
+      raise NotImplementedError
+    end
+
+    def _close
+      raise NotImplementedError
+    end
+
+    def _closed?
+      @db.closed?
+    end
+
+    def _set(key, val)
+      @db[key] = val
+    end
+
     def _get(key)
-      if val = @dbm[@crypter ? @crypter.digest(key) : key]
-        val.encode!(ENC)
+      @db[key]
+    end
+
+    def _val(key)
+      if val = _get(@crypter ? @crypter.digest(key) : key)
+        val.force_encoding(ENC)
         @crypter ? @crypter.decode(key, val) : val
       end
     end
 
-    def _set(key, val)
-      key, val = @crypter.encode(key, val) if @crypter
-      @dbm[key] = (val.length < 950) ? val : val[0, 950]
-    end
+    def convert(verbose = @lingo.config.stderr.tty?)
+      format = @config.fetch('txt-format', 'KeyValue').downcase
+      source = Lingo.const_get("TxtFile_#{format.capitalize}").new(@id, @lingo)
 
-    def source_key(src)
-      [src.size, src.mtime].join(FLD_SEP)
-    end
+      if lex_dic = @config['use-lex']
+        args = [{
+          'source' => lex_dic.split(STRING_SEPERATOR_PATTERN),
+          'mode'   => @config['lex-mode']
+        }, @lingo]
 
-  end
-
-  # Die Klasse Txt2DbConverter steuert die Konvertierung von Wörterbuch-Quelldateien in
-  # Lingo-Datenbanken. Die Identifizierung der Quelldatei erfolgt über die ID
-  # der Datei, so wie sie in der Sprachkonfigurationsdatei <tt>de.lang</tt> unter
-  # <tt>language/dictionary/databases</tt> hinterlegt ist.
-
-  class Txt2DbmConverter
-
-    def initialize(id, lingo, verbose = lingo.config.stderr.tty?)
-      # Konfiguration der Datenbanken auslesen
-      @config, @index = lingo.database_config(id), 0
-
-      # Objekt für Quelldatei erzeugen
-      @format = @config.fetch( 'txt-format', 'KeyValue' ).downcase
-      @source = case @format
-        when 'singleword' then TxtFile_Singleword
-        when 'keyvalue'   then TxtFile_Keyvalue
-        when 'wordclass'  then TxtFile_Wordclass
-        when 'multivalue' then TxtFile_Multivalue
-        when 'multikey'   then TxtFile_Multikey
-        else
-          Lingo.error("Unbekanntes Textformat '#{config['txt-format'].downcase}' bei '#{'language/dictionary/databases/' + id}'")
-      end.new(id, lingo)
-
-      # Zielobjekt erzeugen
-      @destination = DbmFile.new(id, lingo, false)
-
-      # Ausgabesteuerung
-      @progress = ShowProgress.new(@config['name'], verbose, lingo.config.stderr)
-
-      # Lexikalisierungen für Mehrwortgruppen vorbereiten
-      lex_dic = @config['use-lex']
-      lex_mod = @config['lex-mode']
-
-      begin
-        @lexicalize = true
-        @dictionary = Dictionary.new({ 'source' => lex_dic.split(STRING_SEPERATOR_PATTERN), 'mode' => lex_mod }, lingo)
-        @grammar = Grammar.new({ 'source' => lex_dic.split(STRING_SEPERATOR_PATTERN), 'mode' => lex_mod }, lingo)
-      rescue RuntimeError
-        Lingo.error("Auf das Wörterbuch (#{lex_dic}) für die Lexikalisierung der Mehrwortgruppen in (#{@config['name']}) konnte nicht zugegriffen werden")
-      end if lex_dic
-    end
-
-    def convert
-      @progress.start('convert', @source.size)
-
-      @destination.open
-      @destination.clear
-
-      @source.each do |key, value|
-        @progress.tick(@source.position)
-
-        # Behandle Mehrwortschlüssel
-        if @lexicalize && key =~ / /
-          # Schlüssel in Grundform wandeln
-          gkey = key.split(' ').map do |form|
-
-            # => Wortform ohne Satzendepunkt benutzen
-            wordform = form.gsub(/\.$/, '')
-
-            # => Wort suchen
-            result = @dictionary.find_word(wordform)
-
-            # => Kompositum suchen, wenn Wort nicht erkannt
-            if result.attr == WA_UNKNOWN
-              result = @grammar.find_compositum(wordform)
-              compo = result.compo_form
-            end
-
-            compo ? compo.form : result.norm
-          end.join(' ')
-
-          skey = gkey.split
-          # Zusatzschlüssel einfügen, wenn Anzahl Wörter > 3
-          @destination[skey[0...3].join(' ')] = [KEY_REF + skey.size.to_s] if skey.size > 3
-
-          value = value.map { |v| v =~ /^\043/ ? key + v : v }
-          key = gkey
-        end
-
-        # Format Sonderbehandlungen
-        key.gsub!(/\.$/, '') if key
-        case @format
-        when 'multivalue'    # Äquvalenzklassen behandeln
-          key = IDX_REF + @index.to_s
-          @index += 1
-          @destination[key] = value
-          value.each { |v| @destination[v] = [key] }
-        when 'multikey'      # Äquvalenzklassen behandeln
-          value.each { |v| @destination[v] = [key] }
-        else
-          @destination[key] = value
-        end
-
+        dictionary, grammar = Dictionary.new(*args), Grammar.new(*args)
       end
 
-      @destination.set_source_file(@config['name'])
-      @destination.close
+      progress = ShowProgress.new(@config['name'], verbose, @lingo.config.stderr)
+      progress.start('convert', source.size)
 
-      @progress.stop('ok')
+      create {
+        index = -1
 
-      self
+        source.each { |key, value|
+          progress.tick(source.position)
+
+          # Behandle Mehrwortschlüssel
+          if lex_dic && key =~ / /
+            # Schlüssel in Grundform wandeln
+            gkey = key.split(' ').map { |form|
+              # => Wortform ohne Satzendepunkt benutzen
+              form.chomp!('.')
+
+              result = dictionary.find_word(form)
+
+              # => Kompositum suchen, wenn Wort nicht erkannt
+              if result.attr == WA_UNKNOWN
+                result = grammar.find_compositum(form)
+                compo  = result.compo_form
+              end
+
+              compo ? compo.form : result.norm
+            }.join(' ')
+
+            skey = gkey.split
+            # Zusatzschlüssel einfügen, wenn Anzahl Wörter > 3
+            self[skey[0, 3].join(' ')] = [KEY_REF + skey.size.to_s] if skey.size > 3
+
+            key, value = gkey, value.map { |v| v.start_with?('#') ? key + v : v }
+          end
+
+          key.chomp!('.') if key
+
+          case format
+            when 'multivalue'
+              self[key = "#{IDX_REF}#{index += 1}"] = value
+              value.each { |v| self[v] = [key] }
+            when 'multikey'
+              value.each { |v| self[v] = [key] }
+            else
+              self[key] = value
+          end
+        }
+
+        uptodate!
+      }
+
+      progress.stop('ok')
+    end
+
+    module SDBM
+
+      private
+
+      def uptodate?
+        super(@dbm_name + '.pag')
+      end
+
+      def _clear
+        File.delete(*Dir["#{@dbm_name}.{pag,dir}"])
+      end
+
+      def _open
+        ::SDBM.open(@dbm_name)
+      end
+
+      def _set(key, val)
+        super(key, val.length < 950 ? val : val[0, 950])
+      end
+
+    end
+
+    module GDBM
+
+      private
+
+      def init
+        super
+        @dbm_name << '.db'
+      end
+
+      def _open
+        ::GDBM.open(@dbm_name)
+      end
+
+    end
+
+    module CDB
+
+      def close
+        super.tap { @closed = true }
+      end
+
+      private
+
+      def _closed?
+        @closed
+      end
+
+      def init
+        super
+        @dbm_name << '.cdb'
+      end
+
+      def create
+        ::CDBMake.open(@dbm_name) { |db|
+          @db = db
+          yield
+          @db = nil
+        }
+      end
+
+      def _open
+        ::CDB.new(@dbm_name).tap { @closed = false }
+      end
+
+      def _get(key)
+        res = nil; @db.each(key) { |val| res = val }; res
+      end
+
     end
 
   end

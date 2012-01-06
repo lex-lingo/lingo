@@ -52,14 +52,13 @@ class TestLexicalHash < LingoTestCase
 
   def test_auto_create
     txt_file = @database_config['tst-sgw']['name']
-    sto_file = Lingo.find(:store, txt_file) << '.pag'
 
     ds = Lingo::LexicalHash.new('tst-sgw', @lingo)
     assert_equal([lx('substantiv|s')], ds['substantiv'])
     ds.close
 
     # Keine Store-Datei vorhanden, nur Text vorhanden
-    File.delete(sto_file)
+    File.delete(*Dir["#{Lingo.find(:store, txt_file)}.*"])
     ds = Lingo::LexicalHash.new('tst-sgw', @lingo)
     assert_equal([lx('substantiv|s')], ds['substantiv'])
     ds.close

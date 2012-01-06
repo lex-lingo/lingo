@@ -2,10 +2,10 @@
 
 require_relative 'test_helper'
 
-class Lingo::Txt2DbmConverter
-  alias_method :original_initialize, :initialize
-  def initialize(id, lingo, verbose = false)
-    original_initialize(id, lingo, verbose)
+class Lingo::Database
+  alias_method :original_convert, :convert
+  def convert(verbose = false)
+    original_convert(verbose)
   end
 end
 
@@ -132,7 +132,7 @@ Wort2=
       'b7501a62cb083be6730a7a179a4ab346d23efe53' => '4b10'
     })
 
-    compare(config, @singleword) { |dbm| {
+    compare(config, @singleword) { |db| {
       'wort1'                               => '#s',
       'wort2'                               => '#s',
       'juristische personen'                => '#s',
@@ -141,7 +141,7 @@ Wort2=
       'ganz großer und blöder quatsch'      => '#s',
       'ganz großer und blöder mist'         => '#s',
       'ganz großer und blöder schwach sinn' => '#s'
-    }.each { |key, val| assert_equal([val], dbm[key]) } }
+    }.each { |key, val| assert_equal([val], db[key]) } }
   end
 
   def test_keyvalue
@@ -248,11 +248,11 @@ Wort2=
     FileUtils.mkdir_p(File.dirname(TEST_FILE))
     File.write(TEST_FILE, input, encoding: Lingo::ENC)
 
-    Lingo::DbmFile.open(set_config('tst', config.merge('name' => TEST_FILE)), @lingo) { |dbm|
+    Lingo::Database.open(set_config('tst', config.merge('name' => TEST_FILE)), @lingo) { |db|
       if block_given?
-        yield dbm
+        yield db
       else
-        store = dbm.to_h
+        store = db.to_h
         store.delete(Lingo::SYS_KEY)
 
         assert_equal(output, store)

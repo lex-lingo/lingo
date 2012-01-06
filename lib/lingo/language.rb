@@ -34,7 +34,7 @@ require_relative 'database'
 class Lingo
 
   # Die Klasse LexicalHash ermöglicht den Zugriff auf die Lingodatenbanken. Im Gegensatz zur
-  # Klasse DbmFile, welche nur Strings als Ergebnis zurück gibt, wird hier als Ergebnis ein
+  # Klasse Database, welche nur Strings als Ergebnis zurück gibt, wird hier als Ergebnis ein
   # Array von Lexical-Objekten zurück gegeben.
 
   class LexicalHash
@@ -53,7 +53,7 @@ class Lingo
       @wordclass = config.fetch( 'def-wc', LA_UNKNOWN )
 
       # Store erzeugen
-      @source = DbmFile.new(id, lingo)
+      @source = Database.new(id, lingo)
       @source.open
     end
 
