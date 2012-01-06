@@ -3,6 +3,7 @@
 __DIR__ = File.expand_path('..', __FILE__)
 
 require 'rake/clean'
+require 'nuggets/util/ruby'
 require File.join(__DIR__, %w[lib lingo version])
 
 PACKAGE_NAME = 'lingo'
@@ -55,7 +56,8 @@ end
 CLEAN.include(
   'txt/*.{log,mul,non,seq,syn,ve?,csv}',
   'test/{test.*,text.non}',
-  'store/*/*.rev'
+  'store/*/*.rev',
+  'bench/tmp.*'
 )
 
 CLOBBER.include(
@@ -89,9 +91,20 @@ task 'test:remote' => [:package] do
   chdir(PACKAGE_PATH) { system('rake test:all') } || abort
 end
 
-def test_ref(name, cfg = name)
-  require 'nuggets/util/ruby'
+unless (benchmarks = Dir[File.join(__DIR__, 'bench', '*_bench.rb')]).empty?
+  desc 'Run all benchmarks'
+  task :bench
 
+  benchmarks.each { |benchmark|
+    bench = File.basename(benchmark, '_bench.rb')
+    task :bench => benchtask = "bench:#{bench}"
+
+    desc "Run #{bench} benchmark"
+    task(benchtask) { system(File.ruby, benchmark) }
+  }
+end
+
+def test_ref(name, cfg = name)
   require 'diff/lcs'
   require 'diff/lcs/ldiff'
 

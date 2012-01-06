@@ -2,6 +2,7 @@ doc
 doc.local
 pkg
 store
+bench/tmp.*
 .gh-pages
 *.rev
 *.auth
