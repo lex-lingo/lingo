@@ -67,8 +67,8 @@ and babble the content to the world via its output channel.
 The second attendee +debugger+ (Lingo::Attendee::Debugger) does nothing else
 than to put everything on the console (standard error, actually) that comes
 into its input channel. If you write the Lingo configuration which is shown
-above as an example into the file readme.cfg and then run <tt>lingo -c readme
--l en</tt>, the result will look something like this:
+above as an example into the file <tt>readme.cfg</tt> and then run <tt>lingo
+-c readme -l en</tt>, the result will look something like this:
 
   <debug>:  *FILE('README')
   <debug>:  "= Lingo - [...]"
@@ -129,7 +129,7 @@ Furthermore, it may be useful to have a look at the configuration files
 
 === Filters
 
-Lingo is able to read HTML, XML, and PDF.
+Lingo is able to read HTML, XML, and PDF in addition to plain text.
 
 TODO: Examples.
 
@@ -270,10 +270,15 @@ that flag).
 
 If you want to contribute to Lingo, please fork the project on
 GitHub[http://github.com/lex-lingo/lingo] and submit a
-{pull request}[http://github.com/lex-lingo/lingo/pulls] (bonus points for
-topic branches) or clone the repository[http://github.com/lex-lingo/lingo]
-locally and send your formatted patch to the
-{developer list}[mailto:lingo-core@rubyforge.org].
+{pull request}[http://github.com/lex-lingo/lingo/pulls] (bonus points for topic
+branches) or clone the repository[http://github.com/lex-lingo/lingo] locally
+and send your formatted patch to the {developer list}[mailto:lingo-core@rubyforge.org].
+
+To make sure that Lingo's tests pass, install hen[http://blackwinter.github.com/hen]
+(typically <tt>gem install hen</tt>) and all development dependencies (either
+<tt>gem install --development lingo</tt> or manually; see <tt>rake gem:dependencies</tt>).
+Then run <tt>rake test</tt> for the basic tests or <tt>rake test:all</tt> for
+the full test suite.
 
 
 == LINKS
