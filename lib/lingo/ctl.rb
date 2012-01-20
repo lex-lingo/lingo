@@ -7,17 +7,20 @@ class Lingo
 
     extend self
 
-    PROG, VERSION, OPTWIDTH = $0, '0.0.1', 18
+    PROG, VERSION, OPTWIDTH = $0, '0.0.2', 18
     PROGNAME, OPTIONS = File.basename(PROG), {}
 
-    COMMANDS, ALIASES = {}, Hash.new { |_, k|
-      COMMANDS.has_key?(k) ? k : 'usage'
+    COMMANDS, ALIASES = {}, Hash.new { |h, k|
+      h[k] = COMMANDS.has_key?(k) ? k : 'usage'
     }
+
+    ALIASES['ls']  # OCCUPY
 
     { config: %w[configuration],
       lang:   %w[language],
       dict:   %w[dictionary dictionaries],
-      store:  %w[store] }.each { |what, (sing, plur)|
+      store:  %w[store],
+      sample: %w[sample\ text\ file] }.each { |what, (sing, plur)|
       COMMANDS["list#{what}"] = [
         "List available #{plur || "#{sing}s"}",  'Arguments: [name...]'
       ] if what != :store
@@ -31,11 +34,24 @@ class Lingo
       %w[list find copy].each { |method|
         next unless COMMANDS.has_key?(name = "#{method}#{what}")
         class_eval %Q{def do_#{name}; #{method}(:#{what}); end}
-        ALIASES["#{method[0]}#{what[0]}"] = name
+
+        [0, -1].repeated_permutation(2) { |i, j|
+          key = "#{method[i]}#{what[j]}"
+          break ALIASES[key] = name unless ALIASES.has_key?(key)
+        }
       }
+
+      if what == :store
+        COMMANDS['clearstore'] = [
+          'Remove store files to force rebuild', 'Arguments: name'
+        ]
+        ALIASES['cs'] = 'clearstore'
+      end
     }
 
-    { path:    'Print search path for dictionaries and configurations',
+    { demo:    ['Initialize demo directory (Default: current directory)',
+                'Arguments: [path]'],
+      path:    'Print search path for dictionaries and configurations',
       help:    'Print help for available commands',
       version: 'Print Lingo version number' }.each { |what, description|
       COMMANDS[name = what.to_s] = description; ALIASES[name[0]] = name
@@ -53,11 +69,11 @@ EOT
 
     private
 
-    def list(what)
+    def list(what, doit = true)
       names = Regexp.union(*ARGV.empty? ? '' : ARGV)
 
-      Lingo.list(what, path: path_for_scope).each { |file|
-        puts file if File.basename(file) =~ names
+      Lingo.list(what, path: path_for_scope).select { |file|
+        File.basename(file) =~ names ? doit ? puts(file) : true : false
       }
     end
 
@@ -79,6 +95,21 @@ EOT
 
       FileUtils.mkdir_p(File.dirname(target))
       FileUtils.cp(source, target, verbose: true)
+    end
+
+    def do_clearstore
+      store = Dir["#{find(:store, false)}.*"]
+      FileUtils.rm(store, verbose: true) unless store.empty?
+    end
+
+    def do_demo
+      OPTIONS.update(path: ARGV.shift, scope: :system)
+      no_args
+
+      copy_list(:config) { |i| !File.basename(i).start_with?('test') }
+      copy_list(:lang)
+      copy_list(:dict)   { |i|  File.basename(i).start_with?('user') }
+      copy_list(:sample)
     end
 
     def do_path
@@ -154,7 +185,7 @@ EOT
       case scope
         when :system then [BASE]
         when :global then [HOME]
-        when :local  then [CURR]
+        when :local  then [OPTIONS[:path] || CURR]
         when nil
         else do_usage("Invalid scope `#{scope.inspect}'.")
       end
@@ -162,6 +193,12 @@ EOT
 
     def no_args
       do_usage('Too many arguments.') unless ARGV.empty?
+    end
+
+    def copy_list(what)
+      files = list(what, false)
+      files.select!(&Proc.new) if block_given?
+      files.each { |file| ARGV.replace([file]); copy(what) }
     end
 
   end

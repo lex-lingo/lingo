@@ -72,7 +72,8 @@ class Lingo
     config: { dir: 'config', ext: 'cfg'  },
     dict:   { dir: 'dict',   ext: 'txt'  },
     lang:   { dir: 'lang',   ext: 'lang' },
-    store:  { dir: 'store',  ext: nil    }
+    store:  { dir: 'store',  ext: nil    },
+    sample: { dir: 'txt',    ext: 'txt'  }
   }
 
   class << self
