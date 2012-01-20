@@ -1,7 +1,7 @@
 #! /usr/bin/env ruby
 
 require_relative 'bench_helper'
-require_optional 'sdbm', 'gdbm', 'depot', 'sqlite3', %w[cdb cdb-full]
+require_optional 'sdbm', 'gdbm', 'depot', 'sqlite3', %w[cdb cdb-full], 'libcdb'
 
 module StoreBench
 
@@ -56,7 +56,7 @@ module StoreBench
   end
 
   # http://www.fan.gr.jp/~kaz/ruby/ (gem install cdb-full)
-  def cdb(c = false)
+  def cdbmake(c = false)
     (c ? CDBMake : CDB).open(tempfile(:cdb, c)) { |d| yield d }
   end
 
@@ -70,6 +70,10 @@ module StoreBench
   #  }
   #end
 
+  def libcdb(c = false)
+    LibCDB::CDB.open(tempfile(:libcdb, c), c ? 'w' : 'r') { |d| yield d }
+  end
+
   def create(s, f = nil)
     run(s, N, :create, f) { |m| send(m, true) { |d| A.each { |k, v| yield d, k, v } } }
   end
@@ -81,16 +85,19 @@ module StoreBench
 end
 
 Bench.bench(StoreBench) { |x|
-  x.create(:SQLite3) { |d, k, v| d.execute('REPLACE INTO b (k,v) VALUES (?,?)', [k, v]) }
-  x.create(:GDBM)    { |d, k, v| d[k] = v }
-  x.create(:Depot)   { |d, k, v| d[k] = v }
-  x.create(:SDBM)    { |d, k, v| d[k] = v }
-  x.create(:CDB)     { |d, k, v| d[k] = v }
+  x.create(:SQLite3)   { |d, k, v| d.execute('REPLACE INTO b (k,v) VALUES (?,?)', [k, v]) }
+  x.create(:GDBM)      { |d, k, v| d[k] = v }
+  x.create(:Depot)     { |d, k, v| d[k] = v }
+  x.create(:SDBM)      { |d, k, v| d[k] = v }
+  x.create(:LibCDB)    { |d, k, v| d[k] = v }
+  x.create(:LibCDB, 2) { |d, k, v| d.add(k, v) }
+  x.create(:CDBMake)   { |d, k, v| d[k] = v }
 
-  x.read(:SQLite3) { |d, k| d.get_first_value('SELECT v FROM b WHERE k = ?', k) }
-  x.read(:GDBM)    { |d, k| d[k] }
-  x.read(:Depot)   { |d, k| d[k] }
-  x.read(:SDBM)    { |d, k| d[k] }
-  x.read(:CDB, 2)  { |d, k| r = nil; d.each(k) { |v| r = v }; r }
-  x.read(:CDB)     { |d, k| d[k] }
+  x.read(:SQLite3)     { |d, k| d.get_first_value('SELECT v FROM b WHERE k = ?', k) }
+  x.read(:GDBM)        { |d, k| d[k] }
+  x.read(:Depot)       { |d, k| d[k] }
+  x.read(:SDBM)        { |d, k| d[k] }
+  x.read(:LibCDB)      { |d, k| d[k] }
+  x.read(:CDBMake, 2)  { |d, k| r = nil; d.each(k) { |v| r = v }; r }
+  x.read(:CDBMake)     { |d, k| d[k] }
 }
