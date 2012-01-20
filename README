@@ -297,11 +297,14 @@ Bug tracker::       http://github.com/lex-lingo/lingo/issues
 == LITERATURE
 
 <b></b>
-* Lepsky, K., Vorhauer, J.: <em>Lingo: ein open source System für die automatische Indexierung deutschsprachiger Dokumente</em>. (German) In: ABI Technik 26, 2006. S. 18-29.
-* Gödert, W., Lepsky, K., Nagelschmidt, M.: <em>Informationserschließung und Automatisches Indexieren: ein Lehr- und Arbeitsbuch</em>. (German) Berlin etc.: Springer, 2012. Link[http://dx.doi.org/10.1007/978-3-642-23513-9]
-* Nohr, H.: <em>Grundlagen der automatischen Indexierung: ein Lehrbuch</em>. (German) Berlin: Logos, 2005. Link[http://logos-verlag.de/cgi-bin/buch/isbn/0121]
-* Hausser, R.: <em>Grundlagen der Computerlinguistik. Mensch-Maschine-Kommunikation in natürlicher Sprache</em>. (German) Berlin etc.: Springer, 2000. Link[http://zentralblatt-math.org/zbmath/search/?an=0956.68141]
-* Salton, G., McGill, M.: <em>Introduction to modern information retrieval</em>. (English) New York etc.: McGraw-Hill, 1983. Link[http://zentralblatt-math.org/zbmath/search/?an=0523.68084]
+* Lepsky, K., Vorhauer, J.: <em>{Lingo: ein open source System für die automatische Indexierung deutschsprachiger Dokumente}[http://dx.doi.org/10.1515/ABITECH.2006.26.1.18]</em>. (German) In: ABI Technik 26, 2006. p. 18-29.
+* Gödert, W., Lepsky, K., Nagelschmidt, M.: <em>{Informationserschließung und Automatisches Indexieren: ein Lehr- und Arbeitsbuch}[http://dx.doi.org/10.1007/978-3-642-23513-9]</em>. (German) Berlin etc.: Springer, 2012.
+* Nohr, H.: <em>{Grundlagen der automatischen Indexierung: ein Lehrbuch}[http://logos-verlag.de/cgi-bin/buch/isbn/0121]</em>. (German) Berlin: Logos, 2005.
+* Hausser, R.: <em>{Grundlagen der Computerlinguistik. Mensch-Maschine-Kommunikation in natürlicher Sprache}[http://zentralblatt-math.org/zbmath/search/?an=0956.68141]</em>. (German) Berlin etc.: Springer, 2000.
+* Allen, J.: <em>{Natural language understanding}[http://zentralblatt-math.org/zbmath/search/?an=0851.68106]</em>. (English) Redwood City, CA: Benjamin/Cummings, 1995.
+* Grishman, R.: <em>{Computational linguistics: an introduction}[http://dx.doi.org/10.2277/0521310385]</em>. (English) Cambridge: Cambridge Univ. Press, 1986.
+* Salton, G., McGill, M.: <em>{Introduction to modern information retrieval}[http://zentralblatt-math.org/zbmath/search/?an=0523.68084]</em>. (English) New York etc.: McGraw-Hill, 1983.
+* Porter, M.: <em>{An algorithm for suffix stripping}[http://tartarus.org/~martin/PorterStemmer/]</em>. (English) In: Program 14, 1980. p. 130-137.
 
 
 == CREDITS
