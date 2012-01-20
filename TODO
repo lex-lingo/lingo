@@ -1,15 +1,11 @@
 = ToDo list for Lingo
 
-(most important first)
-
 * Update and translate old documentation.
 * Allow for handling of documents in various encodings, not just the one the
   dictionaries are encoded in.
 * Provide automatic encoding detection.
 * Provide automatic language detection (as fine-grained as possible).
 * Make lingo run faster!? (benchmark - profile - optimize)
-* Replace SDBM by DBM (more platform-independent, no 1k limit on record size);
-  maybe QDBM/Tokyo Cabinet or even CDB for faster access.
 * In-memory (volatile) vs. on-disk (persistent) dictionaries. It should be
   possible to simply use the Lingo API without caring about dictionary storage.
 * That being said, provide an easy-to-use Lingo API -- just 'require "lingo"'
@@ -21,7 +17,7 @@
 * Make sure the Crypter is sufficiently secure.
 * Use RSpec for testing.
 * Make Lingo capable to use multiple cores or even machines to boost performance
-  by connecting Attendees through sockets and use separate processes
+  by connecting Attendees through sockets and use separate processes.
 
 NOTE: New code *should* meet the guidelines outlined in the
 RubyStyleGuide[https://github.com/bbatsov/ruby-style-guide],

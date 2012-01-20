@@ -32,12 +32,11 @@ require 'pathname'
 require 'fileutils'
 require 'digest/sha1'
 
-[%w[gdbm], %w[cdb cdb-full]].each { |l, g|
-  next if ENV["LINGO_NO_#{l.upcase}"]
+%w[gdbm libcdb].each { |lib|
+  next if ENV["LINGO_NO_#{lib.upcase}"]
 
   begin
-    gem g if g
-    require l
+    require lib
   rescue LoadError
   end
 }
@@ -371,8 +370,8 @@ class Lingo
       @crypter    = Crypter.new if @config.has_key?('crypt')
 
       # @db: closed?, close, each, [], []=
-      extend(Object.const_defined?(:CDB)  ? CDB  :
-             Object.const_defined?(:GDBM) ? GDBM : SDBM)
+      extend(Object.const_defined?(:LibCDB) ? LibCDB :
+             Object.const_defined?(:GDBM)   ? GDBM   : SDBM)
 
       init
       init_cachable
@@ -451,7 +450,7 @@ class Lingo
 
     def create
       _clear
-      open { |db| yield db }
+      open { yield }
     end
 
     def _clear
@@ -595,17 +594,9 @@ class Lingo
 
     end
 
-    module CDB
-
-      def close
-        super.tap { @closed = true }
-      end
+    module LibCDB
 
       private
-
-      def _closed?
-        @closed
-      end
 
       def init
         super
@@ -613,19 +604,16 @@ class Lingo
       end
 
       def create
-        ::CDBMake.open(@dbm_name) { |db|
+        ::LibCDB::CDB.open(@dbm_name, 'w') { |db|
           @db = db
           yield
-          @db = nil
         }
+      ensure
+        @db = nil
       end
 
       def _open
-        ::CDB.new(@dbm_name).tap { @closed = false }
-      end
-
-      def _get(key)
-        res = nil; @db.each(key) { |val| res = val }; res
+        ::LibCDB::CDB.open(@dbm_name)
       end
 
     end
