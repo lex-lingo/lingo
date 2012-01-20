@@ -1,5 +1,18 @@
 = Revision history for Lingo
 
+== 1.8.1 [2012-02-19]
+
+* Introduced alternative storage backends, mainly to circumvent SDBM's record
+  size limit.
+  * Warn when truncating a record for SDBM now.
+  * Added benchmarks for storage backends.
+* Added demo and sample commands to +lingoctl+ and introduced aliases.
+* Added default plugin path.
+* Fixed Gem dependencies.
+* Updated the German system dictionary.
+* Extended the README with test setup and literature.
+* Internal refactoring and some housekeeping.
+
 == 1.8.0 [2012-01-01]
 
 * Ruby 1.8 officially no longer supported! Use Lingo 1.7.x instead.
