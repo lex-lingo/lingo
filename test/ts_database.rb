@@ -100,7 +100,8 @@ Wort2=
       'txt-format' => 'SingleWord',
       'use-lex'    => set_config('lex',
         'name'       => 'de/lingo-dic.txt',
-        'txt-format' => 'WordClass'
+        'txt-format' => 'WordClass',
+        'separator'  => '='
       )
     }, @singleword, {
       'wort1'                           => '#s',

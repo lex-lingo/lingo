@@ -348,6 +348,8 @@ class Lingo
 
     include Cachable
 
+    BACKENDS = %w[LibCDB SDBM GDBM].unshift(ENV['LINGO_BACKEND']).compact.uniq
+
     INDEX_PATTERN = %r{\A#{Regexp.escape(IDX_REF)}\d+\z}
 
     def self.open(*args, &block)
@@ -359,15 +361,29 @@ class Lingo
       raise "No such database `#{id}'." unless @config && @config.has_key?('name')
 
       @id, @lingo = id, lingo
+      @src_file   = Lingo.find(:dict, @config['name'])
       @crypter    = Crypter.new if @config.has_key?('crypt')
 
-      # @db: closed?, close, each, [], []=
-      extend(Object.const_defined?(:LibCDB) ? LibCDB :
-             Object.const_defined?(:GDBM)   ? GDBM   : SDBM)
+      begin
+        @dbm_name = Lingo.find(:store, @src_file)
+      rescue
+        @backend  = HashStore
+      else
+        FileUtils.mkdir_p(File.dirname(@dbm_name))
+      end
 
-      init
+      extend(backend)
+
+      @dbm_name << store_ext if respond_to?(:store_ext, true)
+
       init_cachable
       convert unless uptodate?
+    end
+
+    def backend
+      @backend ||= BACKENDS.find { |mod|
+        break self.class.const_get("#{mod}Store") if Object.const_defined?(mod)
+      } || HashStore
     end
 
     def closed?
@@ -422,12 +438,6 @@ class Lingo
 
     private
 
-    def init
-      @src_file = Lingo.find(:dict, @config['name'])
-      @dbm_name = Lingo.find(:store, @src_file)
-      FileUtils.mkdir_p(File.dirname(@dbm_name))
-    end
-
     def uptodate?(file = @dbm_name)
       src = Pathname.new(@src_file)
       @source_key = lambda { [src.size, src.mtime].join(FLD_SEP) }
@@ -450,10 +460,6 @@ class Lingo
     end
 
     def _open
-      raise NotImplementedError
-    end
-
-    def _close
       raise NotImplementedError
     end
 
@@ -542,7 +548,41 @@ class Lingo
       progress.stop('ok')
     end
 
-    module SDBM
+    module HashStore
+
+      def to_h
+        @db.dup
+      end
+
+      def close
+        self
+      end
+
+      private
+
+      def uptodate?
+        false
+      end
+
+      def uptodate!
+        nil
+      end
+
+      def _clear
+        @db.clear if @db
+      end
+
+      def _open
+        {}
+      end
+
+      def _closed?
+        false
+      end
+
+    end
+
+    module SDBMStore
 
       private
 
@@ -555,7 +595,7 @@ class Lingo
       end
 
       def _open
-        ::SDBM.open(@dbm_name)
+        SDBM.open(@dbm_name)
       end
 
       def _set(key, val)
@@ -571,32 +611,30 @@ class Lingo
 
     end
 
-    module GDBM
+    module GDBMStore
 
       private
 
-      def init
-        super
-        @dbm_name << '.db'
+      def store_ext
+        '.db'
       end
 
       def _open
-        ::GDBM.open(@dbm_name)
+        GDBM.open(@dbm_name)
       end
 
     end
 
-    module LibCDB
+    module LibCDBStore
 
       private
 
-      def init
-        super
-        @dbm_name << '.cdb'
+      def store_ext
+        '.cdb'
       end
 
       def create
-        ::LibCDB::CDB.open(@dbm_name, 'w') { |db|
+        LibCDB::CDB.open(@dbm_name, 'w') { |db|
           @db = db
           yield
         }
@@ -605,7 +643,7 @@ class Lingo
       end
 
       def _open
-        ::LibCDB::CDB.open(@dbm_name)
+        LibCDB::CDB.open(@dbm_name)
       end
 
     end

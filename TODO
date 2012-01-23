@@ -7,10 +7,7 @@
 * Provide automatic encoding detection.
 * Provide automatic language detection (as fine-grained as possible).
 * Make lingo run faster!? (benchmark - profile - optimize)
-* In-memory (volatile) vs. on-disk (persistent) dictionaries. It should be
-  possible to simply use the Lingo API without caring about dictionary storage.
-* That being said, provide an easy-to-use Lingo API -- just 'require "lingo"'
-  and go for it!
+* Provide an easy-to-use Lingo API -- just 'require "lingo"' and go for it!
 * In addition to that, provide sensible string extensions: String#tokenize,
   String#lemmatize, ...
 * Provide a DSL for configuration -- in addition to, or instead of, the current

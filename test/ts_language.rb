@@ -36,8 +36,8 @@ class TestLexicalHash < LingoTestCase
     ds = Lingo::LexicalHash.new('tst-syn', @lingo)
     ds['abwickeln']    # source read
     ds['abwickeln']    # cache hit
-    ds['regen']      # source read
-    ds['nonesens']    # source read, nothing found
+    ds['regen']        # source read
+    ds['nonesens']     # source read, nothing found
 
     expect = { \
       "tst-syn: cache hits" => 1, \
