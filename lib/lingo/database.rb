@@ -166,15 +166,15 @@ class Lingo
     attr_reader :position
 
     def initialize(id, lingo)
-      # Konfiguration der Datenbank auslesen
       @config = lingo.database_config(id)
 
       source_file = Lingo.find(:dict, name = @config['name'])
+      reject_file = Lingo.find(:store, source_file) << '.rev' rescue nil
 
       @pn_source = Pathname.new(source_file)
-      @pn_reject = Pathname.new(Lingo.find(:store, source_file) << '.rev')
+      @pn_reject = Pathname.new(reject_file) if reject_file
 
-      Lingo.error("No such source file `#{name}' for `#{id}'.") unless @pn_source.exist?
+      raise "No such source file `#{name}' for `#{id}'." unless @pn_source.exist?
 
       @wordclass = @config.fetch('def-wc', '?').downcase
       @separator = @config['separator']
@@ -190,37 +190,29 @@ class Lingo
     end
 
     def each
-      # Reject-Datei öffnen
-      fail_msg = "Fehler beim öffnen der Reject-Datei '#{@pn_reject.to_s}'"
-      reject_file = @pn_reject.open('w', encoding: ENC)
+      reject_file = @pn_reject.open('w', encoding: ENC) if @pn_reject
 
-      # Alle Zeilen der Quelldatei verarbeiten
-      fail_msg = "Fehler beim öffnen der Wörterbuch-Quelldatei '#{@pn_source.to_s}'"
+      @pn_source.each_line($/, encoding: ENC) { |line|
+        @position += length = line.bytesize
 
-      @pn_source.each_line($/, encoding: ENC) do |raw_line|
-        @position += raw_line.size      # Position innerhalb der Datei aktualisieren
-        line = raw_line.chomp.downcase  # Zeile normieren
+        next if line =~ /\A\s*#/ || line.strip.empty?
 
-        next if line =~ /^\s*#/ || line.strip == ''  # Kommentarzeilen und leere Zeilen überspringen
+        line.chomp!
+        line.downcase!
 
-        # Ungültige Zeilen protokollieren
-        unless line.length < 4096 && line =~ @line_pattern
-          fail_msg = "Fehler beim schreiben der Reject-Datei '#{@pn_reject.to_s}'"
-          reject_file.puts line
-          next
+        if length < 4096 && line =~ @line_pattern
+          yield convert_line(line, $1, $2)
+        else
+          reject_file.puts(line) if reject_file
         end
-
-        # Zeile in Werte konvertieren
-        yield convert_line(line, $1, $2)
-      end
-
-      fail_msg = "Fehler beim Schließen der Reject-Datei '#{@pn_reject.to_s}'"
-      reject_file.close
-      @pn_reject.delete if @pn_reject.size == 0
+      }
 
       self
-    rescue RuntimeError
-      Lingo.error(fail_msg)
+    ensure
+      if reject_file
+        reject_file.close
+        @pn_reject.delete if @pn_reject.size == 0
+      end
     end
 
   end

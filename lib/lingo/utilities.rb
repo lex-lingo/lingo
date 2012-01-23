@@ -37,4 +37,8 @@ class String
     Unicode.downcase(self)
   end
 
+  def downcase!
+    replace(downcase)
+  end
+
 end
