@@ -86,10 +86,6 @@ class Lingo
       Call.new(['-c', cfg, *args]).call(&block)
     end
 
-    def error(msg)
-      abort(msg)
-    end
-
     def list(type, options = {})
       options = options_for(type, options)
       path    = path_for(options)

@@ -1,6 +1,7 @@
 = ToDo list for Lingo
 
 * Update and translate old documentation.
+* Raise exceptions with appropriate error classes.
 * Allow for handling of documents in various encodings, not just the one the
   dictionaries are encoded in.
 * Provide automatic encoding detection.

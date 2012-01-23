@@ -48,7 +48,7 @@ class Lingo
 
       # Parameter aus de.lang:language/dictionary/databases auslesen
       config = lingo.config['language/dictionary/databases/' + id]
-      Lingo.error( "LexicalHash kann Datenquelle mit ID '#{id}' in de.lang:language/dictionary/databases' nicht finden" ) if config.nil?
+      raise "No such data source `#{id}'" unless config
 
       @wordclass = config.fetch( 'def-wc', LA_UNKNOWN )
 

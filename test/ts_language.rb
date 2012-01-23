@@ -17,7 +17,7 @@ class TestLexicalHash < LingoTestCase
     old_stderr, $stderr = $stderr, StringIO.new('')
 
     # Datenquelle nicht in Konfiguration enthalten
-    assert_raise(SystemExit) { Lingo::LexicalHash.new('nonsens', @lingo) }
+    assert_raise(RuntimeError) { Lingo::LexicalHash.new('nonsens', @lingo) }
   ensure
     $stderr = old_stderr
   end
