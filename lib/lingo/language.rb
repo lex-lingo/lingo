@@ -122,7 +122,7 @@ class Lingo
       # Parameter auslesen
       @all_sources = (config['mode'].nil? || config['mode'].downcase=='all')
 
-      @sources = config['source'].map { |src| LexicalHash.new(src, lingo) }
+      @sources = config['source'].map { |src| lingo.lexical_hash(src) }
 
       lingo.dictionaries << self
 

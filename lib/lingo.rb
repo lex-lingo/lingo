@@ -207,6 +207,10 @@ class Lingo
     dictionary_config['databases'][id]
   end
 
+  def lexical_hash(src)
+    @lexical_hash[src]
+  end
+
   def talk
     invite
     start
@@ -266,6 +270,7 @@ class Lingo
   def reset(close = true)
     dictionaries.each(&:close) if close
     @dictionaries, @attendees = [], []
+    @lexical_hash = Hash.new { |h, k| h[k] = LexicalHash.new(k, self) }
   end
 
   class Call < Lingo
