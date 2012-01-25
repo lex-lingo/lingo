@@ -33,30 +33,15 @@ require 'nuggets/file/ext'
 require 'nuggets/env/user_home'
 require 'nuggets/numeric/duration'
 
+require_relative 'lingo/call'
 require_relative 'lingo/config'
+require_relative 'lingo/core_ext'
 require_relative 'lingo/cachable'
 require_relative 'lingo/reportable'
 require_relative 'lingo/agenda_item'
-require_relative 'lingo/word_form'
 require_relative 'lingo/database'
 require_relative 'lingo/language'
-require_relative 'lingo/core_ext'
 require_relative 'lingo/attendee'
-require_relative 'lingo/attendee/abbreviator'
-require_relative 'lingo/attendee/debugger'
-require_relative 'lingo/attendee/decomposer'
-require_relative 'lingo/attendee/dehyphenizer'
-require_relative 'lingo/attendee/multiworder'
-require_relative 'lingo/attendee/noneword_filter'
-require_relative 'lingo/attendee/objectfilter'
-require_relative 'lingo/attendee/variator'
-require_relative 'lingo/attendee/sequencer'
-require_relative 'lingo/attendee/synonymer'
-require_relative 'lingo/attendee/textreader'
-require_relative 'lingo/attendee/textwriter'
-require_relative 'lingo/attendee/tokenizer'
-require_relative 'lingo/attendee/vector_filter'
-require_relative 'lingo/attendee/wordsearcher'
 require_relative 'lingo/version'
 
 class Lingo
@@ -283,50 +268,7 @@ class Lingo
   def reset(close = true)
     dictionaries.each(&:close) if close
     @dictionaries, @attendees = [], []
-    @lexical_hash = Hash.new { |h, k| h[k] = LexicalHash.new(k, self) }
-  end
-
-  class Call < Lingo
-
-    def initialize(args = [])
-      super(args, StringIO.new, StringIO.new, StringIO.new)
-    end
-
-    def call
-      invite
-
-      if block_given?
-        begin
-          yield self
-        ensure
-          reset
-        end
-      else
-        self
-      end
-    end
-
-    def talk(str)
-      config.stdin.reopen(str)
-
-      start
-
-      %w[stdout stderr].flat_map { |key|
-        io = config.send(key).tap(&:rewind)
-        io.readlines.each(&:chomp!).tap {
-          io.truncate(0)
-          io.rewind
-        }
-      }.tap { |res|
-        if block_given?
-          res.map!(&Proc.new)
-        else
-          res.sort!
-          res.uniq!
-        end
-      }
-    end
-
+    @lexical_hash = Hash.new { |h, k| h[k] = Language::LexicalHash.new(k, self) }
   end
 
 end

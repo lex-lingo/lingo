@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'test/unit'
 require 'lingo'
 
@@ -27,22 +29,22 @@ class LingoTestCase <  Test::Unit::TestCase
   # Erzeugt ein Token-Objekt
   def tk( text )
     f, a = split( text )
-    Lingo::Token.new( f, a )
+    Lingo::Language::Token.new( f, a )
   end
 
   # Erzeugt ein Lexical-Objekt
   def lx( text )
     f, a = split( text )
-    Lingo::Lexical.new( f, a )
+    Lingo::Language::Lexical.new( f, a )
   end
 
   # Erzeugt ein Word-Objekt
   def wd( text, *lexis )
     f, a = split( text )
-    w = Lingo::Word.new( f, a )
+    w = Lingo::Language::Word.new( f, a )
     lexis.each do |text|
       f, a = split( text )
-      w << Lingo::Lexical.new( f, a )
+      w << Lingo::Language::Lexical.new( f, a )
     end
     w
   end

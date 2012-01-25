@@ -41,313 +41,11 @@ require 'digest/sha1'
   end
 }
 
+require_relative 'database/show_progress'
+require_relative 'database/crypter'
+require_relative 'database/source'
+
 class Lingo
-
-  class ShowProgress
-
-    def initialize(msg, active = true, out = $stderr)
-      @active, @out, format = active, out, ' [%3d%%]'
-
-      # To get the length of the formatted string we have
-      # to actually substitute the placeholder.
-      length = (format % 0).length
-
-      # Now we know how far to "go back" to
-      # overwrite the formatted string...
-      back = "\b" * length
-
-      @format = format       + back
-      @clear  = ' ' * length + back
-
-      print msg, ': '
-    end
-
-    def start(msg, max)
-      @ratio, @count, @next_step = max / 100.0, 0, 0
-      print msg, ' '
-      step
-    end
-
-    def stop(msg)
-      print @clear
-      print msg, "\n"
-    end
-
-    def tick(value)
-      @count = value
-      step if @count >= @next_step
-    end
-
-    private
-
-    def step
-      percent = @count / @ratio
-      @next_step = (percent + 1) * @ratio
-
-      print @format % percent
-    end
-
-    def print(*args)
-      @out.print(*args) if @active
-    end
-
-  end
-
-  # Crypter ermöglicht die Ver- und Entschlüsselung von Wörterbüchern
-
-  class Crypter
-
-    HEX_CHARS = '0123456789abcdef'.freeze
-
-    def digest(key)
-      Digest::SHA1.hexdigest(key)
-    end
-
-    def encode(key, val)
-      hex = ''
-
-      crypt(key, val).each_byte { |byte|
-        # To get a hex representation for a char we just utilize
-        # the quotient and the remainder of division by base 16.
-        q, r = byte.divmod(16)
-        hex << HEX_CHARS[q] << HEX_CHARS[r]
-      }
-
-      [digest(key), hex]
-    end
-
-    def decode(key, val)
-      str, q, first = '', 0, false
-
-      val.each_byte { |byte|
-        byte = byte.chr(ENC)
-
-        # Our hex chars are 2 bytes wide, so we have to keep track
-        # of whether it's the first or the second of the two.
-        if first = !first
-          q = HEX_CHARS.index(byte)
-        else
-          # Now we got both parts, so let's revert the divmod(16)
-          str << q * 16 + HEX_CHARS.index(byte)
-        end
-      }
-
-      crypt(key, str)
-    end
-
-    private
-
-    def crypt(k, v)
-      c, y = '', k.codepoints.reverse_each.cycle
-      v.each_codepoint { |x| c << (x ^ y.next).chr(ENC) }
-      c
-    end
-
-  end
-
-  # Die Klasse TxtFile stellt eine einheitliche Schnittstelle auf die unterschiedlichen Formate
-  # von Wörterbuch-Quelldateien bereit. Die Identifizierung der Quelldatei erfolgt über die ID
-  # der Datei, so wie sie in der Sprachkonfigurationsdatei <tt>de.lang</tt> unter
-  # <tt>language/dictionary/databases</tt> hinterlegt ist.
-  #
-  # Die Verarbeitung der Wörterbücher erfolgt mittels des Iterators <b>each</b>, der für jede
-  # Zeile der Quelldatei ein Array bereitstellt in der Form <tt>[ key, [val1, val2, ...] ]</tt>.
-  #
-  # Nicht korrekt erkannte Zeilen werden abgewiesen und in eine Revoke-Datei gespeichert, die
-  # an der Dateiendung <tt>.rev</tt> zu erkennen ist.
-
-  class TxtFile
-
-    # Define printable characters for tokenizer for UTF-8 encoding
-    UTF8_DIGIT  = '[0-9]'
-    # Define Basic Latin printable characters for UTF-8 encoding from U+0000 to U+007f
-    UTF8_BASLAT = '[A-Za-z]'
-    # Define Latin-1 Supplement printable characters for UTF-8 encoding from U+0080 to U+00ff
-    UTF8_LAT1SP = '[\xc3\x80-\xc3\x96\xc3\x98-\xc3\xb6\xc3\xb8-\xc3\xbf]'
-    # Define Latin Extended-A printable characters for UTF-8 encoding from U+0100 to U+017f
-    UTF8_LATEXA = '[\xc4\x80-\xc4\xbf\xc5\x80-\xc5\xbf]'
-    # Define Latin Extended-B printable characters for UTF-8 encoding from U+0180 to U+024f
-    UTF8_LATEXB = '[\xc6\x80-\xc6\xbf\xc7\x80-\xc7\xbf\xc8\x80-\xc8\xbf\xc9\x80-\xc9\x8f]'
-    # Define IPA Extension printable characters for UTF-8 encoding from U+024f to U+02af
-    UTF8_IPAEXT = '[\xc9\xa0-\xc9\xbf\xca\xa0-\xca\xaf]'
-    # Collect all UTF-8 printable characters in Unicode range U+0000 to U+02af
-    UTF8_CHAR   = "#{UTF8_DIGIT}|#{UTF8_BASLAT}|#{UTF8_LAT1SP}|#{UTF8_LATEXA}|#{UTF8_LATEXB}|#{UTF8_IPAEXT}"
-
-    PRINTABLE_CHAR = "#{UTF8_CHAR}|[<>-]"
-
-    attr_reader :position
-
-    def initialize(id, lingo)
-      @config = lingo.database_config(id)
-
-      source_file = Lingo.find(:dict, name = @config['name'])
-      reject_file = Lingo.find(:store, source_file) << '.rev' rescue nil
-
-      @pn_source = Pathname.new(source_file)
-      @pn_reject = Pathname.new(reject_file) if reject_file
-
-      raise "No such source file `#{name}' for `#{id}'." unless @pn_source.exist?
-
-      @wordclass = @config.fetch('def-wc', '?').downcase
-      @separator = @config['separator']
-
-      @legal_word = '(?:' + PRINTABLE_CHAR + '|[' + Regexp.escape('- /&()[].,') + '])+'  # TODO: v1.60 - ',' bei TxtFile zulassen; in const.rb einbauen
-      @line_pattern = Regexp.new('^'+@legal_word+'$')
-
-      @position = 0
-    end
-
-    def size
-      @pn_source.size
-    end
-
-    def each
-      reject_file = @pn_reject.open('w', encoding: ENC) if @pn_reject
-
-      @pn_source.each_line($/, encoding: ENC) { |line|
-        @position += length = line.bytesize
-
-        next if line =~ /\A\s*#/ || line.strip.empty?
-
-        line.chomp!
-        line.downcase!
-
-        if length < 4096 && line =~ @line_pattern
-          yield convert_line(line, $1, $2)
-        else
-          reject_file.puts(line) if reject_file
-        end
-      }
-
-      self
-    ensure
-      if reject_file
-        reject_file.close
-        @pn_reject.delete if @pn_reject.size == 0
-      end
-    end
-
-  end
-
-  # Abgeleitet von TxtFile behandelt die Klasse Dateien mit dem Format <tt>SingleWord</tt>.
-  # Eine Zeile <tt>"Fachbegriff\n"</tt> wird gewandelt in <tt>[ 'fachbegriff', ['#s'] ]</tt>.
-  # Die Wortklasse kann über den Parameter <tt>def-wc</tt> beeinflusst werden.
-
-  class TxtFile_Singleword < TxtFile
-
-    def initialize(id, lingo)
-      super
-
-      @wc     = @config.fetch('def-wc',     's').downcase
-      @mul_wc = @config.fetch('def-mul-wc', @wc).downcase
-
-      @line_pattern = %r{^(#{@legal_word})$}
-    end
-
-    private
-
-    def convert_line(line, key, val)
-      [key = key.strip, %W[##{key =~ /\s/ ? @mul_wc : @wc}]]
-    end
-
-  end
-
-  # Abgeleitet von TxtFile behandelt die Klasse Dateien mit dem Format <tt>KeyValue</tt>.
-  # Eine Zeile <tt>"Fachbegriff*Fachterminus\n"</tt> wird gewandelt in <tt>[ 'fachbegriff', ['fachterminus#s'] ]</tt>.
-  # Die Wortklasse kann über den Parameter <tt>def-wc</tt> beeinflusst werden.
-  # Der Trenner zwischen Schlüssel und Projektion kann über den Parameter <tt>separator</tt> geändert werden.
-
-  class TxtFile_Keyvalue < TxtFile
-
-    def initialize(id, lingo)
-      super
-
-      @separator = @config.fetch('separator', '*')
-      @line_pattern = Regexp.new('^(' + @legal_word + ')' + Regexp.escape(@separator) + '(' + @legal_word + ')$')
-    end
-
-    private
-
-    def convert_line(line, key, val)
-      key, val = key.strip, val.strip
-      val = '' if key == val
-      val = [val + '#' + @wordclass]
-      [key, val]
-    end
-
-  end
-
-  # Abgeleitet von TxtFile behandelt die Klasse Dateien mit dem Format <tt>WordClass</tt>.
-  # Eine Zeile <tt>"essen,essen #v essen #o esse #s\n"</tt> wird gewandelt in <tt>[ 'essen', ['esse#s', 'essen#v', 'essen#o'] ]</tt>.
-  # Der Trenner zwischen Schlüssel und Projektion kann über den Parameter <tt>separator</tt> geändert werden.
-
-  class TxtFile_Wordclass < TxtFile
-
-    def initialize(id, lingo)
-      super
-
-      @separator = @config.fetch('separator', ',')
-      @line_pattern = Regexp.new('^(' + @legal_word + ')' + Regexp.escape(@separator) + '((?:' + @legal_word + '#\w)+)$')
-    end
-
-    private
-
-    def convert_line(line, key, val)
-      key, valstr = key.strip, val.strip
-      val = valstr.gsub(/\s+#/, '#').scan(/\S.+?\s*#\w/)
-      val = val.map do |str|
-        str =~ /^(.+)#(.)/
-        ($1 == key ? '' : $1) + '#' + $2
-      end
-      [key, val]
-    end
-
-  end
-
-  # Abgeleitet von TxtFile behandelt die Klasse Dateien mit dem Format <tt>MultiValue</tt>.
-  # Eine Zeile <tt>"Triumph;Sieg;Erfolg\n"</tt> wird gewandelt in <tt>[ nil, ['triumph', 'sieg', 'erfolg'] ]</tt>.
-  # Der Trenner zwischen Schlüssel und Projektion kann über den Parameter <tt>separator</tt> geändert werden.
-
-  class TxtFile_Multivalue < TxtFile
-
-    def initialize(id, lingo)
-      super
-
-      @separator = @config.fetch('separator', ';')
-      @line_pattern = Regexp.new('^' + @legal_word + '(?:' + Regexp.escape(@separator) + @legal_word + ')*$')
-    end
-
-    private
-
-    def convert_line(line, key, val)
-      [nil, line.split(@separator).map { |value| value.strip }]
-    end
-
-  end
-
-  # Abgeleitet von TxtFile behandelt die Klasse Dateien mit dem Format <tt>MultiKey</tt>.
-  # Eine Zeile <tt>"Triumph;Sieg;Erfolg\n"</tt> wird gewandelt in <tt>[ 'triumph', ['sieg', 'erfolg'] ]</tt>.
-  # Die Sonderbehandlung erfolgt in der Methode Database#convert, wo daraus Schlüssel-Werte-Paare in der Form
-  # <tt>[ 'sieg', ['triumph'] ]</tt> und <tt>[ 'erfolg', ['triumph'] ]</tt> erzeugt werden.
-  # Der Trenner zwischen Schlüssel und Projektion kann über den Parameter <tt>separator</tt> geändert werden.
-
-  class TxtFile_Multikey < TxtFile
-
-    def initialize(id, lingo)
-      super
-
-      @separator = @config.fetch('separator', ';')
-      @line_pattern = Regexp.new('^' + @legal_word + '(?:' + Regexp.escape(@separator) + @legal_word + ')*$')
-    end
-
-    private
-
-    def convert_line(line, key, val)
-      values = line.split(@separator).map { |value| value.strip }
-      [values[0], values[1..-1]]
-    end
-
-  end
 
   # Die Klasse Database stellt eine einheitliche Schnittstelle auf Lingo-Datenbanken bereit.
   # Die Identifizierung der Datenbank erfolgt über die ID der Datenbank, so wie sie in der
@@ -501,7 +199,7 @@ class Lingo
 
     def convert(verbose = @lingo.config.stderr.tty?)
       format = @config.fetch('txt-format', 'KeyValue').downcase
-      source = Lingo.const_get("TxtFile_#{format.capitalize}").new(@id, @lingo)
+      source = Source.const_get(format.capitalize).new(@id, @lingo)
 
       if lex_dic = @config['use-lex']
         args = [{
@@ -509,7 +207,9 @@ class Lingo
           'mode'   => @config['lex-mode']
         }, @lingo]
 
-        dictionary, grammar = Dictionary.new(*args), Grammar.new(*args)
+        dictionary, grammar = %w[Dictionary Grammar].map { |klass|
+          Language.const_get(klass).new(*args)
+        }
       end
 
       progress = ShowProgress.new(@config['name'], verbose, @lingo.config.stderr)
@@ -531,7 +231,7 @@ class Lingo
               result = dictionary.find_word(form)
 
               # => Kompositum suchen, wenn Wort nicht erkannt
-              if result.attr == Attendee::WA_UNKNOWN
+              if result.attr == Language::WA_UNKNOWN
                 result = grammar.find_compositum(form)
                 compo  = result.compo_form
               end

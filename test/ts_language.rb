@@ -4,6 +4,8 @@ require_relative 'test_helper'
 
 class TestLexicalHash < LingoTestCase
 
+  LH = Lingo::Language::LexicalHash
+
   def setup
     @lingo = Lingo.new
     @database_config = @lingo.config['language/dictionary/databases']
@@ -17,7 +19,7 @@ class TestLexicalHash < LingoTestCase
     old_stderr, $stderr = $stderr, StringIO.new('')
 
     # Datenquelle nicht in Konfiguration enthalten
-    assert_raise(RuntimeError) { Lingo::LexicalHash.new('nonsens', @lingo) }
+    assert_raise(RuntimeError) { LH.new('nonsens', @lingo) }
   ensure
     $stderr = old_stderr
   end
@@ -25,7 +27,7 @@ class TestLexicalHash < LingoTestCase
   # TODO: Crypt testen...
 
   def test_cache
-    ds = Lingo::LexicalHash.new('sys-dic', @lingo)
+    ds = LH.new('sys-dic', @lingo)
     assert_equal([lx('regen|s'), lx('regen|v'), lx('rege|a')], ds['regen'])
     assert_equal([lx('regen|s'), lx('regen|v'), lx('rege|a')], ds['regen'])
     assert_equal([lx('regen|s'), lx('regen|v'), lx('rege|a')], ds['regen'])
@@ -33,7 +35,7 @@ class TestLexicalHash < LingoTestCase
   end
 
   def test_report
-    ds = Lingo::LexicalHash.new('tst-syn', @lingo)
+    ds = LH.new('tst-syn', @lingo)
     ds['abwickeln']    # source read
     ds['abwickeln']    # cache hit
     ds['regen']        # source read
@@ -53,24 +55,24 @@ class TestLexicalHash < LingoTestCase
   def test_auto_create
     txt_file = @database_config['tst-sgw']['name']
 
-    ds = Lingo::LexicalHash.new('tst-sgw', @lingo)
+    ds = LH.new('tst-sgw', @lingo)
     assert_equal([lx('substantiv|s')], ds['substantiv'])
     ds.close
 
     # Keine Store-Datei vorhanden, nur Text vorhanden
     File.delete(*Dir["#{Lingo.find(:store, txt_file)}.*"])
-    ds = Lingo::LexicalHash.new('tst-sgw', @lingo)
+    ds = LH.new('tst-sgw', @lingo)
     assert_equal([lx('substantiv|s')], ds['substantiv'])
     ds.close
 
     # Store vorhanden, aber Text ist neuer
-    ds = Lingo::LexicalHash.new('tst-sgw', @lingo)
+    ds = LH.new('tst-sgw', @lingo)
     assert_equal([lx('substantiv|s')], ds['substantiv'])
     ds.close
   end
 
   def test_singleword
-    ds = Lingo::LexicalHash.new('tst-sgw', @lingo)
+    ds = LH.new('tst-sgw', @lingo)
     assert_equal([lx('substantiv|s')], ds['substantiv'])
     assert_equal([lx('mehr wort gruppe|s')], ds['mehr wort gruppe'])
     assert_equal(nil, ds['nicht vorhanden'])
@@ -78,7 +80,7 @@ class TestLexicalHash < LingoTestCase
   end
 
   def test_keyvalue
-    ds = Lingo::LexicalHash.new('sys-mul', @lingo)
+    ds = LH.new('sys-mul', @lingo)
     assert_equal([lx('abelscher ring ohne nullteiler|m')], ds['abelscher ring ohne nullteiler'])
     assert_equal(['*4'], ds['abelscher ring ohne'])
     assert_equal([lx('alleinreisende frau|m')], ds['alleinreisend frau'])
@@ -88,7 +90,7 @@ class TestLexicalHash < LingoTestCase
   end
 
   def test_wordclass
-    ds = Lingo::LexicalHash.new('sys-dic', @lingo)
+    ds = LH.new('sys-dic', @lingo)
     assert_equal([lx('a-dur|s')], ds['a-dur'])
     assert_equal([lx('aalen|v'), lx('aalen|e')], ds['aalen'])
     assert_equal([lx('abarbeitend|a')], ds['abarbeitend'])
@@ -96,7 +98,7 @@ class TestLexicalHash < LingoTestCase
   end
 
   def test_case
-    ds = Lingo::LexicalHash.new('sys-dic', @lingo)
+    ds = LH.new('sys-dic', @lingo)
     assert_equal([lx('abänderung|s')], ds['abänderung'])
     assert_equal([lx('abänderung|s')], ds['Abänderung'])
     assert_equal([lx('abänderung|s')], ds['ABÄNDERUNG'])
@@ -104,7 +106,7 @@ class TestLexicalHash < LingoTestCase
   end
 
   def test_multivalue
-    ds = Lingo::LexicalHash.new('sys-syn', @lingo)
+    ds = LH.new('sys-syn', @lingo)
     assert_equal([lx('abbau <chemie>|y'), lx('chemische abbaureaktion|y'), lx('chemischer abbau|y'), lx('photochemischer abbau|y')], ds['abbaureaktion'])
     assert_equal([lx('dependenz|y'), lx('unselbstständigkeit|y'), lx('unselbständigkeit|y')], ds['abhängigkeit'])
     ds.close
@@ -114,21 +116,23 @@ end
 
 class TestDictionary < LingoTestCase
 
+  LD = Lingo::Language::Dictionary
+
   def setup
     @lingo = Lingo.new
   end
 
   def test_params
     # Keine Sprach-Konfiguration angegeben
-    #assert_raise(RuntimeError) { Lingo::Dictionary.new({'source'=>['sys-dic']}, @lingo) }
+    #assert_raise(RuntimeError) { LD.new({'source'=>['sys-dic']}, @lingo) }
     # Keine Parameter angegeben
-    assert_raise(RuntimeError) { Lingo::Dictionary.new(nil, @lingo) }
+    assert_raise(RuntimeError) { LD.new(nil, @lingo) }
     # Falsche Parameter angegeben (Pflichtparameter ohne Defaultwert)
-    assert_raise(RuntimeError) { Lingo::Dictionary.new({'course'=>['sys-dic']}, @lingo) }
+    assert_raise(RuntimeError) { LD.new({'course'=>['sys-dic']}, @lingo) }
   end
 
   def test_cache
-    dic = Lingo::Dictionary.new({'source'=>['sys-dic']}, @lingo)
+    dic = LD.new({'source'=>['sys-dic']}, @lingo)
     assert_equal([lx('nase|s')], dic.select('nase'))
     assert_equal([lx('nase|s')], dic.select('nase'))
     assert_equal([lx('nase|s')], dic.select('nase'))
@@ -136,7 +140,7 @@ class TestDictionary < LingoTestCase
   end
 
   def test_report
-    dic = Lingo::Dictionary.new({'source'=>['sys-dic']}, @lingo)
+    dic = LD.new({'source'=>['sys-dic']}, @lingo)
     dic.select('abwickeln')    # source read
     dic.select('abwickeln')    # cache hit
     dic.select('regen')        # source read
@@ -154,7 +158,7 @@ class TestDictionary < LingoTestCase
   end
 
   def test_select_one_source
-    dic = Lingo::Dictionary.new({'source'=>['sys-dic']}, @lingo)
+    dic = LD.new({'source'=>['sys-dic']}, @lingo)
     assert_equal([lx('nase|s')], dic.select('nase'))
     assert_equal([lx('nase|s')], dic.select('NASE'))
     assert_equal([], dic.select('hasennasen'))
@@ -162,7 +166,7 @@ class TestDictionary < LingoTestCase
   end
 
   def test_select_two_sources_mode_first
-    dic = Lingo::Dictionary.new({'source'=>['sys-dic', 'tst-dic'], 'mode'=>'first'}, @lingo)
+    dic = LD.new({'source'=>['sys-dic', 'tst-dic'], 'mode'=>'first'}, @lingo)
     # in keiner Quelle vorhanden
     assert_equal([], dic.select('hasennasen'))
     # nur in erster Quelle vorhanden
@@ -175,7 +179,7 @@ class TestDictionary < LingoTestCase
   end
 
   def test_select_two_sources_mode_first_flipped
-    dic = Lingo::Dictionary.new({'source'=>['tst-dic','sys-dic'], 'mode'=>'first'}, @lingo)
+    dic = LD.new({'source'=>['tst-dic','sys-dic'], 'mode'=>'first'}, @lingo)
     # in keiner Quelle vorhanden
     assert_equal([], dic.select('hasennasen'))
     # nur in erster Quelle vorhanden
@@ -188,7 +192,7 @@ class TestDictionary < LingoTestCase
   end
 
   def test_select_two_sources_mode_all
-    dic = Lingo::Dictionary.new({'source'=>['sys-dic','tst-dic'], 'mode'=>'all'}, @lingo)
+    dic = LD.new({'source'=>['sys-dic','tst-dic'], 'mode'=>'all'}, @lingo)
     # in keiner Quelle vorhanden
     assert_equal([], dic.select('hasennasen'))
     # nur in erster Quelle vorhanden
@@ -202,7 +206,7 @@ class TestDictionary < LingoTestCase
   end
 
   def test_select_two_sources_mode_default
-    dic = Lingo::Dictionary.new({'source'=>['sys-dic','tst-dic']}, @lingo)
+    dic = LD.new({'source'=>['sys-dic','tst-dic']}, @lingo)
     # in keiner Quelle vorhanden
     assert_equal([], dic.select('hasennasen'))
     # nur in erster Quelle vorhanden
@@ -216,7 +220,7 @@ class TestDictionary < LingoTestCase
   end
 
   def test_suffix_lexicals
-    dic = Lingo::Dictionary.new({'source'=>['sys-dic']}, @lingo)
+    dic = LD.new({'source'=>['sys-dic']}, @lingo)
     assert_equal([lx('mau|s'), lx('mauer|s')], dic.suffix_lexicals('mauern'))
     assert_equal([lx('hasen|s'), lx('hasen|v'), lx('hasen|e')], dic.suffix_lexicals('hasens'))
     assert_equal([lx('schönst|s'), lx('schön|a'), lx('schönst|a')], dic.suffix_lexicals('schönster'))
@@ -225,13 +229,13 @@ class TestDictionary < LingoTestCase
   end
 
   def test_infix_lexicals
-    dic = Lingo::Dictionary.new({'source'=>['sys-dic']}, @lingo)
+    dic = LD.new({'source'=>['sys-dic']}, @lingo)
     assert_equal( [lx('information|s'), lx('information|v'), lx('information|e')], dic.suffix_lexicals('informations'))
     dic.close
   end
 
   def test_select_with_suffix
-    dic = Lingo::Dictionary.new({'source'=>['sys-dic']}, @lingo)
+    dic = LD.new({'source'=>['sys-dic']}, @lingo)
     assert_equal([lx('mauern|v')], dic.select_with_suffix('mauern'))
     assert_equal([lx('hase|s')], dic.select_with_suffix('hasen'))
     assert_equal([lx('schön|a')], dic.select_with_suffix('schönster'))
@@ -240,13 +244,13 @@ class TestDictionary < LingoTestCase
   end
 
   def test_select_with_infix
-    dic = Lingo::Dictionary.new({'source'=>['sys-dic']}, @lingo)
+    dic = LD.new({'source'=>['sys-dic']}, @lingo)
     assert_equal( [lx('information|s'), lx('information|v'), lx('information|e')], dic.suffix_lexicals('informations'))
     dic.close
   end
 
   def test_find_word
-    dic = Lingo::Dictionary.new({'source'=>['sys-dic']}, @lingo)
+    dic = LD.new({'source'=>['sys-dic']}, @lingo)
     assert_equal(wd('hasennasen|?'), dic.find_word('hasennasen'))
     assert_equal(wd('hase|IDF', 'hase|s'), dic.find_word('hase'))
     assert_equal(wd('haseses|IDF', 'hase|s'), dic.find_word('haseses'))
@@ -257,6 +261,8 @@ end
 
 class TestGrammar < LingoTestCase
 
+  LG = Lingo::Language::Grammar
+
   def setup
     @lingo = Lingo.new
   end
@@ -266,7 +272,7 @@ class TestGrammar < LingoTestCase
   end
 
   def test_cache
-    gra = Lingo::Grammar.new({'source'=>['sys-dic']}, @lingo)
+    gra = LG.new({'source'=>['sys-dic']}, @lingo)
     assert_equal(
       wd('informationswissenschaften|KOM', 'informationswissenschaft|k', 'information|s+', 'wissenschaft|s+'),
       gra.find_compositum('informationswissenschaften')
@@ -283,7 +289,7 @@ class TestGrammar < LingoTestCase
   end
 
   def t1est_test_compositum
-    gra = Lingo::Grammar.new({'source'=>['sys-dic']}, @lingo)
+    gra = LG.new({'source'=>['sys-dic']}, @lingo)
     # hinterer Teil ist ein Wort mit Suffix
     assert_equal([ [5, 6], [lx('hasenbraten|k'), lx('braten|s'), lx('hase|s'), lx('braten|v')] ],
       gra.test_compositum('hasen', '', 'braten', 1, false)
@@ -317,7 +323,7 @@ class TestGrammar < LingoTestCase
   end
 
   def t1est_permute_compositum
-    gra = Lingo::Grammar.new({'source'=>['sys-dic']}, @lingo)
+    gra = LG.new({'source'=>['sys-dic']}, @lingo)
     # bindestrichversion
     assert_equal([ [7, 10], [lx('arrafat-nachfolger|k'), lx('nachfolger|s'), lx('arrafat|x')] ],
       gra.permute_compositum('arrafat-nachfolger', 1, false)
@@ -348,7 +354,7 @@ class TestGrammar < LingoTestCase
   end
 
   def test_find_compositum
-    gra = Lingo::Grammar.new({'source'=>['sys-dic']}, @lingo)
+    gra = LG.new({'source'=>['sys-dic']}, @lingo)
     assert_equal(
       wd('informationswissenschaften|KOM', 'informationswissenschaft|k', 'information|s+', 'wissenschaft|s+'),
       gra.find_compositum('informationswissenschaften') \
@@ -377,18 +383,18 @@ class TestGrammar < LingoTestCase
   end
 
   def test_min_word_size
-    gra = Lingo::Grammar.new({'source'=>['sys-dic']}, @lingo)
+    gra = LG.new({'source'=>['sys-dic']}, @lingo)
     assert_equal( wd('undsund|?'), gra.find_compositum('undsund'))
     gra.close
   end
 
   def test_max_parts
-    gra = Lingo::Grammar.new({'source'=>['sys-dic']}, @lingo)
+    gra = LG.new({'source'=>['sys-dic']}, @lingo)
     assert_equal(
       wd('baumsbaumsbaum|KOM', 'baumsbaumsbaum|k', 'baum|s+'),
       gra.find_compositum('baumsbaumsbaum')
     )
-    assert_equal( Lingo::Word.new('baumsbaumsbaumsbaumsbaumsbaum', Lingo::Attendee::WA_UNKNOWN), gra.find_compositum('baumsbaumsbaumsbaumsbaumsbaum'))
+    assert_equal(Lingo::Language::Word.new('baumsbaumsbaumsbaumsbaumsbaum', Lingo::Language::WA_UNKNOWN), gra.find_compositum('baumsbaumsbaumsbaumsbaumsbaum'))
     gra.close
   end
 

@@ -67,6 +67,7 @@ class Lingo
 
   class Attendee
 
+    include Language
     include Reportable
 
     STR_CMD_TALK   = 'TALK'
@@ -79,59 +80,10 @@ class Lingo
     STR_CMD_RECORD = 'RECORD'
     STR_CMD_EOF    = 'EOF'
 
-    TA_WORD        = 'WORD'
-    TA_PUNCTUATION = 'PUNC'
-    TA_OTHER       = 'OTHR'
-
-    # Standardattribut bei der Initialisierung eines Word-Objektes
-    WA_UNSET      = '-'
-    # Status, nachdem das Word im Wörterbuch gefunden wurde
-    WA_IDENTIFIED = 'IDF'
-    # Status, wenn das Word nicht gefunden werden konnte
-    WA_UNKNOWN    = '?'
-    # Wort ist als Kompositum erkannt worden
-    WA_KOMPOSITUM = 'KOM'
-    # Wort ist eine Mehrwortgruppe
-    WA_MULTIWORD  = 'MUL'
-    # Wort ist eine Mehrwortgruppe
-    WA_SEQUENCE   = 'SEQ'
-    # Word ist unbekannt, jedoch Teil einer Mehrwortgruppe
-    WA_UNKMULPART = 'MU?'
-
-    LA_SUBSTANTIV = 's'
-    LA_ADJEKTIV   = 'a'
-    LA_VERB       = 'v'
-    LA_EIGENNAME  = 'e'
-    LA_KOMPOSITUM = 'k'
-    LA_MULTIWORD  = 'm'
-    LA_SEQUENCE   = 'q'
-    LA_WORTFORM   = 'w'
-    LA_SYNONYM    = 'y'
-    LA_STOPWORD   = 't'
-    LA_TAKEITASIS = 'x'
-    LA_UNKNOWN    = '?'
-
-    LA_SORTORDER = [
-      LA_MULTIWORD,
-      LA_KOMPOSITUM,
-      LA_SUBSTANTIV,
-      LA_VERB,
-      LA_ADJEKTIV,
-      LA_EIGENNAME,
-      LA_WORTFORM,
-      LA_STOPWORD,
-      LA_TAKEITASIS,
-      LA_SYNONYM,
-      LA_UNKNOWN
-    ].reverse.join
-
     STA_NUM_COMMANDS = 'Received Commands'
     STA_NUM_OBJECTS  = 'Received Objects '
     STA_TIM_COMMANDS = 'Time to control  '
     STA_TIM_OBJECTS  = 'Time to process  '
-
-    # String-Konstanten im Datenstrom
-    CHAR_PUNCT = '.'
 
     def initialize(config, lingo)
       @lingo = lingo
@@ -293,56 +245,41 @@ class Lingo
     # process(obj)
     # ---------------------------------------------------
 
-  end
-
-  class BufferedAttendee < Attendee
-
-    BufferInsert = Struct.new(:position, :object)
-
-    def initialize(config, lingo)
-      # In den Buffer werden alle Objekte geschrieben, bis process_buffer? == true ist
-      @buffer = []
-
-      # deferred_inserts beeinflussen nicht die Buffer-Größe, sondern werden an einer
-      # bestimmten Stelle in den Datenstrom eingefügt
-      @deferred_inserts = []
-
-      super
+    def dictionary(src, mod)
+      Language::Dictionary.new({ 'source' => src, 'mode' => mod }, @lingo)
     end
 
-    protected
-
-    def process(obj)
-      @buffer.push(obj)
-      process_buffer if process_buffer?
+    def grammar(src, mod)
+      Language::Grammar.new({ 'source' => src, 'mode' => mod }, @lingo)
     end
 
-    private
-
-    def forward_buffer
-      # Aufgeschobene Einfügungen in Buffer kopieren
-      @deferred_inserts.sort_by { |ins| ins.position }.each { |ins|
-        @buffer.insert(ins.position, ins.object)
-      }
-      @deferred_inserts.clear
-
-      # Buffer weiterleiten
-      @buffer.each { |obj| forward(obj) }
-      @buffer.clear
+    def set_dic
+      @dic = dictionary(get_array('source'), get_key('mode', 'all'))
     end
 
-    def process_buffer?
-      true
-    end
-
-    def process_buffer
-      # to be defined by child class
-    end
-
-    def deferred_insert(pos, obj)
-      @deferred_inserts << BufferInsert.new(pos, obj)
+    def set_gra
+      @gra = grammar(get_array('source'), get_key('mode', 'all'))
     end
 
   end
 
 end
+
+require_relative 'buffered_attendee'
+
+require_relative 'attendee/abbreviator'
+require_relative 'attendee/debugger'
+require_relative 'attendee/decomposer'
+require_relative 'attendee/dehyphenizer'
+require_relative 'attendee/multiworder'
+require_relative 'attendee/noneword_filter'
+require_relative 'attendee/objectfilter'
+require_relative 'attendee/variator'
+require_relative 'attendee/sequencer'
+require_relative 'attendee/synonymer'
+require_relative 'attendee/textreader'
+require_relative 'attendee/textwriter'
+require_relative 'attendee/formatter'
+require_relative 'attendee/tokenizer'
+require_relative 'attendee/vector_filter'
+require_relative 'attendee/wordsearcher'

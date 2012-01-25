@@ -29,66 +29,67 @@
 
 class Lingo
 
-  # Der Wordsearcher ist das Herzstück von Lingo. Er macht die Hauptarbeit und versucht
-  # alle Token die nach einem sinnvollen Wort aussehen, in den ihm angegebenen
-  # Wörterbüchern zu finden und aufzulösen. Dabei werden die im Wörterbuch gefundenen
-  # Grundformen inkl. Wortklassen an das Word-Objekt angehängt.
-  #
-  # === Mögliche Verlinkung
-  # Erwartet:: Daten vom Typ *Token* (andere werden einfach durchgereicht) z.B. von Tokenizer, Abbreviator
-  # Erzeugt:: Daten vom Typ *Word* für erkannte Wörter z.B. für Synonymer, Decomposer, Ocr_variator, Multiworder, Sequencer, Noneword_filter, Vector_filter
-  #
-  # === Parameter
-  # Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der Voreinstellung).
-  # Alle anderen Parameter müssen zwingend angegeben werden.
-  # <b>in</b>:: siehe allgemeine Beschreibung des Attendee
-  # <b>out</b>:: siehe allgemeine Beschreibung des Attendee
-  # <b>source</b>:: siehe allgemeine Beschreibung des Dictionary
-  # <b><i>mode</i></b>:: (Standard: all) siehe allgemeine Beschreibung des Dictionary
-  #
-  # === Beispiele
-  # Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration <tt>t1.cfg</tt>
-  #   meeting:
-  #     attendees:
-  #       - textreader:   { out: lines, files: '$(files)' }
-  #       - tokenizer:    { in: lines, out: token }
-  #       - abbreviator:  { in: token, out: abbrev, source: 'sys-abk' }
-  #       - wordsearcher: { in: abbrev, out: words, source: 'sys-dic' }
-  #       - debugger:     { in: words, prompt: 'out>' }
-  # ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
-  #   out> *FILE('test.txt')
-  #   out> <Dies = [(dies/w)]>
-  #   out> <ist = [(sein/v)]>
-  #   out> <ggf. = [(gegebenenfalls/w)]>
-  #   out> <eine = [(einen/v), (ein/w)]>
-  #   out> <Abk³rzung = [(abk³rzung/s)]>
-  #   out> :./PUNC:
-  #   out> *EOL('test.txt')
-  #   out> *EOF('test.txt')
+  class Attendee
 
-  class Attendee::Wordsearcher < Attendee
+    # Der Wordsearcher ist das Herzstück von Lingo. Er macht die Hauptarbeit und versucht
+    # alle Token die nach einem sinnvollen Wort aussehen, in den ihm angegebenen
+    # Wörterbüchern zu finden und aufzulösen. Dabei werden die im Wörterbuch gefundenen
+    # Grundformen inkl. Wortklassen an das Word-Objekt angehängt.
+    #
+    # === Mögliche Verlinkung
+    # Erwartet:: Daten vom Typ *Token* (andere werden einfach durchgereicht) z.B. von Tokenizer, Abbreviator
+    # Erzeugt:: Daten vom Typ *Word* für erkannte Wörter z.B. für Synonymer, Decomposer, Ocr_variator, Multiworder, Sequencer, Noneword_filter, Vector_filter
+    #
+    # === Parameter
+    # Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der Voreinstellung).
+    # Alle anderen Parameter müssen zwingend angegeben werden.
+    # <b>in</b>:: siehe allgemeine Beschreibung des Attendee
+    # <b>out</b>:: siehe allgemeine Beschreibung des Attendee
+    # <b>source</b>:: siehe allgemeine Beschreibung des Dictionary
+    # <b><i>mode</i></b>:: (Standard: all) siehe allgemeine Beschreibung des Dictionary
+    #
+    # === Beispiele
+    # Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration <tt>t1.cfg</tt>
+    #   meeting:
+    #     attendees:
+    #       - textreader:   { out: lines, files: '$(files)' }
+    #       - tokenizer:    { in: lines, out: token }
+    #       - abbreviator:  { in: token, out: abbrev, source: 'sys-abk' }
+    #       - wordsearcher: { in: abbrev, out: words, source: 'sys-dic' }
+    #       - debugger:     { in: words, prompt: 'out>' }
+    # ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
+    #   out> *FILE('test.txt')
+    #   out> <Dies = [(dies/w)]>
+    #   out> <ist = [(sein/v)]>
+    #   out> <ggf. = [(gegebenenfalls/w)]>
+    #   out> <eine = [(einen/v), (ein/w)]>
+    #   out> <Abk³rzung = [(abk³rzung/s)]>
+    #   out> :./PUNC:
+    #   out> *EOL('test.txt')
+    #   out> *EOF('test.txt')
 
-    def init
-      # Wörterbuch bereitstellen
-      src = get_array('source')
-      mod = get_key('mode', 'all')
-      @dic = Dictionary.new({'source'=>src, 'mode'=>mod}, @lingo)
-    end
+    class Wordsearcher < self
 
-    def control(cmd, par)
-      @dic.report.each_pair { |key, value|
-        set(key, value)
-      } if cmd == STR_CMD_STATUS
-    end
-
-    def process(obj)
-      if obj.is_a?(Token) && obj.attr == TA_WORD
-        inc('Anzahl gesuchter Wörter')
-        word = @dic.find_word(obj.form)
-        inc('Anzahl gefundener Wörter') unless word.attr == WA_UNKNOWN
-        obj = word
+      def init
+        set_dic
       end
-      forward(obj)
+
+      def control(cmd, par)
+        @dic.report.each_pair { |key, value|
+          set(key, value)
+        } if cmd == STR_CMD_STATUS
+      end
+
+      def process(obj)
+        if obj.is_a?(Token) && obj.attr == TA_WORD
+          inc('Anzahl gesuchter Wörter')
+          word = @dic.find_word(obj.form)
+          inc('Anzahl gefundener Wörter') unless word.attr == WA_UNKNOWN
+          obj = word
+        end
+        forward(obj)
+      end
+
     end
 
   end
