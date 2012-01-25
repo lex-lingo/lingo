@@ -5,7 +5,7 @@
 # Mehrworterkennung und Relationierung.
 #
 # Copyright (C) 2005-2007 John Vorhauer
-# Copyright (C) 2007-2012 John Vorhauer, Jens Wille
+# Copyright (C) 2007-2011 John Vorhauer, Jens Wille
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU Affero General Public License as published by the Free
@@ -29,61 +29,26 @@
 
 class Lingo
 
-  # Provides counters.
+  class AgendaItem
 
-  module Reportable
+    include Comparable
 
-    def init_reportable(prefix = nil)
-      @counters, @prefix = Hash.new(0), prefix ? "#{prefix}: " : ''
+    attr_reader :cmd, :param
+
+    def initialize(cmd, param = nil)
+      @cmd, @param = cmd || '', param || ''
     end
 
-    def inc(counter)
-      @counters[counter] += 1
+    def <=>(other)
+      other.is_a?(self.class) ? to_a <=> other.to_a : 1
     end
 
-    def add(counter, value)
-      @counters[counter] += value
+    def to_a
+      [cmd, param]
     end
 
-    def set(counter, value)
-      @counters[counter] = value
-    end
-
-    def get(counter)
-      @counters[counter]
-    end
-
-    def report
-      @counters.each_with_object({}) { |(k, v), r| r["#{@prefix}#{k}"] = v }
-    end
-
-  end
-
-  # Provides a simple caching mechanism.
-
-  module Cachable
-
-    def init_cachable
-      @cache = Hash.new(false)
-    end
-
-    def hit?(key)
-      @cache.has_key?(key)
-    end
-
-    def store(key, value)
-      @cache[key] = cache_value(value)
-      value
-    end
-
-    def retrieve(key)
-      cache_value(@cache[key])
-    end
-
-    private
-
-    def cache_value(value)
-      value.nil? ? nil : value.dup
+    def inspect
+      "*#{cmd.upcase}('#{param}')"
     end
 
   end

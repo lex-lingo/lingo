@@ -254,7 +254,7 @@ Wort2=
         yield db
       else
         store = db.to_h
-        store.delete(Lingo::SYS_KEY)
+        store.delete(Lingo::Database::SYS_KEY)
 
         assert_equal(output, store)
       end

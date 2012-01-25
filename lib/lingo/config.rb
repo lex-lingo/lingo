@@ -50,7 +50,7 @@ class Lingo
 
         if i = r['files']
           r['files'] = i.strip == '$(files)' ?
-            f : i.split(STRING_SEPERATOR_PATTERN)
+            f : i.split(STRING_SEPARATOR_RE)
         elsif !f.empty?
           r['files'] = f
         end

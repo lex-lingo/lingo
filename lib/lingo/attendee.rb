@@ -27,11 +27,6 @@
 # Lex Lingo rules from here on
 #++
 
-require_relative 'modules'
-require_relative 'language'
-require_relative 'const'
-require_relative 'types'
-
 class Lingo
 
   # Lingo ist als universelles Indexierungssystem entworfen worden. Seine Stärke liegt in der einfachen Konfigurierbarkeit für
@@ -73,6 +68,70 @@ class Lingo
   class Attendee
 
     include Reportable
+
+    STR_CMD_TALK   = 'TALK'
+    STR_CMD_STATUS = 'STATUS'
+    STR_CMD_ERR    = 'ERR'
+    STR_CMD_WARN   = 'WARN'
+    STR_CMD_LIR    = 'LIR-FORMAT'
+    STR_CMD_FILE   = 'FILE'
+    STR_CMD_EOL    = 'EOL'
+    STR_CMD_RECORD = 'RECORD'
+    STR_CMD_EOF    = 'EOF'
+
+    TA_WORD        = 'WORD'
+    TA_PUNCTUATION = 'PUNC'
+    TA_OTHER       = 'OTHR'
+
+    # Standardattribut bei der Initialisierung eines Word-Objektes
+    WA_UNSET      = '-'
+    # Status, nachdem das Word im Wörterbuch gefunden wurde
+    WA_IDENTIFIED = 'IDF'
+    # Status, wenn das Word nicht gefunden werden konnte
+    WA_UNKNOWN    = '?'
+    # Wort ist als Kompositum erkannt worden
+    WA_KOMPOSITUM = 'KOM'
+    # Wort ist eine Mehrwortgruppe
+    WA_MULTIWORD  = 'MUL'
+    # Wort ist eine Mehrwortgruppe
+    WA_SEQUENCE   = 'SEQ'
+    # Word ist unbekannt, jedoch Teil einer Mehrwortgruppe
+    WA_UNKMULPART = 'MU?'
+
+    LA_SUBSTANTIV = 's'
+    LA_ADJEKTIV   = 'a'
+    LA_VERB       = 'v'
+    LA_EIGENNAME  = 'e'
+    LA_KOMPOSITUM = 'k'
+    LA_MULTIWORD  = 'm'
+    LA_SEQUENCE   = 'q'
+    LA_WORTFORM   = 'w'
+    LA_SYNONYM    = 'y'
+    LA_STOPWORD   = 't'
+    LA_TAKEITASIS = 'x'
+    LA_UNKNOWN    = '?'
+
+    LA_SORTORDER = [
+      LA_MULTIWORD,
+      LA_KOMPOSITUM,
+      LA_SUBSTANTIV,
+      LA_VERB,
+      LA_ADJEKTIV,
+      LA_EIGENNAME,
+      LA_WORTFORM,
+      LA_STOPWORD,
+      LA_TAKEITASIS,
+      LA_SYNONYM,
+      LA_UNKNOWN
+    ].reverse.join
+
+    STA_NUM_COMMANDS = 'Received Commands'
+    STA_NUM_OBJECTS  = 'Received Objects '
+    STA_TIM_COMMANDS = 'Time to control  '
+    STA_TIM_OBJECTS  = 'Time to process  '
+
+    # String-Konstanten im Datenstrom
+    CHAR_PUNCT = '.'
 
     def initialize(config, lingo)
       @lingo = lingo
@@ -223,7 +282,7 @@ class Lingo
     end
 
     def get_array(key, default=nil)
-      get_key(key, default).split(STRING_SEPERATOR_PATTERN)
+      get_key(key, default).split(STRING_SEPARATOR_RE)
     end
 
     # ---------------------------------------------------

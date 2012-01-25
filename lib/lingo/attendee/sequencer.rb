@@ -133,7 +133,7 @@ class Lingo
     def process_buffer?
       #   start buffer processing when stopper token are found or at unknown words
       item = @buffer.last
-      (item.is_a?(StringA) && @stopper.include?(item.attr.upcase)) ||
+      (item.is_a?(WordForm) && @stopper.include?(item.attr.upcase)) ||
       (item.is_a?(Word) && item.unknown?)
     end
 

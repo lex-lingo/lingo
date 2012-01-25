@@ -98,7 +98,7 @@ class Lingo
 
     def control(cmd, param)
       if @spooler
-        @spool_from.each { |obj| forward(obj) } if cmd==STR_CMD_TALK
+        @spool_from.each { |obj| forward(obj) } if cmd == STR_CMD_TALK
       else
         @dump_to << AgendaItem.new(cmd, param)
       end

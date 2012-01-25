@@ -123,7 +123,7 @@ class Lingo
         name = rule.keys[0]
         expr = rule.values[0].gsub(/_(\w+?)_/) {
           macros[$&] || begin
-            Lingo.const_get("UTF_8_#{$1.upcase}")
+            TxtFile.const_get("UTF8_#{$1.upcase}")
           rescue NameError
           end
         }

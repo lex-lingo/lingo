@@ -34,7 +34,14 @@ require 'nuggets/env/user_home'
 require 'nuggets/numeric/duration'
 
 require_relative 'lingo/config'
-require_relative 'lingo/attendees'
+require_relative 'lingo/cachable'
+require_relative 'lingo/reportable'
+require_relative 'lingo/agenda_item'
+require_relative 'lingo/word_form'
+require_relative 'lingo/database'
+require_relative 'lingo/language'
+require_relative 'lingo/core_ext'
+require_relative 'lingo/attendee'
 require_relative 'lingo/attendee/abbreviator'
 require_relative 'lingo/attendee/debugger'
 require_relative 'lingo/attendee/decomposer'
@@ -68,13 +75,19 @@ class Lingo
 
   ENV['LINGO_PLUGIN_PATH'] ||= File.join(HOME, 'plugins')
 
+  # Map of file types to their standard location and file extension.
   FIND_OPTIONS = {
     config: { dir: 'config', ext: 'cfg'  },
     dict:   { dir: 'dict',   ext: 'txt'  },
     lang:   { dir: 'lang',   ext: 'lang' },
-    store:  { dir: 'store',  ext: nil    },
+    store:  { dir: 'store',  ext:  nil   },
     sample: { dir: 'txt',    ext: 'txt'  }
   }
+
+  # Default encoding
+  ENC = 'UTF-8'.freeze
+
+  STRING_SEPARATOR_RE = %r{[; ,|]}
 
   class << self
 
@@ -240,10 +253,10 @@ class Lingo
       attendee = Attendee.const_get(cfg['name']).new(cfg, self)
       @attendees << attendee
 
-      cfg['in'].split(STRING_SEPERATOR_PATTERN).each { |interest|
+      cfg['in'].split(STRING_SEPARATOR_RE).each { |interest|
         subscriber[interest] << attendee
       }
-      cfg['out'].split(STRING_SEPERATOR_PATTERN).each { |theme|
+      cfg['out'].split(STRING_SEPARATOR_RE).each { |theme|
         supplier[theme] << attendee
       }
     }
@@ -257,12 +270,12 @@ class Lingo
     @report_status, @report_time = report_status, report_time
 
     time = Benchmark.realtime {
-      @attendees.first.listen(AgendaItem.new(STR_CMD_TALK))
+      @attendees.first.listen(AgendaItem.new(Attendee::STR_CMD_TALK))
     }
 
     if report_status || report_time
       config.stderr.puts "Require protocol...\n#{separator = '-' * 61}"
-      @attendees.first.listen(AgendaItem.new(STR_CMD_STATUS))
+      @attendees.first.listen(AgendaItem.new(Attendee::STR_CMD_STATUS))
       config.stderr.puts "#{separator}\nThe duration of the meeting was #{time.to_hms(2)}"
     end
   end

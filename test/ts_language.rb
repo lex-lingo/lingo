@@ -105,8 +105,8 @@ class TestLexicalHash < LingoTestCase
 
   def test_multivalue
     ds = Lingo::LexicalHash.new('sys-syn', @lingo)
-# assert_equal([lx('abrollen', LA_SYNONYM), lx('abschaffen', LA_SYNONYM), lx('abwickeln', LA_SYNONYM), lx('auflösen (geschäft)','y')], ds['abwickeln'])
-# assert_equal([lx('niederschlag', LA_SYNONYM), lx('regen', LA_SYNONYM), lx('schauer', LA_SYNONYM)], ds['regen'])
+    assert_equal([lx('abbau <chemie>|y'), lx('chemische abbaureaktion|y'), lx('chemischer abbau|y'), lx('photochemischer abbau|y')], ds['abbaureaktion'])
+    assert_equal([lx('dependenz|y'), lx('unselbstständigkeit|y'), lx('unselbständigkeit|y')], ds['abhängigkeit'])
     ds.close
   end
 
@@ -388,7 +388,7 @@ class TestGrammar < LingoTestCase
       wd('baumsbaumsbaum|KOM', 'baumsbaumsbaum|k', 'baum|s+'),
       gra.find_compositum('baumsbaumsbaum')
     )
-    assert_equal( Lingo::Word.new('baumsbaumsbaumsbaumsbaumsbaum', Lingo::WA_UNKNOWN), gra.find_compositum('baumsbaumsbaumsbaumsbaumsbaum'))
+    assert_equal( Lingo::Word.new('baumsbaumsbaumsbaumsbaumsbaum', Lingo::Attendee::WA_UNKNOWN), gra.find_compositum('baumsbaumsbaumsbaumsbaumsbaum'))
     gra.close
   end
 

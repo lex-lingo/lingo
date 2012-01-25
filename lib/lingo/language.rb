@@ -27,10 +27,6 @@
 # Lex Lingo rules from here on
 #++
 
-require_relative 'const'
-require_relative 'modules'
-require_relative 'database'
-
 class Lingo
 
   # Die Klasse LexicalHash ermöglicht den Zugriff auf die Lingodatenbanken. Im Gegensatz zur
@@ -50,7 +46,7 @@ class Lingo
       config = lingo.config['language/dictionary/databases/' + id]
       raise "No such data source `#{id}'" unless config
 
-      @wordclass = config.fetch( 'def-wc', LA_UNKNOWN )
+      @wordclass = config.fetch('def-wc', Attendee::LA_UNKNOWN)
 
       # Store erzeugen
       @source = Database.new(id, lingo)
@@ -162,11 +158,11 @@ class Lingo
         return word
       end
 
-      word = Word.new(string, WA_UNKNOWN)
+      word = Word.new(string, Attendee::WA_UNKNOWN)
       lexicals = select_with_suffix(string)
       unless lexicals.empty?
         word.lexicals = lexicals
-        word.attr = WA_IDENTIFIED
+        word.attr = Attendee::WA_IDENTIFIED
       end
       store(key, word)
     end
@@ -174,17 +170,17 @@ class Lingo
     def find_synonyms(obj)
       # alle Lexicals des Wortes
       lexis = obj.lexicals
-      lexis = [obj] if lexis.empty? && obj.attr==WA_UNKNOWN
+      lexis = [obj] if lexis.empty? && obj.attr==Attendee::WA_UNKNOWN
       # alle gefundenen Synonyme
       synos = []
       # multiworder optimization
-      key_ref = %r{\A#{Regexp.escape(KEY_REF)}\d+}o
+      key_ref = %r{\A#{Regexp.escape(Database::KEY_REF)}\d+}o
 
       lexis.each do |lex|
         # Synonyme für Teile eines Kompositum ausschließen
-        next if obj.attr==WA_KOMPOSITUM && lex.attr!=LA_KOMPOSITUM
+        next if obj.attr==Attendee::WA_KOMPOSITUM && lex.attr!=Attendee::LA_KOMPOSITUM
         # Synonyme für Synonyme ausschließen
-        next if lex.attr==LA_SYNONYM
+        next if lex.attr==Attendee::LA_SYNONYM
 
         select(lex.form).each do |syn|
           synos << syn unless syn =~ key_ref
@@ -359,7 +355,7 @@ class Lingo
       end
 
       # Ergebnis vorbelegen
-      comp = Word.new(string, WA_UNKNOWN)
+      comp = Word.new(string, Attendee::WA_UNKNOWN)
 
       # Validitätsprüfung: nur Strings mit Mindestlänge auf Kompositum prüfen
       if string.size <= @comp_min_word_size
@@ -375,9 +371,9 @@ class Lingo
         # Auf Level 1 Kompositum zurück geben
         if lexis.size > 0 && is_valid?( string, stats, lexis, seqs )
           inc('Komposita erkannt')
-          comp.attr = WA_KOMPOSITUM
+          comp.attr = Attendee::WA_KOMPOSITUM
           comp.lexicals = lexis.collect do |lex|
-            (lex.attr==LA_KOMPOSITUM) ? lex : Lexical.new(lex.form, lex.attr+@append_wc)
+            (lex.attr==Attendee::LA_KOMPOSITUM) ? lex : Lexical.new(lex.form, lex.attr+@append_wc)
           end
         end
 
@@ -420,7 +416,7 @@ class Lingo
           stats, lexis, seqs = test_compositum(fr_str, '', ba_str, level, has_tail)
 
           unless lexis.empty?
-            if lexis[-1].attr==LA_TAKEITASIS
+            if lexis[-1].attr==Attendee::LA_TAKEITASIS
               # => halbes Kompositum
               @suggestions[level] << [stats, lexis, seqs]
             else
@@ -478,7 +474,7 @@ class Lingo
 
       # 4. Möglichkeit:  Take it as is [Nimm's, wie es ist] (nur im Bindestrich-Fall!)
       if back_lexicals.empty? && infix=='-'
-        back_lexicals = [Lexical.new(back_string, LA_TAKEITASIS)]
+        back_lexicals = [Lexical.new(back_string, Attendee::LA_TAKEITASIS)]
         back_form = back_string
         seqs[1] = back_lexicals.sort[0].attr
       end
@@ -507,7 +503,7 @@ class Lingo
 
       # 3. Möglichkeit:  Take it as is [Nimm's, wie es ist] (nur im Bindestrich-Fall!)
       if front_lexicals.empty? && infix=='-'
-        front_lexicals = [Lexical.new(front_string, LA_TAKEITASIS)]
+        front_lexicals = [Lexical.new(front_string, Attendee::LA_TAKEITASIS)]
         seqs[0] = front_lexicals.sort[0].attr
         front_form = front_string
       end
@@ -517,9 +513,9 @@ class Lingo
 
       # Kompositum gefunden, Grundform bilden
       lexis = (front_lexicals + back_lexicals).collect { |lex|
-        (lex.attr==LA_KOMPOSITUM) ? nil : lex
+        (lex.attr==Attendee::LA_KOMPOSITUM) ? nil : lex
       }.compact
-      lexis << Lexical.new(front_form + infix + back_form, LA_KOMPOSITUM)
+      lexis << Lexical.new(front_form + infix + back_form, Attendee::LA_KOMPOSITUM)
 
       [stats, lexis.sort, seqs.join ]
     end

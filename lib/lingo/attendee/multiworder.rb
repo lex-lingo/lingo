@@ -109,8 +109,8 @@ class Lingo
         end
       }
       lex_mod = get_key('lex-mode', lex_mod || 'first')
-      @lex_dic = Dictionary.new({'source'=>lex_src.split(STRING_SEPERATOR_PATTERN), 'mode'=>lex_mod}, @lingo)
-      @lex_gra = Grammar.new({'source'=>lex_src.split(STRING_SEPERATOR_PATTERN), 'mode'=>lex_mod}, @lingo)
+      @lex_dic = Dictionary.new({'source'=>lex_src.split(STRING_SEPARATOR_RE), 'mode'=>lex_mod}, @lingo)
+      @lex_gra = Grammar.new({'source'=>lex_src.split(STRING_SEPARATOR_RE), 'mode'=>lex_mod}, @lingo)
 
       if @combine && has_key?('use-syn')
         syn_src = get_array('use-syn')
@@ -249,7 +249,7 @@ class Lingo
 
       # Wortformen aus der Wortliste auslesen
       sequence = @buffer.map { |obj|
-        next [obj] unless obj.is_a?(StringA)
+        next [obj] unless obj.is_a?(WordForm)
 
         form = obj.form
         next if form == CHAR_PUNCT
