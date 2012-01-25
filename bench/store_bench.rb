@@ -1,4 +1,4 @@
-#! /usr/bin/env ruby
+# encoding: utf-8
 
 require_relative 'bench_helper'
 require_optional 'sdbm', 'gdbm', 'depot', 'sqlite3', %w[cdb cdb-full], 'libcdb'

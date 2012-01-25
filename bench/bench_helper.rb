@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'benchmark'
 
 def require_optional(*args)

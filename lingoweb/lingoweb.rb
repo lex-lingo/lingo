@@ -1,4 +1,5 @@
 #! /usr/bin/env ruby
+# encoding: utf-8
 
 # Usage:
 #   ruby lingoweb.rb [-p <port>]
