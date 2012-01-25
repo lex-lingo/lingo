@@ -70,7 +70,6 @@ class Lingo
 
     def initialize(id, lingo)
       @config = lingo.database_config(id)
-      raise "No such database `#{id}'." unless @config && @config.has_key?('name')
 
       @id, @lingo = id, lingo
       @src_file   = Lingo.find(:dict, @config['name'])
@@ -78,7 +77,7 @@ class Lingo
 
       begin
         @dbm_name = Lingo.find(:store, @src_file)
-      rescue
+      rescue NoWritableStoreError
         @backend  = HashStore
       else
         FileUtils.mkdir_p(File.dirname(@dbm_name))

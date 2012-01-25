@@ -42,8 +42,8 @@ class Lingo
       # config = Attendee-spezifische Parameter
       # dictionary_config = Datenbankkonfiguration aus de.lang
       def initialize(config, lingo)
-        init_reportable
         init_cachable
+        init_reportable
 
         @dictionary = Dictionary.new(config, lingo)
 

@@ -31,6 +31,7 @@ require 'nuggets/env/user_home'
 require 'nuggets/numeric/duration'
 
 require_relative 'lingo/call'
+require_relative 'lingo/error'
 require_relative 'lingo/config'
 require_relative 'lingo/core_ext'
 require_relative 'lingo/cachable'
@@ -42,6 +43,8 @@ require_relative 'lingo/attendee'
 require_relative 'lingo/version'
 
 class Lingo
+
+  include Error
 
   # The system-wide Lingo directory (+LINGO_BASE+).
   BASE = ENV['LINGO_BASE'] || File.expand_path('../..', __FILE__)
@@ -144,7 +147,7 @@ class Lingo
         }
       }
 
-      raise 'No writable store found in search path'
+      raise NoWritableStoreError.new(file, path)
     end
 
     def options_for(type, options = {})
@@ -196,10 +199,15 @@ class Lingo
 
   def dictionary_config
     @dictionary_config ||= config['language/dictionary']
+  rescue => err
+    raise ConfigLoadError.new(err)
   end
 
   def database_config(id)
-    dictionary_config['databases'][id]
+    dictionary_config['databases'][id].tap { |cfg|
+      raise NoDatabaseConfigError.new(id) unless cfg
+      raise InvalidDatabaseConfigError.new(id) unless cfg.has_key?('name')
+    }
   end
 
   def lexical_hash(src)

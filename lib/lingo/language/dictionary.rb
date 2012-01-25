@@ -34,36 +34,33 @@ class Lingo
       include Reportable
 
       def initialize(config, lingo)
-        init_reportable
+        unless config.has_key?('source')
+          raise ArgumentError, 'Required parameter `source\' missing.'
+        end
+
         init_cachable
+        init_reportable
 
-        dictionary_config = lingo.dictionary_config
+        @suffixes, @infixes = [], []
 
-        # Parameter prüfen
-        raise "Keine Sprach-Konfiguration angegeben!" if dictionary_config.nil?
-        raise "Keine Parameter angegeben!" if config.nil?
-        raise "Keine Datenquellen angegeben!" unless config.has_key?('source')
+        if suffix = lingo.dictionary_config['suffix']
+          suffix.each { |t, s|
+            t.downcase!
 
-        # Parameter auslesen
-        @all_sources = (config['mode'].nil? || config['mode'].downcase=='all')
+            s.split.each { |suf|
+              su, ex = suf.split('/')
 
-        @sources = config['source'].map { |src| lingo.lexical_hash(src) }
+              (t == 'f' ? @infixes : @suffixes) << [
+                Regexp.new(su << '$', 'i'), ex || '*', t
+              ]
+            }
+          }
+        end
+
+        @sources     = config['source'].map { |src| lingo.lexical_hash(src) }
+        @all_sources = config['mode'].nil? || config['mode'].downcase == 'all'
 
         lingo.dictionaries << self
-
-        # Parameter aus de.lang:language/dictionary auslesen
-        @suffixes = []
-        @infixes = []
-
-        dictionary_config['suffix'].each {|arr|
-          typ, sufli = arr
-          typ.downcase!
-          sufli.split.each {|suf|
-            su, ex = suf.split('/')
-            fix = [Regexp.new(su+'$', 'i'), ex.nil? ? '*' : ex, typ]
-            (typ=='f' ? @infixes : @suffixes) << fix
-          }
-        } if dictionary_config.has_key?( 'suffix' )
       end
 
       def close

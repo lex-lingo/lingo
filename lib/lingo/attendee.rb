@@ -87,11 +87,8 @@ class Lingo
 
       init_reportable
 
-      begin
-        lingo.dictionary_config
-      rescue
-        raise "Fehler in der .lang-Datei bei 'language/dictionary'"
-      end
+      # Make sure config exists
+      lingo.dictionary_config
 
       @config, @subscriber = config, []
 

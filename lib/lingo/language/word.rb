@@ -67,7 +67,7 @@ class Lingo
         if lexis.is_a?(Array)
           @lexicals = lexis.sort.uniq
         else
-          raise 'Falscher Typ bei Zuweisung'
+          raise TypeError, "wrong argument type #{lexis.class} (expected Array)"
         end
       end
 

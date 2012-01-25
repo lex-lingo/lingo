@@ -38,19 +38,15 @@ class Lingo
       include Reportable
 
       def initialize(id, lingo)
-        init_reportable(id)
         init_cachable
+        init_reportable(id)
 
-        config = lingo.config['language/dictionary/databases/' + id]
-        raise "No such data source `#{id}'" unless config
-
-        @wordclass = config.fetch('def-wc', Language::LA_UNKNOWN)
-
-        @source = Database.open(id, lingo)
+        @wc  = lingo.database_config(id).fetch('def-wc', Language::LA_UNKNOWN)
+        @src = Database.open(id, lingo)
       end
 
       def close
-        @source.close
+        @src.close
       end
 
       def [](key)
@@ -64,13 +60,13 @@ class Lingo
 
         inc('source reads')
 
-        if record = @source[key]
+        if record = @src[key]
           record = record.map { |str|
             case str
               when /^\*\d+$/           then str
               when /^#(.)$/            then Lexical.new(key, $1)
               when /^([^#]+?)\s*#(.)$/ then Lexical.new($1, $2)
-              when /^([^#]+)$/         then Lexical.new($1, @wordclass)
+              when /^([^#]+)$/         then Lexical.new($1, @wc)
               else                          str
             end
           }

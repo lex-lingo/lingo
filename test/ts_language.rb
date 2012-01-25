@@ -19,7 +19,7 @@ class TestLexicalHash < LingoTestCase
     old_stderr, $stderr = $stderr, StringIO.new('')
 
     # Datenquelle nicht in Konfiguration enthalten
-    assert_raise(RuntimeError) { LH.new('nonsens', @lingo) }
+    assert_raise(Lingo::NoDatabaseConfigError) { LH.new('nonsens', @lingo) }
   ensure
     $stderr = old_stderr
   end
@@ -124,11 +124,9 @@ class TestDictionary < LingoTestCase
 
   def test_params
     # Keine Sprach-Konfiguration angegeben
-    #assert_raise(RuntimeError) { LD.new({'source'=>['sys-dic']}, @lingo) }
-    # Keine Parameter angegeben
-    assert_raise(RuntimeError) { LD.new(nil, @lingo) }
+   #assert_raise(RuntimeError) { LD.new({'source'=>['sys-dic']}, @lingo) }
     # Falsche Parameter angegeben (Pflichtparameter ohne Defaultwert)
-    assert_raise(RuntimeError) { LD.new({'course'=>['sys-dic']}, @lingo) }
+    assert_raise(ArgumentError) { LD.new({'course'=>['sys-dic']}, @lingo) }
   end
 
   def test_cache

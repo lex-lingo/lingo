@@ -70,12 +70,15 @@ class Lingo
         @config = lingo.database_config(id)
 
         source_file = Lingo.find(:dict, name = @config['name'])
-        reject_file = Lingo.find(:store, source_file) << '.rev' rescue nil
+        reject_file = begin
+          Lingo.find(:store, source_file) << '.rev'
+        rescue NoWritableStoreError
+        end
 
         @pn_source = Pathname.new(source_file)
         @pn_reject = Pathname.new(reject_file) if reject_file
 
-        raise "No such source file `#{name}' for `#{id}'." unless @pn_source.exist?
+        raise NoSourceFileError.new(name, id) unless @pn_source.exist?
 
         @wordclass = @config.fetch('def-wc', '?').downcase
         @separator = @config['separator']
