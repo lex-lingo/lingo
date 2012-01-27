@@ -60,18 +60,20 @@ class AttendeeTestCase < LingoTestCase
     @lingo, @output = Lingo.new, []
   end
 
-  def meet(att_cfg, check=true)
-    std_cfg = {'name'=>@attendee.capitalize}
-    std_cfg.update({'in'=>'lines'}) unless @input.nil?
-    std_cfg.update({'out'=>'output'}) unless @output.nil?
+  def meet(att_cfg, check = true)
+    cfg = { 'name' => @attendee.capitalize }
+    cfg.update('in'  => 'input')  if @input
+    cfg.update('out' => 'output') if @output
+    cfg.update(att_cfg)
 
     @output.clear
     @lingo.reset
-    inv_list = []
-    inv_list << {'helper'=>{'name'=>'Helper', 'out'=>'lines', 'spool_from'=>@input}} unless @input.nil?
-    inv_list << {@attendee=>std_cfg.update( att_cfg )}
-    inv_list << {'helper'=>{'name'=>'Helper', 'in'=>'output', 'dump_to'=>@output}} unless @output.nil?
-    @lingo.invite(inv_list)
+
+    list = [{ @attendee => cfg }]
+    list.unshift 'Test_spooler' => { 'out' => 'input',  'input'  => @input  } if @input
+    list.push    'Test_dumper'  => { 'in'  => 'output', 'output' => @output } if @output
+
+    @lingo.invite(list)
     @lingo.start
 
     assert_equal(@expect, @output) if check
@@ -80,36 +82,37 @@ class AttendeeTestCase < LingoTestCase
 end
 
 class Lingo
+  class Attendee
+    class Test_spooler < self
 
-  class Attendee::Helper < Attendee
+      protected
 
-    protected
-
-    def init
-      case
-        when has_key?('spool_from')
-          @spool_from = get_key('spool_from')
-          @spooler = true
-        when has_key?('dump_to')
-          @dump_to = get_key('dump_to')
-          @spooler = false
-        else
-          forward(STR_CMD_ERR, 'Weder dump_to noch spool_from-Attribut abgegeben')
+      def init
+        @input = get_key('input')
       end
-    end
 
-    def control(cmd, param)
-      if @spooler
-        @spool_from.each { |obj| forward(obj) } if cmd == STR_CMD_TALK
-      else
-        @dump_to << AgendaItem.new(cmd, param)
+      def control(cmd, param)
+        @input.each(&method(:forward)) if cmd == STR_CMD_TALK
       end
+
     end
 
-    def process(obj)
-      @dump_to << obj unless @spooler
-    end
+    class Test_dumper < self
 
+      protected
+
+      def init
+        @output = get_key('output')
+      end
+
+      def control(cmd, param)
+        @output << AgendaItem.new(cmd, param)
+      end
+
+      def process(obj)
+        @output << obj
+      end
+
+    end
   end
-
 end
