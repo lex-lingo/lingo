@@ -26,36 +26,35 @@
 
 class Lingo
 
+  require_optional 'sdbm'
+
   class Database
 
-    class Source
+    module SDBMStore
 
-      # Abgeleitet von Source behandelt die Klasse Dateien mit dem Format <tt>MultiKey</tt>.
-      # Eine Zeile <tt>"Triumph;Sieg;Erfolg\n"</tt> wird gewandelt in <tt>[ 'triumph', ['sieg', 'erfolg'] ]</tt>.
-      # Die Sonderbehandlung erfolgt in der Methode Database#convert, wo daraus Schlüssel-Werte-Paare in der Form
-      # <tt>[ 'sieg', ['triumph'] ]</tt> und <tt>[ 'erfolg', ['triumph'] ]</tt> erzeugt werden.
-      # Der Trenner zwischen Schlüssel und Projektion kann über den Parameter <tt>separator</tt> geändert werden.
+      private
 
-      class Multikey < self
+      def uptodate?
+        super(@dbm_name + '.pag')
+      end
 
-        def initialize(id, lingo)
-          super
+      def _clear
+        File.delete(*Dir["#{@dbm_name}.{pag,dir}"])
+      end
 
-          @separator = @config.fetch('separator', ';')
-          @line_pattern = Regexp.new('^' + @legal_word + '(?:' + Regexp.escape(@separator) + @legal_word + ')*$')
+      def _open
+        SDBM.open(@dbm_name)
+      end
+
+      def _set(key, val)
+        if val.length > 950
+          val = val[0, 950]
+
+          @lingo.warn "Warning: Entry `#{key}' (#{@src_file})" <<
+                      'too long for SDBM. Truncating...'
         end
 
-        def set(db, key, val)
-          val.each { |v| db[v] = [key] }
-        end
-
-        private
-
-        def convert_line(line, key, val)
-          values = line.split(@separator).map { |value| value.strip }
-          [values[0], values[1..-1]]
-        end
-
+        super
       end
 
     end

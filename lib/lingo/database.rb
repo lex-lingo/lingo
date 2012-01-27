@@ -24,23 +24,17 @@
 ###############################################################################
 #++
 
-require 'sdbm'
 require 'pathname'
 require 'fileutils'
 require 'digest/sha1'
 
-%w[gdbm libcdb].each { |lib|
-  next if ENV["LINGO_NO_#{lib.upcase}"]
-
-  begin
-    require lib
-  rescue LoadError
-  end
-}
-
 require_relative 'database/show_progress'
 require_relative 'database/crypter'
 require_relative 'database/source'
+require_relative 'database/hash_store'
+require_relative 'database/sdbm_store'
+require_relative 'database/gdbm_store'
+require_relative 'database/libcdb_store'
 
 class Lingo
 
@@ -77,10 +71,9 @@ class Lingo
 
       begin
         @dbm_name = Lingo.find(:store, @src_file)
+        FileUtils.mkdir_p(File.dirname(@dbm_name))
       rescue NoWritableStoreError
         @backend  = HashStore
-      else
-        FileUtils.mkdir_p(File.dirname(@dbm_name))
       end
 
       extend(backend)
@@ -194,171 +187,51 @@ class Lingo
     end
 
     def convert(verbose = @lingo.config.stderr.tty?)
-      format = @config.fetch('txt-format', 'KeyValue').downcase
-      source = Source.const_get(format.capitalize).new(@id, @lingo)
+      src = Source.get(@config.fetch('txt-format', 'KeyValue'), @id, @lingo)
 
-      if lex_dic = @config['use-lex']
-        args = [{
-          'source' => lex_dic.split(STRING_SEPARATOR_RE),
+      if lex = @config['use-lex']
+        a, s = [{
+          'source' => lex.split(STRING_SEPARATOR_RE),
           'mode'   => @config['lex-mode']
-        }, @lingo]
+        }, @lingo], ' '
 
-        dictionary, grammar = %w[Dictionary Grammar].map { |klass|
-          Language.const_get(klass).new(*args)
+        dic = Language::Dictionary.new(*a)
+        gra = Language::Grammar.new(*a)
+
+        block = lambda { |form|
+          res = dic.find_word(form)
+
+          if res.unknown?
+            res = gra.find_compositum(form)
+            com = res.compo_form
+          end
+
+          com ? com.form : res.norm
         }
       end
 
-      progress = ShowProgress.new(@config['name'], verbose, @lingo.config.stderr)
-      progress.start('convert', source.size)
+      ShowProgress.new(self, src.size, verbose) { |progress| create {
+        src.each { |key, val|
+          progress[src.position]
 
-      create {
-        index = -1
+          if key
+            key.chomp!('.')
 
-        source.each { |key, value|
-          progress.tick(source.position)
+            if lex && key.include?(s)
+              k = key.split(s).map!(&block).join(s)
 
-          # Behandle Mehrwortschlüssel
-          if lex_dic && key =~ / /
-            # Schlüssel in Grundform wandeln
-            gkey = key.split(' ').map { |form|
-              # => Wortform ohne Satzendepunkt benutzen
-              form.chomp!('.')
+              c = k.count(s) + 1
+              self[k.split(s)[0, 3].join(s)] = ["#{KEY_REF}#{c}"] if c > 3
 
-              result = dictionary.find_word(form)
-
-              # => Kompositum suchen, wenn Wort nicht erkannt
-              if result.attr == Language::WA_UNKNOWN
-                result = grammar.find_compositum(form)
-                compo  = result.compo_form
-              end
-
-              compo ? compo.form : result.norm
-            }.join(' ')
-
-            skey = gkey.split
-            # Zusatzschlüssel einfügen, wenn Anzahl Wörter > 3
-            self[skey[0, 3].join(' ')] = [KEY_REF + skey.size.to_s] if skey.size > 3
-
-            key, value = gkey, value.map { |v| v.start_with?('#') ? key + v : v }
+              key, val = k, val.map { |v| v.start_with?('#') ? key + v : v }
+            end
           end
 
-          key.chomp!('.') if key
-
-          case format
-            when 'multivalue'
-              self[key = "#{IDX_REF}#{index += 1}"] = value
-              value.each { |v| self[v] = [key] }
-            when 'multikey'
-              value.each { |v| self[v] = [key] }
-            else
-              self[key] = value
-          end
+          src.set(self, key, val)
         }
 
         uptodate!
-      }
-
-      progress.stop('ok')
-    end
-
-    module HashStore
-
-      def to_h
-        @db.dup
-      end
-
-      def close
-        self
-      end
-
-      private
-
-      def uptodate?
-        false
-      end
-
-      def uptodate!
-        nil
-      end
-
-      def _clear
-        @db.clear if @db
-      end
-
-      def _open
-        {}
-      end
-
-      def _closed?
-        false
-      end
-
-    end
-
-    module SDBMStore
-
-      private
-
-      def uptodate?
-        super(@dbm_name + '.pag')
-      end
-
-      def _clear
-        File.delete(*Dir["#{@dbm_name}.{pag,dir}"])
-      end
-
-      def _open
-        SDBM.open(@dbm_name)
-      end
-
-      def _set(key, val)
-        if val.length > 950
-          val = val[0, 950]
-
-          @lingo.config.stderr.puts "Warning: Entry `#{key}' (#{@src_file})" <<
-                                    'too long for SDBM. Truncating...'
-        end
-
-        super
-      end
-
-    end
-
-    module GDBMStore
-
-      private
-
-      def store_ext
-        '.db'
-      end
-
-      def _open
-        GDBM.open(@dbm_name)
-      end
-
-    end
-
-    module LibCDBStore
-
-      private
-
-      def store_ext
-        '.cdb'
-      end
-
-      def create
-        LibCDB::CDB.open(@dbm_name, 'w') { |db|
-          @db = db
-          yield
-        }
-      ensure
-        @db = nil
-      end
-
-      def _open
-        LibCDB::CDB.open(@dbm_name)
-      end
-
+      } }
     end
 
   end

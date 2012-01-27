@@ -26,36 +26,29 @@
 
 class Lingo
 
+  require_optional 'libcdb'
+
   class Database
 
-    class Source
+    module LibCDBStore
 
-      # Abgeleitet von Source behandelt die Klasse Dateien mit dem Format <tt>MultiKey</tt>.
-      # Eine Zeile <tt>"Triumph;Sieg;Erfolg\n"</tt> wird gewandelt in <tt>[ 'triumph', ['sieg', 'erfolg'] ]</tt>.
-      # Die Sonderbehandlung erfolgt in der Methode Database#convert, wo daraus Schlüssel-Werte-Paare in der Form
-      # <tt>[ 'sieg', ['triumph'] ]</tt> und <tt>[ 'erfolg', ['triumph'] ]</tt> erzeugt werden.
-      # Der Trenner zwischen Schlüssel und Projektion kann über den Parameter <tt>separator</tt> geändert werden.
+      private
 
-      class Multikey < self
+      def store_ext
+        '.cdb'
+      end
 
-        def initialize(id, lingo)
-          super
+      def create
+        LibCDB::CDB.open(@dbm_name, 'w') { |db|
+          @db = db
+          yield
+        }
+      ensure
+        @db = nil
+      end
 
-          @separator = @config.fetch('separator', ';')
-          @line_pattern = Regexp.new('^' + @legal_word + '(?:' + Regexp.escape(@separator) + @legal_word + ')*$')
-        end
-
-        def set(db, key, val)
-          val.each { |v| db[v] = [key] }
-        end
-
-        private
-
-        def convert_line(line, key, val)
-          values = line.split(@separator).map { |value| value.strip }
-          [values[0], values[1..-1]]
-        end
-
+      def _open
+        LibCDB::CDB.open(@dbm_name)
       end
 
     end

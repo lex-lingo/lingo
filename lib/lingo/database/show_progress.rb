@@ -30,50 +30,48 @@ class Lingo
 
     class ShowProgress
 
-      def initialize(msg, active = true, out = $stderr)
-        @active, @out, format = active, out, ' [%3d%%]'
+      def initialize(src, max, act = true)
+        @out, @act = src.instance_variable_get(:@lingo).config.stderr, act
 
         # To get the length of the formatted string we have
         # to actually substitute the placeholder.
-        length = (format % 0).length
+        fmt = ' [%3d%%]'
+        len = (fmt % 0).length
 
         # Now we know how far to "go back" to
         # overwrite the formatted string...
-        back = "\b" * length
+        back = "\b" * len
 
-        @format = format       + back
-        @clear  = ' ' * length + back
+        @fmt = fmt       + back
+        @clr = ' ' * len + back
 
-        print msg, ': '
-      end
+        print src.instance_variable_get(:@config)['name'], ': '
 
-      def start(msg, max)
-        @ratio, @count, @next_step = max / 100.0, 0, 0
-        print msg, ' '
+        @rat, @cnt, @next = max / 100.0, 0, 0
+        print 'convert '
         step
+
+        yield self
+
+        print "#{@clr}ok\n"
       end
 
-      def stop(msg)
-        print @clear
-        print msg, "\n"
-      end
-
-      def tick(value)
-        @count = value
-        step if @count >= @next_step
+      def [](value)
+        @cnt = value
+        step if @cnt >= @next
       end
 
       private
 
       def step
-        percent = @count / @ratio
-        @next_step = (percent + 1) * @ratio
+        percent = @cnt / @rat
+        @next = (percent + 1) * @rat
 
-        print @format % percent
+        print @fmt % percent
       end
 
       def print(*args)
-        @out.print(*args) if @active
+        @out.print(*args) if @act
       end
 
     end

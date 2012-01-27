@@ -41,6 +41,13 @@ class Lingo
 
           @separator = @config.fetch('separator', ';')
           @line_pattern = Regexp.new('^' + @legal_word + '(?:' + Regexp.escape(@separator) + @legal_word + ')*$')
+
+          @idx = -1
+        end
+
+        def set(db, key, val)
+          db[key = "#{IDX_REF}#{@idx += 1}"] = val
+          val.each { |v| db[v] = [key] }
         end
 
         private

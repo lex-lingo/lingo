@@ -64,6 +64,10 @@ class Lingo
 
       PRINTABLE_CHAR = "#{UTF8_CHAR}|[<>-]"
 
+      def self.get(name, *args)
+        const_get(name.capitalize).new(*args)
+      end
+
       attr_reader :position
 
       def initialize(id, lingo)
@@ -78,7 +82,7 @@ class Lingo
         @pn_source = Pathname.new(source_file)
         @pn_reject = Pathname.new(reject_file) if reject_file
 
-        raise NoSourceFileError.new(name, id) unless @pn_source.exist?
+        raise SourceFileNotFoundError.new(name, id) unless @pn_source.exist?
 
         @wordclass = @config.fetch('def-wc', '?').downcase
         @separator = @config['separator']
@@ -117,6 +121,10 @@ class Lingo
           reject_file.close
           @pn_reject.delete if @pn_reject.size == 0
         end
+      end
+
+      def set(db, key, val)
+        db[key] = val
       end
 
     end
