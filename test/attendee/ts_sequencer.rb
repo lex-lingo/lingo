@@ -2,10 +2,6 @@
 
 require_relative '../test_helper'
 
-################################################################################
-#
-# Attendee Sequencer
-#
 class TestAttendeeSequencer < AttendeeTestCase
 
   def test_basic
@@ -39,5 +35,3 @@ class TestAttendeeSequencer < AttendeeTestCase
   end
 
 end
-#
-################################################################################

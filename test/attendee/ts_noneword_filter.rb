@@ -2,11 +2,7 @@
 
 require_relative '../test_helper'
 
-################################################################################
-#
-# Attendee Noneword_filter
-#
-class TestAttendeeNoneword_filter < AttendeeTestCase
+class TestAttendeeNonewordFilter < AttendeeTestCase
 
   def test_basic
     @input = [wd('Eins|IDF'), wd('Zwei|?'), wd('Drei|IDF'), wd('Vier|?'), ai('EOF|')]
@@ -15,5 +11,3 @@ class TestAttendeeNoneword_filter < AttendeeTestCase
   end
 
 end
-#
-################################################################################

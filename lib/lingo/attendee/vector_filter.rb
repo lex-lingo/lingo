@@ -28,9 +28,9 @@ class Lingo
 
   class Attendee
 
-    # Die Hauptaufgabe des Vector_filter ist die Erstellung eines Dokumenten-Index-Vektor.
+    # Die Hauptaufgabe des VectorFilter ist die Erstellung eines Dokumenten-Index-Vektor.
     # Dabei werden die durch die anderen Attendees ermittelten Grundformen eines Wortes
-    # gespeichert und bei einem Datei- oder Record-Wechsel weitergeleitet. Der Vector_filter
+    # gespeichert und bei einem Datei- oder Record-Wechsel weitergeleitet. Der VectorFilter
     # kann bestimmte Wortklassen filtern und die Ergebnisse in verschiedenen Arten aufbereiten.
     # Dabei werden Funktionen wie das einfache Zählen der Häufigkeit innerhalb eines Dokuments,
     # aber auch die Term-Frequenz und unterschiedliche Ausgabeformate unterstützt.
@@ -48,7 +48,7 @@ class Lingo
     #                          Es können in eckige Klammern beliebige Wortklassen angegeben werden (siehe lib/strings.rb).
     #                          Der Parameter wird als regulärer Ausdruck ausgewertet.
     # <b><i>sort</i></b>:: (Standard: 'normal')
-    #                      Der Parameter +sort+ beeinflußt Verarbeitung und Ausgabeformat des Vector_filters.
+    #                      Der Parameter +sort+ beeinflußt Verarbeitung und Ausgabeformat des VectorFilters.
     #                      normal:: Jedes gefilterte Wort wird einmalig (keine Doppelnennungen!) in
     #                               alphabetischer Reihenfolge in der Form "wort" ausgegeben.
     #                      term_abs:: Jedes gefilterte Wort wird einmalig in absteigender Häufigkeit mit Angabe
@@ -67,17 +67,17 @@ class Lingo
     # Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration <tt>t1.cfg</tt>
     #   meeting:
     #     attendees:
-    #       - textreader:   { out: lines, files: '$(files)' }
-    #       - tokenizer:    { in: lines, out: token }
-    #       - wordsearcher: { in: token, out: words, source: 'sys-dic' }
+    #       - text_reader:   { out: lines, files: '$(files)' }
+    #       - tokenizer:     { in: lines, out: token }
+    #       - word_searcher: { in: token, out: words, source: 'sys-dic' }
     #       - vector_filter: { in: words, out: filtr, sort: 'term_rel' }
-    #       - debugger:     { in: filtr, prompt: 'out>' }
+    #       - debugger:      { in: filtr, prompt: 'out>' }
     # ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
     #   out> *FILE('test.txt')
     #   out> "0.28571 indexierung"
     #   out> *EOF('test.txt')
 
-    class Vector_filter < self
+    class VectorFilter < self
 
       protected
 
@@ -153,6 +153,10 @@ class Lingo
       end
 
     end
+
+    # For backwards compatibility.
+    Vectorfilter  = VectorFilter
+    Vector_filter = VectorFilter
 
   end
 

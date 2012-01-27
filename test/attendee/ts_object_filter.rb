@@ -2,11 +2,7 @@
 
 require_relative '../test_helper'
 
-################################################################################
-#
-# Attendee Objectfilter
-#
-class TestAttendeeObjectfilter < AttendeeTestCase
+class TestAttendeeObjectFilter < AttendeeTestCase
 
   def test_basic
     @input = [wd('Eins|IDF'), wd('zwei|?'), wd('Drei|IDF'), wd('vier|?'), ai('EOF|')]
@@ -15,5 +11,3 @@ class TestAttendeeObjectfilter < AttendeeTestCase
   end
 
 end
-#
-################################################################################

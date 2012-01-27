@@ -56,12 +56,12 @@ class AttendeeTestCase < LingoTestCase
   def initialize(fname)
     super
 
-    @attendee = $1.downcase if self.class.to_s =~ /TestAttendee(.*)/
+    @attendee = $1 if self.class.to_s =~ /TestAttendee(.*)/
     @lingo, @output = Lingo.new, []
   end
 
   def meet(att_cfg, check = true)
-    cfg = { 'name' => @attendee.capitalize }
+    cfg = { 'name' => @attendee.camelcase }
     cfg.update('in'  => 'input')  if @input
     cfg.update('out' => 'output') if @output
     cfg.update(att_cfg)
@@ -70,8 +70,8 @@ class AttendeeTestCase < LingoTestCase
     @lingo.reset
 
     list = [{ @attendee => cfg }]
-    list.unshift 'Test_spooler' => { 'out' => 'input',  'input'  => @input  } if @input
-    list.push    'Test_dumper'  => { 'in'  => 'output', 'output' => @output } if @output
+    list.unshift 'TestSpooler' => { 'out' => 'input',  'input'  => @input  } if @input
+    list.push    'TestDumper'  => { 'in'  => 'output', 'output' => @output } if @output
 
     @lingo.invite(list)
     @lingo.start
@@ -83,7 +83,7 @@ end
 
 class Lingo
   class Attendee
-    class Test_spooler < self
+    class TestSpooler < self
 
       protected
 
@@ -97,7 +97,7 @@ class Lingo
 
     end
 
-    class Test_dumper < self
+    class TestDumper < self
 
       protected
 

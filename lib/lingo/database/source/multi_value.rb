@@ -30,27 +30,30 @@ class Lingo
 
     class Source
 
-      # Abgeleitet von Source behandelt die Klasse Dateien mit dem Format <tt>KeyValue</tt>.
-      # Eine Zeile <tt>"Fachbegriff*Fachterminus\n"</tt> wird gewandelt in <tt>[ 'fachbegriff', ['fachterminus#s'] ]</tt>.
-      # Die Wortklasse kann über den Parameter <tt>def-wc</tt> beeinflusst werden.
+      # Abgeleitet von Source behandelt die Klasse Dateien mit dem Format <tt>MultiValue</tt>.
+      # Eine Zeile <tt>"Triumph;Sieg;Erfolg\n"</tt> wird gewandelt in <tt>[ nil, ['triumph', 'sieg', 'erfolg'] ]</tt>.
       # Der Trenner zwischen Schlüssel und Projektion kann über den Parameter <tt>separator</tt> geändert werden.
 
-      class Keyvalue < self
+      class MultiValue < self
 
         def initialize(id, lingo)
           super
 
-          @separator = @config.fetch('separator', '*')
-          @line_pattern = Regexp.new('^(' + @legal_word + ')' + Regexp.escape(@separator) + '(' + @legal_word + ')$')
+          @separator = @config.fetch('separator', ';')
+          @line_pattern = Regexp.new('^' + @legal_word + '(?:' + Regexp.escape(@separator) + @legal_word + ')*$')
+
+          @idx = -1
+        end
+
+        def set(db, key, val)
+          db[key = "#{IDX_REF}#{@idx += 1}"] = val
+          val.each { |v| db[v] = [key] }
         end
 
         private
 
         def convert_line(line, key, val)
-          key, val = key.strip, val.strip
-          val = '' if key == val
-          val = [val + '#' + @wordclass]
-          [key, val]
+          [nil, line.split(@separator).map { |value| value.strip }]
         end
 
       end

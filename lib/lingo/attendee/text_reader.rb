@@ -35,11 +35,11 @@ class Lingo
 
   class Attendee
 
-    # Der Textreader ist eine klassische Datenquelle. Er liest eine oder mehrere Dateien
+    # Der TextReader ist eine klassische Datenquelle. Er liest eine oder mehrere Dateien
     # und gibt sie Zeilenweise in den Ausgabekanal. Der Start bzw. Wechsel einer Datei
     # wird dabei über den Kommandokanal angekündigt, ebenso wie das Ende.
     #
-    # Der Textreader kann ebenfalls ein spezielles Dateiformat verarbeiten, welches zum
+    # Der TextReader kann ebenfalls ein spezielles Dateiformat verarbeiten, welches zum
     # Austausch mit dem LIR-System dient. Dabei enthält die Datei Record-basierte Informationen,
     # die wie mehrere Dateien verarbeitet werden.
     #
@@ -70,7 +70,7 @@ class Lingo
     #                                    bzw. +00002+ erkannt.
     #
     # === Generierte Kommandos
-    # Damit der nachfolgende Datenstrom einwandfrei verarbeitet werden kann, generiert der Textreader
+    # Damit der nachfolgende Datenstrom einwandfrei verarbeitet werden kann, generiert der TextReader
     # Kommandos, die mit in den Datenstrom eingefügt werden.
     # <b>*FILE(<dateiname>)</b>:: Kennzeichnet den Beginn der Datei <dateiname>
     # <b>*EOF(<dateiname>)</b>:: Kennzeichnet das Ende der Datei <dateiname>
@@ -80,8 +80,8 @@ class Lingo
     # Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration <tt>t1.cfg</tt>
     #   meeting:
     #     attendees:
-    #       - textreader: { out: lines, files: '$(files)' }
-    #       - debugger:   { in: lines, prompt: 'out>' }
+    #       - text_reader: { out: lines, files: '$(files)' }
+    #       - debugger:    { in: lines, prompt: 'out>' }
     # ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
     #   out> *FILE('test.txt')
     #   out> "Dies ist eine Zeile."
@@ -90,8 +90,8 @@ class Lingo
     # Bei der Verarbeitung einer LIR-Datei mit der Ablaufkonfiguration <tt>t2.cfg</tt>
     #   meeting:
     #     attendees:
-    #       - textreader: { out: lines,  files: '$(files)', lir-record-pattern: "^\[(\d+)\.\]" }
-    #       - debugger:   { in: lines, prompt: 'out>'}
+    #       - text_reader: { out: lines,  files: '$(files)', lir-record-pattern: "^\[(\d+)\.\]" }
+    #       - debugger:    { in: lines, prompt: 'out>'}
     # ergibt die Ausgabe mit <tt>lingo -c t2 lir.txt</tt>
     #   out> *LIR-FORMAT('')
     #   out> *FILE('lir.txt')
@@ -101,7 +101,7 @@ class Lingo
     #   out> "020: Nicht-konventionelle Thesaurusrelationen als Orientierungshilfen."
     #   out> *EOF('lir.txt')
 
-    class Textreader < self
+    class TextReader < self
 
       protected
 
@@ -232,6 +232,10 @@ class Lingo
       end
 
     end
+
+    # For backwards compatibility.
+    Textreader  = TextReader
+    Text_reader = TextReader
 
   end
 

@@ -2,11 +2,7 @@
 
 require_relative '../test_helper'
 
-################################################################################
-#
-# Attendee Textwriter
-#
-class TestAttendeeTextwriter < AttendeeTestCase
+class TestAttendeeTextWriter < AttendeeTestCase
 
   def setup
     @data = [
@@ -94,5 +90,3 @@ FG-Projekt GERHARD.\r\n",
   end
 
 end
-#
-################################################################################

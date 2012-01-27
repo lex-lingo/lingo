@@ -61,10 +61,10 @@ class Lingo
     # Bei der Verarbeitung der oben angegebenen Funktionsbeschreibung des Textwriters mit der Ablaufkonfiguration <tt>t1.cfg</tt>
     #   meeting:
     #     attendees:
-    #       - textreader: { out: lines, files: '$(files)' }
-    #       - debugger:   { in: lines, prompt: 'LINES:) ' }
-    #       - tokenizer:  { in: lines, out: token }
-    #       - debugger:   { in: token, prompt: 'TOKEN:) ' }
+    #       - text_reader: { out: lines, files: '$(files)' }
+    #       - debugger:    { in: lines, prompt: 'LINES:) ' }
+    #       - tokenizer:   { in: lines, out: token }
+    #       - debugger:    { in: token, prompt: 'TOKEN:) ' }
     # ergibt die Ausgabe
     #   LINES:)  *FILE('test.txt')
     #   TOKEN:)  *FILE('test.txt')

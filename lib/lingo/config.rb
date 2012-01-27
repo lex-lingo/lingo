@@ -41,7 +41,7 @@ class Lingo
       load_config('config')
 
       Array(self['meeting/attendees']).each { |a|
-        r = a['textreader'] or next
+        r = a['text_reader'] || a['textreader'] or next
 
         f = @cli.files
 

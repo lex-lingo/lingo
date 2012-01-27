@@ -45,7 +45,7 @@ The main functions of Lingo are:
         'test.cfg', '{de,en}/test_*.txt'
       ].to_a,
       required_ruby_version:    '>= 1.9',
-      dependencies:             [['ruby-nuggets', '>= 0.8.3'], 'unicode', 'highline'],
+      dependencies:             [['ruby-nuggets', '>= 0.8.5'], 'unicode', 'highline'],
       development_dependencies: [['diff-lcs', '>= 1.1.3'], 'open4']
     }
   }}

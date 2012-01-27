@@ -50,18 +50,18 @@ files. Here's a minimal example:
 
   meeting:
     attendees:
-      - textreader: { files: 'README' }
-      - debugger:   { eval: 'true', ceval: 'cmd!="EOL"', prompt: '<debug>: ' }
+      - text_reader: { files: 'README' }
+      - debugger:    { eval: 'true', ceval: 'cmd!="EOL"', prompt: '<debug>: ' }
 
 Lingo is told to invite two attendees. And Lingo wants them to talk to each
 other, hence the name Lingo (= the technical language).
 
-The first attendee is the +textreader+ (Lingo::Attendee::Textreader). It can
+The first attendee is the +text_reader+ (Lingo::Attendee::TextReader). It can
 read files (as well as standard input) and communicate its content to other
-attendees. For this purpose the +textreader+ is given an output channel.
-Everything that the +textreader+ has to say is steered through this channel.
+attendees. For this purpose the +text_reader+ is given an output channel.
+Everything that the +text_reader+ has to say is steered through this channel.
 It will do nothing further until Lingo will tell the first attendee to speak.
-Then the +textreader+ will open the file +README+ (<tt>files</tt> parameter)
+Then the +text_reader+ will open the file +README+ (<tt>files</tt> parameter)
 and babble the content to the world via its output channel.
 
 The second attendee +debugger+ (Lingo::Attendee::Debugger) does nothing else
@@ -79,7 +79,7 @@ above as an example into the file <tt>readme.cfg</tt> and then run <tt>lingo
   <debug>:  *EOF('README')
 
 What we see are lines with an asterisk (*) and lines without. That's because
-Lingo distinguishes between commands and data. The +textreader+ did not only
+Lingo distinguishes between commands and data. The +text_reader+ did not only
 read the content of the file, but also communicated through the commands when
 a file begins and when it ends. This can (and will) be an important piece of
 information for other attendees that will be added later.
@@ -94,33 +94,33 @@ identification, decomposition, etc.
 Available attendees that can be used for solving a specific problem (for more
 information see each attendee's documentation):
 
-<tt>textreader</tt>::      Reads files and puts their content into the channels line by
-                           line. (Lingo::Attendee::Textreader)
+<tt>text_reader</tt>::     Reads files and puts their content into the channels line by
+                           line. (Lingo::Attendee::TextReader)
 <tt>tokenizer</tt>::       Dissects lines into defined character strings, i.e. tokens.
                            (Lingo::Attendee::Tokenizer)
 <tt>abbreviator</tt>::     Identifies abbreviations and produces the long form if listed
                            in a dictionary. (Lingo::Attendee::Abbreviator)
-<tt>wordsearcher</tt>::    Identifies tokens and turns them into words for further
+<tt>word_searcher</tt>::   Identifies tokens and turns them into words for further
                            processing. To do this right it looks into the dictionary.
-                           (Lingo::Attendee::Wordsearcher)
-<tt>decomposer</tt>::      Tests any character strings not identified by the +wordsearcher+
+                           (Lingo::Attendee::WordSearcher)
+<tt>decomposer</tt>::      Tests any character strings not identified by the +word_searcher+
                            for being compounds. (Lingo::Attendee::Decomposer)
 <tt>synonymer</tt>::       Extends words with synonyms. (Lingo::Attendee::Synonymer)
 <tt>noneword_filter</tt>:: Filters out everything and lets through only those tokens that
-                           are unknown. (Lingo::Attendee::Noneword_filter)
+                           are unknown. (Lingo::Attendee::NonewordFilter)
 <tt>vector_filter</tt>::   Filters out everything and lets through only those tokens that are
-                           considered useful for indexing. (Lingo::Attendee::Vector_filter)
-<tt>objectfilter</tt>::    Similar to the +vector_filter+. (Lingo::Attendee::Objectfilter)
-<tt>textwriter</tt>::      Writes anything that it receives into a file (or to standard
-                           output). (Lingo::Attendee::Textwriter)
-<tt>formatter</tt>::       Similar to the +textwriter+, but allows for custom output formats.
+                           considered useful for indexing. (Lingo::Attendee::VectorFilter)
+<tt>object_filter</tt>::   Similar to the +vector_filter+. (Lingo::Attendee::ObjectFilter)
+<tt>text_writer</tt>::     Writes anything that it receives into a file (or to standard
+                           output). (Lingo::Attendee::TextWriter)
+<tt>formatter</tt>::       Similar to the +text_writer+, but allows for custom output formats.
                            (Lingo::Attendee::Formatter)
 <tt>debugger</tt>::        Shows everything for debugging. (Lingo::Attendee::Debugger)
 <tt>variator</tt>::        Tries to correct spelling errors and the like.
                            (Lingo::Attendee::Variator)
 <tt>dehyphenizer</tt>::    Tries to undo hyphenation. (Lingo::Attendee::Dehyphenizer)
-<tt>multiworder</tt>::     Identifies phrases (word sequences) based on a multiword
-                           dictionary. (Lingo::Attendee::Multiworder)
+<tt>multi_worder</tt>::    Identifies phrases (word sequences) based on a multiword
+                           dictionary. (Lingo::Attendee::MultiWorder)
 <tt>sequencer</tt>::       Identifies phrases (word sequences) based on patterns of word
                            classes. (Lingo::Attendee::Sequencer)
 

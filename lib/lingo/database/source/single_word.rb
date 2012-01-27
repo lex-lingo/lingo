@@ -30,29 +30,25 @@ class Lingo
 
     class Source
 
-      # Abgeleitet von Source behandelt die Klasse Dateien mit dem Format <tt>WordClass</tt>.
-      # Eine Zeile <tt>"essen,essen #v essen #o esse #s\n"</tt> wird gewandelt in <tt>[ 'essen', ['esse#s', 'essen#v', 'essen#o'] ]</tt>.
-      # Der Trenner zwischen Schlüssel und Projektion kann über den Parameter <tt>separator</tt> geändert werden.
+      # Abgeleitet von Source behandelt die Klasse Dateien mit dem Format <tt>SingleWord</tt>.
+      # Eine Zeile <tt>"Fachbegriff\n"</tt> wird gewandelt in <tt>[ 'fachbegriff', ['#s'] ]</tt>.
+      # Die Wortklasse kann über den Parameter <tt>def-wc</tt> beeinflusst werden.
 
-      class Wordclass < self
+      class SingleWord < self
 
         def initialize(id, lingo)
           super
 
-          @separator = @config.fetch('separator', ',')
-          @line_pattern = Regexp.new('^(' + @legal_word + ')' + Regexp.escape(@separator) + '((?:' + @legal_word + '#\w)+)$')
+          @wc     = @config.fetch('def-wc',     's').downcase
+          @mul_wc = @config.fetch('def-mul-wc', @wc).downcase
+
+          @line_pattern = %r{^(#{@legal_word})$}
         end
 
         private
 
         def convert_line(line, key, val)
-          key, valstr = key.strip, val.strip
-          val = valstr.gsub(/\s+#/, '#').scan(/\S.+?\s*#\w/)
-          val = val.map do |str|
-            str =~ /^(.+)#(.)/
-            ($1 == key ? '' : $1) + '#' + $2
-          end
-          [key, val]
+          [key = key.strip, %W[##{key =~ /\s/ ? @mul_wc : @wc}]]
         end
 
       end

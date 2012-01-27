@@ -2,11 +2,7 @@
 
 require_relative '../test_helper'
 
-################################################################################
-#
-# Attendee Wordsearcher
-#
-class TestAttendeeWordsearcher < AttendeeTestCase
+class TestAttendeeWordSearcher < AttendeeTestCase
 
   def setup
     @test_synonyms = [
@@ -115,5 +111,3 @@ class TestAttendeeWordsearcher < AttendeeTestCase
   end
 
 end
-#
-################################################################################

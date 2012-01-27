@@ -1,9 +1,5 @@
 # encoding: utf-8
 
-################################################################################
-#
-# Attendee Tokenizer
-#
 class TestAttendeeTokenizer < AttendeeTestCase
 
   def test_basic
@@ -28,5 +24,3 @@ class TestAttendeeTokenizer < AttendeeTestCase
   end
 
 end
-#
-################################################################################

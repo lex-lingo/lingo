@@ -2,11 +2,7 @@
 
 require_relative '../test_helper'
 
-################################################################################
-#
-# Attendee Multiworder
-#
-class TestAttendeeMultiworder < AttendeeTestCase
+class TestAttendeeMultiWorder < AttendeeTestCase
 
   def test_basic
     @input = [
@@ -386,5 +382,3 @@ class TestAttendeeMultiworder < AttendeeTestCase
   end
 
 end
-#
-################################################################################

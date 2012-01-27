@@ -2,10 +2,6 @@
 
 require_relative '../test_helper'
 
-################################################################################
-#
-# Attendee Variator
-#
 class TestAttendeeVariator < AttendeeTestCase
 
   def test_basic
@@ -20,5 +16,3 @@ class TestAttendeeVariator < AttendeeTestCase
   end
 
 end
-#
-################################################################################

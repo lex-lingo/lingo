@@ -2,11 +2,7 @@
 
 require_relative '../test_helper'
 
-################################################################################
-#
-# Attendee Vector_filter
-#
-class TestAttendeeVector_filter < AttendeeTestCase
+class TestAttendeeVectorFilter < AttendeeTestCase
 
   def setup
     @input = [
@@ -58,5 +54,3 @@ class TestAttendeeVector_filter < AttendeeTestCase
   end
 
 end
-#
-################################################################################

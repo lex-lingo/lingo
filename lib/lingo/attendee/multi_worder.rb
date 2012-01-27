@@ -32,13 +32,13 @@ class Lingo
     # Token aufgelöst und in Words verwandelt und über den Abbreviator und Decomposer auch
     # Spezialfälle behandelt, die einzelne Wörter betreffen.
     # Um jedoch auch Namen wie z.B. John F. Kennedy als Sinneinheit erkennen zu können, muss
-    # eine Analyse über mehrere Objekte erfolgen. Dies ist die Hauptaufgabe des Multiworders.
-    # Der Multiworder analysiert die Teile des Datenstroms, die z.B. durch Satzzeichen oder
+    # eine Analyse über mehrere Objekte erfolgen. Dies ist die Hauptaufgabe des MultiWorders.
+    # Der MultiWorder analysiert die Teile des Datenstroms, die z.B. durch Satzzeichen oder
     # weiteren Einzelzeichen (z.B. '(') begrenzt sind. Erkannte Mehrwortgruppen werden als
     # zusätzliches Objekt in den Datenstrom mit eingefügt.
     #
     # === Mögliche Verlinkung
-    # Erwartet:: Daten vom Typ *Word* z.B. von Wordsearcher, Decomposer, Ocr_variator, Multiworder
+    # Erwartet:: Daten vom Typ *Word* z.B. von Wordsearcher, Decomposer, Ocr_variator, MultiWorder
     # Erzeugt:: Daten vom Typ *Word* (mit Attribut WA_MULTIWORD). Je erkannter Mehrwortgruppe wird ein zusätzliches Word-Objekt in den Datenstrom eingefügt. Z.B. für Ocr_variator, Sequencer, Noneword_filter, Vector_filter
     #
     # === Parameter
@@ -49,20 +49,20 @@ class Lingo
     # <b>source</b>:: siehe allgemeine Beschreibung des Dictionary
     # <b><i>mode</i></b>:: (Standard: all) siehe allgemeine Beschreibung des Dictionary
     # <b><i>stopper</i></b>:: (Standard: TA_PUNCTUATION, TA_OTHER) Gibt die Begrenzungen an, zwischen
-    #                         denen der Multiworder suchen soll, i.d.R. Satzzeichen und Sonderzeichen,
+    #                         denen der MultiWorder suchen soll, i.d.R. Satzzeichen und Sonderzeichen,
     #                         weil sie kaum in einer Mehrwortgruppen vorkommen.
     #
     # === Beispiele
     # Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration <tt>t1.cfg</tt>
     #   meeting:
     #     attendees:
-    #       - textreader:   { out: lines, files: '$(files)' }
-    #       - tokenizer:    { in: lines, out: token }
+    #       - text_reader:   { out: lines, files: '$(files)' }
+    #       - tokenizer:     { in: lines, out: token }
     #       - abbreviator:   { in: token, out: abbrev, source: 'sys-abk' }
-    #       - wordsearcher: { in: abbrev, out: words, source: 'sys-dic' }
-    #       - decomposer:   { in: words, out: comps, source: 'sys-dic' }
-    #       - multiworder:  { in: comps, out: multi, source: 'sys-mul' }
-    #       - debugger:     { in: multi, prompt: 'out>' }
+    #       - word_searcher: { in: abbrev, out: words, source: 'sys-dic' }
+    #       - decomposer:    { in: words, out: comps, source: 'sys-dic' }
+    #       - multi_worder:  { in: comps, out: multi, source: 'sys-mul' }
+    #       - debugger:      { in: multi, prompt: 'out>' }
     # ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
     #   out> *FILE('test.txt')
     #   out> <Sein = [(sein/s), (sein/v)]>
@@ -76,7 +76,7 @@ class Lingo
     #   out> *EOL('test.txt')
     #   out> *EOF('test.txt')
 
-    class Multiworder < BufferedAttendee
+    class MultiWorder < BufferedAttendee
 
       protected
 
@@ -292,6 +292,10 @@ class Lingo
       end
 
     end
+
+    # For backwards compatibility.
+    Multiworder  = MultiWorder
+    Multi_worder = MultiWorder
 
   end
 

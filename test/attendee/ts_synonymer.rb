@@ -2,10 +2,6 @@
 
 require_relative '../test_helper'
 
-################################################################################
-#
-# Attendee Synonymer
-#
 class TestAttendeeSynonymer < AttendeeTestCase
 
   def test_basic
@@ -29,5 +25,3 @@ class TestAttendeeSynonymer < AttendeeTestCase
   end
 
 end
-#
-################################################################################

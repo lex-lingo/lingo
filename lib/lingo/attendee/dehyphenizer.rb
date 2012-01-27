@@ -49,13 +49,13 @@ class Lingo
     # Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration <tt>t1.cfg</tt>
     #   meeting:
     #     attendees:
-    #       - textreader:   { out: lines, files: '$(files)' }
-    #       - tokenizer:    { in: lines, out: token }
+    #       - text_reader:   { out: lines, files: '$(files)' }
+    #       - tokenizer:     { in: lines, out: token }
     #       - abbreviator:   { in: token, out: abbrev, source: 'sys-abk' }
-    #       - wordsearcher: { in: abbrev, out: words, source: 'sys-dic' }
-    #       - decomposer:   { in: words, out: comps, source: 'sys-dic' }
-    #       - multiworder:  { in: comps, out: multi, source: 'sys-mul' }
-    #       - debugger:     { in: multi, prompt: 'out>' }
+    #       - word_searcher: { in: abbrev, out: words, source: 'sys-dic' }
+    #       - decomposer:    { in: words, out: comps, source: 'sys-dic' }
+    #       - multi_worder:  { in: comps, out: multi, source: 'sys-mul' }
+    #       - debugger:      { in: multi, prompt: 'out>' }
     # ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
     #   out> *FILE('test.txt')
     #   out> <Sein = [(sein/s), (sein/v)]>

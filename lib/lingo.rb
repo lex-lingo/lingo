@@ -29,6 +29,7 @@ require 'benchmark'
 require 'nuggets/file/ext'
 require 'nuggets/env/user_home'
 require 'nuggets/numeric/duration'
+require 'nuggets/string/camelscore'
 
 class Lingo
 
@@ -222,7 +223,7 @@ class Lingo
 
     list.each { |hash|
       # {'attendee' => {'name'=>'Attendee', 'in'=>'nase', 'out'=>'ohr', 'param'=>'hase'}}
-      cfg = hash.values.first.merge('name' => hash.keys.first.capitalize)
+      cfg = hash.values.first.merge('name' => hash.keys.first.camelcase)
 
       %w[in out].each { |key| (cfg[key] ||= '').downcase! }
 

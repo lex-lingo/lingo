@@ -2,10 +2,6 @@
 
 require_relative '../test_helper'
 
-################################################################################
-#
-# Attendee Decomposer
-#
 class TestAttendeeDecomposer < AttendeeTestCase
 
   def test_basic
@@ -27,5 +23,3 @@ class TestAttendeeDecomposer < AttendeeTestCase
   end
 
 end
-#
-################################################################################

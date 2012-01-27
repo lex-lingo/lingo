@@ -71,11 +71,11 @@ class Lingo
     # Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration <tt>t1.cfg</tt>
     #   meeting:
     #     attendees:
-    #       - textreader:   { out: lines, files: '$(files)' }
-    #       - tokenizer:    { in: lines, out: token }
-    #       - wordsearcher: { in: token, out: words, source: 'sys-dic' }
-    #       - sequencer:    { in: words, out: seque }
-    #       - debugger:     { in: seque, prompt: 'out>' }
+    #       - text_reader:   { out: lines, files: '$(files)' }
+    #       - tokenizer:     { in: lines, out: token }
+    #       - word_searcher: { in: token, out: words, source: 'sys-dic' }
+    #       - sequencer:     { in: words, out: seque }
+    #       - debugger:      { in: seque, prompt: 'out>' }
     # ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
     #   out> *FILE('test.txt')
     #   out> <Lingo|?>

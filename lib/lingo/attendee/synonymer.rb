@@ -51,12 +51,12 @@ class Lingo
     # Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration <tt>t1.cfg</tt>
     #   meeting:
     #     attendees:
-    #       - textreader:   { out: lines, files: '$(files)' }
-    #       - tokenizer:    { in: lines, out: token }
-    #       - abbreviator:  { in: token, out: abbrev, source: 'sys-abk' }
-    #       - wordsearcher: { in: abbrev, out: words, source: 'sys-dic' }
-    #       - synonymer:    { in: words, out: synos, source: 'sys-syn' }
-    #       - debugger:     { in: words, prompt: 'out>' }
+    #       - text_reader:   { out: lines, files: '$(files)' }
+    #       - tokenizer:     { in: lines, out: token }
+    #       - abbreviator:   { in: token, out: abbrev, source: 'sys-abk' }
+    #       - word_searcher: { in: abbrev, out: words, source: 'sys-dic' }
+    #       - synonymer:     { in: words, out: synos, source: 'sys-syn' }
+    #       - debugger:      { in: words, prompt: 'out>' }
     # ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
     #   out> *FILE('test.txt')
     #   out> <Dies = [(dies/w), (das/y), (dies/y)]>

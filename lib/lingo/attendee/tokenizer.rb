@@ -32,7 +32,7 @@ class Lingo
     # damit nachfolgende Attendees die Textdatei häppchenweise verarbeiten können.
     #
     # === Mögliche Verlinkung
-    # Erwartet:: Daten des Typs *String* (Textzeilen) z.B. von Textreader
+    # Erwartet:: Daten des Typs *String* (Textzeilen) z.B. von TextReader
     # Erzeugt:: Daten des Typs *Token* z.B. für Abbreviator, Wordsearcher
     #
     # === Parameter
@@ -77,9 +77,9 @@ class Lingo
     # Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration <tt>t1.cfg</tt>
     #   meeting:
     #     attendees:
-    #       - textreader: { out: lines, files: '$(files)' }
-    #       - tokenizer:  { in: lines, out: token }
-    #       - debugger:   { in: token, prompt: 'out>' }
+    #       - text_reader: { out: lines, files: '$(files)' }
+    #       - tokenizer:   { in: lines, out: token }
+    #       - debugger:    { in: token, prompt: 'out>' }
     # ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
     #   out> *FILE('test.txt')
     #   out> :Dies/WORD:

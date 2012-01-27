@@ -24,11 +24,11 @@
 ###############################################################################
 #++
 
-require_relative 'source/keyvalue'
-require_relative 'source/multikey'
-require_relative 'source/multivalue'
-require_relative 'source/singleword'
-require_relative 'source/wordclass'
+require_relative 'source/key_value'
+require_relative 'source/multi_key'
+require_relative 'source/multi_value'
+require_relative 'source/single_word'
+require_relative 'source/word_class'
 
 class Lingo
 
@@ -65,7 +65,7 @@ class Lingo
       PRINTABLE_CHAR = "#{UTF8_CHAR}|[<>-]"
 
       def self.get(name, *args)
-        const_get(name.capitalize).new(*args)
+        const_get(name.camelcase).new(*args)
       end
 
       attr_reader :position

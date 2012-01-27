@@ -30,30 +30,30 @@ class Lingo
 
     class Source
 
-      # Abgeleitet von Source behandelt die Klasse Dateien mit dem Format <tt>MultiValue</tt>.
-      # Eine Zeile <tt>"Triumph;Sieg;Erfolg\n"</tt> wird gewandelt in <tt>[ nil, ['triumph', 'sieg', 'erfolg'] ]</tt>.
+      # Abgeleitet von Source behandelt die Klasse Dateien mit dem Format <tt>MultiKey</tt>.
+      # Eine Zeile <tt>"Triumph;Sieg;Erfolg\n"</tt> wird gewandelt in <tt>[ 'triumph', ['sieg', 'erfolg'] ]</tt>.
+      # Die Sonderbehandlung erfolgt in der Methode Database#convert, wo daraus Schlüssel-Werte-Paare in der Form
+      # <tt>[ 'sieg', ['triumph'] ]</tt> und <tt>[ 'erfolg', ['triumph'] ]</tt> erzeugt werden.
       # Der Trenner zwischen Schlüssel und Projektion kann über den Parameter <tt>separator</tt> geändert werden.
 
-      class Multivalue < self
+      class MultiKey < self
 
         def initialize(id, lingo)
           super
 
           @separator = @config.fetch('separator', ';')
           @line_pattern = Regexp.new('^' + @legal_word + '(?:' + Regexp.escape(@separator) + @legal_word + ')*$')
-
-          @idx = -1
         end
 
         def set(db, key, val)
-          db[key = "#{IDX_REF}#{@idx += 1}"] = val
           val.each { |v| db[v] = [key] }
         end
 
         private
 
         def convert_line(line, key, val)
-          [nil, line.split(@separator).map { |value| value.strip }]
+          values = line.split(@separator).map { |value| value.strip }
+          [values[0], values[1..-1]]
         end
 
       end

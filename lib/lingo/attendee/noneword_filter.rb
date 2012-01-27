@@ -28,15 +28,15 @@ class Lingo
 
   class Attendee
 
-    # Der Noneword_filter ermöglicht es, alle nicht erkannten Wörter aus dem Datenstrom zu
+    # Der NonewordFilter ermöglicht es, alle nicht erkannten Wörter aus dem Datenstrom zu
     # selektieren und weiterzuleiten. Im Prinzip werden alle erkannten Wörter gefiltert.
     # Bei einem Indexierungslauf können so alle nicht durch den Wordsearcher erkannten Wörter,
     # also die, die im Wörterbuch nicht enthalten sind, separat ausgegeben werden und als Grundlage für
     # die Wörterbuchpflege dienen.
-    # Der Noneword_filter ist in einer frühen Entwicklungsphase entstanden. Die gleiche Funktion
+    # Der NonewordFilter ist in einer frühen Entwicklungsphase entstanden. Die gleiche Funktion
     # kann auch mit dem universelleren Objectfilter mit dem Ausdruck 'obj.kind_of?(Word) && obj.attr==WA_UNKNOWN'
-    # durchgeführt werden, mit dem einzigen Unterschied, dass der Noneword_filter nur die Wortform weiterleitet.
-    # Der Noneword_filter verschluckt ebenfalls alle Kommandos, ausser dem Dateianfang (*FILE) und Ende (*EOF),
+    # durchgeführt werden, mit dem einzigen Unterschied, dass der NonewordFilter nur die Wortform weiterleitet.
+    # Der NonewordFilter verschluckt ebenfalls alle Kommandos, ausser dem Dateianfang (*FILE) und Ende (*EOF),
     # sowie dem LIR-Format-Spezifikum (*RECORD).
     #
     # *Hinweis* Dieser Attendee sammelt die auszugebenden Daten so lange, bis ein Dateiwechsel oder Record-Wechsel
@@ -56,17 +56,17 @@ class Lingo
     # Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration <tt>t1.cfg</tt>
     #   meeting:
     #     attendees:
-    #       - textreader:      { out: lines, files: '$(files)' }
-    #       - tokenizer:       { in: lines, out: token }
-    #       - wordsearcher:    { in: token, out: words, source: 'sys-dic' }
-    #       - noneword_filter: { in: words, out: filtr }
-    #       - debugger:        { in: filtr, prompt: 'out>' }
+    #       - text_reader:      { out: lines, files: '$(files)' }
+    #       - tokenizer:        { in: lines, out: token }
+    #       - word_searcher:    { in: token, out: words, source: 'sys-dic' }
+    #       - noneword_filter:  { in: words, out: filtr }
+    #       - debugger:         { in: filtr, prompt: 'out>' }
     # ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
     #   out> *FILE('test.txt')
     #   out> "lingo"
     #   out> *EOF('test.txt')
 
-    class Noneword_filter < self
+    class NonewordFilter < self
 
       protected
 
@@ -98,6 +98,10 @@ class Lingo
       end
 
     end
+
+    # For backwards compatibility.
+    Nonewordfilter  = NonewordFilter
+    Noneword_filter = NonewordFilter
 
   end
 

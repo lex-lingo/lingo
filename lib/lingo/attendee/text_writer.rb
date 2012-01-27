@@ -28,10 +28,10 @@ class Lingo
 
   class Attendee
 
-    # Der Textwriter ermöglicht die Umleitung des Datenstroms in eine Textdatei. Dabei werden
+    # Der TextWriter ermöglicht die Umleitung des Datenstroms in eine Textdatei. Dabei werden
     # Objekte, die nicht vom Typ String sind in eine sinnvolle Textrepresentation gewandelt.
     # Der Name der Ausgabedatei wird durch den Namen der Eingabedatei (des Textreaders) bestimmt.
-    # Es kann lediglich die Extension verändert werden. Der Textwriter kann auch das LIR-Format
+    # Es kann lediglich die Extension verändert werden. Der TextWriter kann auch das LIR-Format
     # erzeugen.
     #
     # === Mögliche Verlinkung
@@ -43,9 +43,9 @@ class Lingo
     # <b>in</b>:: siehe allgemeine Beschreibung des Attendee
     # <b>out</b>:: siehe allgemeine Beschreibung des Attendee
     # <b><i>ext</i></b>:: (Standard: txt2) Gibt die Dateinamen-Erweiertung für die Ausgabedatei an.
-    #                     Wird z.B. dem Textreader die Datei <tt>Dokument.txt</tt> angegeben und
+    #                     Wird z.B. dem TextReader die Datei <tt>Dokument.txt</tt> angegeben und
     #                     über die Lingo-Konfiguration alle Indexwörter herausgefiltert, kann mit
-    #                     <tt>ext: 'idx'</tt> der Textwriter veranlasst werden, die Indexwörter in
+    #                     <tt>ext: 'idx'</tt> der TextWriter veranlasst werden, die Indexwörter in
     #                     die Datei <tt>Dokument.idx</tt> zu schreiben.
     # <b><i>sep</i></b>:: (Standard: ' ') Gibt an, mit welchem Trennzeichen zwei aufeinanderfolgende
     #                     Objekte in der Ausgabedatei getrennt werden sollen. Gängige Werte sind auch
@@ -58,11 +58,11 @@ class Lingo
     # Bei der Verarbeitung der oben angegebenen Funktionsbeschreibung des Textwriters mit der Ablaufkonfiguration <tt>t1.cfg</tt>
     #   meeting:
     #     attendees:
-    #       - textreader:    { out: lines, files: '$(files)' }
-    #       - tokenizer:     { in: lines, out: token }
-    #       - wordsearcher:  { in: token, out: words, source: 'sys-dic' }
-    #       - vector_filter: { in: words, out: filtr, sort: 'term_rel' }
-    #       - textwriter:    { in: filtr, ext: 'vec', sep: '\n' }
+    #       - text_reader:    { out: lines, files: '$(files)' }
+    #       - tokenizer:      { in: lines, out: token }
+    #       - word_searcher:  { in: token, out: words, source: 'sys-dic' }
+    #       - vector_filter:  { in: words, out: filtr, sort: 'term_rel' }
+    #       - text_writer:    { in: filtr, ext: 'vec', sep: '\n' }
     # ergibt die Ausgabe in der Datei <tt>test.vec</tt>
     #   0.03846 name
     #   0.01923 ausgabedatei
@@ -75,7 +75,7 @@ class Lingo
     #   0.01923 typ
     #   0.01923 umleitung
 
-    class Textwriter < self
+    class TextWriter < self
 
       protected
 
@@ -159,6 +159,10 @@ class Lingo
       end
 
     end
+
+    # For backwards compatibility.
+    Textwriter  = TextWriter
+    Text_writer = TextWriter
 
   end
 

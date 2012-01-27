@@ -28,7 +28,7 @@ class Lingo
 
   class Attendee
 
-    class Formatter < Textwriter
+    class Formatter < TextWriter
 
       protected
 

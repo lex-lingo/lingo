@@ -2,10 +2,6 @@
 
 require_relative '../test_helper'
 
-################################################################################
-#
-# Attendee Abbreviator
-#
 class TestAttendeeAbbreviator < AttendeeTestCase
 
   def test_basic
@@ -31,5 +27,3 @@ class TestAttendeeAbbreviator < AttendeeTestCase
   end
 
 end
-#
-################################################################################

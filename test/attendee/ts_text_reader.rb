@@ -2,11 +2,7 @@
 
 require_relative '../test_helper'
 
-################################################################################
-#
-# Attendee Textreader
-#
-class TestAttendeeTextreader < AttendeeTestCase
+class TestAttendeeTextReader < AttendeeTestCase
 
   def test_lir_file
     @expect = [
@@ -54,5 +50,3 @@ class TestAttendeeTextreader < AttendeeTestCase
   end
 
 end
-#
-################################################################################
