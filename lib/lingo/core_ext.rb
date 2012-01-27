@@ -28,7 +28,8 @@ require 'unicode'
 
 class String
 
-  alias_method :_lingo_original_downcase, :downcase
+  alias_method :_lingo_original_downcase,  :downcase
+  alias_method :_lingo_original_downcase!, :downcase!
 
   def downcase
     Unicode.downcase(self)

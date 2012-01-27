@@ -30,21 +30,7 @@ require 'nuggets/file/ext'
 require 'nuggets/env/user_home'
 require 'nuggets/numeric/duration'
 
-require_relative 'lingo/call'
-require_relative 'lingo/error'
-require_relative 'lingo/config'
-require_relative 'lingo/core_ext'
-require_relative 'lingo/cachable'
-require_relative 'lingo/reportable'
-require_relative 'lingo/agenda_item'
-require_relative 'lingo/database'
-require_relative 'lingo/language'
-require_relative 'lingo/attendee'
-require_relative 'lingo/version'
-
 class Lingo
-
-  include Error
 
   # The system-wide Lingo directory (+LINGO_BASE+).
   BASE = ENV['LINGO_BASE'] || File.expand_path('../..', __FILE__)
@@ -128,10 +114,12 @@ class Lingo
     def find_file(file, path, options)
       pn = Pathname.new(file_with_ext(file, options)).cleanpath
 
-      walk(path, options) { |dir|
-        pn2 = pn.expand_path(dir)
-        pn = pn2 and break if pn2.exist?
-      } if pn.relative?
+      if pn.relative?
+        walk(path, options) { |dir|
+          pn2 = pn.expand_path(dir)
+          pn = pn2 and break if pn2.exist?
+        }
+      end
 
       realpath_for(pn, path)
     end
@@ -140,10 +128,10 @@ class Lingo
       base = basename(:dict, find(:dict, file, path))
 
       walk(path.reverse, options, false) { |dir|
-        Pathname.new(dir).ascend { |r|
-          break  true                                 if r.file?
-          return File.chomp_ext(File.join(dir, base)) if r.writable?
-          break  true                                 if r.exist?
+        Pathname.new(dir).ascend { |i|
+          break  true                                 if i.file?
+          return File.chomp_ext(File.join(dir, base)) if i.writable?
+          break  true                                 if i.exist?
         }
       }
 
@@ -182,6 +170,11 @@ class Lingo
 
     def realpath_for(pn, path)
       pn.realpath(path.first).to_s
+    end
+
+    def require_optional(lib)
+      require lib unless ENV["LINGO_NO_#{lib.upcase}"]
+    rescue LoadError
     end
 
   end
@@ -251,8 +244,8 @@ class Lingo
       }
     }
 
-    supplier.each { |channel, attendees| attendees.each { |att|
-      att.add_subscriber(subscriber[channel])
+    supplier.each { |channel, attendees| attendees.each { |attendee|
+      attendee.add_subscriber(subscriber[channel])
     } }
   end
 
@@ -264,9 +257,9 @@ class Lingo
     }
 
     if report_status || report_time
-      config.stderr.puts "Require protocol...\n#{separator = '-' * 61}"
+      warn "Require protocol...\n#{separator = '-' * 61}"
       @attendees.first.listen(AgendaItem.new(Attendee::STR_CMD_STATUS))
-      config.stderr.puts "#{separator}\nThe duration of the meeting was #{time.to_hms(2)}"
+      warn "#{separator}\nThe duration of the meeting was #{time.to_hms(2)}"
     end
   end
 
@@ -276,7 +269,23 @@ class Lingo
     @lexical_hash = Hash.new { |h, k| h[k] = Language::LexicalHash.new(k, self) }
   end
 
+  def warn(*msg)
+    config.stderr.puts(*msg)
+  end
+
 end
+
+require_relative 'lingo/call'
+require_relative 'lingo/error'
+require_relative 'lingo/config'
+require_relative 'lingo/core_ext'
+require_relative 'lingo/cachable'
+require_relative 'lingo/reportable'
+require_relative 'lingo/agenda_item'
+require_relative 'lingo/database'
+require_relative 'lingo/language'
+require_relative 'lingo/attendee'
+require_relative 'lingo/version'
 
 require 'nuggets/util/pluggable'
 Util::Pluggable.load_plugins_for(Lingo)
