@@ -42,6 +42,14 @@ class Lingo
         @form, @attr = form || '', attr || ''
       end
 
+      def unknown?
+        [WA_UNKNOWN, WA_UNKMULPART].include?(attr)
+      end
+
+      def identified?
+        attr == WA_IDENTIFIED
+      end
+
       def <=>(other)
         other.nil? ? 1 : to_a <=> other.to_a
       end

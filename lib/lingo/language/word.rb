@@ -50,14 +50,14 @@ class Lingo
       # <b>Achtung: Lemma wird nicht durch die Word-Klasse bestückt, sondern extern
       # durch die Klasse Dictionary</b>
 
-      def initialize(form, attr = Language::WA_UNSET)
+      def initialize(form, attr = WA_UNSET)
         super
         @lexicals = []
       end
 
       def lexicals(compound_parts = true)
-        if !compound_parts && attr == Language::WA_KOMPOSITUM
-          @lexicals.select { |lex| lex.attr == Language::LA_KOMPOSITUM }
+        if !compound_parts && attr == WA_KOMPOSITUM
+          @lexicals.select { |lex| lex.attr == LA_KOMPOSITUM }
         else
           @lexicals
         end
@@ -96,19 +96,15 @@ class Lingo
       end
 
       def norm
-        attr == Language::WA_IDENTIFIED ? lexicals.first.form : form
+        identified? ? lexicals.first.form : form
       end
 
       def compo_form
-        if attr == Language::WA_KOMPOSITUM
-          get_class(Language::LA_KOMPOSITUM).first
+        if attr == WA_KOMPOSITUM
+          get_class(LA_KOMPOSITUM).first
         else
           nil
         end
-      end
-
-      def unknown?
-        [Language::WA_UNKNOWN, Language::WA_UNKMULPART].include?(attr)
       end
 
       def <<(*other)
@@ -122,7 +118,7 @@ class Lingo
 
       def to_s
         s =  "<#{form}"
-        s << "|#{attr}" unless attr == Language::WA_IDENTIFIED
+        s << "|#{attr}" unless identified?
         s << " = #{lexicals.inspect}" unless lexicals.empty?
         s << '>'
       end

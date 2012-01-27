@@ -286,68 +286,115 @@ class TestGrammar < LingoTestCase
     gra.close
   end
 
-  def t1est_test_compositum
+  def test_test_compositum
     gra = LG.new({'source'=>['sys-dic']}, @lingo)
+
     # hinterer Teil ist ein Wort mit Suffix
-    assert_equal([ [5, 6], [lx('hasenbraten|k'), lx('braten|s'), lx('hase|s'), lx('braten|v')] ],
+    assert_equal([
+      [lx('hasenbraten|k'), lx('hase|s'), lx('braten|v')],
+      [5, 6],
+      'sv'
+    ],
       gra.test_compositum('hasen', '', 'braten', 1, false)
     )
+
     # hinterer Teil ist ein Wort mit Infix ohne Schwanz
-    assert_equal([ [5, 7], [lx('nasenlaufen|k'), lx('laufen|s'), lx('nase|s'), lx('laufen|v')] ],
+    assert_equal([
+      [lx('nasenlaufen|k'), lx('nase|s'), lx('laufen|v')],
+      [5, 7],
+      'sv'
+    ],
       gra.test_compositum('nasen', '', 'laufens', 1, false)
     )
+
     # hinterer Teil ist ein Wort mit Infix mit Schwanz
-    assert_equal([ [5, 7], [lx('nasenlaufens|k'), lx('laufen|s'), lx('nase|s'), lx('laufen|v')] ],
+    assert_equal([
+      [lx('nasenlaufens|k'), lx('nase|s'), lx('laufen|v')],
+      [5, 7],
+      'sv'
+    ],
       gra.test_compositum('nasen', '', 'laufens', 1, true)
     )
+
     # hinterer Teil ist ein Kompositum nach Bindestrich
-    assert_equal([ [7, 9, 6], [lx('arrafat-nachfolgebedarf|k'), lx('bedarf|s'), lx('nachfolge|s'), lx('arrafat|x')] ],
+    assert_equal([
+      [lx('arrafat-nachfolgebedarf|k'), lx('bedarf|s'), lx('nachfolge|s'), lx('arrafat|x')],
+      [7, 9, 6],
+      'xss'
+    ],
       gra.test_compositum('arrafat', '-', 'nachfolgebedarf', 1, false)
     )
+
     # hinterer Teil ist ein TakeItAsIs nach Bindestrich
-    assert_equal([ [9, 7], [lx('nachfolge-arrafat|k'), lx('nachfolge|s'), lx('arrafat|x')] ],
+    assert_equal([
+      [lx('nachfolge-arrafat|k'), lx('nachfolge|s'), lx('arrafat|x')],
+      [9, 7],
+      'sx'
+    ],
       gra.test_compositum('nachfolge', '-', 'arrafat', 1, false)
     )
+
     # vorderer Teil ist ein Wort mit Suffix => siehe Hasenbraten
     # vorderer Teil ist ein Kompositum
-    assert_equal([ [6, 5, 6], [lx('morgenonkelmantel|k'), lx('mantel|s'), lx('morgen|s'), lx('onkel|s'), lx('morgen|w')] ],
+    assert_equal([
+      [lx('morgenonkelmantel|k'), lx('mantel|s'), lx('morgen|s'), lx('onkel|s'), lx('morgen|w')],
+      [6, 5, 6],
+      'sss'
+    ],
       gra.test_compositum('morgenonkel', '', 'mantel', 1, false)
     )
+
     # vorderer Teil ist ein TakeItAsIs vor Bindestrich
-    assert_equal([ [7, 10], [lx('arrafat-nachfolger|k'), lx('nachfolger|s'), lx('arrafat|x')] ],
+    assert_equal([
+      [lx('arrafat-nachfolger|k'), lx('nachfolger|s'), lx('arrafat|x')],
+      [7, 10],
+      'xs'
+    ],
       gra.test_compositum('arrafat', '-', 'nachfolger', 1, false)
     )
+
     gra.close
   end
 
-  def t1est_permute_compositum
+  def test_permute_compositum
     gra = LG.new({'source'=>['sys-dic']}, @lingo)
+
     # bindestrichversion
-    assert_equal([ [7, 10], [lx('arrafat-nachfolger|k'), lx('nachfolger|s'), lx('arrafat|x')] ],
+    assert_equal([
+      [lx('arrafat-nachfolger|k'), lx('nachfolger|s'), lx('arrafat|x')],
+      [7, 10],
+      'xs'
+    ],
       gra.permute_compositum('arrafat-nachfolger', 1, false)
     )
+
     # bindestrichversion zwei-teilig
-    assert_equal([ [6, 11], \
-      [  lx('cd-rom-technologie|k'), \
-        lx('cd-rom|s'), \
-        lx('technologie|s')] ], \
-      gra.permute_compositum('cd-rom-technologie', 1, false) \
+    assert_equal([
+      [lx('cd-rom-technologie|k'), lx('technologie|s'), lx('cd-rom|x')],
+      [6, 11],
+      'xs'
+    ],
+      gra.permute_compositum('cd-rom-technologie', 1, false)
     )
+
     # bindestrichversion drei-teilig
-    assert_equal([ [6, 7, 11], \
-      [  lx('albert-ludwigs-universität|k'), \
-        lx('universität|s'), \
-        lx('albert|e'), \
-        lx('ludwig|e')] ], \
-      gra.permute_compositum('albert-ludwigs-universität', 1, false) \
+    assert_equal([
+      [lx('albert-ludwigs-universität|k'), lx('universität|s'), lx('albert|e'), lx('ludwig|e')],
+      [6, 7, 11],
+      'ees'
+    ],
+      gra.permute_compositum('albert-ludwigs-universität', 1, false)
     )
+
     # normal mit suggestion
-    assert_equal([ [8, 9], \
-      [  lx('benutzerforschung|k'), \
-        lx('benutzer|s'), \
-        lx('forschung|s')] ], \
-      gra.permute_compositum('benutzerforschung', 1, false) \
+    assert_equal([
+      [lx('benutzerforschung|k'), lx('erforschung|s'), lx('benutzen|v')],
+      [6, 11],
+      'vs'
+    ],
+      gra.permute_compositum('benutzerforschung', 1, false)
     )
+
     gra.close
   end
 
@@ -355,7 +402,7 @@ class TestGrammar < LingoTestCase
     gra = LG.new({'source'=>['sys-dic']}, @lingo)
     assert_equal(
       wd('informationswissenschaften|KOM', 'informationswissenschaft|k', 'information|s+', 'wissenschaft|s+'),
-      gra.find_compositum('informationswissenschaften') \
+      gra.find_compositum('informationswissenschaften')
     )
     assert_equal(
       wd('cd-rom-technologie|KOM', 'cd-rom-technologie|k', 'technologie|s+', 'cd-rom|x+'),

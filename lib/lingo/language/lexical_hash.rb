@@ -41,7 +41,7 @@ class Lingo
         init_cachable
         init_reportable(id)
 
-        @wc  = lingo.database_config(id).fetch('def-wc', Language::LA_UNKNOWN)
+        @wc  = lingo.database_config(id).fetch('def-wc', LA_UNKNOWN)
         @src = Database.open(id, lingo)
       end
 

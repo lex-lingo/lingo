@@ -74,94 +74,62 @@ class Lingo
       # _dic_.find_word( _aString_ ) -> _aNewWord_
       #
       # Erstellt aus dem String ein Wort und sucht nach diesem im Wörterbuch.
-      def find_word(string)
-        # Cache abfragen
-        key = string.downcase
-        if hit?(key)
+      def find_word(str)
+        if hit?(key = str.downcase)
           inc('cache hits')
-          word = retrieve(key)
-          word.form = string
-          return word
+          return retrieve(key).tap { |word| word.form = str }
         end
 
-        word = Word.new(string, Language::WA_UNKNOWN)
-        lexicals = select_with_suffix(string)
-        unless lexicals.empty?
+        word = Word.new(str, WA_UNKNOWN)
+
+        unless (lexicals = select_with_suffix(str)).empty?
           word.lexicals = lexicals
-          word.attr = Language::WA_IDENTIFIED
+          word.attr = WA_IDENTIFIED
         end
+
         store(key, word)
       end
 
       def find_synonyms(obj)
-        # alle Lexicals des Wortes
-        lexis = obj.lexicals
-        lexis = [obj] if lexis.empty? && obj.attr==Language::WA_UNKNOWN
-        # alle gefundenen Synonyme
-        synos = []
+        lex = obj.lexicals
+        lex = [obj] if lex.empty? && obj.unknown?
+
         # multiworder optimization
-        key_ref = %r{\A#{Regexp.escape(Database::KEY_REF)}\d+}o
+        ref = %r{\A#{Regexp.escape(Database::KEY_REF)}\d+}o
 
-        lexis.each do |lex|
-          # Synonyme für Teile eines Kompositum ausschließen
-          next if obj.attr==Language::WA_KOMPOSITUM && lex.attr!=Language::LA_KOMPOSITUM
-          # Synonyme für Synonyme ausschließen
-          next if lex.attr==Language::LA_SYNONYM
+        lex.each_with_object([]) { |l, s|
+          next if l.attr == LA_SYNONYM
+          next if l.attr != LA_KOMPOSITUM && obj.attr == WA_KOMPOSITUM
 
-          select(lex.form).each do |syn|
-            synos << syn unless syn =~ key_ref
-          end
-        end
-
-        synos
+          select(l.form).each { |y| s << y unless y =~ ref }
+        }
       end
 
       # _dic_.select( _aString_ ) -> _ArrayOfLexicals_
       #
       # Sucht alle Wörterbücher durch und gibt den ersten Treffer zurück (+mode = first+), oder alle Treffer (+mode = all+)
-      def select(string)
-        lexicals = []
-
-        @sources.each { |src|
-          if lexis = src[string]
-            lexicals += lexis
-            break unless @all_sources
-          end
-        }
-
-        lexicals.sort.uniq
+      def select(str)
+        @sources.each_with_object([]) { |src, lex|
+          l = src[str] or next
+          lex.concat(l)
+          break lex unless @all_sources
+        }.tap { |lex| lex.sort!; lex.uniq! }
       end
 
       # _dic_.select_with_suffix( _aString_ ) -> _ArrayOfLexicals_
       #
       # Sucht alle Wörterbücher durch und gibt den ersten Treffer zurück (+mode = first+), oder alle Treffer (+mode = all+).
       # Sucht dabei auch Wörter, die um wortklassenspezifische Suffixe bereinigt wurden.
-      def select_with_suffix(string)
-        lexicals = select(string)
-        if lexicals.empty?
-          suffix_lexicals(string).each { |suflex|
-            select(suflex.form).each { |srclex|
-              lexicals << srclex if suflex.attr == srclex.attr
-            }
-          }
-        end
-        lexicals
+      def select_with_suffix(str)
+        select_with_affix(:suffix, str)
       end
 
       # _dic_.select_with_infix( _aString_ ) -> _ArrayOfLexicals_
       #
       # Sucht alle Wörterbücher durch und gibt den ersten Treffer zurück (+mode = first+), oder alle Treffer (+mode = all+).
       # Sucht dabei auch Wörter, die eine Fugung am Ende haben.
-      def select_with_infix(string)
-        lexicals = select(string)
-        if lexicals.size == 0
-          infix_lexicals(string).each { |inlex|
-            select(inlex.form).each { |srclex|
-              lexicals << srclex
-            }
-          }
-        end
-        lexicals
+      def select_with_infix(str)
+        select_with_affix(:infix, str)
       end
 
       # _dic_.suffix_lexicals( _aString_ ) -> _ArrayOfLexicals_
@@ -169,33 +137,33 @@ class Lingo
       # Gibt alle möglichen Lexicals zurück, die von der Endung her auf den String anwendbar sind:
       #
       # dic.suffix_lexicals("Hasens") -> [(hasen/s), (hasen/e), (has/e)]
-      def suffix_lexicals(string)
-        lexicals = []
-        newform = regex = ext = type = nil
-        @suffixes.each { |suf|
-          regex, ext, type = suf
-          if string =~ regex
-            newform = $`+((ext=="*")?'':ext)+$'
-            lexicals << Lexical.new(newform, type)
-          end
-        }
-        lexicals
+      def suffix_lexicals(str)
+        affix_lexicals(:suffix, str)
       end
 
       # _dic_.gap_lexicals( _aString_ ) -> _ArrayOfLexicals_
       #
       # Gibt alle möglichen Lexicals zurück, die von der Endung her auf den String anwendbar sind:
-      def infix_lexicals(string)
-        lexicals = []
-        newform = regex = ext = type = nil
-        @infixes.each { |suf|
-          regex, ext, type = suf
-          if string =~ regex
-            newform = $`+((ext=="*")?'':ext)+$'
-            lexicals << Lexical.new(newform, type)
+      def infix_lexicals(str)
+        affix_lexicals(:infix, str)
+      end
+
+      private
+
+      def select_with_affix(affix, str)
+        select(str).tap { |l|
+          if l.empty?
+            affix_lexicals(affix, str).each { |a| select(a.form).each { |b|
+              l << b if affix != :suffix || a.attr == b.attr
+            } }
           end
         }
-        lexicals
+      end
+
+      def affix_lexicals(affix, str)
+        instance_variable_get("@#{affix}es").each_with_object([]) { |(r, e, t), l|
+          l << Lexical.new("#{$`}#{e == '*' ? '' : e}#{$'}", t) if str =~ r
+        }
       end
 
     end

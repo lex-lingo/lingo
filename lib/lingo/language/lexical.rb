@@ -43,8 +43,8 @@ class Lingo
           form <=> other.form
         else
           attr.empty? ? 1 : other.attr.empty? ? -1 : begin
-            a = Language::LA_SORTORDER.index(attr)
-            b = Language::LA_SORTORDER.index(other.attr)
+            a = LA_SORTORDER.index(attr)
+            b = LA_SORTORDER.index(other.attr)
 
             a ? b ? b <=> a : -1 : b ? 1 : attr <=> other.attr
           end
