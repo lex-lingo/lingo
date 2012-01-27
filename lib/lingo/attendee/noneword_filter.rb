@@ -81,17 +81,17 @@ class Lingo
           when STR_CMD_FILE
             @nonewords.clear
           when STR_CMD_EOL
-            deleteCmd
+            skip_command
           when STR_CMD_RECORD, STR_CMD_EOF
             nones = @nonewords.sort.uniq
-            nones.each { |nw| forward(nw) }
+            nones.each(&method(:forward))
             add('Objekte gefiltert', nones.size)
             @nonewords.clear
         end
       end
 
       def process(obj)
-        if obj.is_a?(Word) && obj.attr == WA_UNKNOWN
+        if obj.is_a?(Word) && obj.unknown?
           inc('Anzahl nicht erkannter Wörter')
           @nonewords << obj.form.downcase
         end

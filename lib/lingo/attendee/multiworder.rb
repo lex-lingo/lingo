@@ -96,10 +96,10 @@ class Lingo
 
         mul_src.each { |src|
           this_src, this_mod = databases[src].values_at('use-lex', 'lex-mode')
-          if lex_src.nil? || lex_src==this_src
+          if lex_src.nil? || lex_src == this_src
             lex_src, lex_mod = this_src, this_mod
           else
-            forward(STR_CMD_WARN, "Die Mehrwortwörterbücher #{mul_src.join(',')} sind mit unterschiedlichen Wörterbüchern lexikalisiert worden")
+            @lingo.warn "#{self.class}: Dictionaries don't match: #{mul_src.join(',')}"
           end
         }
 
@@ -199,7 +199,7 @@ class Lingo
             @buffer.delete_at( pos )
             form_parts[-1] += CHAR_PUNCT
           else
-            @buffer[pos].attr = WA_UNKMULPART if @buffer[pos].attr == WA_UNKNOWN
+            @buffer[pos].attr = WA_UNKMULPART if @buffer[pos].unknown?
             form_parts << @buffer[pos].form
             pos += 1
           end
@@ -250,7 +250,7 @@ class Lingo
           next if form == CHAR_PUNCT
 
           word = @lex_dic.find_word(form)
-          word = @lex_gra.find_compositum(form) if word.attr == WA_UNKNOWN
+          word = @lex_gra.find_compositum(form) if word.unknown?
 
           lexicals = word.attr == WA_KOMPOSITUM ?
             [word.lexicals.first] : word.lexicals.dup

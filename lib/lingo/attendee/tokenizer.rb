@@ -103,7 +103,7 @@ class Lingo
       def init
         # Regular Expressions für Token-Erkennung einlesen
         regulars = get_key('regulars', '')
-        forward(STR_CMD_ERR, 'regulars nicht definiert') unless regulars
+        raise NoConfigKeyError.new(:regulars) unless regulars
 
         @space = get_key('space', false)
         @tags  = get_key('tags',  true)

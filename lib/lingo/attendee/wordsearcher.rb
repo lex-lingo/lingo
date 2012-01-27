@@ -81,7 +81,7 @@ class Lingo
         if obj.is_a?(Token) && obj.attr == TA_WORD
           inc('Anzahl gesuchter Wörter')
           word = @dic.find_word(obj.form)
-          inc('Anzahl gefundener Wörter') unless word.attr == WA_UNKNOWN
+          inc('Anzahl gefundener Wörter') unless word.unknown?
           obj = word
         end
         forward(obj)

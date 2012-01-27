@@ -128,7 +128,7 @@ class Lingo
       # Gibt eine Datei zeilenweise in den Ausgabekanal
       def spool(filename)
         unless stdin?(filename)
-          FileTest.exist?(filename) || forward(STR_CMD_ERR, "Datei #{filename} nicht gefunden")
+          raise FileNotFoundError.new(filename) unless File.exist?(filename)
 
           inc('Anzahl Dateien')
           add('Anzahl Bytes', File.stat(filename).size)

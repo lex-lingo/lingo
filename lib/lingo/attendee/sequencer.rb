@@ -100,7 +100,7 @@ class Lingo
         @stopper = get_array('stopper', TA_PUNCTUATION + ',' + TA_OTHER).map(&:upcase)
         @seq_strings = get_key('sequences').map { |e| WordSequence.new(*e) }
 
-        forward(STR_CMD_ERR, 'Konfiguration ist leer') if @seq_strings.empty?
+        raise MissingConfigError.new(:sequences) if @seq_strings.empty?
       end
 
       def control(cmd, par)

@@ -99,7 +99,7 @@ class Lingo
         if @buffer[-2].kind_of?(Token)
           inc('Anzahl gesuchter Abkürzungen')
           abbr = @dic.find_word(@buffer[-2].form)
-          if abbr.attr == WA_IDENTIFIED
+          if abbr.identified?
             inc('Anzahl gefundener Abkürzungen')
             abbr.form += CHAR_PUNCT
             @buffer[-2] = abbr

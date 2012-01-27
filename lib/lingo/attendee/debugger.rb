@@ -90,19 +90,19 @@ class Lingo
       protected
 
       def init
-        @obj_eval = get_key('eval', 'true')
-        @cmd_eval = get_key('ceval', 'true')
-        @prompt = get_key('prompt', 'lex:) ')
+        @obj_eval = get_key('eval',   'true')
+        @cmd_eval = get_key('ceval',  'true')
+        @prompt   = get_key('prompt', 'lex:) ')
       end
 
       def control(cmd, par)
-        if cmd!=STR_CMD_STATUS
-          @lingo.config.stderr.puts "#{@prompt} #{AgendaItem.new(cmd, par).inspect}" if eval(@cmd_eval)
+        if cmd != STR_CMD_STATUS
+          @lingo.warn "#{@prompt} #{AgendaItem.new(cmd, par).inspect}" if eval(@cmd_eval)
         end
       end
 
       def process(obj)
-        @lingo.config.stderr.puts "#{@prompt} #{obj.inspect}" if eval(@obj_eval)
+        @lingo.warn "#{@prompt} #{obj.inspect}" if eval(@obj_eval)
       end
 
     end

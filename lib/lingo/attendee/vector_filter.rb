@@ -96,9 +96,9 @@ class Lingo
       def control(cmd, par)
         case cmd
           when STR_CMD_EOL
-            deleteCmd
+            skip_command
           when STR_CMD_FILE, STR_CMD_RECORD, STR_CMD_EOF
-            @debug ? @vectors.each { |str| forward(str) } : sendVector
+            @debug ? @vectors.each(&method(:forward)) : sendVector
             @vectors.clear
         end
       end
@@ -147,7 +147,7 @@ class Lingo
           when 'sto_rel'  then sprintf "%s {%6.5f}", vec[0], vec[1].to_f/@word_count
           else sprintf "%s", vec
           end
-        }.each { |str| forward(str) }
+        }.each(&method(:forward))
 
         @word_count = 0 if @sort == 'sto_rel'
       end

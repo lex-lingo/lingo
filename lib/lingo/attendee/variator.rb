@@ -82,7 +82,7 @@ class Lingo
 
         # Daten verarbeiten
         @var_strings = get_key('variations')
-        forward(STR_CMD_ERR, 'Ocr-variator: Konfiguration <ocr-variator> ist leer') if @var_strings.empty?
+        raise MissingConfigError.new(:variations) if @var_strings.empty?
 
         # Initialisierungen
         @check = Hash.new(false)
@@ -91,10 +91,9 @@ class Lingo
         set_dic
         set_gra
 
-        # Optimierungen
-        if @max_var == 0
-          forward( STR_CMD_WARN, 'Ocr-variator: max-var ist 0, setze es auf 10.000' )
+        if @max_var.zero?
           @max_var = 10000
+          @lingo.warn "#{self.class}: max-var is 0, setting to #{@max_var}"
         end
       end
 
@@ -124,8 +123,8 @@ class Lingo
           variations[0...@max_var].each do |var|
             # Variiertes Wort im Wörterbuch suchen
             word = @dic.find_word(var)
-            word = @gra.find_compositum(var) if word.attr == WA_UNKNOWN
-            next if word.attr == WA_UNKNOWN || (
+            word = @gra.find_compositum(var) if word.unknown?
+            next if word.unknown? || (
               word.attr == WA_KOMPOSITUM && word.lexicals.any? { |lex|
                 lex.attr[0..0] == LA_TAKEITASIS
               }
