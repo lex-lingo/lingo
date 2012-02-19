@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>class Lingo::Language::Dictionary - lingo Application documentation (v1.8.1)</title>
+
+<link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="../../index.html">Home</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/lingo/language/dictionary.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">Object
+  
+</nav>
+
+    <!-- Included Modules -->
+<nav id="includes-section" class="section">
+  <h3 class="section-header">Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><a class="include" href="../Cachable.html">Lingo::Cachable</a>
+  
+  
+  
+    <li><a class="include" href="../Reportable.html">Lingo::Reportable</a>
+  
+  
+  </ul>
+</nav>
+
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-c-new">::new</a>
+    
+    <li><a href="#method-i-affix_lexicals">#affix_lexicals</a>
+    
+    <li><a href="#method-i-close">#close</a>
+    
+    <li><a href="#method-i-find_synonyms">#find_synonyms</a>
+    
+    <li><a href="#method-i-find_word">#find_word</a>
+    
+    <li><a href="#method-i-infix_lexicals">#infix_lexicals</a>
+    
+    <li><a href="#method-i-report">#report</a>
+    
+    <li><a href="#method-i-select">#select</a>
+    
+    <li><a href="#method-i-select_with_affix">#select_with_affix</a>
+    
+    <li><a href="#method-i-select_with_infix">#select_with_infix</a>
+    
+    <li><a href="#method-i-select_with_suffix">#select_with_suffix</a>
+    
+    <li><a href="#method-i-suffix_lexicals">#suffix_lexicals</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="../../COPYING.html">COPYING</a>
+  
+    <li class="file"><a href="../../ChangeLog.html">ChangeLog</a>
+  
+    <li class="file"><a href="../../README.html">README</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../../Lingo.html">Lingo</a>
+  
+    <li><a href="../../Lingo/AgendaItem.html">Lingo::AgendaItem</a>
+  
+    <li><a href="../../Lingo/Attendee.html">Lingo::Attendee</a>
+  
+    <li><a href="../../Lingo/Attendee/Abbreviator.html">Lingo::Attendee::Abbreviator</a>
+  
+    <li><a href="../../Lingo/Attendee/Debugger.html">Lingo::Attendee::Debugger</a>
+  
+    <li><a href="../../Lingo/Attendee/Decomposer.html">Lingo::Attendee::Decomposer</a>
+  
+    <li><a href="../../Lingo/Attendee/Dehyphenizer.html">Lingo::Attendee::Dehyphenizer</a>
+  
+    <li><a href="../../Lingo/Attendee/Formatter.html">Lingo::Attendee::Formatter</a>
+  
+    <li><a href="../../Lingo/Attendee/MultiWorder.html">Lingo::Attendee::MultiWorder</a>
+  
+    <li><a href="../../Lingo/Attendee/NonewordFilter.html">Lingo::Attendee::NonewordFilter</a>
+  
+    <li><a href="../../Lingo/Attendee/ObjectFilter.html">Lingo::Attendee::ObjectFilter</a>
+  
+    <li><a href="../../Lingo/Attendee/Sequencer.html">Lingo::Attendee::Sequencer</a>
+  
+    <li><a href="../../Lingo/Attendee/Sequencer/WordSequence.html">Lingo::Attendee::Sequencer::WordSequence</a>
+  
+    <li><a href="../../Lingo/Attendee/Synonymer.html">Lingo::Attendee::Synonymer</a>
+  
+    <li><a href="../../Lingo/Attendee/TextReader.html">Lingo::Attendee::TextReader</a>
+  
+    <li><a href="../../Lingo/Attendee/TextReader/PDFFilter.html">Lingo::Attendee::TextReader::PDFFilter</a>
+  
+    <li><a href="../../Lingo/Attendee/TextWriter.html">Lingo::Attendee::TextWriter</a>
+  
+    <li><a href="../../Lingo/Attendee/Tokenizer.html">Lingo::Attendee::Tokenizer</a>
+  
+    <li><a href="../../Lingo/Attendee/Variator.html">Lingo::Attendee::Variator</a>
+  
+    <li><a href="../../Lingo/Attendee/VectorFilter.html">Lingo::Attendee::VectorFilter</a>
+  
+    <li><a href="../../Lingo/Attendee/WordSearcher.html">Lingo::Attendee::WordSearcher</a>
+  
+    <li><a href="../../Lingo/BufferedAttendee.html">Lingo::BufferedAttendee</a>
+  
+    <li><a href="../../Lingo/CLI.html">Lingo::CLI</a>
+  
+    <li><a href="../../Lingo/Cachable.html">Lingo::Cachable</a>
+  
+    <li><a href="../../Lingo/Call.html">Lingo::Call</a>
+  
+    <li><a href="../../Lingo/Config.html">Lingo::Config</a>
+  
+    <li><a href="../../Lingo/ConfigError.html">Lingo::ConfigError</a>
+  
+    <li><a href="../../Lingo/ConfigLoadError.html">Lingo::ConfigLoadError</a>
+  
+    <li><a href="../../Lingo/Ctl.html">Lingo::Ctl</a>
+  
+    <li><a href="../../Lingo/Database.html">Lingo::Database</a>
+  
+    <li><a href="../../Lingo/Database/Crypter.html">Lingo::Database::Crypter</a>
+  
+    <li><a href="../../Lingo/Database/GDBMStore.html">Lingo::Database::GDBMStore</a>
+  
+    <li><a href="../../Lingo/Database/HashStore.html">Lingo::Database::HashStore</a>
+  
+    <li><a href="../../Lingo/Database/LibCDBStore.html">Lingo::Database::LibCDBStore</a>
+  
+    <li><a href="../../Lingo/Database/SDBMStore.html">Lingo::Database::SDBMStore</a>
+  
+    <li><a href="../../Lingo/Database/ShowProgress.html">Lingo::Database::ShowProgress</a>
+  
+    <li><a href="../../Lingo/Database/Source.html">Lingo::Database::Source</a>
+  
+    <li><a href="../../Lingo/Database/Source/KeyValue.html">Lingo::Database::Source::KeyValue</a>
+  
+    <li><a href="../../Lingo/Database/Source/MultiKey.html">Lingo::Database::Source::MultiKey</a>
+  
+    <li><a href="../../Lingo/Database/Source/MultiValue.html">Lingo::Database::Source::MultiValue</a>
+  
+    <li><a href="../../Lingo/Database/Source/SingleWord.html">Lingo::Database::Source::SingleWord</a>
+  
+    <li><a href="../../Lingo/Database/Source/WordClass.html">Lingo::Database::Source::WordClass</a>
+  
+    <li><a href="../../Lingo/FileNotFoundError.html">Lingo::FileNotFoundError</a>
+  
+    <li><a href="../../Lingo/InvalidDatabaseConfigError.html">Lingo::InvalidDatabaseConfigError</a>
+  
+    <li><a href="../../Lingo/Language.html">Lingo::Language</a>
+  
+    <li><a href="../../Lingo/Language/Dictionary.html">Lingo::Language::Dictionary</a>
+  
+    <li><a href="../../Lingo/Language/Grammar.html">Lingo::Language::Grammar</a>
+  
+    <li><a href="../../Lingo/Language/Lexical.html">Lingo::Language::Lexical</a>
+  
+    <li><a href="../../Lingo/Language/LexicalHash.html">Lingo::Language::LexicalHash</a>
+  
+    <li><a href="../../Lingo/Language/Token.html">Lingo::Language::Token</a>
+  
+    <li><a href="../../Lingo/Language/Word.html">Lingo::Language::Word</a>
+  
+    <li><a href="../../Lingo/Language/WordForm.html">Lingo::Language::WordForm</a>
+  
+    <li><a href="../../Lingo/LingoError.html">Lingo::LingoError</a>
+  
+    <li><a href="../../Lingo/MissingConfigError.html">Lingo::MissingConfigError</a>
+  
+    <li><a href="../../Lingo/NoDatabaseConfigError.html">Lingo::NoDatabaseConfigError</a>
+  
+    <li><a href="../../Lingo/NoWritableStoreError.html">Lingo::NoWritableStoreError</a>
+  
+    <li><a href="../../Lingo/Reportable.html">Lingo::Reportable</a>
+  
+    <li><a href="../../Lingo/SourceFileNotFoundError.html">Lingo::SourceFileNotFoundError</a>
+  
+    <li><a href="../../Lingo/Version.html">Lingo::Version</a>
+  
+    <li><a href="../../String.html">String</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class Lingo::Language::Dictionary</h1>
+
+  <div id="description" class="description">
+    
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(config, lingo)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/lingo/language/dictionary.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">config</span>, <span class="ruby-identifier">lingo</span>)
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">'source'</span>)
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">'Required parameter `source\ missing.'</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">init_cachable</span>
+  <span class="ruby-identifier">init_reportable</span>
+
+  <span class="ruby-ivar">@suffixes</span>, <span class="ruby-ivar">@infixes</span> = [], []
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">suffix</span> = <span class="ruby-identifier">lingo</span>.<span class="ruby-identifier">dictionary_config</span>[<span class="ruby-string">'suffix'</span>]
+    <span class="ruby-identifier">suffix</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">t</span>, <span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">t</span>.<span class="ruby-identifier">downcase!</span>
+
+      <span class="ruby-identifier">s</span>.<span class="ruby-identifier">split</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">suf</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">su</span>, <span class="ruby-identifier">ex</span> = <span class="ruby-identifier">suf</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">'/'</span>)
+
+        (<span class="ruby-identifier">t</span> <span class="ruby-operator">==</span> <span class="ruby-string">'f'</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@infixes</span> <span class="ruby-operator">:</span> <span class="ruby-ivar">@suffixes</span>) <span class="ruby-operator">&lt;&lt;</span> [
+          <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">su</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'$'</span>, <span class="ruby-string">'i'</span>), <span class="ruby-identifier">ex</span> <span class="ruby-operator">||</span> <span class="ruby-string">'*'</span>, <span class="ruby-identifier">t</span>
+        ]
+      }
+    }
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@sources</span>     = <span class="ruby-identifier">config</span>[<span class="ruby-string">'source'</span>].<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">src</span><span class="ruby-operator">|</span> <span class="ruby-identifier">lingo</span>.<span class="ruby-identifier">lexical_hash</span>(<span class="ruby-identifier">src</span>) }
+  <span class="ruby-ivar">@all_sources</span> = <span class="ruby-identifier">config</span>[<span class="ruby-string">'mode'</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">config</span>[<span class="ruby-string">'mode'</span>].<span class="ruby-identifier">downcase</span> <span class="ruby-operator">==</span> <span class="ruby-string">'all'</span>
+
+  <span class="ruby-identifier">lingo</span>.<span class="ruby-identifier">dictionaries</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-close" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">close</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="close-source">
+            <pre><span class="ruby-comment"># File lib/lingo/language/dictionary.rb, line 65</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">close</span>
+  <span class="ruby-ivar">@sources</span>.<span class="ruby-identifier">each</span>(&amp;<span class="ruby-value">:close</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- close-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- close-method -->
+
+    
+      <div id="method-i-find_synonyms" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">find_synonyms</span><span
+            class="method-args">(obj)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="find_synonyms-source">
+            <pre><span class="ruby-comment"># File lib/lingo/language/dictionary.rb, line 92</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">find_synonyms</span>(<span class="ruby-identifier">obj</span>)
+  <span class="ruby-identifier">lex</span> = <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">lexicals</span>
+  <span class="ruby-identifier">lex</span> = [<span class="ruby-identifier">obj</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">unknown?</span>
+
+  <span class="ruby-comment"># multiworder optimization</span>
+  <span class="ruby-identifier">ref</span> = <span class="ruby-node">%r{\A#{Regexp.escape(Database::KEY_REF)}\d+}</span>
+
+  <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">each_with_object</span>([]) { <span class="ruby-operator">|</span><span class="ruby-identifier">l</span>, <span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">l</span>.<span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-constant">LA_SYNONYM</span>
+    <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">l</span>.<span class="ruby-identifier">attr</span> <span class="ruby-operator">!=</span> <span class="ruby-constant">LA_KOMPOSITUM</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-constant">WA_KOMPOSITUM</span>
+
+    <span class="ruby-identifier">select</span>(<span class="ruby-identifier">l</span>.<span class="ruby-identifier">form</span>).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">y</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">y</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">y</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">ref</span> }
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- find_synonyms-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- find_synonyms-method -->
+
+    
+      <div id="method-i-find_word" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">find_word</span><span
+            class="method-args">(str)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p><em>dic</em>.<a href="Dictionary.html#method-i-find_word">#find_word</a>(
+<em>a<a href="../../String.html">String</a></em> ) -&gt; <em>aNewWord</em></p>
+
+<p>Erstellt aus dem <a href="../../String.html">String</a> ein Wort und sucht
+nach diesem im Wörterbuch.</p>
+          
+
+          
+          <div class="method-source-code" id="find_word-source">
+            <pre><span class="ruby-comment"># File lib/lingo/language/dictionary.rb, line 76</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">find_word</span>(<span class="ruby-identifier">str</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">hit?</span>(<span class="ruby-identifier">key</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">downcase</span>)
+    <span class="ruby-identifier">inc</span>(<span class="ruby-string">'cache hits'</span>)
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">retrieve</span>(<span class="ruby-identifier">key</span>).<span class="ruby-identifier">tap</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">word</span><span class="ruby-operator">|</span> <span class="ruby-identifier">word</span>.<span class="ruby-identifier">form</span> = <span class="ruby-identifier">str</span> }
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">word</span> = <span class="ruby-constant">Word</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>, <span class="ruby-constant">WA_UNKNOWN</span>)
+
+  <span class="ruby-keyword">unless</span> (<span class="ruby-identifier">lexicals</span> = <span class="ruby-identifier">select_with_suffix</span>(<span class="ruby-identifier">str</span>)).<span class="ruby-identifier">empty?</span>
+    <span class="ruby-identifier">word</span>.<span class="ruby-identifier">lexicals</span> = <span class="ruby-identifier">lexicals</span>
+    <span class="ruby-identifier">word</span>.<span class="ruby-identifier">attr</span> = <span class="ruby-constant">WA_IDENTIFIED</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">store</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">word</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- find_word-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- find_word-method -->
+
+    
+      <div id="method-i-infix_lexicals" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">infix_lexicals</span><span
+            class="method-args">(str)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p><em>dic</em>.gap_lexicals( <em>a<a href="../../String.html">String</a></em>
+) -&gt; <em>ArrayOfLexicals</em></p>
+
+<p>Gibt alle möglichen Lexicals zurück, die von der Endung her auf den <a
+href="../../String.html">String</a> anwendbar sind:</p>
+          
+
+          
+          <div class="method-source-code" id="infix_lexicals-source">
+            <pre><span class="ruby-comment"># File lib/lingo/language/dictionary.rb, line 146</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">infix_lexicals</span>(<span class="ruby-identifier">str</span>)
+  <span class="ruby-identifier">affix_lexicals</span>(<span class="ruby-value">:infix</span>, <span class="ruby-identifier">str</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- infix_lexicals-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- infix_lexicals-method -->
+
+    
+      <div id="method-i-report" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">report</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="report-source">
+            <pre><span class="ruby-comment"># File lib/lingo/language/dictionary.rb, line 69</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">report</span>
+  <span class="ruby-keyword">super</span>.<span class="ruby-identifier">tap</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">rep</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@sources</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">src</span><span class="ruby-operator">|</span> <span class="ruby-identifier">rep</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">src</span>.<span class="ruby-identifier">report</span>) } }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- report-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- report-method -->
+
+    
+      <div id="method-i-select" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">select</span><span
+            class="method-args">(str)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p><em>dic</em>.select( <em>a<a href="../../String.html">String</a></em> )
+-&gt; <em>ArrayOfLexicals</em></p>
+
+<p>Sucht alle Wörterbücher durch und gibt den ersten Treffer zurück (+mode =
+first+), oder alle Treffer (+mode = all+)</p>
+          
+
+          
+          <div class="method-source-code" id="select-source">
+            <pre><span class="ruby-comment"># File lib/lingo/language/dictionary.rb, line 110</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">select</span>(<span class="ruby-identifier">str</span>)
+  <span class="ruby-ivar">@sources</span>.<span class="ruby-identifier">each_with_object</span>([]) { <span class="ruby-operator">|</span><span class="ruby-identifier">src</span>, <span class="ruby-identifier">lex</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">l</span> = <span class="ruby-identifier">src</span>[<span class="ruby-identifier">str</span>] <span class="ruby-keyword">or</span> <span class="ruby-keyword">next</span>
+    <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">l</span>)
+    <span class="ruby-keyword">break</span> <span class="ruby-identifier">lex</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@all_sources</span>
+  }.<span class="ruby-identifier">tap</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">lex</span><span class="ruby-operator">|</span> <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">sort!</span>; <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">uniq!</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- select-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- select-method -->
+
+    
+      <div id="method-i-select_with_infix" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">select_with_infix</span><span
+            class="method-args">(str)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p><em>dic</em>.<a
+href="Dictionary.html#method-i-select_with_infix">#select_with_infix</a>(
+<em>a<a href="../../String.html">String</a></em> ) -&gt;
+<em>ArrayOfLexicals</em></p>
+
+<p>Sucht alle Wörterbücher durch und gibt den ersten Treffer zurück (+mode =
+first+), oder alle Treffer (+mode = all+). Sucht dabei auch Wörter, die
+eine Fugung am Ende haben.</p>
+          
+
+          
+          <div class="method-source-code" id="select_with_infix-source">
+            <pre><span class="ruby-comment"># File lib/lingo/language/dictionary.rb, line 130</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">select_with_infix</span>(<span class="ruby-identifier">str</span>)
+  <span class="ruby-identifier">select_with_affix</span>(<span class="ruby-value">:infix</span>, <span class="ruby-identifier">str</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- select_with_infix-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- select_with_infix-method -->
+
+    
+      <div id="method-i-select_with_suffix" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">select_with_suffix</span><span
+            class="method-args">(str)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p><em>dic</em>.<a
+href="Dictionary.html#method-i-select_with_suffix">#select_with_suffix</a>(
+<em>a<a href="../../String.html">String</a></em> ) -&gt;
+<em>ArrayOfLexicals</em></p>
+
+<p>Sucht alle Wörterbücher durch und gibt den ersten Treffer zurück (+mode =
+first+), oder alle Treffer (+mode = all+). Sucht dabei auch Wörter, die um
+wortklassenspezifische Suffixe bereinigt wurden.</p>
+          
+
+          
+          <div class="method-source-code" id="select_with_suffix-source">
+            <pre><span class="ruby-comment"># File lib/lingo/language/dictionary.rb, line 122</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">select_with_suffix</span>(<span class="ruby-identifier">str</span>)
+  <span class="ruby-identifier">select_with_affix</span>(<span class="ruby-value">:suffix</span>, <span class="ruby-identifier">str</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- select_with_suffix-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- select_with_suffix-method -->
+
+    
+      <div id="method-i-suffix_lexicals" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">suffix_lexicals</span><span
+            class="method-args">(str)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p><em>dic</em>.<a
+href="Dictionary.html#method-i-suffix_lexicals">#suffix_lexicals</a>(
+<em>a<a href="../../String.html">String</a></em> ) -&gt;
+<em>ArrayOfLexicals</em></p>
+
+<p>Gibt alle möglichen Lexicals zurück, die von der Endung her auf den <a
+href="../../String.html">String</a> anwendbar sind:</p>
+
+<p>dic.suffix_lexicals(“Hasens”) -&gt; [(hasen/s), (hasen/e), (has/e)]</p>
+          
+
+          
+          <div class="method-source-code" id="suffix_lexicals-source">
+            <pre><span class="ruby-comment"># File lib/lingo/language/dictionary.rb, line 139</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">suffix_lexicals</span>(<span class="ruby-identifier">str</span>)
+  <span class="ruby-identifier">affix_lexicals</span>(<span class="ruby-value">:suffix</span>, <span class="ruby-identifier">str</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- suffix_lexicals-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- suffix_lexicals-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+     <section id="private-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Private Instance Methods</h3>
+
+    
+      <div id="method-i-affix_lexicals" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">affix_lexicals</span><span
+            class="method-args">(affix, str)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="affix_lexicals-source">
+            <pre><span class="ruby-comment"># File lib/lingo/language/dictionary.rb, line 162</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">affix_lexicals</span>(<span class="ruby-identifier">affix</span>, <span class="ruby-identifier">str</span>)
+  <span class="ruby-identifier">instance_variable_get</span>(<span class="ruby-node">&quot;@#{affix}es&quot;</span>).<span class="ruby-identifier">each_with_object</span>([]) { <span class="ruby-operator">|</span>(<span class="ruby-identifier">r</span>, <span class="ruby-identifier">e</span>, <span class="ruby-identifier">t</span>), <span class="ruby-identifier">l</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">l</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Lexical</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{$`}#{e == '*' ? '' : e}#{$'}&quot;</span>, <span class="ruby-identifier">t</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">str</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">r</span>
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- affix_lexicals-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- affix_lexicals-method -->
+
+    
+      <div id="method-i-select_with_affix" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">select_with_affix</span><span
+            class="method-args">(affix, str)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="select_with_affix-source">
+            <pre><span class="ruby-comment"># File lib/lingo/language/dictionary.rb, line 152</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">select_with_affix</span>(<span class="ruby-identifier">affix</span>, <span class="ruby-identifier">str</span>)
+  <span class="ruby-identifier">select</span>(<span class="ruby-identifier">str</span>).<span class="ruby-identifier">tap</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">l</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">l</span>.<span class="ruby-identifier">empty?</span>
+      <span class="ruby-identifier">affix_lexicals</span>(<span class="ruby-identifier">affix</span>, <span class="ruby-identifier">str</span>).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">select</span>(<span class="ruby-identifier">a</span>.<span class="ruby-identifier">form</span>).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">b</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">l</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">b</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">affix</span> <span class="ruby-operator">!=</span> <span class="ruby-value">:suffix</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">b</span>.<span class="ruby-identifier">attr</span>
+      } }
+    <span class="ruby-keyword">end</span>
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- select_with_affix-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- select_with_affix-method -->
+
+    
+    </section><!-- private-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Lingo::AgendaItem - lingo Application documentation (v1.8.0)</title>
+<title>class Lingo::AgendaItem - lingo Application documentation (v1.8.1)</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -47,7 +47,7 @@
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
   <ul>
-    <li>lib/lingo/types.rb
+    <li>lib/lingo/agenda_item.rb
   </ul>
 </nav>
 
@@ -87,6 +87,8 @@
     <li><a href="#method-i-3C-3D-3E">#&lt;=&gt;</a>
     
     <li><a href="#method-i-inspect">#inspect</a>
+    
+    <li><a href="#method-i-to_a">#to_a</a>
     
   </ul>
 </nav>
@@ -129,29 +131,31 @@
   
     <li><a href="../Lingo/Attendee/Formatter.html">Lingo::Attendee::Formatter</a>
   
-    <li><a href="../Lingo/Attendee/Multiworder.html">Lingo::Attendee::Multiworder</a>
+    <li><a href="../Lingo/Attendee/MultiWorder.html">Lingo::Attendee::MultiWorder</a>
   
-    <li><a href="../Lingo/Attendee/Noneword_filter.html">Lingo::Attendee::Noneword_filter</a>
+    <li><a href="../Lingo/Attendee/NonewordFilter.html">Lingo::Attendee::NonewordFilter</a>
   
-    <li><a href="../Lingo/Attendee/Objectfilter.html">Lingo::Attendee::Objectfilter</a>
+    <li><a href="../Lingo/Attendee/ObjectFilter.html">Lingo::Attendee::ObjectFilter</a>
   
     <li><a href="../Lingo/Attendee/Sequencer.html">Lingo::Attendee::Sequencer</a>
   
+    <li><a href="../Lingo/Attendee/Sequencer/WordSequence.html">Lingo::Attendee::Sequencer::WordSequence</a>
+  
     <li><a href="../Lingo/Attendee/Synonymer.html">Lingo::Attendee::Synonymer</a>
   
-    <li><a href="../Lingo/Attendee/Textreader.html">Lingo::Attendee::Textreader</a>
+    <li><a href="../Lingo/Attendee/TextReader.html">Lingo::Attendee::TextReader</a>
   
-    <li><a href="../Lingo/Attendee/Textreader/PDFFilter.html">Lingo::Attendee::Textreader::PDFFilter</a>
+    <li><a href="../Lingo/Attendee/TextReader/PDFFilter.html">Lingo::Attendee::TextReader::PDFFilter</a>
   
-    <li><a href="../Lingo/Attendee/Textwriter.html">Lingo::Attendee::Textwriter</a>
+    <li><a href="../Lingo/Attendee/TextWriter.html">Lingo::Attendee::TextWriter</a>
   
     <li><a href="../Lingo/Attendee/Tokenizer.html">Lingo::Attendee::Tokenizer</a>
   
     <li><a href="../Lingo/Attendee/Variator.html">Lingo::Attendee::Variator</a>
   
-    <li><a href="../Lingo/Attendee/Vector_filter.html">Lingo::Attendee::Vector_filter</a>
+    <li><a href="../Lingo/Attendee/VectorFilter.html">Lingo::Attendee::VectorFilter</a>
   
-    <li><a href="../Lingo/Attendee/Wordsearcher.html">Lingo::Attendee::Wordsearcher</a>
+    <li><a href="../Lingo/Attendee/WordSearcher.html">Lingo::Attendee::WordSearcher</a>
   
     <li><a href="../Lingo/BufferedAttendee.html">Lingo::BufferedAttendee</a>
   
@@ -161,51 +165,73 @@
   
     <li><a href="../Lingo/Call.html">Lingo::Call</a>
   
-    <li><a href="../Lingo/Compositum.html">Lingo::Compositum</a>
-  
     <li><a href="../Lingo/Config.html">Lingo::Config</a>
   
-    <li><a href="../Lingo/Crypter.html">Lingo::Crypter</a>
+    <li><a href="../Lingo/ConfigError.html">Lingo::ConfigError</a>
+  
+    <li><a href="../Lingo/ConfigLoadError.html">Lingo::ConfigLoadError</a>
   
     <li><a href="../Lingo/Ctl.html">Lingo::Ctl</a>
   
-    <li><a href="../Lingo/DbmFile.html">Lingo::DbmFile</a>
+    <li><a href="../Lingo/Database.html">Lingo::Database</a>
   
-    <li><a href="../Lingo/Dictionary.html">Lingo::Dictionary</a>
+    <li><a href="../Lingo/Database/Crypter.html">Lingo::Database::Crypter</a>
   
-    <li><a href="../Lingo/Grammar.html">Lingo::Grammar</a>
+    <li><a href="../Lingo/Database/GDBMStore.html">Lingo::Database::GDBMStore</a>
   
-    <li><a href="../Lingo/Lexical.html">Lingo::Lexical</a>
+    <li><a href="../Lingo/Database/HashStore.html">Lingo::Database::HashStore</a>
   
-    <li><a href="../Lingo/LexicalHash.html">Lingo::LexicalHash</a>
+    <li><a href="../Lingo/Database/LibCDBStore.html">Lingo::Database::LibCDBStore</a>
+  
+    <li><a href="../Lingo/Database/SDBMStore.html">Lingo::Database::SDBMStore</a>
+  
+    <li><a href="../Lingo/Database/ShowProgress.html">Lingo::Database::ShowProgress</a>
+  
+    <li><a href="../Lingo/Database/Source.html">Lingo::Database::Source</a>
+  
+    <li><a href="../Lingo/Database/Source/KeyValue.html">Lingo::Database::Source::KeyValue</a>
+  
+    <li><a href="../Lingo/Database/Source/MultiKey.html">Lingo::Database::Source::MultiKey</a>
+  
+    <li><a href="../Lingo/Database/Source/MultiValue.html">Lingo::Database::Source::MultiValue</a>
+  
+    <li><a href="../Lingo/Database/Source/SingleWord.html">Lingo::Database::Source::SingleWord</a>
+  
+    <li><a href="../Lingo/Database/Source/WordClass.html">Lingo::Database::Source::WordClass</a>
+  
+    <li><a href="../Lingo/FileNotFoundError.html">Lingo::FileNotFoundError</a>
+  
+    <li><a href="../Lingo/InvalidDatabaseConfigError.html">Lingo::InvalidDatabaseConfigError</a>
+  
+    <li><a href="../Lingo/Language.html">Lingo::Language</a>
+  
+    <li><a href="../Lingo/Language/Dictionary.html">Lingo::Language::Dictionary</a>
+  
+    <li><a href="../Lingo/Language/Grammar.html">Lingo::Language::Grammar</a>
+  
+    <li><a href="../Lingo/Language/Lexical.html">Lingo::Language::Lexical</a>
+  
+    <li><a href="../Lingo/Language/LexicalHash.html">Lingo::Language::LexicalHash</a>
+  
+    <li><a href="../Lingo/Language/Token.html">Lingo::Language::Token</a>
+  
+    <li><a href="../Lingo/Language/Word.html">Lingo::Language::Word</a>
+  
+    <li><a href="../Lingo/Language/WordForm.html">Lingo::Language::WordForm</a>
+  
+    <li><a href="../Lingo/LingoError.html">Lingo::LingoError</a>
+  
+    <li><a href="../Lingo/MissingConfigError.html">Lingo::MissingConfigError</a>
+  
+    <li><a href="../Lingo/NoDatabaseConfigError.html">Lingo::NoDatabaseConfigError</a>
+  
+    <li><a href="../Lingo/NoWritableStoreError.html">Lingo::NoWritableStoreError</a>
   
     <li><a href="../Lingo/Reportable.html">Lingo::Reportable</a>
   
-    <li><a href="../Lingo/ShowProgress.html">Lingo::ShowProgress</a>
-  
-    <li><a href="../Lingo/StringA.html">Lingo::StringA</a>
-  
-    <li><a href="../Lingo/Token.html">Lingo::Token</a>
-  
-    <li><a href="../Lingo/Txt2DbmConverter.html">Lingo::Txt2DbmConverter</a>
-  
-    <li><a href="../Lingo/TxtFile.html">Lingo::TxtFile</a>
-  
-    <li><a href="../Lingo/TxtFile_Keyvalue.html">Lingo::TxtFile_Keyvalue</a>
-  
-    <li><a href="../Lingo/TxtFile_Multikey.html">Lingo::TxtFile_Multikey</a>
-  
-    <li><a href="../Lingo/TxtFile_Multivalue.html">Lingo::TxtFile_Multivalue</a>
-  
-    <li><a href="../Lingo/TxtFile_Singleword.html">Lingo::TxtFile_Singleword</a>
-  
-    <li><a href="../Lingo/TxtFile_Wordclass.html">Lingo::TxtFile_Wordclass</a>
+    <li><a href="../Lingo/SourceFileNotFoundError.html">Lingo::SourceFileNotFoundError</a>
   
     <li><a href="../Lingo/Version.html">Lingo::Version</a>
-  
-    <li><a href="../Lingo/Word.html">Lingo::Word</a>
-  
-    <li><a href="../Lingo/WordSequence.html">Lingo::WordSequence</a>
   
     <li><a href="../String.html">String</a>
   
@@ -277,7 +303,7 @@
         
         <div class="method-heading">
           <span class="method-name">new</span><span
-            class="method-args">(cmd, param='')</span>
+            class="method-args">(cmd, param = nil)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -289,10 +315,9 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/lingo/types.rb, line 264</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">param</span>=<span class="ruby-string">''</span>)
-  <span class="ruby-ivar">@cmd</span> = <span class="ruby-identifier">cmd</span> <span class="ruby-operator">||</span> <span class="ruby-string">''</span>
-  <span class="ruby-ivar">@param</span> = <span class="ruby-identifier">param</span> <span class="ruby-operator">||</span> <span class="ruby-string">''</span>
+            <pre><span class="ruby-comment"># File lib/lingo/agenda_item.rb, line 34</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">param</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-ivar">@cmd</span>, <span class="ruby-ivar">@param</span> = <span class="ruby-identifier">cmd</span> <span class="ruby-operator">||</span> <span class="ruby-string">''</span>, <span class="ruby-identifier">param</span> <span class="ruby-operator">||</span> <span class="ruby-string">''</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- new-source -->
           
@@ -326,14 +351,9 @@
 
           
           <div class="method-source-code" id="3C-3D-3E-source">
-            <pre><span class="ruby-comment"># File lib/lingo/types.rb, line 269</span>
+            <pre><span class="ruby-comment"># File lib/lingo/agenda_item.rb, line 38</span>
 <span class="ruby-keyword">def</span> <span class="ruby-operator">&lt;=&gt;</span>(<span class="ruby-identifier">other</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-value">1</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">AgendaItem</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">cmd</span><span class="ruby-operator">==</span><span class="ruby-identifier">other</span>.<span class="ruby-identifier">cmd</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">param</span><span class="ruby-operator">&lt;=&gt;</span><span class="ruby-identifier">other</span>.<span class="ruby-identifier">param</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">cmd</span><span class="ruby-operator">&lt;=&gt;</span><span class="ruby-identifier">other</span>.<span class="ruby-identifier">cmd</span>
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">other</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">to_a</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">to_a</span> <span class="ruby-operator">:</span> <span class="ruby-value">1</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- 3C-3D-3E-source -->
           
@@ -361,7 +381,7 @@
 
           
           <div class="method-source-code" id="inspect-source">
-            <pre><span class="ruby-comment"># File lib/lingo/types.rb, line 278</span>
+            <pre><span class="ruby-comment"># File lib/lingo/agenda_item.rb, line 46</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">inspect</span>
   <span class="ruby-node">&quot;*#{cmd.upcase}('#{param}')&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -373,6 +393,36 @@
 
         
       </div><!-- inspect-method -->
+
+    
+      <div id="method-i-to_a" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_a</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="to_a-source">
+            <pre><span class="ruby-comment"># File lib/lingo/agenda_item.rb, line 42</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_a</span>
+  [<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">param</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- to_a-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- to_a-method -->
 
     
     </section><!-- public-instance-method-details -->

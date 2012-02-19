@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>class Lingo::Attendee::VectorFilter - lingo Application documentation (v1.8.1)</title>
+
+<link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="../../index.html">Home</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/lingo/attendee/vector_filter.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">self
+  
+</nav>
+
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-i-control">#control</a>
+    
+    <li><a href="#method-i-init">#init</a>
+    
+    <li><a href="#method-i-process">#process</a>
+    
+    <li><a href="#method-i-sendVector">#sendVector</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="../../COPYING.html">COPYING</a>
+  
+    <li class="file"><a href="../../ChangeLog.html">ChangeLog</a>
+  
+    <li class="file"><a href="../../README.html">README</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../../Lingo.html">Lingo</a>
+  
+    <li><a href="../../Lingo/AgendaItem.html">Lingo::AgendaItem</a>
+  
+    <li><a href="../../Lingo/Attendee.html">Lingo::Attendee</a>
+  
+    <li><a href="../../Lingo/Attendee/Abbreviator.html">Lingo::Attendee::Abbreviator</a>
+  
+    <li><a href="../../Lingo/Attendee/Debugger.html">Lingo::Attendee::Debugger</a>
+  
+    <li><a href="../../Lingo/Attendee/Decomposer.html">Lingo::Attendee::Decomposer</a>
+  
+    <li><a href="../../Lingo/Attendee/Dehyphenizer.html">Lingo::Attendee::Dehyphenizer</a>
+  
+    <li><a href="../../Lingo/Attendee/Formatter.html">Lingo::Attendee::Formatter</a>
+  
+    <li><a href="../../Lingo/Attendee/MultiWorder.html">Lingo::Attendee::MultiWorder</a>
+  
+    <li><a href="../../Lingo/Attendee/NonewordFilter.html">Lingo::Attendee::NonewordFilter</a>
+  
+    <li><a href="../../Lingo/Attendee/ObjectFilter.html">Lingo::Attendee::ObjectFilter</a>
+  
+    <li><a href="../../Lingo/Attendee/Sequencer.html">Lingo::Attendee::Sequencer</a>
+  
+    <li><a href="../../Lingo/Attendee/Sequencer/WordSequence.html">Lingo::Attendee::Sequencer::WordSequence</a>
+  
+    <li><a href="../../Lingo/Attendee/Synonymer.html">Lingo::Attendee::Synonymer</a>
+  
+    <li><a href="../../Lingo/Attendee/TextReader.html">Lingo::Attendee::TextReader</a>
+  
+    <li><a href="../../Lingo/Attendee/TextReader/PDFFilter.html">Lingo::Attendee::TextReader::PDFFilter</a>
+  
+    <li><a href="../../Lingo/Attendee/TextWriter.html">Lingo::Attendee::TextWriter</a>
+  
+    <li><a href="../../Lingo/Attendee/Tokenizer.html">Lingo::Attendee::Tokenizer</a>
+  
+    <li><a href="../../Lingo/Attendee/Variator.html">Lingo::Attendee::Variator</a>
+  
+    <li><a href="../../Lingo/Attendee/VectorFilter.html">Lingo::Attendee::VectorFilter</a>
+  
+    <li><a href="../../Lingo/Attendee/WordSearcher.html">Lingo::Attendee::WordSearcher</a>
+  
+    <li><a href="../../Lingo/BufferedAttendee.html">Lingo::BufferedAttendee</a>
+  
+    <li><a href="../../Lingo/CLI.html">Lingo::CLI</a>
+  
+    <li><a href="../../Lingo/Cachable.html">Lingo::Cachable</a>
+  
+    <li><a href="../../Lingo/Call.html">Lingo::Call</a>
+  
+    <li><a href="../../Lingo/Config.html">Lingo::Config</a>
+  
+    <li><a href="../../Lingo/ConfigError.html">Lingo::ConfigError</a>
+  
+    <li><a href="../../Lingo/ConfigLoadError.html">Lingo::ConfigLoadError</a>
+  
+    <li><a href="../../Lingo/Ctl.html">Lingo::Ctl</a>
+  
+    <li><a href="../../Lingo/Database.html">Lingo::Database</a>
+  
+    <li><a href="../../Lingo/Database/Crypter.html">Lingo::Database::Crypter</a>
+  
+    <li><a href="../../Lingo/Database/GDBMStore.html">Lingo::Database::GDBMStore</a>
+  
+    <li><a href="../../Lingo/Database/HashStore.html">Lingo::Database::HashStore</a>
+  
+    <li><a href="../../Lingo/Database/LibCDBStore.html">Lingo::Database::LibCDBStore</a>
+  
+    <li><a href="../../Lingo/Database/SDBMStore.html">Lingo::Database::SDBMStore</a>
+  
+    <li><a href="../../Lingo/Database/ShowProgress.html">Lingo::Database::ShowProgress</a>
+  
+    <li><a href="../../Lingo/Database/Source.html">Lingo::Database::Source</a>
+  
+    <li><a href="../../Lingo/Database/Source/KeyValue.html">Lingo::Database::Source::KeyValue</a>
+  
+    <li><a href="../../Lingo/Database/Source/MultiKey.html">Lingo::Database::Source::MultiKey</a>
+  
+    <li><a href="../../Lingo/Database/Source/MultiValue.html">Lingo::Database::Source::MultiValue</a>
+  
+    <li><a href="../../Lingo/Database/Source/SingleWord.html">Lingo::Database::Source::SingleWord</a>
+  
+    <li><a href="../../Lingo/Database/Source/WordClass.html">Lingo::Database::Source::WordClass</a>
+  
+    <li><a href="../../Lingo/FileNotFoundError.html">Lingo::FileNotFoundError</a>
+  
+    <li><a href="../../Lingo/InvalidDatabaseConfigError.html">Lingo::InvalidDatabaseConfigError</a>
+  
+    <li><a href="../../Lingo/Language.html">Lingo::Language</a>
+  
+    <li><a href="../../Lingo/Language/Dictionary.html">Lingo::Language::Dictionary</a>
+  
+    <li><a href="../../Lingo/Language/Grammar.html">Lingo::Language::Grammar</a>
+  
+    <li><a href="../../Lingo/Language/Lexical.html">Lingo::Language::Lexical</a>
+  
+    <li><a href="../../Lingo/Language/LexicalHash.html">Lingo::Language::LexicalHash</a>
+  
+    <li><a href="../../Lingo/Language/Token.html">Lingo::Language::Token</a>
+  
+    <li><a href="../../Lingo/Language/Word.html">Lingo::Language::Word</a>
+  
+    <li><a href="../../Lingo/Language/WordForm.html">Lingo::Language::WordForm</a>
+  
+    <li><a href="../../Lingo/LingoError.html">Lingo::LingoError</a>
+  
+    <li><a href="../../Lingo/MissingConfigError.html">Lingo::MissingConfigError</a>
+  
+    <li><a href="../../Lingo/NoDatabaseConfigError.html">Lingo::NoDatabaseConfigError</a>
+  
+    <li><a href="../../Lingo/NoWritableStoreError.html">Lingo::NoWritableStoreError</a>
+  
+    <li><a href="../../Lingo/Reportable.html">Lingo::Reportable</a>
+  
+    <li><a href="../../Lingo/SourceFileNotFoundError.html">Lingo::SourceFileNotFoundError</a>
+  
+    <li><a href="../../Lingo/Version.html">Lingo::Version</a>
+  
+    <li><a href="../../String.html">String</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class Lingo::Attendee::VectorFilter</h1>
+
+  <div id="description" class="description">
+    
+<p>Die Hauptaufgabe des <a href="VectorFilter.html">VectorFilter</a> ist die
+Erstellung eines Dokumenten-Index-Vektor. Dabei werden die durch die
+anderen Attendees ermittelten Grundformen eines Wortes gespeichert und bei
+einem Datei- oder Record-Wechsel weitergeleitet. Der <a
+href="VectorFilter.html">VectorFilter</a> kann bestimmte Wortklassen
+filtern und die Ergebnisse in verschiedenen Arten aufbereiten. Dabei werden
+Funktionen wie das einfache Zählen der Häufigkeit innerhalb eines
+Dokuments, aber auch die Term-Frequenz und unterschiedliche Ausgabeformate
+unterstützt.</p>
+
+<h3 id="label-M%C3%B6gliche+Verlinkung">Mögliche Verlinkung</h3>
+<dl class="rdoc-list note-list"><dt>Erwartet
+<dd>
+<p>Daten vom Typ <strong>Word</strong>, z.B. von <a
+href="Abbreviator.html">Abbreviator</a>, Wordsearcher, <a
+href="Decomposer.html">Decomposer</a>, <a
+href="Synonymer.html">Synonymer</a>, Multiworder, <a
+href="Sequencer.html">Sequencer</a></p>
+</dd><dt>Erzeugt
+<dd>
+<p>Daten vom Typ <strong><a href="../../String.html">String</a></strong>, z.B.
+für Textwriter</p>
+</dd></dl>
+
+<h3 id="label-Parameter">Parameter</h3>
+
+<p>Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der
+Voreinstellung). Alle anderen Parameter müssen zwingend angegeben werden.</p>
+<dl class="rdoc-list note-list"><dt><strong>in</strong>
+<dd>
+<p>siehe allgemeine Beschreibung des <a href="../Attendee.html">Attendee</a></p>
+</dd><dt><strong>out</strong>
+<dd>
+<p>siehe allgemeine Beschreibung des <a href="../Attendee.html">Attendee</a></p>
+</dd><dt><strong><em>lexicals</em></strong>
+<dd>
+<p>(Standard: ‘[sy]’ =&gt; die Wortklassen Substantiv und Synonyme werden
+gefiltert) Es können in eckige Klammern beliebige Wortklassen angegeben
+werden (siehe lib/strings.rb). Der Parameter wird als regulärer Ausdruck
+ausgewertet.</p>
+</dd><dt><strong><em>sort</em></strong>
+<dd>
+<p>(Standard: ‘normal’) Der Parameter <code>sort</code> beeinflußt
+Verarbeitung und Ausgabeformat des VectorFilters.</p>
+<dl class="rdoc-list note-list"><dt>normal
+<dd>
+<p>Jedes gefilterte Wort wird einmalig (keine Doppelnennungen!) in
+alphabetischer Reihenfolge in der Form “wort” ausgegeben.</p>
+</dd><dt>term_abs
+<dd>
+<p>Jedes gefilterte Wort wird einmalig in absteigender Häufigkeit mit Angabe
+der absoluten Häufigkeit im Dokument in der Form “12 wort” ausgegeben.</p>
+</dd><dt>term_rel
+<dd>
+<p>Jedes gefilterte Wort wird einmalig in absteigender Häufigkeit mit Angabe
+der relativen Häufigkeit im Dokument in der Form “0.1234 wort” ausgegeben.</p>
+</dd><dt>sto_abs
+<dd>
+<p>Jedes gefilterte Wort wird einmalig in absteigender Häufigkeit mit Angabe
+der absoluten Häufigkeit im Dokument in der Form “wort {12}” ausgegeben.</p>
+</dd><dt>sto_rel
+<dd>
+<p>Jedes gefilterte Wort wird einmalig in absteigender Häufigkeit mit Angabe
+der relativen Häufigkeit im Dokument in der Form “wort {0.1234}”
+ausgegeben.</p>
+</dd></dl>
+</dd><dt><strong><em>skip</em></strong>
+<dd>
+<p>(Standard: TA_PUNCTUATION und TA_OTHER) Hiermit wird angegeben, welche
+Objekte nicht verarbeitet werden sollen. Die <code>skip</code>-Angabe
+bezieht sich auf das Attribut <code>attr</code> von Token oder
+Word-Objekten.</p>
+</dd></dl>
+
+<h3 id="label-Beispiele">Beispiele</h3>
+
+<p>Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration
+<code>t1.cfg</code></p>
+
+<pre>meeting:
+  attendees:
+    - text_reader:   { out: lines, files: '$(files)' }
+    - tokenizer:     { in: lines, out: token }
+    - word_searcher: { in: token, out: words, source: 'sys-dic' }
+    - vector_filter: { in: words, out: filtr, sort: 'term_rel' }
+    - debugger:      { in: filtr, prompt: 'out&gt;' }</pre>
+
+<p>ergibt die Ausgabe über den Debugger: <code>lingo -c t1 test.txt</code></p>
+
+<pre>out&gt; *FILE('test.txt')
+out&gt; &quot;0.28571 indexierung&quot;
+out&gt; *EOF('test.txt')</pre>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="protected-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Protected Instance Methods</h3>
+
+    
+      <div id="method-i-control" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">control</span><span
+            class="method-args">(cmd, par)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="control-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 95</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">par</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">cmd</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-constant">STR_CMD_EOL</span>
+      <span class="ruby-identifier">skip_command</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-constant">STR_CMD_FILE</span>, <span class="ruby-constant">STR_CMD_RECORD</span>, <span class="ruby-constant">STR_CMD_EOF</span>
+      <span class="ruby-ivar">@debug</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@vectors</span>.<span class="ruby-identifier">each</span>(&amp;<span class="ruby-identifier">method</span>(<span class="ruby-value">:forward</span>)) <span class="ruby-operator">:</span> <span class="ruby-identifier">sendVector</span>
+      <span class="ruby-ivar">@vectors</span>.<span class="ruby-identifier">clear</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- control-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- control-method -->
+
+    
+      <div id="method-i-init" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">init</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="init-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 83</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">init</span>
+  <span class="ruby-ivar">@lexis</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">get_key</span>(<span class="ruby-string">'lexicals'</span>, <span class="ruby-string">'[sy]'</span>).<span class="ruby-identifier">downcase</span>)
+  <span class="ruby-ivar">@sort</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">'sort'</span>, <span class="ruby-string">'normal'</span>).<span class="ruby-identifier">downcase</span>
+  <span class="ruby-ivar">@skip</span> = <span class="ruby-identifier">get_array</span>(<span class="ruby-string">'skip'</span>, <span class="ruby-constant">TA_PUNCTUATION</span><span class="ruby-operator">+</span><span class="ruby-string">','</span><span class="ruby-operator">+</span><span class="ruby-constant">TA_OTHER</span>).<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">upcase</span> }
+  <span class="ruby-ivar">@vectors</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@word_count</span> = <span class="ruby-value">0</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@debug</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">'debug'</span>, <span class="ruby-keyword">false</span>)
+    <span class="ruby-ivar">@prompt</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">'prompt'</span>, <span class="ruby-string">'lex:) '</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- init-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- init-method -->
+
+    
+      <div id="method-i-process" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">process</span><span
+            class="method-args">(obj)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="process-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 105</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">process</span>(<span class="ruby-identifier">obj</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@debug</span>
+    <span class="ruby-ivar">@vectors</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{@prompt} #{obj.inspect}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">eval</span>(<span class="ruby-ivar">@debug</span>)
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Word</span>)
+    <span class="ruby-ivar">@word_count</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@skip</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">attr</span>).<span class="ruby-identifier">nil?</span>
+    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">lexicals</span>.<span class="ruby-identifier">nil?</span>
+      <span class="ruby-identifier">lexis</span> = <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">get_class</span>(<span class="ruby-ivar">@lexis</span>) <span class="ruby-comment">#lexicals.collect { |lex| (lex.attr =~ @lexis) ? lex : nil }.compact # get_class(@lexis)</span>
+      <span class="ruby-identifier">lexis</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">lex</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@vectors</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">form</span>.<span class="ruby-identifier">downcase</span> }
+      <span class="ruby-identifier">add</span>(<span class="ruby-string">'Anzahl von Vektor-Wörtern'</span>, <span class="ruby-identifier">lexis</span>.<span class="ruby-identifier">size</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- process-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- process-method -->
+
+    
+    </section><!-- protected-instance-method-details -->
+  
+     <section id="private-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Private Instance Methods</h3>
+
+    
+      <div id="method-i-sendVector" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">sendVector</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="sendVector-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 120</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">sendVector</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@vectors</span>.<span class="ruby-identifier">size</span><span class="ruby-operator">==</span><span class="ruby-value">0</span>
+
+  <span class="ruby-identifier">add</span>(<span class="ruby-string">'Objekte gefiltert'</span>, <span class="ruby-ivar">@vectors</span>.<span class="ruby-identifier">size</span>)
+
+  <span class="ruby-comment"># Array der Vector-Wörter zählen und nach Häufigkeit sortieren</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@sort</span><span class="ruby-operator">==</span><span class="ruby-string">'normal'</span>
+    <span class="ruby-ivar">@vectors</span> = <span class="ruby-ivar">@vectors</span>.<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">uniq</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">cnt</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>)
+    <span class="ruby-ivar">@vectors</span>.<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">cnt</span>[<span class="ruby-identifier">e</span>]<span class="ruby-operator">+=</span><span class="ruby-value">1</span> }
+    <span class="ruby-ivar">@vectors</span> = <span class="ruby-identifier">cnt</span>.<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">sort</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">y</span>[<span class="ruby-value">1</span>]<span class="ruby-operator">&lt;=&gt;</span><span class="ruby-identifier">x</span>[<span class="ruby-value">1</span>])<span class="ruby-operator">==</span><span class="ruby-value">0</span>
+        <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>]<span class="ruby-operator">&lt;=&gt;</span><span class="ruby-identifier">y</span>[<span class="ruby-value">0</span>]
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">y</span>[<span class="ruby-value">1</span>]<span class="ruby-operator">&lt;=&gt;</span><span class="ruby-identifier">x</span>[<span class="ruby-value">1</span>]
+      <span class="ruby-keyword">end</span>
+    }
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Vectoren je nach Parameter formatiert weiterleiten</span>
+  <span class="ruby-ivar">@vectors</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">vec</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">case</span> <span class="ruby-ivar">@sort</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">'term_abs'</span> <span class="ruby-keyword">then</span> <span class="ruby-identifier">sprintf</span> <span class="ruby-string">&quot;%d %s&quot;</span>, <span class="ruby-identifier">vec</span>[<span class="ruby-value">1</span>], <span class="ruby-identifier">vec</span>[<span class="ruby-value">0</span>]
+    <span class="ruby-keyword">when</span> <span class="ruby-string">'term_rel'</span> <span class="ruby-keyword">then</span> <span class="ruby-identifier">sprintf</span> <span class="ruby-string">&quot;%6.5f %s&quot;</span>, <span class="ruby-identifier">vec</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">to_f</span><span class="ruby-operator">/</span><span class="ruby-ivar">@word_count</span>, <span class="ruby-identifier">vec</span>[<span class="ruby-value">0</span>]
+    <span class="ruby-keyword">when</span> <span class="ruby-string">'sto_abs'</span>  <span class="ruby-keyword">then</span> <span class="ruby-identifier">sprintf</span> <span class="ruby-string">&quot;%s {%d}&quot;</span>, <span class="ruby-identifier">vec</span>[<span class="ruby-value">0</span>], <span class="ruby-identifier">vec</span>[<span class="ruby-value">1</span>]
+    <span class="ruby-keyword">when</span> <span class="ruby-string">'sto_rel'</span>  <span class="ruby-keyword">then</span> <span class="ruby-identifier">sprintf</span> <span class="ruby-string">&quot;%s {%6.5f}&quot;</span>, <span class="ruby-identifier">vec</span>[<span class="ruby-value">0</span>], <span class="ruby-identifier">vec</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">to_f</span><span class="ruby-operator">/</span><span class="ruby-ivar">@word_count</span>
+    <span class="ruby-keyword">else</span> <span class="ruby-identifier">sprintf</span> <span class="ruby-string">&quot;%s&quot;</span>, <span class="ruby-identifier">vec</span>
+    <span class="ruby-keyword">end</span>
+  }.<span class="ruby-identifier">each</span>(&amp;<span class="ruby-identifier">method</span>(<span class="ruby-value">:forward</span>))
+
+  <span class="ruby-ivar">@word_count</span> = <span class="ruby-value">0</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@sort</span> <span class="ruby-operator">==</span> <span class="ruby-string">'sto_rel'</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- sendVector-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- sendVector-method -->
+
+    
+    </section><!-- private-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

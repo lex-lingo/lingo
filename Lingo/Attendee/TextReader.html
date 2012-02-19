@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>class Lingo::Attendee::TextReader - lingo Application documentation (v1.8.1)</title>
+
+<link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="../../index.html">Home</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/lingo/attendee/text_reader.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">self
+  
+</nav>
+
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-i-control">#control</a>
+    
+    <li><a href="#method-i-file_type">#file_type</a>
+    
+    <li><a href="#method-i-filter">#filter</a>
+    
+    <li><a href="#method-i-filter_html">#filter_html</a>
+    
+    <li><a href="#method-i-filter_pdf">#filter_pdf</a>
+    
+    <li><a href="#method-i-init">#init</a>
+    
+    <li><a href="#method-i-spool">#spool</a>
+    
+    <li><a href="#method-i-stdin-3F">#stdin?</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="../../COPYING.html">COPYING</a>
+  
+    <li class="file"><a href="../../ChangeLog.html">ChangeLog</a>
+  
+    <li class="file"><a href="../../README.html">README</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../../Lingo.html">Lingo</a>
+  
+    <li><a href="../../Lingo/AgendaItem.html">Lingo::AgendaItem</a>
+  
+    <li><a href="../../Lingo/Attendee.html">Lingo::Attendee</a>
+  
+    <li><a href="../../Lingo/Attendee/Abbreviator.html">Lingo::Attendee::Abbreviator</a>
+  
+    <li><a href="../../Lingo/Attendee/Debugger.html">Lingo::Attendee::Debugger</a>
+  
+    <li><a href="../../Lingo/Attendee/Decomposer.html">Lingo::Attendee::Decomposer</a>
+  
+    <li><a href="../../Lingo/Attendee/Dehyphenizer.html">Lingo::Attendee::Dehyphenizer</a>
+  
+    <li><a href="../../Lingo/Attendee/Formatter.html">Lingo::Attendee::Formatter</a>
+  
+    <li><a href="../../Lingo/Attendee/MultiWorder.html">Lingo::Attendee::MultiWorder</a>
+  
+    <li><a href="../../Lingo/Attendee/NonewordFilter.html">Lingo::Attendee::NonewordFilter</a>
+  
+    <li><a href="../../Lingo/Attendee/ObjectFilter.html">Lingo::Attendee::ObjectFilter</a>
+  
+    <li><a href="../../Lingo/Attendee/Sequencer.html">Lingo::Attendee::Sequencer</a>
+  
+    <li><a href="../../Lingo/Attendee/Sequencer/WordSequence.html">Lingo::Attendee::Sequencer::WordSequence</a>
+  
+    <li><a href="../../Lingo/Attendee/Synonymer.html">Lingo::Attendee::Synonymer</a>
+  
+    <li><a href="../../Lingo/Attendee/TextReader.html">Lingo::Attendee::TextReader</a>
+  
+    <li><a href="../../Lingo/Attendee/TextReader/PDFFilter.html">Lingo::Attendee::TextReader::PDFFilter</a>
+  
+    <li><a href="../../Lingo/Attendee/TextWriter.html">Lingo::Attendee::TextWriter</a>
+  
+    <li><a href="../../Lingo/Attendee/Tokenizer.html">Lingo::Attendee::Tokenizer</a>
+  
+    <li><a href="../../Lingo/Attendee/Variator.html">Lingo::Attendee::Variator</a>
+  
+    <li><a href="../../Lingo/Attendee/VectorFilter.html">Lingo::Attendee::VectorFilter</a>
+  
+    <li><a href="../../Lingo/Attendee/WordSearcher.html">Lingo::Attendee::WordSearcher</a>
+  
+    <li><a href="../../Lingo/BufferedAttendee.html">Lingo::BufferedAttendee</a>
+  
+    <li><a href="../../Lingo/CLI.html">Lingo::CLI</a>
+  
+    <li><a href="../../Lingo/Cachable.html">Lingo::Cachable</a>
+  
+    <li><a href="../../Lingo/Call.html">Lingo::Call</a>
+  
+    <li><a href="../../Lingo/Config.html">Lingo::Config</a>
+  
+    <li><a href="../../Lingo/ConfigError.html">Lingo::ConfigError</a>
+  
+    <li><a href="../../Lingo/ConfigLoadError.html">Lingo::ConfigLoadError</a>
+  
+    <li><a href="../../Lingo/Ctl.html">Lingo::Ctl</a>
+  
+    <li><a href="../../Lingo/Database.html">Lingo::Database</a>
+  
+    <li><a href="../../Lingo/Database/Crypter.html">Lingo::Database::Crypter</a>
+  
+    <li><a href="../../Lingo/Database/GDBMStore.html">Lingo::Database::GDBMStore</a>
+  
+    <li><a href="../../Lingo/Database/HashStore.html">Lingo::Database::HashStore</a>
+  
+    <li><a href="../../Lingo/Database/LibCDBStore.html">Lingo::Database::LibCDBStore</a>
+  
+    <li><a href="../../Lingo/Database/SDBMStore.html">Lingo::Database::SDBMStore</a>
+  
+    <li><a href="../../Lingo/Database/ShowProgress.html">Lingo::Database::ShowProgress</a>
+  
+    <li><a href="../../Lingo/Database/Source.html">Lingo::Database::Source</a>
+  
+    <li><a href="../../Lingo/Database/Source/KeyValue.html">Lingo::Database::Source::KeyValue</a>
+  
+    <li><a href="../../Lingo/Database/Source/MultiKey.html">Lingo::Database::Source::MultiKey</a>
+  
+    <li><a href="../../Lingo/Database/Source/MultiValue.html">Lingo::Database::Source::MultiValue</a>
+  
+    <li><a href="../../Lingo/Database/Source/SingleWord.html">Lingo::Database::Source::SingleWord</a>
+  
+    <li><a href="../../Lingo/Database/Source/WordClass.html">Lingo::Database::Source::WordClass</a>
+  
+    <li><a href="../../Lingo/FileNotFoundError.html">Lingo::FileNotFoundError</a>
+  
+    <li><a href="../../Lingo/InvalidDatabaseConfigError.html">Lingo::InvalidDatabaseConfigError</a>
+  
+    <li><a href="../../Lingo/Language.html">Lingo::Language</a>
+  
+    <li><a href="../../Lingo/Language/Dictionary.html">Lingo::Language::Dictionary</a>
+  
+    <li><a href="../../Lingo/Language/Grammar.html">Lingo::Language::Grammar</a>
+  
+    <li><a href="../../Lingo/Language/Lexical.html">Lingo::Language::Lexical</a>
+  
+    <li><a href="../../Lingo/Language/LexicalHash.html">Lingo::Language::LexicalHash</a>
+  
+    <li><a href="../../Lingo/Language/Token.html">Lingo::Language::Token</a>
+  
+    <li><a href="../../Lingo/Language/Word.html">Lingo::Language::Word</a>
+  
+    <li><a href="../../Lingo/Language/WordForm.html">Lingo::Language::WordForm</a>
+  
+    <li><a href="../../Lingo/LingoError.html">Lingo::LingoError</a>
+  
+    <li><a href="../../Lingo/MissingConfigError.html">Lingo::MissingConfigError</a>
+  
+    <li><a href="../../Lingo/NoDatabaseConfigError.html">Lingo::NoDatabaseConfigError</a>
+  
+    <li><a href="../../Lingo/NoWritableStoreError.html">Lingo::NoWritableStoreError</a>
+  
+    <li><a href="../../Lingo/Reportable.html">Lingo::Reportable</a>
+  
+    <li><a href="../../Lingo/SourceFileNotFoundError.html">Lingo::SourceFileNotFoundError</a>
+  
+    <li><a href="../../Lingo/Version.html">Lingo::Version</a>
+  
+    <li><a href="../../String.html">String</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class Lingo::Attendee::TextReader</h1>
+
+  <div id="description" class="description">
+    
+<p>Der <a href="TextReader.html">TextReader</a> ist eine klassische
+Datenquelle. Er liest eine oder mehrere Dateien und gibt sie Zeilenweise in
+den Ausgabekanal. Der Start bzw. Wechsel einer Datei wird dabei über den
+Kommandokanal angekündigt, ebenso wie das Ende.</p>
+
+<p>Der <a href="TextReader.html">TextReader</a> kann ebenfalls ein spezielles
+Dateiformat verarbeiten, welches zum Austausch mit dem LIR-System dient.
+Dabei enthält die Datei Record-basierte Informationen, die wie mehrere
+Dateien verarbeitet werden.</p>
+
+<h3 id="label-M%C3%B6gliche+Verlinkung">Mögliche Verlinkung</h3>
+<dl class="rdoc-list note-list"><dt>Erzeugt
+<dd>
+<p>Daten des Typs <strong><a href="../../String.html">String</a></strong>
+(Textzeile) z.B. für <a href="Tokenizer.html">Tokenizer</a>, Textwriter</p>
+</dd></dl>
+
+<h3 id="label-Parameter">Parameter</h3>
+
+<p>Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der
+Voreinstellung). Alle anderen Parameter müssen zwingend angegeben werden.</p>
+<dl class="rdoc-list note-list"><dt><strong>out</strong>
+<dd>
+<p>siehe allgemeine Beschreibung des <a href="../Attendee.html">Attendee</a></p>
+</dd><dt><strong>files</strong>
+<dd>
+<p>Es können eine oder mehrere Dateien angegeben werden, die nacheinander
+eingelesen und zeilenweise weitergeleitet werden. Die Dateien werden mit
+Komma voneinander getrennt, z.B.</p>
+
+<pre>files: 'readme.txt'
+files: 'readme.txt,lingo.cfg'</pre>
+</dd><dt><strong><em>lir-record-pattern</em></strong>
+<dd>
+<p>Mit diesem Parameter wird angegeben, woran der Anfang eines neuen Records
+erkannt werden kann und wie die Record-Nummer identifiziert wird. Das
+Format einer LIR-Datei ist z.B.</p>
+
+<pre>[00001.]
+020: ¬Die Aufgabenteilung zwischen Wortschatz und Grammatik.
+
+[00002.]
+020: Nicht-konventionelle Thesaurusrelationen als Orientierungshilfen.</pre>
+
+<p>Mit der Angabe von</p>
+
+<pre>lir-record-pattern: &quot;^\[(\d+)\.\]&quot;</pre>
+
+<p>werden die Record-Zeilen erkannt und jeweils die Record-Nummer
+<code>00001</code>, bzw. <code>00002</code> erkannt.</p>
+</dd></dl>
+
+<h3 id="label-Generierte+Kommandos">Generierte Kommandos</h3>
+
+<p>Damit der nachfolgende Datenstrom einwandfrei verarbeitet werden kann,
+generiert der <a href="TextReader.html">TextReader</a> Kommandos, die mit
+in den Datenstrom eingefügt werden.</p>
+<dl class="rdoc-list note-list"><dt><strong>*FILE(&lt;dateiname&gt;)</strong>
+<dd>
+<p>Kennzeichnet den Beginn der Datei &lt;dateiname&gt;</p>
+</dd><dt><strong>*EOF(&lt;dateiname&gt;)</strong>
+<dd>
+<p>Kennzeichnet das Ende der Datei &lt;dateiname&gt;</p>
+</dd><dt><strong>*LIR_FORMAT(")</strong>
+<dd>
+<p>Kennzeichnet die Verarbeitung einer Datei im LIR-Format (nur bei
+LIR-Format).</p>
+</dd><dt><strong>*RECORD(&lt;nummer&gt;)</strong>
+<dd>
+<p>Kennzeichnet den Beginn eines neuen Records (nur bei LIR-Format).</p>
+</dd></dl>
+
+<h3 id="label-Beispiele">Beispiele</h3>
+
+<p>Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration
+<code>t1.cfg</code></p>
+
+<pre>meeting:
+  attendees:
+    - text_reader: { out: lines, files: '$(files)' }
+    - debugger:    { in: lines, prompt: 'out&gt;' }</pre>
+
+<p>ergibt die Ausgabe über den Debugger: <code>lingo -c t1 test.txt</code></p>
+
+<pre>out&gt; *FILE('test.txt')
+out&gt; &quot;Dies ist eine Zeile.&quot;
+out&gt; &quot;Dies ist noch eine.&quot;
+out&gt; *EOF('test.txt')</pre>
+
+<p>Bei der Verarbeitung einer LIR-Datei mit der Ablaufkonfiguration
+<code>t2.cfg</code></p>
+
+<pre>meeting:
+  attendees:
+    - text_reader: { out: lines,  files: '$(files)', lir-record-pattern: &quot;^\[(\d+)\.\]&quot; }
+    - debugger:    { in: lines, prompt: 'out&gt;'}</pre>
+
+<p>ergibt die Ausgabe mit <code>lingo -c t2 lir.txt</code></p>
+
+<pre>out&gt; *LIR-FORMAT('')
+out&gt; *FILE('lir.txt')
+out&gt; *RECORD('00001')
+out&gt; &quot;020: \254Die Aufgabenteilung zwischen Wortschatz und Grammatik.&quot;
+out&gt; *RECORD('00002')
+out&gt; &quot;020: Nicht-konventionelle Thesaurusrelationen als Orientierungshilfen.&quot;
+out&gt; *EOF('lir.txt')</pre>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="protected-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Protected Instance Methods</h3>
+
+    
+      <div id="method-i-control" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">control</span><span
+            class="method-args">(cmd, param)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="control-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 118</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">param</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">cmd</span><span class="ruby-operator">==</span><span class="ruby-constant">STR_CMD_TALK</span>
+    <span class="ruby-identifier">forward</span>(<span class="ruby-constant">STR_CMD_LIR</span>, <span class="ruby-string">''</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@is_LIR_file</span>
+    <span class="ruby-ivar">@files</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">filename</span><span class="ruby-operator">|</span> <span class="ruby-identifier">spool</span>(<span class="ruby-identifier">filename</span>) }
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- control-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- control-method -->
+
+    
+      <div id="method-i-init" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">init</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>TODO: FILE und LIR-FILE TODO: lir-record-pattern abkürzen Interpretation
+der Parameter</p>
+          
+
+          
+          <div class="method-source-code" id="init-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 110</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">init</span>
+  <span class="ruby-ivar">@files</span> = <span class="ruby-constant">Array</span>(<span class="ruby-identifier">get_key</span>(<span class="ruby-string">'files'</span>, <span class="ruby-string">'-'</span>))
+  <span class="ruby-ivar">@rec_pat</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">get_key</span>(<span class="ruby-string">'lir-record-pattern'</span>, <span class="ruby-string">''</span>))
+  <span class="ruby-ivar">@is_LIR_file</span> = <span class="ruby-identifier">has_key?</span>(<span class="ruby-string">'lir-record-pattern'</span>)
+  <span class="ruby-ivar">@chomp</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">'chomp'</span>, <span class="ruby-keyword">true</span>)
+  <span class="ruby-ivar">@filter</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">'filter'</span>, <span class="ruby-keyword">false</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- init-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- init-method -->
+
+    
+    </section><!-- protected-instance-method-details -->
+  
+     <section id="private-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Private Instance Methods</h3>
+
+    
+      <div id="method-i-file_type" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">file_type</span><span
+            class="method-args">(filename, file)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="file_type-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 187</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">file_type</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-identifier">file</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">Object</span>.<span class="ruby-identifier">const_defined?</span>(<span class="ruby-value">:FileMagic</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">file</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:rewind</span>)
+    <span class="ruby-identifier">type</span> = <span class="ruby-constant">FileMagic</span>.<span class="ruby-identifier">fm</span>(<span class="ruby-value">:mime</span>, <span class="ruby-identifier">simplified</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>).<span class="ruby-identifier">buffer</span>(<span class="ruby-identifier">file</span>.<span class="ruby-identifier">read</span>(<span class="ruby-value">256</span>))
+    <span class="ruby-identifier">file</span>.<span class="ruby-identifier">rewind</span>
+    <span class="ruby-identifier">type</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-constant">Object</span>.<span class="ruby-identifier">const_defined?</span>(<span class="ruby-value">:MIME</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">MIME</span>.<span class="ruby-identifier">const_defined?</span>(<span class="ruby-value">:Types</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">type</span> = <span class="ruby-constant">MIME</span><span class="ruby-operator">::</span><span class="ruby-constant">Types</span>.<span class="ruby-identifier">of</span>(<span class="ruby-identifier">filename</span>).<span class="ruby-identifier">first</span>
+      <span class="ruby-identifier">type</span>.<span class="ruby-identifier">content_type</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">warn</span> <span class="ruby-string">'Filters not available. File type could not be determined.'</span>
+      <span class="ruby-keyword">nil</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;Filters not available. Please install `ruby-filemagic' or `mime-types'.&quot;</span>
+    <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- file_type-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- file_type-method -->
+
+    
+      <div id="method-i-filter" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">filter</span><span
+            class="method-args">(filename, &block)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="filter-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 153</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">filter</span>(<span class="ruby-identifier">filename</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">file</span> = <span class="ruby-identifier">stdin?</span>(<span class="ruby-identifier">filename</span>) <span class="ruby-operator">?</span>
+    <span class="ruby-ivar">@lingo</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">stdin</span>.<span class="ruby-identifier">set_encoding</span>(<span class="ruby-constant">ENC</span>) <span class="ruby-operator">:</span>
+    <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-string">'rb'</span>, <span class="ruby-identifier">encoding</span><span class="ruby-operator">:</span> <span class="ruby-constant">ENC</span>)
+
+  <span class="ruby-identifier">file</span> = <span class="ruby-keyword">case</span> <span class="ruby-ivar">@filter</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">file_type</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-identifier">file</span>) <span class="ruby-operator">:</span> <span class="ruby-ivar">@filter</span>.<span class="ruby-identifier">to_s</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">%rhtml/</span> <span class="ruby-keyword">then</span> <span class="ruby-identifier">filter_html</span>(<span class="ruby-identifier">file</span>)
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">%rxml/</span>  <span class="ruby-keyword">then</span> <span class="ruby-identifier">filter_html</span>(<span class="ruby-identifier">file</span>, <span class="ruby-keyword">true</span>)
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">%rpdf/</span>  <span class="ruby-keyword">then</span> <span class="ruby-identifier">filter_pdf</span>(<span class="ruby-identifier">file</span>, &amp;<span class="ruby-identifier">block</span>) <span class="ruby-keyword">or</span> <span class="ruby-keyword">return</span>
+    <span class="ruby-keyword">else</span> <span class="ruby-identifier">file</span>
+  <span class="ruby-keyword">end</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@filter</span>
+
+  <span class="ruby-identifier">file</span>.<span class="ruby-identifier">each_line</span>(&amp;<span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- filter-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- filter-method -->
+
+    
+      <div id="method-i-filter_html" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">filter_html</span><span
+            class="method-args">(file, xml = false)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="filter_html-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 178</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">filter_html</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">xml</span> = <span class="ruby-keyword">false</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">Object</span>.<span class="ruby-identifier">const_defined?</span>(<span class="ruby-value">:Hpricot</span>)
+    <span class="ruby-constant">Hpricot</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">xml</span><span class="ruby-operator">:</span> <span class="ruby-identifier">xml</span>).<span class="ruby-identifier">inner_text</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;#{xml ? 'X' : 'HT'}ML filter not available. Please install `hpricot'.&quot;</span>
+    <span class="ruby-identifier">file</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- filter_html-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- filter_html-method -->
+
+    
+      <div id="method-i-filter_pdf" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">filter_pdf</span><span
+            class="method-args">(file, &block)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="filter_pdf-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 168</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">filter_pdf</span>(<span class="ruby-identifier">file</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">Object</span>.<span class="ruby-identifier">const_defined?</span>(<span class="ruby-value">:PDF</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">PDF</span>.<span class="ruby-identifier">const_defined?</span>(<span class="ruby-value">:Reader</span>)
+    <span class="ruby-constant">PDFFilter</span>.<span class="ruby-identifier">filter</span>(<span class="ruby-identifier">file</span>, &amp;<span class="ruby-identifier">block</span>)
+    <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;PDF filter not available. Please install `pdf-reader'.&quot;</span>
+    <span class="ruby-identifier">file</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- filter_pdf-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- filter_pdf-method -->
+
+    
+      <div id="method-i-spool" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">spool</span><span
+            class="method-args">(filename)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Gibt eine Datei zeilenweise in den Ausgabekanal</p>
+          
+
+          
+          <div class="method-source-code" id="spool-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 128</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">spool</span>(<span class="ruby-identifier">filename</span>)
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">stdin?</span>(<span class="ruby-identifier">filename</span>)
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">FileNotFoundError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">filename</span>) <span class="ruby-keyword">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">filename</span>)
+
+    <span class="ruby-identifier">inc</span>(<span class="ruby-string">'Anzahl Dateien'</span>)
+    <span class="ruby-identifier">add</span>(<span class="ruby-string">'Anzahl Bytes'</span>, <span class="ruby-constant">File</span>.<span class="ruby-identifier">stat</span>(<span class="ruby-identifier">filename</span>).<span class="ruby-identifier">size</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">forward</span>(<span class="ruby-constant">STR_CMD_FILE</span>, <span class="ruby-identifier">filename</span>)
+
+  <span class="ruby-identifier">filter</span>(<span class="ruby-identifier">filename</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">inc</span>(<span class="ruby-string">'Anzahl Zeilen'</span>)
+    <span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp!</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@chomp</span>
+    <span class="ruby-identifier">line</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">%r\3303\2237/</span>, <span class="ruby-string">&quot;ß&quot;</span>)
+<span class="ruby-comment">### HACK</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@is_LIR_file</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-ivar">@rec_pat</span>
+      <span class="ruby-identifier">forward</span>(<span class="ruby-constant">STR_CMD_RECORD</span>, <span class="ruby-node">$1</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">line</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">size</span><span class="ruby-operator">&gt;</span><span class="ruby-value">0</span>
+    <span class="ruby-keyword">end</span>
+  }
+
+  <span class="ruby-identifier">forward</span>(<span class="ruby-constant">STR_CMD_EOF</span>, <span class="ruby-identifier">filename</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- spool-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- spool-method -->
+
+    
+      <div id="method-i-stdin-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">stdin?</span><span
+            class="method-args">(filename)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="stdin-3F-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 205</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">stdin?</span>(<span class="ruby-identifier">filename</span>)
+  <span class="ruby-node">%w[STDIN -]</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">filename</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- stdin-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- stdin-3F-method -->
+
+    
+    </section><!-- private-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

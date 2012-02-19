@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>module Lingo::Cachable - lingo Application documentation (v1.8.0)</title>
+<title>module Lingo::Cachable - lingo Application documentation (v1.8.1)</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -47,7 +47,7 @@
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
   <ul>
-    <li>lib/lingo/modules.rb
+    <li>lib/lingo/cachable.rb
   </ul>
 </nav>
 
@@ -63,6 +63,8 @@
   <h3 class="section-header">Methods</h3>
 
   <ul class="link-list">
+    
+    <li><a href="#method-i-cache_value">#cache_value</a>
     
     <li><a href="#method-i-hit-3F">#hit?</a>
     
@@ -113,29 +115,31 @@
   
     <li><a href="../Lingo/Attendee/Formatter.html">Lingo::Attendee::Formatter</a>
   
-    <li><a href="../Lingo/Attendee/Multiworder.html">Lingo::Attendee::Multiworder</a>
+    <li><a href="../Lingo/Attendee/MultiWorder.html">Lingo::Attendee::MultiWorder</a>
   
-    <li><a href="../Lingo/Attendee/Noneword_filter.html">Lingo::Attendee::Noneword_filter</a>
+    <li><a href="../Lingo/Attendee/NonewordFilter.html">Lingo::Attendee::NonewordFilter</a>
   
-    <li><a href="../Lingo/Attendee/Objectfilter.html">Lingo::Attendee::Objectfilter</a>
+    <li><a href="../Lingo/Attendee/ObjectFilter.html">Lingo::Attendee::ObjectFilter</a>
   
     <li><a href="../Lingo/Attendee/Sequencer.html">Lingo::Attendee::Sequencer</a>
   
+    <li><a href="../Lingo/Attendee/Sequencer/WordSequence.html">Lingo::Attendee::Sequencer::WordSequence</a>
+  
     <li><a href="../Lingo/Attendee/Synonymer.html">Lingo::Attendee::Synonymer</a>
   
-    <li><a href="../Lingo/Attendee/Textreader.html">Lingo::Attendee::Textreader</a>
+    <li><a href="../Lingo/Attendee/TextReader.html">Lingo::Attendee::TextReader</a>
   
-    <li><a href="../Lingo/Attendee/Textreader/PDFFilter.html">Lingo::Attendee::Textreader::PDFFilter</a>
+    <li><a href="../Lingo/Attendee/TextReader/PDFFilter.html">Lingo::Attendee::TextReader::PDFFilter</a>
   
-    <li><a href="../Lingo/Attendee/Textwriter.html">Lingo::Attendee::Textwriter</a>
+    <li><a href="../Lingo/Attendee/TextWriter.html">Lingo::Attendee::TextWriter</a>
   
     <li><a href="../Lingo/Attendee/Tokenizer.html">Lingo::Attendee::Tokenizer</a>
   
     <li><a href="../Lingo/Attendee/Variator.html">Lingo::Attendee::Variator</a>
   
-    <li><a href="../Lingo/Attendee/Vector_filter.html">Lingo::Attendee::Vector_filter</a>
+    <li><a href="../Lingo/Attendee/VectorFilter.html">Lingo::Attendee::VectorFilter</a>
   
-    <li><a href="../Lingo/Attendee/Wordsearcher.html">Lingo::Attendee::Wordsearcher</a>
+    <li><a href="../Lingo/Attendee/WordSearcher.html">Lingo::Attendee::WordSearcher</a>
   
     <li><a href="../Lingo/BufferedAttendee.html">Lingo::BufferedAttendee</a>
   
@@ -145,51 +149,73 @@
   
     <li><a href="../Lingo/Call.html">Lingo::Call</a>
   
-    <li><a href="../Lingo/Compositum.html">Lingo::Compositum</a>
-  
     <li><a href="../Lingo/Config.html">Lingo::Config</a>
   
-    <li><a href="../Lingo/Crypter.html">Lingo::Crypter</a>
+    <li><a href="../Lingo/ConfigError.html">Lingo::ConfigError</a>
+  
+    <li><a href="../Lingo/ConfigLoadError.html">Lingo::ConfigLoadError</a>
   
     <li><a href="../Lingo/Ctl.html">Lingo::Ctl</a>
   
-    <li><a href="../Lingo/DbmFile.html">Lingo::DbmFile</a>
+    <li><a href="../Lingo/Database.html">Lingo::Database</a>
   
-    <li><a href="../Lingo/Dictionary.html">Lingo::Dictionary</a>
+    <li><a href="../Lingo/Database/Crypter.html">Lingo::Database::Crypter</a>
   
-    <li><a href="../Lingo/Grammar.html">Lingo::Grammar</a>
+    <li><a href="../Lingo/Database/GDBMStore.html">Lingo::Database::GDBMStore</a>
   
-    <li><a href="../Lingo/Lexical.html">Lingo::Lexical</a>
+    <li><a href="../Lingo/Database/HashStore.html">Lingo::Database::HashStore</a>
   
-    <li><a href="../Lingo/LexicalHash.html">Lingo::LexicalHash</a>
+    <li><a href="../Lingo/Database/LibCDBStore.html">Lingo::Database::LibCDBStore</a>
+  
+    <li><a href="../Lingo/Database/SDBMStore.html">Lingo::Database::SDBMStore</a>
+  
+    <li><a href="../Lingo/Database/ShowProgress.html">Lingo::Database::ShowProgress</a>
+  
+    <li><a href="../Lingo/Database/Source.html">Lingo::Database::Source</a>
+  
+    <li><a href="../Lingo/Database/Source/KeyValue.html">Lingo::Database::Source::KeyValue</a>
+  
+    <li><a href="../Lingo/Database/Source/MultiKey.html">Lingo::Database::Source::MultiKey</a>
+  
+    <li><a href="../Lingo/Database/Source/MultiValue.html">Lingo::Database::Source::MultiValue</a>
+  
+    <li><a href="../Lingo/Database/Source/SingleWord.html">Lingo::Database::Source::SingleWord</a>
+  
+    <li><a href="../Lingo/Database/Source/WordClass.html">Lingo::Database::Source::WordClass</a>
+  
+    <li><a href="../Lingo/FileNotFoundError.html">Lingo::FileNotFoundError</a>
+  
+    <li><a href="../Lingo/InvalidDatabaseConfigError.html">Lingo::InvalidDatabaseConfigError</a>
+  
+    <li><a href="../Lingo/Language.html">Lingo::Language</a>
+  
+    <li><a href="../Lingo/Language/Dictionary.html">Lingo::Language::Dictionary</a>
+  
+    <li><a href="../Lingo/Language/Grammar.html">Lingo::Language::Grammar</a>
+  
+    <li><a href="../Lingo/Language/Lexical.html">Lingo::Language::Lexical</a>
+  
+    <li><a href="../Lingo/Language/LexicalHash.html">Lingo::Language::LexicalHash</a>
+  
+    <li><a href="../Lingo/Language/Token.html">Lingo::Language::Token</a>
+  
+    <li><a href="../Lingo/Language/Word.html">Lingo::Language::Word</a>
+  
+    <li><a href="../Lingo/Language/WordForm.html">Lingo::Language::WordForm</a>
+  
+    <li><a href="../Lingo/LingoError.html">Lingo::LingoError</a>
+  
+    <li><a href="../Lingo/MissingConfigError.html">Lingo::MissingConfigError</a>
+  
+    <li><a href="../Lingo/NoDatabaseConfigError.html">Lingo::NoDatabaseConfigError</a>
+  
+    <li><a href="../Lingo/NoWritableStoreError.html">Lingo::NoWritableStoreError</a>
   
     <li><a href="../Lingo/Reportable.html">Lingo::Reportable</a>
   
-    <li><a href="../Lingo/ShowProgress.html">Lingo::ShowProgress</a>
-  
-    <li><a href="../Lingo/StringA.html">Lingo::StringA</a>
-  
-    <li><a href="../Lingo/Token.html">Lingo::Token</a>
-  
-    <li><a href="../Lingo/Txt2DbmConverter.html">Lingo::Txt2DbmConverter</a>
-  
-    <li><a href="../Lingo/TxtFile.html">Lingo::TxtFile</a>
-  
-    <li><a href="../Lingo/TxtFile_Keyvalue.html">Lingo::TxtFile_Keyvalue</a>
-  
-    <li><a href="../Lingo/TxtFile_Multikey.html">Lingo::TxtFile_Multikey</a>
-  
-    <li><a href="../Lingo/TxtFile_Multivalue.html">Lingo::TxtFile_Multivalue</a>
-  
-    <li><a href="../Lingo/TxtFile_Singleword.html">Lingo::TxtFile_Singleword</a>
-  
-    <li><a href="../Lingo/TxtFile_Wordclass.html">Lingo::TxtFile_Wordclass</a>
+    <li><a href="../Lingo/SourceFileNotFoundError.html">Lingo::SourceFileNotFoundError</a>
   
     <li><a href="../Lingo/Version.html">Lingo::Version</a>
-  
-    <li><a href="../Lingo/Word.html">Lingo::Word</a>
-  
-    <li><a href="../Lingo/WordSequence.html">Lingo::WordSequence</a>
   
     <li><a href="../String.html">String</a>
   
@@ -204,8 +230,7 @@
 
   <div id="description" class="description">
     
-<p>Das Modul <a href="Cachable.html">Cachable</a> ermöglicht das Verwerten von
-zwischengespeicherten Ergebnisse für einen schnelleren Zugriff.</p>
+<p>Provides a simple caching mechanism.</p>
 
   </div><!-- description -->
 
@@ -243,7 +268,7 @@ zwischengespeicherten Ergebnisse für einen schnelleren Zugriff.</p>
 
           
           <div class="method-source-code" id="hit-3F-source">
-            <pre><span class="ruby-comment"># File lib/lingo/modules.rb, line 80</span>
+            <pre><span class="ruby-comment"># File lib/lingo/cachable.rb, line 36</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">hit?</span>(<span class="ruby-identifier">key</span>)
   <span class="ruby-ivar">@cache</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">key</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -273,7 +298,7 @@ zwischengespeicherten Ergebnisse für einen schnelleren Zugriff.</p>
 
           
           <div class="method-source-code" id="init_cachable-source">
-            <pre><span class="ruby-comment"># File lib/lingo/modules.rb, line 76</span>
+            <pre><span class="ruby-comment"># File lib/lingo/cachable.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">init_cachable</span>
   <span class="ruby-ivar">@cache</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">false</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -303,10 +328,9 @@ zwischengespeicherten Ergebnisse für einen schnelleren Zugriff.</p>
 
           
           <div class="method-source-code" id="retrieve-source">
-            <pre><span class="ruby-comment"># File lib/lingo/modules.rb, line 90</span>
+            <pre><span class="ruby-comment"># File lib/lingo/cachable.rb, line 45</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">retrieve</span>(<span class="ruby-identifier">key</span>)
-  <span class="ruby-identifier">value</span> = <span class="ruby-ivar">@cache</span>[<span class="ruby-identifier">key</span>]
-  <span class="ruby-identifier">value</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">dup</span>
+  <span class="ruby-identifier">cache_value</span>(<span class="ruby-ivar">@cache</span>[<span class="ruby-identifier">key</span>])
 <span class="ruby-keyword">end</span></pre>
           </div><!-- retrieve-source -->
           
@@ -334,10 +358,9 @@ zwischengespeicherten Ergebnisse für einen schnelleren Zugriff.</p>
 
           
           <div class="method-source-code" id="store-source">
-            <pre><span class="ruby-comment"># File lib/lingo/modules.rb, line 84</span>
+            <pre><span class="ruby-comment"># File lib/lingo/cachable.rb, line 40</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">store</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>)
-  <span class="ruby-identifier">res</span> = <span class="ruby-identifier">value</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">dup</span>
-  <span class="ruby-ivar">@cache</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">res</span>
+  <span class="ruby-ivar">@cache</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">cache_value</span>(<span class="ruby-identifier">value</span>)
   <span class="ruby-identifier">value</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- store-source -->
@@ -351,6 +374,42 @@ zwischengespeicherten Ergebnisse für einen schnelleren Zugriff.</p>
 
     
     </section><!-- public-instance-method-details -->
+  
+     <section id="private-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Private Instance Methods</h3>
+
+    
+      <div id="method-i-cache_value" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">cache_value</span><span
+            class="method-args">(value)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="cache_value-source">
+            <pre><span class="ruby-comment"># File lib/lingo/cachable.rb, line 51</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">cache_value</span>(<span class="ruby-identifier">value</span>)
+  <span class="ruby-identifier">value</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">dup</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- cache_value-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- cache_value-method -->
+
+    
+    </section><!-- private-instance-method-details -->
   
   </section><!-- 5Buntitled-5D -->
 
