@@ -370,9 +370,9 @@ class TestGrammar < LingoTestCase
 
     # bindestrichversion zwei-teilig
     assert_equal([
-      [lx('cd-rom-technologie|k'), lx('technologie|s'), lx('cd-rom|x')],
+      [lx('cd-rom-technologie|k'), lx('cd-rom|s'), lx('technologie|s')],
       [6, 11],
-      'xs'
+      'ss'
     ],
       gra.permute_compositum('cd-rom-technologie', 1, false)
     )
@@ -405,7 +405,7 @@ class TestGrammar < LingoTestCase
       gra.find_compositum('informationswissenschaften')
     )
     assert_equal(
-      wd('cd-rom-technologie|KOM', 'cd-rom-technologie|k', 'technologie|s+', 'cd-rom|x+'),
+      wd('cd-rom-technologie|KOM', 'cd-rom-technologie|k', 'cd-rom|s+', 'technologie|s+'),
       gra.find_compositum('cd-rom-technologie')
     )
     assert_equal(

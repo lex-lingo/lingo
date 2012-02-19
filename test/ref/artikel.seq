@@ -20,7 +20,7 @@
 2 kollektion, heterogen erschlossen
 2 malerei, venezianisch
 2 normierung, begrifflich
-2 quell, terminologisch
+2 quelle, terminologisch
 2 ressource, terminologisch
 2 suche, kontrolliert
 2 vokabular, kontrolliert
@@ -103,6 +103,7 @@
 1 erschließungssituation, unbefriedigend
 1 erschließungssystem, unterschiedlich
 1 erschließungswelt, heterogen
+1 erschließungswelt, sehr heterogen
 1 fall, unser
 1 form, bevorzugt
 1 form, substantivisch
@@ -137,8 +138,6 @@
 1 instrument, gepflegt
 1 instrument, nützlich
 1 instrument, zentral gepflegt
-1 intellektuelle, normiert
-1 intellektuelle, stark
 1 katalogmerkmal, typisch
 1 katalogorientieren, allen
 1 kategorie, allen
@@ -184,10 +183,10 @@
 1 prinzip, wirksam
 1 problem, existierend
 1 problem, hervorgerufen
-1 quell, lexikalisch
-1 quell, verwendend terminologisch
-1 quell, vorhanden terminologisch
-1 rahm, methodisch
+1 quelle, lexikalisch
+1 quelle, verwendend terminologisch
+1 quelle, vorhanden terminologisch
+1 rahmen, methodisch
 1 rahmenbedingung, eng
 1 rahmenbedingung, normierend
 1 rahmenbedingung, streng normierend
@@ -197,6 +196,10 @@
 1 ressource, gering personell
 1 ressource, personell
 1 ressource, stehend terminologisch
+1 retrievalbedingung, bessere
+1 retrievalbedingung, deutlich bessere
+1 retrievalbedingung, unter
+1 retrievaltauglich, eingeschränkt
 1 richtlinie, lokal
 1 rolle, erheblich
 1 rolle, gleich groß
@@ -209,6 +212,7 @@
 1 schritt, vermutlich schwer
 1 standard, gemeinsam
 1 steiger, leicht
+1 steiger, sehr leicht
 1 stilmerkmal, spezifisch
 1 suche, alle
 1 suche, erfolgreich
@@ -247,6 +251,7 @@
 1 vereinheitlichung, grammatikalisch
 1 verweisungsstruktur, dazugehörig
 1 verwendung, gemeinsam
+1 vielfalt, existierend
 1 vokabular, genormt
 1 vokabularverbesserung, deutlich
 1 voraussetzung, ungenannt
@@ -255,7 +260,7 @@
 1 weg, einfach
 1 wendung, fest
 1 werk, aller
-1 wörterbuchquell, unterschiedlich
+1 wörterbuchquelle, unterschiedlich
 1 zahl, ausreichend
 1 zahl, gering
 1 zahl, groß

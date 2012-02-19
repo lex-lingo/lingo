@@ -89,6 +89,7 @@ bedingung
 begegnen
 begegnet
 begreifen
+begriff
 begrifflich
 beharrungsvermögen
 beitrag
@@ -150,6 +151,7 @@ bilddokumentation
 bilden
 bilderschließung
 bildinhalt
+bildretrieval
 bildung
 binden
 bleiben
@@ -302,6 +304,7 @@ festlegung
 finanziell
 finden
 folgend
+fordern
 form
 formal
 formalerschließung
@@ -315,8 +318,6 @@ fragen
 frankfurt
 frauenkirche
 frei
-freie
-freien
 friedhof
 funktionalität
 funktionsspektrum
@@ -330,6 +331,7 @@ gar
 garantieren
 garantiert
 garen
+geben
 gebrauchen
 gebraucht
 gebunden
@@ -430,7 +432,6 @@ institut
 instrument
 integration
 intellektuell
-intellektuelle
 interesse
 invertierung
 italia
@@ -512,11 +513,11 @@ leonardo
 leser
 letzte
 lexikalisch
+liefern
 liege
 liegen
 linguistisch
 linie
-list
 listentauglich
 lokal
 los
@@ -581,8 +582,9 @@ normiert
 normierung
 normierungselement
 normierungsinstrument
-normierungsquell
+normierungsquelle
 notation
+notdürftig
 nutzen
 nutzung
 nötig
@@ -616,16 +618,13 @@ problematik
 problemsituation
 qualität
 quasi-erschließungsstandard
-quell
 quelle
-quellen
 radierer
-rahm
 rahmen
 rahmenbedingung
 rahmenfaktor
 rahmenumgebung
-ranglist
+rangliste
 realistisch
 recall-erhöhung
 recherche
@@ -635,12 +634,25 @@ rechten
 regel
 regeln
 register
-registerbegreifen
+registerbegriff
 registergestützt
 relation
 relativ
 ressource
 resultat
+retrieval
+retrievalbedingung
+retrievalfähig
+retrievalfähigkeit
+retrievalgründen
+retrievalinstrument
+retrievalmöglichkeit
+retrievalorientieren
+retrievalsituation
+retrievalsystem
+retrievaltauglich
+retrievaltechnisch
+retrievalumgebung
 richtlinie
 richtung
 rolle
@@ -664,7 +676,7 @@ schritt
 schwach
 schwer
 sehen
-sehren
+sehr
 sein
 selbstverständlich
 selten
@@ -715,7 +727,7 @@ strukturieren
 strukturiert
 substantiv
 substantivisch
-suchbegreifen
+suchbegriff
 suche
 sucheinstieg
 suchen
@@ -753,7 +765,7 @@ thesaurus
 these
 titelstichwort
 treffen
-trefferlisten
+trefferliste
 treffermenge
 trennen
 trennung
@@ -833,6 +845,7 @@ verzicht
 verzichten
 verzichtet
 veränderung
+vielfalt
 vielzahl
 virtuell
 visuell
@@ -883,7 +896,7 @@ wohl
 wortableitung
 worthäufigkeit
 wunsch
-wörterbuchquell
+wörterbuchquelle
 würde
 zahl
 zahlen
@@ -912,6 +925,7 @@ zusammenführen
 zusammenführung
 zusammengefasst
 zusammenhang
+zustand
 zusätzlich
 zuteilung
 zuweisen
@@ -923,6 +937,7 @@ zweitausendeins
 ähnlich
 äquivalent
 öffentlich
+öl
 überblick
 überspitzen
 überspitzt

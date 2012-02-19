@@ -21,8 +21,8 @@
 12 intellektuell
 12 verfahren
 11 indexterm
-11 intellektuelle
 11 kontrolliert
+11 retrieval
 11 thesaurus
 11 unterschiedlich
 10 kollektion
@@ -48,13 +48,12 @@
 8 sollen
 8 term
 8 vokabular
+7 begriff
 7 bestehen
 7 bilderschließung
 7 einsatz
 7 erreichen
 7 frei
-7 freie
-7 freien
 7 gleich
 7 heterogen
 7 künstlername
@@ -99,6 +98,7 @@
 5 frankfurt
 5 frauenkirche
 5 führen
+5 geben
 5 genormt
 5 homogen
 5 inhaltserschließung
@@ -154,15 +154,13 @@
 4 methode
 4 pflegen
 4 qualität
-4 quell
 4 quelle
-4 quellen
 4 rahmen
 4 recht
 4 relativ
 4 ressource
 4 schlagwortnormdatei
-4 sehren
+4 sehr
 4 stehen
 4 terminologie
 4 unternehmen
@@ -214,6 +212,7 @@
 3 institut
 3 kommen
 3 lebrecht
+3 liefern
 3 liege
 3 liegen
 3 main
@@ -225,6 +224,7 @@
 3 pflege
 3 rahmenbedingung
 3 realistisch
+3 retrievalbedingung
 3 sinnvoll
 3 sondern
 3 stelle
@@ -238,6 +238,7 @@
 3 verbindung
 3 verwendung
 3 verzichten
+3 vorzug
 3 völlig
 3 weg
 3 wenig
@@ -350,7 +351,7 @@
 2 modell
 2 nicht-ansetzungsformen
 2 normierend
-2 normierungsquell
+2 normierungsquelle
 2 notation
 2 nutzung
 2 nützlich
@@ -361,7 +362,6 @@
 2 potenziell
 2 praxis
 2 prinzip
-2 rahm
 2 rechten
 2 regel
 2 regeln
@@ -407,6 +407,7 @@
 2 verweisungsform
 2 verweisungsstruktur
 2 verzicht
+2 vielfalt
 2 vorliegend
 2 vorzugsbenennung
 2 warschau
@@ -506,6 +507,7 @@
 1 bilddokumentation
 1 bilden
 1 bildinhalt
+1 bildretrieval
 1 binden
 1 brauchbar
 1 canaletto-bild
@@ -587,6 +589,7 @@
 1 fax
 1 fest
 1 finanziell
+1 fordern
 1 formalerschließung
 1 formen
 1 formulieren
@@ -705,7 +708,6 @@
 1 leser
 1 letzte
 1 linie
-1 list
 1 listentauglich
 1 los
 1 lose
@@ -742,6 +744,7 @@
 1 normend
 1 normierungselement
 1 normierungsinstrument
+1 notdürftig
 1 nötig
 1 nötigen
 1 oberhaus
@@ -761,15 +764,26 @@
 1 radierer
 1 rahmenfaktor
 1 rahmenumgebung
-1 ranglist
+1 rangliste
 1 recall-erhöhung
 1 recherche
 1 recherchemöglichkeit
 1 register
-1 registerbegreifen
+1 registerbegriff
 1 registergestützt
 1 relation
 1 resultat
+1 retrievalfähig
+1 retrievalfähigkeit
+1 retrievalgründen
+1 retrievalinstrument
+1 retrievalmöglichkeit
+1 retrievalorientieren
+1 retrievalsituation
+1 retrievalsystem
+1 retrievaltauglich
+1 retrievaltechnisch
+1 retrievalumgebung
 1 richtlinie
 1 richtung
 1 rswk-ketten
@@ -809,7 +823,7 @@
 1 strukturiert
 1 substantiv
 1 substantivisch
-1 suchbegreifen
+1 suchbegriff
 1 sucheinstieg
 1 suchindex
 1 suchkonstellation
@@ -829,7 +843,7 @@
 1 thematik
 1 theoretisch
 1 theorie
-1 trefferlisten
+1 trefferliste
 1 treffermenge
 1 trennen
 1 trennung
@@ -889,7 +903,6 @@
 1 vorstellbar
 1 vorstellung
 1 vorwort
-1 vorzug
 1 vorzugsform
 1 wachsen
 1 weisen
@@ -902,7 +915,7 @@
 1 wortableitung
 1 worthäufigkeit
 1 wunsch
-1 wörterbuchquell
+1 wörterbuchquelle
 1 würde
 1 zeichner
 1 zeigen
@@ -919,10 +932,12 @@
 1 zusammenfassend
 1 zusammengefasst
 1 zusammenhang
+1 zustand
 1 zuweisungsverfahren
 1 zweckmäßig
 1 äquivalent
 1 öffentlich
+1 öl
 1 überblick
 1 überspitzen
 1 überspitzt
