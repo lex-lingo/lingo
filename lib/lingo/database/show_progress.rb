@@ -67,7 +67,7 @@ class Lingo
         percent = @cnt / @rat
         @next = (percent + 1) * @rat
 
-        print @fmt % percent
+        print @fmt % percent if percent.finite?
       end
 
       def print(*args)
