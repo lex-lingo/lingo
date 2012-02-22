@@ -13,16 +13,15 @@ require 'nuggets/util/ruby'
 LINGOWEB = File.expand_path('..', __FILE__)
 LINGO    = File.join(File.dirname(LINGOWEB), 'lingo.rb')
 AUTH     = File.join(LINGOWEB, 'lingoweb.auth')
-CFG      = File.join(LINGOWEB, 'lingoweb-%s.cfg')
+CFG      = File.join(LINGOWEB, 'lingoweb.cfg')
 
 require LINGO
 
 LANGS = Dir["#{File.dirname(LINGO)}/*.lang"].map { |path|
-  lang = path[%r{.*/(\w+)\.}, 1]
-  lang if File.readable?(CFG % lang)
-}.compact.sort
+  path[%r{.*/(\w+)\.}, 1]
+}.sort
 
-abort "No *.lang with corresponding #{CFG % '<lang>'}!" if LANGS.empty?
+abort 'No *.lang!' if LANGS.empty?
 
 UILANGS = %w[en de]
 
@@ -77,9 +76,11 @@ helpers do
 end
 
 def doit
-  @success = Process.ruby(LINGO, '-c', CFG % @lang, '-l', @lang) { |_, i, o, e|
+  @success = Process.ruby(LINGO, '-c', CFG, '-l', @lang) { |_, i, o, e|
     IO.interact({ @in => i }, { o => @out = '', e => @err = '' })
   }.success? unless @in.empty?
+
+  [@in, @out, @err].each { |x| x.force_encoding(Lingo::ENC) if x }
 
   erb :index
 end

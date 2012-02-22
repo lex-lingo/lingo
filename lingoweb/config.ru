@@ -1,2 +1,2 @@
-require 'lingoweb'
+require './lingoweb'
 run Sinatra::Application
