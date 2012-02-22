@@ -63,11 +63,10 @@ class Lingo
     end
 
     def initialize(id, lingo)
-      @config = lingo.database_config(id)
+      @id, @lingo, @config, @db = id, lingo, lingo.database_config(id), nil
 
-      @id, @lingo = id, lingo
-      @src_file   = Lingo.find(:dict, @config['name'])
-      @crypter    = Crypter.new if @config.has_key?('crypt')
+      @src_file = Lingo.find(:dict, @config['name'])
+      @crypter  = Crypter.new if @config.has_key?('crypt')
 
       begin
         @dbm_name = Lingo.find(:store, @src_file)
