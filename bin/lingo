@@ -26,4 +26,8 @@
 
 require 'lingo'
 
-Lingo.talk
+begin
+  Lingo.talk
+rescue Lingo::LingoError => err
+  $VERBOSE ? raise : abort(err.to_s)
+end
