@@ -46,6 +46,11 @@ class Lingo
         SDBM.open(@dbm_name)
       end
 
+      def _get(key)
+        val = super
+        val && val.encode(ENC)
+      end
+
       def _set(key, val)
         if val.length > 950
           val = val[0, 950]
