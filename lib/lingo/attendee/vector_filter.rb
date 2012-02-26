@@ -83,13 +83,14 @@ class Lingo
 
       def init
         @lexis = Regexp.new(get_key('lexicals', '[sy]').downcase)
-        @sort = get_key('sort', 'normal').downcase
+        @sort = get_key('sort', 'normal')
+        @sort = @sort.downcase if @sort
         @skip = get_array('skip', TA_PUNCTUATION+','+TA_OTHER).collect {|s| s.upcase }
         @vectors = Array.new
         @word_count = 0
 
         if @debug = get_key('debug', false)
-          @prompt = get_key('prompt', 'lex:) ')
+          @prompt, @sort = get_key('prompt', 'lex:) '), false
         end
       end
 
@@ -105,18 +106,22 @@ class Lingo
 
       def process(obj)
         if @debug
-          @vectors << "#{@prompt} #{obj.inspect}" if eval(@debug)
+          vector("#{@prompt} #{obj.inspect}") if eval(@debug)
         elsif obj.is_a?(Word)
           @word_count += 1 if @skip.index(obj.attr).nil?
           unless obj.lexicals.nil?
             lexis = obj.get_class(@lexis) #lexicals.collect { |lex| (lex.attr =~ @lexis) ? lex : nil }.compact # get_class(@lexis)
-            lexis.each { |lex| @vectors << lex.form.downcase }
+            lexis.each { |lex| vector(lex.form.downcase) }
             add('Anzahl von Vektor-Wörtern', lexis.size)
           end
         end
       end
 
       private
+
+      def vector(vec)
+        @sort ? @vectors << vec : forward(vec)
+      end
 
       def sendVector
         return if @vectors.size==0
