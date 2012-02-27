@@ -82,16 +82,18 @@ class Lingo
       protected
 
       def init
-        @lexis = Regexp.new(get_key('lexicals', '[sy]').downcase)
-        @sort = get_key('sort', 'normal')
-        @sort = @sort.downcase if @sort
-        @skip = get_array('skip', TA_PUNCTUATION+','+TA_OTHER).collect {|s| s.upcase }
-        @vectors = Array.new
-        @word_count = 0
-
         if @debug = get_key('debug', false)
-          @prompt, @sort = get_key('prompt', 'lex:) '), false
+          @prompt = get_key('prompt', 'lex:) ')
+        else
+          @lex  = Regexp.new(get_key('lexicals', '[sy]').downcase)
+          @skip = get_array('skip', TA_PUNCTUATION + ',' + TA_OTHER).map(&:upcase)
+
+          if sort = get_key('sort', 'normal')
+            @sort_format, @sort_method = sort.downcase.split('_', 2)
+          end
         end
+
+        @vectors, @word_count = [], 0.0
       end
 
       def control(cmd, par)
@@ -99,62 +101,54 @@ class Lingo
           when STR_CMD_EOL
             skip_command
           when STR_CMD_FILE, STR_CMD_RECORD, STR_CMD_EOF
-            @debug ? @vectors.each(&method(:forward)) : sendVector
-            @vectors.clear
+            send_vectors unless @vectors.empty?
         end
       end
 
       def process(obj)
         if @debug
-          vector("#{@prompt} #{obj.inspect}") if eval(@debug)
-        elsif obj.is_a?(Word)
-          @word_count += 1 if @skip.index(obj.attr).nil?
-          unless obj.lexicals.nil?
-            lexis = obj.get_class(@lexis) #lexicals.collect { |lex| (lex.attr =~ @lexis) ? lex : nil }.compact # get_class(@lexis)
-            lexis.each { |lex| vector(lex.form.downcase) }
-            add('Anzahl von Vektor-Wörtern', lexis.size)
-          end
+          forward("#{@prompt} #{obj.inspect}") if eval(@debug)
+        elsif obj.is_a?(Word) && !@skip.include?(obj.attr)
+          @word_count += 1
+
+          cnt = obj.get_class(@lex).each { |lex|
+            vec = lex.form.downcase
+            @sort_format ? @vectors << vec : forward(vec)
+          }.size
+
+          add('Anzahl von Vektor-Wörtern', cnt)
         end
       end
 
       private
 
-      def vector(vec)
-        @sort ? @vectors << vec : forward(vec)
-      end
-
-      def sendVector
-        return if @vectors.size==0
-
+      def send_vectors
         add('Objekte gefiltert', @vectors.size)
 
-        # Array der Vector-Wörter zählen und nach Häufigkeit sortieren
-        if @sort=='normal'
-          @vectors = @vectors.compact.sort.uniq
+        if @sort_format == 'normal'
+          @vectors.sort!
+          @vectors.uniq!
+
+          @vectors.each(&method(:forward)).clear
         else
-          cnt = Hash.new(0)
-          @vectors.compact.each { |e| cnt[e]+=1 }
-          @vectors = cnt.to_a.sort { |x,y|
-            if (y[1]<=>x[1])==0
-              x[0]<=>y[0]
-            else
-              y[1]<=>x[1]
-            end
-          }
-        end
+          cnt, fmt = Hash.new(0), '%d'
 
-        # Vectoren je nach Parameter formatiert weiterleiten
-        @vectors.collect { |vec|
-          case @sort
-          when 'term_abs' then sprintf "%d %s", vec[1], vec[0]
-          when 'term_rel' then sprintf "%6.5f %s", vec[1].to_f/@word_count, vec[0]
-          when 'sto_abs'  then sprintf "%s {%d}", vec[0], vec[1]
-          when 'sto_rel'  then sprintf "%s {%6.5f}", vec[0], vec[1].to_f/@word_count
-          else sprintf "%s", vec
+          @vectors.each { |v| cnt[v] += 1 }.clear
+          vec = cnt.sort_by { |v, c| [-c, v] }
+
+          if @sort_method == 'rel'
+            vec.each { |v| v[1] /= @word_count }
+            fmt = '%6.5f'
           end
-        }.each(&method(:forward))
 
-        @word_count = 0 if @sort == 'sto_rel'
+          if @sort_format == 'sto'
+            fmt, @word_count = "%s {#{fmt}}", 0.0
+          else
+            fmt.insert(1, '2$') << ' %1$s'
+          end
+
+          vec.each { |v| forward(fmt % v) }
+        end
       end
 
     end
