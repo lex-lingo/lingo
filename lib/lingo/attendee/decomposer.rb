@@ -79,12 +79,13 @@ class Lingo
         set_gra
       end
 
-      def control(cmd, par)
-        @gra.report.each { |key, val| set(key, val) } if cmd == STR_CMD_STATUS
+      def control(cmd, param)
+        report_on(cmd, @gra)
       end
 
       def process(obj)
-        forward(obj.is_a?(Word) && obj.unknown? ? @gra.find_compositum(obj.form) : obj)
+        obj = @gra.find_compound(obj.form) if obj.is_a?(Word) && obj.unknown?
+        forward(obj)
       end
 
     end

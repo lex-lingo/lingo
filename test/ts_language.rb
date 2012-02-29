@@ -273,20 +273,20 @@ class TestGrammar < LingoTestCase
     gra = LG.new({'source'=>['sys-dic']}, @lingo)
     assert_equal(
       wd('informationswissenschaften|KOM', 'informationswissenschaft|k', 'information|s+', 'wissenschaft|s+'),
-      gra.find_compositum('informationswissenschaften')
+      gra.find_compound('informationswissenschaften')
     )
     assert_equal(
       wd('informationswissenschaften|KOM', 'informationswissenschaft|k', 'information|s+', 'wissenschaft|s+'),
-      gra.find_compositum('informationswissenschaften')
+      gra.find_compound('informationswissenschaften')
     )
     assert_equal(
       wd('informationswissenschaften|KOM', 'informationswissenschaft|k', 'information|s+', 'wissenschaft|s+'),
-      gra.find_compositum('informationswissenschaften')
+      gra.find_compound('informationswissenschaften')
     )
     gra.close
   end
 
-  def test_test_compositum
+  def test_test_compound
     gra = LG.new({'source'=>['sys-dic']}, @lingo)
 
     # hinterer Teil ist ein Wort mit Suffix
@@ -295,7 +295,7 @@ class TestGrammar < LingoTestCase
       [5, 6],
       'sv'
     ],
-      gra.test_compositum('hasen', '', 'braten', 1, false)
+      gra.test_compound('hasen', '', 'braten', 1, false)
     )
 
     # hinterer Teil ist ein Wort mit Infix ohne Schwanz
@@ -304,7 +304,7 @@ class TestGrammar < LingoTestCase
       [5, 7],
       'sv'
     ],
-      gra.test_compositum('nasen', '', 'laufens', 1, false)
+      gra.test_compound('nasen', '', 'laufens', 1, false)
     )
 
     # hinterer Teil ist ein Wort mit Infix mit Schwanz
@@ -313,7 +313,7 @@ class TestGrammar < LingoTestCase
       [5, 7],
       'sv'
     ],
-      gra.test_compositum('nasen', '', 'laufens', 1, true)
+      gra.test_compound('nasen', '', 'laufens', 1, true)
     )
 
     # hinterer Teil ist ein Kompositum nach Bindestrich
@@ -322,7 +322,7 @@ class TestGrammar < LingoTestCase
       [7, 9, 6],
       'xss'
     ],
-      gra.test_compositum('arrafat', '-', 'nachfolgebedarf', 1, false)
+      gra.test_compound('arrafat', '-', 'nachfolgebedarf', 1, false)
     )
 
     # hinterer Teil ist ein TakeItAsIs nach Bindestrich
@@ -331,7 +331,7 @@ class TestGrammar < LingoTestCase
       [9, 7],
       'sx'
     ],
-      gra.test_compositum('nachfolge', '-', 'arrafat', 1, false)
+      gra.test_compound('nachfolge', '-', 'arrafat', 1, false)
     )
 
     # vorderer Teil ist ein Wort mit Suffix => siehe Hasenbraten
@@ -341,7 +341,7 @@ class TestGrammar < LingoTestCase
       [6, 5, 6],
       'sss'
     ],
-      gra.test_compositum('morgenonkel', '', 'mantel', 1, false)
+      gra.test_compound('morgenonkel', '', 'mantel', 1, false)
     )
 
     # vorderer Teil ist ein TakeItAsIs vor Bindestrich
@@ -350,13 +350,13 @@ class TestGrammar < LingoTestCase
       [7, 10],
       'xs'
     ],
-      gra.test_compositum('arrafat', '-', 'nachfolger', 1, false)
+      gra.test_compound('arrafat', '-', 'nachfolger', 1, false)
     )
 
     gra.close
   end
 
-  def test_permute_compositum
+  def test_permute_compound
     gra = LG.new({'source'=>['sys-dic']}, @lingo)
 
     # bindestrichversion
@@ -365,7 +365,7 @@ class TestGrammar < LingoTestCase
       [7, 10],
       'xs'
     ],
-      gra.permute_compositum('arrafat-nachfolger', 1, false)
+      gra.permute_compound('arrafat-nachfolger', 1, false)
     )
 
     # bindestrichversion zwei-teilig
@@ -374,7 +374,7 @@ class TestGrammar < LingoTestCase
       [6, 11],
       'ss'
     ],
-      gra.permute_compositum('cd-rom-technologie', 1, false)
+      gra.permute_compound('cd-rom-technologie', 1, false)
     )
 
     # bindestrichversion drei-teilig
@@ -383,7 +383,7 @@ class TestGrammar < LingoTestCase
       [6, 7, 11],
       'ees'
     ],
-      gra.permute_compositum('albert-ludwigs-universität', 1, false)
+      gra.permute_compound('albert-ludwigs-universität', 1, false)
     )
 
     # normal mit suggestion
@@ -392,44 +392,44 @@ class TestGrammar < LingoTestCase
       [6, 11],
       'vs'
     ],
-      gra.permute_compositum('benutzerforschung', 1, false)
+      gra.permute_compound('benutzerforschung', 1, false)
     )
 
     gra.close
   end
 
-  def test_find_compositum
+  def test_find_compound
     gra = LG.new({'source'=>['sys-dic']}, @lingo)
     assert_equal(
       wd('informationswissenschaften|KOM', 'informationswissenschaft|k', 'information|s+', 'wissenschaft|s+'),
-      gra.find_compositum('informationswissenschaften')
+      gra.find_compound('informationswissenschaften')
     )
     assert_equal(
       wd('cd-rom-technologie|KOM', 'cd-rom-technologie|k', 'cd-rom|s+', 'technologie|s+'),
-      gra.find_compositum('cd-rom-technologie')
+      gra.find_compound('cd-rom-technologie')
     )
     assert_equal(
       wd('albert-ludwigs-universität|KOM', 'albert-ludwigs-universität|k', 'albert|e+', 'ludwig|e+', 'universität|s+'),
-      gra.find_compositum('albert-ludwigs-universität')
+      gra.find_compound('albert-ludwigs-universität')
     )
     assert_equal(
       wd('client-server-system|KOM', 'client-server-system|k', 'client|s+', 'server|s+', 'system|s+'),
-      gra.find_compositum('client-server-system')
+      gra.find_compound('client-server-system')
     )
     assert_equal(
       wd('benutzerforschung|KOM', 'benutzerforschung|k', 'erforschung|s+', 'benutzen|v+'),
-      gra.find_compositum('benutzerforschung')
+      gra.find_compound('benutzerforschung')
     )
     assert_equal(
       wd('clustersuche|KOM', 'clustersuche|k', 'cluster|s+', 'suche|s+', 'suchen|v+'),
-      gra.find_compositum('clustersuche')
+      gra.find_compound('clustersuche')
     )
     gra.close
   end
 
   def test_min_word_size
     gra = LG.new({'source'=>['sys-dic']}, @lingo)
-    assert_equal( wd('undsund|?'), gra.find_compositum('undsund'))
+    assert_equal( wd('undsund|?'), gra.find_compound('undsund'))
     gra.close
   end
 
@@ -437,9 +437,9 @@ class TestGrammar < LingoTestCase
     gra = LG.new({'source'=>['sys-dic']}, @lingo)
     assert_equal(
       wd('baumsbaumsbaum|KOM', 'baumsbaumsbaum|k', 'baum|s+'),
-      gra.find_compositum('baumsbaumsbaum')
+      gra.find_compound('baumsbaumsbaum')
     )
-    assert_equal(Lingo::Language::Word.new('baumsbaumsbaumsbaumsbaumsbaum', Lingo::Language::WA_UNKNOWN), gra.find_compositum('baumsbaumsbaumsbaumsbaumsbaum'))
+    assert_equal(Lingo::Language::Word.new('baumsbaumsbaumsbaumsbaumsbaum', Lingo::Language::WA_UNKNOWN), gra.find_compound('baumsbaumsbaumsbaumsbaumsbaum'))
     gra.close
   end
 

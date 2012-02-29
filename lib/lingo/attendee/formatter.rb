@@ -43,7 +43,7 @@ class Lingo
       end
 
       def process(obj)
-        if obj.is_a?(Word) || obj.is_a?(Token)
+        if obj.is_a?(WordForm)
           str = obj.form
 
           if obj.respond_to?(:lexicals)

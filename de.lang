@@ -65,7 +65,7 @@ language:
       tst-cry: { name: de/test_cry.txt, txt-format: WordClass, crypt } #  TEST: Verschlüsselung
       tst-sgw: { name: de/test_singleword.txt, txt-format: SingleWord } #  TEST: SingleWord-Format
 
-    compositum:
+    compound:
       min-word-size: "7"
       min-part-size: "3"
       max-parts: "5"

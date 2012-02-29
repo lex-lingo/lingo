@@ -96,92 +96,63 @@ class Lingo
       protected
 
       def init
-        # Parameter verwerten
-        @stopper = get_array('stopper', TA_PUNCTUATION + ',' + TA_OTHER).map(&:upcase)
-        @seq_strings = get_key('sequences').map { |e| WordSequence.new(*e) }
+        @stopper = get_array('stopper', DEFAULT_SKIP, :upcase)
 
-        raise MissingConfigError.new(:sequences) if @seq_strings.empty?
+        @seq = get_key('sequences').map { |string, format|
+          [string = string.downcase, string.split(//), format]
+        }
+
+        raise MissingConfigError.new(:sequences) if @seq.empty?
       end
 
-      def control(cmd, par)
-        # Jedes Control-Object ist auch Auslöser der Verarbeitung
+      def control(cmd, param)
         process_buffer if [STR_CMD_RECORD, STR_CMD_EOF].include?(cmd)
       end
 
       def process_buffer?
-        #   start buffer processing when stopper token are found or at unknown words
-        item = @buffer.last
-        (item.is_a?(WordForm) && @stopper.include?(item.attr.upcase)) ||
-        (item.is_a?(Word) && item.unknown?)
+        (obj = @buffer.last).is_a?(WordForm) && (obj.is_a?(Word) &&
+          obj.unknown? || @stopper.include?(obj.attr.upcase))
       end
 
       def process_buffer
-        return if @buffer.empty?
-
-        unless @buffer.size < 2
-          matches = Hash.new { |h, k| h[k] = [] }
-
-          sequences(@buffer.map { |obj|
-            obj.is_a?(Word) && !obj.unknown? ? obj.attrs(false) : ['#']
-          }).uniq.each { |sequence|
-            @seq_strings.each { |wordseq|
-              wordseq.scan(sequence) { |pos, form, classes|
-                inc('Anzahl erkannter Sequenzen')
-
-                classes.each_with_index { |wc, index|
-                  @buffer[pos + index].lexicals.find { |lex|
-                    form.gsub!(index.succ.to_s, lex.form) if lex.attr == wc
-                  } or break
-                } or next
-
-                matches[pos] << form
-              }
-            }
-          }
-
-          matches.sort.each { |pos, forms|
-            forms.uniq.each { |form|
-              deferred_insert(pos, Word.new_lexical(form, WA_SEQUENCE, LA_SEQUENCE))
-            }
-          }
-        end
-
+        insert_sequences if @buffer.size > 1
         forward_buffer
       end
 
       private
 
-      def sequences(map)
-        res = map.shift
+      def insert_sequences
+        matches, buf, seq = Hash.new { |h, k| h[k] = [] }, @buffer, @seq
 
-        map.each { |classes|
-          temp = []
-          res.each { |wc1| classes.each { |wc2| temp << (wc1 + wc2) } }
-          res = temp
+        map = buf.map { |obj|
+          obj.is_a?(Word) && !obj.unknown? ? obj.attrs(false) : ['#']
         }
 
-        res
-      end
+        map.shift.product(*map).map!(&:join).tap(&:uniq!).each { |q|
+          seq.each { |string, classes, format|
+            pos = 0
 
-      class WordSequence
+            while pos = q.index(string, pos)
+              inc('Anzahl erkannter Sequenzen')
 
-        attr_reader :classes, :format, :string
+              fmt = format.dup
 
-        def initialize(wordclasses, format)
-          @string  = wordclasses.downcase
-          @classes = @string.split(//)
-          @format  = format
-        end
+              classes.each_with_index { |wc, i|
+                buf[pos + i].lexicals.find { |l|
+                  fmt.gsub!(i.succ.to_s, l.form) if l.attr == wc
+                } or break
+              } or next
 
-        def scan(sequence)
-          pos = 0
+              matches[pos] << fmt
 
-          while pos = sequence.index(string, pos)
-            yield pos, format.dup, classes
-            pos += 1
-          end
-        end
+              pos += 1
+            end
+          }
+        }
 
+        matches.sort.each { |pos, forms| forms.tap(&:uniq!).each { |form|
+          deferred_insert(pos, Word.new_lexical(form, WA_SEQUENCE, LA_SEQUENCE))
+        } }
       end
 
     end

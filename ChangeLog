@@ -62,13 +62,13 @@
   (requires diff-lcs[http://raa.ruby-lang.org/project/diff-lcs/]).
 * Provide alternatives to standard zip command on windows platforms.
 * Use +UNK+ itself if it doesn't have any lexicals.
-* Use compo form instead of word form when lexicalizing compositum entry for
+* Use compo form instead of word form when lexicalizing compound entry for
   multiword dictionaries.
 * LexicalHash#[] must use target (not source) form.
 * Optionally, try to find matches for all lexicals a word has.
 * Make '-' a PRINTABLE_CHAR.
 * Allow synonyms to be considered for multiword matching.
-* Don't use compositum parts.
+* Don't use compound parts.
 * Introduced some (more or less arbitrary) line length limit. We can only
   store values of a certain length anyway (with SDBM). Entries exceeding this
   limit will be rejected and logged in the .rev file.
@@ -252,12 +252,12 @@
 * <b>Decomposer mit zusätzlicher Validitätsprüfung und Kennzeichnung</b>
 
   Der Decomposer kann bei Bedarf Komposita einer zusätzlichen Prüfung unterziehen.
-  Ist der Schlüssel <tt>de.lang:language/dictionary/compositum/skip-sequences</tt>
+  Ist der Schlüssel <tt>de.lang:language/dictionary/compound/skip-sequences</tt>
   angegeben, der z.B. in der Form <tt>skip-sequences: [ VS ]</tt> definiert wird,
   wird zusätzlich geprüft, ob das Kompositum mit seinen Teilen diesen Wortklassen
   entspricht. Hiernach werden Komposita verworfen, die aus Verb-Substantiv-Kombination
   bestehen. Die Angabe des Parameters ist optional.
-  Zusätzlich werden bei Angabe des Schlüssels <tt>de.lang:language/dictionary/compositum/append-wordclass</tt>,
+  Zusätzlich werden bei Angabe des Schlüssels <tt>de.lang:language/dictionary/compound/append-wordclass</tt>,
   der i.d.R einen ein Zeichen langen String enthält, die durch Zerlegung erkannten
   Wortstämme markiert, in dem ihre Wortklasse das über diesen Schlüssel definierte
   Zeichen angehangen bekommt.
@@ -476,7 +476,7 @@
 * <b>Kompositum-Zerlegung mit weiterer Einschränkung</b>
 
   Ein weiterer Parameter ist für die Kompositumzerlegung hinzugekommen. Als
-  Attribute des Tags <tt>XML:dictionary/compositum</tt> können jetzt angegeben werden:
+  Attribute des Tags <tt>XML:dictionary/compound</tt> können jetzt angegeben werden:
 
     Attribut          Default    Funktion
     ============================================================================

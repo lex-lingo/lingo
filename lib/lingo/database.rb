@@ -201,7 +201,7 @@ class Lingo
           res = dic.find_word(form)
 
           if res.unknown?
-            res = gra.find_compositum(form)
+            res = gra.find_compound(form)
             com = res.compo_form
           end
 

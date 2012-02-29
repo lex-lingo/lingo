@@ -95,9 +95,9 @@ class Lingo
         @prompt   = get_key('prompt', 'lex:) ')
       end
 
-      def control(cmd, par)
+      def control(cmd, param)
         if cmd != STR_CMD_STATUS && eval(@cmd_eval)
-          @lingo.warn "#{@prompt} #{AgendaItem.new(cmd, par).inspect}"
+          @lingo.warn "#{@prompt} #{AgendaItem.new(cmd, param).inspect}"
         end
       end
 

@@ -29,7 +29,7 @@ class Lingo
   module Language
 
     # Die Klasse Grammar beinhaltet grammatikalische Spezialitäten einer Sprache. Derzeit findet die
-    # Kompositumerkennung hier ihren Platz, die mit der Methode find_compositum aufgerufen werden kann.
+    # Kompositumerkennung hier ihren Platz, die mit der Methode find_compound aufgerufen werden kann.
     # Die Klasse Grammar wird genau wie ein Dictionary initialisiert. Das bei der Initialisierung angegebene Wörterbuch ist Grundlage
     # für die Erkennung der Kompositumteile.
 
@@ -49,7 +49,8 @@ class Lingo
 
         @dic, @suggestions = Dictionary.new(config, lingo), []
 
-        cfg = lingo.dictionary_config['compositum']
+        cfg = lingo.dictionary_config['compound'] ||
+              lingo.dictionary_config['compositum']  # DEPRECATE
 
         # Ein Wort muss mindestens 8 Zeichen lang sein, damit
         # überhaupt eine Prüfung stattfindet.
@@ -86,12 +87,12 @@ class Lingo
         super.update(@dic.report)
       end
 
-      # find_compositum(str) -> word wenn level=1
-      # find_compositum(str) -> [lex, sta] wenn level!=1
+      # find_compound(str) -> word wenn level=1
+      # find_compound(str) -> [lex, sta] wenn level!=1
       #
-      # find_compositum arbeitet in verschiedenen Leveln, da die Methode auch rekursiv aufgerufen wird. Ein Level größer 1
+      # find_compound arbeitet in verschiedenen Leveln, da die Methode auch rekursiv aufgerufen wird. Ein Level größer 1
       # entspricht daher einem rekursiven Aufruf
-      def find_compositum(str, level = 1, tail = false)
+      def find_compound(str, level = 1, tail = false)
         key, top, empty = str.downcase, level == 1, [[], [], '']
 
         if top && hit?(key)
@@ -108,7 +109,7 @@ class Lingo
 
         inc('Komposita geprüft')
 
-        res = permute_compositum(key, level, tail)
+        res = permute_compound(key, level, tail)
         val = !(lex = res.first).empty? && valid?(str, *res[1..-1])
 
         if top
@@ -128,14 +129,14 @@ class Lingo
         end
       end
 
-      # permute_compositum( _aString_ ) ->  [lex, sta, seq]
-      def permute_compositum(str, level, tail)
-        return test_compositum($1, '-', $2, level, tail) if str =~ HYPHEN_RE
+      # permute_compound( _aString_ ) ->  [lex, sta, seq]
+      def permute_compound(str, level, tail)
+        return test_compound($1, '-', $2, level, tail) if str =~ HYPHEN_RE
 
         sug, len = @suggestions[level] ||= [], str.length
 
         1.upto(len - 1) { |i|
-          res = test_compositum(str[0, i], '', str[i, len], level, tail)
+          res = test_compound(str[0, i], '', str[i, len], level, tail)
 
           unless (lex = res.first).empty?
             return res unless lex.last.attr == LA_TAKEITASIS
@@ -146,10 +147,10 @@ class Lingo
         sug.empty? ? [[], [], ''] : sug.first.tap { sug.clear }
       end
 
-      # test_compositum() ->  [lex, sta, seq]
+      # test_compound() ->  [lex, sta, seq]
       #
       # Testet einen definiert zerlegten String auf Kompositum
-      def test_compositum(fstr, infix, bstr, level, tail)
+      def test_compound(fstr, infix, bstr, level, tail)
         sta, seq, empty = [fstr.length, bstr.length], %w[? ?], [[], [], '']
 
         if !(blex = @dic.select_with_suffix(bstr)).sort!.empty?
@@ -159,7 +160,7 @@ class Lingo
           # 2. Word w/ infix, unless tail part
           bform, seq[1] = bstr, blex.first.attr
         elsif infix == '-'
-          blex, bsta, bseq = find_compositum(bstr, level + 1, tail)
+          blex, bsta, bseq = find_compound(bstr, level + 1, tail)
 
           if !blex.sort!.empty?
             # 3. Compositum
@@ -176,7 +177,7 @@ class Lingo
           # 1. Word w/ infix
           fform, seq[0] = fstr, flex.first.attr
         else
-          flex, fsta, fseq = find_compositum(fstr, level + 1, true)
+          flex, fsta, fseq = find_compound(fstr, level + 1, true)
 
           if !flex.sort!.empty?
             # 2. Compositum

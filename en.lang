@@ -58,7 +58,7 @@ language:
       #    Benutzerwörterbücher
       usr-dic: { name: en/user-dic.txt, txt-format: WordClass, separator: '=' }
 
-    compositum:
+    compound:
       min-word-size: "7"
       min-part-size: "3"
       max-parts: "5"

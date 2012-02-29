@@ -123,7 +123,7 @@ class Lingo
           variations[0...@max_var].each do |var|
             # Variiertes Wort im Wörterbuch suchen
             word = @dic.find_word(var)
-            word = @gra.find_compositum(var) if word.unknown?
+            word = @gra.find_compound(var) if word.unknown?
             next if word.unknown? || (
               word.attr == WA_KOMPOSITUM && word.lexicals.any? { |lex|
                 lex.attr[0..0] == LA_TAKEITASIS

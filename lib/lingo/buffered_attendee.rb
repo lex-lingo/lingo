@@ -44,6 +44,11 @@ class Lingo
 
     private
 
+    def form_at(index, klass = WordForm)
+      obj = @buffer[index]
+      obj.form if obj.is_a?(klass)
+    end
+
     def forward_buffer
       @inserts.sort_by!(&:position).each { |i|
         @buffer.insert(i.position, i.object)
@@ -52,8 +57,22 @@ class Lingo
       @buffer.each(&method(:forward)).clear
     end
 
+    def forward_number_of_token(len = default = @buffer.size, punct = !default)
+      begin
+        unless @buffer.empty?
+          forward(item = @buffer.delete_at(0))
+          len -= 1 unless punct && item.form == CHAR_PUNCT
+        end
+      end while len > 0
+    end
+
+    def valid_tokens_in_buffer
+      @buffer.count { |item| item.form != CHAR_PUNCT }
+    end
+
     def process_buffer?
-      true
+      !instance_variable_defined?(:@expected_tokens_in_buffer) ||
+      valid_tokens_in_buffer >= @expected_tokens_in_buffer
     end
 
     def process_buffer
@@ -62,6 +81,22 @@ class Lingo
 
     def deferred_insert(pos, obj)
       @inserts << BufferInsert.new(pos, obj)
+    end
+
+    def control_multi(cmd, dic = @dic)
+      report_on(cmd, dic)
+
+      if [STR_CMD_RECORD, STR_CMD_EOF].include?(cmd)
+        @eof_handling = true
+
+        while valid_tokens_in_buffer > 1
+          process_buffer
+        end
+
+        forward_number_of_token
+
+        @eof_handling = false
+      end
     end
 
   end

@@ -71,30 +71,37 @@ class Lingo
       protected
 
       def init
-        @nonewords = []
+        @nonewords, @sort = [], get_key('sort', true)
       end
 
-      # Control behandelt die Kommandos zum Öffnen und Schließen einer Datei.
-      # Für jede Datei wird ein neuer Satz nicht erkannter Wörter registriert.
-      def control(cmd, par)
+      def control(cmd, param)
         case cmd
           when STR_CMD_FILE
             @nonewords.clear
           when STR_CMD_EOL
             skip_command
           when STR_CMD_RECORD, STR_CMD_EOF
-            nones = @nonewords.sort.uniq
-            nones.each(&method(:forward))
-            add('Objekte gefiltert', nones.size)
-            @nonewords.clear
+            send_nonewords unless @nonewords.empty?
         end
       end
 
       def process(obj)
         if obj.is_a?(Word) && obj.unknown?
           inc('Anzahl nicht erkannter Wörter')
-          @nonewords << obj.form.downcase
+
+          non = obj.form.downcase
+          @sort ? @nonewords << non : forward(non)
         end
+      end
+
+      private
+
+      def send_nonewords
+        @nonewords.sort!
+        @nonewords.uniq!
+
+        add('Objekte gefiltert', @nonewords.size)
+        @nonewords.each(&method(:forward)).clear
       end
 
     end

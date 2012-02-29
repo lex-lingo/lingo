@@ -80,6 +80,8 @@ class Lingo
     STA_TIM_COMMANDS = 'Time to control  '
     STA_TIM_OBJECTS  = 'Time to process  '
 
+    DEFAULT_SKIP = [TA_PUNCTUATION, TA_OTHER].join(',')
+
     def initialize(config, lingo)
       @lingo = lingo
 
@@ -128,6 +130,15 @@ class Lingo
     end
 
     private
+
+    def find_word(f, d = @dic, g = @gra)
+      w = d.find_word(f)
+      g && (block_given? ? !yield(w) : w.unknown?) ? g.find_compound(f) : w
+    end
+
+    def report_on(cmd, *rep)
+      rep.each { |r| r.report.each { |q| set(*q) } } if cmd == STR_CMD_STATUS
+    end
 
     def sta_for(key)
       %w[NUM TIM].map { |i| self.class.const_get("STA_#{i}_#{key.upcase}") }
@@ -217,8 +228,10 @@ class Lingo
       @config.fetch(key, default)
     end
 
-    def get_array(key, default = nil)
-      get_key(key, default).split(STRING_SEPARATOR_RE)
+    def get_array(key, default = nil, method = nil)
+      get_key(key, default).split(STRING_SEPARATOR_RE).tap { |ary|
+        ary.map!(&method) if method
+      }
     end
 
     def dictionary(src, mod)

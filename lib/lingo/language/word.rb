@@ -63,12 +63,21 @@ class Lingo
         end
       end
 
-      def lexicals=(lexis)
-        if lexis.is_a?(Array)
-          @lexicals = lexis.sort.uniq
+      def lexicals=(lex)
+        if lex.is_a?(Array)
+          @lexicals = lex.sort.uniq
         else
-          raise TypeError, "wrong argument type #{lexis.class} (expected Array)"
+          raise TypeError, "wrong argument type #{lex.class} (expected Array)"
         end
+      end
+
+      def add_lexicals(lex)
+        @lexicals.concat(lex)
+
+        @lexicals.sort!
+        @lexicals.uniq!
+
+        self
       end
 
       def attrs(compound_parts = true)
@@ -100,15 +109,11 @@ class Lingo
       end
 
       def compo_form
-        if attr == WA_KOMPOSITUM
-          get_class(LA_KOMPOSITUM).first
-        else
-          nil
-        end
+        get_class(LA_KOMPOSITUM).first if attr == WA_KOMPOSITUM
       end
 
       def <<(*other)
-        lexicals.concat(other.flatten)
+        lexicals.concat(other.tap(&:flatten!))
         self
       end
 

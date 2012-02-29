@@ -71,19 +71,18 @@ class Lingo
         set_dic
       end
 
-      def control(cmd, par)
-        @dic.report.each_pair { |key, value|
-          set(key, value)
-        } if cmd == STR_CMD_STATUS
+      def control(cmd, param)
+        report_on(cmd, @dic)
       end
 
       def process(obj)
         if obj.is_a?(Token) && obj.attr == TA_WORD
           inc('Anzahl gesuchter Wörter')
-          word = @dic.find_word(obj.form)
-          inc('Anzahl gefundener Wörter') unless word.unknown?
-          obj = word
+
+          obj = @dic.find_word(obj.form)
+          inc('Anzahl gefundener Wörter') unless obj.unknown?
         end
+
         forward(obj)
       end
 

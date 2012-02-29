@@ -74,24 +74,25 @@ class Lingo
 
       def init
         set_dic
-        @skip = get_array('skip', WA_UNKNOWN).map(&:upcase)
+        @skip = get_array('skip', WA_UNKNOWN, :upcase)
       end
 
-      def control(cmd, par)
-        @dic.report.each_pair { |k, v| set( k, v ) } if cmd == STR_CMD_STATUS
+      def control(cmd, param)
+        report_on(cmd, @dic)
       end
 
       def process(obj)
-        if obj.is_a?(Word) && @skip.index(obj.attr).nil?
+        if obj.is_a?(Word) && !@skip.include?(obj.attr)
           inc('Anzahl gesuchter Wörter')
 
-          # finde die Synonyme für alle Lexicals des Wortes
-          synos = @dic.find_synonyms(obj)
-          obj.lexicals += synos.sort.uniq
+          unless (syn = @dic.find_synonyms(obj)).empty?
+            inc('Anzahl erweiteter Wörter')
 
-          inc('Anzahl erweiteter Wörter') if synos.size>0
-          add('Anzahl gefundener Synonyme', synos.size)
+            obj.add_lexicals(syn.tap(&:uniq!))
+            add('Anzahl gefundener Synonyme', syn.size)
+          end
         end
+
         forward(obj)
       end
 

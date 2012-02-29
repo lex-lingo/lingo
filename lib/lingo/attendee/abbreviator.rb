@@ -76,17 +76,15 @@ class Lingo
         set_dic
       end
 
-      def control(cmd, par)
-        @dic.report.each_pair { |key, value| set(key, value) } if cmd == STR_CMD_STATUS
-
-        # Jedes Control-Object ist auch Auslöser der Verarbeitung
+      def control(cmd, param)
+        report_on(cmd, @dic)
         process_buffer
       end
 
       private
 
       def process_buffer?
-        @buffer[-1].kind_of?(Token) && @buffer[-1].form == CHAR_PUNCT
+        form_at(-1, Token) == CHAR_PUNCT
       end
 
       def process_buffer
@@ -95,13 +93,14 @@ class Lingo
           return
         end
 
-        # Wort vor dem Punkt im Abkürzungswörterbuch suchen
-        if @buffer[-2].kind_of?(Token)
+        if form = form_at(-2, Token)
           inc('Anzahl gesuchter Abkürzungen')
-          abbr = @dic.find_word(@buffer[-2].form)
-          if abbr.identified?
+
+          if (abbr = find_word(form)).identified?
             inc('Anzahl gefundener Abkürzungen')
+
             abbr.form += CHAR_PUNCT
+
             @buffer[-2] = abbr
             @buffer.delete_at(-1)
           end

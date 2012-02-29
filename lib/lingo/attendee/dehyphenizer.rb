@@ -74,33 +74,16 @@ class Lingo
       protected
 
       def init
-        @stopper = get_array('stopper', TA_PUNCTUATION+','+TA_OTHER).map(&:upcase)
-
         set_dic
         set_gra
 
-        @skip = get_array('skip', '').map(&:downcase)
+        @skip = get_array('skip', '', :downcase)
 
-        @number_of_expected_tokens_in_buffer = 2
-        @eof_handling = false
+        @expected_tokens_in_buffer, @eof_handling = 2, false
       end
 
-      def control(cmd, par)
-        @dic.report.each_pair { |key, value| set(key, value) } if cmd == STR_CMD_STATUS
-
-        # Jedes Control-Object ist auch Auslöser der Verarbeitung
-        if cmd == STR_CMD_RECORD || cmd == STR_CMD_EOF
-          @eof_handling = true
-          while number_of_valid_tokens_in_buffer > 1
-            process_buffer
-          end
-          forward_number_of_token( @buffer.size, false )
-          @eof_handling = false
-        end
-      end
-
-      def process_buffer?
-        number_of_valid_tokens_in_buffer >= @number_of_expected_tokens_in_buffer
+      def control(cmd, param)
+        control_multi(cmd)
       end
 
       def process_buffer
@@ -113,20 +96,20 @@ class Lingo
           # Einfache Zusammensetzung versuchen
           form = @buffer[0].form[0...-1] + @buffer[1].form
           word = @dic.find_word(form)
-          word = @gra.find_compositum(form) unless word.identified?
+          word = @gra.find_compound(form) unless word.identified?
 
           unless word.identified? || (word.attr == WA_KOMPOSITUM && word.get_class('x+').empty?)
             # Zusammensetzung mit Bindestrich versuchen
             form = @buffer[0].form + @buffer[1].form
             word = @dic.find_word(form)
-             word = @gra.find_compositum(form) unless word.identified?
+             word = @gra.find_compound(form) unless word.identified?
           end
 
           unless word.identified? || (word.attr == WA_KOMPOSITUM && word.get_class('x+').empty?)
             # Zusammensetzung mit Bindestrich versuchen
             form = @buffer[0].form + @buffer[1].form
             word = @dic.find_word(form)
-            word = @gra.find_compositum(form) unless word.identified?
+            word = @gra.find_compound(form) unless word.identified?
           end
 
           if word.identified? || (word.attr == WA_KOMPOSITUM && word.get_class('x+').empty?)
@@ -137,24 +120,6 @@ class Lingo
 
         # Buffer weiterschaufeln
         forward_number_of_token( 1, false )
-      end
-
-      private
-
-      # Leitet 'len' Token weiter
-      def forward_number_of_token( len, count_punc = true )
-        begin
-          unless @buffer.empty?
-            forward( @buffer[0] )
-            len -= 1 unless count_punc && @buffer[0].form == CHAR_PUNCT
-            @buffer.delete_at( 0 )
-          end
-        end while len > 0
-      end
-
-      # Liefert die Anzahl gültiger Token zurück
-      def number_of_valid_tokens_in_buffer
-        @buffer.collect { |token| (token.form == CHAR_PUNCT) ? nil : 1 }.compact.size
       end
 
     end

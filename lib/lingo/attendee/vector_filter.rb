@@ -86,7 +86,7 @@ class Lingo
           @prompt = get_key('prompt', 'lex:) ')
         else
           @lex  = Regexp.new(get_key('lexicals', '[sy]').downcase)
-          @skip = get_array('skip', TA_PUNCTUATION + ',' + TA_OTHER).map(&:upcase)
+          @skip = get_array('skip', DEFAULT_SKIP, :upcase)
 
           if sort = get_key('sort', 'normal')
             @sort_format, @sort_method = sort.downcase.split('_', 2)
@@ -96,7 +96,7 @@ class Lingo
         @vectors, @word_count = [], 0.0
       end
 
-      def control(cmd, par)
+      def control(cmd, param)
         case cmd
           when STR_CMD_EOL
             skip_command

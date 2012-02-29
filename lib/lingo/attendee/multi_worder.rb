@@ -81,7 +81,7 @@ class Lingo
       protected
 
       def init
-        @stopper = get_array('stopper', TA_PUNCTUATION+','+TA_OTHER).map(&:upcase)
+        @stopper = get_array('stopper', DEFAULT_SKIP).map(&:upcase)
         @mul_dic = dictionary(mul_src = get_array('source'), get_key('mode', 'all'))
 
         # combine lexical variants?
@@ -113,26 +113,12 @@ class Lingo
           @syn_dic = dictionary(get_array('use-syn'), get_key('syn-mode', 'all'))
         end
 
-        @number_of_expected_tokens_in_buffer = 3
+        @expected_tokens_in_buffer = 3
         @eof_handling = false
       end
 
-      def control(cmd, par)
-        @mul_dic.report.each_pair { |key, value| set(key, value) } if cmd == STR_CMD_STATUS
-
-        # Jedes Control-Object ist auch Auslöser der Verarbeitung
-        if cmd == STR_CMD_RECORD || cmd == STR_CMD_EOF
-          @eof_handling = true
-          while number_of_valid_tokens_in_buffer > 1
-            process_buffer
-          end
-          forward_number_of_token( @buffer.size, false )
-          @eof_handling = false
-        end
-      end
-
-      def process_buffer?
-        number_of_valid_tokens_in_buffer >= @number_of_expected_tokens_in_buffer
+      def control(cmd, param)
+        control_multi(cmd, @mul_dic)
       end
 
       def process_buffer
@@ -150,7 +136,7 @@ class Lingo
             else
               # Längster erkannter Schlüssel > 3, Buffer voll genug?
               unless @buffer.size >= lengths[0] || @eof_handling
-                @number_of_expected_tokens_in_buffer = lengths[0]
+                @expected_tokens_in_buffer = lengths[0]
                 return
               else
                 # Buffer voll genug, Verarbeitung kann beginnen
@@ -168,7 +154,7 @@ class Lingo
                   forward_number_of_token( 1 )
                 end
 
-                @number_of_expected_tokens_in_buffer = 3
+                @expected_tokens_in_buffer = 3
                 process_buffer if process_buffer?
                 return
               end
@@ -185,7 +171,7 @@ class Lingo
 
         # Buffer weiterschaufeln
         forward_number_of_token( 1, false )
-        @number_of_expected_tokens_in_buffer = 3
+        @expected_tokens_in_buffer = 3
       end
 
       private
@@ -215,17 +201,6 @@ class Lingo
         forward( word )
       end
 
-      # Leitet 'len' Token weiter
-      def forward_number_of_token( len, count_punc = true )
-        begin
-          unless @buffer.empty?
-            forward( @buffer[0] )
-            len -= 1 unless count_punc && @buffer[0].form == CHAR_PUNCT
-            @buffer.delete_at( 0 )
-          end
-        end while len > 0
-      end
-
       # Ermittelt die maximale Ergebnislänge
       def sort_result_len( result )
         result.collect do |res|
@@ -240,7 +215,7 @@ class Lingo
 
       # Prüft einen definiert langen Schlüssel ab Position 0 im Buffer
       def check_multiword_key( len )
-        return [] if number_of_valid_tokens_in_buffer < len
+        return [] if valid_tokens_in_buffer < len
 
         # Wortformen aus der Wortliste auslesen
         sequence = @buffer.map { |obj|
@@ -250,7 +225,7 @@ class Lingo
           next if form == CHAR_PUNCT
 
           word = @lex_dic.find_word(form)
-          word = @lex_gra.find_compositum(form) if word.unknown?
+          word = @lex_gra.find_compound(form) if word.unknown?
 
           lexicals = word.attr == WA_KOMPOSITUM ?
             [word.lexicals.first] : word.lexicals.dup
@@ -284,11 +259,6 @@ class Lingo
           key = sequence.map { |forms| forms.first }.join(' ')
           @mul_dic.select(key.downcase)
         end
-      end
-
-      # Liefert die Anzahl gültiger Token zurück
-      def number_of_valid_tokens_in_buffer
-        @buffer.collect { |token| (token.form == CHAR_PUNCT) ? nil : 1 }.compact.size
       end
 
     end
