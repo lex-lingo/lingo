@@ -223,25 +223,22 @@ class Lingo
 
     list.each { |hash|
       # {'attendee' => {'name'=>'Attendee', 'in'=>'nase', 'out'=>'ohr', 'param'=>'hase'}}
-      cfg = hash.values.first.merge('name' => hash.keys.first.camelcase)
+      cfg = hash.values.first.merge('name' => name = hash.keys.first.camelcase)
 
       %w[in out].each { |key| (cfg[key] ||= '').downcase! }
 
-      cfg['in']  = last_link                         if cfg['in'].empty?
-      cfg['out'] = "auto_link_out_#{auto_link += 1}" if cfg['out'].empty?
+      cfg['in']  = last_link                     if cfg['in'].empty?
+      cfg['out'] = "auto_link-#{auto_link += 1}" if cfg['out'].empty?
       last_link  = cfg['out']
 
-      data = config["language/attendees/#{cfg['name'].downcase}"]
-      cfg.update(data) if data
+      cfg.update(config["language/attendees/#{name.downcase}"] || {})
 
-      attendee = Attendee.const_get(cfg['name']).new(cfg, self)
-      @attendees << attendee
+      @attendees << attendee = Attendee.const_get(name).new(cfg, self)
 
-      cfg['in'].split(STRING_SEPARATOR_RE).each { |interest|
-        subscriber[interest] << attendee
-      }
-      cfg['out'].split(STRING_SEPARATOR_RE).each { |theme|
-        supplier[theme] << attendee
+      { 'in' => subscriber, 'out' => supplier }.each { |key, target|
+        cfg[key].split(STRING_SEPARATOR_RE).each { |channel|
+          target[channel] << attendee
+        }
       }
     }
 
