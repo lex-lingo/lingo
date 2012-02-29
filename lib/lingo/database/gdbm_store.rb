@@ -39,7 +39,7 @@ class Lingo
       end
 
       def _open
-        GDBM.open(@dbm_name)
+        GDBM.open(@stofile)
       end
 
     end

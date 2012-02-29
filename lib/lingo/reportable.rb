@@ -31,27 +31,29 @@ class Lingo
   module Reportable
 
     def init_reportable(prefix = nil)
-      @counters, @prefix = Hash.new(0), prefix ? "#{prefix}: " : ''
+      @reportable_hash   = Hash.new(0)
+      @reportable_prefix = prefix ? "#{prefix}: " : ''
     end
 
-    def inc(counter)
-      @counters[counter] += 1
+    def inc(key)
+      @reportable_hash[key] += 1
     end
 
-    def add(counter, value)
-      @counters[counter] += value
+    def add(key, val)
+      @reportable_hash[key] += val
     end
 
-    def set(counter, value)
-      @counters[counter] = value
+    def set(key, val)
+      @reportable_hash[key] = val
     end
 
-    def get(counter)
-      @counters[counter]
+    def get(key)
+      @reportable_hash[key]
     end
 
     def report
-      @counters.each_with_object({}) { |(k, v), r| r["#{@prefix}#{k}"] = v }
+      q = @reportable_prefix
+      @reportable_hash.each_with_object({}) { |(k, v), r| r["#{q}#{k}"] = v }
     end
 
   end

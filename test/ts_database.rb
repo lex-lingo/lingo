@@ -264,7 +264,7 @@ Wort2=
   end
 
   def set_config(id, config)
-    "_test_#{id}_".tap { |id| @lingo.config["language/dictionary/databases/#{id}"] = config }
+    "_test_#{id}_".tap { |i| @lingo.config["language/dictionary/databases/#{i}"] = config }
   end
 
 end

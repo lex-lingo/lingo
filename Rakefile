@@ -116,7 +116,7 @@ def test_ref(name, cfg = name)
   }.success? or abort msg.join("\n\n")
 
   Dir["test/ref/#{name}.*"].each { |ref|
-    puts "#{'#' * 60} #{org = ref.sub(/test\/ref/, 'txt')}"
+    puts "## #{org = ref.sub(/test\/ref/, 'txt')}"
     continue += Diff::LCS::Ldiff.run(ARGV.clear << '-a' << org << ref)
   }
 

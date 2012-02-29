@@ -15,53 +15,39 @@ class LingoTestCase <  Test::Unit::TestCase
     Dir[TEST_GLOB].each { |f| File.unlink(f) }
   end
 
-  def split( text )
-    text =~ /^([^|]+)\|([^|]*)$/
-    [$1.nil? ? '' : $1, $2.nil? ? '' : $2]
+  def split(t)
+    t =~ /^([^|]+)\|([^|]*)$/
+    [$1 || '', $2 || '']
   end
 
-  # Erzeugt ein AgendaItem-Objekt
-  def ai( text )
-    c, p = split( text )
-    Lingo::AgendaItem.new( c, p )
+  def ai(t)
+    Lingo::AgendaItem.new(*split(t))
   end
 
-  # Erzeugt ein Token-Objekt
-  def tk( text )
-    f, a = split( text )
-    Lingo::Language::Token.new( f, a )
+  def tk(t)
+    Lingo::Language::Token.new(*split(t))
   end
 
-  # Erzeugt ein Lexical-Objekt
-  def lx( text )
-    f, a = split( text )
-    Lingo::Language::Lexical.new( f, a )
+  def lx(t)
+    Lingo::Language::Lexical.new(*split(t))
   end
 
-  # Erzeugt ein Word-Objekt
-  def wd( text, *lexis )
-    f, a = split( text )
-    w = Lingo::Language::Word.new( f, a )
-    lexis.each do |text|
-      f, a = split( text )
-      w << Lingo::Language::Lexical.new( f, a )
-    end
-    w
+  def wd(t, *l)
+    l.each_with_object(Lingo::Language::Word.new(*split(t))) { |v, w| w << lx(v) }
   end
 
 end
 
 class AttendeeTestCase < LingoTestCase
 
-  def initialize(fname)
+  def initialize(_)
     super
-
-    @attendee = $1 if self.class.to_s =~ /TestAttendee(.*)/
-    @lingo, @output = Lingo.new, []
+    @lingo, @output, @input = Lingo.new, [], nil
+    @attendee = self.class.to_s[/TestAttendee(.*)/, 1]
   end
 
   def meet(att_cfg, check = true)
-    cfg = { 'name' => @attendee.camelcase }
+    cfg = { 'name' => @attendee }
     cfg.update('in'  => 'input')  if @input
     cfg.update('out' => 'output') if @output
     cfg.update(att_cfg)

@@ -35,15 +35,15 @@ class Lingo
       private
 
       def uptodate?
-        super(@dbm_name + '.pag')
+        super(@stofile + '.pag')
       end
 
       def _clear
-        File.delete(*Dir["#{@dbm_name}.{pag,dir}"])
+        File.delete(*Dir["#{@stofile}.{pag,dir}"])
       end
 
       def _open
-        SDBM.open(@dbm_name)
+        SDBM.open(@stofile)
       end
 
       def _get(key)
@@ -55,7 +55,7 @@ class Lingo
         if val.length > 950
           val = val[0, 950]
 
-          @lingo.warn "Warning: Entry `#{key}' (#{@src_file})" <<
+          @lingo.warn "Warning: Entry `#{key}' (#{@srcfile})" <<
                       'too long for SDBM. Truncating...'
         end
 

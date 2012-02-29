@@ -65,19 +65,19 @@ class Lingo
     def initialize(id, lingo)
       @id, @lingo, @config, @db = id, lingo, lingo.database_config(id), nil
 
-      @src_file = Lingo.find(:dict, @config['name'])
-      @crypter  = Crypter.new if @config.has_key?('crypt')
+      @srcfile = Lingo.find(:dict, @config['name'])
+      @crypter = @config.has_key?('crypt') && Crypter.new
 
       begin
-        @dbm_name = Lingo.find(:store, @src_file)
-        FileUtils.mkdir_p(File.dirname(@dbm_name))
+        @stofile = Lingo.find(:store, @srcfile)
+        FileUtils.mkdir_p(File.dirname(@stofile))
       rescue NoWritableStoreError
         @backend  = HashStore
       end
 
       extend(backend)
 
-      @dbm_name << store_ext if respond_to?(:store_ext, true)
+      @stofile << store_ext if respond_to?(:store_ext, true)
 
       init_cachable
       convert unless uptodate?
@@ -141,8 +141,8 @@ class Lingo
 
     private
 
-    def uptodate?(file = @dbm_name)
-      src = Pathname.new(@src_file)
+    def uptodate?(file = @stofile)
+      src = Pathname.new(@srcfile)
       @source_key = lambda { [src.size, src.mtime].join(FLD_SEP) }
 
       sys_key = open { @db[SYS_KEY] } if File.exist?(file)
@@ -159,7 +159,7 @@ class Lingo
     end
 
     def _clear
-      File.delete(@dbm_name) if File.exist?(@dbm_name)
+      File.delete(@stofile) if File.exist?(@stofile)
     end
 
     def _open

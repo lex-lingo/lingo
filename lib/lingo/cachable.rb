@@ -31,26 +31,26 @@ class Lingo
   module Cachable
 
     def init_cachable
-      @cache = Hash.new(false)
+      @cachable_hash = Hash.new(false)
     end
 
     def hit?(key)
-      @cache.has_key?(key)
+      @cachable_hash.has_key?(key)
     end
 
-    def store(key, value)
-      @cache[key] = cache_value(value)
-      value
+    def store(key, val)
+      @cachable_hash[key] = cache_value(val)
+      val
     end
 
     def retrieve(key)
-      cache_value(@cache[key])
+      cache_value(@cachable_hash[key])
     end
 
     private
 
-    def cache_value(value)
-      value.nil? ? nil : value.dup
+    def cache_value(val)
+      val.dup unless val.nil?
     end
 
   end

@@ -39,7 +39,7 @@ class Lingo
       end
 
       def create
-        LibCDB::CDB.open(@dbm_name, 'w') { |db|
+        LibCDB::CDB.open(@stofile, 'w') { |db|
           @db = db
           yield
         }
@@ -48,7 +48,7 @@ class Lingo
       end
 
       def _open
-        LibCDB::CDB.open(@dbm_name)
+        LibCDB::CDB.open(@stofile)
       end
 
     end
