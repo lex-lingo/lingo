@@ -130,9 +130,7 @@ class Lingo
 
         map.shift.product(*map).map!(&:join).tap(&:uniq!).each { |q|
           seq.each { |string, classes, format|
-            pos = 0
-
-            while pos = q.index(string, pos)
+            while pos = q.index(string, pos || 0)
               inc('Anzahl erkannter Sequenzen')
 
               fmt = format.dup
@@ -151,7 +149,7 @@ class Lingo
         }
 
         matches.sort.each { |pos, forms| forms.tap(&:uniq!).each { |form|
-          deferred_insert(pos, Word.new_lexical(form, WA_SEQUENCE, LA_SEQUENCE))
+          @inserts << [pos, Word.new_lexical(form, WA_SEQUENCE, LA_SEQUENCE)]
         } }
       end
 

@@ -88,7 +88,7 @@ Usage: #{PROG} <command> [arguments] [options]
        #{PROG} [-h|--help] [--version]
 EOT
 
-    def do
+    def ctl
       parse_options
       send("do_#{ALIASES[ARGV.shift]}")
     end
@@ -230,7 +230,7 @@ EOT
   end
 
   def self.ctl
-    Ctl.do
+    Ctl.ctl
   rescue => err
     raise if $VERBOSE
     abort "#{err.backtrace.first}: #{err} (#{err.class})"

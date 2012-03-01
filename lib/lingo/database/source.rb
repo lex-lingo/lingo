@@ -63,12 +63,13 @@ class Lingo
       UTF8_CHAR   = "#{UTF8_DIGIT}|#{UTF8_BASLAT}|#{UTF8_LAT1SP}|#{UTF8_LATEXA}|#{UTF8_LATEXB}|#{UTF8_IPAEXT}"
 
       PRINTABLE_CHAR = "#{UTF8_CHAR}|[<>-]"
+      LEGAL_CHAR     = '[ /&()\[\].,-]'
 
       def self.get(name, *args)
         const_get(name.camelcase).new(*args)
       end
 
-      attr_reader :position
+      attr_reader :pos
 
       def initialize(id, lingo)
         @config = lingo.database_config(id)
@@ -79,36 +80,36 @@ class Lingo
         rescue NoWritableStoreError
         end
 
-        @pn_source = Pathname.new(source_file)
-        @pn_reject = Pathname.new(reject_file) if reject_file
+        @src = Pathname.new(source_file)
+        @rej = Pathname.new(reject_file) if reject_file
 
-        raise SourceFileNotFoundError.new(name, id) unless @pn_source.exist?
+        raise SourceFileNotFoundError.new(name, id) unless @src.exist?
 
-        @wordclass = @config.fetch('def-wc', '?').downcase
-        @separator = @config['separator']
+        @def = @config.fetch('def-wc', Language::LA_UNKNOWN).downcase
+        @sep = @config['separator']
 
-        @legal_word = '(?:' + PRINTABLE_CHAR + '|[' + Regexp.escape('- /&()[].,') + '])+'  # TODO: v1.60 - ',' bei Source zulassen; in const.rb einbauen
-        @line_pattern = Regexp.new('^'+@legal_word+'$')
+        @wrd = "(?:#{PRINTABLE_CHAR}|#{LEGAL_CHAR})+"
+        @pat = /^#{@wrd}$/
 
-        @position = 0
+        @pos = 0
       end
 
       def size
-        @pn_source.size
+        @src.size
       end
 
       def each
-        reject_file = @pn_reject.open('w', encoding: ENC) if @pn_reject
+        reject_file = @rej.open('w', encoding: ENC) if @rej
 
-        @pn_source.each_line($/, encoding: ENC) { |line|
-          @position += length = line.bytesize
+        @src.each_line($/, encoding: ENC) { |line|
+          @pos += length = line.bytesize
 
           next if line =~ /\A\s*#/ || line.strip.empty?
 
           line.chomp!
           line.downcase!
 
-          if length < 4096 && line =~ @line_pattern
+          if length < 4096 && line =~ @pat
             yield convert_line(line, $1, $2)
           else
             reject_file.puts(line) if reject_file
@@ -119,7 +120,7 @@ class Lingo
       ensure
         if reject_file
           reject_file.close
-          @pn_reject.delete if @pn_reject.size == 0
+          @rej.delete if @rej.size == 0
         end
       end
 

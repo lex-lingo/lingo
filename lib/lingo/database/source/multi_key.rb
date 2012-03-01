@@ -40,9 +40,7 @@ class Lingo
 
         def initialize(id, lingo)
           super
-
-          @separator = @config.fetch('separator', ';')
-          @line_pattern = Regexp.new('^' + @legal_word + '(?:' + Regexp.escape(@separator) + @legal_word + ')*$')
+          @pat = /^#{@wrd}(?:#{Regexp.escape(@sep ||= ';')}#{@wrd})*$/
         end
 
         def set(db, key, val)
@@ -52,8 +50,8 @@ class Lingo
         private
 
         def convert_line(line, key, val)
-          values = line.split(@separator).map { |value| value.strip }
-          [values[0], values[1..-1]]
+          values = line.split(@sep).each(&:strip!)
+          [values.shift, values]
         end
 
       end

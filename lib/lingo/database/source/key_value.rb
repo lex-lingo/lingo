@@ -39,18 +39,14 @@ class Lingo
 
         def initialize(id, lingo)
           super
-
-          @separator = @config.fetch('separator', '*')
-          @line_pattern = Regexp.new('^(' + @legal_word + ')' + Regexp.escape(@separator) + '(' + @legal_word + ')$')
+          @pat = /^(#{@wrd})#{Regexp.escape(@sep ||= '*')}(#{@wrd})$/
         end
 
         private
 
         def convert_line(line, key, val)
           key, val = key.strip, val.strip
-          val = '' if key == val
-          val = [val + '#' + @wordclass]
-          [key, val]
+          [key, %W[#{val unless key == val}##{@def}]]
         end
 
       end

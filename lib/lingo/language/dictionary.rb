@@ -43,32 +43,29 @@ class Lingo
 
         @suffixes, @infixes = [], []
 
-        if suffix = lingo.dictionary_config['suffix']
-          suffix.each { |t, s|
-            t.downcase!
+        Array(lingo.dictionary_config['suffix']).each { |t, s|
+          t.downcase!
 
-            s.split.each { |suf|
-              su, ex = suf.split('/')
+          a = t == 'f' ? @infixes : @suffixes
 
-              (t == 'f' ? @infixes : @suffixes) << [
-                Regexp.new(su << '$', 'i'), ex || '*', t
-              ]
-            }
+          s.split.each { |r|
+            f, e = r.split('/')
+            a << [/#{f}$/i, e || '*', t]
           }
-        end
+        }
 
-        @sources     = config['source'].map { |src| lingo.lexical_hash(src) }
-        @all_sources = config['mode'].nil? || config['mode'].downcase == 'all'
+        @src = config['source'].map { |src| lingo.lexical_hash(src) }
+        @all = config['mode'].nil? || config['mode'].downcase == 'all'
 
         lingo.dictionaries << self
       end
 
       def close
-        @sources.each(&:close)
+        @src.each(&:close)
       end
 
       def report
-        super.tap { |rep| @sources.each { |src| rep.update(src.report) } }
+        super.tap { |rep| @src.each { |src| rep.update(src.report) } }
       end
 
       # _dic_.find_word( _aString_ ) -> _aNewWord_
@@ -95,11 +92,11 @@ class Lingo
         lex = [obj] if lex.empty? && obj.unknown?
 
         # multiworder optimization
-        ref = %r{\A#{Regexp.escape(Database::KEY_REF)}\d+}o
+        ref = %r{\A#{Database::KEY_REF_ESC}\d+}
 
         lex.each_with_object([]) { |l, s|
           next if l.attr == LA_SYNONYM
-          next if l.attr != LA_KOMPOSITUM && obj.attr == WA_KOMPOSITUM
+          next if l.attr != LA_COMPOUND && obj.attr == WA_COMPOUND
 
           select(l.form).each { |y| s << y unless y =~ ref }
         }
@@ -109,10 +106,10 @@ class Lingo
       #
       # Sucht alle Wörterbücher durch und gibt den ersten Treffer zurück (+mode = first+), oder alle Treffer (+mode = all+)
       def select(str)
-        @sources.each_with_object([]) { |src, lex|
+        @src.each_with_object([]) { |src, lex|
           l = src[str] or next
           lex.concat(l)
-          break lex unless @all_sources
+          break lex unless @all
         }.tap { |lex| lex.sort!; lex.uniq! }
       end
 

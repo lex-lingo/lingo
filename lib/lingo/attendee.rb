@@ -204,7 +204,7 @@ class Lingo
       msg = "Attendee <%s> was connected from '%s' to '%s' reporting..."
 
       @lingo.warn msg % @config.values_at(*%w[name in out]),
-        nil, report.sort.map { |k, v| " #{k} = #{v}" }, nil
+        nil, report.sort.map! { |k, v| " #{k} = #{v}" }, nil
     end
 
     def skip_command
@@ -228,10 +228,8 @@ class Lingo
       @config.fetch(key, default)
     end
 
-    def get_array(key, default = nil, method = nil)
-      get_key(key, default).split(STRING_SEPARATOR_RE).tap { |ary|
-        ary.map!(&method) if method
-      }
+    def get_array(key, default = nil, m = nil)
+      get_key(key, default).split(SEP_RE).tap { |ary| ary.map!(&m) if m }
     end
 
     def dictionary(src, mod)

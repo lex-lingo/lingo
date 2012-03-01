@@ -39,14 +39,14 @@ class Lingo
       def <=>(other)
         return 1 unless other.is_a?(self.class)
 
-        if attr == other.attr
+        a1, a2 = attr, other.attr
+
+        if a1 == a2
           form <=> other.form
         else
-          attr.empty? ? 1 : other.attr.empty? ? -1 : begin
-            a = LA_SORTORDER.index(attr)
-            b = LA_SORTORDER.index(other.attr)
-
-            a ? b ? b <=> a : -1 : b ? 1 : attr <=> other.attr
+          a1.empty? ? 1 : a2.empty? ? -1 : begin
+            i1, i2 = [a1, a2].map(&LA_SORTORDER.method(:index))
+            i1 ? i2 ? i2 <=> i1 : -1 : i2 ? 1 : a1 <=> a2
           end
         end
       end

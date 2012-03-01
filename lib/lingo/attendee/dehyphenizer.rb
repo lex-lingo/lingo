@@ -98,21 +98,21 @@ class Lingo
           word = @dic.find_word(form)
           word = @gra.find_compound(form) unless word.identified?
 
-          unless word.identified? || (word.attr == WA_KOMPOSITUM && word.get_class('x+').empty?)
+          unless word.identified? || (word.attr == WA_COMPOUND && word.get_class('x+').empty?)
             # Zusammensetzung mit Bindestrich versuchen
             form = @buffer[0].form + @buffer[1].form
             word = @dic.find_word(form)
              word = @gra.find_compound(form) unless word.identified?
           end
 
-          unless word.identified? || (word.attr == WA_KOMPOSITUM && word.get_class('x+').empty?)
+          unless word.identified? || (word.attr == WA_COMPOUND && word.get_class('x+').empty?)
             # Zusammensetzung mit Bindestrich versuchen
             form = @buffer[0].form + @buffer[1].form
             word = @dic.find_word(form)
             word = @gra.find_compound(form) unless word.identified?
           end
 
-          if word.identified? || (word.attr == WA_KOMPOSITUM && word.get_class('x+').empty?)
+          if word.identified? || (word.attr == WA_COMPOUND && word.get_class('x+').empty?)
             @buffer[0] = word
             @buffer.delete_at( 1 )
           end

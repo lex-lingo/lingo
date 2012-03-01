@@ -50,7 +50,7 @@ class Lingo
     # Status, wenn das Word nicht gefunden werden konnte
     WA_UNKNOWN    = '?'
     # Wort ist als Kompositum erkannt worden
-    WA_KOMPOSITUM = 'KOM'
+    WA_COMPOUND   = 'KOM'
     # Wort ist eine Mehrwortgruppe
     WA_MULTIWORD  = 'MUL'
     # Wort ist eine Mehrwortgruppe
@@ -58,31 +58,19 @@ class Lingo
     # Word ist unbekannt, jedoch Teil einer Mehrwortgruppe
     WA_UNKMULPART = 'MU?'
 
-    LA_SUBSTANTIV = 's'
-    LA_ADJEKTIV   = 'a'
-    LA_VERB       = 'v'
-    LA_EIGENNAME  = 'e'
-    LA_KOMPOSITUM = 'k'
-    LA_MULTIWORD  = 'm'
-    LA_SEQUENCE   = 'q'
-    LA_WORTFORM   = 'w'
-    LA_SYNONYM    = 'y'
-    LA_STOPWORD   = 't'
-    LA_TAKEITASIS = 'x'
-    LA_UNKNOWN    = '?'
-
     LA_SORTORDER = [
-      LA_MULTIWORD,
-      LA_KOMPOSITUM,
-      LA_SUBSTANTIV,
-      LA_VERB,
-      LA_ADJEKTIV,
-      LA_EIGENNAME,
-      LA_WORTFORM,
-      LA_STOPWORD,
-      LA_TAKEITASIS,
-      LA_SYNONYM,
-      LA_UNKNOWN
+      LA_SEQUENCE   = 'q',
+      LA_MULTIWORD  = 'm',
+      LA_COMPOUND   = 'k',
+      LA_NOUN       = 's',
+      LA_VERB       = 'v',
+      LA_ADJECTIVE  = 'a',
+      LA_NAME       = 'e',
+      LA_WORDFORM   = 'w',
+      LA_STOPWORD   = 't',
+      LA_TAKEITASIS = 'x',
+      LA_SYNONYM    = 'y',
+      LA_UNKNOWN    = '?'
     ].reverse.join
 
   end

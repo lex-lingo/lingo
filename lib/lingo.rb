@@ -59,7 +59,7 @@ class Lingo
   # Default encoding
   ENC = 'UTF-8'.freeze
 
-  STRING_SEPARATOR_RE = %r{[; ,|]}
+  SEP_RE = %r{[; ,|]}
 
   class << self
 
@@ -79,7 +79,7 @@ class Lingo
       glob = File.join('??', glob) if type == :dict
 
       [].tap { |list| walk(path, options) { |dir|
-        Dir[File.join(dir, glob)].sort.each { |file|
+        Dir[File.join(dir, glob)].sort!.each { |file|
           pn = Pathname.new(file)
           list << realpath_for(pn, path) if pn.file?
         }
@@ -236,14 +236,12 @@ class Lingo
       @attendees << attendee = Attendee.const_get(name).new(cfg, self)
 
       { 'in' => subscriber, 'out' => supplier }.each { |key, target|
-        cfg[key].split(STRING_SEPARATOR_RE).each { |channel|
-          target[channel] << attendee
-        }
+        cfg[key].split(SEP_RE).each { |ch| target[ch] << attendee }
       }
     }
 
-    supplier.each { |channel, attendees| attendees.each { |attendee|
-      attendee.add_subscriber(subscriber[channel])
+    supplier.each { |ch, attendees| attendees.each { |att|
+      att.add_subscriber(subscriber[ch])
     } }
   end
 

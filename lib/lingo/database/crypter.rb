@@ -39,35 +39,16 @@ class Lingo
       end
 
       def encode(key, val)
-        hex = ''
-
-        crypt(key, val).each_byte { |byte|
-          # To get a hex representation for a char we just utilize
-          # the quotient and the remainder of division by base 16.
-          q, r = byte.divmod(16)
-          hex << HEX_CHARS[q] << HEX_CHARS[r]
-        }
-
-        [digest(key), hex]
+        [digest(key), crypt(key, val).each_byte.with_object('') { |b, s|
+          b.divmod(16).each { |i| s << HEX_CHARS[i] }
+        }]
       end
 
       def decode(key, val)
-        str, q, first = '', 0, false
-
-        val.each_byte { |byte|
-          byte = byte.chr(ENC)
-
-          # Our hex chars are 2 bytes wide, so we have to keep track
-          # of whether it's the first or the second of the two.
-          if first = !first
-            q = HEX_CHARS.index(byte)
-          else
-            # Now we got both parts, so let's revert the divmod(16)
-            str << q * 16 + HEX_CHARS.index(byte)
-          end
-        }
-
-        crypt(key, str)
+        crypt(key, val.each_byte.each_slice(2).with_object('') { |b, s|
+          q, r = b.map { |i| HEX_CHARS.index(i.chr(ENC)) }
+          s << q * 16 + r
+        })
       end
 
       private

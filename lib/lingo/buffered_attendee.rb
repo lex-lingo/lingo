@@ -28,8 +28,6 @@ class Lingo
 
   class BufferedAttendee < Attendee
 
-    BufferInsert = Struct.new(:position, :object)
-
     def initialize(config, lingo)
       @buffer, @inserts = [], []
       super
@@ -38,7 +36,7 @@ class Lingo
     protected
 
     def process(obj)
-      @buffer.push(obj)
+      @buffer << obj
       process_buffer if process_buffer?
     end
 
@@ -50,10 +48,7 @@ class Lingo
     end
 
     def forward_buffer
-      @inserts.sort_by!(&:position).each { |i|
-        @buffer.insert(i.position, i.object)
-      }.clear
-
+      @inserts.sort_by!(&:first).each { |i| @buffer.insert(*i) }.clear
       @buffer.each(&method(:forward)).clear
     end
 
@@ -77,10 +72,6 @@ class Lingo
 
     def process_buffer
       raise NotImplementedError
-    end
-
-    def deferred_insert(pos, obj)
-      @inserts << BufferInsert.new(pos, obj)
     end
 
     def control_multi(cmd, dic = @dic)

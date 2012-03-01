@@ -49,14 +49,17 @@ class Lingo
 
     include Cachable
 
-    BACKENDS = %w[LibCDB SDBM GDBM].unshift(ENV['LINGO_BACKEND']).compact.uniq
-
     FLD_SEP = '|'
     IDX_REF = '^'
     KEY_REF = '*'
     SYS_KEY = '~'
 
-    INDEX_PATTERN = %r{\A#{Regexp.escape(IDX_REF)}\d+\z}
+    IDX_REF_ESC = Regexp.escape(IDX_REF)
+    KEY_REF_ESC = Regexp.escape(KEY_REF)
+
+    INDEX_PATTERN = %r{\A#{IDX_REF_ESC}\d+\z}
+
+    BACKENDS = %w[LibCDB SDBM GDBM].unshift(ENV['LINGO_BACKEND']).compact.uniq
 
     def self.open(*args, &block)
       new(*args).open(&block)
@@ -133,10 +136,8 @@ class Lingo
       val.uniq!
       store(key, val)
 
-      val = val.join(FLD_SEP)
-      key, val = @crypter.encode(key, val) if @crypter
-
-      _set(key, val)
+      arg = [key, val.join(FLD_SEP)]
+      _set(*@crypter ? @crypter.encode(*arg) : arg)
     end
 
     private
@@ -189,38 +190,27 @@ class Lingo
       src = Source.get(@config.fetch('txt-format', 'KeyValue'), @id, @lingo)
 
       if lex = @config['use-lex']
-        a, s = [{
-          'source' => lex.split(STRING_SEPARATOR_RE),
-          'mode'   => @config['lex-mode']
-        }, @lingo], ' '
+        a = [{ 'source' => lex.split(SEP_RE), 'mode' => @config['lex-mode'] }, @lingo]
+        d, g = Language::Dictionary.new(*a), Language::Grammar.new(*a); a = nil
 
-        dic = Language::Dictionary.new(*a)
-        gra = Language::Grammar.new(*a)
-
-        block = lambda { |form|
-          res = dic.find_word(form)
-
-          if res.unknown?
-            res = gra.find_compound(form)
-            com = res.compo_form
-          end
-
-          com ? com.form : res.norm
+        sep, block = ' ', lambda { |f|
+          (r = d.find_word(f)).unknown? &&
+            (c = (r = g.find_compound(f)).compo_form) ? c.form : r.norm
         }
       end
 
       ShowProgress.new(self, src.size, verbose) { |progress| create {
         src.each { |key, val|
-          progress[src.position]
+          progress[src.pos]
 
           if key
             key.chomp!('.')
 
-            if lex && key.include?(s)
-              k = key.split(s).map!(&block).join(s)
+            if lex && key.include?(sep)
+              k = key.split(sep).map!(&block).join(sep)
 
-              c = k.count(s) + 1
-              self[k.split(s)[0, 3].join(s)] = ["#{KEY_REF}#{c}"] if c > 3
+              c = k.count(sep) + 1
+              self[k.split(sep)[0, 3].join(sep)] = ["#{KEY_REF}#{c}"] if c > 3
 
               key, val = k, val.map { |v| v.start_with?('#') ? key + v : v }
             end

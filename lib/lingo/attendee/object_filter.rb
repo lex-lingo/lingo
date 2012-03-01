@@ -59,7 +59,7 @@ class Lingo
     #       - text_reader:   { out: lines, files: '$(files)' }
     #       - tokenizer:     { in: lines, out: token }
     #       - word_searcher: { in: token, out: words, source: 'sys-dic' }
-    #       - object_filter: { in: words, out: filtr, objects: 'obj.kind_of?(Word) && obj.lexicals.size>0 && obj.lexicals[0].attr==LA_SUBSTANTIV' }
+    #       - object_filter: { in: words, out: filtr, objects: 'obj.kind_of?(Word) && obj.lexicals.size>0 && obj.lexicals[0].attr==LA_NOUN' }
     #       - debugger:      { in: filtr, prompt: 'out>' }
     # ergibt die Ausgabe über den Debugger: <tt>lingo -c t1 test.txt</tt>
     #   out> *FILE('test.txt')

@@ -41,13 +41,12 @@ class Lingo
       load_config('config')
 
       Array(self['meeting/attendees']).each { |a|
-        r = a['text_reader'] || a['textreader'] or next
+        r = a['text_reader'] || a['textreader'] or next  # DEPRECATE textreader
 
         f = @cli.files
 
         if i = r['files']
-          r['files'] = i.strip == '$(files)' ?
-            f : i.split(STRING_SEPARATOR_RE)
+          r['files'] = i.strip == '$(files)' ? f : i.split(SEP_RE)
         elsif !f.empty?
           r['files'] = f
         end
@@ -57,12 +56,12 @@ class Lingo
     end
 
     def [](key)
-      key_to_nodes(key).inject(@opts) { |value, node| value[node] }
+      key_to_nodes(key).inject(@opts) { |hash, node| hash[node] }
     end
 
-    def []=(key, value)
+    def []=(key, val)
       nodes = key_to_nodes(key); node = nodes.pop
-      (self[nodes_to_key(nodes)] ||= {})[node] = value
+      (self[nodes_to_key(nodes)] ||= {})[node] = val
     end
 
     def stdin

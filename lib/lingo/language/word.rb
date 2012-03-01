@@ -56,8 +56,8 @@ class Lingo
       end
 
       def lexicals(compound_parts = true)
-        if !compound_parts && attr == WA_KOMPOSITUM
-          @lexicals.select { |lex| lex.attr == LA_KOMPOSITUM }
+        if !compound_parts && attr == WA_COMPOUND
+          @lexicals.select { |lex| lex.attr == LA_COMPOUND }
         else
           @lexicals
         end
@@ -81,7 +81,7 @@ class Lingo
       end
 
       def attrs(compound_parts = true)
-        lexicals(compound_parts).map { |lex| lex.attr }
+        lexicals(compound_parts).map(&:attr)
       end
 
       def parts
@@ -109,7 +109,7 @@ class Lingo
       end
 
       def compo_form
-        get_class(LA_KOMPOSITUM).first if attr == WA_KOMPOSITUM
+        get_class(LA_COMPOUND).first if attr == WA_COMPOUND
       end
 
       def <<(*other)

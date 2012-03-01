@@ -38,21 +38,15 @@ class Lingo
 
         def initialize(id, lingo)
           super
-
-          @separator = @config.fetch('separator', ',')
-          @line_pattern = Regexp.new('^(' + @legal_word + ')' + Regexp.escape(@separator) + '((?:' + @legal_word + '#\w)+)$')
+          @pat = /^(#{@wrd})#{Regexp.escape(@sep ||= ',')}((?:#{@wrd}#\w)+)$/
         end
 
         private
 
         def convert_line(line, key, val)
-          key, valstr = key.strip, val.strip
-          val = valstr.gsub(/\s+#/, '#').scan(/\S.+?\s*#\w/)
-          val = val.map do |str|
-            str =~ /^(.+)#(.)/
-            ($1 == key ? '' : $1) + '#' + $2
-          end
-          [key, val]
+          [key = key.strip, val.strip.scan(/(\S.+?)\s*#(\w)/).map! { |v, c|
+            "#{v unless key == v}##{c}"
+          }]
         end
 
       end

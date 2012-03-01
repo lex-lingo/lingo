@@ -40,9 +40,6 @@ class Lingo
 
       HYPHEN_RE = %r{\A(.+)-([^-]+)\z}
 
-      # initialize(config, dictionary_config) -> _Grammar_
-      # config = Attendee-spezifische Parameter
-      # dictionary_config = Datenbankkonfiguration aus de.lang
       def initialize(config, lingo)
         init_cachable
         init_reportable
@@ -50,22 +47,13 @@ class Lingo
         @dic, @suggestions = Dictionary.new(config, lingo), []
 
         cfg = lingo.dictionary_config['compound'] ||
-              lingo.dictionary_config['compositum']  # DEPRECATE
+              lingo.dictionary_config['compositum']  # DEPRECATE compositum
 
-        # Ein Wort muss mindestens 8 Zeichen lang sein, damit
-        # überhaupt eine Prüfung stattfindet.
-        @min_word_size = (cfg['min-word-size'] || 8).to_i
-
-        # Die durchschnittliche Länge der Kompositum-Wortteile
-        # muss mindestens 4 Zeichen lang sein, sonst ist es kein
-        # gültiges Kompositum.
-        @min_avg_part_size = (cfg['min-avg-part-size'] || 4).to_i
-
-        # Der kürzeste Kompositum-Wortteil muss mindestens 1 Zeichen lang sein
-        @min_part_size = (cfg['min-part-size'] || 1).to_i
-
-        # Ein Kompositum darf aus höchstens 4 Wortteilen bestehen
-        @max_parts = (cfg['max-parts'] || 4).to_i
+        {
+          min_word_size: 8, min_avg_part_size: 4, min_part_size: 1, max_parts: 4
+        }.each { |k, v|
+          instance_variable_set("@#{k}", cfg.fetch(k.to_s.tr('_', '-'), v).to_i)
+        }
 
         # Die Wortklasse eines Kompositum-Wortteils kann separat gekennzeichnet
         # werden, um sie von Wortklassen normaler Wörter unterscheiden zu
@@ -76,7 +64,7 @@ class Lingo
         # Bestimmte Sequenzen können als ungültige Komposita erkannt werden,
         # z.B. ist ein Kompositum aus zwei Adjetiven kein Kompositum, also
         # skip-sequence = 'aa'
-        @sequences = cfg.fetch('skip-sequences', []).map(&:downcase)
+        @sequences = cfg.fetch('skip-sequences', []).map!(&:downcase)
       end
 
       def close
@@ -109,16 +97,21 @@ class Lingo
 
         inc('Komposita geprüft')
 
-        res = permute_compound(key, level, tail)
-        val = !(lex = res.first).empty? && valid?(str, *res[1..-1])
+        lex, sta, seq = res = permute_compound(key, level, tail)
+
+        val = !lex.empty? &&
+          sta.size              <= @max_parts         &&
+          sta.min               >= @min_part_size     &&
+          str.length / sta.size >= @min_avg_part_size &&
+          (@sequences.empty? || !@sequences.include?(seq))
 
         if top
           if val
             inc('Komposita erkannt')
 
-            com.attr = WA_KOMPOSITUM
+            com.attr = WA_COMPOUND
             com.lexicals = lex.map { |l|
-              l.attr == LA_KOMPOSITUM ? l :
+              l.attr == LA_COMPOUND ? l :
                 Lexical.new(l.form, l.attr + @append_wc)
             }
           end
@@ -163,7 +156,7 @@ class Lingo
           blex, bsta, bseq = find_compound(bstr, level + 1, tail)
 
           if !blex.sort!.empty?
-            # 3. Compositum
+            # 3. Compound
             bform, seq[1], sta[1..-1] = blex.first.form, bseq, bsta
           else
             # 4. Take it as is
@@ -180,7 +173,7 @@ class Lingo
           flex, fsta, fseq = find_compound(fstr, level + 1, true)
 
           if !flex.sort!.empty?
-            # 2. Compositum
+            # 2. Compound
             fform, seq[0], sta[0..0] = flex.first.form, fseq, fsta
           elsif infix == '-'
             # 3. Take it as is
@@ -190,19 +183,10 @@ class Lingo
           end
         end
 
-        flex.concat(blex).delete_if { |l| l.attr == LA_KOMPOSITUM }.
-          push(Lexical.new(fform + infix + bform, LA_KOMPOSITUM)).sort!
+        flex.concat(blex).delete_if { |l| l.attr == LA_COMPOUND }.
+          push(Lexical.new(fform + infix + bform, LA_COMPOUND)).sort!
 
         [flex, sta, seq.join]
-      end
-
-      private
-
-      def valid?(str, sta, seq)
-        sta.size               <= @max_parts         &&
-        sta.sort.first         >= @min_part_size     &&
-        str.length / sta.size  >= @min_avg_part_size &&
-        (@sequences.empty? || !@sequences.include?(seq))
       end
 
     end

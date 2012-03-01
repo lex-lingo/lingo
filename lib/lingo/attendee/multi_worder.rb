@@ -103,7 +103,7 @@ class Lingo
           end
         }
 
-        lex_src = lex_src.split(STRING_SEPARATOR_RE)
+        lex_src = lex_src.split(SEP_RE)
         lex_mod = get_key('lex-mode', lex_mod || 'first')
 
         @lex_dic = dictionary(lex_src, lex_mod)
@@ -227,7 +227,7 @@ class Lingo
           word = @lex_dic.find_word(form)
           word = @lex_gra.find_compound(form) if word.unknown?
 
-          lexicals = word.attr == WA_KOMPOSITUM ?
+          lexicals = word.attr == WA_COMPOUND ?
             [word.lexicals.first] : word.lexicals.dup
 
           lexicals << word if lexicals.empty?

@@ -38,17 +38,15 @@ class Lingo
 
         def initialize(id, lingo)
           super
-
-          @wc     = @config.fetch('def-wc',     's').downcase
-          @mul_wc = @config.fetch('def-mul-wc', @wc).downcase
-
-          @line_pattern = %r{^(#{@legal_word})$}
+          @pat = /^(#{@wrd})$/
+          @def = @config.fetch('def-wc',     's').downcase
+          @mul = @config.fetch('def-mul-wc', @def).downcase
         end
 
         private
 
         def convert_line(line, key, val)
-          [key = key.strip, %W[##{key =~ /\s/ ? @mul_wc : @wc}]]
+          [key = key.strip, %W[##{key =~ /\s/ ? @mul : @def}]]
         end
 
       end
