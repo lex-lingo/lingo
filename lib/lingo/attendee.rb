@@ -24,6 +24,8 @@
 ###############################################################################
 #++
 
+require 'nuggets/string/evaluate'
+
 class Lingo
 
   # Lingo ist als universelles Indexierungssystem entworfen worden. Seine Stärke liegt in der einfachen Konfigurierbarkeit für

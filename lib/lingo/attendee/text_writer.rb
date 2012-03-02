@@ -82,11 +82,15 @@ class Lingo
       def init
         @ext = get_key('ext', 'txt2')
         @lir = get_key('lir-format', false)
-        @sep = @lir ? ' ' : eval("\"#{@config['sep'] || ' '}\"")
+
+        @sep   = @config['sep'] unless @lir
+        @sep &&= @sep.evaluate
+        @sep ||= ' '
+
         @no_sep, @no_puts = true, false
       end
 
-      def control(cmd, par)
+      def control(cmd, param)
         case cmd
           when STR_CMD_LIR
             @lir = true
@@ -94,49 +98,43 @@ class Lingo
             @no_sep = true
 
             if stdout?(@ext)
-              @filename = @ext
-              @file = @lingo.config.stdout
+              @filename, @file = @ext, @lingo.config.stdout
             else
-              @filename = par.sub(/(\.[^.]+)?$/, '.'+@ext)
-              @file = File.new(@filename,'w')
               inc('Anzahl Dateien')
+              @file = File.open(@filename = File.set_ext(param, ".#{@ext}"), 'w')
             end
 
-            @lir_rec_no = ''
-            @lir_rec_buf = Array.new
+            @lir_rec_no, @lir_rec_buf = '', []
           when STR_CMD_RECORD
             @no_sep = true
+
             if @lir
               flush_lir_buffer
-              @lir_rec_no = par
+              @lir_rec_no = param
             end
           when STR_CMD_EOL
             @no_sep = true
+
             unless @lir
-              @file.puts unless @no_puts # unless @sep=="\n"
               inc('Anzahl Zeilen')
+              @file.puts unless @no_puts
             end
           when STR_CMD_EOF
             flush_lir_buffer if @lir
 
             unless stdout?(@filename)
+              add('Anzahl Bytes', @file.size)
               @file.close
-              add('Anzahl Bytes', File.stat(@filename).size)
             end
         end
       end
 
       def process(obj)
-        if @lir
-          @lir_rec_buf << (obj.kind_of?(Token) ? obj.form : obj.to_s)
-        else
-          @file.print @sep unless @no_sep
-          @no_sep=false if @no_sep
-          if obj.is_a?(Word) || obj.is_a?(Token)
-            @file.print obj.form
-          else
-            @file.print obj
-          end
+        obj = obj.form if obj.is_a?(WordForm)
+
+        @lir ? @lir_rec_buf << obj : begin
+          @no_sep ? @no_sep = false : @file.print(@sep)
+          @file.print(obj)
         end
       end
 
@@ -144,12 +142,11 @@ class Lingo
 
       def flush_lir_buffer
         unless @lir_rec_no.empty? || @lir_rec_buf.empty?
-          if @sep =~ /\n/
-            @file.print '*', @lir_rec_no, "\n", @lir_rec_buf.join(@sep), "\n"
-          else
-            @file.print @lir_rec_no, '*', @lir_rec_buf.join(@sep), "\n"
-          end
+          @file.print(*[@lir_rec_no, @lir_rec_buf.join(@sep), "\n"].tap { |buf|
+            @sep =~ /\n/ ? buf.insert(1, "\n").unshift('*') : buf.insert(1, '*')
+          })
         end
+
         @lir_rec_no = ''
         @lir_rec_buf.clear
       end
