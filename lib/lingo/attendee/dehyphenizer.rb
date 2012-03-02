@@ -87,39 +87,33 @@ class Lingo
       end
 
       def process_buffer
-        if @buffer[0].is_a?(Word) &&
-          @buffer[0].form[-1..-1] == '-' &&
-          @buffer[1].is_a?(Word) &&
-          !(!( ttt = @buffer[1].get_class(/./) ).nil? &&
-          !@skip.index( ttt[0].attr ).nil?)
+        a, b, h = *ab = @buffer.values_at(0, 1), '-'
 
-          # Einfache Zusammensetzung versuchen
-          form = @buffer[0].form[0...-1] + @buffer[1].form
-          word = @dic.find_word(form)
-          word = @gra.find_compound(form) unless word.identified?
+        if ab.all? { |i| i.is_a?(Word) } && a.form[-1, 1] == h && !(
+          (c = b.get_class(/./).first) && @skip.include?(c.attr)
+        )
+          a, b = ab.map!(&:form)
 
-          unless word.identified? || (word.attr == WA_COMPOUND && word.get_class('x+').empty?)
-            # Zusammensetzung mit Bindestrich versuchen
-            form = @buffer[0].form + @buffer[1].form
-            word = @dic.find_word(form)
-             word = @gra.find_compound(form) unless word.identified?
-          end
+          word = dehyphenize(a.chomp(h) + b)
+          word = dehyphenize(a          + b) unless dehyphenized?(word)
 
-          unless word.identified? || (word.attr == WA_COMPOUND && word.get_class('x+').empty?)
-            # Zusammensetzung mit Bindestrich versuchen
-            form = @buffer[0].form + @buffer[1].form
-            word = @dic.find_word(form)
-            word = @gra.find_compound(form) unless word.identified?
-          end
-
-          if word.identified? || (word.attr == WA_COMPOUND && word.get_class('x+').empty?)
+          if dehyphenized?(word)
             @buffer[0] = word
-            @buffer.delete_at( 1 )
+            @buffer.delete_at(1)
           end
         end
 
-        # Buffer weiterschaufeln
-        forward_number_of_token( 1, false )
+        forward_number_of_token(1, false)
+      end
+
+      private
+
+      def dehyphenize(form)
+        find_word(form, &:identified?)
+      end
+
+      def dehyphenized?(word)
+        word.identified? || word.full_compound?
       end
 
     end

@@ -112,6 +112,10 @@ class Lingo
         get_class(LA_COMPOUND).first if attr == WA_COMPOUND
       end
 
+      def full_compound?
+        attr == WA_COMPOUND && get_class('x+').empty?
+      end
+
       def <<(*other)
         lexicals.concat(other.tap(&:flatten!))
         self
