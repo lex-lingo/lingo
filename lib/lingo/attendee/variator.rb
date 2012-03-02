@@ -75,67 +75,39 @@ class Lingo
       protected
 
       def init
-        # Parameter verarbeiten
-        @marker  = get_key('marker', '*')
-        @max_var = get_key('max-var', '10000').to_i
-        filter = get_array('check', WA_UNKNOWN)
+        @marker = get_key('marker', '*')
+        @max    = get_key('max-var', max = 10000).to_i
+        @max    = max unless @max > 0
+        @var    = get_key('variations')
 
-        # Daten verarbeiten
-        @var_strings = get_key('variations')
-        raise MissingConfigError.new(:variations) if @var_strings.empty?
+        raise MissingConfigError.new(:variations) if @var.empty?
 
-        # Initialisierungen
         @check = Hash.new(false)
-        filter.each { |s| @check[s.upcase] = true }
+        get_array('check', WA_UNKNOWN).each { |s| @check[s.upcase] = true }
 
         set_dic
         set_gra
-
-        if @max_var.zero?
-          @max_var = 10000
-          @lingo.warn "#{self.class}: max-var is 0, setting to #{@max_var}"
-        end
       end
 
-      def control(cmd, par)
-        # Status wird abgefragt
-        if cmd == STR_CMD_STATUS
-          # Eigenen Status um Status von Dictionary und Grammer erweitern
-          @dic.report.each_pair { | k, v | set( k, v ) }
-          @gra.report.each_pair { | k, v | set( k, v ) }
-        end
+      def control(cmd, param)
+        report_on(cmd, @dic, @gra)
       end
 
       def process(obj)
-        # Zu prüfende Wörter filtern
         if obj.is_a?(Word) && @check[obj.attr]
-          # Statistik für Report
           inc('Anzahl gesuchter Wörter')
 
-          # Erzeuge Variationen einer Wortform
-          variations = [obj.form]
-          @var_strings.each do |switch|
-            from, to = switch
-            variations = variate(variations, from, to)
-          end
-
-          # Prüfe Variation auf bekanntes Wort
-          variations[0...@max_var].each do |var|
-            # Variiertes Wort im Wörterbuch suchen
-            word = @dic.find_word(var)
-            word = @gra.find_compound(var) if word.unknown?
-            next if word.unknown? || (
+          @var.each_with_object([obj.form]) { |a, v| variate(v, *a) }.
+            tap { |v| v.slice!(@max..-1) }.each { |var|
+            next if (word = find_word(var)).unknown? || (
               word.attr == WA_COMPOUND && word.lexicals.any? { |lex|
-                lex.attr[0..0] == LA_TAKEITASIS
+                lex.attr.start_with?(LA_TAKEITASIS)
               }
             )
 
-            # Das erste erkannte Wort beendet die Suche
             inc('Anzahl gefundener Wörter')
-            word.form = @marker + var
-            forward(word)
-            return
-          end
+            return forward(word.tap { word.form = @marker + var })
+          }
         end
 
         forward(obj)
@@ -146,32 +118,20 @@ class Lingo
       # Variiere die Bestandteile eines Arrays gemäß den Austauschvorgaben.
       #
       # variate( 'Tiieh', 'ieh', 'sch' ) => ['Tiieh', 'Tisch']
-      def variate(variation_list, from, to)
-        # neue Varianten sammeln
-        add_variations = []
-        from_re = Regexp.new(from)
+      def variate(variations, from, to)
+        add, change, re = [], [from, to], Regexp.new(from)
 
-        # alle Wörter in der variation_list permutieren
-        variation_list.each do |wordform|
+        variations.each { |form|
+          parts = " #{form} ".split(re)
 
-          # Wortform in Teile zerlegen und anschließend Dimension feststellen
-          wordpart = " #{wordform} ".split( from_re )
-          n = wordpart.size - 1
+          1.upto(2 ** (n = parts.size - 1) - 1) { |i|
+            var = parts.first
+            1.upto(n) { |j| var += change[i[j - 1]] + parts[j] }
+            add << var.strip
+          }
+        }
 
-          # Austauschketten in Matrix hinterlegen
-          change = [from, to]
-
-          # Austauschketten auf alle Teile anwenden
-          (1..(2**n-1)).each do |i|
-            variation = wordpart[0]
-            # i[x] = Wert des x.ten Bit von Integer i
-            (1..n).each { |j| variation += change[i[j-1]] + wordpart[j]  }
-
-            add_variations << variation.strip
-          end
-        end
-
-        variation_list + add_variations
+        variations.concat(add)
       end
 
     end
