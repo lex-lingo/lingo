@@ -101,10 +101,6 @@ class Lingo
       protected
 
       def init
-        # Regular Expressions für Token-Erkennung einlesen
-        regulars = get_key('regulars', '')
-        raise NoConfigKeyError.new(:regulars) unless regulars
-
         @space = get_key('space', false)
         @tags  = get_key('tags',  true)
         @wiki  = get_key('wiki',  true)
@@ -115,30 +111,22 @@ class Lingo
         @rules << ['WIKI', /^\[\[.+?\]\]/]   unless @wiki
         @rules.unshift(['WIKI', /^=+.+=+$/]) unless @wiki
 
-        # Mit _xxx_ gekennzeichnete Makros anwenden und Expressions ergänzen und umwandeln
-        macros = {}
-
-        regulars.each { |rule|
-          name = rule.keys[0]
-          expr = rule.values[0].gsub(/_(\w+?)_/) {
+        get_key('regulars', []).each_with_object({}) { |rule, macros|
+          expr = rule.values.first.gsub(/_(\w+?)_/) {
             macros[$&] || begin
               Database::Source.const_get("UTF8_#{$1.upcase}")
             rescue NameError
             end
           }
 
-          if name =~ /^_\w+_$/    # is a macro
-            macros[name] = expr if name =~ /^_\w+_$/
+          if (name = rule.keys.first) =~ /^_\w+_$/
+            macros[name] = expr
           else
-            @rules << [name, Regexp.new('^'+expr)]
+            @rules << [name, /^#{expr}/]
           end
         }
 
-        # Der Tokenizer gibt jedes Zeilenende als Information weiter, sofern es sich
-        # nicht um die Verarbeitung einer LIR-Datei handelt. Im Falle einer normalen Datei
-        # wird der Dateiname gespeichert und als Kennzeichen für die Erzeugung von
-        # Zeilenende-Nachrichten herangezogen.
-        @filename = nil
+        @filename = @cont = nil
       end
 
       def control(cmd, param)
@@ -154,12 +142,10 @@ class Lingo
           inc('Anzahl Zeilen')
 
           tokenize(obj) { |form, attr|
-            token = Token.new(form, attr)
-
-            inc('Anzahl Muster '+token.attr)
+            inc("Anzahl Muster #{attr}")
             inc('Anzahl Token')
 
-            forward(token)
+            forward(Token.new(form, attr))
           }
 
           forward(STR_CMD_EOL, @filename) if @filename
