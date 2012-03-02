@@ -81,23 +81,21 @@ class Lingo
       protected
 
       def init
-        @stopper = get_array('stopper', DEFAULT_SKIP).map(&:upcase)
-        @mul_dic = dictionary(mul_src = get_array('source'), get_key('mode', 'all'))
-
         # combine lexical variants?
         #
         # false = old behaviour
         # true  = first match
         # 'all' = all matches
-        @combine  = get_key('combine', false)
-        @all_keys = @combine.is_a?(String) && @combine.downcase == 'all'
+        @combine = get_key('combine', false)
+        @all     = @combine.is_a?(String) && @combine.downcase == 'all'
 
-        lex_src, lex_mod, databases = nil, nil, @lingo.dictionary_config['databases']
+        lex_src, lex_mod, d = nil, nil, @lingo.dictionary_config['databases']
 
-        mul_src.each { |src|
-          this_src, this_mod = databases[src].values_at('use-lex', 'lex-mode')
-          if lex_src.nil? || lex_src == this_src
-            lex_src, lex_mod = this_src, this_mod
+        (mul_src = get_array('source')).each { |src|
+          s, m = d[src].values_at('use-lex', 'lex-mode')
+
+          if lex_src.nil? || lex_src == s
+            lex_src, lex_mod = s, m
           else
             @lingo.warn "#{self.class}: Dictionaries don't match: #{mul_src.join(',')}"
           end
@@ -106,15 +104,15 @@ class Lingo
         lex_src = lex_src.split(SEP_RE)
         lex_mod = get_key('lex-mode', lex_mod || 'first')
 
+        @mul_dic = dictionary(mul_src, get_key('mode', 'all'))
         @lex_dic = dictionary(lex_src, lex_mod)
         @lex_gra = grammar(lex_src, lex_mod)
 
-        if @combine && has_key?('use-syn')
-          @syn_dic = dictionary(get_array('use-syn'), get_key('syn-mode', 'all'))
+        @syn_dic = if @combine && has_key?('use-syn')
+          dictionary(get_array('use-syn'), get_key('syn-mode', 'all'))
         end
 
-        @expected_tokens_in_buffer = 3
-        @eof_handling = false
+        @expected_tokens_in_buffer, @eof_handling = 3, false
       end
 
       def control(cmd, param)
@@ -122,142 +120,89 @@ class Lingo
       end
 
       def process_buffer
-        unless @buffer[0].form == CHAR_PUNCT
-          # Prüfe 3er Schlüssel
-          result = check_multiword_key( 3 )
-          unless result.empty?
-            # 3er Schlüssel gefunden
-            lengths = sort_result_len( result )
-            unless lengths[0] > 3
-              # Längster erkannter Schlüssel = 3
-              create_and_forward_multiword( 3, result )
-              forward_number_of_token( 3 )
-              return
-            else
-              # Längster erkannter Schlüssel > 3, Buffer voll genug?
-              unless @buffer.size >= lengths[0] || @eof_handling
-                @expected_tokens_in_buffer = lengths[0]
-                return
-              else
-                # Buffer voll genug, Verarbeitung kann beginnen
-                catch( :forward_one ) do
-                  lengths.each do |len|
-                    result = check_multiword_key( len )
-                    unless result.empty?
-                      create_and_forward_multiword( len, result )
-                      forward_number_of_token( len )
-                      throw :forward_one
-                    end
-                  end
+        unless form_at(0) == CHAR_PUNCT
+          unless (res = check_multiword_key(3)).empty?
+            len = res.map { |r|
+              r.is_a?(Lexical) ? r.form.split(' ').size : r[/^\*(\d+)/, 1].to_i
+            }.sort!.reverse!
 
-                  # Keinen Match gefunden
-                  forward_number_of_token( 1 )
-                end
+            unless (max = len.first) > 3
+              create_and_forward_multiword(3, res)
+              forward_number_of_token(3)
+            else
+              unless @eof_handling || @buffer.size >= max
+                @expected_tokens_in_buffer = max
+              else
+                forward_number_of_token(len.find { |l|
+                  r = check_multiword_key(l)
+                  create_and_forward_multiword(l, r) unless r.empty?
+                } || 1)
 
                 @expected_tokens_in_buffer = 3
                 process_buffer if process_buffer?
-                return
               end
             end
+
+            return
           end
 
-          # Prüfe 2er Schlüssel
-          result = check_multiword_key( 2 )
-          unless result.empty?
-            create_and_forward_multiword( 2, result )
-            forward_number_of_token( 1 )
+          unless (res = check_multiword_key(2)).empty?
+            create_and_forward_multiword(2, res)
+            forward_number_of_token(1)
           end
         end
 
-        # Buffer weiterschaufeln
-        forward_number_of_token( 1, false )
+        forward_number_of_token(1, false)
         @expected_tokens_in_buffer = 3
       end
 
       private
 
-      def create_and_forward_multiword( len, lexicals )
-        # Form aus Buffer auslesen und Teile markieren
-        pos = 0
-        form_parts = []
+      def create_and_forward_multiword(len, lex)
+        pos, parts = 0, []
+
         begin
-          if @buffer[pos].form == CHAR_PUNCT
-            @buffer.delete_at( pos )
-            form_parts[-1] += CHAR_PUNCT
+          if (form = form_at(pos)) == CHAR_PUNCT
+            @buffer.delete_at(pos)
+            parts[-1] += CHAR_PUNCT
           else
             @buffer[pos].attr = WA_UNKMULPART if @buffer[pos].unknown?
-            form_parts << @buffer[pos].form
+            parts << form
             pos += 1
           end
         end while pos < len
 
-        form = form_parts.join( ' ' )
-
-        # Multiword erstellen
-        word = Word.new( form, WA_MULTIWORD )
-        word << lexicals.collect { |lex| (lex.is_a?(Lexical)) ? lex : nil }.compact  # FIXME 1.60 - Ausstieg bei "*5" im Synonymer
-
-        # Forword Multiword
-        forward( word )
-      end
-
-      # Ermittelt die maximale Ergebnislänge
-      def sort_result_len( result )
-        result.collect do |res|
-          if res.is_a?( Lexical )
-            res.form.split( ' ' ).size
-          else
-            res =~ /^\*(\d+)/
-            $1.to_i
-          end
-        end.sort.reverse
+        forward(Word.new_lexicals(parts.join(' '),
+          WA_MULTIWORD, lex.select { |l| l.is_a?(Lexical) }))
       end
 
       # Prüft einen definiert langen Schlüssel ab Position 0 im Buffer
-      def check_multiword_key( len )
+      def check_multiword_key(len)
         return [] if valid_tokens_in_buffer < len
 
-        # Wortformen aus der Wortliste auslesen
-        sequence = @buffer.map { |obj|
+        seq = @buffer.map { |obj|
           next [obj] unless obj.is_a?(WordForm)
+          next if (form = obj.form) == CHAR_PUNCT
 
-          form = obj.form
-          next if form == CHAR_PUNCT
+          w = find_word(form, @lex_dic, @lex_gra)
+          l = w.lexicals
 
-          word = @lex_dic.find_word(form)
-          word = @lex_gra.find_compound(form) if word.unknown?
+          (w.attr == WA_COMPOUND ? [l.first] : l.empty? ? [w] : l.dup).tap { |i|
+            i.concat(@syn_dic.find_synonyms(w)) if @syn_dic
+            i.map! { |j| j.form.downcase }.uniq!
+          }
+        }
 
-          lexicals = word.attr == WA_COMPOUND ?
-            [word.lexicals.first] : word.lexicals.dup
-
-          lexicals << word if lexicals.empty?
-          lexicals += @syn_dic.find_synonyms(word) if @syn_dic
-
-          lexicals.map { |lex| lex.form }.uniq
-        }.compact[0, len]
+        seq.compact!
+        seq.slice!(len..-1)
 
         if @combine
-          keys, muls = [], []
-
-          sequence.each { |forms|
-            keys = forms.map { |form|
-              keys.empty? ? form : keys.map { |key| "#{key} #{form}" }
-            }.flatten(1)
-          }
-
-          keys.each { |key|
-            mul = @mul_dic.select(key.downcase)
-
-            unless mul.empty?
-              muls.concat(mul)
-              break unless @all_keys
-            end
-          }
-
-          muls.uniq
+          [].tap { |mul| seq.shift.product(*seq) { |key|
+            mul.concat(@mul_dic.select(key.join(' ')))
+            break unless @all_keys || mul.empty?
+          } && mul.uniq! }
         else
-          key = sequence.map { |forms| forms.first }.join(' ')
-          @mul_dic.select(key.downcase)
+          @mul_dic.select(seq.map!(&:first).join(' '))
         end
       end
 

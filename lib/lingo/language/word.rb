@@ -33,8 +33,16 @@ class Lingo
 
     class Word < WordForm
 
-      def self.new_lexical(form, attr, lex_attr)
-        new(form, attr) << Lexical.new(form, lex_attr)
+      class << self
+
+        def new_lexicals(form, attr, lex)
+          new(form, attr) << lex
+        end
+
+        def new_lexical(form, attr, lex_attr)
+          new_lexicals(form, attr, Lexical.new(form, lex_attr))
+        end
+
       end
 
       # Exakte Representation der originären Zeichenkette, so wie sie im Satz
