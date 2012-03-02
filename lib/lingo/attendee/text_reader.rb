@@ -109,108 +109,103 @@ class Lingo
       # TODO: lir-record-pattern abkürzen
       # Interpretation der Parameter
       def init
-        @files = Array(get_key('files', '-'))
-        @rec_pat = Regexp.new(get_key('lir-record-pattern', ''))
-        @is_LIR_file = has_key?('lir-record-pattern')
-        @chomp = get_key('chomp', true)
+        @files  = Array(get_key('files', '-'))
+        @chomp  = get_key('chomp', true)
         @filter = get_key('filter', false)
+
+        @lir = get_key('lir-record-pattern', nil)
+        @lir = Regexp.new(@lir) if @lir
       end
 
       def control(cmd, param)
-        if cmd==STR_CMD_TALK
-          forward(STR_CMD_LIR, '') if @is_LIR_file
-          @files.each { |filename| spool(filename) }
+        if cmd == STR_CMD_TALK
+          forward(STR_CMD_LIR, '') if @lir
+          @files.each(&method(:spool))
         end
       end
 
       private
 
       # Gibt eine Datei zeilenweise in den Ausgabekanal
-      def spool(filename)
-        unless stdin?(filename)
-          raise FileNotFoundError.new(filename) unless File.exist?(filename)
+      def spool(path)
+        unless stdin?(path)
+          raise FileNotFoundError.new(path) unless File.exist?(path)
 
           inc('Anzahl Dateien')
-          add('Anzahl Bytes', File.stat(filename).size)
+          add('Anzahl Bytes', File.stat(path).size)
         end
 
-        forward(STR_CMD_FILE, filename)
+        forward(STR_CMD_FILE, path)
 
-        filter(filename) { |line|
+        filter(path) { |line|
           inc('Anzahl Zeilen')
+
           line.chomp! if @chomp
-          line.gsub!(/\303\237/, "ß")
-      ### HACK
-          if @is_LIR_file && line =~ @rec_pat
+
+          if line =~ @lir
             forward(STR_CMD_RECORD, $1)
           else
-            forward(line) if line.size>0
+            forward(line) unless line.empty?
           end
         }
 
-        forward(STR_CMD_EOF, filename)
+        forward(STR_CMD_EOF, path)
       end
 
-      def filter(filename, &block)
-        file = stdin?(filename) ?
+      def filter(path, &block)
+        io = stdin?(path) ?
           @lingo.config.stdin.set_encoding(ENC) :
-          File.open(filename, 'rb', encoding: ENC)
+          File.open(path, 'rb', encoding: ENC)
 
-        file = case @filter == true ? file_type(filename, file) : @filter.to_s
-          when /html/ then filter_html(file)
-          when /xml/  then filter_html(file, true)
-          when /pdf/  then filter_pdf(file, &block) or return
-          else file
-        end if @filter
+        case @filter == true ? file_type(path, io) : @filter.to_s
+          when /html/i then io = filter_html(io)
+          when /xml/i  then io = filter_html(io, true)
+          when /pdf/i  then filter_pdf(io, &block); return
+        end
 
-        file.each_line(&block)
+        io.each_line(&block) if io
       end
 
-      def filter_pdf(file, &block)
+      def filter_pdf(io, &block)
         if Object.const_defined?(:PDF) && PDF.const_defined?(:Reader)
-          PDFFilter.filter(file, &block)
-          nil
+          PDFFilter.filter(io, &block)
         else
           warn "PDF filter not available. Please install `pdf-reader'."
-          file
         end
       end
 
-      def filter_html(file, xml = false)
+      def filter_html(io, xml = false)
         if Object.const_defined?(:Hpricot)
-          Hpricot(file, xml: xml).inner_text
+          Hpricot(io, xml: xml).inner_text
         else
           warn "#{xml ? 'X' : 'HT'}ML filter not available. Please install `hpricot'."
-          file
+          nil
         end
       end
 
-      def file_type(filename, file)
-        if Object.const_defined?(:FileMagic) && file.respond_to?(:rewind)
-          type = FileMagic.fm(:mime, simplified: true).buffer(file.read(256))
-          file.rewind
-          type
+      def file_type(path, io)
+        if Object.const_defined?(:FileMagic) && io.respond_to?(:rewind)
+          FileMagic.fm(:mime, simplified: true).buffer(io.read(256)).tap {
+            io.rewind
+          }
         elsif Object.const_defined?(:MIME) && MIME.const_defined?(:Types)
-          if type = MIME::Types.of(filename).first
-            type.content_type
-          else
-            warn 'Filters not available. File type could not be determined.'
-            nil
-          end
+          MIME::Types.of(path).first.tap { |type| type ? type.content_type :
+            warn('Filters not available. File type could not be determined.')
+          }
         else
           warn "Filters not available. Please install `ruby-filemagic' or `mime-types'."
           nil
         end
       end
 
-      def stdin?(filename)
-        %w[STDIN -].include?(filename)
+      def stdin?(path)
+        %w[STDIN -].include?(path)
       end
 
       class PDFFilter
 
-        def self.filter(file, &block)
-          PDF::Reader.new.parse(file, new(&block))
+        def self.filter(io, &block)
+          PDF::Reader.new.parse(io, new(&block))
         end
 
         def initialize(&block)
