@@ -5,23 +5,27 @@ require_relative '../test_helper'
 class TestAttendeeSynonymer < AttendeeTestCase
 
   def test_basic
-    @input = [wd('abtastzeiten|IDF', 'abtastzeit|s')]
-    @expect = [wd('abtastzeiten|IDF', 'abtastzeit|s', 'abtastfrequenz|y', 'abtastperiode|y')]
-    meet({'source'=>'sys-syn', 'check'=>'-,MUL'})
-# @expect.each_index {|i| assert_equal(@expect[i], @output[i]) }
+    meet({ 'source' => 'sys-syn', 'check' => '-,MUL' }, [
+      wd('abtastzeiten|IDF', 'abtastzeit|s')
+    ], [
+      wd('abtastzeiten|IDF', 'abtastzeit|s', 'abtastfrequenz|y', 'abtastperiode|y')
+    ])
   end
 
   def test_first
-    @input = [wd('Aktienanleihe|IDF', 'aktienanleihe|s')]
-    @expect = [wd('Aktienanleihe|IDF', 'aktienanleihe|s', 'aktien-anleihe|y',
-      'reverse convertible bond|y', 'reverse convertibles|y')]
-    meet({'source'=>'sys-syn,tst-syn', 'check'=>'-,MUL', 'mode'=>'first'})
+    meet({ 'source' => 'sys-syn,tst-syn', 'check' => '-,MUL', 'mode' => 'first' }, [
+      wd('Aktienanleihe|IDF', 'aktienanleihe|s')
+    ], [
+      wd('Aktienanleihe|IDF', 'aktienanleihe|s', 'aktien-anleihe|y', 'reverse convertible bond|y', 'reverse convertibles|y')
+    ])
   end
 
   def test_all
-    @input = [wd('Kerlchen|IDF', 'kerlchen|s')]
-    @expect = [wd('Kerlchen|IDF', 'kerlchen|s', 'kerlchen|y', 'zwerg-nase|y')]
-    meet({'source'=>'sys-syn,tst-syn', 'check'=>'-,MUL', 'mode'=>'all'})
+    meet({ 'source' => 'sys-syn,tst-syn', 'check' => '-,MUL', 'mode' => 'all' }, [
+      wd('Kerlchen|IDF', 'kerlchen|s')
+    ], [
+      wd('Kerlchen|IDF', 'kerlchen|s', 'kerlchen|y', 'zwerg-nase|y')
+    ])
   end
 
 end

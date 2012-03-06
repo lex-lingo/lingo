@@ -37,6 +37,12 @@ class Lingo
       include Cachable
       include Reportable
 
+      def self.open(*args)
+        yield lexical_hash = new(*args)
+      ensure
+        lexical_hash.close if lexical_hash
+      end
+
       def initialize(id, lingo)
         init_cachable
         init_reportable(id)

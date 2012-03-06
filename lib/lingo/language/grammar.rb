@@ -40,6 +40,12 @@ class Lingo
 
       HYPHEN_RE = %r{\A(.+)-([^-]+)\z}
 
+      def self.open(*args)
+        yield grammar = new(*args)
+      ensure
+        grammar.close if grammar
+      end
+
       def initialize(config, lingo)
         init_cachable
         init_reportable
@@ -123,7 +129,7 @@ class Lingo
       end
 
       # permute_compound( _aString_ ) ->  [lex, sta, seq]
-      def permute_compound(str, level, tail)
+      def permute_compound(str, level = 1, tail = false)
         return test_compound($1, '-', $2, level, tail) if str =~ HYPHEN_RE
 
         sug, len = @suggestions[level] ||= [], str.length
@@ -143,7 +149,7 @@ class Lingo
       # test_compound() ->  [lex, sta, seq]
       #
       # Testet einen definiert zerlegten String auf Kompositum
-      def test_compound(fstr, infix, bstr, level, tail)
+      def test_compound(fstr, infix, bstr, level = 1, tail = false)
         sta, seq, empty = [fstr.length, bstr.length], %w[? ?], [[], [], '']
 
         if !(blex = @dic.select_with_suffix(bstr)).sort!.empty?

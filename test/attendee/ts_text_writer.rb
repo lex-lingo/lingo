@@ -5,7 +5,7 @@ require_relative '../test_helper'
 class TestAttendeeTextWriter < AttendeeTestCase
 
   def setup
-    @data = [
+    @input = [
       ai('FILE|test/test.txt'),
       wd('Dies|IDF'),
       wd('ist|IDF'),
@@ -25,34 +25,31 @@ class TestAttendeeTextWriter < AttendeeTestCase
   end
 
   def test_basic
-    @input = @data
-    @expect = [ "Dies,ist,eine,Zeile,.\n", "Dies,ist,eine,zweite,Zeile,.\n" ]
-    meet({'ext'=>'tst',  'sep'=>','}, false)
+    meet({ 'ext' => 'tst', 'sep' => ',' }, @input)
 
-    @output = File.readlines('test/test.tst', encoding: Lingo::ENC)
-    assert_equal(@expect, @output)
+    assert_equal([
+      "Dies,ist,eine,Zeile,.\n", "Dies,ist,eine,zweite,Zeile,.\n"
+    ], File.readlines('test/test.tst', encoding: Lingo::ENC))
   end
 
   def test_complex
-    @input = @data
-    @expect = [ "Dies-ist-eine-Zeile-.\n", "Dies-ist-eine-zweite-Zeile-.\n" ]
-    meet({'ext'=>'yip',  'sep'=>'-'}, false)
+    meet({ 'ext' => 'yip', 'sep' => '-' }, @input)
 
-    @output = File.readlines('test/test.yip', encoding: Lingo::ENC)
-    assert_equal(@expect, @output)
+    assert_equal([
+      "Dies-ist-eine-Zeile-.\n", "Dies-ist-eine-zweite-Zeile-.\n"
+    ], File.readlines('test/test.yip', encoding: Lingo::ENC))
   end
 
   def test_crlf
-    @input = @data
-    @expect = [ "Dies\n", "ist\n", "eine\n", "Zeile\n", ".\n", "Dies\n", "ist\n", "eine\n", "zweite\n", "Zeile\n", ".\n" ]
-    meet({'sep'=>"\n"}, false)
+    meet({ 'sep' => "\n" }, @input)
 
-    @output = File.readlines('test/test.txt2', encoding: Lingo::ENC)
-    assert_equal(@expect, @output)
+    assert_equal([
+      "Dies\n", "ist\n", "eine\n", "Zeile\n", ".\n", "Dies\n", "ist\n", "eine\n", "zweite\n", "Zeile\n", ".\n"
+    ], File.readlines('test/test.txt2', encoding: Lingo::ENC))
   end
 
   def test_lir_file
-    @input = [
+    meet({ 'ext' => 'csv', 'lir-format' => nil }, [
       ai('LIR-FORMAT|'), ai('FILE|test/lir.txt'),
       ai('RECORD|00237'),
       '020: GERHARD.',
@@ -65,28 +62,26 @@ class TestAttendeeTextWriter < AttendeeTestCase
       '020: Information Retrieval und Dokumentmanagement im Multimedia-Zeitalter.',
       "056: \"Das Buch ist ein praxisbezogenes VADEMECUM für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.\r",
       ai('EOF|test/lir.txt')
-    ]
-    @expect = [
+    ])
+
+    assert_equal([
       "00237*020: GERHARD. 025: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressour\
 cen. 056: Die intellektuelle Erschließung des Internet befindet sich in einer Krise. GERHARD ist derzeit weltweit der einzige.\r\n",
       "00238*020: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen. 025: das D\
 FG-Projekt GERHARD.\r\n",
       "00239*020: Information Retrieval und Dokumentmanagement im Multimedia-Zeitalter. 056: \"Das Buch ist ein praxisbezogenes VADEMECUM\
  für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.\r\n"
-    ]
-    meet({'ext'=>'csv', 'lir-format'=>nil}, false)
-
-    @output = File.readlines('test/lir.csv', encoding: Lingo::ENC)
-    assert_equal(@expect, @output)
+    ], File.readlines('test/lir.csv', encoding: Lingo::ENC))
   end
 
   def test_nonewords
-    @input = [ai('FILE|test/text.txt'), 'Nonwörter', 'Nonsense', ai('EOF|test/text.txt')]
-    @expect = [ "Nonwörter\n", "Nonsense" ]
-    meet({'ext'=>'non', 'sep'=>"\n"}, false)
+    meet({ 'ext' => 'non', 'sep' => "\n" }, [
+      ai('FILE|test/text.txt'), 'Nonwörter', 'Nonsense', ai('EOF|test/text.txt')
+    ])
 
-    @output = File.readlines('test/text.non', encoding: Lingo::ENC)
-    assert_equal(@expect, @output)
+    assert_equal([
+      "Nonwörter\n", "Nonsense"
+    ], File.readlines('test/text.non', encoding: Lingo::ENC))
   end
 
 end

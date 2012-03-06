@@ -5,9 +5,11 @@ require_relative '../test_helper'
 class TestAttendeeNonewordFilter < AttendeeTestCase
 
   def test_basic
-    @input = [wd('Eins|IDF'), wd('Zwei|?'), wd('Drei|IDF'), wd('Vier|?'), ai('EOF|')]
-    @expect = ['vier', 'zwei', ai('EOF|')]
-    meet({})
+    meet({}, [
+      wd('Eins|IDF'), wd('Zwei|?'), wd('Drei|IDF'), wd('Vier|?'), ai('EOF|')
+    ], [
+      'vier', 'zwei', ai('EOF|')
+    ])
   end
 
 end

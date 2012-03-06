@@ -33,6 +33,12 @@ class Lingo
       include Cachable
       include Reportable
 
+      def self.open(*args)
+        yield dictionary = new(*args)
+      ensure
+        dictionary.close if dictionary
+      end
+
       def initialize(config, lingo)
         unless config.has_key?('source')
           raise ArgumentError, 'Required parameter `source\' missing.'

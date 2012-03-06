@@ -33,7 +33,7 @@ class LingoTestCase <  Test::Unit::TestCase
   end
 
   def wd(t, *l)
-    l.each_with_object(Lingo::Language::Word.new(*split(t))) { |v, w| w << lx(v) }
+    Lingo::Language::Word.new_lexicals(*split(t), l.map!(&method(:lx)))
   end
 
 end
@@ -42,27 +42,25 @@ class AttendeeTestCase < LingoTestCase
 
   def initialize(_)
     super
-    @lingo, @output, @input = Lingo.new, [], nil
-    @attendee = self.class.to_s[/TestAttendee(.*)/, 1]
+    @lingo, @attendee = Lingo.new, self.class.to_s[/TestAttendee(.*)/, 1]
   end
 
-  def meet(att_cfg, check = true)
+  def meet(att_cfg, input, expect = nil)
     cfg = { 'name' => @attendee }
-    cfg.update('in'  => 'input')  if @input
-    cfg.update('out' => 'output') if @output
+    cfg.update('in'  => 'input')  if input
+    cfg.update('out' => 'output') if expect
     cfg.update(att_cfg)
 
-    @output.clear
     @lingo.reset
 
     list = [{ @attendee => cfg }]
-    list.unshift 'TestSpooler' => { 'out' => 'input',  'input'  => @input  } if @input
-    list.push    'TestDumper'  => { 'in'  => 'output', 'output' => @output } if @output
+    list.unshift 'TestSpooler' => { 'out' => 'input',  'input'  => input       } if input
+    list.push    'TestDumper'  => { 'in'  => 'output', 'output' => output = [] } if expect
 
     @lingo.invite(list)
     @lingo.start
 
-    assert_equal(@expect, @output) if check
+    assert_equal(expect, output) if expect
   end
 
 end

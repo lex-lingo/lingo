@@ -5,7 +5,7 @@ require_relative '../test_helper'
 class TestAttendeeAbbreviator < AttendeeTestCase
 
   def test_basic
-    @input = [
+    meet({ 'source' => 'sys-abk' }, [
       tk('z.b|ABRV'), tk('.|PUNC'),
       tk('im|WORD'),
       tk('14.|NUMS'),
@@ -13,8 +13,7 @@ class TestAttendeeAbbreviator < AttendeeTestCase
       tk('15.|NUMS'),
       tk('Jh|WORD'), tk('.|PUNC'),
       ai('EOL|')
-    ]
-    @expect = [
+    ], [
       wd('z.b.|IDF', 'zum beispiel|w'),
       tk('im|WORD'),
       tk('14.|NUMS'),
@@ -22,8 +21,7 @@ class TestAttendeeAbbreviator < AttendeeTestCase
       tk('15.|NUMS'),
       wd('Jh.|IDF', 'jahrhundert|s'),
       ai('EOL|')
-    ]
-    meet({'source'=>'sys-abk'})
+    ])
   end
 
 end

@@ -3,14 +3,17 @@
 class TestAttendeeTokenizer < AttendeeTestCase
 
   def test_basic
-    @input = ["Dies ist ein Test."]
-    @expect = [tk('Dies|WORD'), tk('ist|WORD'), tk('ein|WORD'), tk('Test|WORD'), tk('.|PUNC')]
-    meet({})
+    meet({}, [
+      "Dies ist ein Test."
+    ], [
+      tk('Dies|WORD'), tk('ist|WORD'), tk('ein|WORD'), tk('Test|WORD'), tk('.|PUNC')
+    ])
   end
 
   def test_complex
-    @input = ["1964 www.vorhauer.de bzw. nasenbär, ()"]
-    @expect = [
+    meet({}, [
+      "1964 www.vorhauer.de bzw. nasenbär, ()"
+    ], [
       tk('1964|NUMS'),
       tk('www.vorhauer.de|URLS'),
       tk('bzw|WORD'),
@@ -19,8 +22,7 @@ class TestAttendeeTokenizer < AttendeeTestCase
       tk(',|PUNC'),
       tk('(|OTHR'),
       tk(')|OTHR')
-    ]
-    meet({})
+    ])
   end
 
 end

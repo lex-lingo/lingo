@@ -3,10 +3,13 @@
 require_relative 'test_helper'
 
 class Lingo::Database
+
   alias_method :original_convert, :convert
+
   def convert(verbose = false)
     original_convert(verbose)
   end
+
 end
 
 class TestDatabase < LingoTestCase
@@ -176,11 +179,11 @@ Wort2=
       'separator'  => '*',
       'def-wc'     => 's'
     }, @keyvalue, {
-      'wort1'=>'projektion1#s|projektion4#s|projektion5#s',
-      'wort2'=>'projektion2#s',
-      'wort3'=>'projektion3#s',
-      'mehr wort satz'=>'pro jeck zion 1#s|pro jeck zion 2#s',
-      'albert einstein'=>'einstein, albert#s'
+      'wort1'           => 'projektion1#s|projektion4#s|projektion5#s',
+      'wort2'           => 'projektion2#s',
+      'wort3'           => 'projektion3#s',
+      'mehr wort satz'  => 'pro jeck zion 1#s|pro jeck zion 2#s',
+      'albert einstein' => 'einstein, albert#s'
     })
   end
 
@@ -253,10 +256,7 @@ Wort2=
       if block_given?
         yield db
       else
-        store = db.to_h
-        store.delete(Lingo::Database::SYS_KEY)
-
-        assert_equal(output, store)
+        assert_equal(output, db.to_h.tap { |store| store.delete(Lingo::Database::SYS_KEY) })
       end
     }
   ensure
