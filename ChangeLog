@@ -1,5 +1,23 @@
 = Revision history for Lingo
 
+== 1.8.2 [2012-04-19]
+
+* Performance improvements regarding Attendee::VectorFilter's (as well as
+  Attendee::NonewordFilter's) memory usage; set <tt>sort: false</tt> in the config.
+* Added Attendee::Stemmer (implementing Porter's algorithm for suffix stripping).
+* Added progress reporting to Attendee::TextReader; set <tt>progress: true</tt>
+  in the config.
+* Added directory and glob processing to Attendee::TextReader (new options
+  +glob+ and +recursive+).
+* Renamed Attendee::TextReader's option +lir-record-pattern+ to +records+.
+* Fixed Attendee::Debugger to forward all objects so it can be inserted
+  between any two attendees in the config.
+* Fixed regression introduced in 1.8.0 where Lingo would not use existing
+  compiled dictionary when source file is not present.
+* Fixed "invalid byte sequence in UTF-8" on Windows for SDBM store.
+* Enabled pluggable (compiled) dictionaries and storage backends.
+* Extensive internal refactoring and cleanup. (Finished for now.)
+
 == 1.8.1 [2012-02-19]
 
 * Introduced alternative storage backends, mainly to circumvent SDBM's record

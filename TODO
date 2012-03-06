@@ -1,5 +1,7 @@
 = ToDo list for Lingo
 
+* Configuration parameter validation.
+* Replace regex-based tokenizer with a (Racc/Ragel/ANTLR-based?) lexer.
 * Update and translate old documentation.
 * Allow for handling of documents in various encodings, not just the one the
   dictionaries are encoded in.
