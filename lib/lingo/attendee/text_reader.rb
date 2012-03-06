@@ -109,9 +109,10 @@ class Lingo
       # TODO: lir-record-pattern abkürzen
       # Interpretation der Parameter
       def init
-        @files  = Array(get_key('files', '-'))
-        @chomp  = get_key('chomp', true)
-        @filter = get_key('filter', false)
+        @files    = Array(get_key('files', '-'))
+        @chomp    = get_key('chomp', true)
+        @filter   = get_key('filter', false)
+        @progress = get_key('progress', false)
 
         @lir = get_key('lir-record-pattern', nil)
         @lir = Regexp.new(@lir) if @lir
@@ -128,34 +129,43 @@ class Lingo
 
       # Gibt eine Datei zeilenweise in den Ausgabekanal
       def spool(path)
-        unless stdin?(path)
+        unless stdin = stdin?(path)
           raise FileNotFoundError.new(path) unless File.exist?(path)
 
           inc('Anzahl Dateien')
-          add('Anzahl Bytes', File.stat(path).size)
+          add('Anzahl Bytes', size = File.size(path))
+
+          size = nil unless @progress
         end
 
         forward(STR_CMD_FILE, path)
 
-        filter(path) { |line|
-          inc('Anzahl Zeilen')
+        ShowProgress.new(self, size, path) { |progress|
+          filter(path, stdin) { |line, pos|
+            inc('Anzahl Zeilen')
+            progress[pos]
 
-          line.chomp! if @chomp
+            line.chomp! if @chomp
 
-          if line =~ @lir
-            forward(STR_CMD_RECORD, $1)
-          else
-            forward(line) unless line.empty?
-          end
+            if line =~ @lir
+              forward(STR_CMD_RECORD, $1)
+            else
+              forward(line) unless line.empty?
+            end
+          }
         }
 
         forward(STR_CMD_EOF, path)
       end
 
-      def filter(path, &block)
-        io = stdin?(path) ?
-          @lingo.config.stdin.set_encoding(ENC) :
-          File.open(path, 'rb', encoding: ENC)
+      def filter(path, stdin = stdin?(path))
+        io, block = stdin ? [
+          @lingo.config.stdin.set_encoding(ENC),
+          lambda { |line| yield line, 0 }
+        ] : [
+          File.open(path, 'rb', encoding: ENC),
+          lambda { |line| yield line, io.pos }
+        ]
 
         case @filter == true ? file_type(path, io) : @filter.to_s
           when /html/i then io = filter_html(io)

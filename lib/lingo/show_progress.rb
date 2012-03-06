@@ -26,14 +26,54 @@
 
 class Lingo
 
-  class Database
+  class ShowProgress
 
-    class ShowProgress < ShowProgress
+    def initialize(obj, max, name = nil, doit = true, text = 'progress')
+      return yield self unless max && doit
 
-      def initialize(obj, max, act = true)
-        super(obj, max, obj.instance_variable_get(:@config)['name'], act, 'convert')
+      @out = obj.instance_variable_get(:@lingo).config.stderr
+
+      # To get the length of the formatted string we have
+      # to actually substitute the placeholder.
+      fmt = ' [%3d%%]'
+      len = (fmt % 0).length
+
+      # Now we know how far to "go back" to
+      # overwrite the formatted string...
+      back = "\b" * len
+
+      @fmt = fmt       + back
+      @clr = ' ' * len + back
+
+      print name, ': ' if name
+
+      @rat, @cnt, @next = max / 100.0, 0, 0
+      print text
+      step
+
+      yield self
+
+      print "#{@clr} done.\n"
+    end
+
+    def [](value)
+      if defined?(@cnt)
+        @cnt = value
+        step if @cnt >= @next
       end
+    end
 
+    private
+
+    def step
+      percent = @cnt / @rat
+      @next = (percent + 1) * @rat
+
+      print @fmt % percent if percent.finite?
+    end
+
+    def print(*args)
+      @out.print(*args)
     end
 
   end
