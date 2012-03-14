@@ -152,9 +152,9 @@ class Lingo
 
       return yield unless @lingo.report_time
 
-      @timer = Time.new
+      @timer = Time.now.to_i
       res = yield
-      add(t, Time.new - @timer)
+      add(t, Time.now.to_i - @timer)
       res
     end
 
