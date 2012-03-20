@@ -37,7 +37,7 @@ class Lingo
     end
 
     def to_s
-      'No writable store found in search path'
+      'No writable store found in search path.'
     end
 
   end
