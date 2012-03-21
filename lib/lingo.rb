@@ -43,7 +43,8 @@ class Lingo
   CURR = ENV['LINGO_CURR'] || '.'
 
   # The search path for Lingo dictionary and configuration files.
-  PATH = ENV['LINGO_PATH'] || [CURR, HOME, BASE].join(File::PATH_SEPARATOR)
+  PATH = ENV['LINGO_PATH'].nil? ? [CURR, HOME, BASE] :
+         ENV['LINGO_PATH'].split(File::PATH_SEPARATOR)
 
   ENV['LINGO_PLUGIN_PATH'] ||= File.join(HOME, 'plugins')
 
@@ -110,7 +111,19 @@ class Lingo
       File.join(options_for(type)[:dir], basename(type, file))
     end
 
+    def append_path(*path)
+      include_path(path)
+    end
+
+    def prepend_path(*path)
+      include_path(path, true)
+    end
+
     private
+
+    def include_path(path, pre = false)
+      PATH.insert(pre ? 0 : -1, *path.map!(&:to_s))
+    end
 
     def find_file(file, path, options)
       if glob = options[:glob]
@@ -170,7 +183,7 @@ class Lingo
     end
 
     def path_for(options)
-      options[:path] || PATH.split(File::PATH_SEPARATOR)
+      options[:path] || PATH
     end
 
     def file_with_ext(file, options)
