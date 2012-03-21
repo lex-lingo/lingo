@@ -32,11 +32,9 @@ class Lingo
 
     module LibCDBStore
 
-      private
+      Database.register(self, 'cdb')
 
-      def store_ext
-        '.cdb'
-      end
+      private
 
       def create
         LibCDB::CDB.open(@stofile, 'w') { |db|

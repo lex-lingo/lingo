@@ -32,14 +32,16 @@ class Lingo
 
     module SDBMStore
 
+      Database.register(self, %w[dir pag], -1, false)
+
       private
 
       def uptodate?
-        super(@stofile + '.pag')
+        super(@stofile + EXT.last)
       end
 
       def _clear
-        File.delete(*Dir["#{@stofile}.{pag,dir}"])
+        File.delete(*Dir["#{@stofile}{#{EXT.join(',')}}"])
       end
 
       def _open

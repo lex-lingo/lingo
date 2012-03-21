@@ -32,11 +32,9 @@ class Lingo
 
     module GDBMStore
 
-      private
+      Database.register(self, 'db')
 
-      def store_ext
-        '.db'
-      end
+      private
 
       def _open
         GDBM.open(@stofile)

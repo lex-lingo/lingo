@@ -31,10 +31,6 @@ require 'digest/sha1'
 require_relative 'database/show_progress'
 require_relative 'database/crypter'
 require_relative 'database/source'
-require_relative 'database/hash_store'
-require_relative 'database/sdbm_store'
-require_relative 'database/gdbm_store'
-require_relative 'database/libcdb_store'
 
 class Lingo
 
@@ -59,10 +55,23 @@ class Lingo
 
     INDEX_PATTERN = %r{\A#{IDX_REF_ESC}\d+\z}
 
-    BACKENDS = %w[LibCDB SDBM GDBM].unshift(ENV['LINGO_BACKEND']).compact.uniq
+    BACKENDS       = []
+    BACKEND_BY_EXT = {}
 
-    def self.open(*args, &block)
-      new(*args).open(&block)
+    class << self
+
+      def register(klass, ext, prio = -1, meth = true)
+        BACKENDS.insert(prio, name = klass.name[/::(\w+)Store\z/, 1])
+        Array(ext).each { |i| BACKEND_BY_EXT[i.prepend('.')] = name }
+
+        klass.const_set(:EXT, ext)
+        klass.class_eval('def store_ext; EXT; end', __FILE__, __LINE__) if meth
+      end
+
+      def open(*args, &block)
+        new(*args).open(&block)
+      end
+
     end
 
     def initialize(id, lingo)
@@ -87,8 +96,9 @@ class Lingo
     end
 
     def backend
-      @backend ||= BACKENDS.find { |mod|
-        break self.class.const_get("#{mod}Store") if Object.const_defined?(mod)
+      @backend ||= [ENV['LINGO_BACKEND'], *BACKENDS].find { |mod|
+        backend = get_backend(mod) if mod
+        break backend if backend
       } || HashStore
     end
 
@@ -143,6 +153,11 @@ class Lingo
     end
 
     private
+
+    def get_backend(mod)
+      self.class.const_get("#{mod}Store") if Object.const_defined?(mod)
+    rescue TypeError, NameError
+    end
 
     def uptodate?(file = @stofile)
       src = Pathname.new(@srcfile)
@@ -228,3 +243,9 @@ class Lingo
   end
 
 end
+
+# in order of priority
+require_relative 'database/libcdb_store'
+require_relative 'database/sdbm_store'
+require_relative 'database/gdbm_store'
+require_relative 'database/hash_store'
