@@ -113,20 +113,38 @@ class Lingo
     private
 
     def find_file(file, path, options)
-      pn = Pathname.new(file_with_ext(file, options)).cleanpath
+      if glob = options[:glob]
+        file = File.chomp_ext(file)
+        options[:ext] ||= '*'
+      end
+
+      file = file_with_ext(file, options)
+      pn   = Pathname.new(file).cleanpath
 
       if pn.relative?
         walk(path, options) { |dir|
           pn2 = pn.expand_path(dir)
-          pn = pn2 and break if pn2.exist?
+          ex  = pn2.exist?
+
+          pn2 = Pathname.glob(pn2).first if glob && !ex
+          pn  = pn2 and break if glob ? pn2 : ex
         }
       end
 
       realpath_for(pn, path)
+    rescue Errno::ENOENT
+      raise unless relax = options[:relax]
+      relax.respond_to?(:[]) ? relax[file] : file
     end
 
     def find_store(file, path, options)
-      base = basename(:dict, find(:dict, file, path))
+      base = basename(:dict, find(:dict, file, path) {
+        raise SourceFileNotFoundError.new(nil, find_file(file, path,
+          options.merge(glob: true, relax: lambda { |_file|
+            raise SourceFileNotFoundError.new(file, _file)
+          })
+        ))
+      })
 
       walk(path.reverse, options, false) { |dir|
         Pathname.new(dir).ascend { |i|

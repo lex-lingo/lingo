@@ -42,6 +42,34 @@ class Lingo
 
   end
 
+  class BackendNotFoundError < LingoError
+
+    attr_reader :file
+
+    def initialize(file)
+      @file = file
+    end
+
+    def to_s
+      "No backend found for `#{file}'."
+    end
+
+  end
+
+  class BackendNotAvailableError < LingoError
+
+    attr_reader :mod, :file
+
+    def initialize(mod, file)
+      @mod, @file = mod, file
+    end
+
+    def to_s
+      "Backend not available `#{mod}' for `#{file}'."
+    end
+
+  end
+
   class DatabaseError < LingoError
 
     attr_reader :action, :file, :err

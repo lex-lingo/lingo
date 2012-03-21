@@ -74,10 +74,11 @@ class Lingo
       def initialize(id, lingo)
         @config = lingo.database_config(id)
 
-        source_file = Lingo.find(:dict, name = @config['name'])
+        source_file = Lingo.find(:dict, name = @config['name'], relax: true)
+
         reject_file = begin
           Lingo.find(:store, source_file) << '.rev'
-        rescue NoWritableStoreError
+        rescue NoWritableStoreError, SourceFileNotFoundError
         end
 
         @src = Pathname.new(source_file)
