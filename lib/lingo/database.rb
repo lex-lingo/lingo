@@ -99,6 +99,8 @@ class Lingo
     def open
       @db = _open if closed?
       block_given? ? yield(self) : self
+    rescue => err
+      raise DatabaseError.new(:open, @stofile, err)
     ensure
       close if @db && block_given?
     end

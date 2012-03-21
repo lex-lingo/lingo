@@ -42,6 +42,20 @@ class Lingo
 
   end
 
+  class DatabaseError < LingoError
+
+    attr_reader :action, :file, :err
+
+    def initialize(action, file, err)
+      @action, @file, @err = action, file, err
+    end
+
+    def to_s
+      "An error occured when trying to #{action} `#{file}': #{err} (#{err.class})"
+    end
+
+  end
+
   class ConfigError < LingoError
 
     attr_reader :id
