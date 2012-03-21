@@ -130,9 +130,13 @@ class Lingo
 
       walk(path.reverse, options, false) { |dir|
         Pathname.new(dir).ascend { |i|
-          break  true                                 if i.file?
-          return File.chomp_ext(File.join(dir, base)) if i.writable?
-          break  true                                 if i.exist?
+          begin
+            stat = i.stat
+
+            break true if stat.file? || !stat.writable?
+            return File.chomp_ext(File.join(dir, base))
+          rescue Errno::ENOENT
+          end
         }
       }
 
