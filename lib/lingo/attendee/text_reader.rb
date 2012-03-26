@@ -57,19 +57,19 @@ class Lingo
     #                Komma voneinander getrennt, z.B.
     #                  files: 'readme.txt'
     #                  files: 'readme.txt,lingo.cfg'
-    # <b><i>lir-record-pattern</i></b>:: Mit diesem Parameter wird angegeben, woran der Anfang
-    #                                    eines neuen Records erkannt werden kann und wie die
-    #                                    Record-Nummer identifiziert wird. Das Format einer
-    #                                    LIR-Datei ist z.B.
-    #                                      [00001.]
-    #                                      020: ¬Die Aufgabenteilung zwischen Wortschatz und Grammatik.
+    # <b><i>records</i></b>:: Mit diesem Parameter wird angegeben, woran der Anfang
+    #                         eines neuen Records erkannt werden kann und wie die
+    #                         Record-Nummer identifiziert wird. Das Format einer
+    #                         LIR-Datei ist z.B.
+    #                           [00001.]
+    #                           020: ¬Die Aufgabenteilung zwischen Wortschatz und Grammatik.
     #
-    #                                      [00002.]
-    #                                      020: Nicht-konventionelle Thesaurusrelationen als Orientierungshilfen.
-    #                                    Mit der Angabe von
-    #                                      lir-record-pattern: "^\[(\d+)\.\]"
-    #                                    werden die Record-Zeilen erkannt und jeweils die Record-Nummer +00001+,
-    #                                    bzw. +00002+ erkannt.
+    #                           [00002.]
+    #                           020: Nicht-konventionelle Thesaurusrelationen als Orientierungshilfen.
+    #                         Mit der Angabe von
+    #                           records: "^\[(\d+)\.\]"
+    #                         werden die Record-Zeilen erkannt und jeweils die Record-Nummer +00001+,
+    #                         bzw. +00002+ erkannt.
     #
     # === Generierte Kommandos
     # Damit der nachfolgende Datenstrom einwandfrei verarbeitet werden kann, generiert der TextReader
@@ -92,7 +92,7 @@ class Lingo
     # Bei der Verarbeitung einer LIR-Datei mit der Ablaufkonfiguration <tt>t2.cfg</tt>
     #   meeting:
     #     attendees:
-    #       - text_reader: { out: lines,  files: '$(files)', lir-record-pattern: "^\[(\d+)\.\]" }
+    #       - text_reader: { out: lines,  files: '$(files)', records: "^\[(\d+)\.\]" }
     #       - debugger:    { in: lines, prompt: 'out>'}
     # ergibt die Ausgabe mit <tt>lingo -c t2 lir.txt</tt>
     #   out> *LIR-FORMAT('')
@@ -107,9 +107,7 @@ class Lingo
 
       protected
 
-      # TODO: FILE und LIR-FILE
-      # TODO: lir-record-pattern abkürzen
-      # Interpretation der Parameter
+      # TODO: FILE und LIR-FILE (?)
       def init
         get_files
 
@@ -117,8 +115,9 @@ class Lingo
         @filter   = get_key('filter', false)
         @progress = get_key('progress', false)
 
-        @lir = get_key('lir-record-pattern', nil)
-        @lir = Regexp.new(@lir) if @lir
+        if @lir = get_key('records', get_key('lir-record-pattern', nil))  # DEPRECATE lir-record-pattern
+          @lir = @lir == true ? %r{^\[(\d+)\.\]} : Regexp.new(@lir)
+        end
       end
 
       def control(cmd, param)

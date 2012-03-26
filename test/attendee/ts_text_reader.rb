@@ -5,7 +5,7 @@ require_relative '../test_helper'
 class TestAttendeeTextReader < AttendeeTestCase
 
   def test_lir_file
-    meet({ 'files' => 'test/lir.txt', 'lir-record-pattern' => '^\[(\d+)\.\]' }, nil, [
+    meet({ 'files' => 'test/lir.txt', 'records' => true }, nil, [
       ai('LIR-FORMAT|'), ai("FILE|#{path = File.expand_path('test/lir.txt')}"),
       ai('RECORD|00237'),
       '020: GERHARD.',
@@ -22,7 +22,7 @@ class TestAttendeeTextReader < AttendeeTestCase
   end
 
   def test_lir_file_another_pattern
-    meet({ 'files' => 'test/lir2.txt', 'lir-record-pattern' => '^\021(\d+)\022' }, nil, [
+    meet({ 'files' => 'test/lir2.txt', 'records' => '^\021(\d+)\022' }, nil, [
       ai('LIR-FORMAT|'), ai("FILE|#{path = File.expand_path('test/lir2.txt')}"),
       ai('RECORD|00237'),
       '020: GERHARD.',
