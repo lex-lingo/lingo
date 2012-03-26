@@ -49,7 +49,7 @@ class TestAttendeeTextWriter < AttendeeTestCase
   end
 
   def test_lir_file
-    meet({ 'ext' => 'csv', 'lir-format' => nil }, [
+    meet({ 'ext' => 'vec', 'lir-format' => nil }, [
       ai('LIR-FORMAT|'), ai('FILE|test/lir.txt'),
       ai('RECORD|00237'),
       '020: GERHARD.',
@@ -71,7 +71,7 @@ cen. 056: Die intellektuelle Erschließung des Internet befindet sich in einer K
 FG-Projekt GERHARD.\r\n",
       "00239*020: Information Retrieval und Dokumentmanagement im Multimedia-Zeitalter. 056: \"Das Buch ist ein praxisbezogenes VADEMECUM\
  für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.\r\n"
-    ], File.readlines('test/lir.csv', encoding: Lingo::ENC))
+    ], File.readlines('test/lir.vec', encoding: Lingo::ENC))
   end
 
   def test_nonewords
