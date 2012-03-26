@@ -42,7 +42,7 @@ The main functions of Lingo are:
         'lingo.rb', 'lingo{,-all,-call}.cfg', 'lingo.opt', 'doc/**/*',
         '{de,en}.lang', '{de,en}/{lingo-*,user-dic}.txt', 'txt/artikel{,-en}.txt',
         'info/gpl-hdr.txt', 'info/*.png', 'lir.cfg', 'txt/lir.txt', 'porter/*',
-        'test.cfg', '{de,en}/test_*.txt'
+        '{de,en}/test_*.txt'
       ].to_a,
       required_ruby_version:    '>= 1.9',
       dependencies:             [['ruby-nuggets', '>= 0.8.5'], 'unicode', 'highline'],
@@ -78,7 +78,7 @@ end
 
 desc 'Test against reference file (TXT)'
 task 'test:txt' do
-  test_ref('artikel', 'test')
+  test_ref('artikel', 'lingo')
 end
 
 desc 'Test against reference file (LIR)'
