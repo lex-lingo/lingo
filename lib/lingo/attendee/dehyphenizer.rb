@@ -41,9 +41,6 @@ class Lingo
     # <b>out</b>:: siehe allgemeine Beschreibung des Attendee
     # <b>source</b>:: siehe allgemeine Beschreibung des Dictionary
     # <b><i>mode</i></b>:: (Standard: all) siehe allgemeine Beschreibung des Dictionary
-    # <b><i>stopper</i></b>:: (Standard: TA_PUNCTUATION, TA_OTHER) Gibt die Begrenzungen an, zwischen
-    #                         denen der Multiworder suchen soll, i.d.R. Satzzeichen und Sonderzeichen,
-    #                         weil sie kaum in einer Mehrwortgruppen vorkommen.
     #
     # === Beispiele
     # Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration <tt>t1.cfg</tt>
