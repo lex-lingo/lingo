@@ -25,6 +25,8 @@
 #++
 
 require 'stringio'
+require 'pathname'
+require 'fileutils'
 require 'benchmark'
 require 'nuggets/file/ext'
 require 'nuggets/env/user_home'

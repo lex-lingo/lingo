@@ -25,7 +25,6 @@
 #++
 
 require 'optparse'
-require 'fileutils'
 
 class Lingo
 

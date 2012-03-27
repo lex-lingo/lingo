@@ -24,10 +24,6 @@
 ###############################################################################
 #++
 
-require 'pathname'
-require 'fileutils'
-require 'digest/sha1'
-
 require_relative 'database/show_progress'
 require_relative 'database/crypter'
 require_relative 'database/source'
