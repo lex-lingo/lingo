@@ -39,7 +39,7 @@ The main functions of Lingo are:
   of word classes
       EOT
       extra_files:  FileList[
-        'lingo.rb', 'lingo{,-all,-call}.cfg', 'lingo.opt', 'doc/**/*',
+        'lingo.rb', 'lingo{,-call}.cfg', 'lingo.opt', 'doc/**/*',
         '{de,en}.lang', '{de,en}/{lingo-*,user-dic}.txt', 'txt/artikel{,-en}.txt',
         'info/gpl-hdr.txt', 'info/*.png', 'lir.cfg', 'txt/lir.txt', 'porter/*',
         '{de,en}/test_*.txt'
