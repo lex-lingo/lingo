@@ -24,56 +24,34 @@
 ###############################################################################
 #++
 
-require_relative 'language/lexical_hash'
-require_relative 'language/dictionary'
-require_relative 'language/grammar'
-require_relative 'language/word_form'
-require_relative 'language/token'
-require_relative 'language/lexical'
-require_relative 'language/word'
-
 class Lingo
 
-  module Language
+  class Attendee
 
-    # String-Konstanten im Datenstrom
-    CHAR_PUNCT = '.'
+    class Stemmer < self
 
-    TA_WORD        = 'WORD'
-    TA_PUNCTUATION = 'PUNC'
-    TA_OTHER       = 'OTHR'
+      protected
 
-    # Standardattribut bei der Initialisierung eines Word-Objektes
-    WA_UNSET      = '-'
-    # Status, nachdem das Word im Wörterbuch gefunden wurde
-    WA_IDENTIFIED = 'IDF'
-    # Status, wenn das Word nicht gefunden werden konnte
-    WA_UNKNOWN    = '?'
-    # Wort ist als Kompositum erkannt worden
-    WA_COMPOUND   = 'KOM'
-    # Wort ist eine Mehrwortgruppe
-    WA_MULTIWORD  = 'MUL'
-    # Wort ist eine Mehrwortgruppe
-    WA_SEQUENCE   = 'SEQ'
-    # Word ist unbekannt, jedoch Teil einer Mehrwortgruppe
-    WA_UNKMULPART = 'MU?'
+      def init
+        extend(Lingo.get_const(get_key('type', 'porter'), self.class))
 
-    LA_SORTORDER = [
-      LA_SEQUENCE   = 'q',
-      LA_MULTIWORD  = 'm',
-      LA_COMPOUND   = 'k',
-      LA_NOUN       = 's',
-      LA_VERB       = 'v',
-      LA_ADJECTIVE  = 'a',
-      LA_NAME       = 'e',
-      LA_WORDFORM   = 'w',
-      LA_STOPWORD   = 't',
-      LA_TAKEITASIS = 'x',
-      LA_SYNONYM    = 'y',
-      LA_STEM       = 'z',
-      LA_UNKNOWN    = '?'
-    ].reverse.join
+        @wc  = get_key('wordclass', LA_STEM)
+        @all = get_key('mode', '').downcase == 'all'
+      end
+
+      def process(obj)
+        if obj.is_a?(Word) && obj.unknown?
+          stem = stem(obj.form.downcase, @all)
+          obj.add_lexicals([Lexical.new(stem, @wc)]) if stem
+        end
+
+        forward(obj)
+      end
+
+    end
 
   end
 
 end
+
+require_relative 'stemmer/porter'
