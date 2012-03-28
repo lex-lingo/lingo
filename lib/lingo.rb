@@ -121,6 +121,12 @@ class Lingo
       include_path(path, true)
     end
 
+    def get_const(name, klass = self)
+      klass.const_get(name.camelcase)
+    rescue NameError
+      raise NameNotFoundError.new(klass, name)
+    end
+
     private
 
     def include_path(path, pre = false)

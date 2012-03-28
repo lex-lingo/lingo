@@ -161,4 +161,18 @@ class Lingo
 
   end
 
+  class NameNotFoundError < LingoError
+
+    attr_reader :klass, :name
+
+    def initialize(klass, name)
+      @klass, @name = klass, name
+    end
+
+    def to_s
+      "No such #{klass.name.split('::').last} type `#{name}'."
+    end
+
+  end
+
 end

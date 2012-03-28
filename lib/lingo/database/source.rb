@@ -66,7 +66,7 @@ class Lingo
       LEGAL_CHAR     = '[ /&()\[\].,-]'
 
       def self.get(name, *args)
-        const_get(name.camelcase).new(*args)
+        Lingo.get_const(name, self).new(*args)
       end
 
       attr_reader :pos
