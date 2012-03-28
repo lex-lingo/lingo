@@ -55,10 +55,8 @@ class Lingo
 
       def _set(key, val)
         if val.length > 950
+          warn "Warning: Entry `#{key}' (#{@srcfile}) too long for SDBM. Truncating..."
           val = val[0, 950]
-
-          @lingo.warn "Warning: Entry `#{key}' (#{@srcfile})" <<
-                      'too long for SDBM. Truncating...'
         end
 
         super

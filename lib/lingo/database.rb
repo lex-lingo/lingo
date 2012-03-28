@@ -212,8 +212,12 @@ class Lingo
       end
     end
 
+    def warn(*msg)
+      @lingo.warn(*msg)
+    end
+
     def convert(verbose = @lingo.config.stderr.tty?)
-      src = Source.get(@config.fetch('txt-format', 'KeyValue'), @id, @lingo)
+      src = Source.get(@config.fetch('txt-format', 'key_value'), @id, @lingo)
 
       if lex = @config['use-lex']
         a = [{ 'source' => lex.split(SEP_RE), 'mode' => @config['lex-mode'] }, @lingo]
