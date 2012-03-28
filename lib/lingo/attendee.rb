@@ -197,7 +197,7 @@ class Lingo
         })
       }
 
-      @lingo.warn msg % arg
+      warn msg % arg
     end
 
     def report_status
@@ -205,8 +205,8 @@ class Lingo
 
       msg = "Attendee <%s> was connected from '%s' to '%s' reporting..."
 
-      @lingo.warn msg % @config.values_at(*%w[name in out]),
-        nil, report.sort.map! { |k, v| " #{k} = #{v}" }, nil
+      warn msg % @config.values_at(*%w[name in out]), nil,
+        report.sort.map! { |k, v| " #{k} = #{v}" }, nil
     end
 
     def skip_command
@@ -248,6 +248,10 @@ class Lingo
 
     def set_gra
       @gra = grammar(get_array('source'), get_key('mode', 'all'))
+    end
+
+    def warn(*msg)
+      @lingo.warn(*msg)
     end
 
   end

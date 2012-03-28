@@ -97,12 +97,12 @@ class Lingo
 
       def control(cmd, param)
         if cmd != STR_CMD_STATUS && eval(@cmd_eval)
-          @lingo.warn "#{@prompt} #{AgendaItem.new(cmd, param).inspect}"
+          warn "#{@prompt} #{AgendaItem.new(cmd, param).inspect}"
         end
       end
 
       def process(obj)
-        @lingo.warn "#{@prompt} #{obj.inspect}" if eval(@obj_eval)
+        warn "#{@prompt} #{obj.inspect}" if eval(@obj_eval)
         forward(obj)
       end
 

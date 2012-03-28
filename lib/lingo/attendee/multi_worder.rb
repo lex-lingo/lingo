@@ -94,7 +94,7 @@ class Lingo
           if lex_src.nil? || lex_src == s
             lex_src, lex_mod = s, m
           else
-            @lingo.warn "#{self.class}: Dictionaries don't match: #{mul_src.join(',')}"
+            warn "#{self.class}: Dictionaries don't match: #{mul_src.join(',')}"
           end
         }
 
