@@ -84,7 +84,11 @@ class Lingo
       end
 
       def process(obj)
-        obj = @gra.find_compound(obj.form) if obj.is_a?(Word) && obj.unknown?
+        if obj.is_a?(Word) && obj.unknown?
+          com = @gra.find_compound(obj.form)
+          obj = com unless com.unknown?
+        end
+
         forward(obj)
       end
 
