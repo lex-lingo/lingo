@@ -71,7 +71,7 @@ class Lingo
       end
 
       def eql?(other)
-        self.class.equal?(other.class) && to_a == other.to_a
+        self.class.equal?(other.class) && (self <=> other) == 0
       end
 
       alias_method :==, :eql?
