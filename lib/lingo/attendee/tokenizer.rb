@@ -161,7 +161,7 @@ class Lingo
         case @cont
           when 'HTML'
             if textline =~ /^[^<>]*>/
-              yield $~[0], @cont
+              yield $&, @cont
               textline, @cont = $', nil
             else
               yield textline, @cont
@@ -169,7 +169,7 @@ class Lingo
             end
           when 'WIKI'
             if textline =~ /^[^\[\]]*\]\]/
-              yield $~[0], @cont
+              yield $&, @cont
               textline, @cont = $', nil
             else
               yield textline, @cont
@@ -177,12 +177,12 @@ class Lingo
             end
           when nil
             if !@tags && textline =~ /<[^<>]*$/
-              yield $~[0], @cont = 'HTML'
+              yield $&, @cont = 'HTML'
               textline = $`
             end
 
             if !@wiki && textline =~ /\[\[[^\[\]]*$/
-              yield $~[0], @cont = 'WIKI'
+              yield $&, @cont = 'WIKI'
               textline = $`
             end
         end
@@ -190,7 +190,7 @@ class Lingo
         until textline.empty?
           @rules.each { |name, expr|
             if textline =~ expr
-              yield $~[0], name if name != 'SPAC' || @space
+              yield $&, name if name != 'SPAC' || @space
               textline = $'
               break
             end
