@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>module Lingo::Reportable - lingo Application documentation (v1.8.1)</title>
+<title>module Lingo::Reportable - lingo Application documentation (v1.8.2)</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -125,7 +125,9 @@
   
     <li><a href="../Lingo/Attendee/Sequencer.html">Lingo::Attendee::Sequencer</a>
   
-    <li><a href="../Lingo/Attendee/Sequencer/WordSequence.html">Lingo::Attendee::Sequencer::WordSequence</a>
+    <li><a href="../Lingo/Attendee/Stemmer.html">Lingo::Attendee::Stemmer</a>
+  
+    <li><a href="../Lingo/Attendee/Stemmer/Porter.html">Lingo::Attendee::Stemmer::Porter</a>
   
     <li><a href="../Lingo/Attendee/Synonymer.html">Lingo::Attendee::Synonymer</a>
   
@@ -142,6 +144,10 @@
     <li><a href="../Lingo/Attendee/VectorFilter.html">Lingo::Attendee::VectorFilter</a>
   
     <li><a href="../Lingo/Attendee/WordSearcher.html">Lingo::Attendee::WordSearcher</a>
+  
+    <li><a href="../Lingo/BackendNotAvailableError.html">Lingo::BackendNotAvailableError</a>
+  
+    <li><a href="../Lingo/BackendNotFoundError.html">Lingo::BackendNotFoundError</a>
   
     <li><a href="../Lingo/BufferedAttendee.html">Lingo::BufferedAttendee</a>
   
@@ -185,6 +191,8 @@
   
     <li><a href="../Lingo/Database/Source/WordClass.html">Lingo::Database::Source::WordClass</a>
   
+    <li><a href="../Lingo/DatabaseError.html">Lingo::DatabaseError</a>
+  
     <li><a href="../Lingo/FileNotFoundError.html">Lingo::FileNotFoundError</a>
   
     <li><a href="../Lingo/InvalidDatabaseConfigError.html">Lingo::InvalidDatabaseConfigError</a>
@@ -209,11 +217,15 @@
   
     <li><a href="../Lingo/MissingConfigError.html">Lingo::MissingConfigError</a>
   
+    <li><a href="../Lingo/NameNotFoundError.html">Lingo::NameNotFoundError</a>
+  
     <li><a href="../Lingo/NoDatabaseConfigError.html">Lingo::NoDatabaseConfigError</a>
   
     <li><a href="../Lingo/NoWritableStoreError.html">Lingo::NoWritableStoreError</a>
   
     <li><a href="../Lingo/Reportable.html">Lingo::Reportable</a>
+  
+    <li><a href="../Lingo/ShowProgress.html">Lingo::ShowProgress</a>
   
     <li><a href="../Lingo/SourceFileNotFoundError.html">Lingo::SourceFileNotFoundError</a>
   
@@ -258,7 +270,7 @@
         
         <div class="method-heading">
           <span class="method-name">add</span><span
-            class="method-args">(counter, value)</span>
+            class="method-args">(key, val)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -270,9 +282,9 @@
 
           
           <div class="method-source-code" id="add-source">
-            <pre><span class="ruby-comment"># File lib/lingo/reportable.rb, line 40</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">add</span>(<span class="ruby-identifier">counter</span>, <span class="ruby-identifier">value</span>)
-  <span class="ruby-ivar">@counters</span>[<span class="ruby-identifier">counter</span>] <span class="ruby-operator">+=</span> <span class="ruby-identifier">value</span>
+            <pre><span class="ruby-comment"># File lib/lingo/reportable.rb, line 41</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">add</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
+  <span class="ruby-ivar">@reportable_hash</span>[<span class="ruby-identifier">key</span>] <span class="ruby-operator">+=</span> <span class="ruby-identifier">val</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- add-source -->
           
@@ -288,7 +300,7 @@
         
         <div class="method-heading">
           <span class="method-name">get</span><span
-            class="method-args">(counter)</span>
+            class="method-args">(key)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -300,9 +312,9 @@
 
           
           <div class="method-source-code" id="get-source">
-            <pre><span class="ruby-comment"># File lib/lingo/reportable.rb, line 48</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">get</span>(<span class="ruby-identifier">counter</span>)
-  <span class="ruby-ivar">@counters</span>[<span class="ruby-identifier">counter</span>]
+            <pre><span class="ruby-comment"># File lib/lingo/reportable.rb, line 49</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get</span>(<span class="ruby-identifier">key</span>)
+  <span class="ruby-ivar">@reportable_hash</span>[<span class="ruby-identifier">key</span>]
 <span class="ruby-keyword">end</span></pre>
           </div><!-- get-source -->
           
@@ -318,7 +330,7 @@
         
         <div class="method-heading">
           <span class="method-name">inc</span><span
-            class="method-args">(counter)</span>
+            class="method-args">(key)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -330,9 +342,9 @@
 
           
           <div class="method-source-code" id="inc-source">
-            <pre><span class="ruby-comment"># File lib/lingo/reportable.rb, line 36</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">inc</span>(<span class="ruby-identifier">counter</span>)
-  <span class="ruby-ivar">@counters</span>[<span class="ruby-identifier">counter</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+            <pre><span class="ruby-comment"># File lib/lingo/reportable.rb, line 37</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">inc</span>(<span class="ruby-identifier">key</span>)
+  <span class="ruby-ivar">@reportable_hash</span>[<span class="ruby-identifier">key</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- inc-source -->
           
@@ -362,7 +374,8 @@
           <div class="method-source-code" id="init_reportable-source">
             <pre><span class="ruby-comment"># File lib/lingo/reportable.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">init_reportable</span>(<span class="ruby-identifier">prefix</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-ivar">@counters</span>, <span class="ruby-ivar">@prefix</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>), <span class="ruby-identifier">prefix</span> <span class="ruby-operator">?</span> <span class="ruby-node">&quot;#{prefix}: &quot;</span> <span class="ruby-operator">:</span> <span class="ruby-string">''</span>
+  <span class="ruby-ivar">@reportable_hash</span>   = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>)
+  <span class="ruby-ivar">@reportable_prefix</span> = <span class="ruby-identifier">prefix</span> <span class="ruby-operator">?</span> <span class="ruby-node">&quot;#{prefix}: &quot;</span> <span class="ruby-operator">:</span> <span class="ruby-string">''</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- init_reportable-source -->
           
@@ -390,9 +403,10 @@
 
           
           <div class="method-source-code" id="report-source">
-            <pre><span class="ruby-comment"># File lib/lingo/reportable.rb, line 52</span>
+            <pre><span class="ruby-comment"># File lib/lingo/reportable.rb, line 53</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">report</span>
-  <span class="ruby-ivar">@counters</span>.<span class="ruby-identifier">each_with_object</span>({}) { <span class="ruby-operator">|</span>(<span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span>), <span class="ruby-identifier">r</span><span class="ruby-operator">|</span> <span class="ruby-identifier">r</span>[<span class="ruby-node">&quot;#{@prefix}#{k}&quot;</span>] = <span class="ruby-identifier">v</span> }
+  <span class="ruby-identifier">q</span> = <span class="ruby-ivar">@reportable_prefix</span>
+  <span class="ruby-ivar">@reportable_hash</span>.<span class="ruby-identifier">each_with_object</span>({}) { <span class="ruby-operator">|</span>(<span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span>), <span class="ruby-identifier">r</span><span class="ruby-operator">|</span> <span class="ruby-identifier">r</span>[<span class="ruby-node">&quot;#{q}#{k}&quot;</span>] = <span class="ruby-identifier">v</span> }
 <span class="ruby-keyword">end</span></pre>
           </div><!-- report-source -->
           
@@ -408,7 +422,7 @@
         
         <div class="method-heading">
           <span class="method-name">set</span><span
-            class="method-args">(counter, value)</span>
+            class="method-args">(key, val)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -420,9 +434,9 @@
 
           
           <div class="method-source-code" id="set-source">
-            <pre><span class="ruby-comment"># File lib/lingo/reportable.rb, line 44</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">set</span>(<span class="ruby-identifier">counter</span>, <span class="ruby-identifier">value</span>)
-  <span class="ruby-ivar">@counters</span>[<span class="ruby-identifier">counter</span>] = <span class="ruby-identifier">value</span>
+            <pre><span class="ruby-comment"># File lib/lingo/reportable.rb, line 45</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">set</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
+  <span class="ruby-ivar">@reportable_hash</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">val</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- set-source -->
           

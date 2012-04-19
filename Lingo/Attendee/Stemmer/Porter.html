@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Lingo::Database::Source::WordClass - lingo Application documentation (v1.8.2)</title>
+<title>module Lingo::Attendee::Stemmer::Porter - lingo Application documentation (v1.8.2)</title>
 
 <link type="text/css" media="screen" href="../../../rdoc.css" rel="stylesheet">
 
@@ -20,7 +20,7 @@
 <script type="text/javascript" charset="utf-8" src="../../../js/darkfish.js"></script>
 
 
-<body id="top" class="class">
+<body id="top" class="module">
 <nav id="metadata">
   <nav id="home-section" class="section">
   <h3 class="section-header">
@@ -47,7 +47,7 @@
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
   <ul>
-    <li>lib/lingo/database/source/word_class.rb
+    <li>lib/lingo/attendee/stemmer/porter.rb
   </ul>
 </nav>
 
@@ -56,13 +56,7 @@
 
   <div id="class-metadata">
     
-    <nav id="parent-class-section" class="section">
-  <h3 class="section-header">Parent</h3>
-  
-  <p class="link">self
-  
-</nav>
-
+    
     
     <!-- Method Quickref -->
 <nav id="method-list-section" class="section">
@@ -70,9 +64,7 @@
 
   <ul class="link-list">
     
-    <li><a href="#method-c-new">::new</a>
-    
-    <li><a href="#method-i-convert_line">#convert_line</a>
+    <li><a href="#method-i-stem">#stem</a>
     
   </ul>
 </nav>
@@ -238,17 +230,10 @@
 </nav>
 
 <div id="documentation">
-  <h1 class="class">class Lingo::Database::Source::WordClass</h1>
+  <h1 class="module">module Lingo::Attendee::Stemmer::Porter</h1>
 
   <div id="description" class="description">
     
-<p>Abgeleitet von <a href="../Source.html">Source</a> behandelt die Klasse
-Dateien mit dem Format <code>WordClass</code>. Eine Zeile
-<code>&quot;essen,essen #v essen #o esse #s\n&quot;</code> wird gewandelt
-in <code>[ 'essen', ['esse#s', 'essen#v', 'essen#o'] ]</code>. Der Trenner
-zwischen Schlüssel und Projektion kann über den Parameter
-<code>separator</code> geändert werden.</p>
-
   </div><!-- description -->
 
   
@@ -260,20 +245,43 @@ zwischen Schlüssel und Projektion kann über den Parameter
     
 
     
+    <!-- Constants -->
+    <section id="constants-list" class="section">
+      <h3 class="section-header">Constants</h3>
+      <dl>
+      
+        <dt id="GOTO_RE">GOTO_RE
+        
+        <dd class="description">
+        
+      
+        <dt id="RULES">RULES
+        
+        <dd class="description">
+        
+      
+        <dt id="RULE_RE">RULE_RE
+        
+        <dd class="description">
+        
+      
+      </dl>
+    </section>
+    
 
     
 
     <!-- Methods -->
     
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
-      <h3 class="section-header">Public Class Methods</h3>
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
 
     
-      <div id="method-c-new" class="method-detail ">
+      <div id="method-i-stem" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">new</span><span
-            class="method-args">(id, lingo)</span>
+          <span class="method-name">stem</span><span
+            class="method-args">(word, found = false)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -284,61 +292,72 @@ zwischen Schlüssel und Projektion kann über den Parameter
           
 
           
-          <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/source/word_class.rb, line 38</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">lingo</span>)
-  <span class="ruby-keyword">super</span>
-  <span class="ruby-ivar">@pat</span> = <span class="ruby-node">%r^(#{@wrd})#{Regexp.escape(@sep ||= ',')}((?:#{@wrd}#\w)+)$/</span>
+          <div class="method-source-code" id="stem-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/stemmer/porter.rb, line 282</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">stem</span>(<span class="ruby-identifier">word</span>, <span class="ruby-identifier">found</span> = <span class="ruby-keyword">false</span>)
+  <span class="ruby-identifier">goto</span>, <span class="ruby-identifier">conv</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">s</span>, <span class="ruby-identifier">h</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">q</span>, <span class="ruby-identifier">r</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-identifier">q</span>, <span class="ruby-identifier">r</span>.<span class="ruby-identifier">to_s</span>) } }
+
+  <span class="ruby-constant">RULES</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">rules</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">goto</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">goto</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">to_s</span>
+
+    <span class="ruby-identifier">rules</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">rule</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">case</span> <span class="ruby-identifier">rule</span>
+        <span class="ruby-keyword">when</span> <span class="ruby-constant">RULE_RE</span>
+          <span class="ruby-identifier">cond</span>, <span class="ruby-identifier">repl</span>, <span class="ruby-identifier">goto</span> = <span class="ruby-node">$1</span>, <span class="ruby-node">$3</span>, <span class="ruby-node">$4</span>
+          <span class="ruby-identifier">stem</span> = <span class="ruby-identifier">word</span>[<span class="ruby-node">%r(.+)#{$2.downcase}$/</span>, <span class="ruby-value">1</span>] <span class="ruby-keyword">or</span> <span class="ruby-keyword">next</span>
+        <span class="ruby-keyword">when</span> <span class="ruby-constant">GOTO_RE</span>
+          <span class="ruby-identifier">goto</span> = <span class="ruby-node">$1</span>
+          <span class="ruby-keyword">break</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">conv</span>[<span class="ruby-identifier">shad</span> = <span class="ruby-identifier">stem</span>.<span class="ruby-identifier">dup</span>,
+        <span class="ruby-regexp">%r[^aeiouy]/</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'c'</span>,
+        <span class="ruby-regexp">%r[aeiou]/</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'v'</span>,
+        <span class="ruby-regexp">%rcy/</span>        =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'cv'</span>,
+        <span class="ruby-regexp">%ry/</span>         =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'c'</span>
+      ]
+
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">cond</span>
+        <span class="ruby-identifier">conv</span>[<span class="ruby-identifier">cond</span>,
+          <span class="ruby-string">'m'</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">shad</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">%rvc/</span>).<span class="ruby-identifier">size</span>,
+          <span class="ruby-string">'*v*'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">shad</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">'v'</span>),
+          <span class="ruby-string">'*d'</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">shad</span>.<span class="ruby-identifier">end_with?</span>(<span class="ruby-string">'c'</span>) <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">last</span> = <span class="ruby-identifier">stem</span>[<span class="ruby-value">-1</span>]) <span class="ruby-operator">==</span> <span class="ruby-identifier">stem</span>[<span class="ruby-value">-2</span>],
+          <span class="ruby-string">'*o'</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">shad</span>.<span class="ruby-identifier">end_with?</span>(<span class="ruby-string">'cvc'</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-string">'wxy'</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">last</span>),
+          <span class="ruby-string">'and'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'&amp;&amp;'</span>,
+          <span class="ruby-string">'or'</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'||'</span>,
+          <span class="ruby-string">'not'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'!'</span>,
+          <span class="ruby-string">'='</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'=='</span>
+        ]
+
+        <span class="ruby-identifier">last</span>.<span class="ruby-identifier">upcase!</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">last</span>
+        <span class="ruby-identifier">cond</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">%r\*(\w)/</span>) { <span class="ruby-identifier">last</span> <span class="ruby-operator">==</span> <span class="ruby-node">$1</span> }
+
+        <span class="ruby-keyword">next</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">eval</span>(<span class="ruby-identifier">cond</span>)
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">found</span>, <span class="ruby-identifier">word</span> = <span class="ruby-keyword">true</span>, <span class="ruby-keyword">begin</span>
+        <span class="ruby-identifier">stem</span>[<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-constant">Integer</span>(<span class="ruby-identifier">repl</span>)]
+      <span class="ruby-keyword">rescue</span> <span class="ruby-constant">ArgumentError</span>
+        <span class="ruby-identifier">stem</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">repl</span>.<span class="ruby-identifier">downcase</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-keyword">break</span>
+    }
+  }
+
+  <span class="ruby-identifier">word</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">found</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- new-source -->
+          </div><!-- stem-source -->
           
         </div>
 
         
 
         
-      </div><!-- new-method -->
+      </div><!-- stem-method -->
 
     
-    </section><!-- public-class-method-details -->
-  
-     <section id="private-instance-5Buntitled-5D-method-details" class="method-section section">
-      <h3 class="section-header">Private Instance Methods</h3>
-
-    
-      <div id="method-i-convert_line" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">convert_line</span><span
-            class="method-args">(line, key, val)</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-
-          
-          <div class="method-source-code" id="convert_line-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/source/word_class.rb, line 45</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">convert_line</span>(<span class="ruby-identifier">line</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
-  [<span class="ruby-identifier">key</span> = <span class="ruby-identifier">key</span>.<span class="ruby-identifier">strip</span>, <span class="ruby-identifier">val</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-node">%r(\S.+?)\s*#(\w)/</span>).<span class="ruby-identifier">map!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span>, <span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
-    <span class="ruby-node">&quot;#{v unless key == v}##{c}&quot;</span>
-  }]
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- convert_line-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- convert_line-method -->
-
-    
-    </section><!-- private-instance-method-details -->
+    </section><!-- public-instance-method-details -->
   
   </section><!-- 5Buntitled-5D -->
 

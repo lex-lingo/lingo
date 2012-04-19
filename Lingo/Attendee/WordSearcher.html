@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Lingo::Attendee::WordSearcher - lingo Application documentation (v1.8.1)</title>
+<title>class Lingo::Attendee::WordSearcher - lingo Application documentation (v1.8.2)</title>
 
 <link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
 
@@ -125,7 +125,9 @@
   
     <li><a href="../../Lingo/Attendee/Sequencer.html">Lingo::Attendee::Sequencer</a>
   
-    <li><a href="../../Lingo/Attendee/Sequencer/WordSequence.html">Lingo::Attendee::Sequencer::WordSequence</a>
+    <li><a href="../../Lingo/Attendee/Stemmer.html">Lingo::Attendee::Stemmer</a>
+  
+    <li><a href="../../Lingo/Attendee/Stemmer/Porter.html">Lingo::Attendee::Stemmer::Porter</a>
   
     <li><a href="../../Lingo/Attendee/Synonymer.html">Lingo::Attendee::Synonymer</a>
   
@@ -142,6 +144,10 @@
     <li><a href="../../Lingo/Attendee/VectorFilter.html">Lingo::Attendee::VectorFilter</a>
   
     <li><a href="../../Lingo/Attendee/WordSearcher.html">Lingo::Attendee::WordSearcher</a>
+  
+    <li><a href="../../Lingo/BackendNotAvailableError.html">Lingo::BackendNotAvailableError</a>
+  
+    <li><a href="../../Lingo/BackendNotFoundError.html">Lingo::BackendNotFoundError</a>
   
     <li><a href="../../Lingo/BufferedAttendee.html">Lingo::BufferedAttendee</a>
   
@@ -185,6 +191,8 @@
   
     <li><a href="../../Lingo/Database/Source/WordClass.html">Lingo::Database::Source::WordClass</a>
   
+    <li><a href="../../Lingo/DatabaseError.html">Lingo::DatabaseError</a>
+  
     <li><a href="../../Lingo/FileNotFoundError.html">Lingo::FileNotFoundError</a>
   
     <li><a href="../../Lingo/InvalidDatabaseConfigError.html">Lingo::InvalidDatabaseConfigError</a>
@@ -209,11 +217,15 @@
   
     <li><a href="../../Lingo/MissingConfigError.html">Lingo::MissingConfigError</a>
   
+    <li><a href="../../Lingo/NameNotFoundError.html">Lingo::NameNotFoundError</a>
+  
     <li><a href="../../Lingo/NoDatabaseConfigError.html">Lingo::NoDatabaseConfigError</a>
   
     <li><a href="../../Lingo/NoWritableStoreError.html">Lingo::NoWritableStoreError</a>
   
     <li><a href="../../Lingo/Reportable.html">Lingo::Reportable</a>
+  
+    <li><a href="../../Lingo/ShowProgress.html">Lingo::ShowProgress</a>
   
     <li><a href="../../Lingo/SourceFileNotFoundError.html">Lingo::SourceFileNotFoundError</a>
   
@@ -319,7 +331,7 @@ out&gt; *EOF('test.txt')</pre>
         
         <div class="method-heading">
           <span class="method-name">control</span><span
-            class="method-args">(cmd, par)</span>
+            class="method-args">(cmd, param)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -332,10 +344,8 @@ out&gt; *EOF('test.txt')</pre>
           
           <div class="method-source-code" id="control-source">
             <pre><span class="ruby-comment"># File lib/lingo/attendee/word_searcher.rb, line 73</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">par</span>)
-  <span class="ruby-ivar">@dic</span>.<span class="ruby-identifier">report</span>.<span class="ruby-identifier">each_pair</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">set</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>)
-  } <span class="ruby-keyword">if</span> <span class="ruby-identifier">cmd</span> <span class="ruby-operator">==</span> <span class="ruby-constant">STR_CMD_STATUS</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">param</span>)
+  <span class="ruby-identifier">report_on</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-ivar">@dic</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- control-source -->
           
@@ -393,14 +403,15 @@ out&gt; *EOF('test.txt')</pre>
 
           
           <div class="method-source-code" id="process-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/word_searcher.rb, line 79</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/word_searcher.rb, line 77</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">process</span>(<span class="ruby-identifier">obj</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Token</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-constant">TA_WORD</span>
     <span class="ruby-identifier">inc</span>(<span class="ruby-string">'Anzahl gesuchter Wörter'</span>)
-    <span class="ruby-identifier">word</span> = <span class="ruby-ivar">@dic</span>.<span class="ruby-identifier">find_word</span>(<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">form</span>)
-    <span class="ruby-identifier">inc</span>(<span class="ruby-string">'Anzahl gefundener Wörter'</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">word</span>.<span class="ruby-identifier">unknown?</span>
-    <span class="ruby-identifier">obj</span> = <span class="ruby-identifier">word</span>
+
+    <span class="ruby-identifier">obj</span> = <span class="ruby-ivar">@dic</span>.<span class="ruby-identifier">find_word</span>(<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">form</span>)
+    <span class="ruby-identifier">inc</span>(<span class="ruby-string">'Anzahl gefundener Wörter'</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">unknown?</span>
   <span class="ruby-keyword">end</span>
+
   <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">obj</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- process-source -->

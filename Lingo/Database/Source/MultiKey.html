@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Lingo::Database::Source::MultiKey - lingo Application documentation (v1.8.1)</title>
+<title>class Lingo::Database::Source::MultiKey - lingo Application documentation (v1.8.2)</title>
 
 <link type="text/css" media="screen" href="../../../rdoc.css" rel="stylesheet">
 
@@ -125,7 +125,9 @@
   
     <li><a href="../../../Lingo/Attendee/Sequencer.html">Lingo::Attendee::Sequencer</a>
   
-    <li><a href="../../../Lingo/Attendee/Sequencer/WordSequence.html">Lingo::Attendee::Sequencer::WordSequence</a>
+    <li><a href="../../../Lingo/Attendee/Stemmer.html">Lingo::Attendee::Stemmer</a>
+  
+    <li><a href="../../../Lingo/Attendee/Stemmer/Porter.html">Lingo::Attendee::Stemmer::Porter</a>
   
     <li><a href="../../../Lingo/Attendee/Synonymer.html">Lingo::Attendee::Synonymer</a>
   
@@ -142,6 +144,10 @@
     <li><a href="../../../Lingo/Attendee/VectorFilter.html">Lingo::Attendee::VectorFilter</a>
   
     <li><a href="../../../Lingo/Attendee/WordSearcher.html">Lingo::Attendee::WordSearcher</a>
+  
+    <li><a href="../../../Lingo/BackendNotAvailableError.html">Lingo::BackendNotAvailableError</a>
+  
+    <li><a href="../../../Lingo/BackendNotFoundError.html">Lingo::BackendNotFoundError</a>
   
     <li><a href="../../../Lingo/BufferedAttendee.html">Lingo::BufferedAttendee</a>
   
@@ -185,6 +191,8 @@
   
     <li><a href="../../../Lingo/Database/Source/WordClass.html">Lingo::Database::Source::WordClass</a>
   
+    <li><a href="../../../Lingo/DatabaseError.html">Lingo::DatabaseError</a>
+  
     <li><a href="../../../Lingo/FileNotFoundError.html">Lingo::FileNotFoundError</a>
   
     <li><a href="../../../Lingo/InvalidDatabaseConfigError.html">Lingo::InvalidDatabaseConfigError</a>
@@ -209,11 +217,15 @@
   
     <li><a href="../../../Lingo/MissingConfigError.html">Lingo::MissingConfigError</a>
   
+    <li><a href="../../../Lingo/NameNotFoundError.html">Lingo::NameNotFoundError</a>
+  
     <li><a href="../../../Lingo/NoDatabaseConfigError.html">Lingo::NoDatabaseConfigError</a>
   
     <li><a href="../../../Lingo/NoWritableStoreError.html">Lingo::NoWritableStoreError</a>
   
     <li><a href="../../../Lingo/Reportable.html">Lingo::Reportable</a>
+  
+    <li><a href="../../../Lingo/ShowProgress.html">Lingo::ShowProgress</a>
   
     <li><a href="../../../Lingo/SourceFileNotFoundError.html">Lingo::SourceFileNotFoundError</a>
   
@@ -282,9 +294,7 @@ Trenner zwischen Schlüssel und Projektion kann über den Parameter
             <pre><span class="ruby-comment"># File lib/lingo/database/source/multi_key.rb, line 40</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">lingo</span>)
   <span class="ruby-keyword">super</span>
-
-  <span class="ruby-ivar">@separator</span> = <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">'separator'</span>, <span class="ruby-string">';'</span>)
-  <span class="ruby-ivar">@line_pattern</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">'^'</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@legal_word</span> <span class="ruby-operator">+</span> <span class="ruby-string">'(?:'</span> <span class="ruby-operator">+</span> <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">escape</span>(<span class="ruby-ivar">@separator</span>) <span class="ruby-operator">+</span> <span class="ruby-ivar">@legal_word</span> <span class="ruby-operator">+</span> <span class="ruby-string">')*$'</span>)
+  <span class="ruby-ivar">@pat</span> = <span class="ruby-node">%r^#{@wrd}(?:#{Regexp.escape(@sep ||= ';')}#{@wrd})*$/</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- new-source -->
           
@@ -318,7 +328,7 @@ Trenner zwischen Schlüssel und Projektion kann über den Parameter
 
           
           <div class="method-source-code" id="set-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/source/multi_key.rb, line 47</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database/source/multi_key.rb, line 45</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">set</span>(<span class="ruby-identifier">db</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
   <span class="ruby-identifier">val</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">db</span>[<span class="ruby-identifier">v</span>] = [<span class="ruby-identifier">key</span>] }
 <span class="ruby-keyword">end</span></pre>
@@ -354,10 +364,10 @@ Trenner zwischen Schlüssel und Projektion kann über den Parameter
 
           
           <div class="method-source-code" id="convert_line-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/source/multi_key.rb, line 53</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database/source/multi_key.rb, line 51</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">convert_line</span>(<span class="ruby-identifier">line</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
-  <span class="ruby-identifier">values</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-ivar">@separator</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">value</span><span class="ruby-operator">|</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">strip</span> }
-  [<span class="ruby-identifier">values</span>[<span class="ruby-value">0</span>], <span class="ruby-identifier">values</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>]]
+  <span class="ruby-identifier">values</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-ivar">@sep</span>).<span class="ruby-identifier">each</span>(&amp;<span class="ruby-value">:strip!</span>)
+  [<span class="ruby-identifier">values</span>.<span class="ruby-identifier">shift</span>, <span class="ruby-identifier">values</span>]
 <span class="ruby-keyword">end</span></pre>
           </div><!-- convert_line-source -->
           

@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Lingo::Attendee::TextWriter - lingo Application documentation (v1.8.1)</title>
+<title>class Lingo::Attendee::TextWriter - lingo Application documentation (v1.8.2)</title>
 
 <link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
 
@@ -129,7 +129,9 @@
   
     <li><a href="../../Lingo/Attendee/Sequencer.html">Lingo::Attendee::Sequencer</a>
   
-    <li><a href="../../Lingo/Attendee/Sequencer/WordSequence.html">Lingo::Attendee::Sequencer::WordSequence</a>
+    <li><a href="../../Lingo/Attendee/Stemmer.html">Lingo::Attendee::Stemmer</a>
+  
+    <li><a href="../../Lingo/Attendee/Stemmer/Porter.html">Lingo::Attendee::Stemmer::Porter</a>
   
     <li><a href="../../Lingo/Attendee/Synonymer.html">Lingo::Attendee::Synonymer</a>
   
@@ -146,6 +148,10 @@
     <li><a href="../../Lingo/Attendee/VectorFilter.html">Lingo::Attendee::VectorFilter</a>
   
     <li><a href="../../Lingo/Attendee/WordSearcher.html">Lingo::Attendee::WordSearcher</a>
+  
+    <li><a href="../../Lingo/BackendNotAvailableError.html">Lingo::BackendNotAvailableError</a>
+  
+    <li><a href="../../Lingo/BackendNotFoundError.html">Lingo::BackendNotFoundError</a>
   
     <li><a href="../../Lingo/BufferedAttendee.html">Lingo::BufferedAttendee</a>
   
@@ -189,6 +195,8 @@
   
     <li><a href="../../Lingo/Database/Source/WordClass.html">Lingo::Database::Source::WordClass</a>
   
+    <li><a href="../../Lingo/DatabaseError.html">Lingo::DatabaseError</a>
+  
     <li><a href="../../Lingo/FileNotFoundError.html">Lingo::FileNotFoundError</a>
   
     <li><a href="../../Lingo/InvalidDatabaseConfigError.html">Lingo::InvalidDatabaseConfigError</a>
@@ -213,11 +221,15 @@
   
     <li><a href="../../Lingo/MissingConfigError.html">Lingo::MissingConfigError</a>
   
+    <li><a href="../../Lingo/NameNotFoundError.html">Lingo::NameNotFoundError</a>
+  
     <li><a href="../../Lingo/NoDatabaseConfigError.html">Lingo::NoDatabaseConfigError</a>
   
     <li><a href="../../Lingo/NoWritableStoreError.html">Lingo::NoWritableStoreError</a>
   
     <li><a href="../../Lingo/Reportable.html">Lingo::Reportable</a>
+  
+    <li><a href="../../Lingo/ShowProgress.html">Lingo::ShowProgress</a>
   
     <li><a href="../../Lingo/SourceFileNotFoundError.html">Lingo::SourceFileNotFoundError</a>
   
@@ -330,7 +342,7 @@ Textwriters mit der Ablaufkonfiguration <code>t1.cfg</code></p>
         
         <div class="method-heading">
           <span class="method-name">control</span><span
-            class="method-args">(cmd, par)</span>
+            class="method-args">(cmd, param)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -342,8 +354,8 @@ Textwriters mit der Ablaufkonfiguration <code>t1.cfg</code></p>
 
           
           <div class="method-source-code" id="control-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_writer.rb, line 88</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">par</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_writer.rb, line 92</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">param</span>)
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">cmd</span>
     <span class="ruby-keyword">when</span> <span class="ruby-constant">STR_CMD_LIR</span>
       <span class="ruby-ivar">@lir</span> = <span class="ruby-keyword">true</span>
@@ -351,34 +363,33 @@ Textwriters mit der Ablaufkonfiguration <code>t1.cfg</code></p>
       <span class="ruby-ivar">@no_sep</span> = <span class="ruby-keyword">true</span>
 
       <span class="ruby-keyword">if</span> <span class="ruby-identifier">stdout?</span>(<span class="ruby-ivar">@ext</span>)
-        <span class="ruby-ivar">@filename</span> = <span class="ruby-ivar">@ext</span>
-        <span class="ruby-ivar">@file</span> = <span class="ruby-ivar">@lingo</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">stdout</span>
+        <span class="ruby-ivar">@filename</span>, <span class="ruby-ivar">@file</span> = <span class="ruby-ivar">@ext</span>, <span class="ruby-ivar">@lingo</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">stdout</span>
       <span class="ruby-keyword">else</span>
-        <span class="ruby-ivar">@filename</span> = <span class="ruby-identifier">par</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">%r(\.[^.]+)?$/</span>, <span class="ruby-string">'.'</span><span class="ruby-operator">+</span><span class="ruby-ivar">@ext</span>)
-        <span class="ruby-ivar">@file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@filename</span>,<span class="ruby-string">'w'</span>)
         <span class="ruby-identifier">inc</span>(<span class="ruby-string">'Anzahl Dateien'</span>)
+        <span class="ruby-ivar">@file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-ivar">@filename</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">set_ext</span>(<span class="ruby-identifier">param</span>, <span class="ruby-node">&quot;.#{@ext}&quot;</span>), <span class="ruby-string">'w'</span>)
       <span class="ruby-keyword">end</span>
 
-      <span class="ruby-ivar">@lir_rec_no</span> = <span class="ruby-string">''</span>
-      <span class="ruby-ivar">@lir_rec_buf</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-ivar">@lir_rec_no</span>, <span class="ruby-ivar">@lir_rec_buf</span> = <span class="ruby-string">''</span>, []
     <span class="ruby-keyword">when</span> <span class="ruby-constant">STR_CMD_RECORD</span>
       <span class="ruby-ivar">@no_sep</span> = <span class="ruby-keyword">true</span>
+
       <span class="ruby-keyword">if</span> <span class="ruby-ivar">@lir</span>
         <span class="ruby-identifier">flush_lir_buffer</span>
-        <span class="ruby-ivar">@lir_rec_no</span> = <span class="ruby-identifier">par</span>
+        <span class="ruby-ivar">@lir_rec_no</span> = <span class="ruby-identifier">param</span>
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">when</span> <span class="ruby-constant">STR_CMD_EOL</span>
       <span class="ruby-ivar">@no_sep</span> = <span class="ruby-keyword">true</span>
+
       <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@lir</span>
-        <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">puts</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@no_puts</span> <span class="ruby-comment"># unless @sep==&quot;\n&quot;</span>
         <span class="ruby-identifier">inc</span>(<span class="ruby-string">'Anzahl Zeilen'</span>)
+        <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">puts</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@no_puts</span>
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">when</span> <span class="ruby-constant">STR_CMD_EOF</span>
       <span class="ruby-identifier">flush_lir_buffer</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@lir</span>
 
       <span class="ruby-keyword">unless</span> <span class="ruby-identifier">stdout?</span>(<span class="ruby-ivar">@filename</span>)
+        <span class="ruby-identifier">add</span>(<span class="ruby-string">'Anzahl Bytes'</span>, <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">size</span>)
         <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">close</span>
-        <span class="ruby-identifier">add</span>(<span class="ruby-string">'Anzahl Bytes'</span>, <span class="ruby-constant">File</span>.<span class="ruby-identifier">stat</span>(<span class="ruby-ivar">@filename</span>).<span class="ruby-identifier">size</span>)
       <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
@@ -412,7 +423,11 @@ Textwriters mit der Ablaufkonfiguration <code>t1.cfg</code></p>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">init</span>
   <span class="ruby-ivar">@ext</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">'ext'</span>, <span class="ruby-string">'txt2'</span>)
   <span class="ruby-ivar">@lir</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">'lir-format'</span>, <span class="ruby-keyword">false</span>)
-  <span class="ruby-ivar">@sep</span> = <span class="ruby-ivar">@lir</span> <span class="ruby-operator">?</span> <span class="ruby-string">' '</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">eval</span>(<span class="ruby-node">&quot;\&quot;#{@config['sep'] || ' '}\&quot;&quot;</span>)
+
+  <span class="ruby-ivar">@sep</span>   = <span class="ruby-ivar">@config</span>[<span class="ruby-string">'sep'</span>] <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@lir</span>
+  <span class="ruby-ivar">@sep</span> <span class="ruby-operator">&amp;&amp;=</span> <span class="ruby-ivar">@sep</span>.<span class="ruby-identifier">evaluate</span>
+  <span class="ruby-ivar">@sep</span> <span class="ruby-operator">||=</span> <span class="ruby-string">' '</span>
+
   <span class="ruby-ivar">@no_sep</span>, <span class="ruby-ivar">@no_puts</span> = <span class="ruby-keyword">true</span>, <span class="ruby-keyword">false</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- init-source -->
@@ -441,18 +456,13 @@ Textwriters mit der Ablaufkonfiguration <code>t1.cfg</code></p>
 
           
           <div class="method-source-code" id="process-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_writer.rb, line 128</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_writer.rb, line 131</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">process</span>(<span class="ruby-identifier">obj</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@lir</span>
-    <span class="ruby-ivar">@lir_rec_buf</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Token</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">form</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">to_s</span>)
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">print</span> <span class="ruby-ivar">@sep</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@no_sep</span>
-    <span class="ruby-ivar">@no_sep</span>=<span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@no_sep</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Word</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Token</span>)
-      <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">print</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">form</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">print</span> <span class="ruby-identifier">obj</span>
-    <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">obj</span> = <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">form</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">WordForm</span>)
+
+  <span class="ruby-ivar">@lir</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@lir_rec_buf</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">obj</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">begin</span>
+    <span class="ruby-ivar">@no_sep</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@no_sep</span> = <span class="ruby-keyword">false</span> <span class="ruby-operator">:</span> <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">print</span>(<span class="ruby-ivar">@sep</span>)
+    <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">print</span>(<span class="ruby-identifier">obj</span>)
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- process-source -->
@@ -487,15 +497,14 @@ Textwriters mit der Ablaufkonfiguration <code>t1.cfg</code></p>
 
           
           <div class="method-source-code" id="flush_lir_buffer-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_writer.rb, line 144</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_writer.rb, line 142</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">flush_lir_buffer</span>
   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@lir_rec_no</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@lir_rec_buf</span>.<span class="ruby-identifier">empty?</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@sep</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r\n/</span>
-      <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">print</span> <span class="ruby-string">'*'</span>, <span class="ruby-ivar">@lir_rec_no</span>, <span class="ruby-string">&quot;\n&quot;</span>, <span class="ruby-ivar">@lir_rec_buf</span>.<span class="ruby-identifier">join</span>(<span class="ruby-ivar">@sep</span>), <span class="ruby-string">&quot;\n&quot;</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">print</span> <span class="ruby-ivar">@lir_rec_no</span>, <span class="ruby-string">'*'</span>, <span class="ruby-ivar">@lir_rec_buf</span>.<span class="ruby-identifier">join</span>(<span class="ruby-ivar">@sep</span>), <span class="ruby-string">&quot;\n&quot;</span>
-    <span class="ruby-keyword">end</span>
+    <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">print</span>(*[<span class="ruby-ivar">@lir_rec_no</span>, <span class="ruby-ivar">@lir_rec_buf</span>.<span class="ruby-identifier">join</span>(<span class="ruby-ivar">@sep</span>), <span class="ruby-string">&quot;\n&quot;</span>].<span class="ruby-identifier">tap</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">buf</span><span class="ruby-operator">|</span>
+      <span class="ruby-ivar">@sep</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r\n/</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">buf</span>.<span class="ruby-identifier">insert</span>(<span class="ruby-value">1</span>, <span class="ruby-string">&quot;\n&quot;</span>).<span class="ruby-identifier">unshift</span>(<span class="ruby-string">'*'</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">buf</span>.<span class="ruby-identifier">insert</span>(<span class="ruby-value">1</span>, <span class="ruby-string">'*'</span>)
+    })
   <span class="ruby-keyword">end</span>
+
   <span class="ruby-ivar">@lir_rec_no</span> = <span class="ruby-string">''</span>
   <span class="ruby-ivar">@lir_rec_buf</span>.<span class="ruby-identifier">clear</span>
 <span class="ruby-keyword">end</span></pre>
@@ -525,7 +534,7 @@ Textwriters mit der Ablaufkonfiguration <code>t1.cfg</code></p>
 
           
           <div class="method-source-code" id="stdout-3F-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_writer.rb, line 156</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_writer.rb, line 153</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">stdout?</span>(<span class="ruby-identifier">filename</span>)
   <span class="ruby-node">%w[STDOUT -]</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">filename</span>)
 <span class="ruby-keyword">end</span></pre>

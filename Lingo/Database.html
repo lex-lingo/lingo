@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Lingo::Database - lingo Application documentation (v1.8.1)</title>
+<title>class Lingo::Database - lingo Application documentation (v1.8.2)</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -98,6 +98,8 @@
     
     <li><a href="#method-c-open">::open</a>
     
+    <li><a href="#method-c-register">::register</a>
+    
     <li><a href="#method-i-5B-5D">#[]</a>
     
     <li><a href="#method-i-5B-5D-3D">#[]=</a>
@@ -114,7 +116,7 @@
     
     <li><a href="#method-i-_val">#_val</a>
     
-    <li><a href="#method-i-backend">#backend</a>
+    <li><a href="#method-i-backend_from_file">#backend_from_file</a>
     
     <li><a href="#method-i-close">#close</a>
     
@@ -124,6 +126,8 @@
     
     <li><a href="#method-i-create">#create</a>
     
+    <li><a href="#method-i-get_backend">#get_backend</a>
+    
     <li><a href="#method-i-open">#open</a>
     
     <li><a href="#method-i-to_h">#to_h</a>
@@ -131,6 +135,10 @@
     <li><a href="#method-i-uptodate-21">#uptodate!</a>
     
     <li><a href="#method-i-uptodate-3F">#uptodate?</a>
+    
+    <li><a href="#method-i-use_backend">#use_backend</a>
+    
+    <li><a href="#method-i-warn">#warn</a>
     
   </ul>
 </nav>
@@ -181,7 +189,9 @@
   
     <li><a href="../Lingo/Attendee/Sequencer.html">Lingo::Attendee::Sequencer</a>
   
-    <li><a href="../Lingo/Attendee/Sequencer/WordSequence.html">Lingo::Attendee::Sequencer::WordSequence</a>
+    <li><a href="../Lingo/Attendee/Stemmer.html">Lingo::Attendee::Stemmer</a>
+  
+    <li><a href="../Lingo/Attendee/Stemmer/Porter.html">Lingo::Attendee::Stemmer::Porter</a>
   
     <li><a href="../Lingo/Attendee/Synonymer.html">Lingo::Attendee::Synonymer</a>
   
@@ -198,6 +208,10 @@
     <li><a href="../Lingo/Attendee/VectorFilter.html">Lingo::Attendee::VectorFilter</a>
   
     <li><a href="../Lingo/Attendee/WordSearcher.html">Lingo::Attendee::WordSearcher</a>
+  
+    <li><a href="../Lingo/BackendNotAvailableError.html">Lingo::BackendNotAvailableError</a>
+  
+    <li><a href="../Lingo/BackendNotFoundError.html">Lingo::BackendNotFoundError</a>
   
     <li><a href="../Lingo/BufferedAttendee.html">Lingo::BufferedAttendee</a>
   
@@ -241,6 +255,8 @@
   
     <li><a href="../Lingo/Database/Source/WordClass.html">Lingo::Database::Source::WordClass</a>
   
+    <li><a href="../Lingo/DatabaseError.html">Lingo::DatabaseError</a>
+  
     <li><a href="../Lingo/FileNotFoundError.html">Lingo::FileNotFoundError</a>
   
     <li><a href="../Lingo/InvalidDatabaseConfigError.html">Lingo::InvalidDatabaseConfigError</a>
@@ -265,11 +281,15 @@
   
     <li><a href="../Lingo/MissingConfigError.html">Lingo::MissingConfigError</a>
   
+    <li><a href="../Lingo/NameNotFoundError.html">Lingo::NameNotFoundError</a>
+  
     <li><a href="../Lingo/NoDatabaseConfigError.html">Lingo::NoDatabaseConfigError</a>
   
     <li><a href="../Lingo/NoWritableStoreError.html">Lingo::NoWritableStoreError</a>
   
     <li><a href="../Lingo/Reportable.html">Lingo::Reportable</a>
+  
+    <li><a href="../Lingo/ShowProgress.html">Lingo::ShowProgress</a>
   
     <li><a href="../Lingo/SourceFileNotFoundError.html">Lingo::SourceFileNotFoundError</a>
   
@@ -318,12 +338,22 @@ Sprachkonfigurationsdatei <code>de.lang</code> unter
         <dd class="description">
         
       
+        <dt id="BACKEND_BY_EXT">BACKEND_BY_EXT
+        
+        <dd class="description">
+        
+      
         <dt id="FLD_SEP">FLD_SEP
         
         <dd class="description">
         
       
         <dt id="IDX_REF">IDX_REF
+        
+        <dd class="description">
+        
+      
+        <dt id="IDX_REF_ESC">IDX_REF_ESC
         
         <dd class="description">
         
@@ -338,6 +368,11 @@ Sprachkonfigurationsdatei <code>de.lang</code> unter
         <dd class="description">
         
       
+        <dt id="KEY_REF_ESC">KEY_REF_ESC
+        
+        <dd class="description">
+        
+      
         <dt id="SYS_KEY">SYS_KEY
         
         <dd class="description">
@@ -347,6 +382,26 @@ Sprachkonfigurationsdatei <code>de.lang</code> unter
     </section>
     
 
+    
+    <!-- Attributes -->
+    <section id="attribute-method-details" class="method-section section">
+      <h3 class="section-header">Attributes</h3>
+
+      
+      <div id="attribute-i-backend" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">backend</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+    </section><!-- attribute-method-details -->
     
 
     <!-- Methods -->
@@ -371,26 +426,26 @@ Sprachkonfigurationsdatei <code>de.lang</code> unter
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 64</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 74</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">lingo</span>)
-  <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">lingo</span>.<span class="ruby-identifier">database_config</span>(<span class="ruby-identifier">id</span>)
+  <span class="ruby-ivar">@id</span>, <span class="ruby-ivar">@lingo</span>, <span class="ruby-ivar">@config</span>, <span class="ruby-ivar">@db</span> = <span class="ruby-identifier">id</span>, <span class="ruby-identifier">lingo</span>, <span class="ruby-identifier">lingo</span>.<span class="ruby-identifier">database_config</span>(<span class="ruby-identifier">id</span>), <span class="ruby-keyword">nil</span>
 
-  <span class="ruby-ivar">@id</span>, <span class="ruby-ivar">@lingo</span> = <span class="ruby-identifier">id</span>, <span class="ruby-identifier">lingo</span>
-  <span class="ruby-ivar">@src_file</span>   = <span class="ruby-constant">Lingo</span>.<span class="ruby-identifier">find</span>(<span class="ruby-value">:dict</span>, <span class="ruby-ivar">@config</span>[<span class="ruby-string">'name'</span>])
-  <span class="ruby-ivar">@crypter</span>    = <span class="ruby-constant">Crypter</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">'crypt'</span>)
+  <span class="ruby-ivar">@srcfile</span> = <span class="ruby-constant">Lingo</span>.<span class="ruby-identifier">find</span>(<span class="ruby-value">:dict</span>, <span class="ruby-ivar">@config</span>[<span class="ruby-string">'name'</span>], <span class="ruby-identifier">relax</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>)
+  <span class="ruby-ivar">@crypter</span> = <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">'crypt'</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">Crypter</span>.<span class="ruby-identifier">new</span>
 
   <span class="ruby-keyword">begin</span>
-    <span class="ruby-ivar">@dbm_name</span> = <span class="ruby-constant">Lingo</span>.<span class="ruby-identifier">find</span>(<span class="ruby-value">:store</span>, <span class="ruby-ivar">@src_file</span>)
-    <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-ivar">@dbm_name</span>))
+    <span class="ruby-ivar">@stofile</span> = <span class="ruby-constant">Lingo</span>.<span class="ruby-identifier">find</span>(<span class="ruby-value">:store</span>, <span class="ruby-ivar">@srcfile</span>)
+    <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-ivar">@stofile</span>))
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">SourceFileNotFoundError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">err</span>
+    <span class="ruby-ivar">@stofile</span> = <span class="ruby-identifier">skip_ext</span> = <span class="ruby-identifier">err</span>.<span class="ruby-identifier">id</span>
+    <span class="ruby-identifier">backend</span> = <span class="ruby-identifier">backend_from_file</span>(<span class="ruby-ivar">@stofile</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">err</span>.<span class="ruby-identifier">name</span>
   <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NoWritableStoreError</span>
-    <span class="ruby-ivar">@backend</span>  = <span class="ruby-constant">HashStore</span>
+    <span class="ruby-identifier">backend</span> = <span class="ruby-constant">HashStore</span>
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-identifier">extend</span>(<span class="ruby-identifier">backend</span>)
-
-  <span class="ruby-ivar">@dbm_name</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">store_ext</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:store_ext</span>, <span class="ruby-keyword">true</span>)
-
+  <span class="ruby-identifier">use_backend</span>(<span class="ruby-identifier">backend</span>, <span class="ruby-identifier">skip_ext</span>)
   <span class="ruby-identifier">init_cachable</span>
+
   <span class="ruby-identifier">convert</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">uptodate?</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- new-source -->
@@ -419,8 +474,8 @@ Sprachkonfigurationsdatei <code>de.lang</code> unter
 
           
           <div class="method-source-code" id="open-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 60</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">open</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">open</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">new</span>(*<span class="ruby-identifier">args</span>).<span class="ruby-identifier">open</span>(&amp;<span class="ruby-identifier">block</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- open-source -->
@@ -431,6 +486,40 @@ Sprachkonfigurationsdatei <code>de.lang</code> unter
 
         
       </div><!-- open-method -->
+
+    
+      <div id="method-c-register" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">register</span><span
+            class="method-args">(klass, ext, prio = -1, meth = true)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="register-source">
+            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">register</span>(<span class="ruby-identifier">klass</span>, <span class="ruby-identifier">ext</span>, <span class="ruby-identifier">prio</span> = <span class="ruby-value">-1</span>, <span class="ruby-identifier">meth</span> = <span class="ruby-keyword">true</span>)
+  <span class="ruby-constant">BACKENDS</span>.<span class="ruby-identifier">insert</span>(<span class="ruby-identifier">prio</span>, <span class="ruby-identifier">name</span> = <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">name</span>[<span class="ruby-regexp">%r::(\w+)Store\z/</span>, <span class="ruby-value">1</span>])
+  <span class="ruby-constant">Array</span>(<span class="ruby-identifier">ext</span>).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-constant">BACKEND_BY_EXT</span>[<span class="ruby-identifier">i</span>.<span class="ruby-identifier">prepend</span>(<span class="ruby-string">'.'</span>)] = <span class="ruby-identifier">name</span> }
+
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">const_set</span>(<span class="ruby-value">:EXT</span>, <span class="ruby-identifier">ext</span>)
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">class_eval</span>(<span class="ruby-string">'def store_ext; EXT; end'</span>, <span class="ruby-keyword">__FILE__</span>, <span class="ruby-keyword">__LINE__</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">meth</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- register-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- register-method -->
 
     
     </section><!-- public-class-method-details -->
@@ -455,7 +544,7 @@ Sprachkonfigurationsdatei <code>de.lang</code> unter
 
           
           <div class="method-source-code" id="5B-5D-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 116</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 122</span>
 <span class="ruby-keyword">def</span> <span class="ruby-operator">[]</span>(<span class="ruby-identifier">key</span>)
   <span class="ruby-identifier">val</span> = <span class="ruby-identifier">_val</span>(<span class="ruby-identifier">key</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">closed?</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">val</span>
@@ -491,7 +580,7 @@ Sprachkonfigurationsdatei <code>de.lang</code> unter
 
           
           <div class="method-source-code" id="5B-5D-3D-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 126</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 132</span>
 <span class="ruby-keyword">def</span> <span class="ruby-operator">[]=</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">closed?</span>
 
@@ -502,10 +591,8 @@ Sprachkonfigurationsdatei <code>de.lang</code> unter
   <span class="ruby-identifier">val</span>.<span class="ruby-identifier">uniq!</span>
   <span class="ruby-identifier">store</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
 
-  <span class="ruby-identifier">val</span> = <span class="ruby-identifier">val</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">FLD_SEP</span>)
-  <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span> = <span class="ruby-ivar">@crypter</span>.<span class="ruby-identifier">encode</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@crypter</span>
-
-  <span class="ruby-identifier">_set</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
+  <span class="ruby-identifier">arg</span> = [<span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">FLD_SEP</span>)]
+  <span class="ruby-identifier">_set</span>(*<span class="ruby-ivar">@crypter</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@crypter</span>.<span class="ruby-identifier">encode</span>(*<span class="ruby-identifier">arg</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">arg</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- 5B-5D-3D-source -->
           
@@ -515,38 +602,6 @@ Sprachkonfigurationsdatei <code>de.lang</code> unter
 
         
       </div><!-- 5B-5D-3D-method -->
-
-    
-      <div id="method-i-backend" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">backend</span><span
-            class="method-args">()</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-
-          
-          <div class="method-source-code" id="backend-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 86</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">backend</span>
-  <span class="ruby-ivar">@backend</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">BACKENDS</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">mod</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">break</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-node">&quot;#{mod}Store&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-constant">Object</span>.<span class="ruby-identifier">const_defined?</span>(<span class="ruby-identifier">mod</span>)
-  } <span class="ruby-operator">||</span> <span class="ruby-constant">HashStore</span>
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- backend-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- backend-method -->
 
     
       <div id="method-i-close" class="method-detail ">
@@ -565,7 +620,7 @@ Sprachkonfigurationsdatei <code>de.lang</code> unter
 
           
           <div class="method-source-code" id="close-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 103</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 109</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">close</span>
   <span class="ruby-ivar">@db</span>.<span class="ruby-identifier">close</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">closed?</span>
   <span class="ruby-ivar">@db</span> = <span class="ruby-keyword">nil</span>
@@ -598,7 +653,7 @@ Sprachkonfigurationsdatei <code>de.lang</code> unter
 
           
           <div class="method-source-code" id="closed-3F-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 92</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 96</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">closed?</span>
   <span class="ruby-ivar">@db</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">_closed?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -628,10 +683,12 @@ Sprachkonfigurationsdatei <code>de.lang</code> unter
 
           
           <div class="method-source-code" id="open-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 96</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 100</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">open</span>
   <span class="ruby-ivar">@db</span> = <span class="ruby-identifier">_open</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">closed?</span>
   <span class="ruby-identifier">block_given?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">yield</span>(<span class="ruby-keyword">self</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">rescue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">err</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">DatabaseError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:open</span>, <span class="ruby-ivar">@stofile</span>, <span class="ruby-identifier">err</span>)
 <span class="ruby-keyword">ensure</span>
   <span class="ruby-identifier">close</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@db</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">block_given?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -661,7 +718,7 @@ Sprachkonfigurationsdatei <code>de.lang</code> unter
 
           
           <div class="method-source-code" id="to_h-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 110</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 116</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_h</span>
   {}.<span class="ruby-identifier">tap</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">hash</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@db</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">key</span>.<span class="ruby-identifier">force_encoding</span>(<span class="ruby-constant">ENC</span>).<span class="ruby-identifier">freeze</span>] = <span class="ruby-identifier">val</span>.<span class="ruby-identifier">force_encoding</span>(<span class="ruby-constant">ENC</span>)
@@ -699,9 +756,9 @@ Sprachkonfigurationsdatei <code>de.lang</code> unter
 
           
           <div class="method-source-code" id="_clear-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 161</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 187</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">_clear</span>
-  <span class="ruby-constant">File</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-ivar">@dbm_name</span>) <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-ivar">@dbm_name</span>)
+  <span class="ruby-constant">File</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-ivar">@stofile</span>) <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-ivar">@stofile</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- _clear-source -->
           
@@ -729,7 +786,7 @@ Sprachkonfigurationsdatei <code>de.lang</code> unter
 
           
           <div class="method-source-code" id="_closed-3F-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 169</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 195</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">_closed?</span>
   <span class="ruby-ivar">@db</span>.<span class="ruby-identifier">closed?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -759,7 +816,7 @@ Sprachkonfigurationsdatei <code>de.lang</code> unter
 
           
           <div class="method-source-code" id="_get-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 177</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 203</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">_get</span>(<span class="ruby-identifier">key</span>)
   <span class="ruby-ivar">@db</span>[<span class="ruby-identifier">key</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -789,7 +846,7 @@ Sprachkonfigurationsdatei <code>de.lang</code> unter
 
           
           <div class="method-source-code" id="_open-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 165</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 191</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">_open</span>
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>
 <span class="ruby-keyword">end</span></pre>
@@ -819,7 +876,7 @@ Sprachkonfigurationsdatei <code>de.lang</code> unter
 
           
           <div class="method-source-code" id="_set-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 173</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 199</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">_set</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
   <span class="ruby-ivar">@db</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">val</span>
 <span class="ruby-keyword">end</span></pre>
@@ -849,7 +906,7 @@ Sprachkonfigurationsdatei <code>de.lang</code> unter
 
           
           <div class="method-source-code" id="_val-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 181</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 207</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">_val</span>(<span class="ruby-identifier">key</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">val</span> = <span class="ruby-identifier">_get</span>(<span class="ruby-ivar">@crypter</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@crypter</span>.<span class="ruby-identifier">digest</span>(<span class="ruby-identifier">key</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">key</span>)
     <span class="ruby-identifier">val</span>.<span class="ruby-identifier">force_encoding</span>(<span class="ruby-constant">ENC</span>)
@@ -864,6 +921,39 @@ Sprachkonfigurationsdatei <code>de.lang</code> unter
 
         
       </div><!-- _val-method -->
+
+    
+      <div id="method-i-backend_from_file" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">backend_from_file</span><span
+            class="method-args">(file)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="backend_from_file-source">
+            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 163</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">backend_from_file</span>(<span class="ruby-identifier">file</span>)
+  <span class="ruby-identifier">ext</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">extname</span>(<span class="ruby-identifier">file</span>)
+
+  <span class="ruby-identifier">mod</span> = <span class="ruby-constant">BACKEND_BY_EXT</span>[<span class="ruby-identifier">ext</span>] <span class="ruby-keyword">or</span> <span class="ruby-identifier">raise</span> <span class="ruby-constant">BackendNotFoundError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>)
+  <span class="ruby-identifier">get_backend</span>(<span class="ruby-identifier">mod</span>) <span class="ruby-keyword">or</span> <span class="ruby-identifier">raise</span> <span class="ruby-constant">BackendNotAvailableError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">mod</span>, <span class="ruby-identifier">file</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- backend_from_file-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- backend_from_file-method -->
 
     
       <div id="method-i-convert" class="method-detail ">
@@ -882,43 +972,32 @@ Sprachkonfigurationsdatei <code>de.lang</code> unter
 
           
           <div class="method-source-code" id="convert-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 188</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 218</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">convert</span>(<span class="ruby-identifier">verbose</span> = <span class="ruby-ivar">@lingo</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">stderr</span>.<span class="ruby-identifier">tty?</span>)
-  <span class="ruby-identifier">src</span> = <span class="ruby-constant">Source</span>.<span class="ruby-identifier">get</span>(<span class="ruby-ivar">@config</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">'txt-format'</span>, <span class="ruby-string">'KeyValue'</span>), <span class="ruby-ivar">@id</span>, <span class="ruby-ivar">@lingo</span>)
+  <span class="ruby-identifier">src</span> = <span class="ruby-constant">Source</span>.<span class="ruby-identifier">get</span>(<span class="ruby-ivar">@config</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">'txt-format'</span>, <span class="ruby-string">'key_value'</span>), <span class="ruby-ivar">@id</span>, <span class="ruby-ivar">@lingo</span>)
 
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">lex</span> = <span class="ruby-ivar">@config</span>[<span class="ruby-string">'use-lex'</span>]
-    <span class="ruby-identifier">a</span>, <span class="ruby-identifier">s</span> = [{
-      <span class="ruby-string">'source'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">split</span>(<span class="ruby-constant">STRING_SEPARATOR_RE</span>),
-      <span class="ruby-string">'mode'</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@config</span>[<span class="ruby-string">'lex-mode'</span>]
-    }, <span class="ruby-ivar">@lingo</span>], <span class="ruby-string">' '</span>
+    <span class="ruby-identifier">a</span> = [{ <span class="ruby-string">'source'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">split</span>(<span class="ruby-constant">SEP_RE</span>), <span class="ruby-string">'mode'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@config</span>[<span class="ruby-string">'lex-mode'</span>] }, <span class="ruby-ivar">@lingo</span>]
+    <span class="ruby-identifier">d</span>, <span class="ruby-identifier">g</span> = <span class="ruby-constant">Language</span><span class="ruby-operator">::</span><span class="ruby-constant">Dictionary</span>.<span class="ruby-identifier">new</span>(*<span class="ruby-identifier">a</span>), <span class="ruby-constant">Language</span><span class="ruby-operator">::</span><span class="ruby-constant">Grammar</span>.<span class="ruby-identifier">new</span>(*<span class="ruby-identifier">a</span>); <span class="ruby-identifier">a</span> = <span class="ruby-keyword">nil</span>
 
-    <span class="ruby-identifier">dic</span> = <span class="ruby-constant">Language</span><span class="ruby-operator">::</span><span class="ruby-constant">Dictionary</span>.<span class="ruby-identifier">new</span>(*<span class="ruby-identifier">a</span>)
-    <span class="ruby-identifier">gra</span> = <span class="ruby-constant">Language</span><span class="ruby-operator">::</span><span class="ruby-constant">Grammar</span>.<span class="ruby-identifier">new</span>(*<span class="ruby-identifier">a</span>)
-
-    <span class="ruby-identifier">block</span> = <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">form</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">res</span> = <span class="ruby-identifier">dic</span>.<span class="ruby-identifier">find_word</span>(<span class="ruby-identifier">form</span>)
-
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">res</span>.<span class="ruby-identifier">unknown?</span>
-        <span class="ruby-identifier">res</span> = <span class="ruby-identifier">gra</span>.<span class="ruby-identifier">find_compositum</span>(<span class="ruby-identifier">form</span>)
-        <span class="ruby-identifier">com</span> = <span class="ruby-identifier">res</span>.<span class="ruby-identifier">compo_form</span>
-      <span class="ruby-keyword">end</span>
-
-      <span class="ruby-identifier">com</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">com</span>.<span class="ruby-identifier">form</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">res</span>.<span class="ruby-identifier">norm</span>
+    <span class="ruby-identifier">sep</span>, <span class="ruby-identifier">block</span> = <span class="ruby-string">' '</span>, <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+      (<span class="ruby-identifier">r</span> = <span class="ruby-identifier">d</span>.<span class="ruby-identifier">find_word</span>(<span class="ruby-identifier">f</span>)).<span class="ruby-identifier">unknown?</span> <span class="ruby-operator">&amp;&amp;</span>
+        (<span class="ruby-identifier">c</span> = (<span class="ruby-identifier">r</span> = <span class="ruby-identifier">g</span>.<span class="ruby-identifier">find_compound</span>(<span class="ruby-identifier">f</span>)).<span class="ruby-identifier">compo_form</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">form</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">r</span>.<span class="ruby-identifier">norm</span>
     }
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-constant">ShowProgress</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">src</span>.<span class="ruby-identifier">size</span>, <span class="ruby-identifier">verbose</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">progress</span><span class="ruby-operator">|</span> <span class="ruby-identifier">create</span> {
     <span class="ruby-identifier">src</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">progress</span>[<span class="ruby-identifier">src</span>.<span class="ruby-identifier">position</span>]
+      <span class="ruby-identifier">progress</span>[<span class="ruby-identifier">src</span>.<span class="ruby-identifier">pos</span>]
 
       <span class="ruby-keyword">if</span> <span class="ruby-identifier">key</span>
         <span class="ruby-identifier">key</span>.<span class="ruby-identifier">chomp!</span>(<span class="ruby-string">'.'</span>)
 
-        <span class="ruby-keyword">if</span> <span class="ruby-identifier">lex</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">s</span>)
-          <span class="ruby-identifier">k</span> = <span class="ruby-identifier">key</span>.<span class="ruby-identifier">split</span>(<span class="ruby-identifier">s</span>).<span class="ruby-identifier">map!</span>(&amp;<span class="ruby-identifier">block</span>).<span class="ruby-identifier">join</span>(<span class="ruby-identifier">s</span>)
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">lex</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">sep</span>)
+          <span class="ruby-identifier">k</span> = <span class="ruby-identifier">key</span>.<span class="ruby-identifier">split</span>(<span class="ruby-identifier">sep</span>).<span class="ruby-identifier">map!</span>(&amp;<span class="ruby-identifier">block</span>).<span class="ruby-identifier">join</span>(<span class="ruby-identifier">sep</span>)
 
-          <span class="ruby-identifier">c</span> = <span class="ruby-identifier">k</span>.<span class="ruby-identifier">count</span>(<span class="ruby-identifier">s</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
-          <span class="ruby-keyword">self</span>[<span class="ruby-identifier">k</span>.<span class="ruby-identifier">split</span>(<span class="ruby-identifier">s</span>)[<span class="ruby-value">0</span>, <span class="ruby-value">3</span>].<span class="ruby-identifier">join</span>(<span class="ruby-identifier">s</span>)] = [<span class="ruby-node">&quot;#{KEY_REF}#{c}&quot;</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">3</span>
+          <span class="ruby-identifier">c</span> = <span class="ruby-identifier">k</span>.<span class="ruby-identifier">count</span>(<span class="ruby-identifier">sep</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+          <span class="ruby-keyword">self</span>[<span class="ruby-identifier">k</span>.<span class="ruby-identifier">split</span>(<span class="ruby-identifier">sep</span>)[<span class="ruby-value">0</span>, <span class="ruby-value">3</span>].<span class="ruby-identifier">join</span>(<span class="ruby-identifier">sep</span>)] = [<span class="ruby-node">&quot;#{KEY_REF}#{c}&quot;</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">3</span>
 
           <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span> = <span class="ruby-identifier">k</span>, <span class="ruby-identifier">val</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">start_with?</span>(<span class="ruby-string">'#'</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">key</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">v</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">v</span> }
         <span class="ruby-keyword">end</span>
@@ -956,7 +1035,7 @@ Sprachkonfigurationsdatei <code>de.lang</code> unter
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 156</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 182</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-identifier">_clear</span>
   <span class="ruby-identifier">open</span> { <span class="ruby-keyword">yield</span> }
@@ -969,6 +1048,37 @@ Sprachkonfigurationsdatei <code>de.lang</code> unter
 
         
       </div><!-- create-method -->
+
+    
+      <div id="method-i-get_backend" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_backend</span><span
+            class="method-args">(mod)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_backend-source">
+            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 158</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_backend</span>(<span class="ruby-identifier">mod</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-node">&quot;#{mod}Store&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-constant">Object</span>.<span class="ruby-identifier">const_defined?</span>(<span class="ruby-identifier">mod</span>)
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-constant">NameError</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_backend-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_backend-method -->
 
     
       <div id="method-i-uptodate-21" class="method-detail ">
@@ -987,7 +1097,7 @@ Sprachkonfigurationsdatei <code>de.lang</code> unter
 
           
           <div class="method-source-code" id="uptodate-21-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 152</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 178</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">uptodate!</span>
   <span class="ruby-ivar">@db</span>[<span class="ruby-constant">SYS_KEY</span>] = <span class="ruby-ivar">@source_key</span>.<span class="ruby-identifier">call</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1005,7 +1115,7 @@ Sprachkonfigurationsdatei <code>de.lang</code> unter
         
         <div class="method-heading">
           <span class="method-name">uptodate?</span><span
-            class="method-args">(file = @dbm_name)</span>
+            class="method-args">(file = @stofile)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -1017,9 +1127,9 @@ Sprachkonfigurationsdatei <code>de.lang</code> unter
 
           
           <div class="method-source-code" id="uptodate-3F-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 144</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">uptodate?</span>(<span class="ruby-identifier">file</span> = <span class="ruby-ivar">@dbm_name</span>)
-  <span class="ruby-identifier">src</span> = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@src_file</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 170</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">uptodate?</span>(<span class="ruby-identifier">file</span> = <span class="ruby-ivar">@stofile</span>)
+  <span class="ruby-identifier">src</span> = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@srcfile</span>)
   <span class="ruby-ivar">@source_key</span> = <span class="ruby-identifier">lambda</span> { [<span class="ruby-identifier">src</span>.<span class="ruby-identifier">size</span>, <span class="ruby-identifier">src</span>.<span class="ruby-identifier">mtime</span>].<span class="ruby-identifier">join</span>(<span class="ruby-constant">FLD_SEP</span>) }
 
   <span class="ruby-identifier">sys_key</span> = <span class="ruby-identifier">open</span> { <span class="ruby-ivar">@db</span>[<span class="ruby-constant">SYS_KEY</span>] } <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">file</span>)
@@ -1033,6 +1143,72 @@ Sprachkonfigurationsdatei <code>de.lang</code> unter
 
         
       </div><!-- uptodate-3F-method -->
+
+    
+      <div id="method-i-use_backend" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">use_backend</span><span
+            class="method-args">(backend = nil, skip_ext = false)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="use_backend-source">
+            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 148</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">use_backend</span>(<span class="ruby-identifier">backend</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">skip_ext</span> = <span class="ruby-keyword">false</span>)
+  [<span class="ruby-constant">ENV</span>[<span class="ruby-string">'LINGO_BACKEND'</span>], *<span class="ruby-constant">BACKENDS</span>].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">mod</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">backend</span> = <span class="ruby-identifier">get_backend</span>(<span class="ruby-identifier">mod</span>) <span class="ruby-keyword">and</span> <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">mod</span>
+  } <span class="ruby-keyword">unless</span> <span class="ruby-identifier">backend</span>
+
+  <span class="ruby-identifier">extend</span>(<span class="ruby-ivar">@backend</span> = <span class="ruby-identifier">backend</span> <span class="ruby-operator">||</span> <span class="ruby-constant">HashStore</span>)
+
+  <span class="ruby-ivar">@stofile</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">store_ext</span> <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">skip_ext</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:store_ext</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- use_backend-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- use_backend-method -->
+
+    
+      <div id="method-i-warn" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">warn</span><span
+            class="method-args">(*msg)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="warn-source">
+            <pre><span class="ruby-comment"># File lib/lingo/database.rb, line 214</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">warn</span>(*<span class="ruby-identifier">msg</span>)
+  <span class="ruby-ivar">@lingo</span>.<span class="ruby-identifier">warn</span>(*<span class="ruby-identifier">msg</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- warn-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- warn-method -->
 
     
     </section><!-- private-instance-method-details -->

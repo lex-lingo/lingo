@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>ChangeLog - lingo Application documentation (v1.8.1)</title>
+<title>ChangeLog - lingo Application documentation (v1.8.2)</title>
 
 <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
 
@@ -87,7 +87,9 @@
   
     <li><a href="./Lingo/Attendee/Sequencer.html">Lingo::Attendee::Sequencer</a>
   
-    <li><a href="./Lingo/Attendee/Sequencer/WordSequence.html">Lingo::Attendee::Sequencer::WordSequence</a>
+    <li><a href="./Lingo/Attendee/Stemmer.html">Lingo::Attendee::Stemmer</a>
+  
+    <li><a href="./Lingo/Attendee/Stemmer/Porter.html">Lingo::Attendee::Stemmer::Porter</a>
   
     <li><a href="./Lingo/Attendee/Synonymer.html">Lingo::Attendee::Synonymer</a>
   
@@ -104,6 +106,10 @@
     <li><a href="./Lingo/Attendee/VectorFilter.html">Lingo::Attendee::VectorFilter</a>
   
     <li><a href="./Lingo/Attendee/WordSearcher.html">Lingo::Attendee::WordSearcher</a>
+  
+    <li><a href="./Lingo/BackendNotAvailableError.html">Lingo::BackendNotAvailableError</a>
+  
+    <li><a href="./Lingo/BackendNotFoundError.html">Lingo::BackendNotFoundError</a>
   
     <li><a href="./Lingo/BufferedAttendee.html">Lingo::BufferedAttendee</a>
   
@@ -147,6 +153,8 @@
   
     <li><a href="./Lingo/Database/Source/WordClass.html">Lingo::Database::Source::WordClass</a>
   
+    <li><a href="./Lingo/DatabaseError.html">Lingo::DatabaseError</a>
+  
     <li><a href="./Lingo/FileNotFoundError.html">Lingo::FileNotFoundError</a>
   
     <li><a href="./Lingo/InvalidDatabaseConfigError.html">Lingo::InvalidDatabaseConfigError</a>
@@ -171,11 +179,15 @@
   
     <li><a href="./Lingo/MissingConfigError.html">Lingo::MissingConfigError</a>
   
+    <li><a href="./Lingo/NameNotFoundError.html">Lingo::NameNotFoundError</a>
+  
     <li><a href="./Lingo/NoDatabaseConfigError.html">Lingo::NoDatabaseConfigError</a>
   
     <li><a href="./Lingo/NoWritableStoreError.html">Lingo::NoWritableStoreError</a>
   
     <li><a href="./Lingo/Reportable.html">Lingo::Reportable</a>
+  
+    <li><a href="./Lingo/ShowProgress.html">Lingo::ShowProgress</a>
   
     <li><a href="./Lingo/SourceFileNotFoundError.html">Lingo::SourceFileNotFoundError</a>
   
@@ -192,6 +204,37 @@
 <div id="documentation" class="description">
   
 <h1 id="label-Revision+history+for+Lingo">Revision history for <a href="Lingo.html">Lingo</a></h1>
+
+<h2 id="label-1.8.2+%5B2012-04-19%5D">1.8.2 [2012-04-19]</h2>
+<ul><li>
+<p>Performance improvements regarding Attendee::VectorFilter’s (as well as
+Attendee::NonewordFilter’s) memory usage; set <code>sort: false</code> in
+the config.</p>
+</li><li>
+<p>Added Attendee::Stemmer (implementing Porter’s algorithm for suffix
+stripping).</p>
+</li><li>
+<p>Added progress reporting to Attendee::TextReader; set <code>progress:
+true</code> in the config.</p>
+</li><li>
+<p>Added directory and glob processing to Attendee::TextReader (new options
+<code>glob</code> and <code>recursive</code>).</p>
+</li><li>
+<p>Renamed Attendee::TextReader’s option <code>lir-record-pattern</code> to
+<code>records</code>.</p>
+</li><li>
+<p>Fixed Attendee::Debugger to forward all objects so it can be inserted
+between any two attendees in the config.</p>
+</li><li>
+<p>Fixed regression introduced in 1.8.0 where <a href="Lingo.html">Lingo</a>
+would not use existing compiled dictionary when source file is not present.</p>
+</li><li>
+<p>Fixed “invalid byte sequence in UTF-8” on Windows for SDBM store.</p>
+</li><li>
+<p>Enabled pluggable (compiled) dictionaries and storage backends.</p>
+</li><li>
+<p>Extensive internal refactoring and cleanup. (Finished for now.)</p>
+</li></ul>
 
 <h2 id="label-1.8.1+%5B2012-02-19%5D">1.8.1 [2012-02-19]</h2>
 <ul><li>
@@ -296,7 +339,7 @@ href="http://raa.ruby-lang.org/project/diff-lcs/">diff-lcs</a>).</p>
 </li><li>
 <p>Use <code>UNK</code> itself if it doesn’t have any lexicals.</p>
 </li><li>
-<p>Use compo form instead of word form when lexicalizing compositum entry for
+<p>Use compo form instead of word form when lexicalizing compound entry for
 multiword dictionaries.</p>
 </li><li>
 <p>LexicalHash#[] must use target (not source) form.</p>
@@ -307,7 +350,7 @@ multiword dictionaries.</p>
 </li><li>
 <p>Allow synonyms to be considered for multiword matching.</p>
 </li><li>
-<p>Don’t use compositum parts.</p>
+<p>Don’t use compound parts.</p>
 </li><li>
 <p>Introduced some (more or less arbitrary) line length limit. We can only
 store values of a certain length anyway (with SDBM). Entries exceeding this
@@ -540,13 +583,13 @@ Kennzeichnung</strong></p>
 
 <p>Der Decomposer kann bei Bedarf Komposita einer zusätzlichen Prüfung
 unterziehen. Ist der Schlüssel
-<code>de.lang:language/dictionary/compositum/skip-sequences</code>
-angegeben, der z.B. in der Form <code>skip-sequences: [ VS ]</code>
-definiert wird, wird zusätzlich geprüft, ob das Kompositum mit seinen
-Teilen diesen Wortklassen entspricht. Hiernach werden Komposita verworfen,
-die aus Verb-Substantiv-Kombination bestehen. Die Angabe des Parameters ist
+<code>de.lang:language/dictionary/compound/skip-sequences</code> angegeben,
+der z.B. in der Form <code>skip-sequences: [ VS ]</code> definiert wird,
+wird zusätzlich geprüft, ob das Kompositum mit seinen Teilen diesen
+Wortklassen entspricht. Hiernach werden Komposita verworfen, die aus
+Verb-Substantiv-Kombination bestehen. Die Angabe des Parameters ist
 optional. Zusätzlich werden bei Angabe des Schlüssels
-<code>de.lang:language/dictionary/compositum/append-wordclass</code>, der
+<code>de.lang:language/dictionary/compound/append-wordclass</code>, der
 i.d.R einen ein Zeichen langen <a href="String.html">String</a> enthält,
 die durch Zerlegung erkannten Wortstämme markiert, in dem ihre Wortklasse
 das über diesen Schlüssel definierte Zeichen angehangen bekommt.</p>
@@ -802,7 +845,7 @@ hierfür ist <code>no-count='PUNCT,OTH_C'</code>.</p>
 <p><strong>Kompositum-Zerlegung mit weiterer Einschränkung</strong></p>
 
 <p>Ein weiterer Parameter ist für die Kompositumzerlegung hinzugekommen. Als
-Attribute des Tags <code>XML:dictionary/compositum</code> können jetzt
+Attribute des Tags <code>XML:dictionary/compound</code> können jetzt
 angegeben werden:</p>
 
 <pre>Attribut          Default    Funktion

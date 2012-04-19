@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Lingo::Attendee::Abbreviator - lingo Application documentation (v1.8.2)</title>
+<title>class Lingo::Attendee::Stemmer - lingo Application documentation (v1.8.2)</title>
 
 <link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
 
@@ -47,7 +47,8 @@
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
   <ul>
-    <li>lib/lingo/attendee/abbreviator.rb
+    <li>lib/lingo/attendee/stemmer.rb
+    <li>lib/lingo/attendee/stemmer/porter.rb
   </ul>
 </nav>
 
@@ -59,7 +60,7 @@
     <nav id="parent-class-section" class="section">
   <h3 class="section-header">Parent</h3>
   
-  <p class="link"><a href="../BufferedAttendee.html">Lingo::BufferedAttendee</a>
+  <p class="link">self
   
 </nav>
 
@@ -70,13 +71,9 @@
 
   <ul class="link-list">
     
-    <li><a href="#method-i-control">#control</a>
-    
     <li><a href="#method-i-init">#init</a>
     
-    <li><a href="#method-i-process_buffer">#process_buffer</a>
-    
-    <li><a href="#method-i-process_buffer-3F">#process_buffer?</a>
+    <li><a href="#method-i-process">#process</a>
     
   </ul>
 </nav>
@@ -242,75 +239,10 @@
 </nav>
 
 <div id="documentation">
-  <h1 class="class">class Lingo::Attendee::Abbreviator</h1>
+  <h1 class="class">class Lingo::Attendee::Stemmer</h1>
 
   <div id="description" class="description">
     
-<p>Die Erkennung von Abkürzungen kann auf vielfältige Weise erfolgen. In jedem
-Fall sollte eine sichere Unterscheidung von einem Satzende-Punkt möglich
-sein. Der in <a href="../../Lingo.html">Lingo</a> gewählte Ansatz befreit
-den <a href="Tokenizer.html">Tokenizer</a> von dieser Arbeit und
-konzentriert die Erkennung in diesem <a
-href="../Attendee.html">Attendee</a>. Sobald der <a
-href="Abbreviator.html">Abbreviator</a> im Datenstrom auf ein Punkt trifft
-(Token = <code>:./PUNC:</code>), prüft er das vorhergehende Token auf eine
-gültige Abkürzung im Abkürzungs-Wörterbuch. Wird es als Abkürzung erkannt,
-dann wird das Token in ein Word gewandelt und das Punkt-Token aus dem
-Zeichenstrom entfernt.</p>
-
-<h3 id="label-M%C3%B6gliche+Verlinkung">Mögliche Verlinkung</h3>
-<dl class="rdoc-list note-list"><dt>Erwartet
-<dd>
-<p>Daten des Typs <strong>Token</strong> z.B. von <a
-href="Tokenizer.html">Tokenizer</a></p>
-</dd><dt>Erzeugt
-<dd>
-<p>Leitet Token weiter und wandelt erkannte Abkürzungen in den Typ
-<strong>Word</strong> z.B. für Wordsearcher</p>
-</dd></dl>
-
-<h3 id="label-Parameter">Parameter</h3>
-
-<p>Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der
-Voreinstellung). Alle anderen Parameter müssen zwingend angegeben werden.</p>
-<dl class="rdoc-list note-list"><dt><strong>in</strong>
-<dd>
-<p>siehe allgemeine Beschreibung des <a href="../Attendee.html">Attendee</a></p>
-</dd><dt><strong>out</strong>
-<dd>
-<p>siehe allgemeine Beschreibung des <a href="../Attendee.html">Attendee</a></p>
-</dd><dt><strong>source</strong>
-<dd>
-<p>siehe allgemeine Beschreibung des Dictionary</p>
-</dd><dt><strong><em>mode</em></strong>
-<dd>
-<p>(Standard: all) siehe allgemeine Beschreibung des Dictionary</p>
-</dd></dl>
-
-<h3 id="label-Beispiele">Beispiele</h3>
-
-<p>Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration
-<code>t1.cfg</code></p>
-
-<pre>meeting:
-  attendees:
-    - text_reader:  { out: lines, files: '$(files)' }
-    - tokenizer:    { in: lines, out: token }
-    - abbreviator:  { in: token, out: abbrev, source: 'sys-abk' }
-    - debugger:     { in: abbrev, prompt: 'out&gt;' }</pre>
-
-<p>ergibt die Ausgabe über den Debugger: <code>lingo -c t1 test.txt</code></p>
-
-<pre>out&gt; *FILE('test.txt')
-out&gt; :Dies/WORD:
-out&gt; :ist/WORD:
-out&gt; &lt;ggf. = [(gegebenenfalls/w)]&gt;
-out&gt; :eine/WORD:
-out&gt; :Abk³rzung/WORD:
-out&gt; :./PUNC:
-out&gt; *EOL('test.txt')
-out&gt; *EOF('test.txt')</pre>
-
   </div><!-- description -->
 
   
@@ -331,37 +263,6 @@ out&gt; *EOF('test.txt')</pre>
       <h3 class="section-header">Protected Instance Methods</h3>
 
     
-      <div id="method-i-control" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">control</span><span
-            class="method-args">(cmd, param)</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-
-          
-          <div class="method-source-code" id="control-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/abbreviator.rb, line 78</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">param</span>)
-  <span class="ruby-identifier">report_on</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-ivar">@dic</span>)
-  <span class="ruby-identifier">process_buffer</span>
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- control-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- control-method -->
-
-    
       <div id="method-i-init" class="method-detail ">
         
         <div class="method-heading">
@@ -378,9 +279,12 @@ out&gt; *EOF('test.txt')</pre>
 
           
           <div class="method-source-code" id="init-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/abbreviator.rb, line 74</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/stemmer.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">init</span>
-  <span class="ruby-identifier">set_dic</span>
+  <span class="ruby-identifier">extend</span>(<span class="ruby-constant">Lingo</span>.<span class="ruby-identifier">get_const</span>(<span class="ruby-identifier">get_key</span>(<span class="ruby-string">'type'</span>, <span class="ruby-string">'porter'</span>), <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>))
+
+  <span class="ruby-ivar">@wc</span>  = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">'wordclass'</span>, <span class="ruby-constant">LA_STEM</span>)
+  <span class="ruby-ivar">@all</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">'mode'</span>, <span class="ruby-string">''</span>).<span class="ruby-identifier">downcase</span> <span class="ruby-operator">==</span> <span class="ruby-string">'all'</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- init-source -->
           
@@ -392,91 +296,42 @@ out&gt; *EOF('test.txt')</pre>
       </div><!-- init-method -->
 
     
+      <div id="method-i-process" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">process</span><span
+            class="method-args">(obj)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="process-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/stemmer.rb, line 41</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">process</span>(<span class="ruby-identifier">obj</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Word</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">unknown?</span>
+    <span class="ruby-identifier">stem</span> = <span class="ruby-identifier">stem</span>(<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">form</span>.<span class="ruby-identifier">downcase</span>, <span class="ruby-ivar">@all</span>)
+    <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">add_lexicals</span>([<span class="ruby-constant">Lexical</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">stem</span>, <span class="ruby-ivar">@wc</span>)]) <span class="ruby-keyword">if</span> <span class="ruby-identifier">stem</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">obj</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- process-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- process-method -->
+
+    
     </section><!-- protected-instance-method-details -->
-  
-     <section id="private-instance-5Buntitled-5D-method-details" class="method-section section">
-      <h3 class="section-header">Private Instance Methods</h3>
-
-    
-      <div id="method-i-process_buffer" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">process_buffer</span><span
-            class="method-args">()</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-
-          
-          <div class="method-source-code" id="process_buffer-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/abbreviator.rb, line 89</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">process_buffer</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">2</span>
-    <span class="ruby-identifier">forward_buffer</span>
-    <span class="ruby-keyword">return</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">form</span> = <span class="ruby-identifier">form_at</span>(<span class="ruby-value">-2</span>, <span class="ruby-constant">Token</span>)
-    <span class="ruby-identifier">inc</span>(<span class="ruby-string">'Anzahl gesuchter Abkürzungen'</span>)
-
-    <span class="ruby-keyword">if</span> (<span class="ruby-identifier">abbr</span> = <span class="ruby-identifier">find_word</span>(<span class="ruby-identifier">form</span>)).<span class="ruby-identifier">identified?</span>
-      <span class="ruby-identifier">inc</span>(<span class="ruby-string">'Anzahl gefundener Abkürzungen'</span>)
-
-      <span class="ruby-identifier">abbr</span>.<span class="ruby-identifier">form</span> <span class="ruby-operator">+=</span> <span class="ruby-constant">CHAR_PUNCT</span>
-
-      <span class="ruby-ivar">@buffer</span>[<span class="ruby-value">-2</span>] = <span class="ruby-identifier">abbr</span>
-      <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">delete_at</span>(<span class="ruby-value">-1</span>)
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-identifier">forward_buffer</span>
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- process_buffer-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- process_buffer-method -->
-
-    
-      <div id="method-i-process_buffer-3F" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">process_buffer?</span><span
-            class="method-args">()</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-
-          
-          <div class="method-source-code" id="process_buffer-3F-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/abbreviator.rb, line 85</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">process_buffer?</span>
-  <span class="ruby-identifier">form_at</span>(<span class="ruby-value">-1</span>, <span class="ruby-constant">Token</span>) <span class="ruby-operator">==</span> <span class="ruby-constant">CHAR_PUNCT</span>
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- process_buffer-3F-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- process_buffer-3F-method -->
-
-    
-    </section><!-- private-instance-method-details -->
   
   </section><!-- 5Buntitled-5D -->
 

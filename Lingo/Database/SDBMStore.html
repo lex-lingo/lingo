@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>module Lingo::Database::SDBMStore - lingo Application documentation (v1.8.1)</title>
+<title>module Lingo::Database::SDBMStore - lingo Application documentation (v1.8.2)</title>
 
 <link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
 
@@ -66,6 +66,8 @@
     
     <li><a href="#method-i-_clear">#_clear</a>
     
+    <li><a href="#method-i-_get">#_get</a>
+    
     <li><a href="#method-i-_open">#_open</a>
     
     <li><a href="#method-i-_set">#_set</a>
@@ -121,7 +123,9 @@
   
     <li><a href="../../Lingo/Attendee/Sequencer.html">Lingo::Attendee::Sequencer</a>
   
-    <li><a href="../../Lingo/Attendee/Sequencer/WordSequence.html">Lingo::Attendee::Sequencer::WordSequence</a>
+    <li><a href="../../Lingo/Attendee/Stemmer.html">Lingo::Attendee::Stemmer</a>
+  
+    <li><a href="../../Lingo/Attendee/Stemmer/Porter.html">Lingo::Attendee::Stemmer::Porter</a>
   
     <li><a href="../../Lingo/Attendee/Synonymer.html">Lingo::Attendee::Synonymer</a>
   
@@ -138,6 +142,10 @@
     <li><a href="../../Lingo/Attendee/VectorFilter.html">Lingo::Attendee::VectorFilter</a>
   
     <li><a href="../../Lingo/Attendee/WordSearcher.html">Lingo::Attendee::WordSearcher</a>
+  
+    <li><a href="../../Lingo/BackendNotAvailableError.html">Lingo::BackendNotAvailableError</a>
+  
+    <li><a href="../../Lingo/BackendNotFoundError.html">Lingo::BackendNotFoundError</a>
   
     <li><a href="../../Lingo/BufferedAttendee.html">Lingo::BufferedAttendee</a>
   
@@ -181,6 +189,8 @@
   
     <li><a href="../../Lingo/Database/Source/WordClass.html">Lingo::Database::Source::WordClass</a>
   
+    <li><a href="../../Lingo/DatabaseError.html">Lingo::DatabaseError</a>
+  
     <li><a href="../../Lingo/FileNotFoundError.html">Lingo::FileNotFoundError</a>
   
     <li><a href="../../Lingo/InvalidDatabaseConfigError.html">Lingo::InvalidDatabaseConfigError</a>
@@ -205,11 +215,15 @@
   
     <li><a href="../../Lingo/MissingConfigError.html">Lingo::MissingConfigError</a>
   
+    <li><a href="../../Lingo/NameNotFoundError.html">Lingo::NameNotFoundError</a>
+  
     <li><a href="../../Lingo/NoDatabaseConfigError.html">Lingo::NoDatabaseConfigError</a>
   
     <li><a href="../../Lingo/NoWritableStoreError.html">Lingo::NoWritableStoreError</a>
   
     <li><a href="../../Lingo/Reportable.html">Lingo::Reportable</a>
+  
+    <li><a href="../../Lingo/ShowProgress.html">Lingo::ShowProgress</a>
   
     <li><a href="../../Lingo/SourceFileNotFoundError.html">Lingo::SourceFileNotFoundError</a>
   
@@ -264,9 +278,9 @@
 
           
           <div class="method-source-code" id="_clear-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/sdbm_store.rb, line 40</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database/sdbm_store.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">_clear</span>
-  <span class="ruby-constant">File</span>.<span class="ruby-identifier">delete</span>(*<span class="ruby-constant">Dir</span>[<span class="ruby-node">&quot;#{@dbm_name}.{pag,dir}&quot;</span>])
+  <span class="ruby-constant">File</span>.<span class="ruby-identifier">delete</span>(*<span class="ruby-constant">Dir</span>[<span class="ruby-node">&quot;#{@stofile}{#{EXT.join(',')}}&quot;</span>])
 <span class="ruby-keyword">end</span></pre>
           </div><!-- _clear-source -->
           
@@ -276,6 +290,37 @@
 
         
       </div><!-- _clear-method -->
+
+    
+      <div id="method-i-_get" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">_get</span><span
+            class="method-args">(key)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="_get-source">
+            <pre><span class="ruby-comment"># File lib/lingo/database/sdbm_store.rb, line 50</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">_get</span>(<span class="ruby-identifier">key</span>)
+  <span class="ruby-identifier">val</span> = <span class="ruby-keyword">super</span>
+  <span class="ruby-identifier">val</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">val</span>.<span class="ruby-identifier">encode</span>(<span class="ruby-constant">ENC</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- _get-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- _get-method -->
 
     
       <div id="method-i-_open" class="method-detail ">
@@ -294,9 +339,9 @@
 
           
           <div class="method-source-code" id="_open-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/sdbm_store.rb, line 44</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database/sdbm_store.rb, line 46</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">_open</span>
-  <span class="ruby-constant">SDBM</span>.<span class="ruby-identifier">open</span>(<span class="ruby-ivar">@dbm_name</span>)
+  <span class="ruby-constant">SDBM</span>.<span class="ruby-identifier">open</span>(<span class="ruby-ivar">@stofile</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- _open-source -->
           
@@ -324,13 +369,11 @@
 
           
           <div class="method-source-code" id="_set-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/sdbm_store.rb, line 48</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database/sdbm_store.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">_set</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">val</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">950</span>
+    <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;Warning: Entry `#{key}' (#{@srcfile}) too long for SDBM. Truncating...&quot;</span>
     <span class="ruby-identifier">val</span> = <span class="ruby-identifier">val</span>[<span class="ruby-value">0</span>, <span class="ruby-value">950</span>]
-
-    <span class="ruby-ivar">@lingo</span>.<span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;Warning: Entry `#{key}' (#{@src_file})&quot;</span> <span class="ruby-operator">&lt;&lt;</span>
-                <span class="ruby-string">'too long for SDBM. Truncating...'</span>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-keyword">super</span>
@@ -361,9 +404,9 @@
 
           
           <div class="method-source-code" id="uptodate-3F-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/sdbm_store.rb, line 36</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database/sdbm_store.rb, line 38</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">uptodate?</span>
-  <span class="ruby-keyword">super</span>(<span class="ruby-ivar">@dbm_name</span> <span class="ruby-operator">+</span> <span class="ruby-string">'.pag'</span>)
+  <span class="ruby-keyword">super</span>(<span class="ruby-ivar">@stofile</span> <span class="ruby-operator">+</span> <span class="ruby-constant">EXT</span>.<span class="ruby-identifier">last</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- uptodate-3F-source -->
           

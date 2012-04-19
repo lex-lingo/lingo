@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Lingo::Attendee::Sequencer - lingo Application documentation (v1.8.1)</title>
+<title>class Lingo::Attendee::Sequencer - lingo Application documentation (v1.8.2)</title>
 
 <link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
 
@@ -74,11 +74,11 @@
     
     <li><a href="#method-i-init">#init</a>
     
+    <li><a href="#method-i-insert_sequences">#insert_sequences</a>
+    
     <li><a href="#method-i-process_buffer">#process_buffer</a>
     
     <li><a href="#method-i-process_buffer-3F">#process_buffer?</a>
-    
-    <li><a href="#method-i-sequences">#sequences</a>
     
   </ul>
 </nav>
@@ -129,7 +129,9 @@
   
     <li><a href="../../Lingo/Attendee/Sequencer.html">Lingo::Attendee::Sequencer</a>
   
-    <li><a href="../../Lingo/Attendee/Sequencer/WordSequence.html">Lingo::Attendee::Sequencer::WordSequence</a>
+    <li><a href="../../Lingo/Attendee/Stemmer.html">Lingo::Attendee::Stemmer</a>
+  
+    <li><a href="../../Lingo/Attendee/Stemmer/Porter.html">Lingo::Attendee::Stemmer::Porter</a>
   
     <li><a href="../../Lingo/Attendee/Synonymer.html">Lingo::Attendee::Synonymer</a>
   
@@ -146,6 +148,10 @@
     <li><a href="../../Lingo/Attendee/VectorFilter.html">Lingo::Attendee::VectorFilter</a>
   
     <li><a href="../../Lingo/Attendee/WordSearcher.html">Lingo::Attendee::WordSearcher</a>
+  
+    <li><a href="../../Lingo/BackendNotAvailableError.html">Lingo::BackendNotAvailableError</a>
+  
+    <li><a href="../../Lingo/BackendNotFoundError.html">Lingo::BackendNotFoundError</a>
   
     <li><a href="../../Lingo/BufferedAttendee.html">Lingo::BufferedAttendee</a>
   
@@ -189,6 +195,8 @@
   
     <li><a href="../../Lingo/Database/Source/WordClass.html">Lingo::Database::Source::WordClass</a>
   
+    <li><a href="../../Lingo/DatabaseError.html">Lingo::DatabaseError</a>
+  
     <li><a href="../../Lingo/FileNotFoundError.html">Lingo::FileNotFoundError</a>
   
     <li><a href="../../Lingo/InvalidDatabaseConfigError.html">Lingo::InvalidDatabaseConfigError</a>
@@ -213,11 +221,15 @@
   
     <li><a href="../../Lingo/MissingConfigError.html">Lingo::MissingConfigError</a>
   
+    <li><a href="../../Lingo/NameNotFoundError.html">Lingo::NameNotFoundError</a>
+  
     <li><a href="../../Lingo/NoDatabaseConfigError.html">Lingo::NoDatabaseConfigError</a>
   
     <li><a href="../../Lingo/NoWritableStoreError.html">Lingo::NoWritableStoreError</a>
   
     <li><a href="../../Lingo/Reportable.html">Lingo::Reportable</a>
+  
+    <li><a href="../../Lingo/ShowProgress.html">Lingo::ShowProgress</a>
   
     <li><a href="../../Lingo/SourceFileNotFoundError.html">Lingo::SourceFileNotFoundError</a>
   
@@ -356,7 +368,7 @@ out&gt; *EOF('test.txt')</pre>
         
         <div class="method-heading">
           <span class="method-name">control</span><span
-            class="method-args">(cmd, par)</span>
+            class="method-args">(cmd, param)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -368,9 +380,8 @@ out&gt; *EOF('test.txt')</pre>
 
           
           <div class="method-source-code" id="control-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/sequencer.rb, line 105</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">par</span>)
-  <span class="ruby-comment"># Jedes Control-Object ist auch Auslöser der Verarbeitung</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/sequencer.rb, line 107</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">param</span>)
   <span class="ruby-identifier">process_buffer</span> <span class="ruby-keyword">if</span> [<span class="ruby-constant">STR_CMD_RECORD</span>, <span class="ruby-constant">STR_CMD_EOF</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">cmd</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- control-source -->
@@ -401,11 +412,13 @@ out&gt; *EOF('test.txt')</pre>
           <div class="method-source-code" id="init-source">
             <pre><span class="ruby-comment"># File lib/lingo/attendee/sequencer.rb, line 97</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">init</span>
-  <span class="ruby-comment"># Parameter verwerten</span>
-  <span class="ruby-ivar">@stopper</span> = <span class="ruby-identifier">get_array</span>(<span class="ruby-string">'stopper'</span>, <span class="ruby-constant">TA_PUNCTUATION</span> <span class="ruby-operator">+</span> <span class="ruby-string">','</span> <span class="ruby-operator">+</span> <span class="ruby-constant">TA_OTHER</span>).<span class="ruby-identifier">map</span>(&amp;<span class="ruby-value">:upcase</span>)
-  <span class="ruby-ivar">@seq_strings</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">'sequences'</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-constant">WordSequence</span>.<span class="ruby-identifier">new</span>(*<span class="ruby-identifier">e</span>) }
+  <span class="ruby-ivar">@stopper</span> = <span class="ruby-identifier">get_array</span>(<span class="ruby-string">'stopper'</span>, <span class="ruby-constant">DEFAULT_SKIP</span>, <span class="ruby-value">:upcase</span>)
 
-  <span class="ruby-identifier">raise</span> <span class="ruby-constant">MissingConfigError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:sequences</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@seq_strings</span>.<span class="ruby-identifier">empty?</span>
+  <span class="ruby-ivar">@seq</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">'sequences'</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">string</span>, <span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    [<span class="ruby-identifier">string</span> = <span class="ruby-identifier">string</span>.<span class="ruby-identifier">downcase</span>, <span class="ruby-identifier">string</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">%r/</span>), <span class="ruby-identifier">format</span>]
+  }
+
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">MissingConfigError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:sequences</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@seq</span>.<span class="ruby-identifier">empty?</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- init-source -->
           
@@ -433,38 +446,9 @@ out&gt; *EOF('test.txt')</pre>
 
           
           <div class="method-source-code" id="process_buffer-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/sequencer.rb, line 117</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/sequencer.rb, line 116</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">process_buffer</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">empty?</span>
-
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">2</span>
-    <span class="ruby-identifier">matches</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span>, <span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>[<span class="ruby-identifier">k</span>] = [] }
-
-    <span class="ruby-identifier">sequences</span>(<span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">obj</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Word</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">obj</span>.<span class="ruby-identifier">unknown?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">attrs</span>(<span class="ruby-keyword">false</span>) <span class="ruby-operator">:</span> [<span class="ruby-string">'#'</span>]
-    }).<span class="ruby-identifier">uniq</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">sequence</span><span class="ruby-operator">|</span>
-      <span class="ruby-ivar">@seq_strings</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">wordseq</span><span class="ruby-operator">|</span>
-        <span class="ruby-identifier">wordseq</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-identifier">sequence</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">pos</span>, <span class="ruby-identifier">form</span>, <span class="ruby-identifier">classes</span><span class="ruby-operator">|</span>
-          <span class="ruby-identifier">inc</span>(<span class="ruby-string">'Anzahl erkannter Sequenzen'</span>)
-
-          <span class="ruby-identifier">classes</span>.<span class="ruby-identifier">each_with_index</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">wc</span>, <span class="ruby-identifier">index</span><span class="ruby-operator">|</span>
-            <span class="ruby-ivar">@buffer</span>[<span class="ruby-identifier">pos</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">index</span>].<span class="ruby-identifier">lexicals</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">lex</span><span class="ruby-operator">|</span>
-              <span class="ruby-identifier">form</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-identifier">index</span>.<span class="ruby-identifier">succ</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">form</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">wc</span>
-            } <span class="ruby-keyword">or</span> <span class="ruby-keyword">break</span>
-          } <span class="ruby-keyword">or</span> <span class="ruby-keyword">next</span>
-
-          <span class="ruby-identifier">matches</span>[<span class="ruby-identifier">pos</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">form</span>
-        }
-      }
-    }
-
-    <span class="ruby-identifier">matches</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">pos</span>, <span class="ruby-identifier">forms</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">forms</span>.<span class="ruby-identifier">uniq</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">form</span><span class="ruby-operator">|</span>
-        <span class="ruby-identifier">deferred_insert</span>(<span class="ruby-identifier">pos</span>, <span class="ruby-constant">Word</span>.<span class="ruby-identifier">new_lexical</span>(<span class="ruby-identifier">form</span>, <span class="ruby-constant">WA_SEQUENCE</span>, <span class="ruby-constant">LA_SEQUENCE</span>))
-      }
-    }
-  <span class="ruby-keyword">end</span>
-
+  <span class="ruby-identifier">insert_sequences</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
   <span class="ruby-identifier">forward_buffer</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- process_buffer-source -->
@@ -493,12 +477,10 @@ out&gt; *EOF('test.txt')</pre>
 
           
           <div class="method-source-code" id="process_buffer-3F-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/sequencer.rb, line 110</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/sequencer.rb, line 111</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">process_buffer?</span>
-  <span class="ruby-comment">#   start buffer processing when stopper token are found or at unknown words</span>
-  <span class="ruby-identifier">item</span> = <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">last</span>
-  (<span class="ruby-identifier">item</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">WordForm</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@stopper</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">item</span>.<span class="ruby-identifier">attr</span>.<span class="ruby-identifier">upcase</span>)) <span class="ruby-operator">||</span>
-  (<span class="ruby-identifier">item</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Word</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">unknown?</span>)
+  (<span class="ruby-identifier">obj</span> = <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">last</span>).<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">WordForm</span>) <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Word</span>) <span class="ruby-operator">&amp;&amp;</span>
+    <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">unknown?</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@stopper</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">attr</span>.<span class="ruby-identifier">upcase</span>))
 <span class="ruby-keyword">end</span></pre>
           </div><!-- process_buffer-3F-source -->
           
@@ -516,11 +498,11 @@ out&gt; *EOF('test.txt')</pre>
       <h3 class="section-header">Private Instance Methods</h3>
 
     
-      <div id="method-i-sequences" class="method-detail ">
+      <div id="method-i-insert_sequences" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">sequences</span><span
-            class="method-args">(map)</span>
+          <span class="method-name">insert_sequences</span><span
+            class="method-args">()</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -531,27 +513,47 @@ out&gt; *EOF('test.txt')</pre>
           
 
           
-          <div class="method-source-code" id="sequences-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/sequencer.rb, line 153</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">sequences</span>(<span class="ruby-identifier">map</span>)
-  <span class="ruby-identifier">res</span> = <span class="ruby-identifier">map</span>.<span class="ruby-identifier">shift</span>
+          <div class="method-source-code" id="insert_sequences-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/sequencer.rb, line 123</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">insert_sequences</span>
+  <span class="ruby-identifier">matches</span>, <span class="ruby-identifier">buf</span>, <span class="ruby-identifier">seq</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span>, <span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>[<span class="ruby-identifier">k</span>] = [] }, <span class="ruby-ivar">@buffer</span>, <span class="ruby-ivar">@seq</span>
 
-  <span class="ruby-identifier">map</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">classes</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">temp</span> = []
-    <span class="ruby-identifier">res</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">wc1</span><span class="ruby-operator">|</span> <span class="ruby-identifier">classes</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">wc2</span><span class="ruby-operator">|</span> <span class="ruby-identifier">temp</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-identifier">wc1</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">wc2</span>) } }
-    <span class="ruby-identifier">res</span> = <span class="ruby-identifier">temp</span>
+  <span class="ruby-identifier">map</span> = <span class="ruby-identifier">buf</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">obj</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Word</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">obj</span>.<span class="ruby-identifier">unknown?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">attrs</span>(<span class="ruby-keyword">false</span>) <span class="ruby-operator">:</span> [<span class="ruby-string">'#'</span>]
   }
 
-  <span class="ruby-identifier">res</span>
+  <span class="ruby-identifier">map</span>.<span class="ruby-identifier">shift</span>.<span class="ruby-identifier">product</span>(*<span class="ruby-identifier">map</span>).<span class="ruby-identifier">map!</span>(&amp;<span class="ruby-value">:join</span>).<span class="ruby-identifier">tap</span>(&amp;<span class="ruby-value">:uniq!</span>).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">q</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">string</span>, <span class="ruby-identifier">classes</span>, <span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">while</span> <span class="ruby-identifier">pos</span> = <span class="ruby-identifier">q</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">string</span>, <span class="ruby-identifier">pos</span> <span class="ruby-operator">||</span> <span class="ruby-value">0</span>)
+        <span class="ruby-identifier">inc</span>(<span class="ruby-string">'Anzahl erkannter Sequenzen'</span>)
+
+        <span class="ruby-identifier">fmt</span> = <span class="ruby-identifier">format</span>.<span class="ruby-identifier">dup</span>
+
+        <span class="ruby-identifier">classes</span>.<span class="ruby-identifier">each_with_index</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">wc</span>, <span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">buf</span>[<span class="ruby-identifier">pos</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">i</span>].<span class="ruby-identifier">lexicals</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">l</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">fmt</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-identifier">i</span>.<span class="ruby-identifier">succ</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">l</span>.<span class="ruby-identifier">form</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">l</span>.<span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">wc</span>
+          } <span class="ruby-keyword">or</span> <span class="ruby-keyword">break</span>
+        } <span class="ruby-keyword">or</span> <span class="ruby-keyword">next</span>
+
+        <span class="ruby-identifier">matches</span>[<span class="ruby-identifier">pos</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">fmt</span>
+
+        <span class="ruby-identifier">pos</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+      <span class="ruby-keyword">end</span>
+    }
+  }
+
+  <span class="ruby-identifier">matches</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">pos</span>, <span class="ruby-identifier">forms</span><span class="ruby-operator">|</span> <span class="ruby-identifier">forms</span>.<span class="ruby-identifier">tap</span>(&amp;<span class="ruby-value">:uniq!</span>).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">form</span><span class="ruby-operator">|</span>
+    <span class="ruby-ivar">@inserts</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">pos</span>, <span class="ruby-constant">Word</span>.<span class="ruby-identifier">new_lexical</span>(<span class="ruby-identifier">form</span>, <span class="ruby-constant">WA_SEQUENCE</span>, <span class="ruby-constant">LA_SEQUENCE</span>)]
+  } }
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- sequences-source -->
+          </div><!-- insert_sequences-source -->
           
         </div>
 
         
 
         
-      </div><!-- sequences-method -->
+      </div><!-- insert_sequences-method -->
 
     
     </section><!-- private-instance-method-details -->

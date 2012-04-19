@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Lingo::Attendee::TextReader - lingo Application documentation (v1.8.1)</title>
+<title>class Lingo::Attendee::TextReader - lingo Application documentation (v1.8.2)</title>
 
 <link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
 
@@ -70,6 +70,8 @@
 
   <ul class="link-list">
     
+    <li><a href="#method-i-add_files">#add_files</a>
+    
     <li><a href="#method-i-control">#control</a>
     
     <li><a href="#method-i-file_type">#file_type</a>
@@ -79,6 +81,8 @@
     <li><a href="#method-i-filter_html">#filter_html</a>
     
     <li><a href="#method-i-filter_pdf">#filter_pdf</a>
+    
+    <li><a href="#method-i-get_files">#get_files</a>
     
     <li><a href="#method-i-init">#init</a>
     
@@ -135,7 +139,9 @@
   
     <li><a href="../../Lingo/Attendee/Sequencer.html">Lingo::Attendee::Sequencer</a>
   
-    <li><a href="../../Lingo/Attendee/Sequencer/WordSequence.html">Lingo::Attendee::Sequencer::WordSequence</a>
+    <li><a href="../../Lingo/Attendee/Stemmer.html">Lingo::Attendee::Stemmer</a>
+  
+    <li><a href="../../Lingo/Attendee/Stemmer/Porter.html">Lingo::Attendee::Stemmer::Porter</a>
   
     <li><a href="../../Lingo/Attendee/Synonymer.html">Lingo::Attendee::Synonymer</a>
   
@@ -152,6 +158,10 @@
     <li><a href="../../Lingo/Attendee/VectorFilter.html">Lingo::Attendee::VectorFilter</a>
   
     <li><a href="../../Lingo/Attendee/WordSearcher.html">Lingo::Attendee::WordSearcher</a>
+  
+    <li><a href="../../Lingo/BackendNotAvailableError.html">Lingo::BackendNotAvailableError</a>
+  
+    <li><a href="../../Lingo/BackendNotFoundError.html">Lingo::BackendNotFoundError</a>
   
     <li><a href="../../Lingo/BufferedAttendee.html">Lingo::BufferedAttendee</a>
   
@@ -195,6 +205,8 @@
   
     <li><a href="../../Lingo/Database/Source/WordClass.html">Lingo::Database::Source::WordClass</a>
   
+    <li><a href="../../Lingo/DatabaseError.html">Lingo::DatabaseError</a>
+  
     <li><a href="../../Lingo/FileNotFoundError.html">Lingo::FileNotFoundError</a>
   
     <li><a href="../../Lingo/InvalidDatabaseConfigError.html">Lingo::InvalidDatabaseConfigError</a>
@@ -219,11 +231,15 @@
   
     <li><a href="../../Lingo/MissingConfigError.html">Lingo::MissingConfigError</a>
   
+    <li><a href="../../Lingo/NameNotFoundError.html">Lingo::NameNotFoundError</a>
+  
     <li><a href="../../Lingo/NoDatabaseConfigError.html">Lingo::NoDatabaseConfigError</a>
   
     <li><a href="../../Lingo/NoWritableStoreError.html">Lingo::NoWritableStoreError</a>
   
     <li><a href="../../Lingo/Reportable.html">Lingo::Reportable</a>
+  
+    <li><a href="../../Lingo/ShowProgress.html">Lingo::ShowProgress</a>
   
     <li><a href="../../Lingo/SourceFileNotFoundError.html">Lingo::SourceFileNotFoundError</a>
   
@@ -274,7 +290,7 @@ Komma voneinander getrennt, z.B.</p>
 
 <pre>files: 'readme.txt'
 files: 'readme.txt,lingo.cfg'</pre>
-</dd><dt><strong><em>lir-record-pattern</em></strong>
+</dd><dt><strong><em>records</em></strong>
 <dd>
 <p>Mit diesem Parameter wird angegeben, woran der Anfang eines neuen Records
 erkannt werden kann und wie die Record-Nummer identifiziert wird. Das
@@ -288,7 +304,7 @@ Format einer LIR-Datei ist z.B.</p>
 
 <p>Mit der Angabe von</p>
 
-<pre>lir-record-pattern: &quot;^\[(\d+)\.\]&quot;</pre>
+<pre>records: &quot;^\[(\d+)\.\]&quot;</pre>
 
 <p>werden die Record-Zeilen erkannt und jeweils die Record-Nummer
 <code>00001</code>, bzw. <code>00002</code> erkannt.</p>
@@ -336,7 +352,7 @@ out&gt; *EOF('test.txt')</pre>
 
 <pre>meeting:
   attendees:
-    - text_reader: { out: lines,  files: '$(files)', lir-record-pattern: &quot;^\[(\d+)\.\]&quot; }
+    - text_reader: { out: lines,  files: '$(files)', records: &quot;^\[(\d+)\.\]&quot; }
     - debugger:    { in: lines, prompt: 'out&gt;'}</pre>
 
 <p>ergibt die Ausgabe mit <code>lingo -c t2 lir.txt</code></p>
@@ -385,11 +401,11 @@ out&gt; *EOF('lir.txt')</pre>
 
           
           <div class="method-source-code" id="control-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 118</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 122</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">param</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">cmd</span><span class="ruby-operator">==</span><span class="ruby-constant">STR_CMD_TALK</span>
-    <span class="ruby-identifier">forward</span>(<span class="ruby-constant">STR_CMD_LIR</span>, <span class="ruby-string">''</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@is_LIR_file</span>
-    <span class="ruby-ivar">@files</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">filename</span><span class="ruby-operator">|</span> <span class="ruby-identifier">spool</span>(<span class="ruby-identifier">filename</span>) }
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">cmd</span> <span class="ruby-operator">==</span> <span class="ruby-constant">STR_CMD_TALK</span>
+    <span class="ruby-identifier">forward</span>(<span class="ruby-constant">STR_CMD_LIR</span>, <span class="ruby-string">''</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@lir</span>
+    <span class="ruby-ivar">@files</span>.<span class="ruby-identifier">each</span>(&amp;<span class="ruby-identifier">method</span>(<span class="ruby-value">:spool</span>))
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- control-source -->
@@ -413,19 +429,22 @@ out&gt; *EOF('lir.txt')</pre>
 
         <div class="method-description">
           
-          <p>TODO: FILE und LIR-FILE TODO: lir-record-pattern abkürzen Interpretation
-der Parameter</p>
+          <p>TODO: FILE und LIR-FILE (?)</p>
           
 
           
           <div class="method-source-code" id="init-source">
             <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 110</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">init</span>
-  <span class="ruby-ivar">@files</span> = <span class="ruby-constant">Array</span>(<span class="ruby-identifier">get_key</span>(<span class="ruby-string">'files'</span>, <span class="ruby-string">'-'</span>))
-  <span class="ruby-ivar">@rec_pat</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">get_key</span>(<span class="ruby-string">'lir-record-pattern'</span>, <span class="ruby-string">''</span>))
-  <span class="ruby-ivar">@is_LIR_file</span> = <span class="ruby-identifier">has_key?</span>(<span class="ruby-string">'lir-record-pattern'</span>)
-  <span class="ruby-ivar">@chomp</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">'chomp'</span>, <span class="ruby-keyword">true</span>)
-  <span class="ruby-ivar">@filter</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">'filter'</span>, <span class="ruby-keyword">false</span>)
+  <span class="ruby-identifier">get_files</span>
+
+  <span class="ruby-ivar">@chomp</span>    = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">'chomp'</span>, <span class="ruby-keyword">true</span>)
+  <span class="ruby-ivar">@filter</span>   = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">'filter'</span>, <span class="ruby-keyword">false</span>)
+  <span class="ruby-ivar">@progress</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">'progress'</span>, <span class="ruby-keyword">false</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@lir</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">'records'</span>, <span class="ruby-identifier">get_key</span>(<span class="ruby-string">'lir-record-pattern'</span>, <span class="ruby-keyword">nil</span>))  <span class="ruby-comment"># DEPRECATE lir-record-pattern</span>
+    <span class="ruby-ivar">@lir</span> = <span class="ruby-ivar">@lir</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span> <span class="ruby-operator">?</span> <span class="ruby-regexp">%r{^\[(\d+)\.\]}</span> <span class="ruby-operator">:</span> <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@lir</span>)
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- init-source -->
           
@@ -443,11 +462,45 @@ der Parameter</p>
       <h3 class="section-header">Private Instance Methods</h3>
 
     
+      <div id="method-i-add_files" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">add_files</span><span
+            class="method-args">(path, glob, recursive = false)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="add_files-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 227</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_files</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">glob</span>, <span class="ruby-identifier">recursive</span> = <span class="ruby-keyword">false</span>)
+  <span class="ruby-constant">Dir</span>[<span class="ruby-identifier">path</span>].<span class="ruby-identifier">sort!</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">match</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">File</span>.<span class="ruby-identifier">directory?</span>(<span class="ruby-identifier">match</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">recursive</span> <span class="ruby-operator">?</span> <span class="ruby-constant">Find</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">match</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">entry</span><span class="ruby-operator">|</span>
+      <span class="ruby-ivar">@files</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">entry</span> <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">file?</span>(<span class="ruby-identifier">entry</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">fnmatch?</span>(<span class="ruby-identifier">glob</span>, <span class="ruby-identifier">entry</span>)
+    } <span class="ruby-operator">:</span> <span class="ruby-identifier">add_files</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">match</span>, <span class="ruby-identifier">glob</span>), <span class="ruby-identifier">glob</span>) <span class="ruby-operator">:</span> <span class="ruby-ivar">@files</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">match</span>
+  }.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">raise</span> <span class="ruby-constant">FileNotFoundError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">path</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- add_files-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- add_files-method -->
+
+    
       <div id="method-i-file_type" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">file_type</span><span
-            class="method-args">(filename, file)</span>
+            class="method-args">(path, io)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -459,19 +512,16 @@ der Parameter</p>
 
           
           <div class="method-source-code" id="file_type-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 187</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">file_type</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-identifier">file</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-constant">Object</span>.<span class="ruby-identifier">const_defined?</span>(<span class="ruby-value">:FileMagic</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">file</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:rewind</span>)
-    <span class="ruby-identifier">type</span> = <span class="ruby-constant">FileMagic</span>.<span class="ruby-identifier">fm</span>(<span class="ruby-value">:mime</span>, <span class="ruby-identifier">simplified</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>).<span class="ruby-identifier">buffer</span>(<span class="ruby-identifier">file</span>.<span class="ruby-identifier">read</span>(<span class="ruby-value">256</span>))
-    <span class="ruby-identifier">file</span>.<span class="ruby-identifier">rewind</span>
-    <span class="ruby-identifier">type</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 195</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">file_type</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">io</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">Object</span>.<span class="ruby-identifier">const_defined?</span>(<span class="ruby-value">:FileMagic</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">io</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:rewind</span>)
+    <span class="ruby-constant">FileMagic</span>.<span class="ruby-identifier">fm</span>(<span class="ruby-value">:mime</span>, <span class="ruby-identifier">simplified</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>).<span class="ruby-identifier">buffer</span>(<span class="ruby-identifier">io</span>.<span class="ruby-identifier">read</span>(<span class="ruby-value">256</span>)).<span class="ruby-identifier">tap</span> {
+      <span class="ruby-identifier">io</span>.<span class="ruby-identifier">rewind</span>
+    }
   <span class="ruby-keyword">elsif</span> <span class="ruby-constant">Object</span>.<span class="ruby-identifier">const_defined?</span>(<span class="ruby-value">:MIME</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">MIME</span>.<span class="ruby-identifier">const_defined?</span>(<span class="ruby-value">:Types</span>)
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">type</span> = <span class="ruby-constant">MIME</span><span class="ruby-operator">::</span><span class="ruby-constant">Types</span>.<span class="ruby-identifier">of</span>(<span class="ruby-identifier">filename</span>).<span class="ruby-identifier">first</span>
-      <span class="ruby-identifier">type</span>.<span class="ruby-identifier">content_type</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">warn</span> <span class="ruby-string">'Filters not available. File type could not be determined.'</span>
-      <span class="ruby-keyword">nil</span>
-    <span class="ruby-keyword">end</span>
+    <span class="ruby-constant">MIME</span><span class="ruby-operator">::</span><span class="ruby-constant">Types</span>.<span class="ruby-identifier">of</span>(<span class="ruby-identifier">path</span>).<span class="ruby-identifier">first</span>.<span class="ruby-identifier">tap</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">type</span><span class="ruby-operator">|</span> <span class="ruby-identifier">type</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">type</span>.<span class="ruby-identifier">content_type</span> <span class="ruby-operator">:</span>
+      <span class="ruby-identifier">warn</span>(<span class="ruby-string">'Filters not available. File type could not be determined.'</span>)
+    }
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;Filters not available. Please install `ruby-filemagic' or `mime-types'.&quot;</span>
     <span class="ruby-keyword">nil</span>
@@ -491,7 +541,7 @@ der Parameter</p>
         
         <div class="method-heading">
           <span class="method-name">filter</span><span
-            class="method-args">(filename, &block)</span>
+            class="method-args">(path, stdin = stdin?(path)) { |line, 0| ... }</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -503,20 +553,23 @@ der Parameter</p>
 
           
           <div class="method-source-code" id="filter-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 153</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">filter</span>(<span class="ruby-identifier">filename</span>, &amp;<span class="ruby-identifier">block</span>)
-  <span class="ruby-identifier">file</span> = <span class="ruby-identifier">stdin?</span>(<span class="ruby-identifier">filename</span>) <span class="ruby-operator">?</span>
-    <span class="ruby-ivar">@lingo</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">stdin</span>.<span class="ruby-identifier">set_encoding</span>(<span class="ruby-constant">ENC</span>) <span class="ruby-operator">:</span>
-    <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-string">'rb'</span>, <span class="ruby-identifier">encoding</span><span class="ruby-operator">:</span> <span class="ruby-constant">ENC</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 160</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">filter</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">stdin</span> = <span class="ruby-identifier">stdin?</span>(<span class="ruby-identifier">path</span>))
+  <span class="ruby-identifier">io</span>, <span class="ruby-identifier">block</span> = <span class="ruby-identifier">stdin</span> <span class="ruby-operator">?</span> [
+    <span class="ruby-ivar">@lingo</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">stdin</span>.<span class="ruby-identifier">set_encoding</span>(<span class="ruby-constant">ENC</span>),
+    <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span> <span class="ruby-identifier">line</span>, <span class="ruby-value">0</span> }
+  ] <span class="ruby-operator">:</span> [
+    <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-string">'rb'</span>, <span class="ruby-identifier">encoding</span><span class="ruby-operator">:</span> <span class="ruby-constant">ENC</span>),
+    <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span> <span class="ruby-identifier">line</span>, <span class="ruby-identifier">io</span>.<span class="ruby-identifier">pos</span> }
+  ]
 
-  <span class="ruby-identifier">file</span> = <span class="ruby-keyword">case</span> <span class="ruby-ivar">@filter</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">file_type</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-identifier">file</span>) <span class="ruby-operator">:</span> <span class="ruby-ivar">@filter</span>.<span class="ruby-identifier">to_s</span>
-    <span class="ruby-keyword">when</span> <span class="ruby-regexp">%rhtml/</span> <span class="ruby-keyword">then</span> <span class="ruby-identifier">filter_html</span>(<span class="ruby-identifier">file</span>)
-    <span class="ruby-keyword">when</span> <span class="ruby-regexp">%rxml/</span>  <span class="ruby-keyword">then</span> <span class="ruby-identifier">filter_html</span>(<span class="ruby-identifier">file</span>, <span class="ruby-keyword">true</span>)
-    <span class="ruby-keyword">when</span> <span class="ruby-regexp">%rpdf/</span>  <span class="ruby-keyword">then</span> <span class="ruby-identifier">filter_pdf</span>(<span class="ruby-identifier">file</span>, &amp;<span class="ruby-identifier">block</span>) <span class="ruby-keyword">or</span> <span class="ruby-keyword">return</span>
-    <span class="ruby-keyword">else</span> <span class="ruby-identifier">file</span>
-  <span class="ruby-keyword">end</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@filter</span>
+  <span class="ruby-keyword">case</span> <span class="ruby-ivar">@filter</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">file_type</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">io</span>) <span class="ruby-operator">:</span> <span class="ruby-ivar">@filter</span>.<span class="ruby-identifier">to_s</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">%rhtml/</span> <span class="ruby-keyword">then</span> <span class="ruby-identifier">io</span> = <span class="ruby-identifier">filter_html</span>(<span class="ruby-identifier">io</span>)
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">%rxml/</span>  <span class="ruby-keyword">then</span> <span class="ruby-identifier">io</span> = <span class="ruby-identifier">filter_html</span>(<span class="ruby-identifier">io</span>, <span class="ruby-keyword">true</span>)
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">%rpdf/</span>  <span class="ruby-keyword">then</span> <span class="ruby-identifier">filter_pdf</span>(<span class="ruby-identifier">io</span>, &amp;<span class="ruby-identifier">block</span>); <span class="ruby-keyword">return</span>
+  <span class="ruby-keyword">end</span>
 
-  <span class="ruby-identifier">file</span>.<span class="ruby-identifier">each_line</span>(&amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">io</span>.<span class="ruby-identifier">each_line</span>(&amp;<span class="ruby-identifier">block</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">io</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- filter-source -->
           
@@ -532,7 +585,7 @@ der Parameter</p>
         
         <div class="method-heading">
           <span class="method-name">filter_html</span><span
-            class="method-args">(file, xml = false)</span>
+            class="method-args">(io, xml = false)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -544,13 +597,13 @@ der Parameter</p>
 
           
           <div class="method-source-code" id="filter_html-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 178</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">filter_html</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">xml</span> = <span class="ruby-keyword">false</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 186</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">filter_html</span>(<span class="ruby-identifier">io</span>, <span class="ruby-identifier">xml</span> = <span class="ruby-keyword">false</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-constant">Object</span>.<span class="ruby-identifier">const_defined?</span>(<span class="ruby-value">:Hpricot</span>)
-    <span class="ruby-constant">Hpricot</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">xml</span><span class="ruby-operator">:</span> <span class="ruby-identifier">xml</span>).<span class="ruby-identifier">inner_text</span>
+    <span class="ruby-constant">Hpricot</span>(<span class="ruby-identifier">io</span>, <span class="ruby-identifier">xml</span><span class="ruby-operator">:</span> <span class="ruby-identifier">xml</span>).<span class="ruby-identifier">inner_text</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;#{xml ? 'X' : 'HT'}ML filter not available. Please install `hpricot'.&quot;</span>
-    <span class="ruby-identifier">file</span>
+    <span class="ruby-keyword">nil</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- filter_html-source -->
@@ -567,7 +620,7 @@ der Parameter</p>
         
         <div class="method-heading">
           <span class="method-name">filter_pdf</span><span
-            class="method-args">(file, &block)</span>
+            class="method-args">(io, &block)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -579,14 +632,12 @@ der Parameter</p>
 
           
           <div class="method-source-code" id="filter_pdf-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 168</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">filter_pdf</span>(<span class="ruby-identifier">file</span>, &amp;<span class="ruby-identifier">block</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 178</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">filter_pdf</span>(<span class="ruby-identifier">io</span>, &amp;<span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-constant">Object</span>.<span class="ruby-identifier">const_defined?</span>(<span class="ruby-value">:PDF</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">PDF</span>.<span class="ruby-identifier">const_defined?</span>(<span class="ruby-value">:Reader</span>)
-    <span class="ruby-constant">PDFFilter</span>.<span class="ruby-identifier">filter</span>(<span class="ruby-identifier">file</span>, &amp;<span class="ruby-identifier">block</span>)
-    <span class="ruby-keyword">nil</span>
+    <span class="ruby-constant">PDFFilter</span>.<span class="ruby-identifier">filter</span>(<span class="ruby-identifier">io</span>, &amp;<span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;PDF filter not available. Please install `pdf-reader'.&quot;</span>
-    <span class="ruby-identifier">file</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- filter_pdf-source -->
@@ -599,11 +650,50 @@ der Parameter</p>
       </div><!-- filter_pdf-method -->
 
     
+      <div id="method-i-get_files" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_files</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_files-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 214</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_files</span>
+  <span class="ruby-identifier">args</span> = [<span class="ruby-identifier">get_key</span>(<span class="ruby-string">'glob'</span>, <span class="ruby-string">'*.txt'</span>), <span class="ruby-identifier">get_key</span>(<span class="ruby-string">'recursive'</span>, <span class="ruby-keyword">false</span>)]
+
+  <span class="ruby-ivar">@files</span> = []
+
+  <span class="ruby-constant">Array</span>(<span class="ruby-identifier">get_key</span>(<span class="ruby-string">'files'</span>, <span class="ruby-string">'-'</span>)).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">stdin?</span>(<span class="ruby-identifier">path</span>) <span class="ruby-operator">?</span> <span class="ruby-ivar">@files</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">path</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">add_files</span>(<span class="ruby-identifier">path</span>, *<span class="ruby-identifier">args</span>)
+  }
+
+  <span class="ruby-ivar">@files</span>.<span class="ruby-identifier">map!</span>(&amp;<span class="ruby-constant">File</span>.<span class="ruby-identifier">method</span>(<span class="ruby-value">:expand_path</span>))
+  <span class="ruby-ivar">@files</span>.<span class="ruby-identifier">uniq!</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_files-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_files-method -->
+
+    
       <div id="method-i-spool" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">spool</span><span
-            class="method-args">(filename)</span>
+            class="method-args">(path)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -615,30 +705,33 @@ der Parameter</p>
 
           
           <div class="method-source-code" id="spool-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 128</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">spool</span>(<span class="ruby-identifier">filename</span>)
-  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">stdin?</span>(<span class="ruby-identifier">filename</span>)
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">FileNotFoundError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">filename</span>) <span class="ruby-keyword">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">filename</span>)
-
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 132</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">spool</span>(<span class="ruby-identifier">path</span>)
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">stdin</span> = <span class="ruby-identifier">stdin?</span>(<span class="ruby-identifier">path</span>)
     <span class="ruby-identifier">inc</span>(<span class="ruby-string">'Anzahl Dateien'</span>)
-    <span class="ruby-identifier">add</span>(<span class="ruby-string">'Anzahl Bytes'</span>, <span class="ruby-constant">File</span>.<span class="ruby-identifier">stat</span>(<span class="ruby-identifier">filename</span>).<span class="ruby-identifier">size</span>)
+    <span class="ruby-identifier">add</span>(<span class="ruby-string">'Anzahl Bytes'</span>, <span class="ruby-identifier">size</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">size</span>(<span class="ruby-identifier">path</span>))
+
+    <span class="ruby-identifier">size</span> = <span class="ruby-keyword">nil</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@progress</span>
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-identifier">forward</span>(<span class="ruby-constant">STR_CMD_FILE</span>, <span class="ruby-identifier">filename</span>)
+  <span class="ruby-identifier">forward</span>(<span class="ruby-constant">STR_CMD_FILE</span>, <span class="ruby-identifier">path</span>)
 
-  <span class="ruby-identifier">filter</span>(<span class="ruby-identifier">filename</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">inc</span>(<span class="ruby-string">'Anzahl Zeilen'</span>)
-    <span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp!</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@chomp</span>
-    <span class="ruby-identifier">line</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">%r\3303\2237/</span>, <span class="ruby-string">&quot;ß&quot;</span>)
-<span class="ruby-comment">### HACK</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@is_LIR_file</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-ivar">@rec_pat</span>
-      <span class="ruby-identifier">forward</span>(<span class="ruby-constant">STR_CMD_RECORD</span>, <span class="ruby-node">$1</span>)
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">line</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">size</span><span class="ruby-operator">&gt;</span><span class="ruby-value">0</span>
-    <span class="ruby-keyword">end</span>
+  <span class="ruby-constant">ShowProgress</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">size</span>, <span class="ruby-identifier">path</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">progress</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">filter</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">stdin</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">line</span>, <span class="ruby-identifier">pos</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">inc</span>(<span class="ruby-string">'Anzahl Zeilen'</span>)
+      <span class="ruby-identifier">progress</span>[<span class="ruby-identifier">pos</span>]
+
+      <span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp!</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@chomp</span>
+
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-ivar">@lir</span>
+        <span class="ruby-identifier">forward</span>(<span class="ruby-constant">STR_CMD_RECORD</span>, <span class="ruby-node">$1</span>)
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">line</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">empty?</span>
+      <span class="ruby-keyword">end</span>
+    }
   }
 
-  <span class="ruby-identifier">forward</span>(<span class="ruby-constant">STR_CMD_EOF</span>, <span class="ruby-identifier">filename</span>)
+  <span class="ruby-identifier">forward</span>(<span class="ruby-constant">STR_CMD_EOF</span>, <span class="ruby-identifier">path</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- spool-source -->
           
@@ -654,7 +747,7 @@ der Parameter</p>
         
         <div class="method-heading">
           <span class="method-name">stdin?</span><span
-            class="method-args">(filename)</span>
+            class="method-args">(path)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -666,9 +759,9 @@ der Parameter</p>
 
           
           <div class="method-source-code" id="stdin-3F-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 205</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">stdin?</span>(<span class="ruby-identifier">filename</span>)
-  <span class="ruby-node">%w[STDIN -]</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">filename</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 210</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">stdin?</span>(<span class="ruby-identifier">path</span>)
+  <span class="ruby-node">%w[STDIN -]</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">path</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- stdin-3F-source -->
           

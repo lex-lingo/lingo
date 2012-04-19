@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Lingo::Language::Word - lingo Application documentation (v1.8.1)</title>
+<title>class Lingo::Language::Word - lingo Application documentation (v1.8.2)</title>
 
 <link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
 
@@ -74,13 +74,19 @@
     
     <li><a href="#method-c-new_lexical">::new_lexical</a>
     
+    <li><a href="#method-c-new_lexicals">::new_lexicals</a>
+    
     <li><a href="#method-i-3C-3C">#&lt;&lt;</a>
     
     <li><a href="#method-i-3C-3D-3E">#&lt;=&gt;</a>
     
+    <li><a href="#method-i-add_lexicals">#add_lexicals</a>
+    
     <li><a href="#method-i-attrs">#attrs</a>
     
     <li><a href="#method-i-compo_form">#compo_form</a>
+    
+    <li><a href="#method-i-full_compound-3F">#full_compound?</a>
     
     <li><a href="#method-i-get_class">#get_class</a>
     
@@ -145,7 +151,9 @@
   
     <li><a href="../../Lingo/Attendee/Sequencer.html">Lingo::Attendee::Sequencer</a>
   
-    <li><a href="../../Lingo/Attendee/Sequencer/WordSequence.html">Lingo::Attendee::Sequencer::WordSequence</a>
+    <li><a href="../../Lingo/Attendee/Stemmer.html">Lingo::Attendee::Stemmer</a>
+  
+    <li><a href="../../Lingo/Attendee/Stemmer/Porter.html">Lingo::Attendee::Stemmer::Porter</a>
   
     <li><a href="../../Lingo/Attendee/Synonymer.html">Lingo::Attendee::Synonymer</a>
   
@@ -162,6 +170,10 @@
     <li><a href="../../Lingo/Attendee/VectorFilter.html">Lingo::Attendee::VectorFilter</a>
   
     <li><a href="../../Lingo/Attendee/WordSearcher.html">Lingo::Attendee::WordSearcher</a>
+  
+    <li><a href="../../Lingo/BackendNotAvailableError.html">Lingo::BackendNotAvailableError</a>
+  
+    <li><a href="../../Lingo/BackendNotFoundError.html">Lingo::BackendNotFoundError</a>
   
     <li><a href="../../Lingo/BufferedAttendee.html">Lingo::BufferedAttendee</a>
   
@@ -205,6 +217,8 @@
   
     <li><a href="../../Lingo/Database/Source/WordClass.html">Lingo::Database::Source::WordClass</a>
   
+    <li><a href="../../Lingo/DatabaseError.html">Lingo::DatabaseError</a>
+  
     <li><a href="../../Lingo/FileNotFoundError.html">Lingo::FileNotFoundError</a>
   
     <li><a href="../../Lingo/InvalidDatabaseConfigError.html">Lingo::InvalidDatabaseConfigError</a>
@@ -229,11 +243,15 @@
   
     <li><a href="../../Lingo/MissingConfigError.html">Lingo::MissingConfigError</a>
   
+    <li><a href="../../Lingo/NameNotFoundError.html">Lingo::NameNotFoundError</a>
+  
     <li><a href="../../Lingo/NoDatabaseConfigError.html">Lingo::NoDatabaseConfigError</a>
   
     <li><a href="../../Lingo/NoWritableStoreError.html">Lingo::NoWritableStoreError</a>
   
     <li><a href="../../Lingo/Reportable.html">Lingo::Reportable</a>
+  
+    <li><a href="../../Lingo/ShowProgress.html">Lingo::ShowProgress</a>
   
     <li><a href="../../Lingo/SourceFileNotFoundError.html">Lingo::SourceFileNotFoundError</a>
   
@@ -303,7 +321,7 @@ extern durch die Klasse <a href="Dictionary.html">Dictionary</a></strong></p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 52</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 60</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">form</span>, <span class="ruby-identifier">attr</span> = <span class="ruby-constant">WA_UNSET</span>)
   <span class="ruby-keyword">super</span>
   <span class="ruby-ivar">@lexicals</span> = []
@@ -334,9 +352,9 @@ extern durch die Klasse <a href="Dictionary.html">Dictionary</a></strong></p>
 
           
           <div class="method-source-code" id="new_lexical-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 35</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new_lexical</span>(<span class="ruby-identifier">form</span>, <span class="ruby-identifier">attr</span>, <span class="ruby-identifier">lex_attr</span>)
-  <span class="ruby-identifier">new</span>(<span class="ruby-identifier">form</span>, <span class="ruby-identifier">attr</span>) <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Lexical</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">form</span>, <span class="ruby-identifier">lex_attr</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 41</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">new_lexical</span>(<span class="ruby-identifier">form</span>, <span class="ruby-identifier">attr</span>, <span class="ruby-identifier">lex_attr</span>)
+  <span class="ruby-identifier">new_lexicals</span>(<span class="ruby-identifier">form</span>, <span class="ruby-identifier">attr</span>, <span class="ruby-constant">Lexical</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">form</span>, <span class="ruby-identifier">lex_attr</span>))
 <span class="ruby-keyword">end</span></pre>
           </div><!-- new_lexical-source -->
           
@@ -346,6 +364,36 @@ extern durch die Klasse <a href="Dictionary.html">Dictionary</a></strong></p>
 
         
       </div><!-- new_lexical-method -->
+
+    
+      <div id="method-c-new_lexicals" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new_lexicals</span><span
+            class="method-args">(form, attr, lex)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="new_lexicals-source">
+            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 37</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">new_lexicals</span>(<span class="ruby-identifier">form</span>, <span class="ruby-identifier">attr</span>, <span class="ruby-identifier">lex</span>)
+  <span class="ruby-identifier">new</span>(<span class="ruby-identifier">form</span>, <span class="ruby-identifier">attr</span>) <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">lex</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new_lexicals-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new_lexicals-method -->
 
     
     </section><!-- public-class-method-details -->
@@ -370,9 +418,9 @@ extern durch die Klasse <a href="Dictionary.html">Dictionary</a></strong></p>
 
           
           <div class="method-source-code" id="3C-3C-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 109</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 126</span>
 <span class="ruby-keyword">def</span> <span class="ruby-operator">&lt;&lt;</span>(*<span class="ruby-identifier">other</span>)
-  <span class="ruby-identifier">lexicals</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">other</span>.<span class="ruby-identifier">flatten</span>)
+  <span class="ruby-identifier">lexicals</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">other</span>.<span class="ruby-identifier">tap</span>(&amp;<span class="ruby-value">:flatten!</span>))
   <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- 3C-3C-source -->
@@ -401,7 +449,7 @@ extern durch die Klasse <a href="Dictionary.html">Dictionary</a></strong></p>
 
           
           <div class="method-source-code" id="3C-3D-3E-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 114</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 131</span>
 <span class="ruby-keyword">def</span> <span class="ruby-operator">&lt;=&gt;</span>(<span class="ruby-identifier">other</span>)
   <span class="ruby-identifier">other</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span> <span class="ruby-value">1</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">lexicals</span>) <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">other</span>.<span class="ruby-identifier">lexicals</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -413,6 +461,41 @@ extern durch die Klasse <a href="Dictionary.html">Dictionary</a></strong></p>
 
         
       </div><!-- 3C-3D-3E-method -->
+
+    
+      <div id="method-i-add_lexicals" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">add_lexicals</span><span
+            class="method-args">(lex)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="add_lexicals-source">
+            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 81</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_lexicals</span>(<span class="ruby-identifier">lex</span>)
+  <span class="ruby-ivar">@lexicals</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">lex</span>)
+
+  <span class="ruby-ivar">@lexicals</span>.<span class="ruby-identifier">sort!</span>
+  <span class="ruby-ivar">@lexicals</span>.<span class="ruby-identifier">uniq!</span>
+
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- add_lexicals-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- add_lexicals-method -->
 
     
       <div id="method-i-attrs" class="method-detail ">
@@ -431,9 +514,9 @@ extern durch die Klasse <a href="Dictionary.html">Dictionary</a></strong></p>
 
           
           <div class="method-source-code" id="attrs-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 73</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 90</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">attrs</span>(<span class="ruby-identifier">compound_parts</span> = <span class="ruby-keyword">true</span>)
-  <span class="ruby-identifier">lexicals</span>(<span class="ruby-identifier">compound_parts</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">lex</span><span class="ruby-operator">|</span> <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">attr</span> }
+  <span class="ruby-identifier">lexicals</span>(<span class="ruby-identifier">compound_parts</span>).<span class="ruby-identifier">map</span>(&amp;<span class="ruby-value">:attr</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- attrs-source -->
           
@@ -461,13 +544,9 @@ extern durch die Klasse <a href="Dictionary.html">Dictionary</a></strong></p>
 
           
           <div class="method-source-code" id="compo_form-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 101</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 118</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">compo_form</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-constant">WA_KOMPOSITUM</span>
-    <span class="ruby-identifier">get_class</span>(<span class="ruby-constant">LA_KOMPOSITUM</span>).<span class="ruby-identifier">first</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">get_class</span>(<span class="ruby-constant">LA_COMPOUND</span>).<span class="ruby-identifier">first</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-constant">WA_COMPOUND</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- compo_form-source -->
           
@@ -477,6 +556,36 @@ extern durch die Klasse <a href="Dictionary.html">Dictionary</a></strong></p>
 
         
       </div><!-- compo_form-method -->
+
+    
+      <div id="method-i-full_compound-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">full_compound?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="full_compound-3F-source">
+            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 122</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">full_compound?</span>
+  <span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-constant">WA_COMPOUND</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">get_class</span>(<span class="ruby-string">'x+'</span>).<span class="ruby-identifier">empty?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- full_compound-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- full_compound-3F-method -->
 
     
       <div id="method-i-get_class" class="method-detail ">
@@ -497,7 +606,7 @@ extern durch die Klasse <a href="Dictionary.html">Dictionary</a></strong></p>
 
           
           <div class="method-source-code" id="get_class-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 87</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 104</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_class</span>(<span class="ruby-identifier">wc_re</span>)
   <span class="ruby-identifier">wc_re</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">wc_re</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">wc_re</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Regexp</span>)
 
@@ -533,10 +642,10 @@ extern durch die Klasse <a href="Dictionary.html">Dictionary</a></strong></p>
 
           
           <div class="method-source-code" id="lexicals-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 57</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 65</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">lexicals</span>(<span class="ruby-identifier">compound_parts</span> = <span class="ruby-keyword">true</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">compound_parts</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-constant">WA_KOMPOSITUM</span>
-    <span class="ruby-ivar">@lexicals</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">lex</span><span class="ruby-operator">|</span> <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-constant">LA_KOMPOSITUM</span> }
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">compound_parts</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-constant">WA_COMPOUND</span>
+    <span class="ruby-ivar">@lexicals</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">lex</span><span class="ruby-operator">|</span> <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-constant">LA_COMPOUND</span> }
   <span class="ruby-keyword">else</span>
     <span class="ruby-ivar">@lexicals</span>
   <span class="ruby-keyword">end</span>
@@ -555,7 +664,7 @@ extern durch die Klasse <a href="Dictionary.html">Dictionary</a></strong></p>
         
         <div class="method-heading">
           <span class="method-name">lexicals=</span><span
-            class="method-args">(lexis)</span>
+            class="method-args">(lex)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -567,12 +676,12 @@ extern durch die Klasse <a href="Dictionary.html">Dictionary</a></strong></p>
 
           
           <div class="method-source-code" id="lexicals-3D-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 65</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">lexicals=</span>(<span class="ruby-identifier">lexis</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">lexis</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>)
-    <span class="ruby-ivar">@lexicals</span> = <span class="ruby-identifier">lexis</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">uniq</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 73</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">lexicals=</span>(<span class="ruby-identifier">lex</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>)
+    <span class="ruby-ivar">@lexicals</span> = <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">uniq</span>
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-node">&quot;wrong argument type #{lexis.class} (expected Array)&quot;</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-node">&quot;wrong argument type #{lex.class} (expected Array)&quot;</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- lexicals-3D-source -->
@@ -601,7 +710,7 @@ extern durch die Klasse <a href="Dictionary.html">Dictionary</a></strong></p>
 
           
           <div class="method-source-code" id="min_part_size-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 81</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 98</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">min_part_size</span>
   <span class="ruby-identifier">form</span>.<span class="ruby-identifier">length</span>
 <span class="ruby-keyword">end</span></pre>
@@ -631,7 +740,7 @@ extern durch die Klasse <a href="Dictionary.html">Dictionary</a></strong></p>
 
           
           <div class="method-source-code" id="norm-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 97</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 114</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">norm</span>
   <span class="ruby-identifier">identified?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">lexicals</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">form</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">form</span>
 <span class="ruby-keyword">end</span></pre>
@@ -661,7 +770,7 @@ extern durch die Klasse <a href="Dictionary.html">Dictionary</a></strong></p>
 
           
           <div class="method-source-code" id="parts-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 77</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 94</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">parts</span>
   <span class="ruby-value">1</span>
 <span class="ruby-keyword">end</span></pre>
@@ -691,7 +800,7 @@ extern durch die Klasse <a href="Dictionary.html">Dictionary</a></strong></p>
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 118</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 135</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-identifier">s</span> =  <span class="ruby-node">&quot;&lt;#{form}&quot;</span>
   <span class="ruby-identifier">s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;|#{attr}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">identified?</span>

@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>Table of Contents - lingo Application documentation (v1.8.1)</title>
+<title>Table of Contents - lingo Application documentation (v1.8.2)</title>
 
 <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
 
@@ -21,7 +21,7 @@
 
 
 <body class="indexpage">
-<h1>Table of Contents - lingo Application documentation (v1.8.1)</h1>
+<h1>Table of Contents - lingo Application documentation (v1.8.2)</h1>
 
 <h2>Pages</h2>
 <ul>
@@ -39,6 +39,7 @@
     <img class="toc-toggle" src="images/transparent.png" alt="" title="toggle headings">
     <ul class="initially-hidden">
       <li><a href="ChangeLog.html#label-Revision+history+for+Lingo">Revision history for Lingo</a>
+      <li><a href="ChangeLog.html#label-1.8.2+%5B2012-04-19%5D">1.8.2 [2012-04-19]</a>
       <li><a href="ChangeLog.html#label-1.8.1+%5B2012-02-19%5D">1.8.1 [2012-02-19]</a>
       <li><a href="ChangeLog.html#label-1.8.0+%5B2012-01-01%5D">1.8.0 [2012-01-01]</a>
       <li><a href="ChangeLog.html#label-1.7.1+%5B2011-10-24%5D">1.7.1 [2011-10-24]</a>
@@ -216,7 +217,10 @@
     </ul>
   </li>
     <li class="class">
-    <a href="Lingo/Attendee/Sequencer/WordSequence.html">Lingo::Attendee::Sequencer::WordSequence</a>
+    <a href="Lingo/Attendee/Stemmer.html">Lingo::Attendee::Stemmer</a>
+  </li>
+    <li class="module">
+    <a href="Lingo/Attendee/Stemmer/Porter.html">Lingo::Attendee::Stemmer::Porter</a>
   </li>
     <li class="class">
     <a href="Lingo/Attendee/Synonymer.html">Lingo::Attendee::Synonymer</a>
@@ -295,6 +299,12 @@
     </ul>
   </li>
     <li class="class">
+    <a href="Lingo/BackendNotAvailableError.html">Lingo::BackendNotAvailableError</a>
+  </li>
+    <li class="class">
+    <a href="Lingo/BackendNotFoundError.html">Lingo::BackendNotFoundError</a>
+  </li>
+    <li class="class">
     <a href="Lingo/BufferedAttendee.html">Lingo::BufferedAttendee</a>
   </li>
     <li class="class">
@@ -358,6 +368,9 @@
     <a href="Lingo/Database/Source/WordClass.html">Lingo::Database::Source::WordClass</a>
   </li>
     <li class="class">
+    <a href="Lingo/DatabaseError.html">Lingo::DatabaseError</a>
+  </li>
+    <li class="class">
     <a href="Lingo/FileNotFoundError.html">Lingo::FileNotFoundError</a>
   </li>
     <li class="class">
@@ -394,6 +407,9 @@
     <a href="Lingo/MissingConfigError.html">Lingo::MissingConfigError</a>
   </li>
     <li class="class">
+    <a href="Lingo/NameNotFoundError.html">Lingo::NameNotFoundError</a>
+  </li>
+    <li class="class">
     <a href="Lingo/NoDatabaseConfigError.html">Lingo::NoDatabaseConfigError</a>
   </li>
     <li class="class">
@@ -401,6 +417,9 @@
   </li>
     <li class="module">
     <a href="Lingo/Reportable.html">Lingo::Reportable</a>
+  </li>
+    <li class="class">
+    <a href="Lingo/ShowProgress.html">Lingo::ShowProgress</a>
   </li>
     <li class="class">
     <a href="Lingo/SourceFileNotFoundError.html">Lingo::SourceFileNotFoundError</a>
@@ -416,6 +435,8 @@
 
 <h2 id="methods">Methods</h2>
 <ul>
+  
+    <li class="method"><a href="Lingo.html#method-c-append_path">::append_path &mdash; Lingo</a>
   
     <li class="method"><a href="Lingo.html#method-c-basename">::basename &mdash; Lingo</a>
   
@@ -439,69 +460,93 @@
   
     <li class="method"><a href="Lingo/Database/Source.html#method-c-get">::get &mdash; Lingo::Database::Source</a>
   
+    <li class="method"><a href="Lingo.html#method-c-get_const">::get_const &mdash; Lingo</a>
+  
+    <li class="method"><a href="Lingo.html#method-c-include_path">::include_path &mdash; Lingo</a>
+  
     <li class="method"><a href="Lingo.html#method-c-list">::list &mdash; Lingo</a>
-  
-    <li class="method"><a href="Lingo/BufferedAttendee.html#method-c-new">::new &mdash; Lingo::BufferedAttendee</a>
-  
-    <li class="method"><a href="Lingo/Language/Dictionary.html#method-c-new">::new &mdash; Lingo::Language::Dictionary</a>
-  
-    <li class="method"><a href="Lingo.html#method-c-new">::new &mdash; Lingo</a>
-  
-    <li class="method"><a href="Lingo/Database.html#method-c-new">::new &mdash; Lingo::Database</a>
-  
-    <li class="method"><a href="Lingo/AgendaItem.html#method-c-new">::new &mdash; Lingo::AgendaItem</a>
-  
-    <li class="method"><a href="Lingo/SourceFileNotFoundError.html#method-c-new">::new &mdash; Lingo::SourceFileNotFoundError</a>
-  
-    <li class="method"><a href="Lingo/Language/Word.html#method-c-new">::new &mdash; Lingo::Language::Word</a>
-  
-    <li class="method"><a href="Lingo/Attendee.html#method-c-new">::new &mdash; Lingo::Attendee</a>
-  
-    <li class="method"><a href="Lingo/Database/Source.html#method-c-new">::new &mdash; Lingo::Database::Source</a>
-  
-    <li class="method"><a href="Lingo/Language/Grammar.html#method-c-new">::new &mdash; Lingo::Language::Grammar</a>
-  
-    <li class="method"><a href="Lingo/FileNotFoundError.html#method-c-new">::new &mdash; Lingo::FileNotFoundError</a>
-  
-    <li class="method"><a href="Lingo/Attendee/Sequencer/WordSequence.html#method-c-new">::new &mdash; Lingo::Attendee::Sequencer::WordSequence</a>
-  
-    <li class="method"><a href="Lingo/Attendee/TextReader/PDFFilter.html#method-c-new">::new &mdash; Lingo::Attendee::TextReader::PDFFilter</a>
-  
-    <li class="method"><a href="Lingo/Language/LexicalHash.html#method-c-new">::new &mdash; Lingo::Language::LexicalHash</a>
   
     <li class="method"><a href="Lingo/Database/Source/SingleWord.html#method-c-new">::new &mdash; Lingo::Database::Source::SingleWord</a>
   
-    <li class="method"><a href="Lingo/Database/Source/MultiValue.html#method-c-new">::new &mdash; Lingo::Database::Source::MultiValue</a>
+    <li class="method"><a href="Lingo/AgendaItem.html#method-c-new">::new &mdash; Lingo::AgendaItem</a>
   
     <li class="method"><a href="Lingo/Config.html#method-c-new">::new &mdash; Lingo::Config</a>
   
-    <li class="method"><a href="Lingo/Call.html#method-c-new">::new &mdash; Lingo::Call</a>
+    <li class="method"><a href="Lingo.html#method-c-new">::new &mdash; Lingo</a>
   
     <li class="method"><a href="Lingo/Database/Source/MultiKey.html#method-c-new">::new &mdash; Lingo::Database::Source::MultiKey</a>
   
-    <li class="method"><a href="Lingo/Database/Source/KeyValue.html#method-c-new">::new &mdash; Lingo::Database::Source::KeyValue</a>
+    <li class="method"><a href="Lingo/Attendee.html#method-c-new">::new &mdash; Lingo::Attendee</a>
   
-    <li class="method"><a href="Lingo/NoWritableStoreError.html#method-c-new">::new &mdash; Lingo::NoWritableStoreError</a>
+    <li class="method"><a href="Lingo/NameNotFoundError.html#method-c-new">::new &mdash; Lingo::NameNotFoundError</a>
   
     <li class="method"><a href="Lingo/Language/WordForm.html#method-c-new">::new &mdash; Lingo::Language::WordForm</a>
   
-    <li class="method"><a href="Lingo/ConfigError.html#method-c-new">::new &mdash; Lingo::ConfigError</a>
+    <li class="method"><a href="Lingo/Language/Dictionary.html#method-c-new">::new &mdash; Lingo::Language::Dictionary</a>
   
-    <li class="method"><a href="Lingo/ConfigLoadError.html#method-c-new">::new &mdash; Lingo::ConfigLoadError</a>
+    <li class="method"><a href="Lingo/BufferedAttendee.html#method-c-new">::new &mdash; Lingo::BufferedAttendee</a>
   
-    <li class="method"><a href="Lingo/Database/ShowProgress.html#method-c-new">::new &mdash; Lingo::Database::ShowProgress</a>
+    <li class="method"><a href="Lingo/Database/Source/KeyValue.html#method-c-new">::new &mdash; Lingo::Database::Source::KeyValue</a>
+  
+    <li class="method"><a href="Lingo/SourceFileNotFoundError.html#method-c-new">::new &mdash; Lingo::SourceFileNotFoundError</a>
+  
+    <li class="method"><a href="Lingo/Attendee/TextReader/PDFFilter.html#method-c-new">::new &mdash; Lingo::Attendee::TextReader::PDFFilter</a>
   
     <li class="method"><a href="Lingo/Database/Source/WordClass.html#method-c-new">::new &mdash; Lingo::Database::Source::WordClass</a>
   
+    <li class="method"><a href="Lingo/FileNotFoundError.html#method-c-new">::new &mdash; Lingo::FileNotFoundError</a>
+  
+    <li class="method"><a href="Lingo/Language/Grammar.html#method-c-new">::new &mdash; Lingo::Language::Grammar</a>
+  
+    <li class="method"><a href="Lingo/Database/Source/MultiValue.html#method-c-new">::new &mdash; Lingo::Database::Source::MultiValue</a>
+  
+    <li class="method"><a href="Lingo/Database/Source.html#method-c-new">::new &mdash; Lingo::Database::Source</a>
+  
+    <li class="method"><a href="Lingo/Call.html#method-c-new">::new &mdash; Lingo::Call</a>
+  
+    <li class="method"><a href="Lingo/Database/ShowProgress.html#method-c-new">::new &mdash; Lingo::Database::ShowProgress</a>
+  
+    <li class="method"><a href="Lingo/Language/Word.html#method-c-new">::new &mdash; Lingo::Language::Word</a>
+  
+    <li class="method"><a href="Lingo/ConfigError.html#method-c-new">::new &mdash; Lingo::ConfigError</a>
+  
+    <li class="method"><a href="Lingo/ShowProgress.html#method-c-new">::new &mdash; Lingo::ShowProgress</a>
+  
+    <li class="method"><a href="Lingo/BackendNotFoundError.html#method-c-new">::new &mdash; Lingo::BackendNotFoundError</a>
+  
+    <li class="method"><a href="Lingo/Language/LexicalHash.html#method-c-new">::new &mdash; Lingo::Language::LexicalHash</a>
+  
+    <li class="method"><a href="Lingo/BackendNotAvailableError.html#method-c-new">::new &mdash; Lingo::BackendNotAvailableError</a>
+  
+    <li class="method"><a href="Lingo/Database.html#method-c-new">::new &mdash; Lingo::Database</a>
+  
+    <li class="method"><a href="Lingo/DatabaseError.html#method-c-new">::new &mdash; Lingo::DatabaseError</a>
+  
+    <li class="method"><a href="Lingo/ConfigLoadError.html#method-c-new">::new &mdash; Lingo::ConfigLoadError</a>
+  
+    <li class="method"><a href="Lingo/NoWritableStoreError.html#method-c-new">::new &mdash; Lingo::NoWritableStoreError</a>
+  
     <li class="method"><a href="Lingo/Language/Word.html#method-c-new_lexical">::new_lexical &mdash; Lingo::Language::Word</a>
   
+    <li class="method"><a href="Lingo/Language/Word.html#method-c-new_lexicals">::new_lexicals &mdash; Lingo::Language::Word</a>
+  
+    <li class="method"><a href="Lingo/Language/Dictionary.html#method-c-open">::open &mdash; Lingo::Language::Dictionary</a>
+  
     <li class="method"><a href="Lingo/Database.html#method-c-open">::open &mdash; Lingo::Database</a>
+  
+    <li class="method"><a href="Lingo/Language/Grammar.html#method-c-open">::open &mdash; Lingo::Language::Grammar</a>
+  
+    <li class="method"><a href="Lingo/Language/LexicalHash.html#method-c-open">::open &mdash; Lingo::Language::LexicalHash</a>
   
     <li class="method"><a href="Lingo.html#method-c-options_for">::options_for &mdash; Lingo</a>
   
     <li class="method"><a href="Lingo.html#method-c-path_for">::path_for &mdash; Lingo</a>
   
+    <li class="method"><a href="Lingo.html#method-c-prepend_path">::prepend_path &mdash; Lingo</a>
+  
     <li class="method"><a href="Lingo.html#method-c-realpath_for">::realpath_for &mdash; Lingo</a>
+  
+    <li class="method"><a href="Lingo/Database.html#method-c-register">::register &mdash; Lingo::Database</a>
   
     <li class="method"><a href="Lingo.html#method-c-require_optional">::require_optional &mdash; Lingo</a>
   
@@ -515,37 +560,39 @@
   
     <li class="method"><a href="Lingo/Language/Word.html#method-i-3C-3C">#<< &mdash; Lingo::Language::Word</a>
   
+    <li class="method"><a href="Lingo/AgendaItem.html#method-i-3C-3D-3E">#<=> &mdash; Lingo::AgendaItem</a>
+  
+    <li class="method"><a href="Lingo/Language/Lexical.html#method-i-3C-3D-3E">#<=> &mdash; Lingo::Language::Lexical</a>
+  
     <li class="method"><a href="Lingo/Language/WordForm.html#method-i-3C-3D-3E">#<=> &mdash; Lingo::Language::WordForm</a>
   
     <li class="method"><a href="Lingo/Language/Word.html#method-i-3C-3D-3E">#<=> &mdash; Lingo::Language::Word</a>
   
-    <li class="method"><a href="Lingo/Language/Lexical.html#method-i-3C-3D-3E">#<=> &mdash; Lingo::Language::Lexical</a>
-  
-    <li class="method"><a href="Lingo/AgendaItem.html#method-i-3C-3D-3E">#<=> &mdash; Lingo::AgendaItem</a>
-  
     <li class="method"><a href="Lingo/Language/WordForm.html#method-i-3D-3D">#== &mdash; Lingo::Language::WordForm</a>
+  
+    <li class="method"><a href="Lingo/Language/LexicalHash.html#method-i-5B-5D">#[] &mdash; Lingo::Language::LexicalHash</a>
+  
+    <li class="method"><a href="Lingo/ShowProgress.html#method-i-5B-5D">#[] &mdash; Lingo::ShowProgress</a>
   
     <li class="method"><a href="Lingo/Config.html#method-i-5B-5D">#[] &mdash; Lingo::Config</a>
   
-    <li class="method"><a href="Lingo/Database/ShowProgress.html#method-i-5B-5D">#[] &mdash; Lingo::Database::ShowProgress</a>
-  
     <li class="method"><a href="Lingo/Database.html#method-i-5B-5D">#[] &mdash; Lingo::Database</a>
-  
-    <li class="method"><a href="Lingo/Language/LexicalHash.html#method-i-5B-5D">#[] &mdash; Lingo::Language::LexicalHash</a>
   
     <li class="method"><a href="Lingo/Database.html#method-i-5B-5D-3D">#[]= &mdash; Lingo::Database</a>
   
     <li class="method"><a href="Lingo/Config.html#method-i-5B-5D-3D">#[]= &mdash; Lingo::Config</a>
   
-    <li class="method"><a href="Lingo/Database/HashStore.html#method-i-_clear">#_clear &mdash; Lingo::Database::HashStore</a>
+    <li class="method"><a href="Lingo/Database.html#method-i-_clear">#_clear &mdash; Lingo::Database</a>
   
     <li class="method"><a href="Lingo/Database/SDBMStore.html#method-i-_clear">#_clear &mdash; Lingo::Database::SDBMStore</a>
   
-    <li class="method"><a href="Lingo/Database.html#method-i-_clear">#_clear &mdash; Lingo::Database</a>
+    <li class="method"><a href="Lingo/Database/HashStore.html#method-i-_clear">#_clear &mdash; Lingo::Database::HashStore</a>
   
     <li class="method"><a href="Lingo/Database/HashStore.html#method-i-_closed-3F">#_closed? &mdash; Lingo::Database::HashStore</a>
   
     <li class="method"><a href="Lingo/Database.html#method-i-_closed-3F">#_closed? &mdash; Lingo::Database</a>
+  
+    <li class="method"><a href="Lingo/Database/SDBMStore.html#method-i-_get">#_get &mdash; Lingo::Database::SDBMStore</a>
   
     <li class="method"><a href="Lingo/Database.html#method-i-_get">#_get &mdash; Lingo::Database</a>
   
@@ -553,23 +600,27 @@
   
     <li class="method"><a href="String.html#method-i-_lingo_original_downcase-21">#_lingo_original_downcase! &mdash; String</a>
   
-    <li class="method"><a href="Lingo/Database.html#method-i-_open">#_open &mdash; Lingo::Database</a>
+    <li class="method"><a href="Lingo/Database/GDBMStore.html#method-i-_open">#_open &mdash; Lingo::Database::GDBMStore</a>
+  
+    <li class="method"><a href="Lingo/Database/LibCDBStore.html#method-i-_open">#_open &mdash; Lingo::Database::LibCDBStore</a>
   
     <li class="method"><a href="Lingo/Database/SDBMStore.html#method-i-_open">#_open &mdash; Lingo::Database::SDBMStore</a>
   
     <li class="method"><a href="Lingo/Database/HashStore.html#method-i-_open">#_open &mdash; Lingo::Database::HashStore</a>
   
-    <li class="method"><a href="Lingo/Database/GDBMStore.html#method-i-_open">#_open &mdash; Lingo::Database::GDBMStore</a>
-  
-    <li class="method"><a href="Lingo/Database/LibCDBStore.html#method-i-_open">#_open &mdash; Lingo::Database::LibCDBStore</a>
-  
-    <li class="method"><a href="Lingo/Database.html#method-i-_set">#_set &mdash; Lingo::Database</a>
+    <li class="method"><a href="Lingo/Database.html#method-i-_open">#_open &mdash; Lingo::Database</a>
   
     <li class="method"><a href="Lingo/Database/SDBMStore.html#method-i-_set">#_set &mdash; Lingo::Database::SDBMStore</a>
+  
+    <li class="method"><a href="Lingo/Database.html#method-i-_set">#_set &mdash; Lingo::Database</a>
   
     <li class="method"><a href="Lingo/Database.html#method-i-_val">#_val &mdash; Lingo::Database</a>
   
     <li class="method"><a href="Lingo/Reportable.html#method-i-add">#add &mdash; Lingo::Reportable</a>
+  
+    <li class="method"><a href="Lingo/Attendee/TextReader.html#method-i-add_files">#add_files &mdash; Lingo::Attendee::TextReader</a>
+  
+    <li class="method"><a href="Lingo/Language/Word.html#method-i-add_lexicals">#add_lexicals &mdash; Lingo::Language::Word</a>
   
     <li class="method"><a href="Lingo/Attendee.html#method-i-add_subscriber">#add_subscriber &mdash; Lingo::Attendee</a>
   
@@ -577,7 +628,7 @@
   
     <li class="method"><a href="Lingo/Language/Word.html#method-i-attrs">#attrs &mdash; Lingo::Language::Word</a>
   
-    <li class="method"><a href="Lingo/Database.html#method-i-backend">#backend &mdash; Lingo::Database</a>
+    <li class="method"><a href="Lingo/Database.html#method-i-backend_from_file">#backend_from_file &mdash; Lingo::Database</a>
   
     <li class="method"><a href="Lingo/Cachable.html#method-i-cache_value">#cache_value &mdash; Lingo::Cachable</a>
   
@@ -587,15 +638,15 @@
   
     <li class="method"><a href="Lingo/Attendee/MultiWorder.html#method-i-check_multiword_key">#check_multiword_key &mdash; Lingo::Attendee::MultiWorder</a>
   
-    <li class="method"><a href="Lingo/Language/Dictionary.html#method-i-close">#close &mdash; Lingo::Language::Dictionary</a>
+    <li class="method"><a href="Lingo/Database.html#method-i-close">#close &mdash; Lingo::Database</a>
   
-    <li class="method"><a href="Lingo/Database/HashStore.html#method-i-close">#close &mdash; Lingo::Database::HashStore</a>
+    <li class="method"><a href="Lingo/Language/Dictionary.html#method-i-close">#close &mdash; Lingo::Language::Dictionary</a>
   
     <li class="method"><a href="Lingo/Language/Grammar.html#method-i-close">#close &mdash; Lingo::Language::Grammar</a>
   
-    <li class="method"><a href="Lingo/Database.html#method-i-close">#close &mdash; Lingo::Database</a>
-  
     <li class="method"><a href="Lingo/Language/LexicalHash.html#method-i-close">#close &mdash; Lingo::Language::LexicalHash</a>
+  
+    <li class="method"><a href="Lingo/Database/HashStore.html#method-i-close">#close &mdash; Lingo::Database::HashStore</a>
   
     <li class="method"><a href="Lingo/Database.html#method-i-closed-3F">#closed? &mdash; Lingo::Database</a>
   
@@ -603,45 +654,47 @@
   
     <li class="method"><a href="Lingo.html#method-i-config">#config &mdash; Lingo</a>
   
-    <li class="method"><a href="Lingo/Attendee/TextReader.html#method-i-control">#control &mdash; Lingo::Attendee::TextReader</a>
+    <li class="method"><a href="Lingo/Attendee/Synonymer.html#method-i-control">#control &mdash; Lingo::Attendee::Synonymer</a>
   
-    <li class="method"><a href="Lingo/Attendee/Decomposer.html#method-i-control">#control &mdash; Lingo::Attendee::Decomposer</a>
-  
-    <li class="method"><a href="Lingo/Attendee/VectorFilter.html#method-i-control">#control &mdash; Lingo::Attendee::VectorFilter</a>
-  
-    <li class="method"><a href="Lingo/Attendee/Abbreviator.html#method-i-control">#control &mdash; Lingo::Attendee::Abbreviator</a>
-  
-    <li class="method"><a href="Lingo/Attendee/MultiWorder.html#method-i-control">#control &mdash; Lingo::Attendee::MultiWorder</a>
-  
-    <li class="method"><a href="Lingo/Attendee/Dehyphenizer.html#method-i-control">#control &mdash; Lingo::Attendee::Dehyphenizer</a>
+    <li class="method"><a href="Lingo/Attendee/Sequencer.html#method-i-control">#control &mdash; Lingo::Attendee::Sequencer</a>
   
     <li class="method"><a href="Lingo/Attendee/WordSearcher.html#method-i-control">#control &mdash; Lingo::Attendee::WordSearcher</a>
   
     <li class="method"><a href="Lingo/Attendee/Tokenizer.html#method-i-control">#control &mdash; Lingo::Attendee::Tokenizer</a>
   
-    <li class="method"><a href="Lingo/Attendee/NonewordFilter.html#method-i-control">#control &mdash; Lingo::Attendee::NonewordFilter</a>
-  
-    <li class="method"><a href="Lingo/Attendee/Synonymer.html#method-i-control">#control &mdash; Lingo::Attendee::Synonymer</a>
-  
-    <li class="method"><a href="Lingo/Attendee/TextWriter.html#method-i-control">#control &mdash; Lingo::Attendee::TextWriter</a>
-  
-    <li class="method"><a href="Lingo/Attendee/Sequencer.html#method-i-control">#control &mdash; Lingo::Attendee::Sequencer</a>
+    <li class="method"><a href="Lingo/Attendee/Abbreviator.html#method-i-control">#control &mdash; Lingo::Attendee::Abbreviator</a>
   
     <li class="method"><a href="Lingo/Attendee/Debugger.html#method-i-control">#control &mdash; Lingo::Attendee::Debugger</a>
   
+    <li class="method"><a href="Lingo/Attendee/TextReader.html#method-i-control">#control &mdash; Lingo::Attendee::TextReader</a>
+  
+    <li class="method"><a href="Lingo/Attendee/Dehyphenizer.html#method-i-control">#control &mdash; Lingo::Attendee::Dehyphenizer</a>
+  
     <li class="method"><a href="Lingo/Attendee/Variator.html#method-i-control">#control &mdash; Lingo::Attendee::Variator</a>
+  
+    <li class="method"><a href="Lingo/Attendee/VectorFilter.html#method-i-control">#control &mdash; Lingo::Attendee::VectorFilter</a>
+  
+    <li class="method"><a href="Lingo/Attendee/NonewordFilter.html#method-i-control">#control &mdash; Lingo::Attendee::NonewordFilter</a>
+  
+    <li class="method"><a href="Lingo/Attendee/MultiWorder.html#method-i-control">#control &mdash; Lingo::Attendee::MultiWorder</a>
+  
+    <li class="method"><a href="Lingo/Attendee/TextWriter.html#method-i-control">#control &mdash; Lingo::Attendee::TextWriter</a>
+  
+    <li class="method"><a href="Lingo/Attendee/Decomposer.html#method-i-control">#control &mdash; Lingo::Attendee::Decomposer</a>
+  
+    <li class="method"><a href="Lingo/BufferedAttendee.html#method-i-control_multi">#control_multi &mdash; Lingo::BufferedAttendee</a>
   
     <li class="method"><a href="Lingo/Database.html#method-i-convert">#convert &mdash; Lingo::Database</a>
   
-    <li class="method"><a href="Lingo/Database/Source/SingleWord.html#method-i-convert_line">#convert_line &mdash; Lingo::Database::Source::SingleWord</a>
-  
     <li class="method"><a href="Lingo/Database/Source/MultiValue.html#method-i-convert_line">#convert_line &mdash; Lingo::Database::Source::MultiValue</a>
+  
+    <li class="method"><a href="Lingo/Database/Source/SingleWord.html#method-i-convert_line">#convert_line &mdash; Lingo::Database::Source::SingleWord</a>
   
     <li class="method"><a href="Lingo/Database/Source/KeyValue.html#method-i-convert_line">#convert_line &mdash; Lingo::Database::Source::KeyValue</a>
   
-    <li class="method"><a href="Lingo/Database/Source/WordClass.html#method-i-convert_line">#convert_line &mdash; Lingo::Database::Source::WordClass</a>
-  
     <li class="method"><a href="Lingo/Database/Source/MultiKey.html#method-i-convert_line">#convert_line &mdash; Lingo::Database::Source::MultiKey</a>
+  
+    <li class="method"><a href="Lingo/Database/Source/WordClass.html#method-i-convert_line">#convert_line &mdash; Lingo::Database::Source::WordClass</a>
   
     <li class="method"><a href="Lingo/Ctl.html#method-i-copy">#copy &mdash; Lingo::Ctl</a>
   
@@ -655,19 +708,21 @@
   
     <li class="method"><a href="Lingo/Database/Crypter.html#method-i-crypt">#crypt &mdash; Lingo::Database::Crypter</a>
   
+    <li class="method"><a href="Lingo/Ctl.html#method-i-ctl">#ctl &mdash; Lingo::Ctl</a>
+  
     <li class="method"><a href="Lingo.html#method-i-database_config">#database_config &mdash; Lingo</a>
   
     <li class="method"><a href="Lingo/Database/Crypter.html#method-i-decode">#decode &mdash; Lingo::Database::Crypter</a>
   
-    <li class="method"><a href="Lingo/BufferedAttendee.html#method-i-deferred_insert">#deferred_insert &mdash; Lingo::BufferedAttendee</a>
+    <li class="method"><a href="Lingo/Attendee/Dehyphenizer.html#method-i-dehyphenize">#dehyphenize &mdash; Lingo::Attendee::Dehyphenizer</a>
+  
+    <li class="method"><a href="Lingo/Attendee/Dehyphenizer.html#method-i-dehyphenized-3F">#dehyphenized? &mdash; Lingo::Attendee::Dehyphenizer</a>
   
     <li class="method"><a href="Lingo/Attendee.html#method-i-dictionary">#dictionary &mdash; Lingo::Attendee</a>
   
     <li class="method"><a href="Lingo.html#method-i-dictionary_config">#dictionary_config &mdash; Lingo</a>
   
     <li class="method"><a href="Lingo/Database/Crypter.html#method-i-digest">#digest &mdash; Lingo::Database::Crypter</a>
-  
-    <li class="method"><a href="Lingo/Ctl.html#method-i-do">#do &mdash; Lingo::Ctl</a>
   
     <li class="method"><a href="Lingo/Ctl.html#method-i-do_clearstore">#do_clearstore &mdash; Lingo::Ctl</a>
   
@@ -701,27 +756,35 @@
   
     <li class="method"><a href="Lingo/Ctl.html#method-i-find">#find &mdash; Lingo::Ctl</a>
   
-    <li class="method"><a href="Lingo/Language/Grammar.html#method-i-find_compositum">#find_compositum &mdash; Lingo::Language::Grammar</a>
+    <li class="method"><a href="Lingo/Language/Grammar.html#method-i-find_compound">#find_compound &mdash; Lingo::Language::Grammar</a>
   
     <li class="method"><a href="Lingo/Language/Dictionary.html#method-i-find_synonyms">#find_synonyms &mdash; Lingo::Language::Dictionary</a>
+  
+    <li class="method"><a href="Lingo/Attendee.html#method-i-find_word">#find_word &mdash; Lingo::Attendee</a>
   
     <li class="method"><a href="Lingo/Language/Dictionary.html#method-i-find_word">#find_word &mdash; Lingo::Language::Dictionary</a>
   
     <li class="method"><a href="Lingo/Attendee/TextWriter.html#method-i-flush_lir_buffer">#flush_lir_buffer &mdash; Lingo::Attendee::TextWriter</a>
   
+    <li class="method"><a href="Lingo/BufferedAttendee.html#method-i-form_at">#form_at &mdash; Lingo::BufferedAttendee</a>
+  
     <li class="method"><a href="Lingo/Attendee.html#method-i-forward">#forward &mdash; Lingo::Attendee</a>
   
     <li class="method"><a href="Lingo/BufferedAttendee.html#method-i-forward_buffer">#forward_buffer &mdash; Lingo::BufferedAttendee</a>
   
-    <li class="method"><a href="Lingo/Attendee/MultiWorder.html#method-i-forward_number_of_token">#forward_number_of_token &mdash; Lingo::Attendee::MultiWorder</a>
+    <li class="method"><a href="Lingo/BufferedAttendee.html#method-i-forward_number_of_token">#forward_number_of_token &mdash; Lingo::BufferedAttendee</a>
   
-    <li class="method"><a href="Lingo/Attendee/Dehyphenizer.html#method-i-forward_number_of_token">#forward_number_of_token &mdash; Lingo::Attendee::Dehyphenizer</a>
+    <li class="method"><a href="Lingo/Language/Word.html#method-i-full_compound-3F">#full_compound? &mdash; Lingo::Language::Word</a>
   
     <li class="method"><a href="Lingo/Reportable.html#method-i-get">#get &mdash; Lingo::Reportable</a>
   
     <li class="method"><a href="Lingo/Attendee.html#method-i-get_array">#get_array &mdash; Lingo::Attendee</a>
   
+    <li class="method"><a href="Lingo/Database.html#method-i-get_backend">#get_backend &mdash; Lingo::Database</a>
+  
     <li class="method"><a href="Lingo/Language/Word.html#method-i-get_class">#get_class &mdash; Lingo::Language::Word</a>
+  
+    <li class="method"><a href="Lingo/Attendee/TextReader.html#method-i-get_files">#get_files &mdash; Lingo::Attendee::TextReader</a>
   
     <li class="method"><a href="Lingo/Attendee.html#method-i-get_key">#get_key &mdash; Lingo::Attendee</a>
   
@@ -739,45 +802,49 @@
   
     <li class="method"><a href="Lingo/Language/Dictionary.html#method-i-infix_lexicals">#infix_lexicals &mdash; Lingo::Language::Dictionary</a>
   
-    <li class="method"><a href="Lingo/Attendee/VectorFilter.html#method-i-init">#init &mdash; Lingo::Attendee::VectorFilter</a>
-  
-    <li class="method"><a href="Lingo/Attendee/Formatter.html#method-i-init">#init &mdash; Lingo::Attendee::Formatter</a>
-  
     <li class="method"><a href="Lingo/Attendee/TextWriter.html#method-i-init">#init &mdash; Lingo::Attendee::TextWriter</a>
-  
-    <li class="method"><a href="Lingo/Attendee/Tokenizer.html#method-i-init">#init &mdash; Lingo::Attendee::Tokenizer</a>
-  
-    <li class="method"><a href="Lingo/Attendee/Dehyphenizer.html#method-i-init">#init &mdash; Lingo::Attendee::Dehyphenizer</a>
-  
-    <li class="method"><a href="Lingo/Attendee/TextReader.html#method-i-init">#init &mdash; Lingo::Attendee::TextReader</a>
   
     <li class="method"><a href="Lingo/Attendee/Synonymer.html#method-i-init">#init &mdash; Lingo::Attendee::Synonymer</a>
   
-    <li class="method"><a href="Lingo/Attendee/Abbreviator.html#method-i-init">#init &mdash; Lingo::Attendee::Abbreviator</a>
-  
-    <li class="method"><a href="Lingo/Attendee/Sequencer.html#method-i-init">#init &mdash; Lingo::Attendee::Sequencer</a>
-  
-    <li class="method"><a href="Lingo/Attendee/MultiWorder.html#method-i-init">#init &mdash; Lingo::Attendee::MultiWorder</a>
-  
-    <li class="method"><a href="Lingo/Attendee/WordSearcher.html#method-i-init">#init &mdash; Lingo::Attendee::WordSearcher</a>
-  
-    <li class="method"><a href="Lingo/Attendee/Decomposer.html#method-i-init">#init &mdash; Lingo::Attendee::Decomposer</a>
+    <li class="method"><a href="Lingo/Attendee/NonewordFilter.html#method-i-init">#init &mdash; Lingo::Attendee::NonewordFilter</a>
   
     <li class="method"><a href="Lingo/Attendee/Variator.html#method-i-init">#init &mdash; Lingo::Attendee::Variator</a>
   
-    <li class="method"><a href="Lingo/Attendee/ObjectFilter.html#method-i-init">#init &mdash; Lingo::Attendee::ObjectFilter</a>
+    <li class="method"><a href="Lingo/Attendee/Tokenizer.html#method-i-init">#init &mdash; Lingo::Attendee::Tokenizer</a>
   
     <li class="method"><a href="Lingo/Attendee/Debugger.html#method-i-init">#init &mdash; Lingo::Attendee::Debugger</a>
   
-    <li class="method"><a href="Lingo/Attendee/NonewordFilter.html#method-i-init">#init &mdash; Lingo::Attendee::NonewordFilter</a>
+    <li class="method"><a href="Lingo/Attendee/TextReader.html#method-i-init">#init &mdash; Lingo::Attendee::TextReader</a>
+  
+    <li class="method"><a href="Lingo/Attendee/WordSearcher.html#method-i-init">#init &mdash; Lingo::Attendee::WordSearcher</a>
+  
+    <li class="method"><a href="Lingo/Attendee/Stemmer.html#method-i-init">#init &mdash; Lingo::Attendee::Stemmer</a>
+  
+    <li class="method"><a href="Lingo/Attendee/Formatter.html#method-i-init">#init &mdash; Lingo::Attendee::Formatter</a>
+  
+    <li class="method"><a href="Lingo/Attendee/Abbreviator.html#method-i-init">#init &mdash; Lingo::Attendee::Abbreviator</a>
+  
+    <li class="method"><a href="Lingo/Attendee/VectorFilter.html#method-i-init">#init &mdash; Lingo::Attendee::VectorFilter</a>
+  
+    <li class="method"><a href="Lingo/Attendee/ObjectFilter.html#method-i-init">#init &mdash; Lingo::Attendee::ObjectFilter</a>
+  
+    <li class="method"><a href="Lingo/Attendee/Decomposer.html#method-i-init">#init &mdash; Lingo::Attendee::Decomposer</a>
+  
+    <li class="method"><a href="Lingo/Attendee/MultiWorder.html#method-i-init">#init &mdash; Lingo::Attendee::MultiWorder</a>
+  
+    <li class="method"><a href="Lingo/Attendee/Sequencer.html#method-i-init">#init &mdash; Lingo::Attendee::Sequencer</a>
+  
+    <li class="method"><a href="Lingo/Attendee/Dehyphenizer.html#method-i-init">#init &mdash; Lingo::Attendee::Dehyphenizer</a>
   
     <li class="method"><a href="Lingo/Cachable.html#method-i-init_cachable">#init_cachable &mdash; Lingo::Cachable</a>
   
     <li class="method"><a href="Lingo/Reportable.html#method-i-init_reportable">#init_reportable &mdash; Lingo::Reportable</a>
   
-    <li class="method"><a href="Lingo/AgendaItem.html#method-i-inspect">#inspect &mdash; Lingo::AgendaItem</a>
+    <li class="method"><a href="Lingo/Attendee/Sequencer.html#method-i-insert_sequences">#insert_sequences &mdash; Lingo::Attendee::Sequencer</a>
   
     <li class="method"><a href="Lingo/Language/WordForm.html#method-i-inspect">#inspect &mdash; Lingo::Language::WordForm</a>
+  
+    <li class="method"><a href="Lingo/AgendaItem.html#method-i-inspect">#inspect &mdash; Lingo::AgendaItem</a>
   
     <li class="method"><a href="Lingo.html#method-i-invite">#invite &mdash; Lingo</a>
   
@@ -807,10 +874,6 @@
   
     <li class="method"><a href="Lingo/Language/Word.html#method-i-norm">#norm &mdash; Lingo::Language::Word</a>
   
-    <li class="method"><a href="Lingo/Attendee/MultiWorder.html#method-i-number_of_valid_tokens_in_buffer">#number_of_valid_tokens_in_buffer &mdash; Lingo::Attendee::MultiWorder</a>
-  
-    <li class="method"><a href="Lingo/Attendee/Dehyphenizer.html#method-i-number_of_valid_tokens_in_buffer">#number_of_valid_tokens_in_buffer &mdash; Lingo::Attendee::Dehyphenizer</a>
-  
     <li class="method"><a href="Lingo/Database.html#method-i-open">#open &mdash; Lingo::Database</a>
   
     <li class="method"><a href="Lingo/CLI.html#method-i-opts">#opts &mdash; Lingo::CLI</a>
@@ -821,61 +884,61 @@
   
     <li class="method"><a href="Lingo/Ctl.html#method-i-path_for_scope">#path_for_scope &mdash; Lingo::Ctl</a>
   
-    <li class="method"><a href="Lingo/Language/Grammar.html#method-i-permute_compositum">#permute_compositum &mdash; Lingo::Language::Grammar</a>
+    <li class="method"><a href="Lingo/Language/Grammar.html#method-i-permute_compound">#permute_compound &mdash; Lingo::Language::Grammar</a>
   
-    <li class="method"><a href="Lingo/Database/ShowProgress.html#method-i-print">#print &mdash; Lingo::Database::ShowProgress</a>
-  
-    <li class="method"><a href="Lingo/Attendee/Synonymer.html#method-i-process">#process &mdash; Lingo::Attendee::Synonymer</a>
-  
-    <li class="method"><a href="Lingo/Attendee/WordSearcher.html#method-i-process">#process &mdash; Lingo::Attendee::WordSearcher</a>
-  
-    <li class="method"><a href="Lingo/Attendee/Tokenizer.html#method-i-process">#process &mdash; Lingo::Attendee::Tokenizer</a>
-  
-    <li class="method"><a href="Lingo/Attendee/NonewordFilter.html#method-i-process">#process &mdash; Lingo::Attendee::NonewordFilter</a>
-  
-    <li class="method"><a href="Lingo/Attendee/TextWriter.html#method-i-process">#process &mdash; Lingo::Attendee::TextWriter</a>
-  
-    <li class="method"><a href="Lingo/Attendee/Formatter.html#method-i-process">#process &mdash; Lingo::Attendee::Formatter</a>
+    <li class="method"><a href="Lingo/ShowProgress.html#method-i-print">#print &mdash; Lingo::ShowProgress</a>
   
     <li class="method"><a href="Lingo/Attendee/Variator.html#method-i-process">#process &mdash; Lingo::Attendee::Variator</a>
   
-    <li class="method"><a href="Lingo/Attendee/VectorFilter.html#method-i-process">#process &mdash; Lingo::Attendee::VectorFilter</a>
-  
-    <li class="method"><a href="Lingo/Attendee/ObjectFilter.html#method-i-process">#process &mdash; Lingo::Attendee::ObjectFilter</a>
-  
     <li class="method"><a href="Lingo/Attendee/Debugger.html#method-i-process">#process &mdash; Lingo::Attendee::Debugger</a>
+  
+    <li class="method"><a href="Lingo/Attendee/Tokenizer.html#method-i-process">#process &mdash; Lingo::Attendee::Tokenizer</a>
+  
+    <li class="method"><a href="Lingo/Attendee/Synonymer.html#method-i-process">#process &mdash; Lingo::Attendee::Synonymer</a>
   
     <li class="method"><a href="Lingo/BufferedAttendee.html#method-i-process">#process &mdash; Lingo::BufferedAttendee</a>
   
+    <li class="method"><a href="Lingo/Attendee/ObjectFilter.html#method-i-process">#process &mdash; Lingo::Attendee::ObjectFilter</a>
+  
+    <li class="method"><a href="Lingo/Attendee/VectorFilter.html#method-i-process">#process &mdash; Lingo::Attendee::VectorFilter</a>
+  
+    <li class="method"><a href="Lingo/Attendee/WordSearcher.html#method-i-process">#process &mdash; Lingo::Attendee::WordSearcher</a>
+  
+    <li class="method"><a href="Lingo/Attendee/NonewordFilter.html#method-i-process">#process &mdash; Lingo::Attendee::NonewordFilter</a>
+  
+    <li class="method"><a href="Lingo/Attendee/Formatter.html#method-i-process">#process &mdash; Lingo::Attendee::Formatter</a>
+  
     <li class="method"><a href="Lingo/Attendee/Decomposer.html#method-i-process">#process &mdash; Lingo::Attendee::Decomposer</a>
   
-    <li class="method"><a href="Lingo/Attendee/MultiWorder.html#method-i-process_buffer">#process_buffer &mdash; Lingo::Attendee::MultiWorder</a>
+    <li class="method"><a href="Lingo/Attendee/TextWriter.html#method-i-process">#process &mdash; Lingo::Attendee::TextWriter</a>
+  
+    <li class="method"><a href="Lingo/Attendee/Stemmer.html#method-i-process">#process &mdash; Lingo::Attendee::Stemmer</a>
   
     <li class="method"><a href="Lingo/Attendee/Sequencer.html#method-i-process_buffer">#process_buffer &mdash; Lingo::Attendee::Sequencer</a>
   
-    <li class="method"><a href="Lingo/Attendee/Dehyphenizer.html#method-i-process_buffer">#process_buffer &mdash; Lingo::Attendee::Dehyphenizer</a>
+    <li class="method"><a href="Lingo/Attendee/MultiWorder.html#method-i-process_buffer">#process_buffer &mdash; Lingo::Attendee::MultiWorder</a>
   
     <li class="method"><a href="Lingo/BufferedAttendee.html#method-i-process_buffer">#process_buffer &mdash; Lingo::BufferedAttendee</a>
   
     <li class="method"><a href="Lingo/Attendee/Abbreviator.html#method-i-process_buffer">#process_buffer &mdash; Lingo::Attendee::Abbreviator</a>
   
-    <li class="method"><a href="Lingo/Attendee/Dehyphenizer.html#method-i-process_buffer-3F">#process_buffer? &mdash; Lingo::Attendee::Dehyphenizer</a>
-  
-    <li class="method"><a href="Lingo/Attendee/MultiWorder.html#method-i-process_buffer-3F">#process_buffer? &mdash; Lingo::Attendee::MultiWorder</a>
-  
-    <li class="method"><a href="Lingo/Attendee/Abbreviator.html#method-i-process_buffer-3F">#process_buffer? &mdash; Lingo::Attendee::Abbreviator</a>
-  
-    <li class="method"><a href="Lingo/BufferedAttendee.html#method-i-process_buffer-3F">#process_buffer? &mdash; Lingo::BufferedAttendee</a>
+    <li class="method"><a href="Lingo/Attendee/Dehyphenizer.html#method-i-process_buffer">#process_buffer &mdash; Lingo::Attendee::Dehyphenizer</a>
   
     <li class="method"><a href="Lingo/Attendee/Sequencer.html#method-i-process_buffer-3F">#process_buffer? &mdash; Lingo::Attendee::Sequencer</a>
   
+    <li class="method"><a href="Lingo/BufferedAttendee.html#method-i-process_buffer-3F">#process_buffer? &mdash; Lingo::BufferedAttendee</a>
+  
+    <li class="method"><a href="Lingo/Attendee/Abbreviator.html#method-i-process_buffer-3F">#process_buffer? &mdash; Lingo::Attendee::Abbreviator</a>
+  
     <li class="method"><a href="Lingo/Config.html#method-i-quit">#quit &mdash; Lingo::Config</a>
   
-    <li class="method"><a href="Lingo/Language/Dictionary.html#method-i-report">#report &mdash; Lingo::Language::Dictionary</a>
+    <li class="method"><a href="Lingo/Reportable.html#method-i-report">#report &mdash; Lingo::Reportable</a>
   
     <li class="method"><a href="Lingo/Language/Grammar.html#method-i-report">#report &mdash; Lingo::Language::Grammar</a>
   
-    <li class="method"><a href="Lingo/Reportable.html#method-i-report">#report &mdash; Lingo::Reportable</a>
+    <li class="method"><a href="Lingo/Language/Dictionary.html#method-i-report">#report &mdash; Lingo::Language::Dictionary</a>
+  
+    <li class="method"><a href="Lingo/Attendee.html#method-i-report_on">#report_on &mdash; Lingo::Attendee</a>
   
     <li class="method"><a href="Lingo/Attendee.html#method-i-report_status">#report_status &mdash; Lingo::Attendee</a>
   
@@ -887,8 +950,6 @@
   
     <li class="method"><a href="Lingo/CLI.html#method-i-run">#run &mdash; Lingo::CLI</a>
   
-    <li class="method"><a href="Lingo/Attendee/Sequencer/WordSequence.html#method-i-scan">#scan &mdash; Lingo::Attendee::Sequencer::WordSequence</a>
-  
     <li class="method"><a href="Lingo/Language/Dictionary.html#method-i-select">#select &mdash; Lingo::Language::Dictionary</a>
   
     <li class="method"><a href="Lingo/Language/Dictionary.html#method-i-select_with_affix">#select_with_affix &mdash; Lingo::Language::Dictionary</a>
@@ -897,17 +958,17 @@
   
     <li class="method"><a href="Lingo/Language/Dictionary.html#method-i-select_with_suffix">#select_with_suffix &mdash; Lingo::Language::Dictionary</a>
   
-    <li class="method"><a href="Lingo/Attendee/VectorFilter.html#method-i-sendVector">#sendVector &mdash; Lingo::Attendee::VectorFilter</a>
+    <li class="method"><a href="Lingo/Attendee/NonewordFilter.html#method-i-send_nonewords">#send_nonewords &mdash; Lingo::Attendee::NonewordFilter</a>
   
-    <li class="method"><a href="Lingo/Attendee/Sequencer.html#method-i-sequences">#sequences &mdash; Lingo::Attendee::Sequencer</a>
+    <li class="method"><a href="Lingo/Attendee/VectorFilter.html#method-i-send_vectors">#send_vectors &mdash; Lingo::Attendee::VectorFilter</a>
   
     <li class="method"><a href="Lingo/Database/Source/MultiValue.html#method-i-set">#set &mdash; Lingo::Database::Source::MultiValue</a>
+  
+    <li class="method"><a href="Lingo/Reportable.html#method-i-set">#set &mdash; Lingo::Reportable</a>
   
     <li class="method"><a href="Lingo/Database/Source.html#method-i-set">#set &mdash; Lingo::Database::Source</a>
   
     <li class="method"><a href="Lingo/Database/Source/MultiKey.html#method-i-set">#set &mdash; Lingo::Database::Source::MultiKey</a>
-  
-    <li class="method"><a href="Lingo/Reportable.html#method-i-set">#set &mdash; Lingo::Reportable</a>
   
     <li class="method"><a href="Lingo/Attendee.html#method-i-set_dic">#set_dic &mdash; Lingo::Attendee</a>
   
@@ -924,8 +985,6 @@
     <li class="method"><a href="Lingo/Attendee.html#method-i-skip_command">#skip_command &mdash; Lingo::Attendee</a>
   
     <li class="method"><a href="Lingo/Attendee.html#method-i-skip_command-21">#skip_command! &mdash; Lingo::Attendee</a>
-  
-    <li class="method"><a href="Lingo/Attendee/MultiWorder.html#method-i-sort_result_len">#sort_result_len &mdash; Lingo::Attendee::MultiWorder</a>
   
     <li class="method"><a href="Lingo/Attendee/TextReader.html#method-i-spool">#spool &mdash; Lingo::Attendee::TextReader</a>
   
@@ -945,25 +1004,23 @@
   
     <li class="method"><a href="Lingo/Attendee/TextWriter.html#method-i-stdout-3F">#stdout? &mdash; Lingo::Attendee::TextWriter</a>
   
-    <li class="method"><a href="Lingo/Database/ShowProgress.html#method-i-step">#step &mdash; Lingo::Database::ShowProgress</a>
+    <li class="method"><a href="Lingo/Attendee/Stemmer/Porter.html#method-i-stem">#stem &mdash; Lingo::Attendee::Stemmer::Porter</a>
+  
+    <li class="method"><a href="Lingo/ShowProgress.html#method-i-step">#step &mdash; Lingo::ShowProgress</a>
   
     <li class="method"><a href="Lingo/Cachable.html#method-i-store">#store &mdash; Lingo::Cachable</a>
-  
-    <li class="method"><a href="Lingo/Database/GDBMStore.html#method-i-store_ext">#store_ext &mdash; Lingo::Database::GDBMStore</a>
-  
-    <li class="method"><a href="Lingo/Database/LibCDBStore.html#method-i-store_ext">#store_ext &mdash; Lingo::Database::LibCDBStore</a>
   
     <li class="method"><a href="Lingo/Language/Dictionary.html#method-i-suffix_lexicals">#suffix_lexicals &mdash; Lingo::Language::Dictionary</a>
   
     <li class="method"><a href="Lingo/Attendee/TextReader/PDFFilter.html#method-i-super_show_text">#super_show_text &mdash; Lingo::Attendee::TextReader::PDFFilter</a>
   
-    <li class="method"><a href="Lingo.html#method-i-talk">#talk &mdash; Lingo</a>
-  
     <li class="method"><a href="Lingo/Call.html#method-i-talk">#talk &mdash; Lingo::Call</a>
+  
+    <li class="method"><a href="Lingo.html#method-i-talk">#talk &mdash; Lingo</a>
   
     <li class="method"><a href="Lingo/Attendee.html#method-i-talk">#talk &mdash; Lingo::Attendee</a>
   
-    <li class="method"><a href="Lingo/Language/Grammar.html#method-i-test_compositum">#test_compositum &mdash; Lingo::Language::Grammar</a>
+    <li class="method"><a href="Lingo/Language/Grammar.html#method-i-test_compound">#test_compound &mdash; Lingo::Language::Grammar</a>
   
     <li class="method"><a href="Lingo/AgendaItem.html#method-i-to_a">#to_a &mdash; Lingo::AgendaItem</a>
   
@@ -973,27 +1030,35 @@
   
     <li class="method"><a href="Lingo/Database.html#method-i-to_h">#to_h &mdash; Lingo::Database</a>
   
-    <li class="method"><a href="Lingo/Language/WordForm.html#method-i-to_s">#to_s &mdash; Lingo::Language::WordForm</a>
-  
-    <li class="method"><a href="Lingo/SourceFileNotFoundError.html#method-i-to_s">#to_s &mdash; Lingo::SourceFileNotFoundError</a>
-  
-    <li class="method"><a href="Lingo/FileNotFoundError.html#method-i-to_s">#to_s &mdash; Lingo::FileNotFoundError</a>
+    <li class="method"><a href="Lingo/Language/Token.html#method-i-to_s">#to_s &mdash; Lingo::Language::Token</a>
   
     <li class="method"><a href="Lingo/InvalidDatabaseConfigError.html#method-i-to_s">#to_s &mdash; Lingo::InvalidDatabaseConfigError</a>
   
-    <li class="method"><a href="Lingo/Language/Token.html#method-i-to_s">#to_s &mdash; Lingo::Language::Token</a>
+    <li class="method"><a href="Lingo/SourceFileNotFoundError.html#method-i-to_s">#to_s &mdash; Lingo::SourceFileNotFoundError</a>
+  
+    <li class="method"><a href="Lingo/NoDatabaseConfigError.html#method-i-to_s">#to_s &mdash; Lingo::NoDatabaseConfigError</a>
+  
+    <li class="method"><a href="Lingo/NameNotFoundError.html#method-i-to_s">#to_s &mdash; Lingo::NameNotFoundError</a>
   
     <li class="method"><a href="Lingo/MissingConfigError.html#method-i-to_s">#to_s &mdash; Lingo::MissingConfigError</a>
   
     <li class="method"><a href="Lingo/ConfigLoadError.html#method-i-to_s">#to_s &mdash; Lingo::ConfigLoadError</a>
   
-    <li class="method"><a href="Lingo/NoDatabaseConfigError.html#method-i-to_s">#to_s &mdash; Lingo::NoDatabaseConfigError</a>
+    <li class="method"><a href="Lingo/Language/WordForm.html#method-i-to_s">#to_s &mdash; Lingo::Language::WordForm</a>
+  
+    <li class="method"><a href="Lingo/FileNotFoundError.html#method-i-to_s">#to_s &mdash; Lingo::FileNotFoundError</a>
+  
+    <li class="method"><a href="Lingo/BackendNotAvailableError.html#method-i-to_s">#to_s &mdash; Lingo::BackendNotAvailableError</a>
   
     <li class="method"><a href="Lingo/Language/Word.html#method-i-to_s">#to_s &mdash; Lingo::Language::Word</a>
   
-    <li class="method"><a href="Lingo/Language/Lexical.html#method-i-to_s">#to_s &mdash; Lingo::Language::Lexical</a>
+    <li class="method"><a href="Lingo/BackendNotFoundError.html#method-i-to_s">#to_s &mdash; Lingo::BackendNotFoundError</a>
+  
+    <li class="method"><a href="Lingo/DatabaseError.html#method-i-to_s">#to_s &mdash; Lingo::DatabaseError</a>
   
     <li class="method"><a href="Lingo/NoWritableStoreError.html#method-i-to_s">#to_s &mdash; Lingo::NoWritableStoreError</a>
+  
+    <li class="method"><a href="Lingo/Language/Lexical.html#method-i-to_s">#to_s &mdash; Lingo::Language::Lexical</a>
   
     <li class="method"><a href="Lingo/Language/Lexical.html#method-i-to_str">#to_str &mdash; Lingo::Language::Lexical</a>
   
@@ -1005,17 +1070,23 @@
   
     <li class="method"><a href="Lingo/Database.html#method-i-uptodate-21">#uptodate! &mdash; Lingo::Database</a>
   
-    <li class="method"><a href="Lingo/Database/SDBMStore.html#method-i-uptodate-3F">#uptodate? &mdash; Lingo::Database::SDBMStore</a>
-  
     <li class="method"><a href="Lingo/Database/HashStore.html#method-i-uptodate-3F">#uptodate? &mdash; Lingo::Database::HashStore</a>
+  
+    <li class="method"><a href="Lingo/Database/SDBMStore.html#method-i-uptodate-3F">#uptodate? &mdash; Lingo::Database::SDBMStore</a>
   
     <li class="method"><a href="Lingo/Database.html#method-i-uptodate-3F">#uptodate? &mdash; Lingo::Database</a>
   
-    <li class="method"><a href="Lingo/Language/Grammar.html#method-i-valid-3F">#valid? &mdash; Lingo::Language::Grammar</a>
+    <li class="method"><a href="Lingo/Database.html#method-i-use_backend">#use_backend &mdash; Lingo::Database</a>
+  
+    <li class="method"><a href="Lingo/BufferedAttendee.html#method-i-valid_tokens_in_buffer">#valid_tokens_in_buffer &mdash; Lingo::BufferedAttendee</a>
   
     <li class="method"><a href="Lingo/Attendee/Variator.html#method-i-variate">#variate &mdash; Lingo::Attendee::Variator</a>
   
     <li class="method"><a href="Lingo.html#method-i-warn">#warn &mdash; Lingo</a>
+  
+    <li class="method"><a href="Lingo/Attendee.html#method-i-warn">#warn &mdash; Lingo::Attendee</a>
+  
+    <li class="method"><a href="Lingo/Database.html#method-i-warn">#warn &mdash; Lingo::Database</a>
   
 </ul>
 

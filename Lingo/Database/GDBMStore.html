@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>module Lingo::Database::GDBMStore - lingo Application documentation (v1.8.1)</title>
+<title>module Lingo::Database::GDBMStore - lingo Application documentation (v1.8.2)</title>
 
 <link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
 
@@ -66,8 +66,6 @@
     
     <li><a href="#method-i-_open">#_open</a>
     
-    <li><a href="#method-i-store_ext">#store_ext</a>
-    
   </ul>
 </nav>
 
@@ -117,7 +115,9 @@
   
     <li><a href="../../Lingo/Attendee/Sequencer.html">Lingo::Attendee::Sequencer</a>
   
-    <li><a href="../../Lingo/Attendee/Sequencer/WordSequence.html">Lingo::Attendee::Sequencer::WordSequence</a>
+    <li><a href="../../Lingo/Attendee/Stemmer.html">Lingo::Attendee::Stemmer</a>
+  
+    <li><a href="../../Lingo/Attendee/Stemmer/Porter.html">Lingo::Attendee::Stemmer::Porter</a>
   
     <li><a href="../../Lingo/Attendee/Synonymer.html">Lingo::Attendee::Synonymer</a>
   
@@ -134,6 +134,10 @@
     <li><a href="../../Lingo/Attendee/VectorFilter.html">Lingo::Attendee::VectorFilter</a>
   
     <li><a href="../../Lingo/Attendee/WordSearcher.html">Lingo::Attendee::WordSearcher</a>
+  
+    <li><a href="../../Lingo/BackendNotAvailableError.html">Lingo::BackendNotAvailableError</a>
+  
+    <li><a href="../../Lingo/BackendNotFoundError.html">Lingo::BackendNotFoundError</a>
   
     <li><a href="../../Lingo/BufferedAttendee.html">Lingo::BufferedAttendee</a>
   
@@ -177,6 +181,8 @@
   
     <li><a href="../../Lingo/Database/Source/WordClass.html">Lingo::Database::Source::WordClass</a>
   
+    <li><a href="../../Lingo/DatabaseError.html">Lingo::DatabaseError</a>
+  
     <li><a href="../../Lingo/FileNotFoundError.html">Lingo::FileNotFoundError</a>
   
     <li><a href="../../Lingo/InvalidDatabaseConfigError.html">Lingo::InvalidDatabaseConfigError</a>
@@ -201,11 +207,15 @@
   
     <li><a href="../../Lingo/MissingConfigError.html">Lingo::MissingConfigError</a>
   
+    <li><a href="../../Lingo/NameNotFoundError.html">Lingo::NameNotFoundError</a>
+  
     <li><a href="../../Lingo/NoDatabaseConfigError.html">Lingo::NoDatabaseConfigError</a>
   
     <li><a href="../../Lingo/NoWritableStoreError.html">Lingo::NoWritableStoreError</a>
   
     <li><a href="../../Lingo/Reportable.html">Lingo::Reportable</a>
+  
+    <li><a href="../../Lingo/ShowProgress.html">Lingo::ShowProgress</a>
   
     <li><a href="../../Lingo/SourceFileNotFoundError.html">Lingo::SourceFileNotFoundError</a>
   
@@ -260,9 +270,9 @@
 
           
           <div class="method-source-code" id="_open-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/gdbm_store.rb, line 40</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database/gdbm_store.rb, line 38</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">_open</span>
-  <span class="ruby-constant">GDBM</span>.<span class="ruby-identifier">open</span>(<span class="ruby-ivar">@dbm_name</span>)
+  <span class="ruby-constant">GDBM</span>.<span class="ruby-identifier">open</span>(<span class="ruby-ivar">@stofile</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- _open-source -->
           
@@ -272,36 +282,6 @@
 
         
       </div><!-- _open-method -->
-
-    
-      <div id="method-i-store_ext" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">store_ext</span><span
-            class="method-args">()</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-
-          
-          <div class="method-source-code" id="store_ext-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/gdbm_store.rb, line 36</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">store_ext</span>
-  <span class="ruby-string">'.db'</span>
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- store_ext-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- store_ext-method -->
 
     
     </section><!-- private-instance-method-details -->

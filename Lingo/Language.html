@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>module Lingo::Language - lingo Application documentation (v1.8.1)</title>
+<title>module Lingo::Language - lingo Application documentation (v1.8.2)</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -112,7 +112,9 @@
   
     <li><a href="../Lingo/Attendee/Sequencer.html">Lingo::Attendee::Sequencer</a>
   
-    <li><a href="../Lingo/Attendee/Sequencer/WordSequence.html">Lingo::Attendee::Sequencer::WordSequence</a>
+    <li><a href="../Lingo/Attendee/Stemmer.html">Lingo::Attendee::Stemmer</a>
+  
+    <li><a href="../Lingo/Attendee/Stemmer/Porter.html">Lingo::Attendee::Stemmer::Porter</a>
   
     <li><a href="../Lingo/Attendee/Synonymer.html">Lingo::Attendee::Synonymer</a>
   
@@ -129,6 +131,10 @@
     <li><a href="../Lingo/Attendee/VectorFilter.html">Lingo::Attendee::VectorFilter</a>
   
     <li><a href="../Lingo/Attendee/WordSearcher.html">Lingo::Attendee::WordSearcher</a>
+  
+    <li><a href="../Lingo/BackendNotAvailableError.html">Lingo::BackendNotAvailableError</a>
+  
+    <li><a href="../Lingo/BackendNotFoundError.html">Lingo::BackendNotFoundError</a>
   
     <li><a href="../Lingo/BufferedAttendee.html">Lingo::BufferedAttendee</a>
   
@@ -172,6 +178,8 @@
   
     <li><a href="../Lingo/Database/Source/WordClass.html">Lingo::Database::Source::WordClass</a>
   
+    <li><a href="../Lingo/DatabaseError.html">Lingo::DatabaseError</a>
+  
     <li><a href="../Lingo/FileNotFoundError.html">Lingo::FileNotFoundError</a>
   
     <li><a href="../Lingo/InvalidDatabaseConfigError.html">Lingo::InvalidDatabaseConfigError</a>
@@ -196,11 +204,15 @@
   
     <li><a href="../Lingo/MissingConfigError.html">Lingo::MissingConfigError</a>
   
+    <li><a href="../Lingo/NameNotFoundError.html">Lingo::NameNotFoundError</a>
+  
     <li><a href="../Lingo/NoDatabaseConfigError.html">Lingo::NoDatabaseConfigError</a>
   
     <li><a href="../Lingo/NoWritableStoreError.html">Lingo::NoWritableStoreError</a>
   
     <li><a href="../Lingo/Reportable.html">Lingo::Reportable</a>
+  
+    <li><a href="../Lingo/ShowProgress.html">Lingo::ShowProgress</a>
   
     <li><a href="../Lingo/SourceFileNotFoundError.html">Lingo::SourceFileNotFoundError</a>
   
@@ -240,67 +252,7 @@
         <dd class="description"><p>String-Konstanten im Datenstrom</p>
         
       
-        <dt id="LA_ADJEKTIV">LA_ADJEKTIV
-        
-        <dd class="description">
-        
-      
-        <dt id="LA_EIGENNAME">LA_EIGENNAME
-        
-        <dd class="description">
-        
-      
-        <dt id="LA_KOMPOSITUM">LA_KOMPOSITUM
-        
-        <dd class="description">
-        
-      
-        <dt id="LA_MULTIWORD">LA_MULTIWORD
-        
-        <dd class="description">
-        
-      
-        <dt id="LA_SEQUENCE">LA_SEQUENCE
-        
-        <dd class="description">
-        
-      
         <dt id="LA_SORTORDER">LA_SORTORDER
-        
-        <dd class="description">
-        
-      
-        <dt id="LA_STOPWORD">LA_STOPWORD
-        
-        <dd class="description">
-        
-      
-        <dt id="LA_SUBSTANTIV">LA_SUBSTANTIV
-        
-        <dd class="description">
-        
-      
-        <dt id="LA_SYNONYM">LA_SYNONYM
-        
-        <dd class="description">
-        
-      
-        <dt id="LA_TAKEITASIS">LA_TAKEITASIS
-        
-        <dd class="description">
-        
-      
-        <dt id="LA_UNKNOWN">LA_UNKNOWN
-        
-        <dd class="description">
-        
-      
-        <dt id="LA_VERB">LA_VERB
-        
-        <dd class="description">
-        
-      
-        <dt id="LA_WORTFORM">LA_WORTFORM
         
         <dd class="description">
         
@@ -320,15 +272,15 @@
         <dd class="description">
         
       
+        <dt id="WA_COMPOUND">WA_COMPOUND
+        
+        <dd class="description"><p>Wort ist als Kompositum erkannt worden</p>
+        
+      
         <dt id="WA_IDENTIFIED">WA_IDENTIFIED
         
         <dd class="description"><p>Status, nachdem das <a href="Language/Word.html">Word</a> im Wörterbuch
 gefunden wurde</p>
-        
-      
-        <dt id="WA_KOMPOSITUM">WA_KOMPOSITUM
-        
-        <dd class="description"><p>Wort ist als Kompositum erkannt worden</p>
         
       
         <dt id="WA_MULTIWORD">WA_MULTIWORD

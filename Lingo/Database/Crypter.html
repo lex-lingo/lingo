@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Lingo::Database::Crypter - lingo Application documentation (v1.8.1)</title>
+<title>class Lingo::Database::Crypter - lingo Application documentation (v1.8.2)</title>
 
 <link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
 
@@ -127,7 +127,9 @@
   
     <li><a href="../../Lingo/Attendee/Sequencer.html">Lingo::Attendee::Sequencer</a>
   
-    <li><a href="../../Lingo/Attendee/Sequencer/WordSequence.html">Lingo::Attendee::Sequencer::WordSequence</a>
+    <li><a href="../../Lingo/Attendee/Stemmer.html">Lingo::Attendee::Stemmer</a>
+  
+    <li><a href="../../Lingo/Attendee/Stemmer/Porter.html">Lingo::Attendee::Stemmer::Porter</a>
   
     <li><a href="../../Lingo/Attendee/Synonymer.html">Lingo::Attendee::Synonymer</a>
   
@@ -144,6 +146,10 @@
     <li><a href="../../Lingo/Attendee/VectorFilter.html">Lingo::Attendee::VectorFilter</a>
   
     <li><a href="../../Lingo/Attendee/WordSearcher.html">Lingo::Attendee::WordSearcher</a>
+  
+    <li><a href="../../Lingo/BackendNotAvailableError.html">Lingo::BackendNotAvailableError</a>
+  
+    <li><a href="../../Lingo/BackendNotFoundError.html">Lingo::BackendNotFoundError</a>
   
     <li><a href="../../Lingo/BufferedAttendee.html">Lingo::BufferedAttendee</a>
   
@@ -187,6 +193,8 @@
   
     <li><a href="../../Lingo/Database/Source/WordClass.html">Lingo::Database::Source::WordClass</a>
   
+    <li><a href="../../Lingo/DatabaseError.html">Lingo::DatabaseError</a>
+  
     <li><a href="../../Lingo/FileNotFoundError.html">Lingo::FileNotFoundError</a>
   
     <li><a href="../../Lingo/InvalidDatabaseConfigError.html">Lingo::InvalidDatabaseConfigError</a>
@@ -211,11 +219,15 @@
   
     <li><a href="../../Lingo/MissingConfigError.html">Lingo::MissingConfigError</a>
   
+    <li><a href="../../Lingo/NameNotFoundError.html">Lingo::NameNotFoundError</a>
+  
     <li><a href="../../Lingo/NoDatabaseConfigError.html">Lingo::NoDatabaseConfigError</a>
   
     <li><a href="../../Lingo/NoWritableStoreError.html">Lingo::NoWritableStoreError</a>
   
     <li><a href="../../Lingo/Reportable.html">Lingo::Reportable</a>
+  
+    <li><a href="../../Lingo/ShowProgress.html">Lingo::ShowProgress</a>
   
     <li><a href="../../Lingo/SourceFileNotFoundError.html">Lingo::SourceFileNotFoundError</a>
   
@@ -286,24 +298,12 @@ von Wörterbüchern</p>
 
           
           <div class="method-source-code" id="decode-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/crypter.rb, line 53</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database/crypter.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">decode</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
-  <span class="ruby-identifier">str</span>, <span class="ruby-identifier">q</span>, <span class="ruby-identifier">first</span> = <span class="ruby-string">''</span>, <span class="ruby-value">0</span>, <span class="ruby-keyword">false</span>
-
-  <span class="ruby-identifier">val</span>.<span class="ruby-identifier">each_byte</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">byte</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">byte</span> = <span class="ruby-identifier">byte</span>.<span class="ruby-identifier">chr</span>(<span class="ruby-constant">ENC</span>)
-
-    <span class="ruby-comment"># Our hex chars are 2 bytes wide, so we have to keep track</span>
-    <span class="ruby-comment"># of whether it's the first or the second of the two.</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">first</span> = <span class="ruby-operator">!</span><span class="ruby-identifier">first</span>
-      <span class="ruby-identifier">q</span> = <span class="ruby-constant">HEX_CHARS</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">byte</span>)
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-comment"># Now we got both parts, so let's revert the divmod(16)</span>
-      <span class="ruby-identifier">str</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">q</span> * <span class="ruby-value">16</span> <span class="ruby-operator">+</span> <span class="ruby-constant">HEX_CHARS</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">byte</span>)
-    <span class="ruby-keyword">end</span>
-  }
-
-  <span class="ruby-identifier">crypt</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">str</span>)
+  <span class="ruby-identifier">crypt</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>.<span class="ruby-identifier">each_byte</span>.<span class="ruby-identifier">each_slice</span>(<span class="ruby-value">2</span>).<span class="ruby-identifier">with_object</span>(<span class="ruby-string">''</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">b</span>, <span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">q</span>, <span class="ruby-identifier">r</span> = <span class="ruby-identifier">b</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-constant">HEX_CHARS</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">i</span>.<span class="ruby-identifier">chr</span>(<span class="ruby-constant">ENC</span>)) }
+    <span class="ruby-identifier">s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">q</span> * <span class="ruby-value">16</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">r</span>
+  })
 <span class="ruby-keyword">end</span></pre>
           </div><!-- decode-source -->
           
@@ -331,7 +331,7 @@ von Wörterbüchern</p>
 
           
           <div class="method-source-code" id="digest-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/crypter.rb, line 36</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database/crypter.rb, line 38</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">digest</span>(<span class="ruby-identifier">key</span>)
   <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA1</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-identifier">key</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -361,18 +361,11 @@ von Wörterbüchern</p>
 
           
           <div class="method-source-code" id="encode-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/crypter.rb, line 40</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database/crypter.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">encode</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
-  <span class="ruby-identifier">hex</span> = <span class="ruby-string">''</span>
-
-  <span class="ruby-identifier">crypt</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>).<span class="ruby-identifier">each_byte</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">byte</span><span class="ruby-operator">|</span>
-    <span class="ruby-comment"># To get a hex representation for a char we just utilize</span>
-    <span class="ruby-comment"># the quotient and the remainder of division by base 16.</span>
-    <span class="ruby-identifier">q</span>, <span class="ruby-identifier">r</span> = <span class="ruby-identifier">byte</span>.<span class="ruby-identifier">divmod</span>(<span class="ruby-value">16</span>)
-    <span class="ruby-identifier">hex</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">HEX_CHARS</span>[<span class="ruby-identifier">q</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">HEX_CHARS</span>[<span class="ruby-identifier">r</span>]
-  }
-
-  [<span class="ruby-identifier">digest</span>(<span class="ruby-identifier">key</span>), <span class="ruby-identifier">hex</span>]
+  [<span class="ruby-identifier">digest</span>(<span class="ruby-identifier">key</span>), <span class="ruby-identifier">crypt</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>).<span class="ruby-identifier">each_byte</span>.<span class="ruby-identifier">with_object</span>(<span class="ruby-string">''</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">b</span>, <span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">b</span>.<span class="ruby-identifier">divmod</span>(<span class="ruby-value">16</span>).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">HEX_CHARS</span>[<span class="ruby-identifier">i</span>] }
+  }]
 <span class="ruby-keyword">end</span></pre>
           </div><!-- encode-source -->
           
@@ -406,7 +399,7 @@ von Wörterbüchern</p>
 
           
           <div class="method-source-code" id="crypt-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/crypter.rb, line 74</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database/crypter.rb, line 57</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">crypt</span>(<span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span>)
   <span class="ruby-identifier">c</span>, <span class="ruby-identifier">y</span> = <span class="ruby-string">''</span>, <span class="ruby-identifier">k</span>.<span class="ruby-identifier">codepoints</span>.<span class="ruby-identifier">reverse_each</span>.<span class="ruby-identifier">cycle</span>
   <span class="ruby-identifier">v</span>.<span class="ruby-identifier">each_codepoint</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-identifier">x</span> <span class="ruby-operator">^</span> <span class="ruby-identifier">y</span>.<span class="ruby-identifier">next</span>).<span class="ruby-identifier">chr</span>(<span class="ruby-constant">ENC</span>) }
