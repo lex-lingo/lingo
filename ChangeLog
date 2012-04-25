@@ -1,5 +1,10 @@
 = Revision history for Lingo
 
+== 1.8.3 [unreleased]
+
+* Fixed regression introduced in 1.8.2 where reading input from STDIN was no
+  longer possible.
+
 == 1.8.2 [2012-04-19]
 
 * Performance improvements regarding Attendee::VectorFilter's (as well as

@@ -220,17 +220,27 @@ class Lingo
         Array(get_key('files', '-')).each { |path|
           stdin?(path) ? @files << path : add_files(path, *args)
         }
-
-        @files.map!(&File.method(:expand_path))
-        @files.uniq!
       end
 
       def add_files(path, glob, recursive = false)
-        Dir[path].sort!.each { |match|
-          File.directory?(match) ? recursive ? Find.find(match) { |entry|
-            @files << entry if File.file?(entry) && File.fnmatch?(glob, entry)
-          } : add_files(File.join(match, glob), glob) : @files << match
-        }.empty? and raise FileNotFoundError.new(path)
+        entries = Dir[path].sort!
+        raise FileNotFoundError.new(path) if entries.empty?
+
+        entries.each { |entry|
+          if File.directory?(entry)
+            if recursive
+              Find.find(entry) { |match|
+                if File.file?(match) && File.fnmatch?(glob, match)
+                  @files << File.expand_path(match)
+                end
+              }
+            else
+              add_files(File.join(entry, glob), glob)
+            end
+          else
+            @files << File.expand_path(entry)
+          end
+        }
       end
 
       class PDFFilter
