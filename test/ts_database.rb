@@ -250,7 +250,7 @@ Wort2=
 
   def compare(config, input, output = nil)
     FileUtils.mkdir_p(File.dirname(TEST_FILE))
-    File.write(TEST_FILE, input, encoding: Lingo::ENC)
+    File.open(TEST_FILE, 'w', encoding: Lingo::ENC) { |f| f.write(input) }
 
     Lingo::Database.open(set_config('tst', config.merge('name' => TEST_FILE)), @lingo) { |db|
       if block_given?

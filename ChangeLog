@@ -4,6 +4,8 @@
 
 * Fixed regression introduced in 1.8.2 where reading input from STDIN was no
   longer possible.
+* Fixed regression introduced in 1.8.2 where Lingo would no longer run on Ruby
+  1.9.2.
 
 == 1.8.2 [2012-04-19]
 

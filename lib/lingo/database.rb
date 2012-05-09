@@ -58,7 +58,7 @@ class Lingo
 
       def register(klass, ext, prio = -1, meth = true)
         BACKENDS.insert(prio, name = klass.name[/::(\w+)Store\z/, 1])
-        Array(ext).each { |i| BACKEND_BY_EXT[i.prepend('.')] = name }
+        Array(ext).each { |i| BACKEND_BY_EXT[i.insert(0, '.')] = name }
 
         klass.const_set(:EXT, ext)
         klass.class_eval('def store_ext; EXT; end', __FILE__, __LINE__) if meth

@@ -37,7 +37,7 @@ else
 
   CREDS = pass ? [user, pass] : []
 
-  File.write(AUTH, CREDS.join(':'))
+  File.open(AUTH, 'w') { |f| f.write(CREDS.join(':')) }
 end
 
 use Rack::Auth::Basic do |*creds|
