@@ -94,7 +94,7 @@ class Lingo
           ret
         }
 
-        level == 1 ? find.call(com = Word.new(str, WA_UNKNOWN)) { |lex|
+        level == 1 ? (@_compound ||= {})[str] ||= find.call(com = Word.new(str, WA_UNKNOWN)) { |lex|
           com.attr = WA_COMPOUND
           com.lexicals = lex.map { |l|
             l.attr == LA_COMPOUND ? l : Lexical.new(l.form, l.attr + @append_wc)
