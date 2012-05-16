@@ -33,22 +33,6 @@ class TestLexicalHash < LingoTestCase
     }
   end
 
-  def test_report
-    lh('tst-syn') { |ds|
-      ds['abwickeln']  # source read
-      ds['abwickeln']  # cache hit
-      ds['regen']      # source read
-      ds['nonesens']   # source read, nothing found
-
-      assert_equal({
-        'tst-syn: cache hits'     => 1,
-        'tst-syn: total requests' => 4,
-        'tst-syn: source reads'   => 3,
-        'tst-syn: data found'     => 2
-      }, ds.report)
-    }
-  end
-
   def test_auto_create
     txt_file = @database_config[id = 'tst-sgw']['name']
 
@@ -132,22 +116,6 @@ class TestDictionary < LingoTestCase
       assert_equal([lx('nase|s')], dic.select('nase'))
       assert_equal([lx('nase|s')], dic.select('nase'))
       assert_equal([lx('nase|s')], dic.select('nase'))
-    }
-  end
-
-  def test_report
-    ld('source' => %w[sys-dic]) { |dic|
-      dic.select('abwickeln')  # source read
-      dic.select('abwickeln')  # cache hit
-      dic.select('regen')      # source read
-      dic.select('nonesens')   # source read, nothing found
-
-      assert_equal({
-        'sys-dic: total requests' => 4,
-        'sys-dic: data found'     => 2,
-        'sys-dic: cache hits'     => 1,
-        'sys-dic: source reads'   => 3
-      }, dic.report)
     }
   end
 

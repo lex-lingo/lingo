@@ -67,7 +67,6 @@ class Lingo
   class Attendee
 
     include Language
-    include Reportable
 
     STR_CMD_TALK   = 'TALK'
     STR_CMD_STATUS = 'STATUS'
@@ -84,15 +83,13 @@ class Lingo
 
     DEFAULT_SKIP = [TA_PUNCTUATION, TA_OTHER].join(',')
 
-    def initialize(config, lingo)
-      @lingo = lingo
+    attr_reader :report
 
-      init_reportable
+    def initialize(config, lingo)
+      @lingo, @config, @report, @subscriber = lingo, config, Hash.new(0), []
 
       # Make sure config exists
       lingo.dictionary_config
-
-      @config, @subscriber = config, []
 
       init if self.class.method_defined?(:init)
 
@@ -133,13 +130,21 @@ class Lingo
 
     private
 
+    def inc(key)
+      add(key, 1)
+    end
+
+    def add(key, val)
+      report[key] += val
+    end
+
     def find_word(f, d = @dic, g = @gra)
       w = d.find_word(f)
       g && (block_given? ? !yield(w) : w.unknown?) ? g.find_compound(f) : w
     end
 
     def report_on(cmd, *rep)
-      rep.each { |r| r.report.each { |q| set(*q) } } if cmd == STR_CMD_STATUS
+      rep.each { |r| report.update(r.report) } if cmd == STR_CMD_STATUS
     end
 
     def sta_for(key)
@@ -176,7 +181,7 @@ class Lingo
       arg = [@config['name']]
 
       %w[commands objects].each { |k|
-        n, t = sta_for(k).map(&method(:get))
+        n, t = report.values_at(*sta_for(k))
         arg << n
 
         arg.concat([1, n].map { |m|

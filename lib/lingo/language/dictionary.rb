@@ -30,9 +30,6 @@ class Lingo
 
     class Dictionary
 
-      include Cachable
-      include Reportable
-
       def self.open(*args)
         yield dictionary = new(*args)
       ensure
@@ -43,9 +40,6 @@ class Lingo
         unless config.has_key?('source')
           raise ArgumentError, 'Required parameter `source\' missing.'
         end
-
-        init_cachable
-        init_reportable
 
         @suffixes, @infixes = [], []
 
@@ -70,27 +64,16 @@ class Lingo
         @src.each(&:close)
       end
 
-      def report
-        super.tap { |rep| @src.each { |src| rep.update(src.report) } }
-      end
-
       # _dic_.find_word( _aString_ ) -> _aNewWord_
       #
       # Erstellt aus dem String ein Wort und sucht nach diesem im Wörterbuch.
       def find_word(str)
-        if hit?(key = str.downcase)
-          inc('cache hits')
-          return retrieve(key).tap { |word| word.form = str }
-        end
-
-        word = Word.new(str, WA_UNKNOWN)
-
-        unless (lexicals = select_with_suffix(str)).empty?
-          word.lexicals = lexicals
-          word.attr = WA_IDENTIFIED
-        end
-
-        store(key, word)
+        Word.new(str, WA_UNKNOWN).tap { |w|
+          unless (lexicals = select_with_suffix(str)).empty?
+            w.lexicals = lexicals
+            w.attr = WA_IDENTIFIED
+          end
+        }
       end
 
       def find_synonyms(obj)
@@ -116,7 +99,7 @@ class Lingo
           l = src[str] or next
           lex.concat(l)
           break lex unless @all
-        }.tap { |lex| lex.sort!; lex.uniq! }
+        }.sort!.tap(&:uniq!)
       end
 
       # _dic_.select_with_suffix( _aString_ ) -> _ArrayOfLexicals_

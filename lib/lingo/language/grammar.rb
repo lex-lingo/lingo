@@ -35,9 +35,6 @@ class Lingo
 
     class Grammar
 
-      include Cachable
-      include Reportable
-
       HYPHEN_RE = %r{\A(.+)-([^-]+)\z}
 
       def self.open(*args)
@@ -47,9 +44,6 @@ class Lingo
       end
 
       def initialize(config, lingo)
-        init_cachable
-        init_reportable
-
         @dic, @suggestions = Dictionary.new(config, lingo), []
 
         cfg = lingo.dictionary_config['compound'] ||
@@ -77,55 +71,35 @@ class Lingo
         @dic.close
       end
 
-      def report
-        super.update(@dic.report)
-      end
-
       # find_compound(str) -> word wenn level=1
       # find_compound(str) -> [lex, sta] wenn level!=1
       #
       # find_compound arbeitet in verschiedenen Leveln, da die Methode auch rekursiv aufgerufen wird. Ein Level größer 1
       # entspricht daher einem rekursiven Aufruf
       def find_compound(str, level = 1, tail = false)
-        key, top, empty = str.downcase, level == 1, [[], [], '']
+        find = lambda { |ret, &block|
+          if str.length > @min_word_size
+            lex, sta, seq = res = permute_compound(str.downcase, level, tail)
 
-        if top && hit?(key)
-          inc('cache hits')
-          return retrieve(key)
-        end
+            if !lex.empty? &&
+              sta.size              <= @max_parts         &&
+              sta.min               >= @min_part_size     &&
+              str.length / sta.size >= @min_avg_part_size &&
+              (@sequences.empty? || !@sequences.include?(seq))
 
-        com = Word.new(str, WA_UNKNOWN)
-
-        unless str.length > @min_word_size
-          inc('String zu kurz')
-          return top ? com : empty
-        end
-
-        inc('Komposita geprüft')
-
-        lex, sta, seq = res = permute_compound(key, level, tail)
-
-        val = !lex.empty? &&
-          sta.size              <= @max_parts         &&
-          sta.min               >= @min_part_size     &&
-          str.length / sta.size >= @min_avg_part_size &&
-          (@sequences.empty? || !@sequences.include?(seq))
-
-        if top
-          if val
-            inc('Komposita erkannt')
-
-            com.attr = WA_COMPOUND
-            com.lexicals = lex.map { |l|
-              l.attr == LA_COMPOUND ? l :
-                Lexical.new(l.form, l.attr + @append_wc)
-            }
+              block ? block[lex] : ret = res
+            end
           end
 
-          store(key, com)
-        else
-          val ? res : empty
-        end
+          ret
+        }
+
+        level == 1 ? find.call(com = Word.new(str, WA_UNKNOWN)) { |lex|
+          com.attr = WA_COMPOUND
+          com.lexicals = lex.map { |l|
+            l.attr == LA_COMPOUND ? l : Lexical.new(l.form, l.attr + @append_wc)
+          }
+        } : find[[[], [], '']]
       end
 
       # permute_compound( _aString_ ) ->  [lex, sta, seq]

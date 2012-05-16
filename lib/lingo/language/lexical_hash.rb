@@ -34,9 +34,6 @@ class Lingo
 
     class LexicalHash
 
-      include Cachable
-      include Reportable
-
       def self.open(*args)
         yield lexical_hash = new(*args)
       ensure
@@ -44,9 +41,6 @@ class Lingo
       end
 
       def initialize(id, lingo)
-        init_cachable
-        init_reportable(id)
-
         @wc  = lingo.database_config(id).fetch('def-wc', LA_UNKNOWN)
         @src = Database.open(id, lingo)
       end
@@ -56,35 +50,17 @@ class Lingo
       end
 
       def [](key)
-        inc('total requests')
-        key = key.downcase
+        rec = @src[key = key.downcase] or return
 
-        if hit?(key)
-          inc('cache hits')
-          return retrieve(key)
-        end
-
-        inc('source reads')
-
-        if record = @src[key]
-          record = record.map { |str|
-            case str
-              when /^\*\d+$/           then str
-              when /^#(.)$/            then Lexical.new(key, $1)
-              when /^([^#]+?)\s*#(.)$/ then Lexical.new($1, $2)
-              when /^([^#]+)$/         then Lexical.new($1, @wc)
-              else                          str
-            end
-          }
-
-          record.compact!
-          record.sort!
-          record.uniq!
-
-          inc('data found')
-        end
-
-        store(key, record)
+        rec.map { |str|
+          case str
+            when /^\*\d+$/           then str
+            when /^#(.)$/            then Lexical.new(key, $1)
+            when /^([^#]+?)\s*#(.)$/ then Lexical.new($1,  $2)
+            when /^([^#]+)$/         then Lexical.new($1, @wc)
+            else                          str
+          end
+        }.tap { |r| r.compact!; r.sort!; r.uniq! }
       end
 
     end

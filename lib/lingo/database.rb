@@ -39,8 +39,6 @@ class Lingo
 
   class Database
 
-    include Cachable
-
     FLD_SEP = '|'
     IDX_REF = '^'
     KEY_REF = '*'
@@ -78,6 +76,8 @@ class Lingo
       @srcfile = Lingo.find(:dict, @config['name'], relax: true)
       @crypter = @config.has_key?('crypt') && Crypter.new
 
+      @val = Hash.new { |h, k| h[k] = [] }
+
       begin
         @stofile = Lingo.find(:store, @srcfile)
         FileUtils.mkdir_p(File.dirname(@stofile))
@@ -89,7 +89,6 @@ class Lingo
       end
 
       use_backend(backend, skip_ext)
-      init_cachable
 
       convert unless uptodate?
     end
@@ -133,14 +132,7 @@ class Lingo
     def []=(key, val)
       return if closed?
 
-      val = val.dup
-      val.concat(retrieve(key)) if hit?(key)
-
-      val.sort!
-      val.uniq!
-      store(key, val)
-
-      arg = [key, val.join(FLD_SEP)]
+      arg = [key, @val[key].concat(val).sort!.tap(&:uniq!).join(FLD_SEP)]
       _set(*@crypter ? @crypter.encode(*arg) : arg)
     end
 
