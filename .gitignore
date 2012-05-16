@@ -1,6 +1,7 @@
 doc
 doc.local
 pkg
+prof
 store
 bench/tmp.*
 .gh-pages

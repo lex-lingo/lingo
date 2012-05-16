@@ -252,8 +252,10 @@ class Lingo
   end
 
   def talk
-    invite
-    start
+    profile {
+      invite
+      start
+    }
   ensure
     reset
   end
@@ -310,6 +312,36 @@ class Lingo
 
   def warn(*msg)
     config.stderr.puts(*msg)
+  end
+
+  def profile(base = config['profile'])
+    return yield unless base
+
+    require 'ruby-prof'
+
+    result = RubyProf.profile { yield }
+    result.eliminate_methods! [/\b(?:Gem|HighLine)\b/,
+      /\A(?:Benchmark|FileUtils|Pathname|Util)\b/]
+
+    if base.is_a?(IO)
+      RubyProf::FlatPrinter.new(result).print(base)
+    else
+      FileUtils.mkdir_p(File.dirname(base))
+
+      mode = ENV['RUBY_PROF_MEASURE_MODE']
+      base += "-#{mode}" if mode && !mode.empty?
+
+      {
+        :txt   => :FlatPrinter,
+        :lines => :FlatPrinterWithLineNumbers,
+        :html  => :GraphHtmlPrinter,
+        :stack => :CallStackPrinter
+      }.each { |ext, name|
+        File.open("#{base}.#{ext}", 'a+', encoding: ENC) { |f|
+          RubyProf.const_get(name).new(result).print(f)
+        }
+      }
+    end
   end
 
 end

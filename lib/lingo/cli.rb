@@ -37,7 +37,8 @@ class Lingo
           config:   'lingo.cfg',
           language: 'de',
           status:   false,
-          perfmon:  false
+          perfmon:  false,
+          profile:  false
         )
       end
 
@@ -79,7 +80,13 @@ class Lingo
       opts.separator ''
 
       opts.on('-L', '--log FILE', 'Log file to print debug and status information to') { |log|
-        options[:log] = @stderr.reopen(File.open(log, 'a+', encoding: ENC))
+        options[:log] = stderr.reopen(log == '-' ? stdout : File.open(log, 'a+', encoding: ENC))
+      }
+
+      opts.separator ''
+
+      opts.on('-P', '--profile PATH', 'Print profiling results') { |profile|
+        options[:profile] = profile == '-' ? stdout : profile
       }
     end
 
