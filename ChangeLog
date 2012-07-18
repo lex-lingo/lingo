@@ -6,6 +6,7 @@
   longer possible.
 * Fixed regression introduced in 1.8.2 where Lingo would no longer run on Ruby
   1.9.2.
+* Made dependency on Ruby version >= 1.9.2 explicit.
 
 == 1.8.2 [2012-04-19]
 
