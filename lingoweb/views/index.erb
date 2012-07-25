@@ -33,15 +33,9 @@
           <textarea name="in" rows="20" cols="50"><%= @in %></textarea>
         </fieldset>
 
-      <% if @success %>
         <fieldset><legend><strong><%= t 'Output', 'Ausgabe' %></strong></legend>
           <textarea readonly="readonly" rows="20" cols="50"><%= @out %></textarea>
         </fieldset>
-      <% else %>
-        <fieldset class="error"><legend><strong><%= t 'Error', 'Fehler' %></strong></legend>
-          <textarea readonly="readonly" rows="20" cols="50"><%= @err %></textarea>
-        </fieldset>
-      <% end %>
 
         <br />
 

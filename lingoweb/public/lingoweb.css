@@ -1,3 +1,7 @@
+html, body {
+  margin-top:       0;
+}
+
 a img {
   border:           none;
 }
@@ -18,7 +22,7 @@ textarea {
 }
 
 #welcome {
-  font-size:        90%;
+  font-size:        70%;
   color:            #333333;
   margin-bottom:    0.5em;
   text-align:       center;
