@@ -40,9 +40,8 @@ class Lingo
       load_config('language', :lang)
       load_config('config')
 
-      Array(self['meeting/attendees']).each { |a|
-        r = a['text_reader'] || a['textreader'] or next  # DEPRECATE textreader
-
+      if r = get('meeting/attendees', 'text_reader') ||
+             get('meeting/attendees', 'textreader')  # DEPRECATE textreader
         f = @cli.files
 
         if i = r['files']
@@ -50,9 +49,7 @@ class Lingo
         elsif !f.empty?
           r['files'] = f
         end
-
-        break
-      }
+      end
     end
 
     def [](key)
@@ -62,6 +59,23 @@ class Lingo
     def []=(key, val)
       nodes = key_to_nodes(key); node = nodes.pop
       (self[nodes_to_key(nodes)] ||= {})[node] = val
+    end
+
+    def get(key, *names)
+      val = self[key]
+
+      while name = names.shift
+        case val
+          when Hash  then val = val[name]
+          when Array then val = val.find { |h|
+            k, v = h.dup.shift
+            break v if k == name
+          }
+          else break
+        end
+      end
+
+      val
     end
 
     def stdin
