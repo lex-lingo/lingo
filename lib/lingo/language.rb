@@ -31,6 +31,7 @@ require_relative 'language/word_form'
 require_relative 'language/token'
 require_relative 'language/lexical'
 require_relative 'language/word'
+require_relative 'language/char'
 
 class Lingo
 

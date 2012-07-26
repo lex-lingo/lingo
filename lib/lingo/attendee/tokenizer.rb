@@ -112,14 +112,13 @@ class Lingo
         @rules.unshift(['WIKI', /^=+.+=+$/]) unless @wiki
 
         get_key('regulars', []).each_with_object({}) { |rule, macros|
-          expr = rule.values.first.gsub(/_(\w+?)_/) {
-            macros[$&] || begin
-              Database::Source.const_get("UTF8_#{$1.upcase}")
-            rescue NameError
-            end
+          name, expr = rule.dup.shift
+
+          expr = expr.gsub(/_(\w+?)_/) {
+            macros[$&] || Char[$1] || warn("Macro not found: #{$1}")
           }
 
-          if (name = rule.keys.first) =~ /^_\w+_$/
+          if name =~ /^_\w+_$/
             macros[name] = expr
           else
             @rules << [name, /^#{expr}/]

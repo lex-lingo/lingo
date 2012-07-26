@@ -6,6 +6,8 @@
   longer possible.
 * Fixed regression introduced in 1.8.2 where Lingo would no longer run on Ruby
   1.9.2.
+* Modified character handling to accept *any* Unicode letter (_Alphabetical_)
+  and digit (<i>Decimal Number</i>).
 * Added +src+ option to Attendee::VectorFilter to print "source" part of
   compounds.
 * Added +lingosrv+ and +lingoweb+ executables. The former provides a simple
