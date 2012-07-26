@@ -44,28 +44,10 @@ class Lingo
     # === Konfiguration
     # Der Tokenizer benötigt zur Identifikation einzelner Token Regeln, nach denen er
     # arbeiten soll. Die benötigten Regeln werden aufgrund des Umfangs nicht als Parameter,
-    # sondern in der Sprachkonfiguration hinterlegt, die sich standardmäßig in der Datei
-    # <tt>de.lang</tt> befindet (YAML-Format).
-    #   language:
-    #     attendees:
-    #       tokenizer:
-    #         regulars:
-    #           - _CHR_: '\wÄÖÜÁÂÀÉÊÈÍÎÌÓÔÒÚÛÙÝäöüáâàéêèíîìóôòúûùý'
-    #           - NUMS:  '[+-]?(\d{4,}|\d{1,3}(\.\d{3,3})*)(\.|(,\d+)?%?)'
-    #           - URLS:  '((mailto:|(news|http|https|ftp|ftps)://)\S+|^(www(\.\S+)+)|\S+([\._]\S+)+@\S+(\.\S+)+)'
-    #           - ABRV:  '(([_CHR_]+\.)+)[_CHR_]+'
-    #           - ABRS:  '(([_CHR_]{1,1}\.)+)(?!\.\.)'
-    #           - WORD:  '[_CHR_\d]+'
-    #           - PUNC:  '[!,\.:;?]'
-    #           - OTHR:  '[!\"#$%&()*\+,\-\./:;<=>?@\[\\\]^_`{|}~´]'
-    #           - HELP:  '.*'
+    # sondern in einer Programmkonstanten hinterlegt.
     # Die Regeln werden in der angegebenen Reihenfolge abgearbeitet, solange bis ein Token
     # erkannt wurde. Sollte keine Regel zutreffen, so greift die letzt Regel +HELP+ in jedem
     # Fall.
-    # Regeln, deren Name in Unterstriche eingefasst sind, werden als Makro interpretiert.
-    # Makros werden genutzt, um lange oder sich wiederholende Bestandteile von Regeln
-    # einmalig zu definieren und in den Regeln über den Makronamen eine Auflösung zu forcieren.
-    # Makros werden selber nicht für die Erkennung von Token eingesetzt.
     #
     # === Generierte Kommandos
     # Damit der nachfolgende Datenstrom einwandfrei verarbeitet werden kann, generiert der Tokenizer
@@ -98,32 +80,79 @@ class Lingo
 
     class Tokenizer < self
 
+      CHAR, DIGIT = Char::CHAR, Char::DIGIT
+
+      RULES = [
+        ['WIKI', /^=+.+=+$/],
+        ['SPAC', /^\s+/],
+        ['HTML', /^<[^>]+>/],
+        ['WIKI', /^\[\[.+?\]\]/],
+        ['NUMS', /^[+-]?(?:\d{4,}|\d{1,3}(?:\.\d{3,3})*)(?:\.|(?:,\d+)?%?)/],
+        ['URLS', /^(?:(?:mailto:|(?:news|https?|ftps?):\/\/)\S+|^(?:www(?:\.\S+)+)|[^\s.]+(?:[\._]\S+)+@\S+(?:\.\S+)+)/],
+        ['ABRV', /^(?:(?:(?:#{CHAR})+\.)+)(?:#{CHAR})+/],
+        ['WORD', /^(?:#{CHAR}|#{DIGIT}|-)+/],
+        ['PUNC', /^[!,.:;?¡¿]/],
+        ['OTHR', /^["$#%&'()*+\-\/<=>@\[\\\]^_{|}~¢£¤¥¦§¨©«¬®¯°±²³´¶·¸¹»¼½¾×÷]/],
+        ['HELP', /^[^ ]*/]
+      ]
+
+      class << self
+
+        def rule(name)
+          RULES.assoc(name)
+        end
+
+        def delete(*names)
+          names.each { |name| RULES.delete(rule(name)) }
+        end
+
+        def replace(name, expr)
+          rule = rule(name) or return
+          rule[1] = block_given? ? yield(rule[1]) : expr
+        end
+
+        def insert(*rules)
+          _insert(0, rules)
+        end
+
+        def append(*rules)
+          _insert(-1, rules)
+        end
+
+        def insert_before(name, *rules)
+          _insert_name(name, rules, 0)
+        end
+
+        def insert_after(name, *rules)
+          _insert_name(name, rules, -1)
+        end
+
+        private
+
+        def _insert(index, rules)
+          rules.push(*rules.pop) if rules.last.is_a?(Hash)
+          RULES.insert(index, *rules)
+        end
+
+        def _insert_name(name, rules, offset)
+          index = RULES.index(rule(name))
+          _insert(index ? index - offset : offset, rules)
+        end
+
+      end
+
       protected
 
       def init
         @space = get_key('space', false)
-        @tags  = get_key('tags',  true)
-        @wiki  = get_key('wiki',  true)
+        @tags  = get_key('tags',  false)
+        @wiki  = get_key('wiki',  false)
 
-        # default rules
-        @rules = [['SPAC', /^\s+/]]
-        @rules << ['HTML', /^<[^>]+>/]       unless @tags
-        @rules << ['WIKI', /^\[\[.+?\]\]/]   unless @wiki
-        @rules.unshift(['WIKI', /^=+.+=+$/]) unless @wiki
+        skip = []
+        skip << 'HTML' unless @tags
+        skip << 'WIKI' unless @wiki
 
-        get_key('regulars', []).each_with_object({}) { |rule, macros|
-          name, expr = rule.dup.shift
-
-          expr = expr.gsub(/_(\w+?)_/) {
-            macros[$&] || Char[$1] || warn("Macro not found: #{$1}")
-          }
-
-          if name =~ /^_\w+_$/
-            macros[name] = expr
-          else
-            @rules << [name, /^#{expr}/]
-          end
-        }
+        @rules = RULES.reject { |name, _| skip.include?(name) }
 
         @filename = @cont = nil
       end
@@ -175,12 +204,12 @@ class Lingo
               return
             end
           when nil
-            if !@tags && line =~ /<[^<>]*$/
+            if @tags && line =~ /<[^<>]*$/
               yield $&, @cont = 'HTML'
               line = $`
             end
 
-            if !@wiki && line =~ /\[\[[^\[\]]*$/
+            if @wiki && line =~ /\[\[[^\[\]]*$/
               yield $&, @cont = 'WIKI'
               line = $`
             end
