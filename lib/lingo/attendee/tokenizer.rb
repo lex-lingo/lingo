@@ -157,44 +157,42 @@ class Lingo
       private
 
       # tokenize("Eine Zeile.")  ->  [:Eine/WORD:, :Zeile/WORD:, :./PUNC:]
-      def tokenize(textline)
+      def tokenize(line)
         case @cont
           when 'HTML'
-            if textline =~ /^[^<>]*>/
+            if line =~ /^[^<>]*>/
               yield $&, @cont
-              textline, @cont = $', nil
+              line, @cont = $', nil
             else
-              yield textline, @cont
+              yield line, @cont
               return
             end
           when 'WIKI'
-            if textline =~ /^[^\[\]]*\]\]/
+            if line =~ /^[^\[\]]*\]\]/
               yield $&, @cont
-              textline, @cont = $', nil
+              line, @cont = $', nil
             else
-              yield textline, @cont
+              yield line, @cont
               return
             end
           when nil
-            if !@tags && textline =~ /<[^<>]*$/
+            if !@tags && line =~ /<[^<>]*$/
               yield $&, @cont = 'HTML'
-              textline = $`
+              line = $`
             end
 
-            if !@wiki && textline =~ /\[\[[^\[\]]*$/
+            if !@wiki && line =~ /\[\[[^\[\]]*$/
               yield $&, @cont = 'WIKI'
-              textline = $`
+              line = $`
             end
         end
 
-        until textline.empty?
-          @rules.each { |name, expr|
-            if textline =~ expr
-              yield $&, name if name != 'SPAC' || @space
-              textline = $'
-              break
-            end
-          }
+        while (l = line.length) > 0 && @rules.find { |name, expr|
+          if line =~ expr
+            yield $&, name if name != 'SPAC' || @space
+            l == $'.length ? break : line = $'
+          end
+        }
         end
       end
 
