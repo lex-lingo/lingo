@@ -31,14 +31,22 @@ require 'json'
 LINGO = Lingo::Call.new((i = ARGV.index('--')) ? ARGV[i + 1 .. -1] : []).call
 abort 'Something went wrong...' unless LINGO.is_a?(Lingo::Call)
 
+c = LINGO.config.get('meeting/attendees', 'vector_filter', 'src')
+SRC_SEP = c == true ? Lingo::Attendee::VectorFilter::DEFAULT_SRC_SEP : c
+
 get('')   { doit }
 get('/')  { doit }
 post('/') { doit }
 
 def doit
-  str = params[:str]
-  res = LINGO.talk(str) if str
-  { str => res }.to_json if res
+  str = params[:str] and res = LINGO.talk(str) or return
+
+  res = res.inject(Hash.new { |h, k| h[k] = [] }) { |h, s|
+    a, b = s.split(SRC_SEP, 2); h[b] << a; h
+  } if SRC_SEP
+
+  content_type :json
+  { str => res }.to_json
 end
 
 Sinatra::Application.run! unless $0 == __FILE__
