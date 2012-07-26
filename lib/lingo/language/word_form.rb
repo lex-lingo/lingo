@@ -36,10 +36,10 @@ class Lingo
 
       include Comparable
 
-      attr_accessor :form, :attr
+      attr_accessor :form, :attr, :src
 
-      def initialize(form, attr = '-')
-        @form, @attr = form || '', attr || ''
+      def initialize(form, attr = '-', src = nil)
+        @form, @attr, @src = form || '', attr || '', src
       end
 
       def unknown?

@@ -96,9 +96,7 @@ class Lingo
 
         level == 1 ? (@_compound ||= {})[str] ||= find.call(com = Word.new(str, WA_UNKNOWN)) { |lex|
           com.attr = WA_COMPOUND
-          com.lexicals = lex.map { |l|
-            l.attr == LA_COMPOUND ? l : Lexical.new(l.form, l.attr + @append_wc)
-          }
+          com.lexicals = lex.each { |l| l.attr += @append_wc unless l.attr == LA_COMPOUND }
         } : find[[[], [], '']]
       end
 
@@ -162,6 +160,10 @@ class Lingo
             return empty
           end
         end
+
+        { flex => fform, blex => bform }.each { |a, f|
+          a.each { |l| l.src ||= f }
+        }
 
         flex.concat(blex).delete_if { |l| l.attr == LA_COMPOUND }.
           push(Lexical.new(fform + infix + bform, LA_COMPOUND)).sort!
