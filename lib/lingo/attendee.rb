@@ -230,7 +230,7 @@ class Lingo
       @config && @config.has_key?(key)
     end
 
-    def get_key(key, default = nodefault = Object.new)
+    def get_key(key, default = nodefault = true)
       raise MissingConfigError.new(key) if nodefault && !has_key?(key)
       @config.fetch(key, default)
     end

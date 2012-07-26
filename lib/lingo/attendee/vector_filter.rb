@@ -79,6 +79,8 @@ class Lingo
 
     class VectorFilter < self
 
+      DEFAULT_SRC_SEP = '|'
+
       protected
 
       def init
@@ -87,6 +89,9 @@ class Lingo
         else
           @lex  = Regexp.new(get_key('lexicals', '[sy]').downcase)
           @skip = get_array('skip', DEFAULT_SKIP, :upcase)
+
+          @src = get_key('src', false)
+          @src = DEFAULT_SRC_SEP if @src == true
 
           if sort = get_key('sort', 'normal')
             @sort_format, @sort_method = sort.downcase.split('_', 2)
@@ -113,6 +118,7 @@ class Lingo
 
           cnt = obj.get_class(@lex).each { |lex|
             vec = lex.form.downcase
+            vec << @src << lex.src if @src && lex.src
             @sort_format ? @vectors << vec : forward(vec)
           }.size
 
