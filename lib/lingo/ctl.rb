@@ -76,6 +76,8 @@ class Lingo
 
     { demo:    ['Initialize demo directory (Default: current directory)',
                 'Arguments: [path]'],
+      rackup:  ['Print path to rackup file',
+                'Arguments: name'],
       path:    'Print search path for dictionaries and configurations',
       help:    'Print help for available commands',
       version: 'Print Lingo version number' }.each { |what, description|
@@ -135,6 +137,19 @@ EOT
       copy_list(:lang)
       copy_list(:dict)   { |i|  File.basename(i).start_with?('user') }
       copy_list(:sample)
+    end
+
+    def do_rackup(doit = true)
+      name = ARGV.shift or do_usage('Required argument `name\' missing.')
+      no_args
+
+      require 'lingo/app'
+
+      if file = Lingo::App.rackup(name)
+        doit ? puts(file) : file
+      else
+        do_usage("Invalid app name `#{name.inspect}'.")
+      end
     end
 
     def do_path

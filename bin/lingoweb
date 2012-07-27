@@ -25,6 +25,6 @@
 #++
 
 require 'lingo'
-require 'lingo/srv'
+require 'lingo/web'
 
-Lingo::Srv.run!
+Lingo::Web.run!

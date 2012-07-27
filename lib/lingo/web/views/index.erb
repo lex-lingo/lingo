@@ -30,18 +30,18 @@
     <form action="<%= url_for '/' %>" method="post">
       <div>
         <fieldset><legend><strong><%= t 'Input', 'Eingabe' %></strong></legend>
-          <textarea name="in" rows="20" cols="50"><%= @in %></textarea>
+          <textarea name="q" rows="20" cols="50"><%= @q %></textarea>
         </fieldset>
 
         <fieldset><legend><strong><%= t 'Output', 'Ausgabe' %></strong></legend>
-          <textarea readonly="readonly" rows="20" cols="50"><%= @out %></textarea>
+          <textarea readonly="readonly" rows="20" cols="50"><%= @r %></textarea>
         </fieldset>
 
         <br />
 
-        <strong><%= t 'Language', 'Sprache' %></strong> = <select name="lang">
-        <% for lang in LANGS %>
-          <option value="<%= lang %>"<%= ' selected="selected"' if lang == @lang %>><%= lang %></option>
+        <strong><%= t 'Language', 'Sprache' %></strong> = <select name="l">
+        <% for l in LANGS %>
+          <option value="<%= l %>"<%= ' selected="selected"' if l == @l %>><%= l %></option>
         <% end %>
         </select>
 

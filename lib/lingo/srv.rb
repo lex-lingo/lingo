@@ -1,4 +1,4 @@
-#! /usr/bin/env ruby
+# encoding: utf-8
 
 #--
 ###############################################################################
@@ -24,7 +24,36 @@
 ###############################################################################
 #++
 
-require 'lingo'
-require 'lingo/srv'
+require 'json'
+require_relative 'app'
 
-Lingo::Srv.run!
+class Lingo
+
+  class Srv < App
+
+    init_app(__FILE__) { %W[-c #{File.join(root, 'lingosrv.cfg')}] }
+
+    LINGO = Call.new(ARGV).call
+    abort 'Something went wrong...' unless LINGO.is_a?(Call)
+
+    c = LINGO.config.get('meeting/attendees', 'vector_filter', 'src')
+    SRC_SEP = c == true ? Attendee::VectorFilter::DEFAULT_SRC_SEP : c
+
+    get('')   { doit }
+    get('/')  { doit }
+    post('/') { doit }
+
+    def doit
+      q = params[:q]
+      r = LINGO.talk(q) if q && !q.empty?
+
+      r = r.inject(Hash.new { |h, k| h[k] = [] }) { |h, s|
+        a, b = s.split(SRC_SEP, 2); h[b] << a; h
+      } if r && SRC_SEP
+
+      to_json(q, r)
+    end
+
+  end
+
+end

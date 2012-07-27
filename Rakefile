@@ -39,8 +39,9 @@ The main functions of Lingo are:
   of word classes
       EOT
       extra_files:  FileList[
-        'lingo.rb', 'lingo{,-call}.cfg', 'lir.cfg', '{de,en}.lang',
-        '{de,en}/{lingo-*,user-dic,test_*}.txt', 'txt/{artikel{,-en},lir}.txt'
+        'lingo.rb', 'lingo{,-call}.cfg', 'lir.cfg',
+        '{de,en}.lang', '{de,en}/{lingo-*,user-dic,test_*}.txt',
+        'txt/{artikel{,-en},lir}.txt', 'lib/lingo/{srv,web}/**/*'
       ].to_a,
       required_ruby_version:    '>= 1.9.2',
       dependencies:             [['ruby-nuggets', '>= 0.8.5'],
