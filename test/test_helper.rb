@@ -12,7 +12,7 @@ class LingoTestCase <  Test::Unit::TestCase
   end
 
   def cleanup_store
-    Dir[TEST_GLOB].each { |f| File.unlink(f) }
+    Dir[TEST_GLOB].each { |f| File.delete(f) }
   end
 
   def split(t)
@@ -61,6 +61,8 @@ class AttendeeTestCase < LingoTestCase
     @lingo.start
 
     assert_equal(expect, output) if expect
+
+    @lingo.reset
   end
 
 end
