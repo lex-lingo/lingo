@@ -54,23 +54,23 @@ class TestAttendeeTextWriter < AttendeeTestCase
       ai('RECORD|00237'),
       '020: GERHARD.',
       '025: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.',
-      "056: Die intellektuelle Erschließung des Internet befindet sich in einer Krise. GERHARD ist derzeit weltweit der einzige.\r",
+      "056: Die intellektuelle Erschließung des Internet befindet sich in einer Krise. GERHARD ist derzeit weltweit der einzige.",
       ai('RECORD|00238'),
       '020: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.',
-      "025: das DFG-Projekt GERHARD.\r",
+      "025: das DFG-Projekt GERHARD.",
       ai('RECORD|00239'),
       '020: Information Retrieval und Dokumentmanagement im Multimedia-Zeitalter.',
-      "056: \"Das Buch ist ein praxisbezogenes VADEMECUM für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.\r",
+      "056: \"Das Buch ist ein praxisbezogenes VADEMECUM für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.",
       ai('EOF|test/lir.txt')
     ])
 
     assert_equal([
       "00237*020: GERHARD. 025: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressour\
-cen. 056: Die intellektuelle Erschließung des Internet befindet sich in einer Krise. GERHARD ist derzeit weltweit der einzige.\r\n",
+cen. 056: Die intellektuelle Erschließung des Internet befindet sich in einer Krise. GERHARD ist derzeit weltweit der einzige.\n",
       "00238*020: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen. 025: das D\
-FG-Projekt GERHARD.\r\n",
+FG-Projekt GERHARD.\n",
       "00239*020: Information Retrieval und Dokumentmanagement im Multimedia-Zeitalter. 056: \"Das Buch ist ein praxisbezogenes VADEMECUM\
- für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.\r\n"
+ für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.\n"
     ], File.readlines('test/lir.vec', encoding: Lingo::ENC))
   end
 
