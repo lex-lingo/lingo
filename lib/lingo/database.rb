@@ -115,7 +115,7 @@ class Lingo
 
     def to_h
       {}.tap { |hash| @db.each { |key, val|
-        hash[key.force_encoding(ENC).freeze] = val.force_encoding(ENC)
+        hash[_encode!(key).freeze] = _encode!(val)
       } unless closed? }
     end
 
@@ -199,9 +199,13 @@ class Lingo
 
     def _val(key)
       if val = _get(@crypter ? @crypter.digest(key) : key)
-        val.force_encoding(ENC)
+        _encode!(val)
         @crypter ? @crypter.decode(key, val) : val
       end
+    end
+
+    def _encode!(str)
+      str.force_encoding(ENC)
     end
 
     def warn(*msg)

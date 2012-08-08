@@ -6,6 +6,7 @@
   longer possible.
 * Fixed regression introduced in 1.8.2 where Lingo would no longer run on Ruby
   1.9.2.
+* Fixed encoding issue in SDBM store.
 * Fixed issue with BOM in config files.
 * Modified character handling to accept *any* Unicode letter (_Alphabetical_)
   and digit (<i>Decimal Number</i>).

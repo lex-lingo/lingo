@@ -60,7 +60,7 @@ class Lingo
   }
 
   # Default encoding
-  ENC = 'UTF-8'.freeze
+  Encoding.default_external = Encoding.default_internal = ENC = 'UTF-8'.freeze
 
   SEP_RE = %r{[; ,|]}
 

@@ -48,11 +48,6 @@ class Lingo
         SDBM.open(@stofile)
       end
 
-      def _get(key)
-        val = super
-        val && val.encode(ENC)
-      end
-
       def _set(key, val)
         if val.length > 950
           warn "Warning: Entry `#{key}' (#{@srcfile}) too long for SDBM. Truncating..."
