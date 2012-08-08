@@ -27,6 +27,8 @@
 require 'yaml'
 require_relative 'cli'
 
+YAML::ENGINE.yamler = 'psych'
+
 class Lingo
 
   class Config
