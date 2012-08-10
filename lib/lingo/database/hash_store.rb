@@ -30,20 +30,19 @@ class Lingo
 
     module HashStore
 
-      def to_h
-        @db.dup
-      end
-
+      # Never close, because we can't restore.
       def close
         self
       end
 
       private
 
+      # Never up-to-date.
       def uptodate?
         false
       end
 
+      # Nothing to do.
       def uptodate!
         nil
       end
@@ -56,9 +55,15 @@ class Lingo
         {}
       end
 
+      # Never closed.
       def _closed?
         false
       end
+
+      # Dup key, because we're reusing everything.
+      def _each
+       @db.each { |key, val| yield key.dup, val }
+     end
 
     end
 

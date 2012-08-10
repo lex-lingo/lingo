@@ -94,7 +94,7 @@ class Lingo
     end
 
     def closed?
-      @db.nil? || _closed?
+      !@db || _closed?
     end
 
     def open
@@ -107,16 +107,18 @@ class Lingo
     end
 
     def close
-      @db.close unless closed?
+      _close unless closed?
       @db = nil
 
       self
     end
 
     def to_h
-      {}.tap { |hash| @db.each { |key, val|
-        hash[_encode!(key).freeze] = _encode!(val)
-      } unless closed? }
+      {}.tap { |hash| each { |key, val| hash[key.freeze] = val } }
+    end
+
+    def each
+      _each { |key, val| yield _encode!(key), _encode!(val) } unless closed?
     end
 
     def [](key)
@@ -185,8 +187,16 @@ class Lingo
       raise NotImplementedError
     end
 
+    def _close
+      @db.close
+    end
+
     def _closed?
       @db.closed?
+    end
+
+    def _each
+      @db.each { |key, val| yield key, val }
     end
 
     def _set(key, val)
