@@ -116,7 +116,7 @@ class Lingo
 
       def process_buffer
         insert_sequences if @buffer.size > 1
-        forward_buffer
+        flush(@buffer)
       end
 
       private
@@ -149,7 +149,7 @@ class Lingo
         }
 
         matches.sort.each { |pos, forms| forms.tap(&:uniq!).each { |form|
-          @inserts << [pos, Word.new_lexical(form, WA_SEQUENCE, LA_SEQUENCE)]
+          buf << Word.new_lexical(form, WA_SEQUENCE, LA_SEQUENCE)
         } }
       end
 

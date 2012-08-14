@@ -19,15 +19,15 @@ class TestAttendeeSequencer < AttendeeTestCase
     ], [
       # AS
       wd('Die|IDF', 'die|w'),
-      wd('sonne, hell|SEQ', 'sonne, hell|q'),
       wd('helle|IDF', 'hell|a'),
       wd('Sonne|IDF', 'sonne|s'),
       tk('.|PUNC'),
+      wd('sonne, hell|SEQ', 'sonne, hell|q'),
       # AK
       wd('Der|IDF', 'der|w'),
-      wd('sonnenuntergang, schön|SEQ', 'sonnenuntergang, schön|q'),
       wd('schöne|IDF', 'schön|a'),
       wd('Sonnenuntergang|KOM', 'sonnenuntergang|k', 'sonne|s+', 'untergang|s+'),
+      wd('sonnenuntergang, schön|SEQ', 'sonnenuntergang, schön|q'),
       ai('EOF|')
     ])
   end

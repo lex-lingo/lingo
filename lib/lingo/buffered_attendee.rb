@@ -29,7 +29,7 @@ class Lingo
   class BufferedAttendee < Attendee
 
     def initialize(config, lingo)
-      @buffer, @inserts = [], []
+      @buffer = []
       super
     end
 
@@ -45,11 +45,6 @@ class Lingo
     def form_at(index, klass = WordForm)
       obj = @buffer[index]
       obj.form if obj.is_a?(klass)
-    end
-
-    def forward_buffer
-      @inserts.sort_by!(&:first).each { |i| @buffer.insert(*i) }.clear
-      @buffer.each(&method(:forward)).clear
     end
 
     def forward_number_of_token(len = default = @buffer.size, punct = !default)
