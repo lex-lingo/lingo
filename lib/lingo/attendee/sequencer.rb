@@ -97,10 +97,14 @@ class Lingo
 
       def init
         @stopper = get_array('stopper', DEFAULT_SKIP, :upcase)
+        @classes = []
 
         @seq = get_key('sequences').map { |string, format|
-          [string = string.downcase, string.split(//), format]
+          @classes.concat(classes = string.downcase!.chars.to_a)
+          [string, classes, format]
         }
+
+        @classes.uniq!
 
         raise MissingConfigError.new(:sequences) if @seq.empty?
       end
@@ -115,42 +119,56 @@ class Lingo
       end
 
       def process_buffer
-        insert_sequences if @buffer.size > 1
-        flush(@buffer)
+        matches = []
+
+        if @buffer.size > 1
+          buf, map, seq, cls, unk = [], [], @seq, @classes, %w[#]
+
+          @buffer.each { |obj|
+            att = obj.is_a?(Word) && !obj.unknown? ? obj.attrs(false) : unk
+
+            (att &= cls).empty? ? find_seq(buf, map, seq, matches) : begin
+              buf << obj
+              map << att
+            end
+          }
+
+          find_seq(buf, map, seq, matches)
+        end
+
+        flush(@buffer.concat(matches))
       end
 
       private
 
-      def insert_sequences
-        matches, buf, seq = Hash.new { |h, k| h[k] = [] }, @buffer, @seq
+      def find_seq(buf, map, seq, matches)
+        return if buf.empty?
 
-        map = buf.map { |obj|
-          obj.is_a?(Word) && !obj.unknown? ? obj.attrs(false) : ['#']
-        }
+        match = Hash.new { |h, k| h[k] = [] }
 
         map.shift.product(*map).map!(&:join).tap(&:uniq!).each { |q|
           seq.each { |string, classes, format|
             while pos = q.index(string, pos || 0)
-              inc('Anzahl erkannter Sequenzen')
-
-              fmt = format.dup
+              form = format.dup
 
               classes.each_with_index { |wc, i|
                 buf[pos + i].lexicals.find { |l|
-                  fmt.gsub!(i.succ.to_s, l.form) if l.attr == wc
+                  form.gsub!(i.succ.to_s, l.form) if l.attr == wc
                 } or break
               } or next
 
-              matches[pos] << fmt
-
-              pos += 1
+              inc('Anzahl erkannter Sequenzen')
+              match[pos += 1] << form
             end
           }
         }
 
-        matches.sort.each { |pos, forms| forms.tap(&:uniq!).each { |form|
-          buf << Word.new_lexical(form, WA_SEQUENCE, LA_SEQUENCE)
+        match.each_value { |forms| forms.tap(&:uniq!).each { |form|
+          matches << Word.new_lexical(form, WA_SEQUENCE, LA_SEQUENCE)
         } }
+
+        buf.clear
+        map.clear
       end
 
     end

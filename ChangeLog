@@ -11,6 +11,8 @@
 * Modified character handling to accept *any* Unicode letter (_Alphabetical_)
   and digit (<i>Decimal Number</i>).
 * Modified Attendee::Tokenizer to use only hard-coded tokenization rules.
+* Improved Attendee::Sequencer performance a bit while changing the order
+  sequences are inserted into the stream.
 * Added +src+ option to Attendee::VectorFilter to print "source" part of
   compounds.
 * Added +lingosrv+ and +lingoweb+ executables. The former provides a simple
