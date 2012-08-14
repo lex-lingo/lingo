@@ -96,7 +96,7 @@ class Lingo
       @can_control = self.class.method_defined?(:control)
       @can_process = self.class.method_defined?(:process)
 
-      @skip_command, @timer = false, nil
+      @skip_command, @timer, @forward = false, nil, method(:forward)
     end
 
     def add_subscriber(subscriber)
@@ -224,6 +224,10 @@ class Lingo
 
     def forward(obj, param = nil)
       talk(param ? AgendaItem.new(obj, param) : obj)
+    end
+
+    def flush(buffer)
+      buffer.each(&@forward).clear
     end
 
     def has_key?(key)

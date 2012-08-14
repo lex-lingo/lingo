@@ -135,7 +135,7 @@ class Lingo
           @vectors.sort!
           @vectors.uniq!
 
-          @vectors.each(&method(:forward)).clear
+          flush(@vectors)
         else
           cnt, fmt = Hash.new(0), '%d'
 

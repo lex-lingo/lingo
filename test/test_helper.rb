@@ -78,7 +78,7 @@ class Lingo
       end
 
       def control(cmd, param)
-        @input.each(&method(:forward)) if cmd == STR_CMD_TALK
+        @input.each(&@forward) if cmd == STR_CMD_TALK
       end
 
     end

@@ -101,7 +101,7 @@ class Lingo
         @nonewords.uniq!
 
         add('Objekte gefiltert', @nonewords.size)
-        @nonewords.each(&method(:forward)).clear
+        flush(@nonewords)
       end
 
     end
