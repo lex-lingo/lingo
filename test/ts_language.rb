@@ -252,106 +252,97 @@ class TestGrammar < LingoTestCase
     }
   end
 
-  def test_test_compound
-    lg { |gra|
-      # hinterer Teil ist ein Wort mit Suffix
-      assert_equal([
-        [lx('hasenbraten|k'), lx('hase|s'), lx('braten|v')],
-        [5, 6], 'sv'], gra.test_compound('hasen', '', 'braten')
-      )
-
-      # hinterer Teil ist ein Wort mit Infix ohne Schwanz
-      assert_equal([
-        [lx('nasenlaufen|k'), lx('nase|s'), lx('laufen|v')],
-        [5, 7], 'sv'], gra.test_compound('nasen', '', 'laufens')
-      )
-
-      # hinterer Teil ist ein Wort mit Infix mit Schwanz
-      assert_equal([
-        [lx('nasenlaufens|k'), lx('nase|s'), lx('laufen|v')],
-        [5, 7], 'sv'], gra.test_compound('nasen', '', 'laufens', 1, true)
-      )
-
-      # hinterer Teil ist ein Kompositum nach Bindestrich
-      assert_equal([
-        [lx('arrafat-nachfolgebedarf|k'), lx('bedarf|s'), lx('nachfolge|s'), lx('arrafat|x')],
-        [7, 9, 6], 'xss'], gra.test_compound('arrafat', '-', 'nachfolgebedarf')
-      )
-
-      # hinterer Teil ist ein TakeItAsIs nach Bindestrich
-      assert_equal([
-        [lx('nachfolge-arrafat|k'), lx('nachfolge|s'), lx('arrafat|x')],
-        [9, 7], 'sx'], gra.test_compound('nachfolge', '-', 'arrafat')
-      )
-
-      # vorderer Teil ist ein Wort mit Suffix => siehe Hasenbraten
-      # vorderer Teil ist ein Kompositum
-      assert_equal([
-        [lx('morgenonkelmantel|k'), lx('mantel|s'), lx('morgen|s'), lx('onkel|s'), lx('morgen|w')],
-        [6, 5, 6], 'sss'], gra.test_compound('morgenonkel', '', 'mantel')
-      )
-
-      # vorderer Teil ist ein TakeItAsIs vor Bindestrich
-      assert_equal([
-        [lx('arrafat-nachfolger|k'), lx('nachfolger|s'), lx('arrafat|x')],
-        [7, 10], 'xs'], gra.test_compound('arrafat', '-', 'nachfolger')
-      )
-    }
-  end
-
-  def test_permute_compound
-    lg { |gra|
-      # bindestrichversion
-      assert_equal([
-        [lx('arrafat-nachfolger|k'), lx('nachfolger|s'), lx('arrafat|x')],
-        [7, 10], 'xs'], gra.permute_compound('arrafat-nachfolger')
-      )
-
-      # bindestrichversion zwei-teilig
-      assert_equal([
-        [lx('cd-rom-technologie|k'), lx('cd-rom|s'), lx('technologie|s')],
-        [6, 11], 'ss'], gra.permute_compound('cd-rom-technologie')
-      )
-
-      # bindestrichversion drei-teilig
-      assert_equal([
-        [lx('albert-ludwigs-universität|k'), lx('universität|s'), lx('albert|e'), lx('ludwig|e')],
-        [6, 7, 11], 'ees'], gra.permute_compound('albert-ludwigs-universität')
-      )
-
-      # normal mit suggestion
-      assert_equal([
-        [lx('benutzerforschung|k'), lx('erforschung|s'), lx('benutzen|v')],
-        [6, 11], 'vs'], gra.permute_compound('benutzerforschung')
-      )
-    }
-  end
-
   def test_find_compound
     lg { |gra|
       assert_equal(
         wd('informationswissenschaften|KOM', 'informationswissenschaft|k', 'information|s+', 'wissenschaft|s+'),
         gra.find_compound('informationswissenschaften')
       )
+
       assert_equal(
         wd('cd-rom-technologie|KOM', 'cd-rom-technologie|k', 'cd-rom|s+', 'technologie|s+'),
         gra.find_compound('cd-rom-technologie')
       )
+
       assert_equal(
         wd('albert-ludwigs-universität|KOM', 'albert-ludwigs-universität|k', 'albert|e+', 'ludwig|e+', 'universität|s+'),
         gra.find_compound('albert-ludwigs-universität')
       )
+
       assert_equal(
         wd('client-server-system|KOM', 'client-server-system|k', 'client|s+', 'server|s+', 'system|s+'),
         gra.find_compound('client-server-system')
       )
+
       assert_equal(
         wd('benutzerforschung|KOM', 'benutzerforschung|k', 'erforschung|s+', 'benutzen|v+'),
         gra.find_compound('benutzerforschung')
       )
+
       assert_equal(
         wd('clustersuche|KOM', 'clustersuche|k', 'cluster|s+', 'suche|s+', 'suchen|v+'),
         gra.find_compound('clustersuche')
+      )
+
+      # hinterer Teil ist ein Wort mit Suffix
+      assert_equal(
+        wd('hasenbraten|KOM', 'hasenbraten|k', 'hase|s+', 'braten|v+'),
+        gra.find_compound('hasenbraten')
+      )
+
+      # hinterer Teil ist ein Wort mit Infix ohne Schwanz
+      assert_equal(
+        wd('nasenlaufen|KOM', 'nasenlaufen|k', 'nase|s+', 'laufen|v+'),
+        gra.find_compound('nasenlaufen')
+      )
+
+      # hinterer Teil ist ein Wort mit Infix mit Schwanz
+      assert_equal(
+        wd('nasenlaufens|KOM', 'nasenlaufen|k', 'nase|s+', 'laufen|v+'),
+        gra.find_compound('nasenlaufens')
+      )
+
+      # hinterer Teil ist ein Kompositum nach Bindestrich
+      assert_equal(
+        wd('arrafat-nachfolgebedarf|KOM', 'arrafat-nachfolgebedarf|k', 'bedarf|s+', 'nachfolge|s+', 'arrafat|x+'),
+        gra.find_compound('arrafat-nachfolgebedarf')
+      )
+
+      # hinterer Teil ist ein TakeItAsIs nach Bindestrich
+      assert_equal(
+        wd('nachfolge-arrafat|KOM', 'nachfolge-arrafat|k', 'nachfolge|s+', 'arrafat|x+'),
+        gra.find_compound('nachfolge-arrafat')
+      )
+
+      # vorderer Teil ist ein Wort mit Suffix => siehe Hasenbraten
+      # vorderer Teil ist ein Kompositum
+      assert_equal(
+        wd('morgenonkelmantel|KOM', 'morgenonkelmantel|k', 'mantel|s+', 'morgen|s+', 'onkel|s+', 'morgen|w+'),
+        gra.find_compound('morgenonkelmantel')
+      )
+
+      # vorderer Teil ist ein TakeItAsIs vor Bindestrich / bindestrichversion
+      assert_equal(
+        wd('arrafat-nachfolger|KOM', 'arrafat-nachfolger|k', 'nachfolger|s+', 'arrafat|x+'),
+        gra.find_compound('arrafat-nachfolger')
+      )
+
+      # bindestrichversion zwei-teilig
+      assert_equal(
+        wd('cd-rom-technologie|KOM', 'cd-rom-technologie|k', 'cd-rom|s+', 'technologie|s+'),
+        gra.find_compound('cd-rom-technologie')
+      )
+
+      # bindestrichversion drei-teilig
+      assert_equal(
+        wd('albert-ludwigs-universität|KOM', 'albert-ludwigs-universität|k', 'albert|e+', 'ludwig|e+', 'universität|s+'),
+        gra.find_compound('albert-ludwigs-universität')
+      )
+
+      # normal mit suggestion
+      assert_equal(
+        wd('benutzerforschung|KOM', 'benutzerforschung|k', 'erforschung|s+', 'benutzen|v+'),
+        gra.find_compound('benutzerforschung')
       )
     }
   end

@@ -77,45 +77,50 @@ class Lingo
       # find_compound arbeitet in verschiedenen Leveln, da die Methode auch rekursiv aufgerufen wird. Ein Level größer 1
       # entspricht daher einem rekursiven Aufruf
       def find_compound(str, level = 1, tail = false)
-        find = lambda { |ret, &block|
-          if str.length > @min_word_size
-            lex, sta, seq = res = permute_compound(str.downcase, level, tail)
+        return permute_compound([[], [], ''], str, level, tail) if level != 1
 
-            if !lex.empty? &&
-              sta.size              <= @max_parts         &&
-              sta.min               >= @min_part_size     &&
-              str.length / sta.size >= @min_avg_part_size &&
-              (@sequences.empty? || !@sequences.include?(seq))
-
-              block ? block[lex] : ret = res
-            end
-          end
-
-          ret
-        }
-
-        level == 1 ? (@_compound ||= {})[str] ||= find.call(com = Word.new(str, WA_UNKNOWN)) { |lex|
+        (@_compound ||= {})[str] ||= permute_compound(
+          com = Word.new(str, WA_UNKNOWN), str, level, tail
+        ) { |lex|
           com.attr = WA_COMPOUND
-          com.lexicals = lex.each { |l| l.attr += @append_wc unless l.attr == LA_COMPOUND }
-        } : find[[[], [], '']]
+          com.lexicals = lex.each { |l|
+            l.attr += @append_wc unless l.attr == LA_COMPOUND
+          }
+        }
       end
 
-      # permute_compound( _aString_ ) ->  [lex, sta, seq]
-      def permute_compound(str, level = 1, tail = false)
-        return test_compound($1, '-', $2, level, tail) if str =~ HYPHEN_RE
+      private
 
-        sug, len = @suggestions[level] ||= [], str.length
+      def permute_compound(ret, str, level, tail)
+        if str.length > @min_word_size
+          str = str.downcase
 
-        1.upto(len - 1) { |i|
-          res = test_compound(str[0, i], '', str[i, len], level, tail)
+          lex, sta, seq = res = if str =~ HYPHEN_RE
+            test_compound($1, '-', $2, level, tail)
+          else
+            sug, len = @suggestions[level] ||= [], str.length
 
-          unless (lex = res.first).empty?
-            return res unless lex.last.attr == LA_TAKEITASIS
-            sug << res
+            catch(:res) {
+              1.upto(len - 1) { |i|
+                tst = test_compound(str[0, i], '', str[i, len], level, tail)
+
+                unless (lex = tst.first).empty?
+                  lex.last.attr == LA_TAKEITASIS ? sug << tst : throw(:res, tst)
+                end
+              }
+
+              sug.empty? ? [[], [], ''] : sug.first.tap { sug.clear }
+            }
           end
-        }
 
-        sug.empty? ? [[], [], ''] : sug.first.tap { sug.clear }
+          block_given? ? yield(lex) : ret = res if !lex.empty? &&
+            sta.size              <= @max_parts         &&
+            sta.min               >= @min_part_size     &&
+            str.length / sta.size >= @min_avg_part_size &&
+            (@sequences.empty? || !@sequences.include?(seq))
+        end
+
+        ret
       end
 
       # test_compound() ->  [lex, sta, seq]
