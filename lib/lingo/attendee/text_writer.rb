@@ -142,9 +142,9 @@ class Lingo
 
       def flush_lir_buffer
         unless @lir_rec_no.empty? || @lir_rec_buf.empty?
-          @file.print(*[@lir_rec_no, @lir_rec_buf.join(@sep), "\n"].tap { |buf|
-            @sep =~ /\n/ ? buf.insert(1, "\n").unshift('*') : buf.insert(1, '*')
-          })
+          buf = [@lir_rec_no, @lir_rec_buf.join(@sep), "\n"]
+          @sep =~ /\n/ ? buf.insert(1, "\n").unshift('*') : buf.insert(1, '*')
+          @file.print(*buf)
         end
 
         @lir_rec_no = ''

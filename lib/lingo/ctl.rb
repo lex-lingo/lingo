@@ -108,7 +108,7 @@ EOT
       name = ARGV.shift or do_usage('Required argument `name\' missing.')
       no_args
 
-      file = Lingo.find(what, name, path: path_for_scope, &method(:do_usage))
+      file = Lingo.find(what, name, path: path_for_scope) { do_usage }
       doit ? puts(file) : file
     end
 
@@ -237,7 +237,7 @@ EOT
 
     def copy_list(what)
       files = list(what, false)
-      files.select!(&Proc.new) if block_given?
+      files.select! { |i| yield i } if block_given?
       files.each { |file| ARGV.replace([file]); copy(what) }
     end
 

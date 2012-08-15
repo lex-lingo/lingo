@@ -64,7 +64,7 @@ class Lingo
         # Bestimmte Sequenzen können als ungültige Komposita erkannt werden,
         # z.B. ist ein Kompositum aus zwei Adjetiven kein Kompositum, also
         # skip-sequence = 'aa'
-        @sequences = cfg.fetch('skip-sequences', []).map!(&:downcase)
+        @sequences = cfg.fetch('skip-sequences', []).map! { |i| i.downcase }
       end
 
       def close

@@ -73,7 +73,7 @@ class Lingo
       LA_SYNONYM    = 'y',
       LA_STEM       = 'z',
       LA_UNKNOWN    = '?'
-    ].reverse.join
+    ].each_with_index.inject({}) { |h, (i, j)| h[i] = j; h }
 
   end
 

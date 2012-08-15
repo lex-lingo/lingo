@@ -96,7 +96,7 @@ class Lingo
       @can_control = self.class.method_defined?(:control)
       @can_process = self.class.method_defined?(:process)
 
-      @skip_command, @timer, @forward = false, nil, method(:forward)
+      @skip_command, @timer = false, nil
     end
 
     def add_subscriber(subscriber)
@@ -227,7 +227,7 @@ class Lingo
     end
 
     def flush(buffer)
-      buffer.each(&@forward).clear
+      buffer.each { |i| forward(i) }.clear
     end
 
     def has_key?(key)
@@ -239,8 +239,10 @@ class Lingo
       @config.fetch(key, default)
     end
 
-    def get_array(key, default = nil, m = nil)
-      get_key(key, default).split(SEP_RE).tap { |ary| ary.map!(&m) if m }
+    def get_array(key, default = nil, method = nil)
+      ary = get_key(key, default).split(SEP_RE)
+      ary.map!(&method) if method
+      ary
     end
 
     def dictionary(src, mod)

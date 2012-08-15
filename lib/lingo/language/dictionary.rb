@@ -63,7 +63,7 @@ class Lingo
       end
 
       def close
-        @src.each(&:close)
+        @src.each { |i| i.close }
       end
 
       # _dic_.find_word( _aString_ ) -> _aNewWord_

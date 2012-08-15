@@ -28,6 +28,8 @@ class Lingo
 
   class Call < self
 
+    CHANNELS = %w[stdout stderr].freeze
+
     def initialize(args = [])
       super(args, StringIO.new, StringIO.new, StringIO.new)
     end
@@ -51,20 +53,23 @@ class Lingo
 
       start
 
-      %w[stdout stderr].flat_map { |key|
-        io = config.send(key).tap(&:rewind)
-        io.readlines.each(&:chomp!).tap {
-          io.truncate(0)
-          io.rewind
-        }
-      }.tap { |res|
-        if block_given?
-          res.map!(&Proc.new)
-        else
-          res.sort!
-          res.uniq!
-        end
+      res = CHANNELS.flat_map { |key|
+        io = config.send(key)
+        io.rewind
+
+        lines = io.readlines.each { |i| i.chomp! }
+
+        io.truncate(0)
+        io.rewind
+
+        lines
       }
+
+      block_given? ? res.map! { |i| yield i } : begin
+        res.sort!
+        res.uniq!
+        res
+      end
     end
 
   end

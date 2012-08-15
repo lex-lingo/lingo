@@ -146,7 +146,11 @@ class Lingo
 
         match = Hash.new { |h, k| h[k] = [] }
 
-        map.shift.product(*map).map!(&:join).tap(&:uniq!).each { |q|
+        map.replace(map.shift.product(*map))
+        map.map! { |i| i.join }
+        map.uniq!
+
+        map.each { |q|
           seq.each { |string, classes, format|
             while pos = q.index(string, pos || 0)
               form = format.dup
@@ -163,9 +167,12 @@ class Lingo
           }
         }
 
-        match.each_value { |forms| forms.tap(&:uniq!).each { |form|
-          matches << Word.new_lexical(form, WA_SEQUENCE, LA_SEQUENCE)
-        } }
+        match.each_value { |forms|
+          forms.uniq!
+          forms.each { |form|
+            matches << Word.new_lexical(form, WA_SEQUENCE, LA_SEQUENCE)
+          }
+        }
 
         buf.clear
         map.clear

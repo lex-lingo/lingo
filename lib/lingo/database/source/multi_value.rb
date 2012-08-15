@@ -49,7 +49,7 @@ class Lingo
         private
 
         def convert_line(line, key, val)
-          [nil, line.split(@sep).each(&:strip!)]
+          [nil, line.split(@sep).each { |i| i.strip! }]
         end
 
       end

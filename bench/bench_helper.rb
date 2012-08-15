@@ -26,8 +26,14 @@ module Bench
   module BenchHelper
 
     def tempfile(name, create, ext = nil)
-      File.join(Bench::DIR, "tmp.#{name}").tap { |file| File.delete(*ext ?
-        Dir["#{file}#{ext}"] : File.exist?(file) ? file : nil) if create }
+      file = File.join(Bench::DIR, "tmp.#{name}")
+
+      if create
+        delete = ext ? Dir["#{file}#{ext}"] : File.exist?(file) ? file : nil
+        File.delete(*delete) if delete
+      end
+
+      file
     end
 
     def run(symbol, count = 1, prefix = nil, suffix = nil)

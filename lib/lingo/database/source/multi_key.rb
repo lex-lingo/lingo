@@ -50,7 +50,7 @@ class Lingo
         private
 
         def convert_line(line, key, val)
-          values = line.split(@sep).each(&:strip!)
+          values = line.split(@sep).each { |i| i.strip! }
           [values.shift, values]
         end
 

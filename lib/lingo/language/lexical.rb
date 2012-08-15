@@ -40,14 +40,11 @@ class Lingo
         return 1 unless other.is_a?(self.class)
 
         a1, a2 = attr, other.attr
+        return form <=> other.form if a1 == a2
 
-        if a1 == a2
-          form <=> other.form
-        else
-          a1.empty? ? 1 : a2.empty? ? -1 : begin
-            i1, i2 = [a1, a2].map(&LA_SORTORDER.method(:index))
-            i1 ? i2 ? i2 <=> i1 : -1 : i2 ? 1 : a1 <=> a2
-          end
+        a1.empty? ? 1 : a2.empty? ? -1 : begin
+          i1, i2 = LA_SORTORDER.values_at(a1, a2)
+          i1 ? i2 ? i1 <=> i2 : -1 : i2 ? 1 : a1 <=> a2
         end
       end
 

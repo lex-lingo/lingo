@@ -76,17 +76,18 @@ class Lingo
 
     def list(type, options = {})
       options = options_for(type, options)
-      path    = path_for(options)
 
-      glob = file_with_ext('*', options)
+      glob, list = file_with_ext('*', options), []
       glob = File.join('??', glob) if type == :dict
 
-      [].tap { |list| walk(path, options) { |dir|
+      walk(path = path_for(options), options) { |dir|
         Dir[File.join(dir, glob)].sort!.each { |file|
           pn = Pathname.new(file)
           list << realpath_for(pn, path) if pn.file?
         }
-      } }
+      }
+
+      list
     end
 
     def find(type, file, options = {})
@@ -130,7 +131,7 @@ class Lingo
     private
 
     def include_path(path, pre = false)
-      PATH.insert(pre ? 0 : -1, *path.map!(&:to_s))
+      PATH.insert(pre ? 0 : -1, *path.map! { |i| i.to_s })
     end
 
     def find_file(file, path, options)
@@ -305,7 +306,7 @@ class Lingo
   end
 
   def reset(close = true)
-    dictionaries.each(&:close) if close
+    dictionaries.each { |i| i.close } if close
     @dictionaries, @attendees = [], []
     @lexical_hash = Hash.new { |h, k| h[k] = Language::LexicalHash.new(k, self) }
   end

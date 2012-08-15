@@ -107,8 +107,8 @@ class Lingo
     end
 
     def load_config(key, type = key.to_sym)
-      file = Lingo.find(type, @opts[key], &method(:quit))
-      @opts.update(File.open(file, encoding: ENC, &YAML.method(:load)))
+      file = Lingo.find(type, @opts[key]) { quit }
+      @opts.update(File.open(file, encoding: ENC) { |f| YAML.load(f) })
     end
 
   end

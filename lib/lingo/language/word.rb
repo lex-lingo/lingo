@@ -89,7 +89,7 @@ class Lingo
       end
 
       def attrs(compound_parts = true)
-        lexicals(compound_parts).map(&:attr)
+        lexicals(compound_parts).map { |i| i.attr }
       end
 
       def parts
@@ -125,7 +125,8 @@ class Lingo
       end
 
       def <<(*other)
-        lexicals.concat(other.tap(&:flatten!))
+        other.flatten!
+        lexicals.concat(other)
         self
       end
 

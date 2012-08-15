@@ -201,7 +201,7 @@ class Lingo
             break unless @all_keys || mul.empty?
           } && mul.uniq! }
         else
-          @mul_dic.select(seq.map!(&:first).join(' '))
+          @mul_dic.select(seq.map! { |i,| i }.join(' '))
         end
       end
 

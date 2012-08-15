@@ -123,7 +123,7 @@ class Lingo
       def control(cmd, param)
         if cmd == STR_CMD_TALK
           forward(STR_CMD_LIR, '') if @lir
-          @files.each(&method(:spool))
+          @files.each { |i| spool(i) }
         end
       end
 
@@ -195,13 +195,16 @@ class Lingo
 
       def file_type(path, io)
         if Object.const_defined?(:FileMagic) && io.respond_to?(:rewind)
-          FileMagic.fm(:mime, simplified: true).buffer(io.read(256)).tap {
-            io.rewind
-          }
+          type = FileMagic.fm(:mime, simplified: true).buffer(io.read(256))
+          io.rewind
+          type
         elsif Object.const_defined?(:MIME) && MIME.const_defined?(:Types)
-          MIME::Types.of(path).first.tap { |type| type ? type.content_type :
-            warn('Filters not available. File type could not be determined.')
-          }
+          if type = MIME::Types.of(path).first
+            type.content_type
+          else
+            warn 'Filters not available. File type could not be determined.'
+            nil
+          end
         else
           warn "Filters not available. Please install `ruby-filemagic' or `mime-types'."
           nil

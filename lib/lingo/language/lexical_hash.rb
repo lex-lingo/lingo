@@ -52,7 +52,7 @@ class Lingo
       def [](key)
         rec = @src[key = key.downcase] or return
 
-        rec.map { |str|
+        res = rec.map { |str|
           case str
             when /^\*\d+$/           then str
             when /^#(.)$/            then Lexical.new(key, $1)
@@ -60,7 +60,13 @@ class Lingo
             when /^([^#]+)$/         then Lexical.new($1, @wc)
             else                          str
           end
-        }.tap { |r| r.compact!; r.sort!; r.uniq! }
+        }
+
+        res.compact!
+        res.sort!
+        res.uniq!
+
+        res
       end
 
     end

@@ -114,7 +114,9 @@ class Lingo
     end
 
     def to_h
-      {}.tap { |hash| each { |key, val| hash[key.freeze] = val } }
+      hash = {}
+      each { |key, val| hash[key.freeze] = val }
+      hash
     end
 
     def each
@@ -134,8 +136,11 @@ class Lingo
     def []=(key, val)
       return if closed?
 
-      arg = [key, @val[key].concat(val).sort!.tap(&:uniq!).join(FLD_SEP)]
-      _set(*@crypter ? @crypter.encode(*arg) : arg)
+      val = @val[key].concat(val).sort!
+      val.uniq!
+
+      val = val.join(FLD_SEP)
+      @crypter ? _set(*@crypter.encode(key, val)) : _set(key, val)
     end
 
     private

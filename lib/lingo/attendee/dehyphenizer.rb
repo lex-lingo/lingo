@@ -89,7 +89,7 @@ class Lingo
         if ab.all? { |i| i.is_a?(Word) } && a.form[-1, 1] == h && !(
           (c = b.get_class(/./).first) && @skip.include?(c.attr)
         )
-          a, b = ab.map!(&:form)
+          a, b = ab.map! { |i| i.form }
 
           word = dehyphenize(a.chomp(h) + b)
           word = dehyphenize(a          + b) unless dehyphenized?(word)
@@ -106,7 +106,7 @@ class Lingo
       private
 
       def dehyphenize(form)
-        find_word(form, &:identified?)
+        find_word(form) { |i| i.identified? }
       end
 
       def dehyphenized?(word)

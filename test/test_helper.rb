@@ -33,7 +33,7 @@ class LingoTestCase <  Test::Unit::TestCase
   end
 
   def wd(t, *l)
-    Lingo::Language::Word.new_lexicals(*split(t), l.map!(&method(:lx)))
+    Lingo::Language::Word.new_lexicals(*split(t), l.map! { |i| lx(i) })
   end
 
 end
@@ -78,7 +78,7 @@ class Lingo
       end
 
       def control(cmd, param)
-        @input.each(&@forward) if cmd == STR_CMD_TALK
+        @input.each { |i| forward(i) } if cmd == STR_CMD_TALK
       end
 
     end
