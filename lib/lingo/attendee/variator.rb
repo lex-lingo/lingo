@@ -97,8 +97,14 @@ class Lingo
         if obj.is_a?(Word) && @check[obj.attr]
           inc('Anzahl gesuchter Wörter')
 
-          @var.each_with_object([obj.form]) { |a, v| variate(v, *a) }.
-            tap { |v| v.slice!(@max..-1) }.each { |var|
+          vars, max = [obj.form], @max
+
+          @var.each { |args|
+            variate(vars, *args)
+            break unless vars.length < max
+          }
+
+          vars.each { |var|
             next if (word = find_word(var)).unknown? || (
               word.attr == WA_COMPOUND && word.lexicals.any? { |lex|
                 lex.attr.start_with?(LA_TAKEITASIS)

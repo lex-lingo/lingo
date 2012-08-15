@@ -177,7 +177,9 @@ class Lingo
       def check_multiword_key(len)
         return [] if valid_tokens_in_buffer < len
 
-        seq = @buffer.map { |obj|
+        seq = []
+
+        @buffer.each { |obj|
           next [obj] unless obj.is_a?(WordForm)
           next if (form = obj.form) == CHAR_PUNCT
 
@@ -189,17 +191,20 @@ class Lingo
           @syn_dic.find_synonyms(w, i) if @syn_dic
           i.map! { |j| Unicode.downcase(j.form) }.uniq!
 
-          i
+          seq << i
+
+          break unless seq.length < len
         }
 
-        seq.compact!
-        seq.slice!(len..-1)
-
         if @combine
-          [].tap { |mul| seq.shift.product(*seq) { |key|
-            mul.concat(@mul_dic.select(key.join(' ')))
+          mul = []
+
+          seq.shift.product(*seq) { |key|
+            @mul_dic.select(key.join(' '), mul)
             break unless @all_keys || mul.empty?
-          } && mul.uniq! }
+          } && mul.uniq!
+
+          mul
         else
           @mul_dic.select(seq.map! { |i,| i }.join(' '))
         end
