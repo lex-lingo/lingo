@@ -187,7 +187,7 @@ class Lingo
           i = w.attr == WA_COMPOUND ? [l.first] : l.empty? ? [w] : l.dup
 
           @syn_dic.find_synonyms(w, i) if @syn_dic
-          i.map! { |j| j.form.downcase }.uniq!
+          i.map! { |j| Unicode.downcase(j.form) }.uniq!
 
           i
         }

@@ -50,7 +50,7 @@ class Lingo
       end
 
       def [](key)
-        rec = @src[key = key.downcase] or return
+        rec = @src[key = Unicode.downcase(key)] or return
 
         res = rec.map { |str|
           case str

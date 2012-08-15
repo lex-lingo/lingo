@@ -90,7 +90,7 @@ class Lingo
           next if line =~ /\A\s*#/ || line.strip.empty?
 
           line.chomp!
-          line.downcase!
+          line.replace(Unicode.downcase(line))
 
           if length < 4096 && line =~ @pat
             yield convert_line(line, $1, $2)

@@ -93,7 +93,7 @@ class Lingo
 
       def permute_compound(ret, str, level, tail)
         if str.length > @min_word_size
-          str = str.downcase
+          str = Unicode.downcase(str)
 
           lex, sta, seq = res = if str =~ HYPHEN_RE
             test_compound($1, '-', $2, level, tail)

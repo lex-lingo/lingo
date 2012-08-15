@@ -24,6 +24,7 @@
 ###############################################################################
 #++
 
+require 'unicode'
 require 'stringio'
 require 'pathname'
 require 'fileutils'
@@ -350,7 +351,6 @@ end
 require_relative 'lingo/call'
 require_relative 'lingo/error'
 require_relative 'lingo/config'
-require_relative 'lingo/core_ext'
 require_relative 'lingo/agenda_item'
 require_relative 'lingo/show_progress'
 require_relative 'lingo/database'

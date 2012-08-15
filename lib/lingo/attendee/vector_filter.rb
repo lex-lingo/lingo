@@ -117,7 +117,7 @@ class Lingo
           @word_count += 1
 
           cnt = obj.get_class(@lex).each { |lex|
-            vec = lex.form.downcase
+            vec = Unicode.downcase(lex.form)
             vec << @src << lex.src if @src && lex.src
             @sort_format ? @vectors << vec : forward(vec)
           }.size

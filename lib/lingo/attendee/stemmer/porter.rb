@@ -290,7 +290,7 @@ class Lingo
               case rule
                 when RULE_RE
                   cond, repl, goto = $1, $3, $4
-                  stem = word[/(.+)#{$2.downcase}$/, 1] or next
+                  stem = word[/(.+)#{Unicode.downcase($2)}$/, 1] or next
                 when GOTO_RE
                   goto = $1
                   break
@@ -324,7 +324,7 @@ class Lingo
               found, word = true, begin
                 stem[0...Integer(repl)]
               rescue ArgumentError
-                stem << repl.downcase
+                stem << Unicode.downcase(repl)
               end
 
               break

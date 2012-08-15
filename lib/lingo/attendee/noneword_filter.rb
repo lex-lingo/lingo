@@ -89,7 +89,7 @@ class Lingo
         if obj.is_a?(Word) && obj.unknown?
           inc('Anzahl nicht erkannter Wörter')
 
-          non = obj.form.downcase
+          non = Unicode.downcase(obj.form)
           @sort ? @nonewords << non : forward(non)
         end
       end
