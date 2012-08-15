@@ -86,7 +86,9 @@ class Lingo
     attr_reader :report
 
     def initialize(config, lingo)
-      @lingo, @config, @report, @subscriber = lingo, config, Hash.new(0), []
+      @lingo, @config, @subscriber = lingo, config, []
+
+      @report = Hash.new(0) if lingo.report_status || lingo.report_time
 
       # Make sure config exists
       lingo.dictionary_config
@@ -135,7 +137,7 @@ class Lingo
     end
 
     def add(key, val)
-      report[key] += val
+      report[key] += val if report
     end
 
     def find_word(f, d = @dic, g = @gra)
@@ -144,7 +146,7 @@ class Lingo
     end
 
     def report_on(cmd, *rep)
-      rep.each { |r| report.update(r.report) } if cmd == STR_CMD_STATUS
+      rep.each { |r| report.update(r.report) } if report && cmd == STR_CMD_STATUS
     end
 
     def sta_for(key)
@@ -152,6 +154,8 @@ class Lingo
     end
 
     def stat_timer(key)
+      return yield unless report
+
       n, t = sta_for(key)
       inc(n)
 
