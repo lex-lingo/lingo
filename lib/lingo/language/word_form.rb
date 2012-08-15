@@ -67,7 +67,7 @@ class Lingo
       end
 
       def hash
-        to_s.hash
+        to_a.hash
       end
 
       def eql?(other)

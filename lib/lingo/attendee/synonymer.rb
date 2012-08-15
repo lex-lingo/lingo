@@ -86,10 +86,10 @@ class Lingo
           inc('Anzahl gesuchter Wörter')
 
           unless (syn = @dic.find_synonyms(obj)).empty?
+            add('Anzahl gefundener Synonyme', syn.size)
             inc('Anzahl erweiteter Wörter')
 
-            obj.add_lexicals(syn.tap(&:uniq!))
-            add('Anzahl gefundener Synonyme', syn.size)
+            obj.add_lexicals(syn)
           end
         end
 

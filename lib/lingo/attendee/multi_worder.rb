@@ -184,10 +184,12 @@ class Lingo
           w = find_word(form, @lex_dic, @lex_gra)
           l = w.lexicals
 
-          (w.attr == WA_COMPOUND ? [l.first] : l.empty? ? [w] : l.dup).tap { |i|
-            i.concat(@syn_dic.find_synonyms(w)) if @syn_dic
-            i.map! { |j| j.form.downcase }.uniq!
-          }
+          i = w.attr == WA_COMPOUND ? [l.first] : l.empty? ? [w] : l.dup
+
+          @syn_dic.find_synonyms(w, i) if @syn_dic
+          i.map! { |j| j.form.downcase }.uniq!
+
+          i
         }
 
         seq.compact!

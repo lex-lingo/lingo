@@ -30,6 +30,8 @@ class Lingo
 
     class Dictionary
 
+      KEY_REF_RE = %r{\A#{Database::KEY_REF_ESC}\d+}
+
       def self.open(*args)
         yield dictionary = new(*args)
       ensure
@@ -76,30 +78,34 @@ class Lingo
         }
       end
 
-      def find_synonyms(obj)
+      def find_synonyms(obj, syn = [])
         lex = obj.lexicals
         lex = [obj] if lex.empty? && obj.unknown?
 
-        # multiworder optimization
-        ref = %r{\A#{Database::KEY_REF_ESC}\d+}
+        com, ref = obj.attr == WA_COMPOUND, KEY_REF_RE
 
-        lex.each_with_object([]) { |l, s|
-          next if l.attr == LA_SYNONYM
-          next if l.attr != LA_COMPOUND && obj.attr == WA_COMPOUND
-
-          select(l.form).each { |y| s << y unless y =~ ref }
+        lex.each { |l|
+          select(l.form, syn) { |i| i =~ ref } unless com &&
+            l.attr != LA_COMPOUND || l.attr == LA_SYNONYM
         }
+
+        syn
       end
 
       # _dic_.select( _aString_ ) -> _ArrayOfLexicals_
       #
       # Sucht alle Wörterbücher durch und gibt den ersten Treffer zurück (+mode = first+), oder alle Treffer (+mode = all+)
-      def select(str)
-        @src.each_with_object([]) { |src, lex|
+      def select(str, lex = [])
+        @src.each { |src|
           l = src[str] or next
-          lex.concat(l)
-          break lex unless @all
-        }.sort!.tap(&:uniq!)
+          lex.concat(block_given? ? l.delete_if { |i| yield i } : l)
+          break unless @all
+        }
+
+        lex.sort!
+        lex.uniq!
+
+        lex
       end
 
       # _dic_.select_with_suffix( _aString_ ) -> _ArrayOfLexicals_
@@ -137,19 +143,22 @@ class Lingo
       private
 
       def select_with_affix(affix, str)
-        select(str).tap { |l|
-          if l.empty?
-            affix_lexicals(affix, str).each { |a| select(a.form).each { |b|
-              l << b if affix != :suffix || a.attr == b.attr
-            } }
-          end
-        }
+        lex = select(str)
+
+        affix_lexicals(affix, str).each { |a| select(a.form, lex) { |b|
+          affix == :suffix && a.attr != b.attr
+        } } if lex.empty?
+
+        lex
       end
 
       def affix_lexicals(affix, str)
-        instance_variable_get("@#{affix}es").each_with_object([]) { |(r, e, t), l|
-          l << Lexical.new("#{$`}#{e == '*' ? '' : e}#{$'}", t) if str =~ r
+        lex = instance_variable_get("@#{affix}es").map { |r, e, t|
+          Lexical.new("#{$`}#{e == '*' ? '' : e}#{$'}", t) if str =~ r
         }
+
+        lex.compact!
+        lex
       end
 
     end
