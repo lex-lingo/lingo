@@ -34,6 +34,8 @@ class Lingo
 
       Database.register(self, %w[dir pag], -1, false)
 
+      MAX_LENGTH = 950
+
       private
 
       def uptodate?
@@ -49,9 +51,9 @@ class Lingo
       end
 
       def _set(key, val)
-        if val.length > 950
+        if val.bytesize > MAX_LENGTH
           warn "Warning: Entry `#{key}' (#{@srcfile}) too long for SDBM. Truncating..."
-          val = val[0, 950]
+          val = val.byteslice(0, MAX_LENGTH)
         end
 
         super
