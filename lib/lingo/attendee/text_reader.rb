@@ -159,13 +159,13 @@ class Lingo
       end
 
       def filter(path, stdin = stdin?(path))
-        io, block = stdin ? [
-          @lingo.config.stdin.set_encoding(ENC),
-          lambda { |line| yield line, 0 }
-        ] : [
-          File.open(path, 'rb', encoding: ENC),
+        io = stdin ?
+          @lingo.config.stdin.set_encoding(ENC) :
+          File.open(path, 'rb', encoding: ENC)
+
+        block = stdin || !@progress ?
+          lambda { |line| yield line, 0 } :
           lambda { |line| yield line, io.pos }
-        ]
 
         case @filter == true ? file_type(path, io) : @filter.to_s
           when /html/i then io = filter_html(io)
