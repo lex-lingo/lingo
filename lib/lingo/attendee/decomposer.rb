@@ -80,7 +80,6 @@ class Lingo
       end
 
       def control(cmd, param)
-        report_on(cmd, @gra)
       end
 
       def process(obj)

@@ -263,6 +263,8 @@ class Lingo
   end
 
   def invite(list = config['meeting/attendees'])
+    @report_status, @report_time = config['status'], config['perfmon']
+
     supplier   = Hash.new { |h, k| h[k] = [] }
     subscriber = Hash.new { |h, k| h[k] = [] }
 
@@ -292,9 +294,7 @@ class Lingo
     } }
   end
 
-  def start(report_status = config['status'], report_time = config['perfmon'])
-    @report_status, @report_time = report_status, report_time
-
+  def start
     time = Benchmark.realtime {
       @attendees.first.listen(AgendaItem.new(Attendee::STR_CMD_TALK))
     }

@@ -145,10 +145,6 @@ class Lingo
       g && (block_given? ? !yield(w) : w.unknown?) ? g.find_compound(f) : w
     end
 
-    def report_on(cmd, *rep)
-      rep.each { |r| report.update(r.report) } if report && cmd == STR_CMD_STATUS
-    end
-
     def sta_for(key)
       %w[NUM TIM].map { |i| self.class.const_get("STA_#{i}_#{key.upcase}") }
     end

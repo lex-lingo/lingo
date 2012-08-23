@@ -70,8 +70,6 @@ class Lingo
     end
 
     def control_multi(cmd, dic = @dic)
-      report_on(cmd, dic)
-
       if [STR_CMD_RECORD, STR_CMD_EOF].include?(cmd)
         @eof_handling = true
 

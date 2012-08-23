@@ -77,7 +77,6 @@ class Lingo
       end
 
       def control(cmd, param)
-        report_on(cmd, @dic)
         process_buffer
       end
 
