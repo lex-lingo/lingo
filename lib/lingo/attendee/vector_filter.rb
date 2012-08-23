@@ -116,26 +116,20 @@ class Lingo
         elsif obj.is_a?(Word) && !@skip.include?(obj.attr)
           @word_count += 1
 
-          cnt = obj.get_class(@lex).each { |lex|
+          obj.get_class(@lex).each { |lex|
             vec = Unicode.downcase(lex.form)
             vec << @src << lex.src if @src && lex.src
             @sort_format ? @vectors << vec : forward(vec)
-          }.size
-
-          add('Anzahl von Vektor-Wörtern', cnt)
+          }
         end
       end
 
       private
 
       def send_vectors
-        add('Objekte gefiltert', @vectors.size)
-
         if @sort_format == 'normal'
-          @vectors.sort!
           @vectors.uniq!
-
-          flush(@vectors)
+          flush(@vectors.sort!)
         else
           cnt, fmt = Hash.new(0), '%d'
 

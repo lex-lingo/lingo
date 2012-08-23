@@ -75,14 +75,7 @@ class Lingo
       end
 
       def process(obj)
-        if obj.is_a?(Token) && obj.attr == TA_WORD
-          inc('Anzahl gesuchter Wörter')
-
-          obj = @dic.find_word(obj.form)
-          inc('Anzahl gefundener Wörter') unless obj.unknown?
-        end
-
-        forward(obj)
+        forward(obj.is_a?(Token) && obj.word? ? @dic.find_word(obj.form) : obj)
       end
 
     end

@@ -80,12 +80,10 @@ class Lingo
       end
 
       def add_lexicals(lex)
-        @lexicals.concat(lex)
-
-        @lexicals.sort!
-        @lexicals.uniq!
-
-        self
+        unless lex.empty?
+          @lexicals.concat(lex).uniq!
+          @lexicals.sort!
+        end
       end
 
       def attrs(compound_parts = true)

@@ -87,17 +87,14 @@ class Lingo
       end
 
       def process_buffer
-        if @buffer.size > 1 && form = form_at(-2, Token)
-          inc('Anzahl gesuchter Abkürzungen')
+        if @buffer.size > 1 and
+          form = form_at(-2, Token) and
+          (abbr = find_word(form)).identified?
 
-          if (abbr = find_word(form)).identified?
-            inc('Anzahl gefundener Abkürzungen')
+          abbr.form += CHAR_PUNCT
 
-            abbr.form += CHAR_PUNCT
-
-            @buffer[-2] = abbr
-            @buffer.delete_at(-1)
-          end
+          @buffer[-2] = abbr
+          @buffer.delete_at(-1)
         end
 
         flush(@buffer)

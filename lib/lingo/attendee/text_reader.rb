@@ -132,17 +132,13 @@ class Lingo
       # Gibt eine Datei zeilenweise in den Ausgabekanal
       def spool(path)
         unless stdin = stdin?(path)
-          inc('Anzahl Dateien')
-          add('Anzahl Bytes', size = File.size(path))
-
-          size = nil unless @progress
+          size = File.size(path) if @progress
         end
 
         forward(STR_CMD_FILE, path)
 
         ShowProgress.new(self, size, path) { |progress|
           filter(path, stdin) { |line, pos|
-            inc('Anzahl Zeilen')
             progress[pos]
 
             line.chomp! if @chomp

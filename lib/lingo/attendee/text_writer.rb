@@ -100,7 +100,6 @@ class Lingo
             if stdout?(@ext)
               @filename, @file = @ext, @lingo.config.stdout
             else
-              inc('Anzahl Dateien')
               @file = File.open(@filename = File.set_ext(param, ".#{@ext}"), 'w')
             end
 
@@ -116,14 +115,12 @@ class Lingo
             @no_sep = true
 
             unless @lir
-              inc('Anzahl Zeilen')
               @file.puts unless @no_puts
             end
           when STR_CMD_EOF
             flush_lir_buffer if @lir
 
             unless stdout?(@filename)
-              add('Anzahl Bytes', @file.size)
               @file.close
             end
         end

@@ -94,8 +94,6 @@ class Lingo
 
       def process(obj)
         if obj.is_a?(Word) && @check[obj.attr]
-          inc('Anzahl gesuchter Wörter')
-
           vars, max = [obj.form], @max
 
           @var.each { |args|
@@ -110,7 +108,6 @@ class Lingo
               }
             )
 
-            inc('Anzahl gefundener Wörter')
             return forward(word.tap { word.form = @marker + var })
           }
         end

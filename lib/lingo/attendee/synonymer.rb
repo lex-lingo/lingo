@@ -82,14 +82,7 @@ class Lingo
 
       def process(obj)
         if obj.is_a?(Word) && !@skip.include?(obj.attr)
-          inc('Anzahl gesuchter Wörter')
-
-          unless (syn = @dic.find_synonyms(obj)).empty?
-            add('Anzahl gefundener Synonyme', syn.size)
-            inc('Anzahl erweiteter Wörter')
-
-            obj.add_lexicals(syn)
-          end
+          obj.add_lexicals(@dic.find_synonyms(obj))
         end
 
         forward(obj)

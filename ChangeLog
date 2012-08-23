@@ -19,8 +19,8 @@
 * Added +lingosrv+ and +lingoweb+ executables. The former provides a simple
   HTTP endpoint with JSON output; the latter serves a demo web interface.
 * Refactored internal caching.
-* Removed reporting facility.
 * Made dependency on Ruby version >= 1.9.2 explicit.
+* Removed reporting facility (options '--perfmon' and '--status').
 * Learned '--profile' option to collect profiling information while running.
 
 == 1.8.2 [2012-04-19]

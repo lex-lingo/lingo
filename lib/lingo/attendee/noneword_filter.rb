@@ -87,8 +87,6 @@ class Lingo
 
       def process(obj)
         if obj.is_a?(Word) && obj.unknown?
-          inc('Anzahl nicht erkannter Wörter')
-
           non = Unicode.downcase(obj.form)
           @sort ? @nonewords << non : forward(non)
         end
@@ -97,11 +95,8 @@ class Lingo
       private
 
       def send_nonewords
-        @nonewords.sort!
         @nonewords.uniq!
-
-        add('Objekte gefiltert', @nonewords.size)
-        flush(@nonewords)
+        flush(@nonewords.sort!)
       end
 
     end

@@ -37,6 +37,10 @@ class Lingo
 
     class Token < WordForm
 
+      def word?
+        attr == TA_WORD
+      end
+
       def to_s
         ":#{super}:"
       end

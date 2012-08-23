@@ -167,15 +167,7 @@ class Lingo
 
       def process(obj)
         if obj.is_a?(String)
-          inc('Anzahl Zeilen')
-
-          tokenize(obj) { |form, attr|
-            inc("Anzahl Muster #{attr}")
-            inc('Anzahl Token')
-
-            forward(Token.new(form, attr))
-          }
-
+          tokenize(obj) { |*i| forward(Token.new(*i)) }
           forward(STR_CMD_EOL, @filename) if @filename
         else
           forward(obj)

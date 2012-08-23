@@ -96,14 +96,18 @@ class Lingo
       end
 
       def control(cmd, param)
-        if cmd != STR_CMD_STATUS && eval(@cmd_eval)
-          warn "#{@prompt} #{AgendaItem.new(cmd, param).inspect}"
-        end
+        debug(AgendaItem.new(cmd, param), @cmd_eval)
       end
 
       def process(obj)
-        warn "#{@prompt} #{obj.inspect}" if eval(@obj_eval)
+        debug(obj, @obj_eval)
         forward(obj)
+      end
+
+      private
+
+      def debug(obj, cond)
+        warn "#{@prompt} #{obj.inspect}" if eval(cond)
       end
 
     end

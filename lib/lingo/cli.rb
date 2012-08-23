@@ -36,8 +36,6 @@ class Lingo
         super.merge(
           config:   'lingo.cfg',
           language: 'de',
-          status:   false,
-          perfmon:  false,
           profile:  false
         )
       end
@@ -69,17 +67,7 @@ class Lingo
 
       opts.separator ''
 
-      opts.on('-s', '--status', 'Print status information after processing') {
-        options[:status] = true
-      }
-
-      opts.on('-p', '--perfmon', 'Print performance details after processing') {
-        options[:perfmon] = true
-      }
-
-      opts.separator ''
-
-      opts.on('-L', '--log FILE', 'Log file to print debug and status information to') { |log|
+      opts.on('-L', '--log FILE', 'Log file to print debug information to') { |log|
         options[:log] = stderr.reopen(log == '-' ? stdout : File.open(log, 'a+', encoding: ENC))
       }
 

@@ -161,7 +161,6 @@ class Lingo
                 } or break
               } or next
 
-              inc('Anzahl erkannter Sequenzen')
               match[pos += 1] << form
             end
           }

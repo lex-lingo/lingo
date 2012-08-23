@@ -28,10 +28,8 @@ require 'unicode'
 require 'stringio'
 require 'pathname'
 require 'fileutils'
-require 'benchmark'
 require 'nuggets/file/ext'
 require 'nuggets/env/user_home'
-require 'nuggets/numeric/duration'
 require 'nuggets/string/camelscore'
 
 class Lingo
@@ -225,12 +223,12 @@ class Lingo
 
   end
 
-  attr_reader :dictionaries, :report_status, :report_time
-
   def initialize(*args)
     @config_args = args
     reset(false)
   end
+
+  attr_reader :dictionaries
 
   def config
     @config ||= Config.new(*@config_args)
@@ -263,8 +261,6 @@ class Lingo
   end
 
   def invite(list = config['meeting/attendees'])
-    @report_status, @report_time = config['status'], config['perfmon']
-
     supplier   = Hash.new { |h, k| h[k] = [] }
     subscriber = Hash.new { |h, k| h[k] = [] }
 
@@ -295,15 +291,7 @@ class Lingo
   end
 
   def start
-    time = Benchmark.realtime {
-      @attendees.first.listen(AgendaItem.new(Attendee::STR_CMD_TALK))
-    }
-
-    if report_status || report_time
-      warn "Require protocol...\n#{separator = '-' * 61}"
-      @attendees.first.listen(AgendaItem.new(Attendee::STR_CMD_STATUS))
-      warn "#{separator}\nThe duration of the meeting was #{time.to_hms(2)}"
-    end
+    @attendees.first.listen(AgendaItem.new(Attendee::STR_CMD_TALK))
   end
 
   def reset(close = true)

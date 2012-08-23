@@ -56,7 +56,7 @@ class Lingo
   # was macht attendee
   # - verkettung der attendees anhand von konfigurationsinformationen
   # - bereitstellung von globalen und spezifischen konfigurationsinformationen
-  # - behandlung von bestimmten übergreifenden Kommandos, z.B. STR_CMD_TALK, STR_CMD_STATUS
+  # - behandlung von bestimmten übergreifenden Kommandos, z.B. STR_CMD_TALK
   # - separierung und routing von kommando bzw. datenobjekten
   #
   # was macht die abgeleitet klasse
@@ -69,26 +69,16 @@ class Lingo
     include Language
 
     STR_CMD_TALK   = 'TALK'
-    STR_CMD_STATUS = 'STATUS'
     STR_CMD_LIR    = 'LIR-FORMAT'
     STR_CMD_FILE   = 'FILE'
     STR_CMD_EOL    = 'EOL'
     STR_CMD_RECORD = 'RECORD'
     STR_CMD_EOF    = 'EOF'
 
-    STA_NUM_COMMANDS = 'Received Commands'
-    STA_NUM_OBJECTS  = 'Received Objects '
-    STA_TIM_COMMANDS = 'Time to control  '
-    STA_TIM_OBJECTS  = 'Time to process  '
-
     DEFAULT_SKIP = [TA_PUNCTUATION, TA_OTHER].join(',')
-
-    attr_reader :report
 
     def initialize(config, lingo)
       @lingo, @config, @subscriber = lingo, config, []
-
-      @report = Hash.new(0) if lingo.report_status || lingo.report_time
 
       # Make sure config exists
       lingo.dictionary_config
@@ -98,7 +88,7 @@ class Lingo
       @can_control = self.class.method_defined?(:control)
       @can_process = self.class.method_defined?(:process)
 
-      @skip_command, @timer = false, nil
+      @skip_command = false
     end
 
     def add_subscriber(subscriber)
@@ -107,111 +97,23 @@ class Lingo
 
     def listen(obj)
       unless obj.is_a?(AgendaItem)
-        @can_process ? stat_timer(:objects) { process(obj) } : forward(obj)
+        @can_process ? process(obj) : forward(obj)
       else
         args = obj.to_a
-        stat_timer(:commands) { control(*args) } if @can_control
-
-        case obj.cmd
-          when STR_CMD_TALK
-            nil
-          when STR_CMD_STATUS
-            report_time
-            report_status
-
-            forward(*args)
-          else
-            forward(*args) unless skip_command!
-        end
+        control(*args) if @can_control
+        forward(*args) unless obj.cmd == STR_CMD_TALK || skip_command!
       end
     end
 
     def talk(obj)
-      charge_timer { @subscriber.each { |attendee| attendee.listen(obj) } }
+      @subscriber.each { |attendee| attendee.listen(obj) }
     end
 
     private
 
-    def inc(key)
-      add(key, 1)
-    end
-
-    def add(key, val)
-      report[key] += val if report
-    end
-
     def find_word(f, d = @dic, g = @gra)
       w = d.find_word(f)
       g && (block_given? ? !yield(w) : w.unknown?) ? g.find_compound(f) : w
-    end
-
-    def sta_for(key)
-      %w[NUM TIM].map { |i| self.class.const_get("STA_#{i}_#{key.upcase}") }
-    end
-
-    def stat_timer(key)
-      return yield unless report
-
-      n, t = sta_for(key)
-      inc(n)
-
-      return yield unless @lingo.report_time
-
-      @timer = Time.now.to_i
-      res = yield
-      add(t, Time.now.to_i - @timer)
-      res
-    end
-
-    def charge_timer
-      return yield unless @lingo.report_time
-
-      res = nil
-      @timer += Benchmark.realtime { res = yield }
-      res
-    end
-
-    def report_time
-      return unless @lingo.report_time
-
-      msg = 'Perf: %-15s ' <<
-            '=> %7d commands in %s (%s/cmd)' <<
-            ',  %8d objects in %s (%s/obj)'
-
-      arg = [@config['name']]
-
-      %w[commands objects].each { |k|
-        n, t = report.values_at(*sta_for(k))
-        arg << n
-
-        arg.concat([1, n].map { |m|
-          s = m.zero? ? 0.0 : t / m.to_f
-
-          '%9.3f %-2s' %
-            if s < 0.001
-              [s * 1000.0 ** 2, 'µs']
-            elsif s < 1.0
-              [s * 1000.0,      'ms']
-            elsif s < 60.0
-              [s,               's']
-            elsif s < 60.0 ** 2
-              [s / 60.0,        'm']
-            else
-              [s / 60.0 ** 2,   'h']
-            end
-        })
-      }
-
-      warn msg % arg
-    end
-
-    def report_status
-      return unless @lingo.report_status
-
-      msg = "Attendee <%s> was connected from '%s' to '%s' reporting..."
-
-      warn msg % @config.values_at(*%w[name in out]), nil,
-        report.sort.map! { |k, v| " #{k} = #{v}" }, nil
     end
 
     def skip_command
