@@ -92,13 +92,13 @@ class Lingo
       private
 
       def permute_compound(ret, str, level, tail)
-        if str.length > @min_word_size
+        if (len = str.length) > @min_word_size
           str = Unicode.downcase(str)
 
           lex, sta, seq = res = if str =~ HYPHEN_RE
             test_compound($1, '-', $2, level, tail)
           else
-            sug, len = @suggestions[level] ||= [], str.length
+            sug = @suggestions[level] ||= []
 
             catch(:res) {
               1.upto(len - 1) { |i|

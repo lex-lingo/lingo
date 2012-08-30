@@ -69,7 +69,7 @@ class Lingo
       raise NotImplementedError
     end
 
-    def control_multi(cmd, dic = @dic)
+    def control_multi(cmd)
       if [STR_CMD_RECORD, STR_CMD_EOF].include?(cmd)
         @eof_handling = true
 

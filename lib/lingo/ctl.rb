@@ -39,60 +39,51 @@ class Lingo
       h[k] = COMMANDS.has_key?(k) ? k : 'usage'
     }
 
-    ALIASES['ls']  # OCCUPY
-
-    { config: %w[configuration],
-      lang:   %w[language],
-      dict:   %w[dictionary dictionaries],
-      store:  %w[store],
-      sample: %w[sample\ text\ file] }.each { |what, (sing, plur)|
-      COMMANDS["list#{what}"] = [
-        "List available #{plur || "#{sing}s"}",  'Arguments: [name...]'
-      ] if what != :store
-      COMMANDS["find#{what}"] = [
-        "Find #{sing} in Lingo search path",     'Arguments: name'
-      ]
-      COMMANDS["copy#{what}"] = [
-        "Copy #{sing} to local Lingo directory", 'Arguments: name'
-      ] if what != :store
-
-      %w[list find copy].each { |method|
-        next unless COMMANDS.has_key?(name = "#{method}#{what}")
-        class_eval %Q{def do_#{name}; #{method}(:#{what}); end}
-
-        [0, -1].repeated_permutation(2) { |i, j|
-          key = "#{method[i]}#{what[j]}"
-          break ALIASES[key] = name unless ALIASES.has_key?(key)
-        }
-      }
-
-      if what == :store
-        COMMANDS['clearstore'] = [
-          'Remove store files to force rebuild', 'Arguments: name'
-        ]
-        ALIASES['cs'] = 'clearstore'
-      end
-    }
-
-    { demo:    ['Initialize demo directory (Default: current directory)',
-                'Arguments: [path]'],
-      rackup:  ['Print path to rackup file',
-                'Arguments: name'],
-      path:    'Print search path for dictionaries and configurations',
-      help:    'Print help for available commands',
-      version: 'Print Lingo version number' }.each { |what, description|
-      COMMANDS[name = what.to_s] = description; ALIASES[name[0]] = name
-    }
-
-    USAGE = <<EOT
+    USAGE = <<-EOT
 Usage: #{PROG} <command> [arguments] [options]
        #{PROG} [-h|--help] [--version]
-EOT
+    EOT
 
     def ctl
       parse_options
       send("do_#{ALIASES[ARGV.shift]}")
     end
+
+    def self.cmd(name, short, desc, args = nil, default = nil)
+      if name.is_a?(Array)
+        m, f, k = name
+        name, short = "#{m}#{k}", "#{f}#{short}"
+        class_eval %Q{private; def do_#{name}; #{m}(:#{k}); end}
+      end
+
+      if args
+        desc = [desc, args = "Arguments: #{args}"]
+        args << " (Default: #{default})" if default
+      end
+
+      COMMANDS[name], ALIASES[short] = desc, name
+    end
+
+    { config: %w[c configuration],
+      lang:   %w[l language],
+      dict:   %w[d dictionary dictionaries],
+      store:  %w[s store],
+      sample: %w[e sample\ text\ file]
+    }.each { |n, (s, q, r)|
+      t = n == :store
+
+      cmd([:list,  :l, n], s, "List available #{r || "#{q}s"}", '[name...]') if !t
+      cmd([:find,  :f, n], s, "Find #{q} in Lingo search path",      'name')
+      cmd([:copy,  :c, n], s, "Copy #{q} to local Lingo directory",  'name') if !t
+      cmd([:clear, :c, n], s, 'Remove store files to force rebuild', 'name') if  t
+    }
+
+    { demo:    [:d, 'Initialize demo directory', '[path]', 'current directory'],
+      rackup:  [:r, 'Print path to rackup file', 'name'],
+      path:    [:p, 'Print search path for dictionaries and configurations'],
+      help:    [:h, 'Print help for available commands'],
+      version: [:v, 'Print Lingo version number']
+    }.each { |n, (s, *a)| cmd(n.to_s, s.to_s, *a) }
 
     private
 
@@ -105,20 +96,20 @@ EOT
     end
 
     def find(what, doit = true)
-      name = ARGV.shift or do_usage('Required argument `name\' missing.')
+      name = ARGV.shift or missing_arg(:name)
       no_args
 
-      file = Lingo.find(what, name, path: path_for_scope) { do_usage }
+      file = Lingo.find(what, name, path: path_for_scope) { usage }
       doit ? puts(file) : file
     end
 
     def copy(what)
-      do_usage('Source and target are the same.') if OPTIONS[:scope] == :local
+      usage('Source and target are the same.') if OPTIONS[:scope] == :local
 
       source = find(what, false)
       target = File.join(path_for_scope(:local), Lingo.basepath(what, source))
 
-      do_usage('Source and target are the same.') if source == target
+      usage('Source and target are the same.') if source == target
 
       FileUtils.mkdir_p(File.dirname(target))
       FileUtils.cp(source, target, verbose: true)
@@ -140,7 +131,7 @@ EOT
     end
 
     def do_rackup(doit = true)
-      name = ARGV.shift or do_usage('Required argument `name\' missing.')
+      name = ARGV.shift or missing_arg(:name)
       no_args
 
       require 'lingo/app'
@@ -148,7 +139,7 @@ EOT
       if file = Lingo::App.rackup(name)
         doit ? puts(file) : file
       else
-        do_usage("Invalid app name `#{name.inspect}'.")
+        usage("Invalid app name `#{name.inspect}'.")
       end
     end
 
@@ -187,10 +178,6 @@ EOT
       doit ? puts(msg) : msg
     end
 
-    def do_usage(msg = nil)
-      abort "#{"#{PROGNAME}: #{msg}\n\n" if msg}#{USAGE}"
-    end
-
     def parse_options
       OptionParser.new(USAGE, OPTWIDTH) { |opts|
         opts.separator ''
@@ -227,12 +214,22 @@ EOT
         when :global then [HOME]
         when :local  then [OPTIONS[:path] || CURR]
         when nil
-        else do_usage("Invalid scope `#{scope.inspect}'.")
+        else usage("Invalid scope `#{scope.inspect}'.")
       end
     end
 
+    def usage(msg = nil)
+      abort "#{"#{PROGNAME}: #{msg}\n\n" if msg}#{USAGE}"
+    end
+
+    alias_method :do_usage, :usage
+
+    def missing_arg(arg)
+      usage("Required argument `#{arg}' missing.")
+    end
+
     def no_args
-      do_usage('Too many arguments.') unless ARGV.empty?
+      usage('Too many arguments.') unless ARGV.empty?
     end
 
     def copy_list(what)

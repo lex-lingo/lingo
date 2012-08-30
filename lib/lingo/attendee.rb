@@ -96,12 +96,12 @@ class Lingo
     end
 
     def listen(obj)
-      unless obj.is_a?(AgendaItem)
-        @can_process ? process(obj) : forward(obj)
-      else
+      if obj.is_a?(AgendaItem)
         args = obj.to_a
         control(*args) if @can_control
         forward(*args) unless obj.cmd == STR_CMD_TALK || skip_command!
+      else
+        @can_process ? process(obj) : forward(obj)
       end
     end
 

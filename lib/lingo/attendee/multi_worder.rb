@@ -113,7 +113,7 @@ class Lingo
       end
 
       def control(cmd, param)
-        control_multi(cmd, @mul_dic)
+        control_multi(cmd)
       end
 
       def process_buffer
