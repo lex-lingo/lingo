@@ -147,6 +147,12 @@ class Lingo
       ary
     end
 
+    def get_re(key, default = nil, standard = nil)
+      if value = get_key(key, default)
+        value == true ? standard : Regexp.new(value)
+      end
+    end
+
     def dictionary(src, mod)
       Language::Dictionary.new({ 'source' => src, 'mode' => mod }, @lingo)
     end

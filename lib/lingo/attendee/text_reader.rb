@@ -115,9 +115,9 @@ class Lingo
         @filter   = get_key('filter', false)
         @progress = get_key('progress', false)
 
-        if @lir = get_key('records', get_key('lir-record-pattern', nil))  # DEPRECATE lir-record-pattern
-          @lir = @lir == true ? %r{^\[(\d+)\.\]} : Regexp.new(@lir)
-        end
+        @lir  = get_re('records', get_key('lir-record-pattern', nil), %r{^\[(\d+)\.\]})  # DEPRECATE lir-record-pattern
+        @cut  = get_re('fields', !!@lir, %r{^.+?:\s*})
+        @skip = get_re('skip', nil)
       end
 
       def control(cmd, param)
@@ -142,10 +142,12 @@ class Lingo
             progress[pos]
 
             line.chomp! if @chomp
+            next if line =~ @skip
 
             if line =~ @lir
               forward(STR_CMD_RECORD, $1)
             else
+              line.sub!(@cut, '') if @cut
               forward(line) unless line.empty?
             end
           }

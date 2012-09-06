@@ -87,7 +87,7 @@ class Lingo
         if @debug = get_key('debug', false)
           @prompt = get_key('prompt', 'lex:) ')
         else
-          @lex  = Regexp.new(get_key('lexicals', '[sy]').downcase)
+          @lex  = get_re('lexicals', '[sy]')
           @skip = get_array('skip', DEFAULT_SKIP, :upcase)
 
           @src = get_key('src', false)

@@ -12,8 +12,13 @@
 * Modified character handling to accept *any* Unicode letter (_Alphabetical_)
   and digit (<i>Decimal Number</i>).
 * Modified Attendee::Tokenizer to use only hard-coded tokenization rules.
+* Modified Attendee::VectorFilter's +lexicals+ option to be case-sensitive.
 * Improved overall performance and memory usage; Attendee::Sequencer changed
   the order sequences are inserted into the stream.
+* Added +fields+ option to Attendee::TextReader to cut off field labels;
+  defaults to +true+ in record (LIR) mode.
+* Added +skip+ option to Attendee::TextReader to skip lines matching the given
+  pattern.
 * Added +src+ option to Attendee::VectorFilter to print "source" part of
   compounds.
 * Added +lingosrv+ and +lingoweb+ executables. The former provides a simple
