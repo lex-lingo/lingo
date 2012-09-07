@@ -34,6 +34,8 @@ class Lingo
   class Config
 
     def initialize(*args)
+      @deprecated = Hash.new { |h, k| h[k] = true; false }
+
       @cli, @opts = CLI.new, {}
 
       @cli.execute(*args)
@@ -41,6 +43,8 @@ class Lingo
 
       load_config('language', :lang)
       load_config('config')
+
+      deprecate(:textreader, :text_reader) if Array(self['meeting/attendees']).map(&:keys).flatten.include?('textreader')
 
       if r = get('meeting/attendees', 'text_reader') ||
              get('meeting/attendees', 'textreader')  # DEPRECATE textreader
@@ -92,8 +96,21 @@ class Lingo
       @cli.stderr
     end
 
+    def warn(*msg)
+      stderr.puts(*msg)
+    end
+
     def quit(*args)
       @cli.send(:quit, *args)
+    end
+
+    def deprecate(old, new, obj = self)
+      unless @deprecated[[source = obj.class.name.sub(/\ALingo::/, ''), old]]
+        warn(
+          "DEPRECATION WARNING: #{source} option `#{old}' is deprecated " <<
+          "and will be removed in Lingo 1.9. Please use `#{new}' instead."
+        )
+      end
     end
 
     private

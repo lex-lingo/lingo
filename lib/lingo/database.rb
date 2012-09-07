@@ -143,6 +143,10 @@ class Lingo
       @crypter ? _set(*@crypter.encode(key, val)) : _set(key, val)
     end
 
+    def warn(*msg)
+      @lingo.warn(*msg)
+    end
+
     private
 
     def use_backend(backend = nil, skip_ext = false)
@@ -221,10 +225,6 @@ class Lingo
 
     def _encode!(str)
       str.force_encoding(ENC)
-    end
-
-    def warn(*msg)
-      @lingo.warn(*msg)
     end
 
     def convert(verbose = @lingo.config.stderr.tty?)

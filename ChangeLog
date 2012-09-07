@@ -28,6 +28,9 @@
 * Made dependency on Ruby version >= 1.9.2 explicit.
 * Removed reporting facility (options '--perfmon' and '--status').
 * Learned '--profile' option to collect profiling information while running.
+* Deprecated Language::Grammar option +compositum+ (now +compound+), Config
+  option +textreader+ (now +text_reader+), and Attendee::TextReader option
+  +lir-record-pattern+ (now +records+); they will be removed in Lingo 1.9.
 
 == 1.8.2 [2012-04-19]
 

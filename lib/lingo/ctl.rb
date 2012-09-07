@@ -187,7 +187,7 @@ Usage: #{PROG} <command> [arguments] [options]
           OPTIONS[:scope] = :system
         }
 
-        opts.on('--global', 'Restrict command to the user\'s personal Lingo directory') {
+        opts.on('--global', "Restrict command to the user's personal Lingo directory") {
           OPTIONS[:scope] = :global
         }
 

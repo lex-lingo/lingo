@@ -301,7 +301,11 @@ class Lingo
   end
 
   def warn(*msg)
-    config.stderr.puts(*msg)
+    config.warn(*msg)
+  end
+
+  def deprecate(old, new, obj = self)
+    config.deprecate(old, new, obj)
   end
 
   def profile(base = config['profile'])

@@ -40,7 +40,7 @@ class Lingo
 
       def initialize(config, lingo)
         unless config.has_key?('source')
-          raise ArgumentError, 'Required parameter `source\' missing.'
+          raise ArgumentError, "Required parameter `source' missing."
         end
 
         @suffixes, @infixes = [], []
