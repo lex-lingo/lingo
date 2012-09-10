@@ -68,7 +68,7 @@ class Lingo
     #   out> *EOL('test.txt')
     #   out> *EOF('test.txt')
 
-    class Abbreviator < BufferedAttendee
+    class Abbreviator < self
 
       protected
 
@@ -77,27 +77,32 @@ class Lingo
       end
 
       def control(cmd, param)
-        process_buffer
+        send_abbr(nil) if [STR_CMD_RECORD, STR_CMD_EOF].include?(cmd)
+      end
+
+      def process(obj)
+        if obj.is_a?(Token)
+          if obj.form == CHAR_PUNCT
+            if @abbr && (abbr = find_word(form = @abbr.form)).identified?
+              form << CHAR_PUNCT unless form.end_with?(CHAR_PUNCT)
+              send_abbr(abbr)
+            else
+              send_abbr(@abbr)
+              forward(obj)
+            end
+          else
+            send_abbr(@abbr, obj)
+          end
+        else
+          send_abbr(obj)
+        end
       end
 
       private
 
-      def process_buffer?
-        form_at(-1, Token) == CHAR_PUNCT
-      end
-
-      def process_buffer
-        if @buffer.size > 1 and
-          form = form_at(-2, Token) and
-          (abbr = find_word(form)).identified?
-
-          abbr.form += CHAR_PUNCT
-
-          @buffer[-2] = abbr
-          @buffer.delete_at(-1)
-        end
-
-        flush(@buffer)
+      def send_abbr(abbr, obj = nil)
+        @abbr = obj
+        forward(abbr) if abbr
       end
 
     end
