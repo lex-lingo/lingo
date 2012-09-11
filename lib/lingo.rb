@@ -224,6 +224,8 @@ class Lingo
   end
 
   def initialize(*args)
+    Debug.ps(:lingo_new)
+
     @config_args = args
     reset(false)
   end
@@ -252,10 +254,12 @@ class Lingo
   end
 
   def talk
-    profile {
+    Debug.profile(config['profile']) {
       invite
       start
     }
+
+    Debug.ps(:lingo_talk)
   ensure
     reset
   end
@@ -308,40 +312,11 @@ class Lingo
     config.deprecate(old, new, obj)
   end
 
-  def profile(base = config['profile'])
-    return yield unless base
-
-    require 'ruby-prof'
-
-    result = RubyProf.profile { yield }
-    result.eliminate_methods! [/\b(?:Gem|HighLine)\b/,
-      /\A(?:Benchmark|FileUtils|Pathname|Util)\b/]
-
-    if base.is_a?(IO)
-      RubyProf::FlatPrinter.new(result).print(base)
-    else
-      FileUtils.mkdir_p(File.dirname(base))
-
-      mode = ENV['RUBY_PROF_MEASURE_MODE']
-      base += "-#{mode}" if mode && !mode.empty?
-
-      {
-        :txt   => :FlatPrinter,
-        :lines => :FlatPrinterWithLineNumbers,
-        :html  => :GraphHtmlPrinter,
-        :stack => :CallStackPrinter
-      }.each { |ext, name|
-        File.open("#{base}.#{ext}", 'a+', encoding: ENC) { |f|
-          RubyProf.const_get(name).new(result).print(f)
-        }
-      }
-    end
-  end
-
 end
 
 require_relative 'lingo/call'
 require_relative 'lingo/error'
+require_relative 'lingo/debug'
 require_relative 'lingo/config'
 require_relative 'lingo/agenda_item'
 require_relative 'lingo/show_progress'
