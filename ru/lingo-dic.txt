@@ -2,10 +2,10 @@
 # enthält russische Grundformen mit Wortklassen
 # #s = Substantiv
 # #a = Adjektiv
-# #v = Verbe
+# #v = Verben
 # #t = Takeitasis
 # Quelle: WordNet WordNet 3.0 Copyright 2006 by Princeton University
-# URL: http://wordnet.ru/LICENSE.txt 
+# URL: http://wordnet.ru/LICENSE.txt
 # Stand: 07.09.2012
 
 а=а #t

@@ -43,18 +43,16 @@
 #    lingo language definition
 ---
 language:
-
   name: 'Englisch'
 
   dictionary:
-
     databases:
-
       #    Systemwörterbücher
       sys-dic: { name: en/lingo-dic.txt, txt-format: WordClass, separator: '=' }
       sys-syn: { name: en/lingo-syn.txt, txt-format: KeyValue, separator: '=', def-wc: y }
       sys-mul: { name: en/lingo-mul.txt, txt-format: SingleWord, use-lex: 'sys-dic', def-wc: m }
-
+      sys-irr: { name: en/lingo-irr.txt, txt-format: WordClass, separator: '=' }
+      sys-wdn: { name: en/lingo-wdn.txt, txt-format: WordClass, separator: '=' }
       #    Benutzerwörterbücher
       usr-dic: { name: en/user-dic.txt, txt-format: WordClass, separator: '=' }
 

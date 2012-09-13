@@ -72,7 +72,7 @@ language:
       min-avg-part-size: "4"
       append-wordclass: "+"
       skip-sequences: [ xx ]
-      
+
     suffix:
       #    Suffixliste, Stand: 30-06-2005
       #    Suffixklasse:   s = Substantiv, a = Adjektiv, v = Verb, e = Eigenwort, f = Fugung
@@ -105,6 +105,6 @@ language:
         - [ fl,  st  ]
         - [ li,  h   ]
         - [ i,   s   ]
-        
+
     sequencer:
       sequences: [ [AS, "2, 1"], [AK, "2, 1"], [AAK, "3, 1 2"], [AAS, "3, 1 2"] ]

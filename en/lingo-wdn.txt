@@ -1,10 +1,13 @@
-#
-#  englischsprachiges Wörterbuch
-#  Quelle: WordNet WordNet 3.0 Copyright 2006 by Princeton University
-#  URL: http://wordnet.princeton.edu/
-#
-#  Stand: 26.05.08 / Thomas Müller
-#  
+# Systemwörterbuch lingo-wdn.txt
+# enthält englischen Grundformen mit Wortklassen
+# #s = Substantiv
+# #a = Adjektiv
+# #v = Verben
+# #t = Takeitasis
+# Quelle: WordNet WordNet 3.0 Copyright 2006 by Princeton University
+# URL: http://wordnet.princeton.edu/wordnet/license/
+# Stand: 07.04.2009
+
 aachen=aachen #s
 aaium=aaium #s
 aaland=aaland #s
