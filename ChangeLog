@@ -16,6 +16,7 @@
 * Improved overall performance and memory usage; Attendee::Sequencer changed
   the order sequences are inserted into the stream.
 * Eliminated performance penalty caused by Attendee::Abbreviator.
+* Added Russian language support (Yulia Dorokhova, Thomas Müller).
 * Added +fields+ option to Attendee::TextReader to cut off field labels;
   defaults to +true+ in record (LIR) mode.
 * Added +skip+ option to Attendee::TextReader to skip lines matching the given
