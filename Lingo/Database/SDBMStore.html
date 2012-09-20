@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>module Lingo::Database::SDBMStore - lingo Application documentation (v1.8.2)</title>
+<title>module Lingo::Database::SDBMStore - lingo Application documentation (v1.8.3)</title>
 
 <link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
 
@@ -66,8 +66,6 @@
     
     <li><a href="#method-i-_clear">#_clear</a>
     
-    <li><a href="#method-i-_get">#_get</a>
-    
     <li><a href="#method-i-_open">#_open</a>
     
     <li><a href="#method-i-_set">#_set</a>
@@ -102,6 +100,8 @@
     <li><a href="../../Lingo.html">Lingo</a>
   
     <li><a href="../../Lingo/AgendaItem.html">Lingo::AgendaItem</a>
+  
+    <li><a href="../../Lingo/App.html">Lingo::App</a>
   
     <li><a href="../../Lingo/Attendee.html">Lingo::Attendee</a>
   
@@ -151,8 +151,6 @@
   
     <li><a href="../../Lingo/CLI.html">Lingo::CLI</a>
   
-    <li><a href="../../Lingo/Cachable.html">Lingo::Cachable</a>
-  
     <li><a href="../../Lingo/Call.html">Lingo::Call</a>
   
     <li><a href="../../Lingo/Config.html">Lingo::Config</a>
@@ -191,11 +189,15 @@
   
     <li><a href="../../Lingo/DatabaseError.html">Lingo::DatabaseError</a>
   
+    <li><a href="../../Lingo/Debug.html">Lingo::Debug</a>
+  
     <li><a href="../../Lingo/FileNotFoundError.html">Lingo::FileNotFoundError</a>
   
     <li><a href="../../Lingo/InvalidDatabaseConfigError.html">Lingo::InvalidDatabaseConfigError</a>
   
     <li><a href="../../Lingo/Language.html">Lingo::Language</a>
+  
+    <li><a href="../../Lingo/Language/Char.html">Lingo::Language::Char</a>
   
     <li><a href="../../Lingo/Language/Dictionary.html">Lingo::Language::Dictionary</a>
   
@@ -221,15 +223,15 @@
   
     <li><a href="../../Lingo/NoWritableStoreError.html">Lingo::NoWritableStoreError</a>
   
-    <li><a href="../../Lingo/Reportable.html">Lingo::Reportable</a>
-  
     <li><a href="../../Lingo/ShowProgress.html">Lingo::ShowProgress</a>
   
     <li><a href="../../Lingo/SourceFileNotFoundError.html">Lingo::SourceFileNotFoundError</a>
   
+    <li><a href="../../Lingo/Srv.html">Lingo::Srv</a>
+  
     <li><a href="../../Lingo/Version.html">Lingo::Version</a>
   
-    <li><a href="../../String.html">String</a>
+    <li><a href="../../Lingo/Web.html">Lingo::Web</a>
   
   </ul>
 </nav>
@@ -252,6 +254,19 @@
 
     
 
+    
+    <!-- Constants -->
+    <section id="constants-list" class="section">
+      <h3 class="section-header">Constants</h3>
+      <dl>
+      
+        <dt id="MAX_LENGTH">MAX_LENGTH
+        
+        <dd class="description">
+        
+      
+      </dl>
+    </section>
     
 
     
@@ -278,7 +293,7 @@
 
           
           <div class="method-source-code" id="_clear-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/sdbm_store.rb, line 42</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database/sdbm_store.rb, line 44</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">_clear</span>
   <span class="ruby-constant">File</span>.<span class="ruby-identifier">delete</span>(*<span class="ruby-constant">Dir</span>[<span class="ruby-node">&quot;#{@stofile}{#{EXT.join(',')}}&quot;</span>])
 <span class="ruby-keyword">end</span></pre>
@@ -290,37 +305,6 @@
 
         
       </div><!-- _clear-method -->
-
-    
-      <div id="method-i-_get" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">_get</span><span
-            class="method-args">(key)</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-
-          
-          <div class="method-source-code" id="_get-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/sdbm_store.rb, line 50</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">_get</span>(<span class="ruby-identifier">key</span>)
-  <span class="ruby-identifier">val</span> = <span class="ruby-keyword">super</span>
-  <span class="ruby-identifier">val</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">val</span>.<span class="ruby-identifier">encode</span>(<span class="ruby-constant">ENC</span>)
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- _get-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- _get-method -->
 
     
       <div id="method-i-_open" class="method-detail ">
@@ -339,7 +323,7 @@
 
           
           <div class="method-source-code" id="_open-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/sdbm_store.rb, line 46</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database/sdbm_store.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">_open</span>
   <span class="ruby-constant">SDBM</span>.<span class="ruby-identifier">open</span>(<span class="ruby-ivar">@stofile</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -369,11 +353,11 @@
 
           
           <div class="method-source-code" id="_set-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/sdbm_store.rb, line 55</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database/sdbm_store.rb, line 52</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">_set</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">val</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">950</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">val</span>.<span class="ruby-identifier">bytesize</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">MAX_LENGTH</span>
     <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;Warning: Entry `#{key}' (#{@srcfile}) too long for SDBM. Truncating...&quot;</span>
-    <span class="ruby-identifier">val</span> = <span class="ruby-identifier">val</span>[<span class="ruby-value">0</span>, <span class="ruby-value">950</span>]
+    <span class="ruby-identifier">val</span> = <span class="ruby-identifier">val</span>.<span class="ruby-identifier">byteslice</span>(<span class="ruby-value">0</span>, <span class="ruby-constant">MAX_LENGTH</span>)
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-keyword">super</span>
@@ -404,7 +388,7 @@
 
           
           <div class="method-source-code" id="uptodate-3F-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/sdbm_store.rb, line 38</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database/sdbm_store.rb, line 40</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">uptodate?</span>
   <span class="ruby-keyword">super</span>(<span class="ruby-ivar">@stofile</span> <span class="ruby-operator">+</span> <span class="ruby-constant">EXT</span>.<span class="ruby-identifier">last</span>)
 <span class="ruby-keyword">end</span></pre>

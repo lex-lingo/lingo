@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Lingo::Attendee::Abbreviator - lingo Application documentation (v1.8.2)</title>
+<title>class Lingo::Attendee::Abbreviator - lingo Application documentation (v1.8.3)</title>
 
 <link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
 
@@ -59,7 +59,7 @@
     <nav id="parent-class-section" class="section">
   <h3 class="section-header">Parent</h3>
   
-  <p class="link"><a href="../BufferedAttendee.html">Lingo::BufferedAttendee</a>
+  <p class="link">self
   
 </nav>
 
@@ -74,9 +74,9 @@
     
     <li><a href="#method-i-init">#init</a>
     
-    <li><a href="#method-i-process_buffer">#process_buffer</a>
+    <li><a href="#method-i-process">#process</a>
     
-    <li><a href="#method-i-process_buffer-3F">#process_buffer?</a>
+    <li><a href="#method-i-send_abbr">#send_abbr</a>
     
   </ul>
 </nav>
@@ -106,6 +106,8 @@
     <li><a href="../../Lingo.html">Lingo</a>
   
     <li><a href="../../Lingo/AgendaItem.html">Lingo::AgendaItem</a>
+  
+    <li><a href="../../Lingo/App.html">Lingo::App</a>
   
     <li><a href="../../Lingo/Attendee.html">Lingo::Attendee</a>
   
@@ -155,8 +157,6 @@
   
     <li><a href="../../Lingo/CLI.html">Lingo::CLI</a>
   
-    <li><a href="../../Lingo/Cachable.html">Lingo::Cachable</a>
-  
     <li><a href="../../Lingo/Call.html">Lingo::Call</a>
   
     <li><a href="../../Lingo/Config.html">Lingo::Config</a>
@@ -195,11 +195,15 @@
   
     <li><a href="../../Lingo/DatabaseError.html">Lingo::DatabaseError</a>
   
+    <li><a href="../../Lingo/Debug.html">Lingo::Debug</a>
+  
     <li><a href="../../Lingo/FileNotFoundError.html">Lingo::FileNotFoundError</a>
   
     <li><a href="../../Lingo/InvalidDatabaseConfigError.html">Lingo::InvalidDatabaseConfigError</a>
   
     <li><a href="../../Lingo/Language.html">Lingo::Language</a>
+  
+    <li><a href="../../Lingo/Language/Char.html">Lingo::Language::Char</a>
   
     <li><a href="../../Lingo/Language/Dictionary.html">Lingo::Language::Dictionary</a>
   
@@ -225,15 +229,15 @@
   
     <li><a href="../../Lingo/NoWritableStoreError.html">Lingo::NoWritableStoreError</a>
   
-    <li><a href="../../Lingo/Reportable.html">Lingo::Reportable</a>
-  
     <li><a href="../../Lingo/ShowProgress.html">Lingo::ShowProgress</a>
   
     <li><a href="../../Lingo/SourceFileNotFoundError.html">Lingo::SourceFileNotFoundError</a>
   
+    <li><a href="../../Lingo/Srv.html">Lingo::Srv</a>
+  
     <li><a href="../../Lingo/Version.html">Lingo::Version</a>
   
-    <li><a href="../../String.html">String</a>
+    <li><a href="../../Lingo/Web.html">Lingo::Web</a>
   
   </ul>
 </nav>
@@ -349,8 +353,7 @@ out&gt; *EOF('test.txt')</pre>
           <div class="method-source-code" id="control-source">
             <pre><span class="ruby-comment"># File lib/lingo/attendee/abbreviator.rb, line 78</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">param</span>)
-  <span class="ruby-identifier">report_on</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-ivar">@dic</span>)
-  <span class="ruby-identifier">process_buffer</span>
+  <span class="ruby-identifier">send_abbr</span>(<span class="ruby-keyword">nil</span>) <span class="ruby-keyword">if</span> [<span class="ruby-constant">STR_CMD_RECORD</span>, <span class="ruby-constant">STR_CMD_EOF</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">cmd</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- control-source -->
           
@@ -392,17 +395,61 @@ out&gt; *EOF('test.txt')</pre>
       </div><!-- init-method -->
 
     
+      <div id="method-i-process" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">process</span><span
+            class="method-args">(obj)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="process-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/abbreviator.rb, line 82</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">process</span>(<span class="ruby-identifier">obj</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Token</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">form</span> <span class="ruby-operator">==</span> <span class="ruby-constant">CHAR_PUNCT</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@abbr</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">abbr</span> = <span class="ruby-identifier">find_word</span>(<span class="ruby-identifier">form</span> = <span class="ruby-ivar">@abbr</span>.<span class="ruby-identifier">form</span>)).<span class="ruby-identifier">identified?</span>
+        <span class="ruby-identifier">form</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">CHAR_PUNCT</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">form</span>.<span class="ruby-identifier">end_with?</span>(<span class="ruby-constant">CHAR_PUNCT</span>)
+        <span class="ruby-identifier">send_abbr</span>(<span class="ruby-identifier">abbr</span>)
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">send_abbr</span>(<span class="ruby-ivar">@abbr</span>)
+        <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">obj</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">send_abbr</span>(<span class="ruby-ivar">@abbr</span>, <span class="ruby-identifier">obj</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">send_abbr</span>(<span class="ruby-identifier">obj</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- process-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- process-method -->
+
+    
     </section><!-- protected-instance-method-details -->
   
      <section id="private-instance-5Buntitled-5D-method-details" class="method-section section">
       <h3 class="section-header">Private Instance Methods</h3>
 
     
-      <div id="method-i-process_buffer" class="method-detail ">
+      <div id="method-i-send_abbr" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">process_buffer</span><span
-            class="method-args">()</span>
+          <span class="method-name">send_abbr</span><span
+            class="method-args">(abbr, obj = nil)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -413,67 +460,20 @@ out&gt; *EOF('test.txt')</pre>
           
 
           
-          <div class="method-source-code" id="process_buffer-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/abbreviator.rb, line 89</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">process_buffer</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">2</span>
-    <span class="ruby-identifier">forward_buffer</span>
-    <span class="ruby-keyword">return</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">form</span> = <span class="ruby-identifier">form_at</span>(<span class="ruby-value">-2</span>, <span class="ruby-constant">Token</span>)
-    <span class="ruby-identifier">inc</span>(<span class="ruby-string">'Anzahl gesuchter Abkürzungen'</span>)
-
-    <span class="ruby-keyword">if</span> (<span class="ruby-identifier">abbr</span> = <span class="ruby-identifier">find_word</span>(<span class="ruby-identifier">form</span>)).<span class="ruby-identifier">identified?</span>
-      <span class="ruby-identifier">inc</span>(<span class="ruby-string">'Anzahl gefundener Abkürzungen'</span>)
-
-      <span class="ruby-identifier">abbr</span>.<span class="ruby-identifier">form</span> <span class="ruby-operator">+=</span> <span class="ruby-constant">CHAR_PUNCT</span>
-
-      <span class="ruby-ivar">@buffer</span>[<span class="ruby-value">-2</span>] = <span class="ruby-identifier">abbr</span>
-      <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">delete_at</span>(<span class="ruby-value">-1</span>)
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-identifier">forward_buffer</span>
+          <div class="method-source-code" id="send_abbr-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/abbreviator.rb, line 102</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">send_abbr</span>(<span class="ruby-identifier">abbr</span>, <span class="ruby-identifier">obj</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-ivar">@abbr</span> = <span class="ruby-identifier">obj</span>
+  <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">abbr</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">abbr</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- process_buffer-source -->
+          </div><!-- send_abbr-source -->
           
         </div>
 
         
 
         
-      </div><!-- process_buffer-method -->
-
-    
-      <div id="method-i-process_buffer-3F" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">process_buffer?</span><span
-            class="method-args">()</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-
-          
-          <div class="method-source-code" id="process_buffer-3F-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/abbreviator.rb, line 85</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">process_buffer?</span>
-  <span class="ruby-identifier">form_at</span>(<span class="ruby-value">-1</span>, <span class="ruby-constant">Token</span>) <span class="ruby-operator">==</span> <span class="ruby-constant">CHAR_PUNCT</span>
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- process_buffer-3F-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- process_buffer-3F-method -->
+      </div><!-- send_abbr-method -->
 
     
     </section><!-- private-instance-method-details -->

@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Lingo::Language::Lexical - lingo Application documentation (v1.8.2)</title>
+<title>class Lingo::Language::Lexical - lingo Application documentation (v1.8.3)</title>
 
 <link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
 
@@ -105,6 +105,8 @@
   
     <li><a href="../../Lingo/AgendaItem.html">Lingo::AgendaItem</a>
   
+    <li><a href="../../Lingo/App.html">Lingo::App</a>
+  
     <li><a href="../../Lingo/Attendee.html">Lingo::Attendee</a>
   
     <li><a href="../../Lingo/Attendee/Abbreviator.html">Lingo::Attendee::Abbreviator</a>
@@ -153,8 +155,6 @@
   
     <li><a href="../../Lingo/CLI.html">Lingo::CLI</a>
   
-    <li><a href="../../Lingo/Cachable.html">Lingo::Cachable</a>
-  
     <li><a href="../../Lingo/Call.html">Lingo::Call</a>
   
     <li><a href="../../Lingo/Config.html">Lingo::Config</a>
@@ -193,11 +193,15 @@
   
     <li><a href="../../Lingo/DatabaseError.html">Lingo::DatabaseError</a>
   
+    <li><a href="../../Lingo/Debug.html">Lingo::Debug</a>
+  
     <li><a href="../../Lingo/FileNotFoundError.html">Lingo::FileNotFoundError</a>
   
     <li><a href="../../Lingo/InvalidDatabaseConfigError.html">Lingo::InvalidDatabaseConfigError</a>
   
     <li><a href="../../Lingo/Language.html">Lingo::Language</a>
+  
+    <li><a href="../../Lingo/Language/Char.html">Lingo::Language::Char</a>
   
     <li><a href="../../Lingo/Language/Dictionary.html">Lingo::Language::Dictionary</a>
   
@@ -223,15 +227,15 @@
   
     <li><a href="../../Lingo/NoWritableStoreError.html">Lingo::NoWritableStoreError</a>
   
-    <li><a href="../../Lingo/Reportable.html">Lingo::Reportable</a>
-  
     <li><a href="../../Lingo/ShowProgress.html">Lingo::ShowProgress</a>
   
     <li><a href="../../Lingo/SourceFileNotFoundError.html">Lingo::SourceFileNotFoundError</a>
   
+    <li><a href="../../Lingo/Srv.html">Lingo::Srv</a>
+  
     <li><a href="../../Lingo/Version.html">Lingo::Version</a>
   
-    <li><a href="../../String.html">String</a>
+    <li><a href="../../Lingo/Web.html">Lingo::Web</a>
   
   </ul>
 </nav>
@@ -293,14 +297,11 @@ eines Lexical-Objektes zurückgegeben, z.B. Lexical.new(‘Rennen’, ‘S’) -
   <span class="ruby-keyword">return</span> <span class="ruby-value">1</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>)
 
   <span class="ruby-identifier">a1</span>, <span class="ruby-identifier">a2</span> = <span class="ruby-identifier">attr</span>, <span class="ruby-identifier">other</span>.<span class="ruby-identifier">attr</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">form</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">form</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">a1</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">a2</span>
 
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">a1</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">a2</span>
-    <span class="ruby-identifier">form</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">form</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">a1</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-value">1</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">a2</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-value">-1</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">begin</span>
-      <span class="ruby-identifier">i1</span>, <span class="ruby-identifier">i2</span> = [<span class="ruby-identifier">a1</span>, <span class="ruby-identifier">a2</span>].<span class="ruby-identifier">map</span>(&amp;<span class="ruby-constant">LA_SORTORDER</span>.<span class="ruby-identifier">method</span>(<span class="ruby-value">:index</span>))
-      <span class="ruby-identifier">i1</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">i2</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">i2</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">i1</span> <span class="ruby-operator">:</span> <span class="ruby-value">-1</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">i2</span> <span class="ruby-operator">?</span> <span class="ruby-value">1</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">a1</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">a2</span>
-    <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">a1</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-value">1</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">a2</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-value">-1</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">i1</span>, <span class="ruby-identifier">i2</span> = <span class="ruby-constant">LA_SORTORDER</span>.<span class="ruby-identifier">values_at</span>(<span class="ruby-identifier">a1</span>, <span class="ruby-identifier">a2</span>)
+    <span class="ruby-identifier">i1</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">i2</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">i1</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">i2</span> <span class="ruby-operator">:</span> <span class="ruby-value">-1</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">i2</span> <span class="ruby-operator">?</span> <span class="ruby-value">1</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">a1</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">a2</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- 3C-3D-3E-source -->
@@ -329,7 +330,7 @@ eines Lexical-Objektes zurückgegeben, z.B. Lexical.new(‘Rennen’, ‘S’) -
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/lexical.rb, line 57</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/lexical.rb, line 54</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-node">&quot;(#{super})&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -359,7 +360,7 @@ eines Lexical-Objektes zurückgegeben, z.B. Lexical.new(‘Rennen’, ‘S’) -
 
           
           <div class="method-source-code" id="to_str-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/lexical.rb, line 53</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/lexical.rb, line 50</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_str</span>
   <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">'#'</span>)
 <span class="ruby-keyword">end</span></pre>

@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Lingo::Attendee::Stemmer - lingo Application documentation (v1.8.3)</title>
+<title>module Lingo::Language::Char - lingo Application documentation (v1.8.3)</title>
 
 <link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
 
@@ -20,7 +20,7 @@
 <script type="text/javascript" charset="utf-8" src="../../js/darkfish.js"></script>
 
 
-<body id="top" class="class">
+<body id="top" class="module">
 <nav id="metadata">
   <nav id="home-section" class="section">
   <h3 class="section-header">
@@ -47,8 +47,7 @@
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
   <ul>
-    <li>lib/lingo/attendee/stemmer.rb
-    <li>lib/lingo/attendee/stemmer/porter.rb
+    <li>lib/lingo/language/char.rb
   </ul>
 </nav>
 
@@ -57,27 +56,9 @@
 
   <div id="class-metadata">
     
-    <nav id="parent-class-section" class="section">
-  <h3 class="section-header">Parent</h3>
-  
-  <p class="link">self
-  
-</nav>
-
     
-    <!-- Method Quickref -->
-<nav id="method-list-section" class="section">
-  <h3 class="section-header">Methods</h3>
-
-  <ul class="link-list">
     
-    <li><a href="#method-i-init">#init</a>
     
-    <li><a href="#method-i-process">#process</a>
-    
-  </ul>
-</nav>
-
   </div>
 
   <div id="project-metadata">
@@ -243,7 +224,7 @@
 </nav>
 
 <div id="documentation">
-  <h1 class="class">class Lingo::Attendee::Stemmer</h1>
+  <h1 class="module">module Lingo::Language::Char</h1>
 
   <div id="description" class="description">
     
@@ -258,85 +239,24 @@
     
 
     
+    <!-- Constants -->
+    <section id="constants-list" class="section">
+      <h3 class="section-header">Constants</h3>
+      <dl>
+      
+        <dt id="ANY">ANY
+        
+        <dd class="description">
+        
+      
+      </dl>
+    </section>
+    
 
     
 
     <!-- Methods -->
     
-     <section id="protected-instance-5Buntitled-5D-method-details" class="method-section section">
-      <h3 class="section-header">Protected Instance Methods</h3>
-
-    
-      <div id="method-i-init" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">init</span><span
-            class="method-args">()</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-
-          
-          <div class="method-source-code" id="init-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/stemmer.rb, line 34</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">init</span>
-  <span class="ruby-identifier">extend</span>(<span class="ruby-constant">Lingo</span>.<span class="ruby-identifier">get_const</span>(<span class="ruby-identifier">get_key</span>(<span class="ruby-string">'type'</span>, <span class="ruby-string">'porter'</span>), <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>))
-
-  <span class="ruby-ivar">@wc</span>  = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">'wordclass'</span>, <span class="ruby-constant">LA_STEM</span>)
-  <span class="ruby-ivar">@all</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">'mode'</span>, <span class="ruby-string">''</span>).<span class="ruby-identifier">downcase</span> <span class="ruby-operator">==</span> <span class="ruby-string">'all'</span>
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- init-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- init-method -->
-
-    
-      <div id="method-i-process" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">process</span><span
-            class="method-args">(obj)</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-
-          
-          <div class="method-source-code" id="process-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/stemmer.rb, line 41</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">process</span>(<span class="ruby-identifier">obj</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Word</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">unknown?</span>
-    <span class="ruby-identifier">stem</span> = <span class="ruby-identifier">stem</span>(<span class="ruby-constant">Unicode</span>.<span class="ruby-identifier">downcase</span>(<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">form</span>), <span class="ruby-ivar">@all</span>)
-    <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">add_lexicals</span>([<span class="ruby-constant">Lexical</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">stem</span>, <span class="ruby-ivar">@wc</span>)]) <span class="ruby-keyword">if</span> <span class="ruby-identifier">stem</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">obj</span>)
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- process-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- process-method -->
-
-    
-    </section><!-- protected-instance-method-details -->
-  
   </section><!-- 5Buntitled-5D -->
 
 </div><!-- documentation -->

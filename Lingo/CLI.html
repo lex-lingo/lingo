@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Lingo::CLI - lingo Application documentation (v1.8.2)</title>
+<title>class Lingo::CLI - lingo Application documentation (v1.8.3)</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -107,6 +107,8 @@
   
     <li><a href="../Lingo/AgendaItem.html">Lingo::AgendaItem</a>
   
+    <li><a href="../Lingo/App.html">Lingo::App</a>
+  
     <li><a href="../Lingo/Attendee.html">Lingo::Attendee</a>
   
     <li><a href="../Lingo/Attendee/Abbreviator.html">Lingo::Attendee::Abbreviator</a>
@@ -155,8 +157,6 @@
   
     <li><a href="../Lingo/CLI.html">Lingo::CLI</a>
   
-    <li><a href="../Lingo/Cachable.html">Lingo::Cachable</a>
-  
     <li><a href="../Lingo/Call.html">Lingo::Call</a>
   
     <li><a href="../Lingo/Config.html">Lingo::Config</a>
@@ -195,11 +195,15 @@
   
     <li><a href="../Lingo/DatabaseError.html">Lingo::DatabaseError</a>
   
+    <li><a href="../Lingo/Debug.html">Lingo::Debug</a>
+  
     <li><a href="../Lingo/FileNotFoundError.html">Lingo::FileNotFoundError</a>
   
     <li><a href="../Lingo/InvalidDatabaseConfigError.html">Lingo::InvalidDatabaseConfigError</a>
   
     <li><a href="../Lingo/Language.html">Lingo::Language</a>
+  
+    <li><a href="../Lingo/Language/Char.html">Lingo::Language::Char</a>
   
     <li><a href="../Lingo/Language/Dictionary.html">Lingo::Language::Dictionary</a>
   
@@ -225,15 +229,15 @@
   
     <li><a href="../Lingo/NoWritableStoreError.html">Lingo::NoWritableStoreError</a>
   
-    <li><a href="../Lingo/Reportable.html">Lingo::Reportable</a>
-  
     <li><a href="../Lingo/ShowProgress.html">Lingo::ShowProgress</a>
   
     <li><a href="../Lingo/SourceFileNotFoundError.html">Lingo::SourceFileNotFoundError</a>
   
+    <li><a href="../Lingo/Srv.html">Lingo::Srv</a>
+  
     <li><a href="../Lingo/Version.html">Lingo::Version</a>
   
-    <li><a href="../String.html">String</a>
+    <li><a href="../Lingo/Web.html">Lingo::Web</a>
   
   </ul>
 </nav>
@@ -307,8 +311,7 @@
   <span class="ruby-keyword">super</span>.<span class="ruby-identifier">merge</span>(
     <span class="ruby-identifier">config</span><span class="ruby-operator">:</span>   <span class="ruby-string">'lingo.cfg'</span>,
     <span class="ruby-identifier">language</span><span class="ruby-operator">:</span> <span class="ruby-string">'de'</span>,
-    <span class="ruby-identifier">status</span><span class="ruby-operator">:</span>   <span class="ruby-keyword">false</span>,
-    <span class="ruby-identifier">perfmon</span><span class="ruby-operator">:</span>  <span class="ruby-keyword">false</span>
+    <span class="ruby-identifier">profile</span><span class="ruby-operator">:</span>  <span class="ruby-keyword">false</span>
   )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- defaults-source -->
@@ -343,7 +346,7 @@
 
           
           <div class="method-source-code" id="run-source">
-            <pre><span class="ruby-comment"># File lib/lingo/cli.rb, line 47</span>
+            <pre><span class="ruby-comment"># File lib/lingo/cli.rb, line 46</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">run</span>(<span class="ruby-identifier">arguments</span>)
   <span class="ruby-ivar">@files</span> = <span class="ruby-identifier">arguments</span>
 <span class="ruby-keyword">end</span></pre>
@@ -379,7 +382,7 @@
 
           
           <div class="method-source-code" id="load_config-source">
-            <pre><span class="ruby-comment"># File lib/lingo/cli.rb, line 53</span>
+            <pre><span class="ruby-comment"># File lib/lingo/cli.rb, line 52</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">load_config</span>(*)
   <span class="ruby-ivar">@config</span> = {}
 <span class="ruby-keyword">end</span></pre>
@@ -409,7 +412,7 @@
 
           
           <div class="method-source-code" id="opts-source">
-            <pre><span class="ruby-comment"># File lib/lingo/cli.rb, line 57</span>
+            <pre><span class="ruby-comment"># File lib/lingo/cli.rb, line 56</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">opts</span>(<span class="ruby-identifier">opts</span>)
   <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">'-c'</span>, <span class="ruby-string">'--config YAML'</span>, <span class="ruby-node">&quot;Config file [Default: #{defaults[:config]}#{' (currently not present)' unless File.readable?(defaults[:config])}]&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">config</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">options</span>[<span class="ruby-value">:config</span>] = <span class="ruby-identifier">config</span>
@@ -423,18 +426,14 @@
 
   <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-string">''</span>
 
-  <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">'-s'</span>, <span class="ruby-string">'--status'</span>, <span class="ruby-string">'Print status information after processing'</span>) {
-    <span class="ruby-identifier">options</span>[<span class="ruby-value">:status</span>] = <span class="ruby-keyword">true</span>
-  }
-
-  <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">'-p'</span>, <span class="ruby-string">'--perfmon'</span>, <span class="ruby-string">'Print performance details after processing'</span>) {
-    <span class="ruby-identifier">options</span>[<span class="ruby-value">:perfmon</span>] = <span class="ruby-keyword">true</span>
+  <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">'-L'</span>, <span class="ruby-string">'--log FILE'</span>, <span class="ruby-string">'Log file to print debug information to'</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">log</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">options</span>[<span class="ruby-value">:log</span>] = <span class="ruby-identifier">stderr</span>.<span class="ruby-identifier">reopen</span>(<span class="ruby-identifier">log</span> <span class="ruby-operator">==</span> <span class="ruby-string">'-'</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">stdout</span> <span class="ruby-operator">:</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">log</span>, <span class="ruby-string">'a+'</span>, <span class="ruby-identifier">encoding</span><span class="ruby-operator">:</span> <span class="ruby-constant">ENC</span>))
   }
 
   <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-string">''</span>
 
-  <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">'-L'</span>, <span class="ruby-string">'--log FILE'</span>, <span class="ruby-string">'Log file to print debug and status information to'</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">log</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">options</span>[<span class="ruby-value">:log</span>] = <span class="ruby-ivar">@stderr</span>.<span class="ruby-identifier">reopen</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">log</span>, <span class="ruby-string">'a+'</span>, <span class="ruby-identifier">encoding</span><span class="ruby-operator">:</span> <span class="ruby-constant">ENC</span>))
+  <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">'-P'</span>, <span class="ruby-string">'--profile PATH'</span>, <span class="ruby-string">'Print profiling results'</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">profile</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">options</span>[<span class="ruby-value">:profile</span>] = <span class="ruby-identifier">profile</span> <span class="ruby-operator">==</span> <span class="ruby-string">'-'</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">stdout</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">profile</span>
   }
 <span class="ruby-keyword">end</span></pre>
           </div><!-- opts-source -->

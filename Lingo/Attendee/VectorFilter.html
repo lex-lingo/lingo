@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Lingo::Attendee::VectorFilter - lingo Application documentation (v1.8.2)</title>
+<title>class Lingo::Attendee::VectorFilter - lingo Application documentation (v1.8.3)</title>
 
 <link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
 
@@ -107,6 +107,8 @@
   
     <li><a href="../../Lingo/AgendaItem.html">Lingo::AgendaItem</a>
   
+    <li><a href="../../Lingo/App.html">Lingo::App</a>
+  
     <li><a href="../../Lingo/Attendee.html">Lingo::Attendee</a>
   
     <li><a href="../../Lingo/Attendee/Abbreviator.html">Lingo::Attendee::Abbreviator</a>
@@ -155,8 +157,6 @@
   
     <li><a href="../../Lingo/CLI.html">Lingo::CLI</a>
   
-    <li><a href="../../Lingo/Cachable.html">Lingo::Cachable</a>
-  
     <li><a href="../../Lingo/Call.html">Lingo::Call</a>
   
     <li><a href="../../Lingo/Config.html">Lingo::Config</a>
@@ -195,11 +195,15 @@
   
     <li><a href="../../Lingo/DatabaseError.html">Lingo::DatabaseError</a>
   
+    <li><a href="../../Lingo/Debug.html">Lingo::Debug</a>
+  
     <li><a href="../../Lingo/FileNotFoundError.html">Lingo::FileNotFoundError</a>
   
     <li><a href="../../Lingo/InvalidDatabaseConfigError.html">Lingo::InvalidDatabaseConfigError</a>
   
     <li><a href="../../Lingo/Language.html">Lingo::Language</a>
+  
+    <li><a href="../../Lingo/Language/Char.html">Lingo::Language::Char</a>
   
     <li><a href="../../Lingo/Language/Dictionary.html">Lingo::Language::Dictionary</a>
   
@@ -225,15 +229,15 @@
   
     <li><a href="../../Lingo/NoWritableStoreError.html">Lingo::NoWritableStoreError</a>
   
-    <li><a href="../../Lingo/Reportable.html">Lingo::Reportable</a>
-  
     <li><a href="../../Lingo/ShowProgress.html">Lingo::ShowProgress</a>
   
     <li><a href="../../Lingo/SourceFileNotFoundError.html">Lingo::SourceFileNotFoundError</a>
   
+    <li><a href="../../Lingo/Srv.html">Lingo::Srv</a>
+  
     <li><a href="../../Lingo/Version.html">Lingo::Version</a>
   
-    <li><a href="../../String.html">String</a>
+    <li><a href="../../Lingo/Web.html">Lingo::Web</a>
   
   </ul>
 </nav>
@@ -266,8 +270,7 @@ href="Synonymer.html">Synonymer</a>, Multiworder, <a
 href="Sequencer.html">Sequencer</a></p>
 </dd><dt>Erzeugt
 <dd>
-<p>Daten vom Typ <strong><a href="../../String.html">String</a></strong>, z.B.
-für Textwriter</p>
+<p>Daten vom Typ <strong>String</strong>, z.B. für Textwriter</p>
 </dd></dl>
 
 <h3 id="label-Parameter">Parameter</h3>
@@ -350,6 +353,19 @@ out&gt; *EOF('test.txt')</pre>
     
 
     
+    <!-- Constants -->
+    <section id="constants-list" class="section">
+      <h3 class="section-header">Constants</h3>
+      <dl>
+      
+        <dt id="DEFAULT_SRC_SEP">DEFAULT_SRC_SEP
+        
+        <dd class="description">
+        
+      
+      </dl>
+    </section>
+    
 
     
 
@@ -375,7 +391,7 @@ out&gt; *EOF('test.txt')</pre>
 
           
           <div class="method-source-code" id="control-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 98</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 103</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">param</span>)
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">cmd</span>
     <span class="ruby-keyword">when</span> <span class="ruby-constant">STR_CMD_EOL</span>
@@ -410,13 +426,16 @@ out&gt; *EOF('test.txt')</pre>
 
           
           <div class="method-source-code" id="init-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 83</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 85</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">init</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@debug</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">'debug'</span>, <span class="ruby-keyword">false</span>)
     <span class="ruby-ivar">@prompt</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">'prompt'</span>, <span class="ruby-string">'lex:) '</span>)
   <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@lex</span>  = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">get_key</span>(<span class="ruby-string">'lexicals'</span>, <span class="ruby-string">'[sy]'</span>).<span class="ruby-identifier">downcase</span>)
+    <span class="ruby-ivar">@lex</span>  = <span class="ruby-identifier">get_re</span>(<span class="ruby-string">'lexicals'</span>, <span class="ruby-string">'[sy]'</span>)
     <span class="ruby-ivar">@skip</span> = <span class="ruby-identifier">get_array</span>(<span class="ruby-string">'skip'</span>, <span class="ruby-constant">DEFAULT_SKIP</span>, <span class="ruby-value">:upcase</span>)
+
+    <span class="ruby-ivar">@src</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">'src'</span>, <span class="ruby-keyword">false</span>)
+    <span class="ruby-ivar">@src</span> = <span class="ruby-constant">DEFAULT_SRC_SEP</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@src</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span>
 
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">sort</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">'sort'</span>, <span class="ruby-string">'normal'</span>)
       <span class="ruby-ivar">@sort_format</span>, <span class="ruby-ivar">@sort_method</span> = <span class="ruby-identifier">sort</span>.<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">'_'</span>, <span class="ruby-value">2</span>)
@@ -451,19 +470,18 @@ out&gt; *EOF('test.txt')</pre>
 
           
           <div class="method-source-code" id="process-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 107</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 112</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">process</span>(<span class="ruby-identifier">obj</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@debug</span>
     <span class="ruby-identifier">forward</span>(<span class="ruby-node">&quot;#{@prompt} #{obj.inspect}&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">eval</span>(<span class="ruby-ivar">@debug</span>)
   <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Word</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@skip</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">attr</span>)
     <span class="ruby-ivar">@word_count</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
 
-    <span class="ruby-identifier">cnt</span> = <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">get_class</span>(<span class="ruby-ivar">@lex</span>).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">lex</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">vec</span> = <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">form</span>.<span class="ruby-identifier">downcase</span>
+    <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">get_class</span>(<span class="ruby-ivar">@lex</span>).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">lex</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">vec</span> = <span class="ruby-constant">Unicode</span>.<span class="ruby-identifier">downcase</span>(<span class="ruby-identifier">lex</span>.<span class="ruby-identifier">form</span>)
+      <span class="ruby-identifier">vec</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@src</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">src</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@src</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">src</span>
       <span class="ruby-ivar">@sort_format</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@vectors</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">vec</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">vec</span>)
-    }.<span class="ruby-identifier">size</span>
-
-    <span class="ruby-identifier">add</span>(<span class="ruby-string">'Anzahl von Vektor-Wörtern'</span>, <span class="ruby-identifier">cnt</span>)
+    }
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- process-source -->
@@ -498,15 +516,11 @@ out&gt; *EOF('test.txt')</pre>
 
           
           <div class="method-source-code" id="send_vectors-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 124</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 128</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">send_vectors</span>
-  <span class="ruby-identifier">add</span>(<span class="ruby-string">'Objekte gefiltert'</span>, <span class="ruby-ivar">@vectors</span>.<span class="ruby-identifier">size</span>)
-
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@sort_format</span> <span class="ruby-operator">==</span> <span class="ruby-string">'normal'</span>
-    <span class="ruby-ivar">@vectors</span>.<span class="ruby-identifier">sort!</span>
     <span class="ruby-ivar">@vectors</span>.<span class="ruby-identifier">uniq!</span>
-
-    <span class="ruby-ivar">@vectors</span>.<span class="ruby-identifier">each</span>(&amp;<span class="ruby-identifier">method</span>(<span class="ruby-value">:forward</span>)).<span class="ruby-identifier">clear</span>
+    <span class="ruby-identifier">flush</span>(<span class="ruby-ivar">@vectors</span>.<span class="ruby-identifier">sort!</span>)
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">cnt</span>, <span class="ruby-identifier">fmt</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>), <span class="ruby-string">'%d'</span>
 

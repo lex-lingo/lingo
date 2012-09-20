@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Lingo::Attendee::MultiWorder - lingo Application documentation (v1.8.2)</title>
+<title>class Lingo::Attendee::MultiWorder - lingo Application documentation (v1.8.3)</title>
 
 <link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
 
@@ -109,6 +109,8 @@
   
     <li><a href="../../Lingo/AgendaItem.html">Lingo::AgendaItem</a>
   
+    <li><a href="../../Lingo/App.html">Lingo::App</a>
+  
     <li><a href="../../Lingo/Attendee.html">Lingo::Attendee</a>
   
     <li><a href="../../Lingo/Attendee/Abbreviator.html">Lingo::Attendee::Abbreviator</a>
@@ -157,8 +159,6 @@
   
     <li><a href="../../Lingo/CLI.html">Lingo::CLI</a>
   
-    <li><a href="../../Lingo/Cachable.html">Lingo::Cachable</a>
-  
     <li><a href="../../Lingo/Call.html">Lingo::Call</a>
   
     <li><a href="../../Lingo/Config.html">Lingo::Config</a>
@@ -197,11 +197,15 @@
   
     <li><a href="../../Lingo/DatabaseError.html">Lingo::DatabaseError</a>
   
+    <li><a href="../../Lingo/Debug.html">Lingo::Debug</a>
+  
     <li><a href="../../Lingo/FileNotFoundError.html">Lingo::FileNotFoundError</a>
   
     <li><a href="../../Lingo/InvalidDatabaseConfigError.html">Lingo::InvalidDatabaseConfigError</a>
   
     <li><a href="../../Lingo/Language.html">Lingo::Language</a>
+  
+    <li><a href="../../Lingo/Language/Char.html">Lingo::Language::Char</a>
   
     <li><a href="../../Lingo/Language/Dictionary.html">Lingo::Language::Dictionary</a>
   
@@ -227,15 +231,15 @@
   
     <li><a href="../../Lingo/NoWritableStoreError.html">Lingo::NoWritableStoreError</a>
   
-    <li><a href="../../Lingo/Reportable.html">Lingo::Reportable</a>
-  
     <li><a href="../../Lingo/ShowProgress.html">Lingo::ShowProgress</a>
   
     <li><a href="../../Lingo/SourceFileNotFoundError.html">Lingo::SourceFileNotFoundError</a>
   
+    <li><a href="../../Lingo/Srv.html">Lingo::Srv</a>
+  
     <li><a href="../../Lingo/Version.html">Lingo::Version</a>
   
-    <li><a href="../../String.html">String</a>
+    <li><a href="../../Lingo/Web.html">Lingo::Web</a>
   
   </ul>
 </nav>
@@ -359,7 +363,7 @@ out&gt; *EOF('test.txt')</pre>
           <div class="method-source-code" id="control-source">
             <pre><span class="ruby-comment"># File lib/lingo/attendee/multi_worder.rb, line 114</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">param</span>)
-  <span class="ruby-identifier">control_multi</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-ivar">@mul_dic</span>)
+  <span class="ruby-identifier">control_multi</span>(<span class="ruby-identifier">cmd</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- control-source -->
           
@@ -521,29 +525,36 @@ out&gt; *EOF('test.txt')</pre>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">check_multiword_key</span>(<span class="ruby-identifier">len</span>)
   <span class="ruby-keyword">return</span> [] <span class="ruby-keyword">if</span> <span class="ruby-identifier">valid_tokens_in_buffer</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">len</span>
 
-  <span class="ruby-identifier">seq</span> = <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">obj</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">seq</span> = []
+
+  <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">obj</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">next</span> [<span class="ruby-identifier">obj</span>] <span class="ruby-keyword">unless</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">WordForm</span>)
     <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> (<span class="ruby-identifier">form</span> = <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">form</span>) <span class="ruby-operator">==</span> <span class="ruby-constant">CHAR_PUNCT</span>
 
     <span class="ruby-identifier">w</span> = <span class="ruby-identifier">find_word</span>(<span class="ruby-identifier">form</span>, <span class="ruby-ivar">@lex_dic</span>, <span class="ruby-ivar">@lex_gra</span>)
     <span class="ruby-identifier">l</span> = <span class="ruby-identifier">w</span>.<span class="ruby-identifier">lexicals</span>
 
-    (<span class="ruby-identifier">w</span>.<span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-constant">WA_COMPOUND</span> <span class="ruby-operator">?</span> [<span class="ruby-identifier">l</span>.<span class="ruby-identifier">first</span>] <span class="ruby-operator">:</span> <span class="ruby-identifier">l</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> [<span class="ruby-identifier">w</span>] <span class="ruby-operator">:</span> <span class="ruby-identifier">l</span>.<span class="ruby-identifier">dup</span>).<span class="ruby-identifier">tap</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">i</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-ivar">@syn_dic</span>.<span class="ruby-identifier">find_synonyms</span>(<span class="ruby-identifier">w</span>)) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@syn_dic</span>
-      <span class="ruby-identifier">i</span>.<span class="ruby-identifier">map!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">j</span><span class="ruby-operator">|</span> <span class="ruby-identifier">j</span>.<span class="ruby-identifier">form</span>.<span class="ruby-identifier">downcase</span> }.<span class="ruby-identifier">uniq!</span>
-    }
+    <span class="ruby-identifier">i</span> = <span class="ruby-identifier">w</span>.<span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-constant">WA_COMPOUND</span> <span class="ruby-operator">?</span> [<span class="ruby-identifier">l</span>.<span class="ruby-identifier">first</span>] <span class="ruby-operator">:</span> <span class="ruby-identifier">l</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> [<span class="ruby-identifier">w</span>] <span class="ruby-operator">:</span> <span class="ruby-identifier">l</span>.<span class="ruby-identifier">dup</span>
+
+    <span class="ruby-ivar">@syn_dic</span>.<span class="ruby-identifier">find_synonyms</span>(<span class="ruby-identifier">w</span>, <span class="ruby-identifier">i</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@syn_dic</span>
+    <span class="ruby-identifier">i</span>.<span class="ruby-identifier">map!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">j</span><span class="ruby-operator">|</span> <span class="ruby-constant">Unicode</span>.<span class="ruby-identifier">downcase</span>(<span class="ruby-identifier">j</span>.<span class="ruby-identifier">form</span>) }.<span class="ruby-identifier">uniq!</span>
+
+    <span class="ruby-identifier">seq</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">i</span>
+
+    <span class="ruby-keyword">break</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">len</span>
   }
 
-  <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">compact!</span>
-  <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">slice!</span>(<span class="ruby-identifier">len</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>)
-
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@combine</span>
-    [].<span class="ruby-identifier">tap</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">mul</span><span class="ruby-operator">|</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">shift</span>.<span class="ruby-identifier">product</span>(*<span class="ruby-identifier">seq</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">mul</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-ivar">@mul_dic</span>.<span class="ruby-identifier">select</span>(<span class="ruby-identifier">key</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">' '</span>)))
+    <span class="ruby-identifier">mul</span> = []
+
+    <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">shift</span>.<span class="ruby-identifier">product</span>(*<span class="ruby-identifier">seq</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
+      <span class="ruby-ivar">@mul_dic</span>.<span class="ruby-identifier">select</span>(<span class="ruby-identifier">key</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">' '</span>), <span class="ruby-identifier">mul</span>)
       <span class="ruby-keyword">break</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@all_keys</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">mul</span>.<span class="ruby-identifier">empty?</span>
-    } <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">mul</span>.<span class="ruby-identifier">uniq!</span> }
+    } <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">mul</span>.<span class="ruby-identifier">uniq!</span>
+
+    <span class="ruby-identifier">mul</span>
   <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@mul_dic</span>.<span class="ruby-identifier">select</span>(<span class="ruby-identifier">seq</span>.<span class="ruby-identifier">map!</span>(&amp;<span class="ruby-value">:first</span>).<span class="ruby-identifier">join</span>(<span class="ruby-string">' '</span>))
+    <span class="ruby-ivar">@mul_dic</span>.<span class="ruby-identifier">select</span>(<span class="ruby-identifier">seq</span>.<span class="ruby-identifier">map!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span>,<span class="ruby-operator">|</span> <span class="ruby-identifier">i</span> }.<span class="ruby-identifier">join</span>(<span class="ruby-string">' '</span>))
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- check_multiword_key-source -->

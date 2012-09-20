@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Lingo - lingo Application documentation (v1.8.2)</title>
+<title>class Lingo - lingo Application documentation (v1.8.3)</title>
 
 <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
 
@@ -48,18 +48,21 @@
   <h3 class="section-header">Defined In</h3>
   <ul>
     <li>lib/lingo.rb
+    <li>lib/lingo/app.rb
     <li>lib/lingo/cli.rb
     <li>lib/lingo/ctl.rb
+    <li>lib/lingo/srv.rb
+    <li>lib/lingo/web.rb
     <li>lib/lingo/call.rb
+    <li>lib/lingo/debug.rb
     <li>lib/lingo/error.rb
     <li>lib/lingo/config.rb
     <li>lib/lingo/version.rb
     <li>lib/lingo/attendee.rb
-    <li>lib/lingo/cachable.rb
     <li>lib/lingo/database.rb
     <li>lib/lingo/language.rb
-    <li>lib/lingo/reportable.rb
     <li>lib/lingo/agenda_item.rb
+    <li>lib/lingo/language/char.rb
     <li>lib/lingo/language/word.rb
     <li>lib/lingo/show_progress.rb
     <li>lib/lingo/language/token.rb
@@ -165,6 +168,8 @@
     
     <li><a href="#method-i-database_config">#database_config</a>
     
+    <li><a href="#method-i-deprecate">#deprecate</a>
+    
     <li><a href="#method-i-dictionary_config">#dictionary_config</a>
     
     <li><a href="#method-i-invite">#invite</a>
@@ -207,6 +212,8 @@
     <li><a href="./Lingo.html">Lingo</a>
   
     <li><a href="./Lingo/AgendaItem.html">Lingo::AgendaItem</a>
+  
+    <li><a href="./Lingo/App.html">Lingo::App</a>
   
     <li><a href="./Lingo/Attendee.html">Lingo::Attendee</a>
   
@@ -256,8 +263,6 @@
   
     <li><a href="./Lingo/CLI.html">Lingo::CLI</a>
   
-    <li><a href="./Lingo/Cachable.html">Lingo::Cachable</a>
-  
     <li><a href="./Lingo/Call.html">Lingo::Call</a>
   
     <li><a href="./Lingo/Config.html">Lingo::Config</a>
@@ -296,11 +301,15 @@
   
     <li><a href="./Lingo/DatabaseError.html">Lingo::DatabaseError</a>
   
+    <li><a href="./Lingo/Debug.html">Lingo::Debug</a>
+  
     <li><a href="./Lingo/FileNotFoundError.html">Lingo::FileNotFoundError</a>
   
     <li><a href="./Lingo/InvalidDatabaseConfigError.html">Lingo::InvalidDatabaseConfigError</a>
   
     <li><a href="./Lingo/Language.html">Lingo::Language</a>
+  
+    <li><a href="./Lingo/Language/Char.html">Lingo::Language::Char</a>
   
     <li><a href="./Lingo/Language/Dictionary.html">Lingo::Language::Dictionary</a>
   
@@ -326,15 +335,15 @@
   
     <li><a href="./Lingo/NoWritableStoreError.html">Lingo::NoWritableStoreError</a>
   
-    <li><a href="./Lingo/Reportable.html">Lingo::Reportable</a>
-  
     <li><a href="./Lingo/ShowProgress.html">Lingo::ShowProgress</a>
   
     <li><a href="./Lingo/SourceFileNotFoundError.html">Lingo::SourceFileNotFoundError</a>
   
+    <li><a href="./Lingo/Srv.html">Lingo::Srv</a>
+  
     <li><a href="./Lingo/Version.html">Lingo::Version</a>
   
-    <li><a href="./String.html">String</a>
+    <li><a href="./Lingo/Web.html">Lingo::Web</a>
   
   </ul>
 </nav>
@@ -377,7 +386,7 @@
       
         <dt id="ENC">ENC
         
-        <dd class="description"><p>Default encoding</p>
+        <dd class="description">
         
       
         <dt id="FIND_OPTIONS">FIND_OPTIONS
@@ -420,32 +429,6 @@ configuration files.</p>
       <div id="attribute-i-dictionaries" class="method-detail">
         <div class="method-heading attribute-method-heading">
           <span class="method-name">dictionaries</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
-
-        <div class="method-description">
-        
-        
-        
-        </div>
-      </div>
-      
-      <div id="attribute-i-report_status" class="method-detail">
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">report_status</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
-
-        <div class="method-description">
-        
-        
-        
-        </div>
-      </div>
-      
-      <div id="attribute-i-report_time" class="method-detail">
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">report_time</span><span
             class="attribute-access-type">[R]</span>
         </div>
 
@@ -572,7 +555,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="call-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 72</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 71</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">call</span>(<span class="ruby-identifier">cfg</span> = <span class="ruby-identifier">find</span>(<span class="ruby-value">:config</span>, <span class="ruby-string">'lingo-call'</span>), <span class="ruby-identifier">args</span> = [], &amp;<span class="ruby-identifier">block</span>)
   <span class="ruby-constant">Call</span>.<span class="ruby-identifier">new</span>([<span class="ruby-string">'-c'</span>, <span class="ruby-identifier">cfg</span>, *<span class="ruby-identifier">args</span>]).<span class="ruby-identifier">call</span>(&amp;<span class="ruby-identifier">block</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -602,7 +585,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="ctl-source">
-            <pre><span class="ruby-comment"># File lib/lingo/ctl.rb, line 230</span>
+            <pre><span class="ruby-comment"># File lib/lingo/ctl.rb, line 242</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">ctl</span>
   <span class="ruby-constant">Ctl</span>.<span class="ruby-identifier">ctl</span>
 <span class="ruby-keyword">rescue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">err</span>
@@ -708,20 +691,21 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="list-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 76</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 75</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">list</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-identifier">options</span> = <span class="ruby-identifier">options_for</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">options</span>)
-  <span class="ruby-identifier">path</span>    = <span class="ruby-identifier">path_for</span>(<span class="ruby-identifier">options</span>)
 
-  <span class="ruby-identifier">glob</span> = <span class="ruby-identifier">file_with_ext</span>(<span class="ruby-string">'*'</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">glob</span>, <span class="ruby-identifier">list</span> = <span class="ruby-identifier">file_with_ext</span>(<span class="ruby-string">'*'</span>, <span class="ruby-identifier">options</span>), []
   <span class="ruby-identifier">glob</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">'??'</span>, <span class="ruby-identifier">glob</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-value">:dict</span>
 
-  [].<span class="ruby-identifier">tap</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">list</span><span class="ruby-operator">|</span> <span class="ruby-identifier">walk</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">dir</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">walk</span>(<span class="ruby-identifier">path</span> = <span class="ruby-identifier">path_for</span>(<span class="ruby-identifier">options</span>), <span class="ruby-identifier">options</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">dir</span><span class="ruby-operator">|</span>
     <span class="ruby-constant">Dir</span>[<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-identifier">glob</span>)].<span class="ruby-identifier">sort!</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
       <span class="ruby-identifier">pn</span> = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>)
       <span class="ruby-identifier">list</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">realpath_for</span>(<span class="ruby-identifier">pn</span>, <span class="ruby-identifier">path</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">pn</span>.<span class="ruby-identifier">file?</span>
     }
-  } }
+  }
+
+  <span class="ruby-identifier">list</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- list-source -->
           
@@ -749,8 +733,10 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 227</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 225</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-constant">Debug</span>.<span class="ruby-identifier">ps</span>(<span class="ruby-value">:lingo_new</span>)
+
   <span class="ruby-ivar">@config_args</span> = <span class="ruby-identifier">args</span>
   <span class="ruby-identifier">reset</span>(<span class="ruby-keyword">false</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -810,7 +796,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="talk-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 68</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 67</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">talk</span>(*<span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">new</span>(*<span class="ruby-identifier">args</span>).<span class="ruby-identifier">talk</span>
 <span class="ruby-keyword">end</span></pre>
@@ -980,7 +966,7 @@ configuration files.</p>
           <div class="method-source-code" id="include_path-source">
             <pre><span class="ruby-comment"># File lib/lingo.rb, line 131</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">include_path</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">pre</span> = <span class="ruby-keyword">false</span>)
-  <span class="ruby-constant">PATH</span>.<span class="ruby-identifier">insert</span>(<span class="ruby-identifier">pre</span> <span class="ruby-operator">?</span> <span class="ruby-value">0</span> <span class="ruby-operator">:</span> <span class="ruby-value">-1</span>, *<span class="ruby-identifier">path</span>.<span class="ruby-identifier">map!</span>(&amp;<span class="ruby-value">:to_s</span>))
+  <span class="ruby-constant">PATH</span>.<span class="ruby-identifier">insert</span>(<span class="ruby-identifier">pre</span> <span class="ruby-operator">?</span> <span class="ruby-value">0</span> <span class="ruby-operator">:</span> <span class="ruby-value">-1</span>, *<span class="ruby-identifier">path</span>.<span class="ruby-identifier">map!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">to_s</span> })
 <span class="ruby-keyword">end</span></pre>
           </div><!-- include_path-source -->
           
@@ -1178,7 +1164,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="config-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 232</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 234</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">config</span>
   <span class="ruby-ivar">@config</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Config</span>.<span class="ruby-identifier">new</span>(*<span class="ruby-ivar">@config_args</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -1208,7 +1194,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="database_config-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 242</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 244</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">database_config</span>(<span class="ruby-identifier">id</span>)
   <span class="ruby-identifier">dictionary_config</span>[<span class="ruby-string">'databases'</span>][<span class="ruby-identifier">id</span>].<span class="ruby-identifier">tap</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">cfg</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">NoDatabaseConfigError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">id</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">cfg</span>
@@ -1223,6 +1209,36 @@ configuration files.</p>
 
         
       </div><!-- database_config-method -->
+
+    
+      <div id="method-i-deprecate" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">deprecate</span><span
+            class="method-args">(old, new, obj = self)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="deprecate-source">
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 310</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">deprecate</span>(<span class="ruby-identifier">old</span>, <span class="ruby-identifier">new</span>, <span class="ruby-identifier">obj</span> = <span class="ruby-keyword">self</span>)
+  <span class="ruby-identifier">config</span>.<span class="ruby-identifier">deprecate</span>(<span class="ruby-identifier">old</span>, <span class="ruby-identifier">new</span>, <span class="ruby-identifier">obj</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- deprecate-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- deprecate-method -->
 
     
       <div id="method-i-dictionary_config" class="method-detail ">
@@ -1241,7 +1257,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="dictionary_config-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 236</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 238</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">dictionary_config</span>
   <span class="ruby-ivar">@dictionary_config</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">config</span>[<span class="ruby-string">'language/dictionary'</span>]
 <span class="ruby-keyword">rescue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">err</span>
@@ -1273,7 +1289,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="invite-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 260</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 266</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">invite</span>(<span class="ruby-identifier">list</span> = <span class="ruby-identifier">config</span>[<span class="ruby-string">'meeting/attendees'</span>])
   <span class="ruby-identifier">supplier</span>   = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span>, <span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>[<span class="ruby-identifier">k</span>] = [] }
   <span class="ruby-identifier">subscriber</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span>, <span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>[<span class="ruby-identifier">k</span>] = [] }
@@ -1329,7 +1345,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="lexical_hash-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 249</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 251</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">lexical_hash</span>(<span class="ruby-identifier">src</span>)
   <span class="ruby-ivar">@lexical_hash</span>[<span class="ruby-identifier">src</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -1359,9 +1375,9 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="reset-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 304</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 300</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reset</span>(<span class="ruby-identifier">close</span> = <span class="ruby-keyword">true</span>)
-  <span class="ruby-identifier">dictionaries</span>.<span class="ruby-identifier">each</span>(&amp;<span class="ruby-value">:close</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">close</span>
+  <span class="ruby-identifier">dictionaries</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">close</span> } <span class="ruby-keyword">if</span> <span class="ruby-identifier">close</span>
   <span class="ruby-ivar">@dictionaries</span>, <span class="ruby-ivar">@attendees</span> = [], []
   <span class="ruby-ivar">@lexical_hash</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span>, <span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-constant">Language</span><span class="ruby-operator">::</span><span class="ruby-constant">LexicalHash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">k</span>, <span class="ruby-keyword">self</span>) }
 <span class="ruby-keyword">end</span></pre>
@@ -1379,7 +1395,7 @@ configuration files.</p>
         
         <div class="method-heading">
           <span class="method-name">start</span><span
-            class="method-args">(report_status = config['status'], report_time = config['perfmon'])</span>
+            class="method-args">()</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -1391,19 +1407,9 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="start-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 290</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">start</span>(<span class="ruby-identifier">report_status</span> = <span class="ruby-identifier">config</span>[<span class="ruby-string">'status'</span>], <span class="ruby-identifier">report_time</span> = <span class="ruby-identifier">config</span>[<span class="ruby-string">'perfmon'</span>])
-  <span class="ruby-ivar">@report_status</span>, <span class="ruby-ivar">@report_time</span> = <span class="ruby-identifier">report_status</span>, <span class="ruby-identifier">report_time</span>
-
-  <span class="ruby-identifier">time</span> = <span class="ruby-constant">Benchmark</span>.<span class="ruby-identifier">realtime</span> {
-    <span class="ruby-ivar">@attendees</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">listen</span>(<span class="ruby-constant">AgendaItem</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Attendee</span><span class="ruby-operator">::</span><span class="ruby-constant">STR_CMD_TALK</span>))
-  }
-
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">report_status</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">report_time</span>
-    <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;Require protocol...\n#{separator = '-' * 61}&quot;</span>
-    <span class="ruby-ivar">@attendees</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">listen</span>(<span class="ruby-constant">AgendaItem</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Attendee</span><span class="ruby-operator">::</span><span class="ruby-constant">STR_CMD_STATUS</span>))
-    <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;#{separator}\nThe duration of the meeting was #{time.to_hms(2)}&quot;</span>
-  <span class="ruby-keyword">end</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 296</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">start</span>
+  <span class="ruby-ivar">@attendees</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">listen</span>(<span class="ruby-constant">AgendaItem</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Attendee</span><span class="ruby-operator">::</span><span class="ruby-constant">STR_CMD_TALK</span>))
 <span class="ruby-keyword">end</span></pre>
           </div><!-- start-source -->
           
@@ -1431,10 +1437,14 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="talk-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 253</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 255</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">talk</span>
-  <span class="ruby-identifier">invite</span>
-  <span class="ruby-identifier">start</span>
+  <span class="ruby-constant">Debug</span>.<span class="ruby-identifier">profile</span>(<span class="ruby-identifier">config</span>[<span class="ruby-string">'profile'</span>]) {
+    <span class="ruby-identifier">invite</span>
+    <span class="ruby-identifier">start</span>
+  }
+
+  <span class="ruby-constant">Debug</span>.<span class="ruby-identifier">ps</span>(<span class="ruby-value">:lingo_talk</span>)
 <span class="ruby-keyword">ensure</span>
   <span class="ruby-identifier">reset</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1464,9 +1474,9 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="warn-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 310</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 306</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">warn</span>(*<span class="ruby-identifier">msg</span>)
-  <span class="ruby-identifier">config</span>.<span class="ruby-identifier">stderr</span>.<span class="ruby-identifier">puts</span>(*<span class="ruby-identifier">msg</span>)
+  <span class="ruby-identifier">config</span>.<span class="ruby-identifier">warn</span>(*<span class="ruby-identifier">msg</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- warn-source -->
           

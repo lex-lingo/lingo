@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>module Lingo::Database::HashStore - lingo Application documentation (v1.8.2)</title>
+<title>module Lingo::Database::HashStore - lingo Application documentation (v1.8.3)</title>
 
 <link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
 
@@ -68,11 +68,11 @@
     
     <li><a href="#method-i-_closed-3F">#_closed?</a>
     
+    <li><a href="#method-i-_each">#_each</a>
+    
     <li><a href="#method-i-_open">#_open</a>
     
     <li><a href="#method-i-close">#close</a>
-    
-    <li><a href="#method-i-to_h">#to_h</a>
     
     <li><a href="#method-i-uptodate-21">#uptodate!</a>
     
@@ -106,6 +106,8 @@
     <li><a href="../../Lingo.html">Lingo</a>
   
     <li><a href="../../Lingo/AgendaItem.html">Lingo::AgendaItem</a>
+  
+    <li><a href="../../Lingo/App.html">Lingo::App</a>
   
     <li><a href="../../Lingo/Attendee.html">Lingo::Attendee</a>
   
@@ -155,8 +157,6 @@
   
     <li><a href="../../Lingo/CLI.html">Lingo::CLI</a>
   
-    <li><a href="../../Lingo/Cachable.html">Lingo::Cachable</a>
-  
     <li><a href="../../Lingo/Call.html">Lingo::Call</a>
   
     <li><a href="../../Lingo/Config.html">Lingo::Config</a>
@@ -195,11 +195,15 @@
   
     <li><a href="../../Lingo/DatabaseError.html">Lingo::DatabaseError</a>
   
+    <li><a href="../../Lingo/Debug.html">Lingo::Debug</a>
+  
     <li><a href="../../Lingo/FileNotFoundError.html">Lingo::FileNotFoundError</a>
   
     <li><a href="../../Lingo/InvalidDatabaseConfigError.html">Lingo::InvalidDatabaseConfigError</a>
   
     <li><a href="../../Lingo/Language.html">Lingo::Language</a>
+  
+    <li><a href="../../Lingo/Language/Char.html">Lingo::Language::Char</a>
   
     <li><a href="../../Lingo/Language/Dictionary.html">Lingo::Language::Dictionary</a>
   
@@ -225,15 +229,15 @@
   
     <li><a href="../../Lingo/NoWritableStoreError.html">Lingo::NoWritableStoreError</a>
   
-    <li><a href="../../Lingo/Reportable.html">Lingo::Reportable</a>
-  
     <li><a href="../../Lingo/ShowProgress.html">Lingo::ShowProgress</a>
   
     <li><a href="../../Lingo/SourceFileNotFoundError.html">Lingo::SourceFileNotFoundError</a>
   
+    <li><a href="../../Lingo/Srv.html">Lingo::Srv</a>
+  
     <li><a href="../../Lingo/Version.html">Lingo::Version</a>
   
-    <li><a href="../../String.html">String</a>
+    <li><a href="../../Lingo/Web.html">Lingo::Web</a>
   
   </ul>
 </nav>
@@ -277,12 +281,12 @@
 
         <div class="method-description">
           
-          
+          <p>Never close, because we can’t restore.</p>
           
 
           
           <div class="method-source-code" id="close-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/hash_store.rb, line 36</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database/hash_store.rb, line 33</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">close</span>
   <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
@@ -294,36 +298,6 @@
 
         
       </div><!-- close-method -->
-
-    
-      <div id="method-i-to_h" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">to_h</span><span
-            class="method-args">()</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-
-          
-          <div class="method-source-code" id="to_h-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/hash_store.rb, line 32</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_h</span>
-  <span class="ruby-ivar">@db</span>.<span class="ruby-identifier">dup</span>
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- to_h-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- to_h-method -->
 
     
     </section><!-- public-instance-method-details -->
@@ -348,7 +322,7 @@
 
           
           <div class="method-source-code" id="_clear-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/hash_store.rb, line 50</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database/hash_store.rb, line 49</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">_clear</span>
   <span class="ruby-ivar">@db</span>.<span class="ruby-identifier">clear</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@db</span>
 <span class="ruby-keyword">end</span></pre>
@@ -373,7 +347,7 @@
 
         <div class="method-description">
           
-          
+          <p>Never closed.</p>
           
 
           
@@ -392,6 +366,36 @@
       </div><!-- _closed-3F-method -->
 
     
+      <div id="method-i-_each" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">_each</span><span
+            class="method-args">() { |dup, val| ... }</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Dup key, because we’re reusing everything.</p>
+          
+
+          
+          <div class="method-source-code" id="_each-source">
+            <pre><span class="ruby-comment"># File lib/lingo/database/hash_store.rb, line 63</span>
+ <span class="ruby-keyword">def</span> <span class="ruby-identifier">_each</span>
+  <span class="ruby-ivar">@db</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">dup</span>, <span class="ruby-identifier">val</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- _each-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- _each-method -->
+
+    
       <div id="method-i-_open" class="method-detail ">
         
         <div class="method-heading">
@@ -408,7 +412,7 @@
 
           
           <div class="method-source-code" id="_open-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/hash_store.rb, line 54</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database/hash_store.rb, line 53</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">_open</span>
   {}
 <span class="ruby-keyword">end</span></pre>
@@ -433,12 +437,12 @@
 
         <div class="method-description">
           
-          
+          <p>Nothing to do.</p>
           
 
           
           <div class="method-source-code" id="uptodate-21-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/hash_store.rb, line 46</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database/hash_store.rb, line 45</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">uptodate!</span>
   <span class="ruby-keyword">nil</span>
 <span class="ruby-keyword">end</span></pre>
@@ -463,12 +467,12 @@
 
         <div class="method-description">
           
-          
+          <p>Never up-to-date.</p>
           
 
           
           <div class="method-source-code" id="uptodate-3F-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/hash_store.rb, line 42</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database/hash_store.rb, line 40</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">uptodate?</span>
   <span class="ruby-keyword">false</span>
 <span class="ruby-keyword">end</span></pre>

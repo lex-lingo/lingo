@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Lingo::Language::LexicalHash - lingo Application documentation (v1.8.2)</title>
+<title>class Lingo::Language::LexicalHash - lingo Application documentation (v1.8.3)</title>
 
 <link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
 
@@ -63,23 +63,7 @@
   
 </nav>
 
-    <!-- Included Modules -->
-<nav id="includes-section" class="section">
-  <h3 class="section-header">Included Modules</h3>
-
-  <ul class="link-list">
-  
-  
-    <li><a class="include" href="../Cachable.html">Lingo::Cachable</a>
-  
-  
-  
-    <li><a class="include" href="../Reportable.html">Lingo::Reportable</a>
-  
-  
-  </ul>
-</nav>
-
+    
     <!-- Method Quickref -->
 <nav id="method-list-section" class="section">
   <h3 class="section-header">Methods</h3>
@@ -122,6 +106,8 @@
     <li><a href="../../Lingo.html">Lingo</a>
   
     <li><a href="../../Lingo/AgendaItem.html">Lingo::AgendaItem</a>
+  
+    <li><a href="../../Lingo/App.html">Lingo::App</a>
   
     <li><a href="../../Lingo/Attendee.html">Lingo::Attendee</a>
   
@@ -171,8 +157,6 @@
   
     <li><a href="../../Lingo/CLI.html">Lingo::CLI</a>
   
-    <li><a href="../../Lingo/Cachable.html">Lingo::Cachable</a>
-  
     <li><a href="../../Lingo/Call.html">Lingo::Call</a>
   
     <li><a href="../../Lingo/Config.html">Lingo::Config</a>
@@ -211,11 +195,15 @@
   
     <li><a href="../../Lingo/DatabaseError.html">Lingo::DatabaseError</a>
   
+    <li><a href="../../Lingo/Debug.html">Lingo::Debug</a>
+  
     <li><a href="../../Lingo/FileNotFoundError.html">Lingo::FileNotFoundError</a>
   
     <li><a href="../../Lingo/InvalidDatabaseConfigError.html">Lingo::InvalidDatabaseConfigError</a>
   
     <li><a href="../../Lingo/Language.html">Lingo::Language</a>
+  
+    <li><a href="../../Lingo/Language/Char.html">Lingo::Language::Char</a>
   
     <li><a href="../../Lingo/Language/Dictionary.html">Lingo::Language::Dictionary</a>
   
@@ -241,15 +229,15 @@
   
     <li><a href="../../Lingo/NoWritableStoreError.html">Lingo::NoWritableStoreError</a>
   
-    <li><a href="../../Lingo/Reportable.html">Lingo::Reportable</a>
-  
     <li><a href="../../Lingo/ShowProgress.html">Lingo::ShowProgress</a>
   
     <li><a href="../../Lingo/SourceFileNotFoundError.html">Lingo::SourceFileNotFoundError</a>
   
+    <li><a href="../../Lingo/Srv.html">Lingo::Srv</a>
+  
     <li><a href="../../Lingo/Version.html">Lingo::Version</a>
   
-    <li><a href="../../String.html">String</a>
+    <li><a href="../../Lingo/Web.html">Lingo::Web</a>
   
   </ul>
 </nav>
@@ -304,11 +292,8 @@ gegeben.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/lexical_hash.rb, line 45</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/lexical_hash.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">lingo</span>)
-  <span class="ruby-identifier">init_cachable</span>
-  <span class="ruby-identifier">init_reportable</span>(<span class="ruby-identifier">id</span>)
-
   <span class="ruby-ivar">@wc</span>  = <span class="ruby-identifier">lingo</span>.<span class="ruby-identifier">database_config</span>(<span class="ruby-identifier">id</span>).<span class="ruby-identifier">fetch</span>(<span class="ruby-string">'def-wc'</span>, <span class="ruby-constant">LA_UNKNOWN</span>)
   <span class="ruby-ivar">@src</span> = <span class="ruby-constant">Database</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">lingo</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -338,7 +323,7 @@ gegeben.</p>
 
           
           <div class="method-source-code" id="open-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/lexical_hash.rb, line 39</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/lexical_hash.rb, line 36</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">open</span>(*<span class="ruby-identifier">args</span>)
   <span class="ruby-keyword">yield</span> <span class="ruby-identifier">lexical_hash</span> = <span class="ruby-identifier">new</span>(*<span class="ruby-identifier">args</span>)
 <span class="ruby-keyword">ensure</span>
@@ -376,37 +361,25 @@ gegeben.</p>
 
           
           <div class="method-source-code" id="5B-5D-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/lexical_hash.rb, line 57</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/lexical_hash.rb, line 51</span>
 <span class="ruby-keyword">def</span> <span class="ruby-operator">[]</span>(<span class="ruby-identifier">key</span>)
-  <span class="ruby-identifier">inc</span>(<span class="ruby-string">'total requests'</span>)
-  <span class="ruby-identifier">key</span> = <span class="ruby-identifier">key</span>.<span class="ruby-identifier">downcase</span>
+  <span class="ruby-identifier">rec</span> = <span class="ruby-ivar">@src</span>[<span class="ruby-identifier">key</span> = <span class="ruby-constant">Unicode</span>.<span class="ruby-identifier">downcase</span>(<span class="ruby-identifier">key</span>)] <span class="ruby-keyword">or</span> <span class="ruby-keyword">return</span>
 
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">hit?</span>(<span class="ruby-identifier">key</span>)
-    <span class="ruby-identifier">inc</span>(<span class="ruby-string">'cache hits'</span>)
-    <span class="ruby-keyword">return</span> <span class="ruby-identifier">retrieve</span>(<span class="ruby-identifier">key</span>)
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">res</span> = <span class="ruby-identifier">rec</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">str</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">str</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-regexp">%r^\*\d+$/</span>           <span class="ruby-keyword">then</span> <span class="ruby-identifier">str</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-node">%r^#(.)$/</span>            <span class="ruby-keyword">then</span> <span class="ruby-constant">Lexical</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">key</span>, <span class="ruby-node">$1</span>)
+      <span class="ruby-keyword">when</span> <span class="ruby-node">%r^([^#]+?)\s*#(.)$/</span> <span class="ruby-keyword">then</span> <span class="ruby-constant">Lexical</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">$1</span>,  <span class="ruby-node">$2</span>)
+      <span class="ruby-keyword">when</span> <span class="ruby-node">%r^([^#]+)$/</span>         <span class="ruby-keyword">then</span> <span class="ruby-constant">Lexical</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">$1</span>, <span class="ruby-ivar">@wc</span>)
+      <span class="ruby-keyword">else</span>                          <span class="ruby-identifier">str</span>
+    <span class="ruby-keyword">end</span>
+  }
 
-  <span class="ruby-identifier">inc</span>(<span class="ruby-string">'source reads'</span>)
+  <span class="ruby-identifier">res</span>.<span class="ruby-identifier">compact!</span>
+  <span class="ruby-identifier">res</span>.<span class="ruby-identifier">sort!</span>
+  <span class="ruby-identifier">res</span>.<span class="ruby-identifier">uniq!</span>
 
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">record</span> = <span class="ruby-ivar">@src</span>[<span class="ruby-identifier">key</span>]
-    <span class="ruby-identifier">record</span> = <span class="ruby-identifier">record</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">str</span><span class="ruby-operator">|</span>
-      <span class="ruby-keyword">case</span> <span class="ruby-identifier">str</span>
-        <span class="ruby-keyword">when</span> <span class="ruby-regexp">%r^\*\d+$/</span>           <span class="ruby-keyword">then</span> <span class="ruby-identifier">str</span>
-        <span class="ruby-keyword">when</span> <span class="ruby-node">%r^#(.)$/</span>            <span class="ruby-keyword">then</span> <span class="ruby-constant">Lexical</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">key</span>, <span class="ruby-node">$1</span>)
-        <span class="ruby-keyword">when</span> <span class="ruby-node">%r^([^#]+?)\s*#(.)$/</span> <span class="ruby-keyword">then</span> <span class="ruby-constant">Lexical</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">$1</span>, <span class="ruby-node">$2</span>)
-        <span class="ruby-keyword">when</span> <span class="ruby-node">%r^([^#]+)$/</span>         <span class="ruby-keyword">then</span> <span class="ruby-constant">Lexical</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">$1</span>, <span class="ruby-ivar">@wc</span>)
-        <span class="ruby-keyword">else</span>                          <span class="ruby-identifier">str</span>
-      <span class="ruby-keyword">end</span>
-    }
-
-    <span class="ruby-identifier">record</span>.<span class="ruby-identifier">compact!</span>
-    <span class="ruby-identifier">record</span>.<span class="ruby-identifier">sort!</span>
-    <span class="ruby-identifier">record</span>.<span class="ruby-identifier">uniq!</span>
-
-    <span class="ruby-identifier">inc</span>(<span class="ruby-string">'data found'</span>)
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-identifier">store</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">record</span>)
+  <span class="ruby-identifier">res</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- 5B-5D-source -->
           
@@ -434,7 +407,7 @@ gegeben.</p>
 
           
           <div class="method-source-code" id="close-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/lexical_hash.rb, line 53</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/lexical_hash.rb, line 47</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">close</span>
   <span class="ruby-ivar">@src</span>.<span class="ruby-identifier">close</span>
 <span class="ruby-keyword">end</span></pre>

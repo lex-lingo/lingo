@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Lingo::Attendee::Variator - lingo Application documentation (v1.8.2)</title>
+<title>class Lingo::Attendee::Variator - lingo Application documentation (v1.8.3)</title>
 
 <link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
 
@@ -107,6 +107,8 @@
   
     <li><a href="../../Lingo/AgendaItem.html">Lingo::AgendaItem</a>
   
+    <li><a href="../../Lingo/App.html">Lingo::App</a>
+  
     <li><a href="../../Lingo/Attendee.html">Lingo::Attendee</a>
   
     <li><a href="../../Lingo/Attendee/Abbreviator.html">Lingo::Attendee::Abbreviator</a>
@@ -155,8 +157,6 @@
   
     <li><a href="../../Lingo/CLI.html">Lingo::CLI</a>
   
-    <li><a href="../../Lingo/Cachable.html">Lingo::Cachable</a>
-  
     <li><a href="../../Lingo/Call.html">Lingo::Call</a>
   
     <li><a href="../../Lingo/Config.html">Lingo::Config</a>
@@ -195,11 +195,15 @@
   
     <li><a href="../../Lingo/DatabaseError.html">Lingo::DatabaseError</a>
   
+    <li><a href="../../Lingo/Debug.html">Lingo::Debug</a>
+  
     <li><a href="../../Lingo/FileNotFoundError.html">Lingo::FileNotFoundError</a>
   
     <li><a href="../../Lingo/InvalidDatabaseConfigError.html">Lingo::InvalidDatabaseConfigError</a>
   
     <li><a href="../../Lingo/Language.html">Lingo::Language</a>
+  
+    <li><a href="../../Lingo/Language/Char.html">Lingo::Language::Char</a>
   
     <li><a href="../../Lingo/Language/Dictionary.html">Lingo::Language::Dictionary</a>
   
@@ -225,15 +229,15 @@
   
     <li><a href="../../Lingo/NoWritableStoreError.html">Lingo::NoWritableStoreError</a>
   
-    <li><a href="../../Lingo/Reportable.html">Lingo::Reportable</a>
-  
     <li><a href="../../Lingo/ShowProgress.html">Lingo::ShowProgress</a>
   
     <li><a href="../../Lingo/SourceFileNotFoundError.html">Lingo::SourceFileNotFoundError</a>
   
+    <li><a href="../../Lingo/Srv.html">Lingo::Srv</a>
+  
     <li><a href="../../Lingo/Version.html">Lingo::Version</a>
   
-    <li><a href="../../String.html">String</a>
+    <li><a href="../../Lingo/Web.html">Lingo::Web</a>
   
   </ul>
 </nav>
@@ -359,7 +363,6 @@ out&gt; *EOF('test.txt')</pre>
           <div class="method-source-code" id="control-source">
             <pre><span class="ruby-comment"># File lib/lingo/attendee/variator.rb, line 91</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">param</span>)
-  <span class="ruby-identifier">report_on</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-ivar">@dic</span>, <span class="ruby-ivar">@gra</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- control-source -->
           
@@ -428,20 +431,23 @@ out&gt; *EOF('test.txt')</pre>
 
           
           <div class="method-source-code" id="process-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/variator.rb, line 95</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/variator.rb, line 94</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">process</span>(<span class="ruby-identifier">obj</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Word</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@check</span>[<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">attr</span>]
-    <span class="ruby-identifier">inc</span>(<span class="ruby-string">'Anzahl gesuchter Wörter'</span>)
+    <span class="ruby-identifier">vars</span>, <span class="ruby-identifier">max</span> = [<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">form</span>], <span class="ruby-ivar">@max</span>
 
-    <span class="ruby-ivar">@var</span>.<span class="ruby-identifier">each_with_object</span>([<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">form</span>]) { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">variate</span>(<span class="ruby-identifier">v</span>, *<span class="ruby-identifier">a</span>) }.
-      <span class="ruby-identifier">tap</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">slice!</span>(<span class="ruby-ivar">@max</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>) }.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">var</span><span class="ruby-operator">|</span>
+    <span class="ruby-ivar">@var</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">args</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">variate</span>(<span class="ruby-identifier">vars</span>, *<span class="ruby-identifier">args</span>)
+      <span class="ruby-keyword">break</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">vars</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">max</span>
+    }
+
+    <span class="ruby-identifier">vars</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">var</span><span class="ruby-operator">|</span>
       <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> (<span class="ruby-identifier">word</span> = <span class="ruby-identifier">find_word</span>(<span class="ruby-identifier">var</span>)).<span class="ruby-identifier">unknown?</span> <span class="ruby-operator">||</span> (
         <span class="ruby-identifier">word</span>.<span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-constant">WA_COMPOUND</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">word</span>.<span class="ruby-identifier">lexicals</span>.<span class="ruby-identifier">any?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">lex</span><span class="ruby-operator">|</span>
           <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">attr</span>.<span class="ruby-identifier">start_with?</span>(<span class="ruby-constant">LA_TAKEITASIS</span>)
         }
       )
 
-      <span class="ruby-identifier">inc</span>(<span class="ruby-string">'Anzahl gefundener Wörter'</span>)
       <span class="ruby-keyword">return</span> <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">word</span>.<span class="ruby-identifier">tap</span> { <span class="ruby-identifier">word</span>.<span class="ruby-identifier">form</span> = <span class="ruby-ivar">@marker</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">var</span> })
     }
   <span class="ruby-keyword">end</span>
@@ -482,7 +488,7 @@ out&gt; *EOF('test.txt')</pre>
 
           
           <div class="method-source-code" id="variate-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/variator.rb, line 120</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/variator.rb, line 122</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">variate</span>(<span class="ruby-identifier">variations</span>, <span class="ruby-identifier">from</span>, <span class="ruby-identifier">to</span>)
   <span class="ruby-identifier">add</span>, <span class="ruby-identifier">change</span>, <span class="ruby-identifier">re</span> = [], [<span class="ruby-identifier">from</span>, <span class="ruby-identifier">to</span>], <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">from</span>)
 

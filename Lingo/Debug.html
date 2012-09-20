@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Lingo::Call - lingo Application documentation (v1.8.3)</title>
+<title>module Lingo::Debug - lingo Application documentation (v1.8.3)</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -20,7 +20,7 @@
 <script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
 
 
-<body id="top" class="class">
+<body id="top" class="module">
 <nav id="metadata">
   <nav id="home-section" class="section">
   <h3 class="section-header">
@@ -47,7 +47,7 @@
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
   <ul>
-    <li>lib/lingo/call.rb
+    <li>lib/lingo/debug.rb
   </ul>
 </nav>
 
@@ -56,13 +56,7 @@
 
   <div id="class-metadata">
     
-    <nav id="parent-class-section" class="section">
-  <h3 class="section-header">Parent</h3>
-  
-  <p class="link">self
-  
-</nav>
-
+    
     
     <!-- Method Quickref -->
 <nav id="method-list-section" class="section">
@@ -70,11 +64,9 @@
 
   <ul class="link-list">
     
-    <li><a href="#method-c-new">::new</a>
+    <li><a href="#method-i-profile">#profile</a>
     
-    <li><a href="#method-i-call">#call</a>
-    
-    <li><a href="#method-i-talk">#talk</a>
+    <li><a href="#method-i-ps">#ps</a>
     
   </ul>
 </nav>
@@ -244,7 +236,7 @@
 </nav>
 
 <div id="documentation">
-  <h1 class="class">class Lingo::Call</h1>
+  <h1 class="module">module Lingo::Debug</h1>
 
   <div id="description" class="description">
     
@@ -264,7 +256,22 @@
       <h3 class="section-header">Constants</h3>
       <dl>
       
-        <dt id="CHANNELS">CHANNELS
+        <dt id="PS_COLUMNS">PS_COLUMNS
+        
+        <dd class="description">
+        
+      
+        <dt id="PS_COMMAND">PS_COMMAND
+        
+        <dd class="description">
+        
+      
+        <dt id="PS_NO_HEADING">PS_NO_HEADING
+        
+        <dd class="description">
+        
+      
+        <dt id="PS_RE">PS_RE
         
         <dd class="description">
         
@@ -277,51 +284,15 @@
 
     <!-- Methods -->
     
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
-      <h3 class="section-header">Public Class Methods</h3>
-
-    
-      <div id="method-c-new" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">new</span><span
-            class="method-args">(args = [])</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-
-          
-          <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/lingo/call.rb, line 32</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">args</span> = [])
-  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">args</span>, <span class="ruby-constant">StringIO</span>.<span class="ruby-identifier">new</span>, <span class="ruby-constant">StringIO</span>.<span class="ruby-identifier">new</span>, <span class="ruby-constant">StringIO</span>.<span class="ruby-identifier">new</span>)
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- new-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- new-method -->
-
-    
-    </section><!-- public-class-method-details -->
-  
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
       <h3 class="section-header">Public Instance Methods</h3>
 
     
-      <div id="method-i-call" class="method-detail ">
+      <div id="method-i-profile" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">call</span><span
-            class="method-args">() { |self| ... }</span>
+          <span class="method-name">profile</span><span
+            class="method-args">(base) { || ... }</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -332,36 +303,52 @@
           
 
           
-          <div class="method-source-code" id="call-source">
-            <pre><span class="ruby-comment"># File lib/lingo/call.rb, line 36</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">call</span>
-  <span class="ruby-identifier">invite</span>
+          <div class="method-source-code" id="profile-source">
+            <pre><span class="ruby-comment"># File lib/lingo/debug.rb, line 46</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">profile</span>(<span class="ruby-identifier">base</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">yield</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">base</span>
 
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
-    <span class="ruby-keyword">begin</span>
-      <span class="ruby-keyword">yield</span> <span class="ruby-keyword">self</span>
-    <span class="ruby-keyword">ensure</span>
-      <span class="ruby-identifier">reset</span>
-    <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">'ruby-prof'</span>
+
+  <span class="ruby-identifier">result</span> = <span class="ruby-constant">RubyProf</span>.<span class="ruby-identifier">profile</span> { <span class="ruby-keyword">yield</span> }
+  <span class="ruby-identifier">result</span>.<span class="ruby-identifier">eliminate_methods!</span> [<span class="ruby-regexp">%r\b(?:Gem|HighLine)\b/</span>,
+    <span class="ruby-regexp">%r\A(?:Benchmark|FileUtils|Pathname|Util)\b/</span>]
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">base</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">IO</span>)
+    <span class="ruby-constant">RubyProf</span><span class="ruby-operator">::</span><span class="ruby-constant">FlatPrinter</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">result</span>).<span class="ruby-identifier">print</span>(<span class="ruby-identifier">base</span>)
   <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">self</span>
+    <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-identifier">base</span>))
+
+    <span class="ruby-identifier">mode</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-string">'RUBY_PROF_MEASURE_MODE'</span>]
+    <span class="ruby-identifier">base</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;-#{mode}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">mode</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">mode</span>.<span class="ruby-identifier">empty?</span>
+
+    {
+      <span class="ruby-value">:txt</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:FlatPrinter</span>,
+      <span class="ruby-value">:lines</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:FlatPrinterWithLineNumbers</span>,
+      <span class="ruby-value">:html</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:GraphHtmlPrinter</span>,
+      <span class="ruby-value">:stack</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:CallStackPrinter</span>
+    }.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">ext</span>, <span class="ruby-identifier">name</span><span class="ruby-operator">|</span>
+      <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-node">&quot;#{base}.#{ext}&quot;</span>, <span class="ruby-string">'a+'</span>, <span class="ruby-identifier">encoding</span><span class="ruby-operator">:</span> <span class="ruby-constant">ENC</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+        <span class="ruby-constant">RubyProf</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">name</span>).<span class="ruby-identifier">new</span>(<span class="ruby-identifier">result</span>).<span class="ruby-identifier">print</span>(<span class="ruby-identifier">f</span>)
+      }
+    }
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- call-source -->
+          </div><!-- profile-source -->
           
         </div>
 
         
 
         
-      </div><!-- call-method -->
+      </div><!-- profile-method -->
 
     
-      <div id="method-i-talk" class="method-detail ">
+      <div id="method-i-ps" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">talk</span><span
-            class="method-args">(str) { |i| ... }</span>
+          <span class="method-name">ps</span><span
+            class="method-args">(name)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -372,39 +359,22 @@
           
 
           
-          <div class="method-source-code" id="talk-source">
-            <pre><span class="ruby-comment"># File lib/lingo/call.rb, line 50</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">talk</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-identifier">config</span>.<span class="ruby-identifier">stdin</span>.<span class="ruby-identifier">reopen</span>(<span class="ruby-identifier">str</span>)
-
-  <span class="ruby-identifier">start</span>
-
-  <span class="ruby-identifier">res</span> = <span class="ruby-constant">CHANNELS</span>.<span class="ruby-identifier">flat_map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">io</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">key</span>)
-    <span class="ruby-identifier">io</span>.<span class="ruby-identifier">rewind</span>
-
-    <span class="ruby-identifier">lines</span> = <span class="ruby-identifier">io</span>.<span class="ruby-identifier">readlines</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">chomp!</span> }
-
-    <span class="ruby-identifier">io</span>.<span class="ruby-identifier">truncate</span>(<span class="ruby-value">0</span>)
-    <span class="ruby-identifier">io</span>.<span class="ruby-identifier">rewind</span>
-
-    <span class="ruby-identifier">lines</span>
-  }
-
-  <span class="ruby-identifier">block_given?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">res</span>.<span class="ruby-identifier">map!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span> <span class="ruby-identifier">i</span> } <span class="ruby-operator">:</span> <span class="ruby-keyword">begin</span>
-    <span class="ruby-identifier">res</span>.<span class="ruby-identifier">sort!</span>
-    <span class="ruby-identifier">res</span>.<span class="ruby-identifier">uniq!</span>
-    <span class="ruby-identifier">res</span>
-  <span class="ruby-keyword">end</span>
+          <div class="method-source-code" id="ps-source">
+            <pre><span class="ruby-comment"># File lib/lingo/debug.rb, line 39</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">ps</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-identifier">system</span>(<span class="ruby-constant">PS_COMMAND</span>,
+    <span class="ruby-string">'-o'</span>, <span class="ruby-constant">PS_COLUMNS</span>,
+    <span class="ruby-node">&quot;--#{'no-' if PS_NO_HEADING[name]}heading&quot;</span>,
+    <span class="ruby-constant">Process</span>.<span class="ruby-identifier">pid</span>.<span class="ruby-identifier">to_s</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">name</span> <span class="ruby-operator">=~</span> <span class="ruby-constant">PS_RE</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- talk-source -->
+          </div><!-- ps-source -->
           
         </div>
 
         
 
         
-      </div><!-- talk-method -->
+      </div><!-- ps-method -->
 
     
     </section><!-- public-instance-method-details -->

@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Lingo::Attendee::NonewordFilter - lingo Application documentation (v1.8.2)</title>
+<title>class Lingo::Attendee::NonewordFilter - lingo Application documentation (v1.8.3)</title>
 
 <link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
 
@@ -107,6 +107,8 @@
   
     <li><a href="../../Lingo/AgendaItem.html">Lingo::AgendaItem</a>
   
+    <li><a href="../../Lingo/App.html">Lingo::App</a>
+  
     <li><a href="../../Lingo/Attendee.html">Lingo::Attendee</a>
   
     <li><a href="../../Lingo/Attendee/Abbreviator.html">Lingo::Attendee::Abbreviator</a>
@@ -155,8 +157,6 @@
   
     <li><a href="../../Lingo/CLI.html">Lingo::CLI</a>
   
-    <li><a href="../../Lingo/Cachable.html">Lingo::Cachable</a>
-  
     <li><a href="../../Lingo/Call.html">Lingo::Call</a>
   
     <li><a href="../../Lingo/Config.html">Lingo::Config</a>
@@ -195,11 +195,15 @@
   
     <li><a href="../../Lingo/DatabaseError.html">Lingo::DatabaseError</a>
   
+    <li><a href="../../Lingo/Debug.html">Lingo::Debug</a>
+  
     <li><a href="../../Lingo/FileNotFoundError.html">Lingo::FileNotFoundError</a>
   
     <li><a href="../../Lingo/InvalidDatabaseConfigError.html">Lingo::InvalidDatabaseConfigError</a>
   
     <li><a href="../../Lingo/Language.html">Lingo::Language</a>
+  
+    <li><a href="../../Lingo/Language/Char.html">Lingo::Language::Char</a>
   
     <li><a href="../../Lingo/Language/Dictionary.html">Lingo::Language::Dictionary</a>
   
@@ -225,15 +229,15 @@
   
     <li><a href="../../Lingo/NoWritableStoreError.html">Lingo::NoWritableStoreError</a>
   
-    <li><a href="../../Lingo/Reportable.html">Lingo::Reportable</a>
-  
     <li><a href="../../Lingo/ShowProgress.html">Lingo::ShowProgress</a>
   
     <li><a href="../../Lingo/SourceFileNotFoundError.html">Lingo::SourceFileNotFoundError</a>
   
+    <li><a href="../../Lingo/Srv.html">Lingo::Srv</a>
+  
     <li><a href="../../Lingo/Version.html">Lingo::Version</a>
   
-    <li><a href="../../String.html">String</a>
+    <li><a href="../../Lingo/Web.html">Lingo::Web</a>
   
   </ul>
 </nav>
@@ -276,8 +280,7 @@ href="Synonymer.html">Synonymer</a>, Multiworder, <a
 href="Sequencer.html">Sequencer</a></p>
 </dd><dt>Erzeugt
 <dd>
-<p>Daten vom Typ <strong><a href="../../String.html">String</a></strong>, z.B.
-für Textwriter</p>
+<p>Daten vom Typ <strong>String</strong>, z.B. für Textwriter</p>
 </dd></dl>
 
 <h3 id="label-Parameter">Parameter</h3>
@@ -417,9 +420,7 @@ out&gt; *EOF('test.txt')</pre>
             <pre><span class="ruby-comment"># File lib/lingo/attendee/noneword_filter.rb, line 87</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">process</span>(<span class="ruby-identifier">obj</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Word</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">unknown?</span>
-    <span class="ruby-identifier">inc</span>(<span class="ruby-string">'Anzahl nicht erkannter Wörter'</span>)
-
-    <span class="ruby-identifier">non</span> = <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">form</span>.<span class="ruby-identifier">downcase</span>
+    <span class="ruby-identifier">non</span> = <span class="ruby-constant">Unicode</span>.<span class="ruby-identifier">downcase</span>(<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">form</span>)
     <span class="ruby-ivar">@sort</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@nonewords</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">non</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">non</span>)
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
@@ -455,13 +456,10 @@ out&gt; *EOF('test.txt')</pre>
 
           
           <div class="method-source-code" id="send_nonewords-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/noneword_filter.rb, line 98</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/noneword_filter.rb, line 96</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">send_nonewords</span>
-  <span class="ruby-ivar">@nonewords</span>.<span class="ruby-identifier">sort!</span>
   <span class="ruby-ivar">@nonewords</span>.<span class="ruby-identifier">uniq!</span>
-
-  <span class="ruby-identifier">add</span>(<span class="ruby-string">'Objekte gefiltert'</span>, <span class="ruby-ivar">@nonewords</span>.<span class="ruby-identifier">size</span>)
-  <span class="ruby-ivar">@nonewords</span>.<span class="ruby-identifier">each</span>(&amp;<span class="ruby-identifier">method</span>(<span class="ruby-value">:forward</span>)).<span class="ruby-identifier">clear</span>
+  <span class="ruby-identifier">flush</span>(<span class="ruby-ivar">@nonewords</span>.<span class="ruby-identifier">sort!</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- send_nonewords-source -->
           
