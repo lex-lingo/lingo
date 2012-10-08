@@ -9,7 +9,7 @@
 * Fixed length limit handling for multibyte characters in SDBM store.
 * Fixed encoding issue in SDBM store.
 * Fixed issue with BOM in config files.
-* Modified character handling to accept *any* Unicode letter (_Alphabetical_)
+* Modified character handling to accept *any* Unicode letter (_Alphabetic_)
   and digit (<i>Decimal Number</i>).
 * Modified Attendee::Tokenizer to use only hard-coded tokenization rules.
 * Modified Attendee::VectorFilter's +lexicals+ option to be case-sensitive.

@@ -14,15 +14,19 @@
 
   <div id="welcome">
     <strong><%= t 'Welcome to Lingo Web!', 'Willkommen bei Lingo Web!' %></strong>
-    <%= t %q{
-      Lingo Web provides the opportunity to test the functionality of
-      <a href="http://lex-lingo.de">Lingo</a>.<br />
-      Lingo is an open source indexing system for research and teaching.
-    }, %q{
-      Lingo Web bietet die Möglichkeit, die Funktionsweise von
-      <a href="http://lex-lingo.de">Lingo</a> zu testen.<br />
-      Lingo ist ein frei verfügbares System zur linguistisch und statistisch
-      basierten automatischen Indexierung des Deutschen und Englischen.
+    <%= t %Q{
+      <a href="http://lex-lingo.de">Lingo</a> is an open source indexing system
+      based on<br />linguistic and statistic analysis that currently offers
+      support for <a href="#{url_for '/?l=de'}">German</a>,
+      <a href="#{url_for '/?l=en'}">English</a>, and
+      <a href="#{url_for '/?l=ru'}">Russian</a>.
+    }, %Q{
+      <a href="http://lex-lingo.de">Lingo</a> ist ein frei verfügbares System
+      zur linguistisch und statistisch<br />basierten automatischen Indexierung
+      und bringt aktuell Unterstützung für
+      <a href="#{url_for '/?l=de'}">Deutsch</a>,
+      <a href="#{url_for '/?l=en'}">Englisch</a> und
+      <a href="#{url_for '/?l=ru'}">Russisch</a> mit.
     } %>
   </div>
 
