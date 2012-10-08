@@ -44,7 +44,7 @@
         <br />
 
         <strong><%= t 'Language', 'Sprache' %></strong> = <select name="l">
-        <% for l in LANGS %>
+        <% for l in L %>
           <option value="<%= l %>"<%= ' selected="selected"' if l == @l %>><%= l %></option>
         <% end %>
         </select>

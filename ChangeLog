@@ -1,5 +1,9 @@
 = Revision history for Lingo
 
+== 1.8.4 [unreleased]
+
+* Lingo Web learned parameter +hl+ to set UI language.
+
 == 1.8.3 [2012-09-20]
 
 * Fixed regression introduced in 1.8.2 where reading input from STDIN was no

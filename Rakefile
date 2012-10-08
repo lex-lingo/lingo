@@ -43,10 +43,18 @@ The main functions of Lingo are:
         '{de,en,ru}.lang', '{de,en,ru}/{lingo-*,user-dic,test_*}.txt',
         'txt/{artikel{,-en,-ru},lir}.txt', 'lib/lingo/{srv,web}/**/*'
       ].to_a,
-      required_ruby_version:    '>= 1.9.2',
-      dependencies:             [['ruby-nuggets', '>= 0.8.5'],
-                                 'unicode', 'highline', 'sinatra'],
-      development_dependencies: [['diff-lcs', '>= 1.1.3'], 'open4']
+      required_ruby_version: '>= 1.9.2',
+      dependencies: [
+        'highline',
+        ['ruby-nuggets', '>= 0.8.5'],
+        'sinatra',
+        'sinatra-contrib',
+        'unicode'
+      ],
+      development_dependencies: [
+        ['diff-lcs', '>= 1.1.3'],
+        'open4'
+      ]
     }
   }}
 rescue LoadError => err

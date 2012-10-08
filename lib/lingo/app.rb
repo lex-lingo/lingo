@@ -27,6 +27,7 @@
 require 'optparse'
 require 'shellwords'
 require 'sinatra/base'
+require 'sinatra/cookies'
 
 class Lingo
 
@@ -37,6 +38,7 @@ class Lingo
       def init_app(file, *args, &block)
         set :root, File.chomp_ext(file)
         parse_options(*args, &block)
+        helpers Sinatra::Cookies
       end
 
       def parse_options(lingo_options = false)

@@ -35,7 +35,7 @@ class Lingo
 
     init_app(__FILE__)
 
-    UILANGS, LANGS = %w[en de], Lingo.list(:lang).map! { |lang|
+    HL, L = %w[en de], Lingo.list(:lang).map! { |lang|
       lang[%r{.*/(\w+)\.}, 1]
     }.uniq.sort!
 
@@ -51,14 +51,16 @@ class Lingo
     LINGO = Hash.new { |h, k| h[k] = Lingo.call(cfg, ['-l', k]) }
 
     before do
-      @uilang = if hal = env['HTTP_ACCEPT_LANGUAGE']
-        hals = hal.split(',').map { |l| l.split('-').first.strip }
-        (hals & UILANGS).first
-      end || UILANGS.first
+      @hl = if v = params[:hl] || cookies[:hl] || env['HTTP_ACCEPT_LANGUAGE']
+        v = v.split(',').map { |l| l.split('-').first.strip }
+        (v & HL).first
+      end || HL.first
+
+      cookies[:hl] = @hl unless cookies[:hl] == @hl
 
       @q = params[:q]
-      @l = params[:l] || @uilang
-      @l = LANGS.first unless LANGS.include?(@l)
+      @l = params[:l] || @hl
+      @l = L.first unless L.include?(@l)
     end
 
     get('')   { redirect url_for('/') }
@@ -71,7 +73,7 @@ class Lingo
       end
 
       def t(*t)
-        (i = UILANGS.index(@uilang)) && t[i] || t.first
+        (i = HL.index(@hl)) && t[i] || t.first
       end
     end
 
