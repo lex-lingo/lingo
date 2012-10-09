@@ -25,6 +25,7 @@
 #++
 
 require 'json'
+require 'strscan'
 require 'nuggets/util/ruby'
 
 require_relative 'app'
@@ -49,6 +50,34 @@ class Lingo
     end
 
     LINGO = Hash.new { |h, k| h[k] = Lingo.call(cfg, ['-l', k]) }
+
+    CFG, s = '', StringScanner.new('')
+    c = lambda { |n| %Q{<span style="color:#{n}">#{s.matched}</span>} }
+
+    File.foreach(cfg) { |line|
+      s.string = line.chomp
+
+      until s.eos?
+        CFG << if s.scan(/\s+/)   then c[:black]
+        elsif s.scan(/---|[{}:]/) then c[:purple]
+        elsif s.scan(/-/)         then c[:olive]
+        elsif s.scan(/,/)         then c[:black]
+        elsif s.scan(/[\w-]+/)    then c[s.peek(1) == ':' ? :teal : :black]
+        elsif s.scan(/'.*?'/)     then c[:maroon]
+        elsif s.scan(/"/)
+          buf = c[:maroon]
+
+          until s.scan(/"/)
+            buf << (s.scan(/\\\w/) ? c[:purple] : (s.scan(/./); c[:maroon]))
+          end
+
+          buf << c[:maroon]
+        else s.rest
+        end
+      end
+
+      CFG << "\n"
+    }
 
     before do
       @hl = if v = params[:hl] || cookies[:hl] || env['HTTP_ACCEPT_LANGUAGE']

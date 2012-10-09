@@ -1,5 +1,6 @@
 html, body {
   margin-top:       0;
+  font-size:        90%;
 }
 
 a img {
@@ -22,16 +23,17 @@ textarea {
 }
 
 #welcome {
-  font-size:        70%;
+  font-size:        85%;
   color:            #333333;
   margin-bottom:    0.5em;
   text-align:       center;
 }
 
-#legend {
-  font-size:        75%;
+#legend, #config {
   color:            #333333;
   margin-bottom:    0.5em;
+  width:            50%;
+  float:            left;
 }
 
 #legend table {
@@ -39,13 +41,13 @@ textarea {
 }
 
 #legend th {
-  font-size:        110%;
   font-weight:      normal;
   font-family:      monospace;
   text-align:       left;
 }
 
 #legend td {
+  font-size:        85%;
   padding-left:     1em;
 }
 
