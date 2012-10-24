@@ -2,6 +2,7 @@
 
 == 1.8.4 [unreleased]
 
+* <tt>lingoctl demo</tt> reports successful initialization.
 * Lingo Web learned parameter +hl+ to set UI language.
 * Lingo Web displays the configuration in use.
 

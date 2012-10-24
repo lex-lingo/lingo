@@ -121,13 +121,15 @@ Usage: #{PROG} <command> [arguments] [options]
     end
 
     def do_demo
-      OPTIONS.update(path: ARGV.shift, scope: :system)
+      OPTIONS.update(path: path = ARGV.shift, scope: :system)
       no_args
 
       copy_list(:config) { |i| !File.basename(i).start_with?('test') }
       copy_list(:lang)
       copy_list(:dict)   { |i|  File.basename(i).start_with?('user') }
       copy_list(:sample)
+
+      puts "Demo directory successfully initialized at `#{path}'."
     end
 
     def do_rackup(doit = true)
