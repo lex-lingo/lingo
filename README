@@ -178,6 +178,12 @@ Please note that Lingo requires Ruby version 1.9 to run (1.9.2 or greater;
 version). If you want to use Lingo on Ruby 1.8, please refer to the legacy
 version (see below).
 
+Since Lingo depends on native extensions, you need to make sure that
+development files for your Ruby version are installed. On Debian-based
+Linux platforms they are included in the package <tt>ruby1.9.1-dev</tt>;
+other distributions may have a similarly named package. On Windows those
+development files are currently not required.
+
 Prior to version 1.8.0, Lingo expected to be run from its installation
 directory. This is no longer necessary. But if you prefer that use case,
 you can either download and extract an
