@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="content-type" content="application/xhtml+xml; charset=utf-8" />
-  <title>Lingo Web - <%= t 'Automatic indexing online', 'Automatische Indexierung Online' %></title>
+  <title>Lingo Web - <%= t 'Automatic indexing online', 'Automatische Indexierung Online', 'Автоматическая обработка текстов онлайн' %></title>
   <link rel="stylesheet" type="text/css" href="<%= url_for '/lingoweb.css' %>" />
 </head>
 <body>
@@ -13,7 +13,7 @@
   </div>
 
   <div id="welcome">
-    <strong><%= t 'Welcome to Lingo Web!', 'Willkommen bei Lingo Web!' %></strong>
+    <strong><%= t 'Welcome to Lingo Web!', 'Willkommen bei Lingo Web!', 'Добро пожаловать в Lingo Web!' %></strong>
     <%= t %Q{
       <a href="http://lex-lingo.de">Lingo</a> is an open source indexing system
       based on<br />linguistic and statistic analysis that currently offers
@@ -27,23 +27,30 @@
       <a href="#{url_for '/?l=de'}">Deutsch</a>,
       <a href="#{url_for '/?l=en'}">Englisch</a> und
       <a href="#{url_for '/?l=ru'}">Russisch</a> mit.
+    }, %Q{
+      <a href="http://lex-lingo.de">Lingo</a> – бесплатное программное обеспечение
+      для автоматической обработки текстов (АОТ) на естественном языке, как
+      лингвистической, так и статистической. Lingo может обрабатывать тексты на
+      <a href="#{url_for '/?l=de'}">английском</a>,
+      <a href="#{url_for '/?l=en'}">немецком</a> и
+      <a href="#{url_for '/?l=ru'}">русском</a> языке.
     } %>
   </div>
 
   <div id="main">
     <form action="<%= url_for '/' %>" method="post">
       <div>
-        <fieldset><legend><strong><%= t 'Input', 'Eingabe' %></strong></legend>
+        <fieldset><legend><strong><%= t 'Input', 'Eingabe', 'ввод данных' %></strong></legend>
           <textarea name="q" rows="20" cols="50"><%= @q %></textarea>
         </fieldset>
 
-        <fieldset><legend><strong><%= t 'Output', 'Ausgabe' %></strong></legend>
+        <fieldset><legend><strong><%= t 'Output', 'Ausgabe', 'вывод данных' %></strong></legend>
           <textarea readonly="readonly" rows="20" cols="50"><%= @r %></textarea>
         </fieldset>
 
         <br />
 
-        <strong><%= t 'Language', 'Sprache' %></strong> = <select name="l">
+        <strong><%= t 'Language', 'Sprache', 'язык' %></strong> = <select name="l">
         <% for l in L %>
           <option value="<%= l %>"<%= ' selected="selected"' if l == @l %>><%= l %></option>
         <% end %>
@@ -52,9 +59,9 @@
         <br />
         <br />
 
-        <input type="submit" value="<%= t 'Start processing...', 'Verarbeitung starten...' %>"></input> |
-        <input type="reset" value="<%= t 'Reset form', 'Formular zurücksetzen' %>"></input> |
-        <a href="<%= url_for '/' %>"><%= t 'New request', 'Neue Anfrage' %></a>
+        <input type="submit" value="<%= t 'Start processing...', 'Verarbeitung starten...', 'начать обработку...' %>"></input> |
+        <input type="reset" value="<%= t 'Reset form', 'Formular zurücksetzen', 'очистить формуляр' %>"></input> |
+        <a href="<%= url_for '/' %>"><%= t 'New request', 'Neue Anfrage', 'новый запрос' %></a>
       </div>
     </form>
 
@@ -62,33 +69,73 @@
   </div>
 
   <div id="legend">
-    <strong><%= t 'Legend', 'Legende' %></strong>:
+    <strong><%= t 'Legend', 'Legende', 'Сокращения' %></strong>:
     <table>
-      <tr><th>s       </th><td><%= t 'Noun',                                                    'Substantiv' %></td></tr>
-      <tr><th>a       </th><td><%= t 'Adjective',                                               'Adjektiv' %></td></tr>
-      <tr><th>v       </th><td><%= t 'Verb',                                                    'Verb' %></td></tr>
-      <tr><th>e       </th><td><%= t 'Proper name',                                             'Eigenname' %></td></tr>
-      <tr><th>w       </th><td><%= t 'Word class without suffixes',                             'Wortklasse ohne Suffixe' %></td></tr>
-      <tr><th>t       </th><td><%= t 'Word class without suffixes (e.g. high frequency terms)', 'Wortklasse ohne Suffixe (z.B. Hochfrequenzterme)' %></td></tr>
-      <tr><th>y       </th><td><%= t 'Synonym',                                                 'Synonym' %></td></tr>
-      <tr><th>q (=SEQ)</th><td><%= t 'Sequence (algorithmically identified phrase)',            'Sequenz (algorithmisch erkannter Mehrwortbegriff)' %></td></tr>
-      <tr><th>m (=MUL)</th><td><%= t 'Phrase',                                                  'Mehrwortbegriff' %></td></tr>
-      <tr><th>k (=KOM)</th><td><%= t 'Compound',                                                'Kompositum' %></td></tr>
-      <tr><th>+       </th><td><%= t 'Part of a compound',                                      'Kompositum-Bestandteil' %></td></tr>
-      <tr><th>x+      </th><td><%= t 'Unknown part of a hyphenated compound',                   'unbekannter Kompositum-Bestandteil einer Bindestrich-Konstruktion' %></td></tr>
-      <tr><th>?       </th><td><%= t 'Unknown word',                                            'unbekanntes Wort' %></td></tr>
-      <tr><th>MU?     </th><td><%= t 'Part of a phrase (unknown word)',                         'Mehrwortbestandteil (unbekanntes Wort)' %></td></tr>
-      <tr><th>HELP    </th><td><%= t 'e.g. Special characters',                                 'z.B. unbekanntes Sonderzeichen' %></td></tr>
-      <tr><th>ABRV    </th><td><%= t 'Possible abbreviation with a full stop in the middle',    'mögliche Abk. mit eingeschlossenem Punkt (z.B. "Ausst.Kat")' %></td></tr>
-      <tr><th>PUNC    </th><td><%= t 'Punctuation etc.',                                        'Satzzeichen etc.' %></td></tr>
-      <tr><th>OTHR    </th><td><%= t 'Other character',                                         'Sonstiges Zeichen' %></td></tr>
-      <tr><th>URLS    </th><td><%= t 'URL',                                                     'URL' %></td></tr>
-      <tr><th>NUMS    </th><td><%= t 'Number',                                                  'Zahl' %></td></tr>
+      <tr><th>s       </th><td><%= t 'Noun',
+                                     'Substantiv',
+                                     'существительное' %></td></tr>
+      <tr><th>a       </th><td><%= t 'Adjective',
+                                     'Adjektiv',
+                                     'прилагательное' %></td></tr>
+      <tr><th>v       </th><td><%= t 'Verb',
+                                     'Verb',
+                                     'глагол' %></td></tr>
+      <tr><th>e       </th><td><%= t 'Proper name',
+                                     'Eigenname',
+                                     'имя собственное' %></td></tr>
+      <tr><th>w       </th><td><%= t 'Word class without suffixes',
+                                     'Wortklasse ohne Suffixe',
+                                     'бесфлективная часть речи' %></td></tr>
+      <tr><th>t       </th><td><%= t 'Word class without suffixes (e.g. high frequency terms)',
+                                     'Wortklasse ohne Suffixe (z.B. Hochfrequenzterme)',
+                                     'бесфлективная часть речи (н-р  высокочастотные термины)' %></td></tr>
+      <tr><th>y       </th><td><%= t 'Synonym',
+                                     'Synonym',
+                                     'синоним' %></td></tr>
+      <tr><th>q (=SEQ)</th><td><%= t 'Sequence (algorithmically identified phrase)',
+                                     'Sequenz (algorithmisch erkannter Mehrwortbegriff)',
+                                     'сочетание (составная лексема, алгоритмически выделяемая)' %></td></tr>
+      <tr><th>m (=MUL)</th><td><%= t 'Phrase',
+                                     'Mehrwortbegriff',
+                                     'составная лексема' %></td></tr>
+      <tr><th>k (=KOM)</th><td><%= t 'Compound',
+                                     'Kompositum',
+                                     'сложное слово' %></td></tr>
+      <tr><th>+       </th><td><%= t 'Part of a compound',
+                                     'Kompositum-Bestandteil',
+                                     'компонент сложного слова' %></td></tr>
+      <tr><th>x+      </th><td><%= t 'Unknown part of a hyphenated compound',
+                                     'unbekannter Kompositum-Bestandteil einer Bindestrich-Konstruktion',
+                                     'неизвестный компонент сложного слова, пишущегося через дефис' %></td></tr>
+      <tr><th>?       </th><td><%= t 'Unknown word',
+                                     'unbekanntes Wort',
+                                     'неизвестное слово' %></td></tr>
+      <tr><th>MU?     </th><td><%= t 'Part of a phrase (unknown word)',
+                                     'Mehrwortbestandteil (unbekanntes Wort)',
+                                     'часть составной лексемы (неизвестное слово)' %></td></tr>
+      <tr><th>HELP    </th><td><%= t 'e.g. Special characters',
+                                     'z.B. unbekanntes Sonderzeichen',
+                                     'н-р, неизвестный спецсимвол' %></td></tr>
+      <tr><th>ABRV    </th><td><%= t 'Possible abbreviation with a full stop in the middle',
+                                     'mögliche Abk. mit eingeschlossenem Punkt (z.B. "Ausst.Kat")',
+                                     'возможное сокращение с точкой внутри' %></td></tr>
+      <tr><th>PUNC    </th><td><%= t 'Punctuation etc.',
+                                     'Satzzeichen etc.',
+                                     'знак пунктуации' %></td></tr>
+      <tr><th>OTHR    </th><td><%= t 'Other character',
+                                     'Sonstiges Zeichen',
+                                     'прочие знаки' %></td></tr>
+      <tr><th>URLS    </th><td><%= t 'URL',
+                                     'URL',
+                                     'URL' %></td></tr>
+      <tr><th>NUMS    </th><td><%= t 'Number',
+                                     'Zahl',
+                                     'числительное' %></td></tr>
     </table>
   </div>
 
   <div id="config">
-    <strong><%= t 'Configuration', 'Konfiguration' %></strong>:
+    <strong><%= t 'Configuration', 'Konfiguration', 'конфигурация' %></strong>:
     <pre><%= CFG %></pre>
   </div>
 

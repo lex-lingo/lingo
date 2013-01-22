@@ -27,6 +27,7 @@ textarea {
   color:            #333333;
   margin-bottom:    0.5em;
   text-align:       center;
+  margin:           0 15%;
 }
 
 #legend, #config {

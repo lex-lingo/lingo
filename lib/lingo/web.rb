@@ -36,7 +36,7 @@ class Lingo
 
     init_app(__FILE__)
 
-    HL, L = %w[en de], Lingo.list(:lang).map! { |lang|
+    HL, L = %w[en de ru], Lingo.list(:lang).map! { |lang|
       lang[%r{.*/(\w+)\.}, 1]
     }.uniq.sort!
 
