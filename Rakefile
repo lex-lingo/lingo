@@ -3,7 +3,7 @@
 __DIR__ = File.expand_path('..', __FILE__)
 
 require 'rake/clean'
-require 'nuggets/util/ruby'
+require 'nuggets/ruby'
 require File.join(__DIR__, %w[lib lingo version])
 
 PACKAGE_NAME = 'lingo'
@@ -46,7 +46,7 @@ The main functions of Lingo are:
       required_ruby_version: '>= 1.9.2',
       dependencies: [
         'highline',
-        ['ruby-nuggets', '>= 0.8.5'],
+        ['ruby-nuggets', '>= 0.9.2'],
         'sinatra',
         'sinatra-contrib',
         'unicode'

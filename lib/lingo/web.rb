@@ -24,9 +24,8 @@
 ###############################################################################
 #++
 
-require 'json'
 require 'strscan'
-require 'nuggets/util/ruby'
+require 'nuggets/ruby'
 
 require_relative 'app'
 

@@ -325,5 +325,5 @@ require_relative 'lingo/language'
 require_relative 'lingo/attendee'
 require_relative 'lingo/version'
 
-require 'nuggets/util/pluggable'
-Util::Pluggable.load_plugins_for(Lingo)
+require 'nuggets/pluggable'
+Nuggets::Pluggable.load_plugins_for(Lingo)

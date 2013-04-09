@@ -24,11 +24,11 @@
 ###############################################################################
 #++
 
-require 'nuggets/util/cli'
+require 'nuggets/cli'
 
 class Lingo
 
-  class CLI < ::Util::CLI
+  class CLI < ::Nuggets::CLI
 
     class << self
 

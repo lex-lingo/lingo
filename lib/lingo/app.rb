@@ -24,6 +24,7 @@
 ###############################################################################
 #++
 
+require 'json'
 require 'optparse'
 require 'shellwords'
 require 'sinatra/base'
