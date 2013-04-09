@@ -43,6 +43,8 @@
 </nav>
 
 
+  
+
   <div id="file-metadata">
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
@@ -76,31 +78,32 @@
   </ul>
 </nav>
 
+    
     <!-- Method Quickref -->
 <nav id="method-list-section" class="section">
   <h3 class="section-header">Methods</h3>
 
   <ul class="link-list">
     
-    <li><a href="#method-c-new">::new</a>
+    <li ><a href="#method-c-new">::new</a>
     
-    <li><a href="#method-i-3C-3D-3E">#&lt;=&gt;</a>
+    <li ><a href="#method-i-3C-3D-3E">#&lt;=&gt;</a>
     
-    <li><a href="#method-i-3D-3D">#==</a>
+    <li ><a href="#method-i-3D-3D">#==</a>
     
-    <li><a href="#method-i-eql-3F">#eql?</a>
+    <li ><a href="#method-i-eql-3F">#eql?</a>
     
-    <li><a href="#method-i-hash">#hash</a>
+    <li ><a href="#method-i-hash">#hash</a>
     
-    <li><a href="#method-i-identified-3F">#identified?</a>
+    <li ><a href="#method-i-identified-3F">#identified?</a>
     
-    <li><a href="#method-i-inspect">#inspect</a>
+    <li ><a href="#method-i-inspect">#inspect</a>
     
-    <li><a href="#method-i-to_a">#to_a</a>
+    <li ><a href="#method-i-to_a">#to_a</a>
     
-    <li><a href="#method-i-to_s">#to_s</a>
+    <li ><a href="#method-i-to_s">#to_s</a>
     
-    <li><a href="#method-i-unknown-3F">#unknown?</a>
+    <li ><a href="#method-i-unknown-3F">#unknown?</a>
     
   </ul>
 </nav>
@@ -263,6 +266,14 @@
   
     <li><a href="../../Lingo/Web.html">Lingo::Web</a>
   
+    <li><a href="../../Lingo/Web/Rack.html">Lingo::Web::Rack</a>
+  
+    <li><a href="../../Lingo/Web/Rack/Auth.html">Lingo::Web::Rack::Auth</a>
+  
+    <li><a href="../../Nuggets.html">Nuggets</a>
+  
+    <li><a href="../../YAML.html">YAML</a>
+  
   </ul>
 </nav>
 
@@ -350,7 +361,9 @@ versehen werden kann.</p>
         <div class="method-heading">
           <span class="method-name">new</span><span
             class="method-args">(form, attr = '-', src = nil)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -358,12 +371,13 @@ versehen werden kann.</p>
           
           
           
+          
 
           
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File lib/lingo/language/word_form.rb, line 40</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">form</span>, <span class="ruby-identifier">attr</span> = <span class="ruby-string">'-'</span>, <span class="ruby-identifier">src</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-ivar">@form</span>, <span class="ruby-ivar">@attr</span>, <span class="ruby-ivar">@src</span> = <span class="ruby-identifier">form</span> <span class="ruby-operator">||</span> <span class="ruby-string">''</span>, <span class="ruby-identifier">attr</span> <span class="ruby-operator">||</span> <span class="ruby-string">''</span>, <span class="ruby-identifier">src</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">form</span>, <span class="ruby-identifier">attr</span> = <span class="ruby-string">&#39;-&#39;</span>, <span class="ruby-identifier">src</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-ivar">@form</span>, <span class="ruby-ivar">@attr</span>, <span class="ruby-ivar">@src</span> = <span class="ruby-identifier">form</span> <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">attr</span> <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">src</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- new-source -->
           
@@ -386,11 +400,14 @@ versehen werden kann.</p>
         <div class="method-heading">
           <span class="method-name">&lt;=&gt;</span><span
             class="method-args">(other)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
+          
           
           
           
@@ -416,11 +433,12 @@ versehen werden kann.</p>
         <div class="method-heading">
           <span class="method-name">==</span><span
             class="method-args">(other)</span>
-          <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
+          
           
           
           
@@ -443,11 +461,14 @@ versehen werden kann.</p>
         <div class="method-heading">
           <span class="method-name">eql?</span><span
             class="method-args">(other)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
+          
           
           
           
@@ -477,11 +498,14 @@ versehen werden kann.</p>
         <div class="method-heading">
           <span class="method-name">hash</span><span
             class="method-args">()</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
+          
           
           
           
@@ -507,11 +531,14 @@ versehen werden kann.</p>
         <div class="method-heading">
           <span class="method-name">identified?</span><span
             class="method-args">()</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
+          
           
           
           
@@ -537,11 +564,14 @@ versehen werden kann.</p>
         <div class="method-heading">
           <span class="method-name">inspect</span><span
             class="method-args">()</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
+          
           
           
           
@@ -567,11 +597,14 @@ versehen werden kann.</p>
         <div class="method-heading">
           <span class="method-name">to_a</span><span
             class="method-args">()</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
+          
           
           
           
@@ -597,11 +630,14 @@ versehen werden kann.</p>
         <div class="method-heading">
           <span class="method-name">to_s</span><span
             class="method-args">()</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
+          
           
           
           
@@ -610,7 +646,7 @@ versehen werden kann.</p>
           <div class="method-source-code" id="to_s-source">
             <pre><span class="ruby-comment"># File lib/lingo/language/word_form.rb, line 60</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
-  <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">'/'</span>)
+  <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;/&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- to_s-source -->
           
@@ -627,11 +663,14 @@ versehen werden kann.</p>
         <div class="method-heading">
           <span class="method-name">unknown?</span><span
             class="method-args">()</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
+          
           
           
           
@@ -661,7 +700,7 @@ versehen werden kann.</p>
 
 <footer id="validator-badges">
   <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.1.
   <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
 </footer>
 

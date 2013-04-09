@@ -43,6 +43,19 @@
 </nav>
 
 
+  
+<div id="table-of-contents">
+  <nav class="section">
+    <h3 class="section-header">Table of Contents</h3>
+    <ul>
+      <li><a href="#label-M%C3%B6gliche+Verlinkung">Mögliche Verlinkung</a>
+      <li><a href="#label-Parameter">Parameter</a>
+      <li><a href="#label-Beispiele">Beispiele</a>
+    </ul>
+  </nav>
+</div>
+
+
   <div id="file-metadata">
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
@@ -59,10 +72,11 @@
     <nav id="parent-class-section" class="section">
   <h3 class="section-header">Parent</h3>
   
-  <p class="link"><a href="../BufferedAttendee.html">Lingo::BufferedAttendee</a>
+  <p class="link">BufferedAttendee
   
 </nav>
 
+    
     
     <!-- Method Quickref -->
 <nav id="method-list-section" class="section">
@@ -70,15 +84,15 @@
 
   <ul class="link-list">
     
-    <li><a href="#method-i-control">#control</a>
+    <li ><a href="#method-i-control">#control</a>
     
-    <li><a href="#method-i-dehyphenize">#dehyphenize</a>
+    <li ><a href="#method-i-dehyphenize">#dehyphenize</a>
     
-    <li><a href="#method-i-dehyphenized-3F">#dehyphenized?</a>
+    <li ><a href="#method-i-dehyphenized-3F">#dehyphenized?</a>
     
-    <li><a href="#method-i-init">#init</a>
+    <li ><a href="#method-i-init">#init</a>
     
-    <li><a href="#method-i-process_buffer">#process_buffer</a>
+    <li ><a href="#method-i-process_buffer">#process_buffer</a>
     
   </ul>
 </nav>
@@ -241,6 +255,14 @@
   
     <li><a href="../../Lingo/Web.html">Lingo::Web</a>
   
+    <li><a href="../../Lingo/Web/Rack.html">Lingo::Web::Rack</a>
+  
+    <li><a href="../../Lingo/Web/Rack/Auth.html">Lingo::Web::Rack::Auth</a>
+  
+    <li><a href="../../Nuggets.html">Nuggets</a>
+  
+    <li><a href="../../YAML.html">YAML</a>
+  
   </ul>
 </nav>
 
@@ -255,7 +277,7 @@
 <p>Der <a href="Dehyphenizer.html">Dehyphenizer</a> … muss noch dokumentiert
 werden</p>
 
-<h3 id="label-M%C3%B6gliche+Verlinkung">Mögliche Verlinkung</h3>
+<h3 id="label-M%C3%B6gliche+Verlinkung">Mögliche Verlinkung<span><a href="#label-M%C3%B6gliche+Verlinkung">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
 <dl class="rdoc-list note-list"><dt>Erwartet
 <dd>
 <p>Daten vom Typ <strong>Word</strong> z.B. von Wordsearcher, <a
@@ -268,7 +290,7 @@ Datenstrom eingefügt. Z.B. für Ocr_variator, <a
 href="Sequencer.html">Sequencer</a>, Noneword_filter, Vector_filter</p>
 </dd></dl>
 
-<h3 id="label-Parameter">Parameter</h3>
+<h3 id="label-Parameter">Parameter<span><a href="#label-Parameter">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
 
 <p>Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der
 Voreinstellung). Alle anderen Parameter müssen zwingend angegeben werden.</p>
@@ -286,24 +308,24 @@ Voreinstellung). Alle anderen Parameter müssen zwingend angegeben werden.</p>
 <p>(Standard: all) siehe allgemeine Beschreibung des Dictionary</p>
 </dd></dl>
 
-<h3 id="label-Beispiele">Beispiele</h3>
+<h3 id="label-Beispiele">Beispiele<span><a href="#label-Beispiele">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
 
 <p>Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration
 <code>t1.cfg</code></p>
 
 <pre>meeting:
   attendees:
-    - text_reader:   { out: lines, files: '$(files)' }
+    - text_reader:   { out: lines, files: &#39;$(files)&#39; }
     - tokenizer:     { in: lines, out: token }
-    - abbreviator:   { in: token, out: abbrev, source: 'sys-abk' }
-    - word_searcher: { in: abbrev, out: words, source: 'sys-dic' }
-    - decomposer:    { in: words, out: comps, source: 'sys-dic' }
-    - multi_worder:  { in: comps, out: multi, source: 'sys-mul' }
-    - debugger:      { in: multi, prompt: 'out&gt;' }</pre>
+    - abbreviator:   { in: token, out: abbrev, source: &#39;sys-abk&#39; }
+    - word_searcher: { in: abbrev, out: words, source: &#39;sys-dic&#39; }
+    - decomposer:    { in: words, out: comps, source: &#39;sys-dic&#39; }
+    - multi_worder:  { in: comps, out: multi, source: &#39;sys-mul&#39; }
+    - debugger:      { in: multi, prompt: &#39;out&gt;&#39; }</pre>
 
 <p>ergibt die Ausgabe über den Debugger: <code>lingo -c t1 test.txt</code></p>
 
-<pre>out&gt; *FILE('test.txt')
+<pre>out&gt; *FILE(&#39;test.txt&#39;)
 out&gt; &lt;Sein = [(sein/s), (sein/v)]&gt;
 out&gt; &lt;Name = [(name/s)]&gt;
 out&gt; &lt;ist = [(sein/v)]&gt;
@@ -312,8 +334,8 @@ out&gt; &lt;Johann = [(johann/e)]&gt;
 out&gt; &lt;van = [(van/w)]&gt;
 out&gt; &lt;Siegen = [(sieg/s), (siegen/v), (siegen/e)]&gt;
 out&gt; :./PUNC:
-out&gt; *EOL('test.txt')
-out&gt; *EOF('test.txt')</pre>
+out&gt; *EOL(&#39;test.txt&#39;)
+out&gt; *EOF(&#39;test.txt&#39;)</pre>
 
   </div><!-- description -->
 
@@ -340,11 +362,14 @@ out&gt; *EOF('test.txt')</pre>
         <div class="method-heading">
           <span class="method-name">control</span><span
             class="method-args">(cmd, param)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
+          
           
           
           
@@ -370,11 +395,14 @@ out&gt; *EOF('test.txt')</pre>
         <div class="method-heading">
           <span class="method-name">init</span><span
             class="method-args">()</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
+          
           
           
           
@@ -386,7 +414,7 @@ out&gt; *EOF('test.txt')</pre>
   <span class="ruby-identifier">set_dic</span>
   <span class="ruby-identifier">set_gra</span>
 
-  <span class="ruby-ivar">@skip</span> = <span class="ruby-identifier">get_array</span>(<span class="ruby-string">'skip'</span>, <span class="ruby-string">''</span>, <span class="ruby-value">:downcase</span>)
+  <span class="ruby-ivar">@skip</span> = <span class="ruby-identifier">get_array</span>(<span class="ruby-string">&#39;skip&#39;</span>, <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-value">:downcase</span>)
 
   <span class="ruby-ivar">@expected_tokens_in_buffer</span>, <span class="ruby-ivar">@eof_handling</span> = <span class="ruby-value">2</span>, <span class="ruby-keyword">false</span>
 <span class="ruby-keyword">end</span></pre>
@@ -405,11 +433,14 @@ out&gt; *EOF('test.txt')</pre>
         <div class="method-heading">
           <span class="method-name">process_buffer</span><span
             class="method-args">()</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
+          
           
           
           
@@ -418,10 +449,10 @@ out&gt; *EOF('test.txt')</pre>
           <div class="method-source-code" id="process_buffer-source">
             <pre><span class="ruby-comment"># File lib/lingo/attendee/dehyphenizer.rb, line 85</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">process_buffer</span>
-  <span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span>, <span class="ruby-identifier">h</span> = *<span class="ruby-identifier">ab</span> = <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">values_at</span>(<span class="ruby-value">0</span>, <span class="ruby-value">1</span>), <span class="ruby-string">'-'</span>
+  <span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span>, <span class="ruby-identifier">h</span> = <span class="ruby-operator">*</span><span class="ruby-identifier">ab</span> = <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">values_at</span>(<span class="ruby-value">0</span>, <span class="ruby-value">1</span>), <span class="ruby-string">&#39;-&#39;</span>
 
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">ab</span>.<span class="ruby-identifier">all?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Word</span>) } <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">form</span>[<span class="ruby-value">-1</span>, <span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">h</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span>(
-    (<span class="ruby-identifier">c</span> = <span class="ruby-identifier">b</span>.<span class="ruby-identifier">get_class</span>(<span class="ruby-regexp">%r./</span>).<span class="ruby-identifier">first</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@skip</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">c</span>.<span class="ruby-identifier">attr</span>)
+    (<span class="ruby-identifier">c</span> = <span class="ruby-identifier">b</span>.<span class="ruby-identifier">get_class</span>(<span class="ruby-regexp">/./</span>).<span class="ruby-identifier">first</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@skip</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">c</span>.<span class="ruby-identifier">attr</span>)
   )
     <span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span> = <span class="ruby-identifier">ab</span>.<span class="ruby-identifier">map!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">form</span> }
 
@@ -457,11 +488,14 @@ out&gt; *EOF('test.txt')</pre>
         <div class="method-heading">
           <span class="method-name">dehyphenize</span><span
             class="method-args">(form)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
+          
           
           
           
@@ -487,11 +521,14 @@ out&gt; *EOF('test.txt')</pre>
         <div class="method-heading">
           <span class="method-name">dehyphenized?</span><span
             class="method-args">(word)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
+          
           
           
           
@@ -521,7 +558,7 @@ out&gt; *EOF('test.txt')</pre>
 
 <footer id="validator-badges">
   <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.1.
   <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
 </footer>
 

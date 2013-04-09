@@ -43,6 +43,21 @@
 </nav>
 
 
+  
+<div id="table-of-contents">
+  <nav class="section">
+    <h3 class="section-header">Table of Contents</h3>
+    <ul>
+      <li><a href="#label-M%C3%B6gliche+Verlinkung">Mögliche Verlinkung</a>
+      <li><a href="#label-Parameter">Parameter</a>
+      <li><a href="#label-Konfiguration">Konfiguration</a>
+      <li><a href="#label-Generierte+Kommandos">Generierte Kommandos</a>
+      <li><a href="#label-Beispiele">Beispiele</a>
+    </ul>
+  </nav>
+</div>
+
+
   <div id="file-metadata">
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
@@ -64,37 +79,38 @@
 </nav>
 
     
+    
     <!-- Method Quickref -->
 <nav id="method-list-section" class="section">
   <h3 class="section-header">Methods</h3>
 
   <ul class="link-list">
     
-    <li><a href="#method-c-_insert">::_insert</a>
+    <li ><a href="#method-c-_insert">::_insert</a>
     
-    <li><a href="#method-c-_insert_name">::_insert_name</a>
+    <li ><a href="#method-c-_insert_name">::_insert_name</a>
     
-    <li><a href="#method-c-append">::append</a>
+    <li ><a href="#method-c-append">::append</a>
     
-    <li><a href="#method-c-delete">::delete</a>
+    <li ><a href="#method-c-delete">::delete</a>
     
-    <li><a href="#method-c-insert">::insert</a>
+    <li ><a href="#method-c-insert">::insert</a>
     
-    <li><a href="#method-c-insert_after">::insert_after</a>
+    <li ><a href="#method-c-insert_after">::insert_after</a>
     
-    <li><a href="#method-c-insert_before">::insert_before</a>
+    <li ><a href="#method-c-insert_before">::insert_before</a>
     
-    <li><a href="#method-c-replace">::replace</a>
+    <li ><a href="#method-c-replace">::replace</a>
     
-    <li><a href="#method-c-rule">::rule</a>
+    <li ><a href="#method-c-rule">::rule</a>
     
-    <li><a href="#method-i-control">#control</a>
+    <li ><a href="#method-i-control">#control</a>
     
-    <li><a href="#method-i-init">#init</a>
+    <li ><a href="#method-i-init">#init</a>
     
-    <li><a href="#method-i-process">#process</a>
+    <li ><a href="#method-i-process">#process</a>
     
-    <li><a href="#method-i-tokenize">#tokenize</a>
+    <li ><a href="#method-i-tokenize">#tokenize</a>
     
   </ul>
 </nav>
@@ -257,6 +273,14 @@
   
     <li><a href="../../Lingo/Web.html">Lingo::Web</a>
   
+    <li><a href="../../Lingo/Web/Rack.html">Lingo::Web::Rack</a>
+  
+    <li><a href="../../Lingo/Web/Rack/Auth.html">Lingo::Web::Rack::Auth</a>
+  
+    <li><a href="../../Nuggets.html">Nuggets</a>
+  
+    <li><a href="../../YAML.html">YAML</a>
+  
   </ul>
 </nav>
 
@@ -272,7 +296,7 @@
 einzelne Token. Dies ist notwendig, damit nachfolgende Attendees die
 Textdatei häppchenweise verarbeiten können.</p>
 
-<h3 id="label-M%C3%B6gliche+Verlinkung">Mögliche Verlinkung</h3>
+<h3 id="label-M%C3%B6gliche+Verlinkung">Mögliche Verlinkung<span><a href="#label-M%C3%B6gliche+Verlinkung">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
 <dl class="rdoc-list note-list"><dt>Erwartet
 <dd>
 <p>Daten des Typs <strong>String</strong> (Textzeilen) z.B. von <a
@@ -283,7 +307,7 @@ href="TextReader.html">TextReader</a></p>
 href="Abbreviator.html">Abbreviator</a>, Wordsearcher</p>
 </dd></dl>
 
-<h3 id="label-Parameter">Parameter</h3>
+<h3 id="label-Parameter">Parameter<span><a href="#label-Parameter">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
 
 <p>Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der
 Voreinstellung). Alle anderen Parameter müssen zwingend angegeben werden.</p>
@@ -295,7 +319,7 @@ Voreinstellung). Alle anderen Parameter müssen zwingend angegeben werden.</p>
 <p>siehe allgemeine Beschreibung des <a href="../Attendee.html">Attendee</a></p>
 </dd></dl>
 
-<h3 id="label-Konfiguration">Konfiguration</h3>
+<h3 id="label-Konfiguration">Konfiguration<span><a href="#label-Konfiguration">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
 
 <p>Der <a href="Tokenizer.html">Tokenizer</a> benötigt zur Identifikation
 einzelner Token Regeln, nach denen er arbeiten soll. Die benötigten Regeln
@@ -304,7 +328,7 @@ Programmkonstanten hinterlegt. Die Regeln werden in der angegebenen
 Reihenfolge abgearbeitet, solange bis ein Token erkannt wurde. Sollte keine
 Regel zutreffen, so greift die letzt Regel <code>HELP</code> in jedem Fall.</p>
 
-<h3 id="label-Generierte+Kommandos">Generierte Kommandos</h3>
+<h3 id="label-Generierte+Kommandos">Generierte Kommandos<span><a href="#label-Generierte+Kommandos">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
 
 <p>Damit der nachfolgende Datenstrom einwandfrei verarbeitet werden kann,
 generiert der <a href="Tokenizer.html">Tokenizer</a> Kommandos, die mit in
@@ -316,33 +340,33 @@ den Datenstrom eingefügt werden.</p>
 
 <p>für nachfolgende Attendees verloren wäre.</p>
 
-<h3 id="label-Beispiele">Beispiele</h3>
+<h3 id="label-Beispiele">Beispiele<span><a href="#label-Beispiele">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
 
 <p>Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration
 <code>t1.cfg</code></p>
 
 <pre>meeting:
   attendees:
-    - text_reader: { out: lines, files: '$(files)' }
+    - text_reader: { out: lines, files: &#39;$(files)&#39; }
     - tokenizer:   { in: lines, out: token }
-    - debugger:    { in: token, prompt: 'out&gt;' }</pre>
+    - debugger:    { in: token, prompt: &#39;out&gt;&#39; }</pre>
 
 <p>ergibt die Ausgabe über den Debugger: <code>lingo -c t1 test.txt</code></p>
 
-<pre>out&gt; *FILE('test.txt')
+<pre>out&gt; *FILE(&#39;test.txt&#39;)
 out&gt; :Dies/WORD:
 out&gt; :ist/WORD:
 out&gt; :eine/WORD:
 out&gt; :Zeile/WORD:
 out&gt; :./PUNC:
-out&gt; *EOL('test.txt')
+out&gt; *EOL(&#39;test.txt&#39;)
 out&gt; :Dies/WORD:
 out&gt; :ist/WORD:
 out&gt; :noch/WORD:
 out&gt; :eine/WORD:
 out&gt; :./PUNC:
-out&gt; *EOL('test.txt')
-out&gt; *EOF('test.txt')</pre>
+out&gt; *EOL(&#39;test.txt&#39;)
+out&gt; *EOF(&#39;test.txt&#39;)</pre>
 
   </div><!-- description -->
 
@@ -387,7 +411,9 @@ out&gt; *EOF('test.txt')</pre>
         <div class="method-heading">
           <span class="method-name">append</span><span
             class="method-args">(*rules)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -395,11 +421,12 @@ out&gt; *EOF('test.txt')</pre>
           
           
           
+          
 
           
           <div class="method-source-code" id="append-source">
             <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 117</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">append</span>(*<span class="ruby-identifier">rules</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">append</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">rules</span>)
   <span class="ruby-identifier">_insert</span>(<span class="ruby-value">-1</span>, <span class="ruby-identifier">rules</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- append-source -->
@@ -417,7 +444,9 @@ out&gt; *EOF('test.txt')</pre>
         <div class="method-heading">
           <span class="method-name">delete</span><span
             class="method-args">(*names)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -425,11 +454,12 @@ out&gt; *EOF('test.txt')</pre>
           
           
           
+          
 
           
           <div class="method-source-code" id="delete-source">
             <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 104</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span>(*<span class="ruby-identifier">names</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">names</span>)
   <span class="ruby-identifier">names</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span> <span class="ruby-constant">RULES</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">rule</span>(<span class="ruby-identifier">name</span>)) }
 <span class="ruby-keyword">end</span></pre>
           </div><!-- delete-source -->
@@ -447,7 +477,9 @@ out&gt; *EOF('test.txt')</pre>
         <div class="method-heading">
           <span class="method-name">insert</span><span
             class="method-args">(*rules)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -455,11 +487,12 @@ out&gt; *EOF('test.txt')</pre>
           
           
           
+          
 
           
           <div class="method-source-code" id="insert-source">
             <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 113</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">insert</span>(*<span class="ruby-identifier">rules</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">insert</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">rules</span>)
   <span class="ruby-identifier">_insert</span>(<span class="ruby-value">0</span>, <span class="ruby-identifier">rules</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- insert-source -->
@@ -477,7 +510,9 @@ out&gt; *EOF('test.txt')</pre>
         <div class="method-heading">
           <span class="method-name">insert_after</span><span
             class="method-args">(name, *rules)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -485,11 +520,12 @@ out&gt; *EOF('test.txt')</pre>
           
           
           
+          
 
           
           <div class="method-source-code" id="insert_after-source">
             <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 125</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">insert_after</span>(<span class="ruby-identifier">name</span>, *<span class="ruby-identifier">rules</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">insert_after</span>(<span class="ruby-identifier">name</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">rules</span>)
   <span class="ruby-identifier">_insert_name</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">rules</span>, <span class="ruby-value">-1</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- insert_after-source -->
@@ -507,7 +543,9 @@ out&gt; *EOF('test.txt')</pre>
         <div class="method-heading">
           <span class="method-name">insert_before</span><span
             class="method-args">(name, *rules)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -515,11 +553,12 @@ out&gt; *EOF('test.txt')</pre>
           
           
           
+          
 
           
           <div class="method-source-code" id="insert_before-source">
             <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 121</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">insert_before</span>(<span class="ruby-identifier">name</span>, *<span class="ruby-identifier">rules</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">insert_before</span>(<span class="ruby-identifier">name</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">rules</span>)
   <span class="ruby-identifier">_insert_name</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">rules</span>, <span class="ruby-value">0</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- insert_before-source -->
@@ -537,11 +576,14 @@ out&gt; *EOF('test.txt')</pre>
         <div class="method-heading">
           <span class="method-name">replace</span><span
             class="method-args">(name, expr) { |rule| ... }</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
+          
           
           
           
@@ -568,11 +610,14 @@ out&gt; *EOF('test.txt')</pre>
         <div class="method-heading">
           <span class="method-name">rule</span><span
             class="method-args">(name)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
+          
           
           
           
@@ -604,11 +649,14 @@ out&gt; *EOF('test.txt')</pre>
         <div class="method-heading">
           <span class="method-name">_insert</span><span
             class="method-args">(index, rules)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
+          
           
           
           
@@ -617,8 +665,8 @@ out&gt; *EOF('test.txt')</pre>
           <div class="method-source-code" id="_insert-source">
             <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 131</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">_insert</span>(<span class="ruby-identifier">index</span>, <span class="ruby-identifier">rules</span>)
-  <span class="ruby-identifier">rules</span>.<span class="ruby-identifier">push</span>(*<span class="ruby-identifier">rules</span>.<span class="ruby-identifier">pop</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">rules</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
-  <span class="ruby-constant">RULES</span>.<span class="ruby-identifier">insert</span>(<span class="ruby-identifier">index</span>, *<span class="ruby-identifier">rules</span>)
+  <span class="ruby-identifier">rules</span>.<span class="ruby-identifier">push</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">rules</span>.<span class="ruby-identifier">pop</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">rules</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
+  <span class="ruby-constant">RULES</span>.<span class="ruby-identifier">insert</span>(<span class="ruby-identifier">index</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">rules</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- _insert-source -->
           
@@ -635,11 +683,14 @@ out&gt; *EOF('test.txt')</pre>
         <div class="method-heading">
           <span class="method-name">_insert_name</span><span
             class="method-args">(name, rules, offset)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
+          
           
           
           
@@ -672,11 +723,14 @@ out&gt; *EOF('test.txt')</pre>
         <div class="method-heading">
           <span class="method-name">control</span><span
             class="method-args">(cmd, param)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
+          
           
           
           
@@ -706,11 +760,14 @@ out&gt; *EOF('test.txt')</pre>
         <div class="method-heading">
           <span class="method-name">init</span><span
             class="method-args">()</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
+          
           
           
           
@@ -719,13 +776,13 @@ out&gt; *EOF('test.txt')</pre>
           <div class="method-source-code" id="init-source">
             <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 145</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">init</span>
-  <span class="ruby-ivar">@space</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">'space'</span>, <span class="ruby-keyword">false</span>)
-  <span class="ruby-ivar">@tags</span>  = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">'tags'</span>,  <span class="ruby-keyword">false</span>)
-  <span class="ruby-ivar">@wiki</span>  = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">'wiki'</span>,  <span class="ruby-keyword">false</span>)
+  <span class="ruby-ivar">@space</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;space&#39;</span>, <span class="ruby-keyword">false</span>)
+  <span class="ruby-ivar">@tags</span>  = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;tags&#39;</span>,  <span class="ruby-keyword">false</span>)
+  <span class="ruby-ivar">@wiki</span>  = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;wiki&#39;</span>,  <span class="ruby-keyword">false</span>)
 
   <span class="ruby-identifier">skip</span> = []
-  <span class="ruby-identifier">skip</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'HTML'</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@tags</span>
-  <span class="ruby-identifier">skip</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'WIKI'</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@wiki</span>
+  <span class="ruby-identifier">skip</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;HTML&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@tags</span>
+  <span class="ruby-identifier">skip</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;WIKI&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@wiki</span>
 
   <span class="ruby-ivar">@rules</span> = <span class="ruby-constant">RULES</span>.<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">_</span><span class="ruby-operator">|</span> <span class="ruby-identifier">skip</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">name</span>) }
 
@@ -746,11 +803,14 @@ out&gt; *EOF('test.txt')</pre>
         <div class="method-heading">
           <span class="method-name">process</span><span
             class="method-args">(obj)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
+          
           
           
           
@@ -760,7 +820,7 @@ out&gt; *EOF('test.txt')</pre>
             <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 167</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">process</span>(<span class="ruby-identifier">obj</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>)
-    <span class="ruby-identifier">tokenize</span>(<span class="ruby-identifier">obj</span>) { <span class="ruby-operator">|</span>*<span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">forward</span>(<span class="ruby-constant">Token</span>.<span class="ruby-identifier">new</span>(*<span class="ruby-identifier">i</span>)) }
+    <span class="ruby-identifier">tokenize</span>(<span class="ruby-identifier">obj</span>) { <span class="ruby-operator">|</span><span class="ruby-operator">*</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">forward</span>(<span class="ruby-constant">Token</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">i</span>)) }
     <span class="ruby-identifier">forward</span>(<span class="ruby-constant">STR_CMD_EOL</span>, <span class="ruby-ivar">@filename</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@filename</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">obj</span>)
@@ -787,7 +847,9 @@ out&gt; *EOF('test.txt')</pre>
         <div class="method-heading">
           <span class="method-name">tokenize</span><span
             class="method-args">(line) { |$&, cont| ... }</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -795,44 +857,45 @@ out&gt; *EOF('test.txt')</pre>
           
           <p>tokenize(“Eine Zeile.”)  -&gt;  [:Eine/WORD:, :Zeile/WORD:, :./PUNC:]</p>
           
+          
 
           
           <div class="method-source-code" id="tokenize-source">
             <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 179</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">tokenize</span>(<span class="ruby-identifier">line</span>)
   <span class="ruby-keyword">case</span> <span class="ruby-ivar">@cont</span>
-    <span class="ruby-keyword">when</span> <span class="ruby-string">'HTML'</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r^[^&lt;&gt;]*&gt;/</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;HTML&#39;</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^[^&lt;&gt;]*&gt;/</span>
         <span class="ruby-keyword">yield</span> <span class="ruby-node">$&amp;</span>, <span class="ruby-ivar">@cont</span>
-        <span class="ruby-identifier">line</span>, <span class="ruby-ivar">@cont</span> = <span class="ruby-node">$'</span>, <span class="ruby-keyword">nil</span>
+        <span class="ruby-identifier">line</span>, <span class="ruby-ivar">@cont</span> = <span class="ruby-node">$&#39;</span>, <span class="ruby-keyword">nil</span>
       <span class="ruby-keyword">else</span>
         <span class="ruby-keyword">yield</span> <span class="ruby-identifier">line</span>, <span class="ruby-ivar">@cont</span>
         <span class="ruby-keyword">return</span>
       <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">when</span> <span class="ruby-string">'WIKI'</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r^[^\[\]]*\]\]/</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;WIKI&#39;</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^[^\[\]]*\]\]/</span>
         <span class="ruby-keyword">yield</span> <span class="ruby-node">$&amp;</span>, <span class="ruby-ivar">@cont</span>
-        <span class="ruby-identifier">line</span>, <span class="ruby-ivar">@cont</span> = <span class="ruby-node">$'</span>, <span class="ruby-keyword">nil</span>
+        <span class="ruby-identifier">line</span>, <span class="ruby-ivar">@cont</span> = <span class="ruby-node">$&#39;</span>, <span class="ruby-keyword">nil</span>
       <span class="ruby-keyword">else</span>
         <span class="ruby-keyword">yield</span> <span class="ruby-identifier">line</span>, <span class="ruby-ivar">@cont</span>
         <span class="ruby-keyword">return</span>
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">when</span> <span class="ruby-keyword">nil</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@tags</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r&lt;[^&lt;&gt;]*$/</span>
-        <span class="ruby-keyword">yield</span> <span class="ruby-node">$&amp;</span>, <span class="ruby-ivar">@cont</span> = <span class="ruby-string">'HTML'</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@tags</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/&lt;[^&lt;&gt;]*$/</span>
+        <span class="ruby-keyword">yield</span> <span class="ruby-node">$&amp;</span>, <span class="ruby-ivar">@cont</span> = <span class="ruby-string">&#39;HTML&#39;</span>
         <span class="ruby-identifier">line</span> = <span class="ruby-node">$`</span>
       <span class="ruby-keyword">end</span>
 
-      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@wiki</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r\[\[[^\[\]]*$/</span>
-        <span class="ruby-keyword">yield</span> <span class="ruby-node">$&amp;</span>, <span class="ruby-ivar">@cont</span> = <span class="ruby-string">'WIKI'</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@wiki</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/\[\[[^\[\]]*$/</span>
+        <span class="ruby-keyword">yield</span> <span class="ruby-node">$&amp;</span>, <span class="ruby-ivar">@cont</span> = <span class="ruby-string">&#39;WIKI&#39;</span>
         <span class="ruby-identifier">line</span> = <span class="ruby-node">$`</span>
       <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-keyword">while</span> (<span class="ruby-identifier">l</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">length</span>) <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@rules</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">expr</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">expr</span>
-      <span class="ruby-keyword">yield</span> <span class="ruby-node">$&amp;</span>, <span class="ruby-identifier">name</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">name</span> <span class="ruby-operator">!=</span> <span class="ruby-string">'SPAC'</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@space</span>
-      <span class="ruby-identifier">l</span> <span class="ruby-operator">==</span> <span class="ruby-node">$'</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">break</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">line</span> = <span class="ruby-node">$'</span>
+      <span class="ruby-keyword">yield</span> <span class="ruby-node">$&amp;</span>, <span class="ruby-identifier">name</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">name</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;SPAC&#39;</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@space</span>
+      <span class="ruby-identifier">l</span> <span class="ruby-operator">==</span> <span class="ruby-node">$&#39;</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">break</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">line</span> = <span class="ruby-node">$&#39;</span>
     <span class="ruby-keyword">end</span>
   }
   <span class="ruby-keyword">end</span>
@@ -856,7 +919,7 @@ out&gt; *EOF('test.txt')</pre>
 
 <footer id="validator-badges">
   <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.1.
   <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
 </footer>
 

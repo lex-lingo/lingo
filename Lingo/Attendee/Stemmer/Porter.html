@@ -43,6 +43,8 @@
 </nav>
 
 
+  
+
   <div id="file-metadata">
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
@@ -58,13 +60,14 @@
     
     
     
+    
     <!-- Method Quickref -->
 <nav id="method-list-section" class="section">
   <h3 class="section-header">Methods</h3>
 
   <ul class="link-list">
     
-    <li><a href="#method-i-stem">#stem</a>
+    <li ><a href="#method-i-stem">#stem</a>
     
   </ul>
 </nav>
@@ -227,6 +230,14 @@
   
     <li><a href="../../../Lingo/Web.html">Lingo::Web</a>
   
+    <li><a href="../../../Lingo/Web/Rack.html">Lingo::Web::Rack</a>
+  
+    <li><a href="../../../Lingo/Web/Rack/Auth.html">Lingo::Web::Rack::Auth</a>
+  
+    <li><a href="../../../Nuggets.html">Nuggets</a>
+  
+    <li><a href="../../../YAML.html">YAML</a>
+  
   </ul>
 </nav>
 
@@ -286,11 +297,14 @@
         <div class="method-heading">
           <span class="method-name">stem</span><span
             class="method-args">(word, found = false)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
+          
           
           
           
@@ -308,33 +322,33 @@
       <span class="ruby-keyword">case</span> <span class="ruby-identifier">rule</span>
         <span class="ruby-keyword">when</span> <span class="ruby-constant">RULE_RE</span>
           <span class="ruby-identifier">cond</span>, <span class="ruby-identifier">repl</span>, <span class="ruby-identifier">goto</span> = <span class="ruby-node">$1</span>, <span class="ruby-node">$3</span>, <span class="ruby-node">$4</span>
-          <span class="ruby-identifier">stem</span> = <span class="ruby-identifier">word</span>[<span class="ruby-node">%r(.+)#{Unicode.downcase($2)}$/</span>, <span class="ruby-value">1</span>] <span class="ruby-keyword">or</span> <span class="ruby-keyword">next</span>
+          <span class="ruby-identifier">stem</span> = <span class="ruby-identifier">word</span>[<span class="ruby-node">/(.+)#{Unicode.downcase($2)}$/</span>, <span class="ruby-value">1</span>] <span class="ruby-keyword">or</span> <span class="ruby-keyword">next</span>
         <span class="ruby-keyword">when</span> <span class="ruby-constant">GOTO_RE</span>
           <span class="ruby-identifier">goto</span> = <span class="ruby-node">$1</span>
           <span class="ruby-keyword">break</span>
       <span class="ruby-keyword">end</span>
 
       <span class="ruby-identifier">conv</span>[<span class="ruby-identifier">shad</span> = <span class="ruby-identifier">stem</span>.<span class="ruby-identifier">dup</span>,
-        <span class="ruby-regexp">%r[^aeiouy]/</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'c'</span>,
-        <span class="ruby-regexp">%r[aeiou]/</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'v'</span>,
-        <span class="ruby-regexp">%rcy/</span>        =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'cv'</span>,
-        <span class="ruby-regexp">%ry/</span>         =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'c'</span>
+        <span class="ruby-regexp">/[^aeiouy]/</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;c&#39;</span>,
+        <span class="ruby-regexp">/[aeiou]/</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;v&#39;</span>,
+        <span class="ruby-regexp">/cy/</span>        =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;cv&#39;</span>,
+        <span class="ruby-regexp">/y/</span>         =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;c&#39;</span>
       ]
 
       <span class="ruby-keyword">if</span> <span class="ruby-identifier">cond</span>
         <span class="ruby-identifier">conv</span>[<span class="ruby-identifier">cond</span>,
-          <span class="ruby-string">'m'</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">shad</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">%rvc/</span>).<span class="ruby-identifier">size</span>,
-          <span class="ruby-string">'*v*'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">shad</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">'v'</span>),
-          <span class="ruby-string">'*d'</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">shad</span>.<span class="ruby-identifier">end_with?</span>(<span class="ruby-string">'c'</span>) <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">last</span> = <span class="ruby-identifier">stem</span>[<span class="ruby-value">-1</span>]) <span class="ruby-operator">==</span> <span class="ruby-identifier">stem</span>[<span class="ruby-value">-2</span>],
-          <span class="ruby-string">'*o'</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">shad</span>.<span class="ruby-identifier">end_with?</span>(<span class="ruby-string">'cvc'</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-string">'wxy'</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">last</span>),
-          <span class="ruby-string">'and'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'&amp;&amp;'</span>,
-          <span class="ruby-string">'or'</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'||'</span>,
-          <span class="ruby-string">'not'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'!'</span>,
-          <span class="ruby-string">'='</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'=='</span>
+          <span class="ruby-string">&#39;m&#39;</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">shad</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/vc/</span>).<span class="ruby-identifier">size</span>,
+          <span class="ruby-string">&#39;*v*&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">shad</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">&#39;v&#39;</span>),
+          <span class="ruby-string">&#39;*d&#39;</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">shad</span>.<span class="ruby-identifier">end_with?</span>(<span class="ruby-string">&#39;c&#39;</span>) <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">last</span> = <span class="ruby-identifier">stem</span>[<span class="ruby-value">-1</span>]) <span class="ruby-operator">==</span> <span class="ruby-identifier">stem</span>[<span class="ruby-value">-2</span>],
+          <span class="ruby-string">&#39;*o&#39;</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">shad</span>.<span class="ruby-identifier">end_with?</span>(<span class="ruby-string">&#39;cvc&#39;</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-string">&#39;wxy&#39;</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">last</span>),
+          <span class="ruby-string">&#39;and&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;&amp;&amp;&#39;</span>,
+          <span class="ruby-string">&#39;or&#39;</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;||&#39;</span>,
+          <span class="ruby-string">&#39;not&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;!&#39;</span>,
+          <span class="ruby-string">&#39;=&#39;</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;==&#39;</span>
         ]
 
         <span class="ruby-identifier">last</span>.<span class="ruby-identifier">upcase!</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">last</span>
-        <span class="ruby-identifier">cond</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">%r\*(\w)/</span>) { <span class="ruby-identifier">last</span> <span class="ruby-operator">==</span> <span class="ruby-node">$1</span> }
+        <span class="ruby-identifier">cond</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/\*(\w)/</span>) { <span class="ruby-identifier">last</span> <span class="ruby-operator">==</span> <span class="ruby-node">$1</span> }
 
         <span class="ruby-keyword">next</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">eval</span>(<span class="ruby-identifier">cond</span>)
       <span class="ruby-keyword">end</span>
@@ -370,7 +384,7 @@
 
 <footer id="validator-badges">
   <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.1.
   <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
 </footer>
 

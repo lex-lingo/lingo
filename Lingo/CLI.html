@@ -43,6 +43,8 @@
 </nav>
 
 
+  
+
   <div id="file-metadata">
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
@@ -59,10 +61,11 @@
     <nav id="parent-class-section" class="section">
   <h3 class="section-header">Parent</h3>
   
-  <p class="link">Util::CLI
+  <p class="link">Nuggets::CLI
   
 </nav>
 
+    
     
     <!-- Method Quickref -->
 <nav id="method-list-section" class="section">
@@ -70,13 +73,13 @@
 
   <ul class="link-list">
     
-    <li><a href="#method-c-defaults">::defaults</a>
+    <li class="calls-super" ><a href="#method-c-defaults">::defaults</a>
     
-    <li><a href="#method-i-load_config">#load_config</a>
+    <li ><a href="#method-i-load_config">#load_config</a>
     
-    <li><a href="#method-i-opts">#opts</a>
+    <li ><a href="#method-i-opts">#opts</a>
     
-    <li><a href="#method-i-run">#run</a>
+    <li ><a href="#method-i-run">#run</a>
     
   </ul>
 </nav>
@@ -239,6 +242,14 @@
   
     <li><a href="../Lingo/Web.html">Lingo::Web</a>
   
+    <li><a href="../Lingo/Web/Rack.html">Lingo::Web::Rack</a>
+  
+    <li><a href="../Lingo/Web/Rack/Auth.html">Lingo::Web::Rack::Auth</a>
+  
+    <li><a href="../Nuggets.html">Nuggets</a>
+  
+    <li><a href="../YAML.html">YAML</a>
+  
   </ul>
 </nav>
 
@@ -295,7 +306,9 @@
         <div class="method-heading">
           <span class="method-name">defaults</span><span
             class="method-args">()</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -303,14 +316,20 @@
           
           
           
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              
+            </div>
+          
 
           
           <div class="method-source-code" id="defaults-source">
             <pre><span class="ruby-comment"># File lib/lingo/cli.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">defaults</span>
   <span class="ruby-keyword">super</span>.<span class="ruby-identifier">merge</span>(
-    <span class="ruby-identifier">config</span><span class="ruby-operator">:</span>   <span class="ruby-string">'lingo.cfg'</span>,
-    <span class="ruby-identifier">language</span><span class="ruby-operator">:</span> <span class="ruby-string">'de'</span>,
+    <span class="ruby-identifier">config</span><span class="ruby-operator">:</span>   <span class="ruby-string">&#39;lingo.cfg&#39;</span>,
+    <span class="ruby-identifier">language</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;de&#39;</span>,
     <span class="ruby-identifier">profile</span><span class="ruby-operator">:</span>  <span class="ruby-keyword">false</span>
   )
 <span class="ruby-keyword">end</span></pre>
@@ -335,11 +354,14 @@
         <div class="method-heading">
           <span class="method-name">run</span><span
             class="method-args">(arguments)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
+          
           
           
           
@@ -371,7 +393,9 @@
         <div class="method-heading">
           <span class="method-name">load_config</span><span
             class="method-args">(*)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -379,11 +403,12 @@
           
           
           
+          
 
           
           <div class="method-source-code" id="load_config-source">
             <pre><span class="ruby-comment"># File lib/lingo/cli.rb, line 52</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">load_config</span>(*)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">load_config</span>(<span class="ruby-operator">*</span>)
   <span class="ruby-ivar">@config</span> = {}
 <span class="ruby-keyword">end</span></pre>
           </div><!-- load_config-source -->
@@ -401,11 +426,14 @@
         <div class="method-heading">
           <span class="method-name">opts</span><span
             class="method-args">(opts)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
+          
           
           
           
@@ -414,26 +442,26 @@
           <div class="method-source-code" id="opts-source">
             <pre><span class="ruby-comment"># File lib/lingo/cli.rb, line 56</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">opts</span>(<span class="ruby-identifier">opts</span>)
-  <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">'-c'</span>, <span class="ruby-string">'--config YAML'</span>, <span class="ruby-node">&quot;Config file [Default: #{defaults[:config]}#{' (currently not present)' unless File.readable?(defaults[:config])}]&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">config</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&#39;-c&#39;</span>, <span class="ruby-string">&#39;--config YAML&#39;</span>, <span class="ruby-node">&quot;Config file [Default: #{defaults[:config]}#{&#39; (currently not present)&#39; unless File.readable?(defaults[:config])}]&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">config</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">options</span>[<span class="ruby-value">:config</span>] = <span class="ruby-identifier">config</span>
   }
 
-  <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-string">''</span>
+  <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-string">&#39;&#39;</span>
 
-  <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">'-l'</span>, <span class="ruby-string">'--language LANG'</span>, <span class="ruby-node">&quot;Language for processing [Default: #{defaults[:language]}]&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">language</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&#39;-l&#39;</span>, <span class="ruby-string">&#39;--language LANG&#39;</span>, <span class="ruby-node">&quot;Language for processing [Default: #{defaults[:language]}]&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">language</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">options</span>[<span class="ruby-value">:language</span>] = <span class="ruby-identifier">language</span>
   }
 
-  <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-string">''</span>
+  <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-string">&#39;&#39;</span>
 
-  <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">'-L'</span>, <span class="ruby-string">'--log FILE'</span>, <span class="ruby-string">'Log file to print debug information to'</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">log</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">options</span>[<span class="ruby-value">:log</span>] = <span class="ruby-identifier">stderr</span>.<span class="ruby-identifier">reopen</span>(<span class="ruby-identifier">log</span> <span class="ruby-operator">==</span> <span class="ruby-string">'-'</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">stdout</span> <span class="ruby-operator">:</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">log</span>, <span class="ruby-string">'a+'</span>, <span class="ruby-identifier">encoding</span><span class="ruby-operator">:</span> <span class="ruby-constant">ENC</span>))
+  <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&#39;-L&#39;</span>, <span class="ruby-string">&#39;--log FILE&#39;</span>, <span class="ruby-string">&#39;Log file to print debug information to&#39;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">log</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">options</span>[<span class="ruby-value">:log</span>] = <span class="ruby-identifier">stderr</span>.<span class="ruby-identifier">reopen</span>(<span class="ruby-identifier">log</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;-&#39;</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">stdout</span> <span class="ruby-operator">:</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">log</span>, <span class="ruby-string">&#39;a+&#39;</span>, <span class="ruby-identifier">encoding</span><span class="ruby-operator">:</span> <span class="ruby-constant">ENC</span>))
   }
 
-  <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-string">''</span>
+  <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-string">&#39;&#39;</span>
 
-  <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">'-P'</span>, <span class="ruby-string">'--profile PATH'</span>, <span class="ruby-string">'Print profiling results'</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">profile</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">options</span>[<span class="ruby-value">:profile</span>] = <span class="ruby-identifier">profile</span> <span class="ruby-operator">==</span> <span class="ruby-string">'-'</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">stdout</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">profile</span>
+  <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&#39;-P&#39;</span>, <span class="ruby-string">&#39;--profile PATH&#39;</span>, <span class="ruby-string">&#39;Print profiling results&#39;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">profile</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">options</span>[<span class="ruby-value">:profile</span>] = <span class="ruby-identifier">profile</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;-&#39;</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">stdout</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">profile</span>
   }
 <span class="ruby-keyword">end</span></pre>
           </div><!-- opts-source -->
@@ -455,7 +483,7 @@
 
 <footer id="validator-badges">
   <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.1.
   <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
 </footer>
 

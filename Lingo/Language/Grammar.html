@@ -43,6 +43,8 @@
 </nav>
 
 
+  
+
   <div id="file-metadata">
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
@@ -64,23 +66,24 @@
 </nav>
 
     
+    
     <!-- Method Quickref -->
 <nav id="method-list-section" class="section">
   <h3 class="section-header">Methods</h3>
 
   <ul class="link-list">
     
-    <li><a href="#method-c-new">::new</a>
+    <li ><a href="#method-c-new">::new</a>
     
-    <li><a href="#method-c-open">::open</a>
+    <li ><a href="#method-c-open">::open</a>
     
-    <li><a href="#method-i-close">#close</a>
+    <li ><a href="#method-i-close">#close</a>
     
-    <li><a href="#method-i-find_compound">#find_compound</a>
+    <li ><a href="#method-i-find_compound">#find_compound</a>
     
-    <li><a href="#method-i-permute_compound">#permute_compound</a>
+    <li ><a href="#method-i-permute_compound">#permute_compound</a>
     
-    <li><a href="#method-i-test_compound">#test_compound</a>
+    <li ><a href="#method-i-test_compound">#test_compound</a>
     
   </ul>
 </nav>
@@ -243,6 +246,14 @@
   
     <li><a href="../../Lingo/Web.html">Lingo::Web</a>
   
+    <li><a href="../../Lingo/Web/Rack.html">Lingo::Web::Rack</a>
+  
+    <li><a href="../../Lingo/Web/Rack/Auth.html">Lingo::Web::Rack::Auth</a>
+  
+    <li><a href="../../Nuggets.html">Nuggets</a>
+  
+    <li><a href="../../YAML.html">YAML</a>
+  
   </ul>
 </nav>
 
@@ -301,11 +312,14 @@ Kompositumteile.</p>
         <div class="method-heading">
           <span class="method-name">new</span><span
             class="method-args">(config, lingo)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
+          
           
           
           
@@ -316,27 +330,27 @@ Kompositumteile.</p>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">config</span>, <span class="ruby-identifier">lingo</span>)
   <span class="ruby-ivar">@dic</span>, <span class="ruby-ivar">@suggestions</span> = <span class="ruby-constant">Dictionary</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">config</span>, <span class="ruby-identifier">lingo</span>), []
 
-  <span class="ruby-identifier">lingo</span>.<span class="ruby-identifier">deprecate</span>(<span class="ruby-value">:compositum</span>, <span class="ruby-value">:compound</span>, <span class="ruby-keyword">self</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">lingo</span>.<span class="ruby-identifier">dictionary_config</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">'compositum'</span>)
+  <span class="ruby-identifier">lingo</span>.<span class="ruby-identifier">deprecate</span>(<span class="ruby-value">:compositum</span>, <span class="ruby-value">:compound</span>, <span class="ruby-keyword">self</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">lingo</span>.<span class="ruby-identifier">dictionary_config</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">&#39;compositum&#39;</span>)
 
-  <span class="ruby-identifier">cfg</span> = <span class="ruby-identifier">lingo</span>.<span class="ruby-identifier">dictionary_config</span>[<span class="ruby-string">'compound'</span>] <span class="ruby-operator">||</span>
-        <span class="ruby-identifier">lingo</span>.<span class="ruby-identifier">dictionary_config</span>[<span class="ruby-string">'compositum'</span>]  <span class="ruby-comment"># DEPRECATE compositum</span>
+  <span class="ruby-identifier">cfg</span> = <span class="ruby-identifier">lingo</span>.<span class="ruby-identifier">dictionary_config</span>[<span class="ruby-string">&#39;compound&#39;</span>] <span class="ruby-operator">||</span>
+        <span class="ruby-identifier">lingo</span>.<span class="ruby-identifier">dictionary_config</span>[<span class="ruby-string">&#39;compositum&#39;</span>]  <span class="ruby-comment"># DEPRECATE compositum</span>
 
   {
     <span class="ruby-identifier">min_word_size</span><span class="ruby-operator">:</span> <span class="ruby-value">8</span>, <span class="ruby-identifier">min_avg_part_size</span><span class="ruby-operator">:</span> <span class="ruby-value">4</span>, <span class="ruby-identifier">min_part_size</span><span class="ruby-operator">:</span> <span class="ruby-value">1</span>, <span class="ruby-identifier">max_parts</span><span class="ruby-operator">:</span> <span class="ruby-value">4</span>
   }.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">instance_variable_set</span>(<span class="ruby-node">&quot;@#{k}&quot;</span>, <span class="ruby-identifier">cfg</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">k</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-string">'_'</span>, <span class="ruby-string">'-'</span>), <span class="ruby-identifier">v</span>).<span class="ruby-identifier">to_i</span>)
+    <span class="ruby-identifier">instance_variable_set</span>(<span class="ruby-node">&quot;@#{k}&quot;</span>, <span class="ruby-identifier">cfg</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">k</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-string">&#39;_&#39;</span>, <span class="ruby-string">&#39;-&#39;</span>), <span class="ruby-identifier">v</span>).<span class="ruby-identifier">to_i</span>)
   }
 
   <span class="ruby-comment"># Die Wortklasse eines Kompositum-Wortteils kann separat gekennzeichnet</span>
   <span class="ruby-comment"># werden, um sie von Wortklassen normaler Wörter unterscheiden zu</span>
-  <span class="ruby-comment"># können z.B. Hausmeister =&gt; ['haus/s', 'meister/s'] oder Hausmeister</span>
-  <span class="ruby-comment"># =&gt; ['haus/s+', 'meister/s+'] mit append-wordclass = '+'</span>
-  <span class="ruby-ivar">@append_wc</span> = <span class="ruby-identifier">cfg</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">'append-wordclass'</span>, <span class="ruby-string">''</span>)
+  <span class="ruby-comment"># können z.B. Hausmeister =&gt; [&#39;haus/s&#39;, &#39;meister/s&#39;] oder Hausmeister</span>
+  <span class="ruby-comment"># =&gt; [&#39;haus/s+&#39;, &#39;meister/s+&#39;] mit append-wordclass = &#39;+&#39;</span>
+  <span class="ruby-ivar">@append_wc</span> = <span class="ruby-identifier">cfg</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;append-wordclass&#39;</span>, <span class="ruby-string">&#39;&#39;</span>)
 
   <span class="ruby-comment"># Bestimmte Sequenzen können als ungültige Komposita erkannt werden,</span>
   <span class="ruby-comment"># z.B. ist ein Kompositum aus zwei Adjetiven kein Kompositum, also</span>
-  <span class="ruby-comment"># skip-sequence = 'aa'</span>
-  <span class="ruby-ivar">@sequences</span> = <span class="ruby-identifier">cfg</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">'skip-sequences'</span>, []).<span class="ruby-identifier">map!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">downcase</span> }
+  <span class="ruby-comment"># skip-sequence = &#39;aa&#39;</span>
+  <span class="ruby-ivar">@sequences</span> = <span class="ruby-identifier">cfg</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;skip-sequences&#39;</span>, []).<span class="ruby-identifier">map!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">downcase</span> }
 <span class="ruby-keyword">end</span></pre>
           </div><!-- new-source -->
           
@@ -353,7 +367,9 @@ Kompositumteile.</p>
         <div class="method-heading">
           <span class="method-name">open</span><span
             class="method-args">(*args) { |grammar = new(*args)| ... }</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -361,12 +377,13 @@ Kompositumteile.</p>
           
           
           
+          
 
           
           <div class="method-source-code" id="open-source">
             <pre><span class="ruby-comment"># File lib/lingo/language/grammar.rb, line 39</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">open</span>(*<span class="ruby-identifier">args</span>)
-  <span class="ruby-keyword">yield</span> <span class="ruby-identifier">grammar</span> = <span class="ruby-identifier">new</span>(*<span class="ruby-identifier">args</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">open</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+  <span class="ruby-keyword">yield</span> <span class="ruby-identifier">grammar</span> = <span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
 <span class="ruby-keyword">ensure</span>
   <span class="ruby-identifier">grammar</span>.<span class="ruby-identifier">close</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">grammar</span>
 <span class="ruby-keyword">end</span></pre>
@@ -391,11 +408,14 @@ Kompositumteile.</p>
         <div class="method-heading">
           <span class="method-name">close</span><span
             class="method-args">()</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
+          
           
           
           
@@ -421,7 +441,9 @@ Kompositumteile.</p>
         <div class="method-heading">
           <span class="method-name">find_compound</span><span
             class="method-args">(str, level = 1, tail = false)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -436,12 +458,13 @@ href="Grammar.html#method-i-find_compound">#find_compound</a>(str) -&gt;
 in verschiedenen Leveln, da die Methode auch rekursiv aufgerufen wird. Ein
 Level größer 1 entspricht daher einem rekursiven Aufruf</p>
           
+          
 
           
           <div class="method-source-code" id="find_compound-source">
             <pre><span class="ruby-comment"># File lib/lingo/language/grammar.rb, line 80</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find_compound</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">level</span> = <span class="ruby-value">1</span>, <span class="ruby-identifier">tail</span> = <span class="ruby-keyword">false</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">permute_compound</span>([[], [], <span class="ruby-string">''</span>], <span class="ruby-identifier">str</span>, <span class="ruby-identifier">level</span>, <span class="ruby-identifier">tail</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">level</span> <span class="ruby-operator">!=</span> <span class="ruby-value">1</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">permute_compound</span>([[], [], <span class="ruby-string">&#39;&#39;</span>], <span class="ruby-identifier">str</span>, <span class="ruby-identifier">level</span>, <span class="ruby-identifier">tail</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">level</span> <span class="ruby-operator">!=</span> <span class="ruby-value">1</span>
 
   (<span class="ruby-ivar">@_compound</span> <span class="ruby-operator">||=</span> {})[<span class="ruby-identifier">str</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">permute_compound</span>(
     <span class="ruby-identifier">com</span> = <span class="ruby-constant">Word</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>, <span class="ruby-constant">WA_UNKNOWN</span>), <span class="ruby-identifier">str</span>, <span class="ruby-identifier">level</span>, <span class="ruby-identifier">tail</span>
@@ -473,11 +496,14 @@ Level größer 1 entspricht daher einem rekursiven Aufruf</p>
         <div class="method-heading">
           <span class="method-name">permute_compound</span><span
             class="method-args">(ret, str, level, tail) { |lex| ... }</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
+          
           
           
           
@@ -490,20 +516,20 @@ Level größer 1 entspricht daher einem rekursiven Aufruf</p>
     <span class="ruby-identifier">str</span> = <span class="ruby-constant">Unicode</span>.<span class="ruby-identifier">downcase</span>(<span class="ruby-identifier">str</span>)
 
     <span class="ruby-identifier">lex</span>, <span class="ruby-identifier">sta</span>, <span class="ruby-identifier">seq</span> = <span class="ruby-identifier">res</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">str</span> <span class="ruby-operator">=~</span> <span class="ruby-constant">HYPHEN_RE</span>
-      <span class="ruby-identifier">test_compound</span>(<span class="ruby-node">$1</span>, <span class="ruby-string">'-'</span>, <span class="ruby-node">$2</span>, <span class="ruby-identifier">level</span>, <span class="ruby-identifier">tail</span>)
+      <span class="ruby-identifier">test_compound</span>(<span class="ruby-node">$1</span>, <span class="ruby-string">&#39;-&#39;</span>, <span class="ruby-node">$2</span>, <span class="ruby-identifier">level</span>, <span class="ruby-identifier">tail</span>)
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">sug</span> = <span class="ruby-ivar">@suggestions</span>[<span class="ruby-identifier">level</span>] <span class="ruby-operator">||=</span> []
 
       <span class="ruby-identifier">catch</span>(<span class="ruby-value">:res</span>) {
         <span class="ruby-value">1</span>.<span class="ruby-identifier">upto</span>(<span class="ruby-identifier">len</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
-          <span class="ruby-identifier">tst</span> = <span class="ruby-identifier">test_compound</span>(<span class="ruby-identifier">str</span>[<span class="ruby-value">0</span>, <span class="ruby-identifier">i</span>], <span class="ruby-string">''</span>, <span class="ruby-identifier">str</span>[<span class="ruby-identifier">i</span>, <span class="ruby-identifier">len</span>], <span class="ruby-identifier">level</span>, <span class="ruby-identifier">tail</span>)
+          <span class="ruby-identifier">tst</span> = <span class="ruby-identifier">test_compound</span>(<span class="ruby-identifier">str</span>[<span class="ruby-value">0</span>, <span class="ruby-identifier">i</span>], <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">str</span>[<span class="ruby-identifier">i</span>, <span class="ruby-identifier">len</span>], <span class="ruby-identifier">level</span>, <span class="ruby-identifier">tail</span>)
 
           <span class="ruby-keyword">unless</span> (<span class="ruby-identifier">lex</span> = <span class="ruby-identifier">tst</span>.<span class="ruby-identifier">first</span>).<span class="ruby-identifier">empty?</span>
             <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-constant">LA_TAKEITASIS</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">sug</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">tst</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">throw</span>(<span class="ruby-value">:res</span>, <span class="ruby-identifier">tst</span>)
           <span class="ruby-keyword">end</span>
         }
 
-        <span class="ruby-identifier">sug</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> [[], [], <span class="ruby-string">''</span>] <span class="ruby-operator">:</span> <span class="ruby-identifier">sug</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">tap</span> { <span class="ruby-identifier">sug</span>.<span class="ruby-identifier">clear</span> }
+        <span class="ruby-identifier">sug</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> [[], [], <span class="ruby-string">&#39;&#39;</span>] <span class="ruby-operator">:</span> <span class="ruby-identifier">sug</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">tap</span> { <span class="ruby-identifier">sug</span>.<span class="ruby-identifier">clear</span> }
       }
     <span class="ruby-keyword">end</span>
 
@@ -531,7 +557,9 @@ Level größer 1 entspricht daher einem rekursiven Aufruf</p>
         <div class="method-heading">
           <span class="method-name">test_compound</span><span
             class="method-args">(fstr, infix, bstr, level = 1, tail = false)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -542,12 +570,13 @@ Level größer 1 entspricht daher einem rekursiven Aufruf</p>
 
 <p>Testet einen definiert zerlegten String auf Kompositum</p>
           
+          
 
           
           <div class="method-source-code" id="test_compound-source">
             <pre><span class="ruby-comment"># File lib/lingo/language/grammar.rb, line 130</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">test_compound</span>(<span class="ruby-identifier">fstr</span>, <span class="ruby-identifier">infix</span>, <span class="ruby-identifier">bstr</span>, <span class="ruby-identifier">level</span> = <span class="ruby-value">1</span>, <span class="ruby-identifier">tail</span> = <span class="ruby-keyword">false</span>)
-  <span class="ruby-identifier">sta</span>, <span class="ruby-identifier">seq</span>, <span class="ruby-identifier">empty</span> = [<span class="ruby-identifier">fstr</span>.<span class="ruby-identifier">length</span>, <span class="ruby-identifier">bstr</span>.<span class="ruby-identifier">length</span>], <span class="ruby-node">%w[? ?]</span>, [[], [], <span class="ruby-string">''</span>]
+  <span class="ruby-identifier">sta</span>, <span class="ruby-identifier">seq</span>, <span class="ruby-identifier">empty</span> = [<span class="ruby-identifier">fstr</span>.<span class="ruby-identifier">length</span>, <span class="ruby-identifier">bstr</span>.<span class="ruby-identifier">length</span>], <span class="ruby-node">%w[? ?]</span>, [[], [], <span class="ruby-string">&#39;&#39;</span>]
 
   <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span>(<span class="ruby-identifier">blex</span> = <span class="ruby-ivar">@dic</span>.<span class="ruby-identifier">select_with_suffix</span>(<span class="ruby-identifier">bstr</span>)).<span class="ruby-identifier">sort!</span>.<span class="ruby-identifier">empty?</span>
     <span class="ruby-comment"># 1. Word w/ suffix</span>
@@ -555,7 +584,7 @@ Level größer 1 entspricht daher einem rekursiven Aufruf</p>
   <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">tail</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span>(<span class="ruby-identifier">blex</span> = <span class="ruby-ivar">@dic</span>.<span class="ruby-identifier">select_with_infix</span>(<span class="ruby-identifier">bstr</span>)).<span class="ruby-identifier">sort!</span>.<span class="ruby-identifier">empty?</span>
     <span class="ruby-comment"># 2. Word w/ infix, unless tail part</span>
     <span class="ruby-identifier">bform</span>, <span class="ruby-identifier">seq</span>[<span class="ruby-value">1</span>] = <span class="ruby-identifier">bstr</span>, <span class="ruby-identifier">blex</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">attr</span>
-  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">infix</span> <span class="ruby-operator">==</span> <span class="ruby-string">'-'</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">infix</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;-&#39;</span>
     <span class="ruby-identifier">blex</span>, <span class="ruby-identifier">bsta</span>, <span class="ruby-identifier">bseq</span> = <span class="ruby-identifier">find_compound</span>(<span class="ruby-identifier">bstr</span>, <span class="ruby-identifier">level</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>, <span class="ruby-identifier">tail</span>)
 
     <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">blex</span>.<span class="ruby-identifier">sort!</span>.<span class="ruby-identifier">empty?</span>
@@ -578,7 +607,7 @@ Level größer 1 entspricht daher einem rekursiven Aufruf</p>
     <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">flex</span>.<span class="ruby-identifier">sort!</span>.<span class="ruby-identifier">empty?</span>
       <span class="ruby-comment"># 2. Compound</span>
       <span class="ruby-identifier">fform</span>, <span class="ruby-identifier">seq</span>[<span class="ruby-value">0</span>], <span class="ruby-identifier">sta</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">0</span>] = <span class="ruby-identifier">flex</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">form</span>, <span class="ruby-identifier">fseq</span>, <span class="ruby-identifier">fsta</span>
-    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">infix</span> <span class="ruby-operator">==</span> <span class="ruby-string">'-'</span>
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">infix</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;-&#39;</span>
       <span class="ruby-comment"># 3. Take it as is</span>
       <span class="ruby-identifier">flex</span> = [<span class="ruby-constant">Lexical</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">fform</span> = <span class="ruby-identifier">fstr</span>, <span class="ruby-identifier">seq</span>[<span class="ruby-value">0</span>] = <span class="ruby-constant">LA_TAKEITASIS</span>)]
     <span class="ruby-keyword">else</span>
@@ -614,7 +643,7 @@ Level größer 1 entspricht daher einem rekursiven Aufruf</p>
 
 <footer id="validator-badges">
   <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.1.
   <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
 </footer>
 

@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Lingo::Database::Source::WordClass - lingo Application documentation (v1.8.3)</title>
+<title>module Lingo::Web::Rack::Auth - lingo Application documentation (v1.8.3)</title>
 
 <link type="text/css" media="screen" href="../../../rdoc.css" rel="stylesheet">
 
@@ -20,7 +20,7 @@
 <script type="text/javascript" charset="utf-8" src="../../../js/darkfish.js"></script>
 
 
-<body id="top" class="class">
+<body id="top" class="module">
 <nav id="metadata">
   <nav id="home-section" class="section">
   <h3 class="section-header">
@@ -49,7 +49,7 @@
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
   <ul>
-    <li>lib/lingo/database/source/word_class.rb
+    <li>lib/lingo/web.rb
   </ul>
 </nav>
 
@@ -58,28 +58,10 @@
 
   <div id="class-metadata">
     
-    <nav id="parent-class-section" class="section">
-  <h3 class="section-header">Parent</h3>
-  
-  <p class="link">self
-  
-</nav>
-
     
     
-    <!-- Method Quickref -->
-<nav id="method-list-section" class="section">
-  <h3 class="section-header">Methods</h3>
-
-  <ul class="link-list">
     
-    <li class="calls-super" ><a href="#method-c-new">::new</a>
     
-    <li ><a href="#method-i-convert_line">#convert_line</a>
-    
-  </ul>
-</nav>
-
   </div>
 
   <div id="project-metadata">
@@ -253,17 +235,10 @@
 </nav>
 
 <div id="documentation">
-  <h1 class="class">class Lingo::Database::Source::WordClass</h1>
+  <h1 class="module">module Lingo::Web::Rack::Auth</h1>
 
   <div id="description" class="description">
     
-<p>Abgeleitet von <a href="../Source.html">Source</a> behandelt die Klasse
-Dateien mit dem Format <code>WordClass</code>. Eine Zeile
-<code>&quot;essen,essen #v essen #o esse #s\n&quot;</code> wird gewandelt
-in <code>[ &#39;essen&#39;, [&#39;esse#s&#39;, &#39;essen#v&#39;,
-&#39;essen#o&#39;] ]</code>. Der Trenner zwischen Schlüssel und Projektion
-kann über den Parameter <code>separator</code> geändert werden.</p>
-
   </div><!-- description -->
 
   
@@ -280,92 +255,6 @@ kann über den Parameter <code>separator</code> geändert werden.</p>
 
     <!-- Methods -->
     
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
-      <h3 class="section-header">Public Class Methods</h3>
-
-    
-      <div id="method-c-new" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">new</span><span
-            class="method-args">(id, lingo)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-            <div class="method-calls-super">
-              Calls superclass method
-              
-            </div>
-          
-
-          
-          <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/source/word_class.rb, line 38</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">lingo</span>)
-  <span class="ruby-keyword">super</span>
-  <span class="ruby-ivar">@pat</span> = <span class="ruby-node">/^(#{@wrd})#{Regexp.escape(@sep ||= &#39;,&#39;)}((?:#{@wrd}#\w)+)$/</span>
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- new-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- new-method -->
-
-    
-    </section><!-- public-class-method-details -->
-  
-     <section id="private-instance-5Buntitled-5D-method-details" class="method-section section">
-      <h3 class="section-header">Private Instance Methods</h3>
-
-    
-      <div id="method-i-convert_line" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">convert_line</span><span
-            class="method-args">(line, key, val)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="convert_line-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/source/word_class.rb, line 45</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">convert_line</span>(<span class="ruby-identifier">line</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
-  [<span class="ruby-identifier">key</span> = <span class="ruby-identifier">key</span>.<span class="ruby-identifier">strip</span>, <span class="ruby-identifier">val</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-node">/(\S.+?)\s*#(\w)/</span>).<span class="ruby-identifier">map!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span>, <span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
-    <span class="ruby-node">&quot;#{v unless key == v}##{c}&quot;</span>
-  }]
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- convert_line-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- convert_line-method -->
-
-    
-    </section><!-- private-instance-method-details -->
-  
   </section><!-- 5Buntitled-5D -->
 
 </div><!-- documentation -->

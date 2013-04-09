@@ -43,6 +43,19 @@
 </nav>
 
 
+  
+<div id="table-of-contents">
+  <nav class="section">
+    <h3 class="section-header">Table of Contents</h3>
+    <ul>
+      <li><a href="#label-M%C3%B6gliche+Verlinkung">Mögliche Verlinkung</a>
+      <li><a href="#label-Parameter">Parameter</a>
+      <li><a href="#label-Beispiele">Beispiele</a>
+    </ul>
+  </nav>
+</div>
+
+
   <div id="file-metadata">
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
@@ -64,19 +77,20 @@
 </nav>
 
     
+    
     <!-- Method Quickref -->
 <nav id="method-list-section" class="section">
   <h3 class="section-header">Methods</h3>
 
   <ul class="link-list">
     
-    <li><a href="#method-i-control">#control</a>
+    <li ><a href="#method-i-control">#control</a>
     
-    <li><a href="#method-i-debug">#debug</a>
+    <li ><a href="#method-i-debug">#debug</a>
     
-    <li><a href="#method-i-init">#init</a>
+    <li ><a href="#method-i-init">#init</a>
     
-    <li><a href="#method-i-process">#process</a>
+    <li ><a href="#method-i-process">#process</a>
     
   </ul>
 </nav>
@@ -239,6 +253,14 @@
   
     <li><a href="../../Lingo/Web.html">Lingo::Web</a>
   
+    <li><a href="../../Lingo/Web/Rack.html">Lingo::Web::Rack</a>
+  
+    <li><a href="../../Lingo/Web/Rack/Auth.html">Lingo::Web::Rack::Auth</a>
+  
+    <li><a href="../../Nuggets.html">Nuggets</a>
+  
+    <li><a href="../../YAML.html">YAML</a>
+  
   </ul>
 </nav>
 
@@ -269,13 +291,13 @@ nach dem <a href="../Attendee.html">Attendee</a> zu platzieren, dessen
 Ausgabe debugt werden soll. Ansonsten kann es zu scheinbar unerklärlichen
 Interferrenzen bei der Ausgabe kommen.</p>
 
-<h3 id="label-M%C3%B6gliche+Verlinkung">Mögliche Verlinkung</h3>
+<h3 id="label-M%C3%B6gliche+Verlinkung">Mögliche Verlinkung<span><a href="#label-M%C3%B6gliche+Verlinkung">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
 <dl class="rdoc-list note-list"><dt>Erwartet
 <dd>
 <p>Daten beliebigen Typs</p>
 </dd></dl>
 
-<h3 id="label-Parameter">Parameter</h3>
+<h3 id="label-Parameter">Parameter<span><a href="#label-Parameter">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
 
 <p>Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der
 Voreinstellung). Alle anderen Parameter müssen zwingend angegeben werden.</p>
@@ -297,43 +319,43 @@ Datenobjekt ausgegeben wird (siehe Beschreibung Objectfilter)</p>
 <pre>Kommandoobjekt ausgegeben wird.</pre>
 <dl class="rdoc-list note-list"><dt><strong><em>prompt</em></strong>
 <dd>
-<p>(Standard: ‘lex:) ’) Gibt an, mit welchem Prefix die Ausgabe versehen
-werden soll. Insbesondere wenn mit mehreren Debuggern gearbeitet wird,
-sollte dies genutzt werden.</p>
+<p>(Standard: &#39;lex:) &#39;) Gibt an, mit welchem Prefix die Ausgabe
+versehen werden soll. Insbesondere wenn mit mehreren Debuggern gearbeitet
+wird, sollte dies genutzt werden.</p>
 </dd></dl>
 
-<h3 id="label-Beispiele">Beispiele</h3>
+<h3 id="label-Beispiele">Beispiele<span><a href="#label-Beispiele">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
 
 <p>Bei der Verarbeitung der oben angegebenen Funktionsbeschreibung des
 Textwriters mit der Ablaufkonfiguration <code>t1.cfg</code></p>
 
 <pre>meeting:
   attendees:
-    - text_reader: { out: lines, files: '$(files)' }
-    - debugger:    { in: lines, prompt: 'LINES:) ' }
+    - text_reader: { out: lines, files: &#39;$(files)&#39; }
+    - debugger:    { in: lines, prompt: &#39;LINES:) &#39; }
     - tokenizer:   { in: lines, out: token }
-    - debugger:    { in: token, prompt: 'TOKEN:) ' }</pre>
+    - debugger:    { in: token, prompt: &#39;TOKEN:) &#39; }</pre>
 
 <p>ergibt die Ausgabe</p>
 
-<pre>LINES:)  *FILE('test.txt')
-TOKEN:)  *FILE('test.txt')
+<pre>LINES:)  *FILE(&#39;test.txt&#39;)
+TOKEN:)  *FILE(&#39;test.txt&#39;)
 LINES:)  &quot;Der Debugger kann was.&quot;
 TOKEN:)  :Der/WORD:
 TOKEN:)  :Debugger/WORD:
 TOKEN:)  :kann/WORD:
 TOKEN:)  :was/WORD:
 TOKEN:)  :./PUNC:
-TOKEN:)  *EOL('test.txt')
+TOKEN:)  *EOL(&#39;test.txt&#39;)
 LINES:)  &quot;Lingo auch :o)&quot;
 TOKEN:)  :Lingo/WORD:
 TOKEN:)  :auch/WORD:
 TOKEN:)  ::/PUNC:
 TOKEN:)  :o/WORD:
 TOKEN:)  :)/OTHR:
-TOKEN:)  *EOL('test.txt')
-LINES:)  *EOF('test.txt')
-TOKEN:)  *EOF('test.txt')</pre>
+TOKEN:)  *EOL(&#39;test.txt&#39;)
+LINES:)  *EOF(&#39;test.txt&#39;)
+TOKEN:)  *EOF(&#39;test.txt&#39;)</pre>
 
   </div><!-- description -->
 
@@ -360,11 +382,14 @@ TOKEN:)  *EOF('test.txt')</pre>
         <div class="method-heading">
           <span class="method-name">control</span><span
             class="method-args">(cmd, param)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
+          
           
           
           
@@ -390,11 +415,14 @@ TOKEN:)  *EOF('test.txt')</pre>
         <div class="method-heading">
           <span class="method-name">init</span><span
             class="method-args">()</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
+          
           
           
           
@@ -403,9 +431,9 @@ TOKEN:)  *EOF('test.txt')</pre>
           <div class="method-source-code" id="init-source">
             <pre><span class="ruby-comment"># File lib/lingo/attendee/debugger.rb, line 91</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">init</span>
-  <span class="ruby-ivar">@obj_eval</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">'eval'</span>,   <span class="ruby-string">'true'</span>)
-  <span class="ruby-ivar">@cmd_eval</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">'ceval'</span>,  <span class="ruby-string">'true'</span>)
-  <span class="ruby-ivar">@prompt</span>   = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">'prompt'</span>, <span class="ruby-string">'lex:) '</span>)
+  <span class="ruby-ivar">@obj_eval</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;eval&#39;</span>,   <span class="ruby-string">&#39;true&#39;</span>)
+  <span class="ruby-ivar">@cmd_eval</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;ceval&#39;</span>,  <span class="ruby-string">&#39;true&#39;</span>)
+  <span class="ruby-ivar">@prompt</span>   = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;prompt&#39;</span>, <span class="ruby-string">&#39;lex:) &#39;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- init-source -->
           
@@ -422,11 +450,14 @@ TOKEN:)  *EOF('test.txt')</pre>
         <div class="method-heading">
           <span class="method-name">process</span><span
             class="method-args">(obj)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
+          
           
           
           
@@ -459,11 +490,14 @@ TOKEN:)  *EOF('test.txt')</pre>
         <div class="method-heading">
           <span class="method-name">debug</span><span
             class="method-args">(obj, cond)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
+          
           
           
           
@@ -493,7 +527,7 @@ TOKEN:)  *EOF('test.txt')</pre>
 
 <footer id="validator-badges">
   <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.1.
   <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
 </footer>
 
