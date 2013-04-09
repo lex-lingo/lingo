@@ -25,7 +25,7 @@ begin
       version:      Lingo::VERSION,
       summary:      'The full-featured automatic indexing system',
       authors:      ['John Vorhauer', 'Jens Wille'],
-      email:        ['lingo@vorhauer.de', 'jens.wille@uni-koeln.de'],
+      email:        ['lingo@vorhauer.de', 'jens.wille@gmail.com'],
       homepage:     'http://lex-lingo.de',
       description:  <<-EOT,
 Lingo is an open source indexing system for research and teachings.
