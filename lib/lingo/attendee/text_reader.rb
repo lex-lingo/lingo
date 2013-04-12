@@ -147,7 +147,7 @@ class Lingo
             next if line =~ @skip
 
             if line =~ @lir
-              forward(STR_CMD_RECORD, $1)
+              forward(STR_CMD_RECORD, $1 || $&)
             else
               line.sub!(@cut, '') if @cut
               forward(line) unless line.empty?
