@@ -173,8 +173,8 @@ to run that command with administrator privileges, depending on your
 environment). Then you can call the +lingo+ executable to process your
 data. See <tt>lingo --help</tt> for starters.
 
-Please note that Lingo requires Ruby version 1.9 to run (1.9.2 or greater;
-1.9.3[http://ruby-lang.org/en/downloads/] is the currently recommended
+Please note that Lingo requires Ruby version 1.9.2 or higher to run
+(2.0.0[http://ruby-lang.org/en/downloads/] is the currently recommended
 version). If you want to use Lingo on Ruby 1.8, please refer to the legacy
 version (see below).
 
@@ -230,8 +230,8 @@ the development efforts will be directed towards Lingo 1.8+.
 
 To install the legacy version, download and extract the ZIP archive from
 RubyForge[http://rubyforge.org/frs/?group_id=5663]. No additional dependencies
-are required. This version of Lingo works with both Ruby 1.8 (1.8.5 or greater)
-and 1.9 (1.9.2 or greater).
+are required. This version of Lingo works with both Ruby 1.8 (1.8.5 or higher)
+and 1.9 (1.9.2 or higher).
 
 The executable is named +lingo.rb+. It's located at the root of the installation
 directory and may only be run from there. See <tt>ruby lingo.rb -h</tt> for
