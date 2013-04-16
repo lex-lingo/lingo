@@ -790,7 +790,7 @@ out&gt; *EOF(&#39;lir.txt&#39;)</pre>
       <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-ivar">@skip</span>
 
       <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-ivar">@lir</span>
-        <span class="ruby-identifier">forward</span>(<span class="ruby-constant">STR_CMD_RECORD</span>, <span class="ruby-node">$1</span>)
+        <span class="ruby-identifier">forward</span>(<span class="ruby-constant">STR_CMD_RECORD</span>, <span class="ruby-node">$1</span> <span class="ruby-operator">||</span> <span class="ruby-node">$&amp;</span>)
       <span class="ruby-keyword">else</span>
         <span class="ruby-identifier">line</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-ivar">@cut</span>, <span class="ruby-string">&#39;&#39;</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@cut</span>
         <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">line</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">empty?</span>

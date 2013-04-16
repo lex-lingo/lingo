@@ -1,7 +1,7 @@
-Tue, 09 Apr 2013 13:20:41 +0200
-README	Tue, 09 Apr 2013 13:16:42 +0200
+Tue, 16 Apr 2013 12:30:42 +0200
+README	Fri, 12 Apr 2013 11:23:28 +0200
 COPYING	Wed, 06 Mar 2013 13:57:17 +0100
-ChangeLog	Wed, 06 Mar 2013 13:57:17 +0100
+ChangeLog	Tue, 16 Apr 2013 12:19:20 +0200
 lib/lingo.rb	Mon, 25 Mar 2013 17:17:45 +0100
 lib/lingo/app.rb	Fri, 15 Mar 2013 13:09:52 +0100
 lib/lingo/cli.rb	Mon, 25 Mar 2013 17:17:28 +0100
@@ -40,7 +40,7 @@ lib/lingo/database/hash_store.rb	Wed, 06 Mar 2013 13:57:17 +0100
 lib/lingo/database/sdbm_store.rb	Wed, 06 Mar 2013 13:57:17 +0100
 lib/lingo/language/dictionary.rb	Wed, 06 Mar 2013 13:57:17 +0100
 lib/lingo/attendee/abbreviator.rb	Wed, 06 Mar 2013 13:57:17 +0100
-lib/lingo/attendee/text_reader.rb	Wed, 06 Mar 2013 13:57:17 +0100
+lib/lingo/attendee/text_reader.rb	Thu, 11 Apr 2013 17:12:43 +0200
 lib/lingo/attendee/text_writer.rb	Wed, 06 Mar 2013 13:57:17 +0100
 lib/lingo/attendee/dehyphenizer.rb	Wed, 06 Mar 2013 13:57:17 +0100
 lib/lingo/attendee/multi_worder.rb	Wed, 06 Mar 2013 13:57:17 +0100
