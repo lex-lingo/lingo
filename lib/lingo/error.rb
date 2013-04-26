@@ -26,7 +26,17 @@
 
 class Lingo
 
-  class LingoError < StandardError; end
+  class LingoError < StandardError
+
+    def class_name
+      klass.name.split('::').last
+    end
+
+    def error(msg = 'An error occurred')
+      "#{msg}: #{err} (#{err.class})"
+    end
+
+  end
 
   class NoWritableStoreError < LingoError
 
@@ -79,7 +89,7 @@ class Lingo
     end
 
     def to_s
-      "An error occured when trying to #{action} `#{file}': #{err} (#{err.class})"
+      error("An error occured when trying to #{action} `#{file}'")
     end
 
   end
@@ -103,7 +113,7 @@ class Lingo
     end
 
     def to_s
-      "Error loading config: #{err}"
+      error("Error loading config")
     end
 
   end
@@ -170,7 +180,21 @@ class Lingo
     end
 
     def to_s
-      "No such #{klass.name.split('::').last} type `#{name}'."
+      "No such #{class_name} type `#{name}'."
+    end
+
+  end
+
+  class LibraryLoadError < LingoError
+
+    attr_reader :klass, :lib, :err
+
+    def initialize(klass, lib, err)
+      @klass, @lib, @err = klass, lib, err
+    end
+
+    def to_s
+      error("#{class_name}: An error occured while trying to load '#{lib}'")
     end
 
   end

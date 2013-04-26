@@ -173,6 +173,12 @@ class Lingo
       @lingo.warn(*msg)
     end
 
+    def require_lib(lib)
+      require lib
+    rescue LoadError => err
+      raise LibraryLoadError.new(self.class, lib, err)
+    end
+
   end
 
 end
