@@ -98,7 +98,7 @@ class Lingo
           end
         end
 
-        @vectors, @word_count = [], 0.0
+        @vectors, @word_count = [], 0
       end
 
       def control(cmd, param)
@@ -137,12 +137,12 @@ class Lingo
           vec = cnt.sort_by { |v, c| [-c, v] }
 
           if @sort_method == 'rel'
-            vec.each { |v| v[1] /= @word_count }
-            fmt = '%6.5f'
+            fmt, wc = '%6.5f', @word_count.to_f
+            vec.each { |v| v[1] /= wc }
           end
 
           if @sort_format == 'sto'
-            fmt, @word_count = "%s {#{fmt}}", 0.0
+            fmt, @word_count = "%s {#{fmt}}", 0
           else
             fmt.insert(1, '2$') << ' %1$s'
           end
