@@ -7,6 +7,7 @@
 * <tt>lingoctl demo</tt> reports successful initialization.
 * Lingo Web learned parameter +hl+ to set UI language.
 * Lingo Web displays the configuration in use.
+* Lingo Srv accepts array of query strings in addition to single query string.
 * LIR record number defaults to match string in absence of capture group.
 
 == 1.8.3 [2012-09-20]

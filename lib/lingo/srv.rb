@@ -43,14 +43,19 @@ class Lingo
     post('/') { doit }
 
     def doit
-      q = params[:q]
-      r = LINGO.talk(q) if q && !q.empty?
+      to_json(q = params[:q], case q
+        when String then talk(q)
+        when Array  then q.inject({}) { |h, k| h[k] = talk(k); h }
+      end)
+    end
 
-      r = r.inject(Hash.new { |h, k| h[k] = [] }) { |h, s|
+    def talk(q)
+      r = LINGO.talk(q) unless q.empty?
+      return r unless r && SRC_SEP
+
+      r.inject(Hash.new { |h, k| h[k] = [] }) { |h, s|
         a, b = s.split(SRC_SEP, 2); h[b] << a; h
-      } if r && SRC_SEP
-
-      to_json(q, r)
+      }
     end
 
   end
