@@ -71,7 +71,11 @@ class Lingo
       protected
 
       def init
-        @nonewords, @sort = [], get_key('sort', true)
+        @sort = get_key('sort', true)
+        @dict = get_key('dict', false)
+        @dict = '=' if @dict == true
+
+        @nonewords = []
       end
 
       def control(cmd, param)
@@ -80,14 +84,17 @@ class Lingo
             @nonewords.clear
           when STR_CMD_EOL
             skip_command
-          when STR_CMD_RECORD, STR_CMD_EOF
-            send_nonewords unless @nonewords.empty?
+          when STR_CMD_RECORD
+            send_nonewords unless @dict
+          when STR_CMD_EOF
+            send_nonewords
         end
       end
 
       def process(obj)
         if obj.is_a?(Word) && obj.unknown?
           non = Unicode.downcase(obj.form)
+          non = "#{non}#{@dict}#{non} #?" if @dict
           @sort ? @nonewords << non : forward(non)
         end
       end
@@ -95,8 +102,10 @@ class Lingo
       private
 
       def send_nonewords
-        @nonewords.uniq!
-        flush(@nonewords.sort!)
+        unless @nonewords.empty?
+          @nonewords.uniq!
+          flush(@nonewords.sort!)
+        end
       end
 
     end

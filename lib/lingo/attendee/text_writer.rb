@@ -93,7 +93,7 @@ class Lingo
       def control(cmd, param)
         case cmd
           when STR_CMD_LIR
-            @lir = true
+            @lir = true unless @lir.nil?
           when STR_CMD_FILE
             @no_sep = true
 
@@ -105,9 +105,9 @@ class Lingo
 
             @lir_rec_no, @lir_rec_buf = '', []
           when STR_CMD_RECORD
-            @no_sep = true
-
             if @lir
+              @no_sep = true
+
               flush_lir_buffer
               @lir_rec_no = param
             end

@@ -49,7 +49,7 @@ class TestAttendeeTextWriter < AttendeeTestCase
   end
 
   def test_lir_file
-    meet({ 'ext' => 'vec', 'lir-format' => nil }, [
+    meet({ 'ext' => 'vec', 'lir-format' => false }, [
       ai('LIR-FORMAT|'), ai('FILE|test/lir.txt'),
       ai('RECORD|00237'),
       '020: GERHARD.',
