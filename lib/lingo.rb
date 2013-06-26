@@ -65,6 +65,14 @@ class Lingo
 
   class << self
 
+    if ENV['LINGO_NO_SORT']
+      def sort!(x) x       end
+      def sort(x)  x.dup   end
+    else
+      def sort!(x) x.sort! end
+      def sort(x)  x.sort  end
+    end
+
     def talk(*args)
       new(*args).talk
     end

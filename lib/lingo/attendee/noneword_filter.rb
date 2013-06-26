@@ -71,7 +71,7 @@ class Lingo
       protected
 
       def init
-        @sort = get_key('sort', true)
+        @sort = get_key('sort', !ENV['LINGO_NO_SORT'])
         @dict = get_key('dict', false)
         @dict = '=' if @dict == true
 

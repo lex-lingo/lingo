@@ -131,16 +131,16 @@ class Lingo
       def test_compound(fstr, infix, bstr, level = 1, tail = false)
         sta, seq, empty = [fstr.length, bstr.length], %w[? ?], [[], [], '']
 
-        if !(blex = @dic.select_with_suffix(bstr)).sort!.empty?
+        if !Lingo.sort!(blex = @dic.select_with_suffix(bstr)).empty?
           # 1. Word w/ suffix
           bform, seq[1] = tail ? bstr : blex.first.form, blex.first.attr
-        elsif tail && !(blex = @dic.select_with_infix(bstr)).sort!.empty?
+        elsif tail && !Lingo.sort!(blex = @dic.select_with_infix(bstr)).empty?
           # 2. Word w/ infix, unless tail part
           bform, seq[1] = bstr, blex.first.attr
         elsif infix == '-'
           blex, bsta, bseq = find_compound(bstr, level + 1, tail)
 
-          if !blex.sort!.empty?
+          if !Lingo.sort!(blex).empty?
             # 3. Compound
             bform, seq[1], sta[1..-1] = blex.first.form, bseq, bsta
           else
@@ -151,13 +151,13 @@ class Lingo
           return empty
         end
 
-        if !(flex = @dic.select_with_infix(fstr)).sort!.empty?
+        if !Lingo.sort!(flex = @dic.select_with_infix(fstr)).empty?
           # 1. Word w/ infix
           fform, seq[0] = fstr, flex.first.attr
         else
           flex, fsta, fseq = find_compound(fstr, level + 1, true)
 
-          if !flex.sort!.empty?
+          if !Lingo.sort!(flex).empty?
             # 2. Compound
             fform, seq[0], sta[0..0] = flex.first.form, fseq, fsta
           elsif infix == '-'
@@ -173,9 +173,9 @@ class Lingo
         }
 
         flex.concat(blex).delete_if { |l| l.attr == LA_COMPOUND }.
-          push(Lexical.new(fform + infix + bform, LA_COMPOUND)).sort!
+          push(Lexical.new(fform + infix + bform, LA_COMPOUND))
 
-        [flex, sta, seq.join]
+        [Lingo.sort!(flex), sta, seq.join]
       end
 
     end

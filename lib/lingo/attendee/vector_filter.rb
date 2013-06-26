@@ -93,7 +93,7 @@ class Lingo
           @src = get_key('src', false)
           @src = DEFAULT_SRC_SEP if @src == true
 
-          if sort = get_key('sort', 'normal')
+          if sort = get_key('sort', ENV['LINGO_NO_SORT'] ? false : 'normal')
             @sort_format, @sort_method = sort.downcase.split('_', 2)
           end
         end

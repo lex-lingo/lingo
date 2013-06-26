@@ -73,7 +73,7 @@ class Lingo
 
       def lexicals=(lex)
         if lex.is_a?(Array)
-          @lexicals = lex.sort.uniq
+          @lexicals = Lingo.sort(lex).uniq
         else
           raise TypeError, "wrong argument type #{lex.class} (expected Array)"
         end
@@ -82,7 +82,7 @@ class Lingo
       def add_lexicals(lex)
         unless lex.empty?
           @lexicals.concat(lex).uniq!
-          @lexicals.sort!
+          Lingo.sort!(@lexicals)
         end
       end
 

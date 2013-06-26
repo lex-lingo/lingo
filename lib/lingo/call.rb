@@ -66,7 +66,7 @@ class Lingo
       }
 
       block_given? ? res.map! { |i| yield i } : begin
-        res.sort!
+        Lingo.sort!(res)
         res.uniq!
         res
       end

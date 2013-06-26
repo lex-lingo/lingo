@@ -58,6 +58,11 @@ class Lingo
       }
     end
 
+    if ENV['LINGO_NO_SORT']
+      alias_method :_talk, :talk
+      def talk(q) _talk(q).to_a end
+    end
+
   end
 
 end
