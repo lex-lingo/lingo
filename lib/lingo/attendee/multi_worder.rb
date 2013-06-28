@@ -180,7 +180,7 @@ class Lingo
         seq = []
 
         @buffer.each { |obj|
-          next [obj] unless obj.is_a?(WordForm)
+          next seq << [obj] unless obj.is_a?(WordForm)
           next if (form = obj.form) == CHAR_PUNCT
 
           w = find_word(form, @lex_dic, @lex_gra)
