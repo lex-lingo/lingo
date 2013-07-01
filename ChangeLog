@@ -11,6 +11,8 @@
 * Lingo Web learned parameter +hl+ to set UI language.
 * Lingo Web displays the configuration in use.
 * Lingo Srv accepts array of query strings in addition to single query string.
+* When dictionary entries are rejected during conversion, the location of the
+  reject file will be shown.
 * LIR record number defaults to match string in absence of capture group.
 * Optionally prevent Lingo from sorting any results by setting the
   +LINGO_NO_SORT+ environment variable.

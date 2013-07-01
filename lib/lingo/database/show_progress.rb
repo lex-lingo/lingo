@@ -30,8 +30,21 @@ class Lingo
 
     class ShowProgress < ShowProgress
 
-      def initialize(obj, max, act = true)
-        super(obj, max, obj.instance_variable_get(:@config)['name'], act, 'convert')
+      def initialize(obj, src, doit = true)
+        name = obj.instance_variable_get(:@config)['name']
+        super(obj, src.size, name, doit, 'convert', false)
+
+        if defined?(@cnt)
+          cnt, rej = src.rejected
+
+          if cnt > 0
+            print ' (', cnt, ' rejected'
+            print ': ', rej if rej
+            print ')'
+          end
+
+          print "\n"
+        end
       end
 
     end

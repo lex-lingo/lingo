@@ -74,7 +74,7 @@ class Lingo
         @wrd = "(?:#{Language::Char::ANY})+"
         @pat = /^#{@wrd}$/
 
-        @pos = 0
+        @pos = @rej_cnt = 0
       end
 
       def size
@@ -95,6 +95,7 @@ class Lingo
           if length < 4096 && line =~ @pat
             yield convert_line(line, $1, $2)
           else
+            @rej_cnt += 1
             reject_file.puts(line) if reject_file
           end
         }
@@ -109,6 +110,10 @@ class Lingo
 
       def set(db, key, val)
         db[key] = val
+      end
+
+      def rejected
+        [@rej_cnt, @rej]
       end
 
     end

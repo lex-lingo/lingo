@@ -28,7 +28,7 @@ class Lingo
 
   class ShowProgress
 
-    def initialize(obj, max, name = nil, doit = true, text = 'progress')
+    def initialize(obj, max, name = nil, doit = true, text = 'progress', nl = true)
       return yield self unless max && doit
 
       @out = obj.instance_variable_get(:@lingo).config.stderr
@@ -53,7 +53,8 @@ class Lingo
 
       yield self
 
-      print "#{@clr} done.\n"
+      print "#{@clr} done."
+      print "\n" if nl
     end
 
     def [](value)

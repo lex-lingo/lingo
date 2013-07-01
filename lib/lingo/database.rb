@@ -240,7 +240,7 @@ class Lingo
         }
       end
 
-      ShowProgress.new(self, src.size, verbose) { |progress| create {
+      ShowProgress.new(self, src, verbose) { |progress| create {
         src.each { |key, val|
           progress[src.pos]
 
