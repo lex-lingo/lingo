@@ -38,7 +38,7 @@ class Lingo
 
       attr_accessor :form, :attr, :src
 
-      def initialize(form, attr = '-', src = nil)
+      def initialize(form, attr = WA_UNSET, src = nil)
         @form, @attr, @src = form || '', attr || '', src
       end
 
