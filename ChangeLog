@@ -4,6 +4,7 @@
 
 == 1.8.4 [unreleased]
 
+* Meeting config takes precedence over language config.
 * Attendee::NonewordFilter learned +dict+ option to print nonewords in
   dictionary format.
 * <tt>lingoctl demo</tt> reports successful initialization.

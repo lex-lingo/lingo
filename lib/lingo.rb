@@ -279,16 +279,16 @@ class Lingo
     last_link, auto_link = '', 0
 
     list.each { |hash|
-      # {'attendee' => {'name'=>'Attendee', 'in'=>'nase', 'out'=>'ohr', 'param'=>'hase'}}
-      cfg = hash.values.first.merge('name' => name = hash.keys.first.camelcase)
+      name = hash.keys.first.camelcase
+
+      cfg = (config["language/attendees/#{name.downcase}"] || {})
+        .merge(hash.values.first).update('name' => name)
 
       %w[in out].each { |key| (cfg[key] ||= '').downcase! }
 
       cfg['in']  = last_link                     if cfg['in'].empty?
       cfg['out'] = "auto_link-#{auto_link += 1}" if cfg['out'].empty?
       last_link  = cfg['out']
-
-      cfg.update(config["language/attendees/#{name.downcase}"] || {})
 
       @attendees << attendee = Attendee.const_get(name).new(cfg, self)
 
