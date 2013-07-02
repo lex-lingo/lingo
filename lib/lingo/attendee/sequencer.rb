@@ -96,17 +96,16 @@ class Lingo
       protected
 
       def init
-        @stopper = get_array('stopper', DEFAULT_SKIP, :upcase)
-        @classes = []
+        @stopper = get_array('stopper', DEFAULT_SKIP)
+                     .push(WA_UNKNOWN, WA_UNKMULPART)
 
-        @seq = get_key('sequences').map { |string, format|
-          @classes.concat(classes = string.downcase!.chars.to_a)
-          [string, classes, format]
+        @seq = get_key('sequences').map { |str, fmt|
+          [str = str.downcase, str.chars.to_a, fmt.gsub(/\d+/, '%\&$s')]
         }
 
-        @classes.uniq!
-
         raise MissingConfigError.new(:sequences) if @seq.empty?
+
+        @cls = @seq.flat_map { |_, i, _| i }.uniq
       end
 
       def control(cmd, param)
@@ -114,67 +113,51 @@ class Lingo
       end
 
       def process_buffer?
-        (obj = @buffer.last).is_a?(WordForm) && (obj.is_a?(Word) &&
-          obj.unknown? || @stopper.include?(obj.attr.upcase))
+        (obj = @buffer.last).is_a?(WordForm) && @stopper.include?(obj.attr)
       end
 
       def process_buffer
-        matches = []
-
-        if @buffer.size > 1
-          buf, map, seq, cls, unk = [], [], @seq, @classes, %w[#]
+        flush(@buffer.size < 2 ? @buffer : begin
+          arg, cls, unk = [[], buf = [], map = [], @seq], @cls, %w[#]
 
           @buffer.each { |obj|
             att = obj.is_a?(Word) && !obj.unknown? ? obj.attrs(false) : unk
-
-            (att &= cls).empty? ? find_seq(buf, map, seq, matches) : begin
-              buf << obj
-              map << att
-            end
-          }
-
-          find_seq(buf, map, seq, matches)
-        end
-
-        flush(@buffer.concat(matches))
+            (att &= cls).empty? ? find_seq(*arg) : (buf << obj; map << att)
+          }.concat(find_seq(*arg))
+        end)
       end
 
       private
 
-      def find_seq(buf, map, seq, matches)
-        return if buf.empty?
+      def find_seq(mat, buf, map, seq)
+        return mat if buf.empty?
 
-        match = Hash.new { |h, k| h[k] = [] }
+        forms, args = [], []
 
-        map.replace(map.shift.product(*map))
-        map.map! { |i| i.join }
-        map.uniq!
+        map.replace(map.shift.product(*map)).map! { |i| i.join }.uniq!
 
         map.each { |q|
-          seq.each { |string, classes, format|
-            while pos = q.index(string, pos || 0)
-              form = format.dup
+          seq.each { |str, cls, fmt|
+            while pos = q.index(str, pos || 0)
+              args.clear
 
-              classes.each_with_index { |wc, i|
+              cls.each_with_index { |wc, i|
                 buf[pos + i].lexicals.find { |l|
-                  form.gsub!(i.succ.to_s, l.form) if l.attr == wc
+                  args[i] = l.form if l.attr == wc
                 } or break
               } or next
 
-              match[pos += 1] << form
+              forms << fmt % args
+              pos += 1
             end
           }
-        }
+        }.clear
 
-        match.each_value { |forms|
-          forms.uniq!
-          forms.each { |form|
-            matches << Word.new_lexical(form, WA_SEQUENCE, LA_SEQUENCE)
-          }
-        }
+        forms.uniq!
+        forms.each { |f| mat << Word.new_lexical(f, WA_SEQUENCE, LA_SEQUENCE) }
 
         buf.clear
-        map.clear
+        mat
       end
 
     end
