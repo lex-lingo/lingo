@@ -122,6 +122,10 @@ class Lingo
         attr == WA_COMPOUND && get_class('x+').empty?
       end
 
+      def multiword_size(wc_re = LA_MULTIWORD)
+        lex = get_class(wc_re).first and lex.form.count(' ') + 1
+      end
+
       def <<(*other)
         other.flatten!
         lexicals.concat(other)

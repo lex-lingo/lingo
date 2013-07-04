@@ -106,6 +106,7 @@ class Lingo
         raise MissingConfigError.new(:sequences) if @seq.empty?
 
         @cls = @seq.flat_map { |_, i, _| i }.uniq
+        @mwc = get_key('multiword', LA_MULTIWORD)
       end
 
       def control(cmd, param)
@@ -118,12 +119,41 @@ class Lingo
 
       def process_buffer
         flush(@buffer.size < 2 ? @buffer : begin
-          arg, cls, unk = [[], buf = [], map = [], @seq], @cls, %w[#]
+          arg, cls, mwc, unk = [[], buf = [], map = [], @seq], @cls, @mwc, %w[#]
 
-          @buffer.each { |obj|
+          iter, skip, rewind = @buffer.each_with_index, 0, lambda {
+            iter.rewind; skip.times { iter.next }; skip = 0
+          }
+
+          loop {
+            obj, idx = begin
+              iter.next
+            rescue StopIteration
+              raise unless skip > 0
+
+              buf.slice!(0, skip)
+              map.slice!(0, skip)
+
+              rewind.call
+            end
+
             att = obj.is_a?(Word) && !obj.unknown? ? obj.attrs(false) : unk
-            (att &= cls).empty? ? find_seq(*arg) : (buf << obj; map << att)
-          }.concat(find_seq(*arg))
+
+            if (att &= cls).empty?
+              find_seq(*arg)
+              rewind.call if skip > 0
+            else
+              if n = obj.multiword_size(mwc)
+                n.times { iter.next }
+                skip = idx + 1
+              end
+
+              buf << obj
+              map << att
+            end
+          }
+
+          @buffer.concat(find_seq(*arg))
         end)
       end
 
