@@ -100,7 +100,10 @@ class Lingo
                      .push(WA_UNKNOWN, WA_UNKMULPART)
 
         @seq = get_key('sequences').map { |str, fmt|
-          [str = str.downcase, str.chars.to_a, fmt.gsub(/\d+/, '%\&$s')]
+          str, fmt = str.downcase, fmt.gsub(/\d+/, '%\&$s')
+
+          str !~ /[^[:alpha:]]/ ? [str, str.chars.to_a, fmt] :
+             [Regexp.new(str), str.scan(/[[:alpha:]]/), fmt]
         }
 
         raise MissingConfigError.new(:sequences) if @seq.empty?
@@ -171,7 +174,7 @@ class Lingo
             while pos = q.index(str, pos || 0)
               args.clear
 
-              cls.each_with_index { |wc, i|
+              (str.is_a?(Regexp) ? $&.chars : cls).each_with_index { |wc, i|
                 buf[pos + i].lexicals.find { |l|
                   args[i] = l.form if l.attr == wc
                 } or break

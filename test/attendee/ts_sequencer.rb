@@ -127,4 +127,36 @@ class TestAttendeeSequencer < AttendeeTestCase
     ])
   end
 
+  def test_regex
+    meet({ 'sequences' => [['[MS]S', '1 2']] }, [
+      # MS + SS + SS
+      wd('Der|IDF', 'der|w'),
+      wd('Abbild Gottes|MUL', 'abbild gottes|m'),
+      wd('Abbild|IDF', 'abbild|s'),
+      wd('Gottes|IDF', 'gott|s'),
+      wd('Turm|IDF', 'turm|s'),
+      tk('.|PUNC'),
+      wd('Abbild Gottes|MUL', 'abbild gottes|m'),
+      wd('Abbild|IDF', 'abbild|s'),
+      wd('Gottes|IDF', 'gott|s'),
+      ai('EOF|')
+    ], [
+      # MS + SS + SS
+      wd('Der|IDF', 'der|w'),
+      wd('Abbild Gottes|MUL', 'abbild gottes|m'),
+      wd('Abbild|IDF', 'abbild|s'),
+      wd('Gottes|IDF', 'gott|s'),
+      wd('Turm|IDF', 'turm|s'),
+      tk('.|PUNC'),
+      wd('abbild gottes turm|SEQ', 'abbild gottes turm|q'),
+      wd('abbild gott|SEQ', 'abbild gott|q'),
+      wd('gott turm|SEQ', 'gott turm|q'),
+      wd('Abbild Gottes|MUL', 'abbild gottes|m'),
+      wd('Abbild|IDF', 'abbild|s'),
+      wd('Gottes|IDF', 'gott|s'),
+      wd('abbild gott|SEQ', 'abbild gott|q'),
+      ai('EOF|')
+    ])
+  end
+
 end
