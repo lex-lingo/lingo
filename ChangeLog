@@ -4,7 +4,9 @@
 
 == 1.8.4 [unreleased]
 
-* Meeting config takes precedence over language config.
+* Attendee::Sequencer accepts regular expression patterns (fixed-length only).
+* Attendee::Sequencer substitutes +0+ in the format string for the matched
+  pattern.
 * Attendee::NonewordFilter learned +dict+ option to print nonewords in
   dictionary format.
 * <tt>lingoctl demo</tt> reports successful initialization.
@@ -12,6 +14,7 @@
 * Lingo Web learned parameter +hl+ to set UI language.
 * Lingo Web displays the configuration in use.
 * Lingo Srv accepts array of query strings in addition to single query string.
+* Meeting config takes precedence over language config.
 * When dictionary entries are rejected during conversion, the location of the
   reject file will be shown.
 * LIR record number defaults to match string in absence of capture group.
