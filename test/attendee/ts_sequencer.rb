@@ -159,4 +159,34 @@ class TestAttendeeSequencer < AttendeeTestCase
     ])
   end
 
+  def test_match
+    meet({ 'sequences' => [['WA', '1 2 (0)'], ['A[SK]', '0: 2, 1']] }, [
+      # WA + AS
+      wd('Die|IDF', 'die|w'),
+      wd('helle|IDF', 'hell|a'),
+      wd('Sonne|IDF', 'sonne|s'),
+      tk('.|PUNC'),
+      # WA + AK
+      wd('Der|IDF', 'der|w'),
+      wd('schöne|IDF', 'schön|a'),
+      wd('Sonnenuntergang|KOM', 'sonnenuntergang|k', 'sonne|s+', 'untergang|s+'),
+      ai('EOF|')
+    ], [
+      # WA + AS
+      wd('Die|IDF', 'die|w'),
+      wd('helle|IDF', 'hell|a'),
+      wd('Sonne|IDF', 'sonne|s'),
+      tk('.|PUNC'),
+      wd('die hell (wa)|SEQ', 'die hell (wa)|q'),
+      wd('as: sonne, hell|SEQ', 'as: sonne, hell|q'),
+      # WA + AK
+      wd('Der|IDF', 'der|w'),
+      wd('schöne|IDF', 'schön|a'),
+      wd('Sonnenuntergang|KOM', 'sonnenuntergang|k', 'sonne|s+', 'untergang|s+'),
+      wd('der schön (wa)|SEQ', 'der schön (wa)|q'),
+      wd('ak: sonnenuntergang, schön|SEQ', 'ak: sonnenuntergang, schön|q'),
+      ai('EOF|')
+    ])
+  end
+
 end

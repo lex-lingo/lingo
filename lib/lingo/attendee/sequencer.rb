@@ -99,17 +99,19 @@ class Lingo
         @stopper = get_array('stopper', DEFAULT_SKIP)
                      .push(WA_UNKNOWN, WA_UNKMULPART)
 
-        @seq = get_key('sequences').map { |str, fmt|
-          str, fmt = str.downcase, fmt.gsub(/\d+/, '%\&$s')
+        @mwc = get_key('multiword', LA_MULTIWORD)
+        @cls = []
 
-          str !~ /[^[:alpha:]]/ ? [str, str.chars.to_a, fmt] :
-             [Regexp.new(str), str.scan(/[[:alpha:]]/), fmt]
+        @seq = get_key('sequences').map { |str, fmt|
+          @cls.concat(cls = (str = str.downcase).scan(/[[:alpha:]]/))
+
+          (str =~ /[^[:alpha:]]/ ? [Regexp.new(str), nil] : [str, cls])
+            .push(fmt.gsub(/\d+/, '%\&$s'))
         }
 
-        raise MissingConfigError.new(:sequences) if @seq.empty?
+        @cls.uniq!
 
-        @cls = @seq.flat_map { |_, i, _| i }.uniq
-        @mwc = get_key('multiword', LA_MULTIWORD)
+        raise MissingConfigError.new(:sequences) if @seq.empty?
       end
 
       def control(cmd, param)
@@ -171,16 +173,20 @@ class Lingo
 
         map.each { |q|
           seq.each { |str, cls, fmt|
+            _str, _cls = [str, cls]
+
             while pos = q.index(str, pos || 0)
+              _str, _cls = [$&, $&.chars] unless cls
+
               args.clear
 
-              (str.is_a?(Regexp) ? $&.chars : cls).each_with_index { |wc, i|
+              _cls.each_with_index { |wc, i|
                 buf[pos + i].lexicals.find { |l|
                   args[i] = l.form if l.attr == wc
                 } or break
               } or next
 
-              forms << fmt % args
+              forms << fmt.gsub('%0$s', _str) % args
               pos += 1
             end
           }
