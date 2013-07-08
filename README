@@ -187,7 +187,7 @@ development files are currently not required.
 Prior to version 1.8.0, Lingo expected to be run from its installation
 directory. This is no longer necessary. But if you prefer that use case,
 you can either download and extract an
-{archive file}[http://github.com/lex-lingo/lingo/tags] or unpack the
+{archive file}[http://github.com/lex-lingo/lingo/releases] or unpack the
 Gem archive (<tt>gem unpack lingo</tt>); or you can install the legacy
 version of Lingo (see below).
 
