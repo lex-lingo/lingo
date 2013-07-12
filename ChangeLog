@@ -4,7 +4,7 @@
 
 == 1.8.4 [unreleased]
 
-* Attendee::Sequencer accepts regular expression patterns (fixed-length only).
+* Attendee::Sequencer accepts regular expression patterns.
 * Attendee::Sequencer substitutes +0+ in the format string for the matched
   pattern.
 * Attendee::NonewordFilter learned +dict+ option to print nonewords in

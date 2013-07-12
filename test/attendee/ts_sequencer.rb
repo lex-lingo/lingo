@@ -33,13 +33,13 @@ class TestAttendeeSequencer < AttendeeTestCase
   end
 
   def test_param
-    meet({ 'sequences' => [['SS', '1 2']] }, [
+    meet({ 'sequences' => [['SS', '1 2'], ['SSS', '1 2 3']] }, [
       # (AS)
       wd('Die|IDF', 'die|w'),
       wd('helle|IDF', 'hell|a'),
       wd('Sonne|IDF', 'sonne|s'),
       tk('.|PUNC'),
-      # SS + SS
+      # SS + SS + SSS
       wd('Der|IDF', 'der|w'),
       wd('Abbild Gottes|MUL', 'abbild gottes|m'),
       wd('Abbild|IDF', 'abbild|s'),
@@ -57,7 +57,7 @@ class TestAttendeeSequencer < AttendeeTestCase
       wd('helle|IDF', 'hell|a'),
       wd('Sonne|IDF', 'sonne|s'),
       tk('.|PUNC'),
-      # SS + SS
+      # SS + SS + SSS
       wd('Der|IDF', 'der|w'),
       wd('Abbild Gottes|MUL', 'abbild gottes|m'),
       wd('Abbild|IDF', 'abbild|s'),
@@ -66,6 +66,7 @@ class TestAttendeeSequencer < AttendeeTestCase
       tk('.|PUNC'),
       wd('abbild gott|SEQ', 'abbild gott|q'),
       wd('gott turm|SEQ', 'gott turm|q'),
+      wd('abbild gott turm|SEQ', 'abbild gott turm|q'),
       # SS
       wd('Der|IDF', 'der|w'),
       wd('Sonne|IDF', 'sonne|s'),
@@ -96,20 +97,21 @@ class TestAttendeeSequencer < AttendeeTestCase
       wd('abbild gottes turm|SEQ', 'abbild gottes turm|q'),
       ai('EOF|')
     ])
-    meet({ 'sequences' => [['MS', '1 2'], ['SS', '1 2']] }, [
-      # MS + SS + SS
+    meet({ 'sequences' => [['MS', '1 2'], ['SS', '1 2'], ['SSS', '1 2 3']] }, [
+      # MS + SS + SS + SSS
       wd('Der|IDF', 'der|w'),
       wd('Abbild Gottes|MUL', 'abbild gottes|m'),
       wd('Abbild|IDF', 'abbild|s'),
       wd('Gottes|IDF', 'gott|s'),
       wd('Turm|IDF', 'turm|s'),
       tk('.|PUNC'),
+      # SS
       wd('Abbild Gottes|MUL', 'abbild gottes|m'),
       wd('Abbild|IDF', 'abbild|s'),
       wd('Gottes|IDF', 'gott|s'),
       ai('EOF|')
     ], [
-      # MS + SS + SS
+      # MS + SS + SS + SSS
       wd('Der|IDF', 'der|w'),
       wd('Abbild Gottes|MUL', 'abbild gottes|m'),
       wd('Abbild|IDF', 'abbild|s'),
@@ -119,6 +121,8 @@ class TestAttendeeSequencer < AttendeeTestCase
       wd('abbild gottes turm|SEQ', 'abbild gottes turm|q'),
       wd('abbild gott|SEQ', 'abbild gott|q'),
       wd('gott turm|SEQ', 'gott turm|q'),
+      wd('abbild gott turm|SEQ', 'abbild gott turm|q'),
+      # SS
       wd('Abbild Gottes|MUL', 'abbild gottes|m'),
       wd('Abbild|IDF', 'abbild|s'),
       wd('Gottes|IDF', 'gott|s'),
@@ -136,6 +140,7 @@ class TestAttendeeSequencer < AttendeeTestCase
       wd('Gottes|IDF', 'gott|s'),
       wd('Turm|IDF', 'turm|s'),
       tk('.|PUNC'),
+      # SS
       wd('Abbild Gottes|MUL', 'abbild gottes|m'),
       wd('Abbild|IDF', 'abbild|s'),
       wd('Gottes|IDF', 'gott|s'),
@@ -151,10 +156,125 @@ class TestAttendeeSequencer < AttendeeTestCase
       wd('abbild gottes turm|SEQ', 'abbild gottes turm|q'),
       wd('abbild gott|SEQ', 'abbild gott|q'),
       wd('gott turm|SEQ', 'gott turm|q'),
+      # SS
       wd('Abbild Gottes|MUL', 'abbild gottes|m'),
       wd('Abbild|IDF', 'abbild|s'),
       wd('Gottes|IDF', 'gott|s'),
       wd('abbild gott|SEQ', 'abbild gott|q'),
+      ai('EOF|')
+    ])
+  end
+
+  def test_regex_none
+    meet({ 'sequences' => ['..'] }, [
+      # (MS + SS + SS)
+      wd('Der|IDF', 'der|w'),
+      wd('Abbild Gottes|MUL', 'abbild gottes|m'),
+      wd('Abbild|IDF', 'abbild|s'),
+      wd('Gottes|IDF', 'gott|s'),
+      wd('Turm|IDF', 'turm|s'),
+      tk('.|PUNC'),
+      wd('Abbild Gottes|MUL', 'abbild gottes|m'),
+      wd('Abbild|IDF', 'abbild|s'),
+      wd('Gottes|IDF', 'gott|s'),
+      ai('EOF|')
+    ], [
+      # (MS + SS + SS)
+      wd('Der|IDF', 'der|w'),
+      wd('Abbild Gottes|MUL', 'abbild gottes|m'),
+      wd('Abbild|IDF', 'abbild|s'),
+      wd('Gottes|IDF', 'gott|s'),
+      wd('Turm|IDF', 'turm|s'),
+      tk('.|PUNC'),
+      wd('Abbild Gottes|MUL', 'abbild gottes|m'),
+      wd('Abbild|IDF', 'abbild|s'),
+      wd('Gottes|IDF', 'gott|s'),
+      ai('EOF|')
+    ])
+  end
+
+  def test_regex_comm
+    meet({ 'sequences' => ['(?#MS)..'] }, [  # = [MS][MS]
+      # MS + SS + SS
+      wd('Der|IDF', 'der|w'),
+      wd('Abbild Gottes|MUL', 'abbild gottes|m'),
+      wd('Abbild|IDF', 'abbild|s'),
+      wd('Gottes|IDF', 'gott|s'),
+      wd('Turm|IDF', 'turm|s'),
+      tk('.|PUNC'),
+      # SS
+      wd('Abbild Gottes|MUL', 'abbild gottes|m'),
+      wd('Abbild|IDF', 'abbild|s'),
+      wd('Gottes|IDF', 'gott|s'),
+      ai('EOF|')
+    ], [
+      # MS + SS + SS
+      wd('Der|IDF', 'der|w'),
+      wd('Abbild Gottes|MUL', 'abbild gottes|m'),
+      wd('Abbild|IDF', 'abbild|s'),
+      wd('Gottes|IDF', 'gott|s'),
+      wd('Turm|IDF', 'turm|s'),
+      tk('.|PUNC'),
+      wd('abbild gottes turm|SEQ', 'abbild gottes turm|q'),
+      wd('abbild gott|SEQ', 'abbild gott|q'),
+      wd('gott turm|SEQ', 'gott turm|q'),
+      # SS
+      wd('Abbild Gottes|MUL', 'abbild gottes|m'),
+      wd('Abbild|IDF', 'abbild|s'),
+      wd('Gottes|IDF', 'gott|s'),
+      wd('abbild gott|SEQ', 'abbild gott|q'),
+      ai('EOF|')
+    ])
+  end
+
+  def test_regex_quan
+    meet({ 'sequences' => ['[MS]S+'] }, [
+      # MS + SSS + (SS) + SS
+      wd('Der|IDF', 'der|w'),
+      wd('Abbild Gottes|MUL', 'abbild gottes|m'),
+      wd('Abbild|IDF', 'abbild|s'),
+      wd('Gottes|IDF', 'gott|s'),
+      wd('Turm|IDF', 'turm|s'),
+      tk('.|PUNC'),
+      ai('EOF|')
+    ], [
+      # MS + SSS + (SS) + SS
+      wd('Der|IDF', 'der|w'),
+      wd('Abbild Gottes|MUL', 'abbild gottes|m'),
+      wd('Abbild|IDF', 'abbild|s'),
+      wd('Gottes|IDF', 'gott|s'),
+      wd('Turm|IDF', 'turm|s'),
+      tk('.|PUNC'),
+      wd('abbild gottes turm|SEQ', 'abbild gottes turm|q'),
+      wd('abbild gott turm|SEQ', 'abbild gott turm|q'),
+      #wd('abbild gott|SEQ', 'abbild gott|q'),  # FIXME
+      wd('gott turm|SEQ', 'gott turm|q'),
+      ai('EOF|')
+    ])
+  end
+
+  def test_regex_form
+    meet({ 'sequences' => [['[MS]S+', '^']] }, [
+      # MS + SSS + (SS) + SS
+      wd('Der|IDF', 'der|w'),
+      wd('Abbild Gottes|MUL', 'abbild gottes|m'),
+      wd('Abbild|IDF', 'abbild|s'),
+      wd('Gottes|IDF', 'gott|s'),
+      wd('Turm|IDF', 'turm|s'),
+      tk('.|PUNC'),
+      ai('EOF|')
+    ], [
+      # MS + SSS + (SS) + SS
+      wd('Der|IDF', 'der|w'),
+      wd('Abbild Gottes|MUL', 'abbild gottes|m'),
+      wd('Abbild|IDF', 'abbild|s'),
+      wd('Gottes|IDF', 'gott|s'),
+      wd('Turm|IDF', 'turm|s'),
+      tk('.|PUNC'),
+      wd('ms:abbild gottes^turm|SEQ', 'ms:abbild gottes^turm|q'),
+      wd('sss:abbild^gott^turm|SEQ', 'sss:abbild^gott^turm|q'),
+      #wd('ss:abbild^gott|SEQ', 'ss:abbild^gott|q'),  # FIXME
+      wd('ss:gott^turm|SEQ', 'ss:gott^turm|q'),
       ai('EOF|')
     ])
   end

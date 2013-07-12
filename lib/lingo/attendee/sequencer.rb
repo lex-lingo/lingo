@@ -105,8 +105,8 @@ class Lingo
         @seq = get_key('sequences').map { |str, fmt|
           @cls.concat(cls = (str = str.downcase).scan(/[[:alpha:]]/))
 
-          (str =~ /[^[:alpha:]]/ ? [Regexp.new(str), nil] : [str, cls])
-            .push(fmt.gsub(/\d+/, '%\&$s'))
+          (str =~ /\W/ ? [Regexp.new(str), nil] : [str, cls]).push(
+            fmt == true ? '|' : fmt ? fmt.gsub(/\d+/, '%\&$s') : nil)
         }
 
         @cls.uniq!
@@ -186,7 +186,11 @@ class Lingo
                 } or break
               } or next
 
-              forms << fmt.gsub('%0$s', _str) % args
+              forms << (
+                fmt =~ /\d/ ? fmt.gsub('%0$s', _str) % args :
+                fmt ? "#{_str}:#{args.join(fmt)}" : args.join(' ')
+              )
+
               pos += 1
             end
           }
