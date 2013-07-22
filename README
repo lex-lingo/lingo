@@ -85,7 +85,7 @@ a file begins and when it ends. This can (and will) be an important piece of
 information for other attendees that will be added later.
 
 To try out Lingo's functionality without installing it first, have a look at
-{Lingo Web}[http://linux2.fbi.fh-koeln.de/lingoweb]. There you can enter some
+{Lingo Web}[http://ixtrieve.fh-koeln.de/lingoweb]. There you can enter some
 text and see the debug output Lingo generated, including tokenization, word
 identification, decomposition, etc.
 
@@ -291,7 +291,7 @@ the full test suite.
 
 <b></b>
 Website::           http://lex-lingo.de
-Demo::              http://linux2.fbi.fh-koeln.de/lingoweb
+Demo::              http://ixtrieve.fh-koeln.de/lingoweb
 Documentation::     http://lex-lingo.github.com/lingo
 Source code::       http://github.com/lex-lingo/lingo
 RubyGem::           http://rubygems.org/gems/lingo
