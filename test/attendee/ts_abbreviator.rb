@@ -24,4 +24,26 @@ class TestAttendeeAbbreviator < AttendeeTestCase
     ])
   end
 
+  def test_sentence
+    meet({ 'source' => 'sys-abk' }, [
+      tk('Dieser|WORD'),
+      tk('Satz|WORD'),
+      tk('hat|WORD'),
+      tk('keinen|WORD'),
+      tk('Punkt|WORD'),
+      tk('am|WORD'),
+      tk('Ende|WORD'),
+      ai('EOF|')
+    ], [
+      tk('Dieser|WORD'),
+      tk('Satz|WORD'),
+      tk('hat|WORD'),
+      tk('keinen|WORD'),
+      tk('Punkt|WORD'),
+      tk('am|WORD'),
+      tk('Ende|WORD'),
+      ai('EOF|')
+    ])
+  end
+
 end

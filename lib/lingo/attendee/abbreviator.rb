@@ -77,7 +77,7 @@ class Lingo
       end
 
       def control(cmd, param)
-        send_abbr(nil) if [STR_CMD_RECORD, STR_CMD_EOF].include?(cmd)
+        send_abbr(@abbr) if [STR_CMD_RECORD, STR_CMD_EOF].include?(cmd)
       end
 
       def process(obj)
