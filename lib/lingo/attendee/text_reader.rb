@@ -133,14 +133,17 @@ class Lingo
 
       # Gibt eine Datei zeilenweise in den Ausgabekanal
       def spool(path)
-        unless stdin = stdin?(path)
-          size = File.size(path) if @progress
-        end
-
         forward(STR_CMD_FILE, path)
 
-        ShowProgress.new(self, size, path) { |progress|
-          filter(path, stdin) { |line, pos|
+        if stdin?(path)
+          io = @lingo.config.stdin.set_encoding(ENC)
+          io = StringIO.new(io.read) if @progress
+        else
+          io, name = File.open(path, 'rb', encoding: ENC), path
+        end
+
+        ShowProgress.new(self, @progress && io.size, name) { |progress|
+          filter(io) { |line, pos|
             progress[pos]
 
             line.chomp! if @chomp
@@ -158,14 +161,10 @@ class Lingo
         forward(STR_CMD_EOF, path)
       end
 
-      def filter(path, stdin = stdin?(path))
-        io = stdin ?
-          @lingo.config.stdin.set_encoding(ENC) :
-          File.open(path, 'rb', encoding: ENC)
-
-        block = stdin || !@progress ?
-          lambda { |line| yield line, 0 } :
-          lambda { |line| yield line, io.pos }
+      def filter(io)
+        block = @progress ?
+          lambda { |line| yield line, io.pos } :
+          lambda { |line| yield line, 0 }
 
         case @filter == true ? file_type(path, io) : @filter.to_s
           when /html/i then io = filter_html(io)

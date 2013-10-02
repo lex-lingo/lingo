@@ -9,6 +9,7 @@
   pattern.
 * Attendee::NonewordFilter learned +dict+ option to print nonewords in
   dictionary format.
+* Added progress reporting to Attendee::TextReader for STDIN.
 * <tt>lingoctl demo</tt> reports successful initialization.
 * Russian localization for Lingo Web. (Yulia Dorokhova, Thomas Müller)
 * Lingo Web learned parameter +hl+ to set UI language.
