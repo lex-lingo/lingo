@@ -1,6 +1,7 @@
 doc
 doc.local
 pkg
+tmp
 prof
 store
 bench/tmp.*
