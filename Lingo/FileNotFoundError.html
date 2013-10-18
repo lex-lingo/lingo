@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Lingo::FileNotFoundError - lingo Application documentation (v1.8.3)</title>
+<title>class Lingo::FileNotFoundError - lingo Application documentation (v1.8.4)</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -118,6 +118,10 @@
   
     <li><a href="../Lingo/Attendee/Dehyphenizer.html">Lingo::Attendee::Dehyphenizer</a>
   
+    <li><a href="../Lingo/Attendee/Disambiguator.html">Lingo::Attendee::Disambiguator</a>
+  
+    <li><a href="../Lingo/Attendee/Disambiguator/STATS.html">Lingo::Attendee::Disambiguator::STATS</a>
+  
     <li><a href="../Lingo/Attendee/Formatter.html">Lingo::Attendee::Formatter</a>
   
     <li><a href="../Lingo/Attendee/MultiWorder.html">Lingo::Attendee::MultiWorder</a>
@@ -218,6 +222,8 @@
   
     <li><a href="../Lingo/Language/WordForm.html">Lingo::Language::WordForm</a>
   
+    <li><a href="../Lingo/LibraryLoadError.html">Lingo::LibraryLoadError</a>
+  
     <li><a href="../Lingo/LingoError.html">Lingo::LingoError</a>
   
     <li><a href="../Lingo/MissingConfigError.html">Lingo::MissingConfigError</a>
@@ -316,7 +322,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/lingo/error.rb, line 138</span>
+            <pre><span class="ruby-comment"># File lib/lingo/error.rb, line 148</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">name</span>)
   <span class="ruby-ivar">@name</span> = <span class="ruby-identifier">name</span>
 <span class="ruby-keyword">end</span></pre>
@@ -355,7 +361,7 @@
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/lingo/error.rb, line 142</span>
+            <pre><span class="ruby-comment"># File lib/lingo/error.rb, line 152</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-node">&quot;No such file `#{name}&#39;.&quot;</span>
 <span class="ruby-keyword">end</span></pre>

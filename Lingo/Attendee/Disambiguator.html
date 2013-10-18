@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Lingo::Attendee::Variator - lingo Application documentation (v1.8.4)</title>
+<title>class Lingo::Attendee::Disambiguator - lingo Application documentation (v1.8.4)</title>
 
 <link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
 
@@ -44,23 +44,12 @@
 
 
   
-<div id="table-of-contents">
-  <nav class="section">
-    <h3 class="section-header">Table of Contents</h3>
-    <ul>
-      <li><a href="#label-M%C3%B6gliche+Verlinkung">Mögliche Verlinkung</a>
-      <li><a href="#label-Parameter">Parameter</a>
-      <li><a href="#label-Beispiele">Beispiele</a>
-    </ul>
-  </nav>
-</div>
-
 
   <div id="file-metadata">
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
   <ul>
-    <li>lib/lingo/attendee/variator.rb
+    <li>lib/lingo/attendee/disambiguator.rb
   </ul>
 </nav>
 
@@ -86,11 +75,11 @@
     
     <li ><a href="#method-i-control">#control</a>
     
+    <li ><a href="#method-i-disambiguate">#disambiguate</a>
+    
     <li ><a href="#method-i-init">#init</a>
     
     <li ><a href="#method-i-process">#process</a>
-    
-    <li ><a href="#method-i-variate">#variate</a>
     
   </ul>
 </nav>
@@ -274,86 +263,10 @@
 </nav>
 
 <div id="documentation">
-  <h1 class="class">class Lingo::Attendee::Variator</h1>
+  <h1 class="class">class Lingo::Attendee::Disambiguator</h1>
 
   <div id="description" class="description">
     
-<p>Der <a href="Variator.html">Variator</a> ermöglicht bei nicht erkannten
-Wörtern den listenbasierten Austausch einzelner Wortteile einchließlich
-erneuter Wörterbuchsuche zur Verbesserung der Worterkennungsquote.</p>
-
-<p>Ursprünglich wurde der <a href="Variator.html">Variator</a> entwickelt, um
-die mangelnde Qualität bei der OCR-Erkennung altdeutscher
-&#39;s&#39;-Konsonanten zu optimieren. Er kann ebenso bei alternativen
-Umlautschreibweisen z.B. zur Wandlung von &#39;Koeln&#39; in &#39;Köln&#39;
-dienen.</p>
-
-<h3 id="label-M%C3%B6gliche+Verlinkung">Mögliche Verlinkung<span><a href="#label-M%C3%B6gliche+Verlinkung">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt>Erwartet
-<dd>
-<p>Daten vom Typ <strong>Word</strong> (andere werden einfach durchgereicht)
-z.B. von Wordsearcher</p>
-</dd><dt>Erzeugt
-<dd>
-<p>Daten vom Typ <strong>Word</strong> zur Weiterleitung z.B. an <a
-href="Synonymer.html">Synonymer</a>, <a
-href="Decomposer.html">Decomposer</a>, Multiworder, <a
-href="Sequencer.html">Sequencer</a>, Noneword_filter oder Vector_filter</p>
-</dd></dl>
-
-<h3 id="label-Parameter">Parameter<span><a href="#label-Parameter">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
-
-<p>Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der
-Voreinstellung). Alle anderen Parameter müssen zwingend angegeben werden.</p>
-<dl class="rdoc-list note-list"><dt><strong>in</strong>
-<dd>
-<p>siehe allgemeine Beschreibung des <a href="../Attendee.html">Attendee</a></p>
-</dd><dt><strong>out</strong>
-<dd>
-<p>siehe allgemeine Beschreibung des <a href="../Attendee.html">Attendee</a></p>
-</dd><dt><strong>source</strong>
-<dd>
-<p>siehe allgemeine Beschreibung des Dictionary</p>
-</dd><dt><strong><em>mode</em></strong>
-<dd>
-<p>(Standard: all) siehe allgemeine Beschreibung des Dictionary</p>
-</dd><dt><strong><em>^check</em></strong>
-<dd>
-<p>(Standard: WA_UNKNOWN) Gebrenzt die zu variierenden Worttypen</p>
-</dd><dt><strong><em>marker</em></strong>
-<dd>
-<p>(Standard: &#39;*&#39;) Kennzeichnung durch Variation erkannter Wörter</p>
-</dd><dt><strong><em>max-var</em></strong>
-<dd>
-<p>(Standard: &#39;10000&#39;) Begrenzung der maximal zu prüfenden
-Permutationen bei der vollständigen Kombination aller auf ein Wort
-anzuwendenen aufgelisteten Wortteile.</p>
-</dd></dl>
-
-<h3 id="label-Beispiele">Beispiele<span><a href="#label-Beispiele">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
-
-<p>Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration
-<code>t1.cfg</code></p>
-
-<pre>meeting:
-  attendees:
-    - text_reader:   { out: lines, files: &#39;$(files)&#39; }
-    - tokenizer:     { in: lines, out: token }
-    - word_searcher: { in: abbrev, out: words, source: &#39;sys-dic&#39; }
-    - variator:      { in: words, out: varios, source: &#39;sys-dic&#39; }
-    - debugger:      { in: varios, prompt: &#39;out&gt;&#39; }</pre>
-
-<p>ergibt die Ausgabe über den Debugger: <code>lingo -c t1 test.txt</code></p>
-
-<pre>out&gt; *FILE(&#39;test.txt&#39;)
-out&gt; &lt;*Dies = [(dies/w)]&gt;
-out&gt; &lt;*ist = [(ist/t)]&gt;
-out&gt; &lt;ein = [(ein/t)]&gt;
-out&gt; &lt;*Tisch = [(tisch/s)]&gt;
-out&gt; :./PUNC:
-out&gt; *EOL(&#39;test.txt&#39;)
-out&gt; *EOF(&#39;test.txt&#39;)</pre>
-
   </div><!-- description -->
 
   
@@ -393,8 +306,17 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
 
           
           <div class="method-source-code" id="control-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/variator.rb, line 91</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/disambiguator.rb, line 109</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">param</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">cmd</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-constant">STR_CMD_FILE</span>
+      <span class="ruby-ivar">@state</span> = <span class="ruby-ivar">@start</span>
+      <span class="ruby-ivar">@token</span>.<span class="ruby-identifier">clear</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-constant">STR_CMD_EOF</span>
+      <span class="ruby-ivar">@state</span> = <span class="ruby-ivar">@start</span>
+      <span class="ruby-identifier">flush</span>(<span class="ruby-ivar">@token</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">obj</span><span class="ruby-operator">|</span> <span class="ruby-identifier">disambiguate</span>(<span class="ruby-identifier">obj</span>) })
+      <span class="ruby-constant">STATS</span>.<span class="ruby-identifier">dump</span>(<span class="ruby-ivar">@dump</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@dump</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- control-source -->
           
@@ -425,20 +347,17 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
 
           
           <div class="method-source-code" id="init-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/variator.rb, line 76</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/disambiguator.rb, line 97</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">init</span>
-  <span class="ruby-ivar">@marker</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;marker&#39;</span>, <span class="ruby-string">&#39;*&#39;</span>)
-  <span class="ruby-ivar">@max</span>    = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;max-var&#39;</span>, <span class="ruby-identifier">max</span> = <span class="ruby-value">10000</span>).<span class="ruby-identifier">to_i</span>
-  <span class="ruby-ivar">@max</span>    = <span class="ruby-identifier">max</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@max</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
-  <span class="ruby-ivar">@var</span>    = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;variations&#39;</span>)
+  <span class="ruby-ivar">@load</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;load&#39;</span>, <span class="ruby-keyword">nil</span>)
+  <span class="ruby-ivar">@dump</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;dump&#39;</span>, <span class="ruby-keyword">nil</span>)
 
-  <span class="ruby-identifier">raise</span> <span class="ruby-constant">MissingConfigError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:variations</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@var</span>.<span class="ruby-identifier">empty?</span>
+  <span class="ruby-constant">STATS</span>.<span class="ruby-identifier">load</span>(<span class="ruby-ivar">@load</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@load</span>
 
-  <span class="ruby-ivar">@check</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">false</span>)
-  <span class="ruby-identifier">get_array</span>(<span class="ruby-string">&#39;check&#39;</span>, <span class="ruby-constant">WA_UNKNOWN</span>).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@check</span>[<span class="ruby-identifier">s</span>.<span class="ruby-identifier">upcase</span>] = <span class="ruby-keyword">true</span> }
-
-  <span class="ruby-identifier">set_dic</span>
-  <span class="ruby-identifier">set_gra</span>
+  <span class="ruby-ivar">@learn</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;learn&#39;</span>, <span class="ruby-operator">!</span><span class="ruby-ivar">@load</span>)
+  <span class="ruby-ivar">@punct</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;punct&#39;</span>, <span class="ruby-string">&#39;,&#39;</span>).<span class="ruby-identifier">chars</span>.<span class="ruby-identifier">to_a</span>
+  <span class="ruby-ivar">@start</span> = <span class="ruby-node">%w[^]</span>
+  <span class="ruby-ivar">@token</span> = []
 <span class="ruby-keyword">end</span></pre>
           </div><!-- init-source -->
           
@@ -469,28 +388,23 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
 
           
           <div class="method-source-code" id="process-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/variator.rb, line 94</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/disambiguator.rb, line 121</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">process</span>(<span class="ruby-identifier">obj</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Word</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@check</span>[<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">attr</span>]
-    <span class="ruby-identifier">vars</span>, <span class="ruby-identifier">max</span> = [<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">form</span>], <span class="ruby-ivar">@max</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@learn</span>
+    <span class="ruby-ivar">@token</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">obj</span>
 
-    <span class="ruby-ivar">@var</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">args</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">variate</span>(<span class="ruby-identifier">vars</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
-      <span class="ruby-keyword">break</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">vars</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">max</span>
-    }
-
-    <span class="ruby-identifier">vars</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">var</span><span class="ruby-operator">|</span>
-      <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> (<span class="ruby-identifier">word</span> = <span class="ruby-identifier">find_word</span>(<span class="ruby-identifier">var</span>)).<span class="ruby-identifier">unknown?</span> <span class="ruby-operator">||</span> (
-        <span class="ruby-identifier">word</span>.<span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-constant">WA_COMPOUND</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">word</span>.<span class="ruby-identifier">lexicals</span>.<span class="ruby-identifier">any?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">lex</span><span class="ruby-operator">|</span>
-          <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">attr</span>.<span class="ruby-identifier">start_with?</span>(<span class="ruby-constant">LA_TAKEITASIS</span>)
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">obj</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-constant">Word</span>
+        <span class="ruby-ivar">@state</span> = (<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">identified?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">attrs</span> <span class="ruby-operator">:</span> [<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">attr</span>]).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">attr</span><span class="ruby-operator">|</span>
+          <span class="ruby-constant">STATS</span>.<span class="ruby-identifier">record</span>(<span class="ruby-identifier">attr</span>, <span class="ruby-operator">*</span><span class="ruby-ivar">@state</span>)
         }
-      )
-
-      <span class="ruby-keyword">return</span> <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">word</span>.<span class="ruby-identifier">tap</span> { <span class="ruby-identifier">word</span>.<span class="ruby-identifier">form</span> = <span class="ruby-ivar">@marker</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">var</span> })
-    }
+      <span class="ruby-keyword">when</span> <span class="ruby-constant">Token</span>
+        <span class="ruby-ivar">@state</span> = <span class="ruby-ivar">@punct</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">form</span>) <span class="ruby-operator">?</span> [<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">attr</span>] <span class="ruby-operator">:</span> <span class="ruby-ivar">@start</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">disambiguate</span>(<span class="ruby-identifier">obj</span>)
+    <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">obj</span>)
   <span class="ruby-keyword">end</span>
-
-  <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">obj</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- process-source -->
           
@@ -508,11 +422,11 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
       <h3 class="section-header">Private Instance Methods</h3>
 
     
-      <div id="method-i-variate" class="method-detail ">
+      <div id="method-i-disambiguate" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">variate</span><span
-            class="method-args">(variations, from, to)</span>
+          <span class="method-name">disambiguate</span><span
+            class="method-args">(obj)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -521,39 +435,40 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
 
         <div class="method-description">
           
-          <p>Variiere die Bestandteile eines Arrays gemäß den Austauschvorgaben.</p>
-
-<p>variate( &#39;Tiieh&#39;, &#39;ieh&#39;, &#39;sch&#39; ) =&gt;
-[&#39;Tiieh&#39;, &#39;Tisch&#39;]</p>
+          
           
           
 
           
-          <div class="method-source-code" id="variate-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/variator.rb, line 122</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">variate</span>(<span class="ruby-identifier">variations</span>, <span class="ruby-identifier">from</span>, <span class="ruby-identifier">to</span>)
-  <span class="ruby-identifier">add</span>, <span class="ruby-identifier">change</span>, <span class="ruby-identifier">re</span> = [], [<span class="ruby-identifier">from</span>, <span class="ruby-identifier">to</span>], <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">from</span>)
+          <div class="method-source-code" id="disambiguate-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/disambiguator.rb, line 141</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">disambiguate</span>(<span class="ruby-identifier">obj</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">obj</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-constant">Word</span>
+      <span class="ruby-identifier">attrs</span> = <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">identified?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">attrs</span> <span class="ruby-operator">:</span> [<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">attr</span>]
 
-  <span class="ruby-identifier">variations</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">form</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">parts</span> = <span class="ruby-node">&quot; #{form} &quot;</span>.<span class="ruby-identifier">split</span>(<span class="ruby-identifier">re</span>)
-
-    <span class="ruby-value">1</span>.<span class="ruby-identifier">upto</span>(<span class="ruby-value">2</span> <span class="ruby-operator">**</span> (<span class="ruby-identifier">n</span> = <span class="ruby-identifier">parts</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>) <span class="ruby-operator">-</span> <span class="ruby-value">1</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">var</span> = <span class="ruby-identifier">parts</span>.<span class="ruby-identifier">first</span>
-      <span class="ruby-value">1</span>.<span class="ruby-identifier">upto</span>(<span class="ruby-identifier">n</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">j</span><span class="ruby-operator">|</span> <span class="ruby-identifier">var</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">change</span>[<span class="ruby-identifier">i</span>[<span class="ruby-identifier">j</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>]] <span class="ruby-operator">+</span> <span class="ruby-identifier">parts</span>[<span class="ruby-identifier">j</span>] }
-      <span class="ruby-identifier">add</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">var</span>.<span class="ruby-identifier">strip</span>
-    }
-  }
-
-  <span class="ruby-identifier">variations</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">add</span>)
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">attrs</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
+        <span class="ruby-ivar">@state</span> = [<span class="ruby-identifier">attr</span> = <span class="ruby-constant">STATS</span>.<span class="ruby-identifier">rank</span>(<span class="ruby-ivar">@state</span>.<span class="ruby-identifier">first</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">attrs</span>).<span class="ruby-identifier">first</span>.<span class="ruby-identifier">first</span>]
+        <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">lexicals</span>.<span class="ruby-identifier">delete_if</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">lex</span><span class="ruby-operator">|</span> <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">attr</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">attr</span> }
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@state</span> = <span class="ruby-identifier">attrs</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-constant">Token</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@punct</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">attr</span> = <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">attr</span>[<span class="ruby-value">0</span>])
+        <span class="ruby-ivar">@state</span> = [<span class="ruby-identifier">attr</span>]
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@state</span> = <span class="ruby-ivar">@start</span>
+      <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- variate-source -->
+          </div><!-- disambiguate-source -->
           
         </div>
 
         
 
         
-      </div><!-- variate-method -->
+      </div><!-- disambiguate-method -->
 
     
     </section><!-- private-instance-method-details -->

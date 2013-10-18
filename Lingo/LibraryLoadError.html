@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Lingo::BackendNotFoundError - lingo Application documentation (v1.8.4)</title>
+<title>class Lingo::LibraryLoadError - lingo Application documentation (v1.8.4)</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -259,7 +259,7 @@
 </nav>
 
 <div id="documentation">
-  <h1 class="class">class Lingo::BackendNotFoundError</h1>
+  <h1 class="class">class Lingo::LibraryLoadError</h1>
 
   <div id="description" class="description">
     
@@ -281,9 +281,35 @@
       <h3 class="section-header">Attributes</h3>
 
       
-      <div id="attribute-i-file" class="method-detail">
+      <div id="attribute-i-err" class="method-detail">
         <div class="method-heading attribute-method-heading">
-          <span class="method-name">file</span><span
+          <span class="method-name">err</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-klass" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">klass</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-lib" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">lib</span><span
             class="attribute-access-type">[R]</span>
         </div>
 
@@ -307,7 +333,7 @@
         
         <div class="method-heading">
           <span class="method-name">new</span><span
-            class="method-args">(file)</span>
+            class="method-args">(klass, lib, err)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -322,9 +348,9 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/lingo/error.rb, line 58</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">file</span>)
-  <span class="ruby-ivar">@file</span> = <span class="ruby-identifier">file</span>
+            <pre><span class="ruby-comment"># File lib/lingo/error.rb, line 191</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">klass</span>, <span class="ruby-identifier">lib</span>, <span class="ruby-identifier">err</span>)
+  <span class="ruby-ivar">@klass</span>, <span class="ruby-ivar">@lib</span>, <span class="ruby-ivar">@err</span> = <span class="ruby-identifier">klass</span>, <span class="ruby-identifier">lib</span>, <span class="ruby-identifier">err</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- new-source -->
           
@@ -361,9 +387,9 @@
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/lingo/error.rb, line 62</span>
+            <pre><span class="ruby-comment"># File lib/lingo/error.rb, line 195</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
-  <span class="ruby-node">&quot;No backend found for `#{file}&#39;.&quot;</span>
+  <span class="ruby-identifier">error</span>(<span class="ruby-node">&quot;#{class_name}: An error occured while trying to load &#39;#{lib}&#39;&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- to_s-source -->
           

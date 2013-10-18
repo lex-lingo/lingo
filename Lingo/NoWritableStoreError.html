@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Lingo::NoWritableStoreError - lingo Application documentation (v1.8.3)</title>
+<title>class Lingo::NoWritableStoreError - lingo Application documentation (v1.8.4)</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -118,6 +118,10 @@
   
     <li><a href="../Lingo/Attendee/Dehyphenizer.html">Lingo::Attendee::Dehyphenizer</a>
   
+    <li><a href="../Lingo/Attendee/Disambiguator.html">Lingo::Attendee::Disambiguator</a>
+  
+    <li><a href="../Lingo/Attendee/Disambiguator/STATS.html">Lingo::Attendee::Disambiguator::STATS</a>
+  
     <li><a href="../Lingo/Attendee/Formatter.html">Lingo::Attendee::Formatter</a>
   
     <li><a href="../Lingo/Attendee/MultiWorder.html">Lingo::Attendee::MultiWorder</a>
@@ -217,6 +221,8 @@
     <li><a href="../Lingo/Language/Word.html">Lingo::Language::Word</a>
   
     <li><a href="../Lingo/Language/WordForm.html">Lingo::Language::WordForm</a>
+  
+    <li><a href="../Lingo/LibraryLoadError.html">Lingo::LibraryLoadError</a>
   
     <li><a href="../Lingo/LingoError.html">Lingo::LingoError</a>
   
@@ -329,7 +335,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/lingo/error.rb, line 34</span>
+            <pre><span class="ruby-comment"># File lib/lingo/error.rb, line 44</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>)
   <span class="ruby-ivar">@file</span>, <span class="ruby-ivar">@path</span> = <span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>
 <span class="ruby-keyword">end</span></pre>
@@ -368,7 +374,7 @@
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/lingo/error.rb, line 38</span>
+            <pre><span class="ruby-comment"># File lib/lingo/error.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-string">&#39;No writable store found in search path.&#39;</span>
 <span class="ruby-keyword">end</span></pre>

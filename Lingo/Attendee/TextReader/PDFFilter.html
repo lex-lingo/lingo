@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Lingo::Attendee::TextReader::PDFFilter - lingo Application documentation (v1.8.3)</title>
+<title>class Lingo::Attendee::TextReader::PDFFilter - lingo Application documentation (v1.8.4)</title>
 
 <link type="text/css" media="screen" href="../../../rdoc.css" rel="stylesheet">
 
@@ -128,6 +128,10 @@
   
     <li><a href="../../../Lingo/Attendee/Dehyphenizer.html">Lingo::Attendee::Dehyphenizer</a>
   
+    <li><a href="../../../Lingo/Attendee/Disambiguator.html">Lingo::Attendee::Disambiguator</a>
+  
+    <li><a href="../../../Lingo/Attendee/Disambiguator/STATS.html">Lingo::Attendee::Disambiguator::STATS</a>
+  
     <li><a href="../../../Lingo/Attendee/Formatter.html">Lingo::Attendee::Formatter</a>
   
     <li><a href="../../../Lingo/Attendee/MultiWorder.html">Lingo::Attendee::MultiWorder</a>
@@ -228,6 +232,8 @@
   
     <li><a href="../../../Lingo/Language/WordForm.html">Lingo::Language::WordForm</a>
   
+    <li><a href="../../../Lingo/LibraryLoadError.html">Lingo::LibraryLoadError</a>
+  
     <li><a href="../../../Lingo/LingoError.html">Lingo::LingoError</a>
   
     <li><a href="../../../Lingo/MissingConfigError.html">Lingo::MissingConfigError</a>
@@ -306,7 +312,7 @@
 
           
           <div class="method-source-code" id="filter-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 250</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 249</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">filter</span>(<span class="ruby-identifier">io</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-constant">PDF</span><span class="ruby-operator">::</span><span class="ruby-constant">Reader</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">io</span>, <span class="ruby-identifier">new</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -339,7 +345,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 254</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 253</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-ivar">@block</span> = <span class="ruby-identifier">block</span>
 <span class="ruby-keyword">end</span></pre>
@@ -434,7 +440,7 @@
 
           
           <div class="method-source-code" id="show_text-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 258</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 257</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show_text</span>(<span class="ruby-identifier">string</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">params</span>)
   <span class="ruby-ivar">@block</span>[<span class="ruby-identifier">string</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;|&#39;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -471,7 +477,7 @@
 
           
           <div class="method-source-code" id="show_text_with_positioning-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 266</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 265</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show_text_with_positioning</span>(<span class="ruby-identifier">params</span>, <span class="ruby-operator">*</span>)
   <span class="ruby-identifier">params</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">param</span><span class="ruby-operator">|</span> <span class="ruby-identifier">show_text</span>(<span class="ruby-identifier">param</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">param</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>) }
 <span class="ruby-keyword">end</span></pre>

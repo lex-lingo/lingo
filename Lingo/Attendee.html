@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Lingo::Attendee - lingo Application documentation (v1.8.3)</title>
+<title>class Lingo::Attendee - lingo Application documentation (v1.8.4)</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -54,6 +54,7 @@
     <li>lib/lingo/attendee/debugger.rb
     <li>lib/lingo/attendee/decomposer.rb
     <li>lib/lingo/attendee/dehyphenizer.rb
+    <li>lib/lingo/attendee/disambiguator.rb
     <li>lib/lingo/attendee/formatter.rb
     <li>lib/lingo/attendee/multi_worder.rb
     <li>lib/lingo/attendee/noneword_filter.rb
@@ -127,6 +128,8 @@
     
     <li ><a href="#method-i-listen">#listen</a>
     
+    <li ><a href="#method-i-require_lib">#require_lib</a>
+    
     <li ><a href="#method-i-set_dic">#set_dic</a>
     
     <li ><a href="#method-i-set_gra">#set_gra</a>
@@ -179,6 +182,10 @@
     <li><a href="../Lingo/Attendee/Decomposer.html">Lingo::Attendee::Decomposer</a>
   
     <li><a href="../Lingo/Attendee/Dehyphenizer.html">Lingo::Attendee::Dehyphenizer</a>
+  
+    <li><a href="../Lingo/Attendee/Disambiguator.html">Lingo::Attendee::Disambiguator</a>
+  
+    <li><a href="../Lingo/Attendee/Disambiguator/STATS.html">Lingo::Attendee::Disambiguator::STATS</a>
   
     <li><a href="../Lingo/Attendee/Formatter.html">Lingo::Attendee::Formatter</a>
   
@@ -279,6 +286,8 @@
     <li><a href="../Lingo/Language/Word.html">Lingo::Language::Word</a>
   
     <li><a href="../Lingo/Language/WordForm.html">Lingo::Language::WordForm</a>
+  
+    <li><a href="../Lingo/LibraryLoadError.html">Lingo::LibraryLoadError</a>
   
     <li><a href="../Lingo/LingoError.html">Lingo::LingoError</a>
   
@@ -984,6 +993,41 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
 
         
       </div><!-- has_key-3F-method -->
+
+    
+      <div id="method-i-require_lib" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">require_lib</span><span
+            class="method-args">(lib)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="require_lib-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 175</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">require_lib</span>(<span class="ruby-identifier">lib</span>)
+  <span class="ruby-identifier">require</span> <span class="ruby-identifier">lib</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">LoadError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">err</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">LibraryLoadError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>, <span class="ruby-identifier">lib</span>, <span class="ruby-identifier">err</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- require_lib-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- require_lib-method -->
 
     
       <div id="method-i-set_dic" class="method-detail ">

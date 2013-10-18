@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Lingo::Language::Word - lingo Application documentation (v1.8.3)</title>
+<title>class Lingo::Language::Word - lingo Application documentation (v1.8.4)</title>
 
 <link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
 
@@ -99,6 +99,8 @@
     
     <li ><a href="#method-i-min_part_size">#min_part_size</a>
     
+    <li ><a href="#method-i-multiword_size">#multiword_size</a>
+    
     <li ><a href="#method-i-norm">#norm</a>
     
     <li ><a href="#method-i-parts">#parts</a>
@@ -145,6 +147,10 @@
     <li><a href="../../Lingo/Attendee/Decomposer.html">Lingo::Attendee::Decomposer</a>
   
     <li><a href="../../Lingo/Attendee/Dehyphenizer.html">Lingo::Attendee::Dehyphenizer</a>
+  
+    <li><a href="../../Lingo/Attendee/Disambiguator.html">Lingo::Attendee::Disambiguator</a>
+  
+    <li><a href="../../Lingo/Attendee/Disambiguator/STATS.html">Lingo::Attendee::Disambiguator::STATS</a>
   
     <li><a href="../../Lingo/Attendee/Formatter.html">Lingo::Attendee::Formatter</a>
   
@@ -245,6 +251,8 @@
     <li><a href="../../Lingo/Language/Word.html">Lingo::Language::Word</a>
   
     <li><a href="../../Lingo/Language/WordForm.html">Lingo::Language::WordForm</a>
+  
+    <li><a href="../../Lingo/LibraryLoadError.html">Lingo::LibraryLoadError</a>
   
     <li><a href="../../Lingo/LingoError.html">Lingo::LingoError</a>
   
@@ -451,7 +459,7 @@ extern durch die Klasse <a href="Dictionary.html">Dictionary</a></strong></p>
 
           
           <div class="method-source-code" id="3C-3C-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 124</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 128</span>
 <span class="ruby-keyword">def</span> <span class="ruby-operator">&lt;&lt;</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">other</span>)
   <span class="ruby-identifier">other</span>.<span class="ruby-identifier">flatten!</span>
   <span class="ruby-identifier">lexicals</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">other</span>)
@@ -486,8 +494,9 @@ extern durch die Klasse <a href="Dictionary.html">Dictionary</a></strong></p>
 
           
           <div class="method-source-code" id="3C-3D-3E-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 130</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 134</span>
 <span class="ruby-keyword">def</span> <span class="ruby-operator">&lt;=&gt;</span>(<span class="ruby-identifier">other</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-value">1</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>)
   <span class="ruby-identifier">other</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span> <span class="ruby-value">1</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">lexicals</span>) <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">other</span>.<span class="ruby-identifier">lexicals</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- 3C-3D-3E-source -->
@@ -523,7 +532,7 @@ extern durch die Klasse <a href="Dictionary.html">Dictionary</a></strong></p>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">add_lexicals</span>(<span class="ruby-identifier">lex</span>)
   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">empty?</span>
     <span class="ruby-ivar">@lexicals</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">lex</span>).<span class="ruby-identifier">uniq!</span>
-    <span class="ruby-ivar">@lexicals</span>.<span class="ruby-identifier">sort!</span>
+    <span class="ruby-constant">Lingo</span>.<span class="ruby-identifier">sort!</span>(<span class="ruby-ivar">@lexicals</span>)
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- add_lexicals-source -->
@@ -735,7 +744,7 @@ extern durch die Klasse <a href="Dictionary.html">Dictionary</a></strong></p>
             <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 73</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">lexicals=</span>(<span class="ruby-identifier">lex</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>)
-    <span class="ruby-ivar">@lexicals</span> = <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">uniq</span>
+    <span class="ruby-ivar">@lexicals</span> = <span class="ruby-constant">Lingo</span>.<span class="ruby-identifier">sort</span>(<span class="ruby-identifier">lex</span>).<span class="ruby-identifier">uniq</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-node">&quot;wrong argument type #{lex.class} (expected Array)&quot;</span>
   <span class="ruby-keyword">end</span>
@@ -781,6 +790,39 @@ extern durch die Klasse <a href="Dictionary.html">Dictionary</a></strong></p>
 
         
       </div><!-- min_part_size-method -->
+
+    
+      <div id="method-i-multiword_size" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">multiword_size</span><span
+            class="method-args">(wc_re = LA_MULTIWORD)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="multiword_size-source">
+            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 124</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">multiword_size</span>(<span class="ruby-identifier">wc_re</span> = <span class="ruby-constant">LA_MULTIWORD</span>)
+  <span class="ruby-identifier">lex</span> = <span class="ruby-identifier">get_class</span>(<span class="ruby-identifier">wc_re</span>).<span class="ruby-identifier">first</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">form</span>.<span class="ruby-identifier">count</span>(<span class="ruby-string">&#39; &#39;</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- multiword_size-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- multiword_size-method -->
 
     
       <div id="method-i-norm" class="method-detail ">
@@ -868,7 +910,7 @@ extern durch die Klasse <a href="Dictionary.html">Dictionary</a></strong></p>
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 134</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 139</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-identifier">s</span> =  <span class="ruby-node">&quot;&lt;#{form}&quot;</span>
   <span class="ruby-identifier">s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;|#{attr}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">identified?</span>

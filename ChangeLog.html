@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>ChangeLog - lingo Application documentation (v1.8.3)</title>
+<title>ChangeLog - lingo Application documentation (v1.8.4)</title>
 
 <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
 
@@ -49,7 +49,7 @@
     <h3 class="section-header">Table of Contents</h3>
     <ul>
       <li><a href="#label-Revision+history+for+Lingo">Revision history for Lingo</a>
-      <li><a href="#label-1.8.4+%5Bunreleased%5D">1.8.4 [unreleased]</a>
+      <li><a href="#label-1.8.4+%5B2013-10-18%5D">1.8.4 [2013-10-18]</a>
       <li><a href="#label-1.8.3+%5B2012-09-20%5D">1.8.3 [2012-09-20]</a>
       <li><a href="#label-1.8.2+%5B2012-04-19%5D">1.8.2 [2012-04-19]</a>
       <li><a href="#label-1.8.1+%5B2012-02-19%5D">1.8.1 [2012-02-19]</a>
@@ -137,6 +137,10 @@
     <li><a href="./Lingo/Attendee/Decomposer.html">Lingo::Attendee::Decomposer</a>
   
     <li><a href="./Lingo/Attendee/Dehyphenizer.html">Lingo::Attendee::Dehyphenizer</a>
+  
+    <li><a href="./Lingo/Attendee/Disambiguator.html">Lingo::Attendee::Disambiguator</a>
+  
+    <li><a href="./Lingo/Attendee/Disambiguator/STATS.html">Lingo::Attendee::Disambiguator::STATS</a>
   
     <li><a href="./Lingo/Attendee/Formatter.html">Lingo::Attendee::Formatter</a>
   
@@ -238,6 +242,8 @@
   
     <li><a href="./Lingo/Language/WordForm.html">Lingo::Language::WordForm</a>
   
+    <li><a href="./Lingo/LibraryLoadError.html">Lingo::LibraryLoadError</a>
+  
     <li><a href="./Lingo/LingoError.html">Lingo::LingoError</a>
   
     <li><a href="./Lingo/MissingConfigError.html">Lingo::MissingConfigError</a>
@@ -276,16 +282,40 @@
   
 <h1 id="label-Revision+history+for+Lingo">Revision history for <a href="Lingo.html">Lingo</a><span><a href="#label-Revision+history+for+Lingo">&para;</a> <a href="#documentation">&uarr;</a></span></h1>
 
-<h2 id="label-1.8.4+%5Bunreleased%5D">1.8.4 [unreleased]<span><a href="#label-1.8.4+%5Bunreleased%5D">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+<h2 id="label-1.8.4+%5B2013-10-18%5D">1.8.4 [2013-10-18]<span><a href="#label-1.8.4+%5B2013-10-18%5D">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 <ul><li>
+<p>Attendee::Sequencer accepts regular expression patterns.</p>
+</li><li>
+<p>Attendee::Sequencer substitutes <code>0</code> in the format string for the
+matched    pattern.</p>
+</li><li>
+<p>Attendee::NonewordFilter learned <code>dict</code> option to print
+nonewords in    dictionary format.</p>
+</li><li>
+<p>Added progress reporting to Attendee::TextReader for STDIN.</p>
+</li><li>
 <p><code>lingoctl demo</code> reports successful initialization.</p>
+</li><li>
+<p>Russian localization for <a href="Lingo.html">Lingo</a> Web. (Yulia
+Dorokhova, Thomas Müller)</p>
 </li><li>
 <p><a href="Lingo.html">Lingo</a> Web learned parameter <code>hl</code> to set
 UI language.</p>
 </li><li>
 <p><a href="Lingo.html">Lingo</a> Web displays the configuration in use.</p>
 </li><li>
+<p><a href="Lingo.html">Lingo</a> Srv accepts array of query strings in
+addition to single query string.</p>
+</li><li>
+<p>Meeting config takes precedence over language config.</p>
+</li><li>
+<p>When dictionary entries are rejected during conversion, the location of the
+reject file will be shown.</p>
+</li><li>
 <p>LIR record number defaults to match string in absence of capture group.</p>
+</li><li>
+<p>Optionally prevent <a href="Lingo.html">Lingo</a> from sorting any results
+by setting the    <code>LINGO_NO_SORT</code> environment variable.</p>
 </li></ul>
 
 <h2 id="label-1.8.3+%5B2012-09-20%5D">1.8.3 [2012-09-20]<span><a href="#label-1.8.3+%5B2012-09-20%5D">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
@@ -315,7 +345,7 @@ the order sequences are inserted into the stream.</p>
 </li><li>
 <p>Eliminated performance penalty caused by Attendee::Abbreviator.</p>
 </li><li>
-<p>Added Russian language support (Yulia Dorokhova, Thomas Müller).</p>
+<p>Added Russian language support. (Yulia Dorokhova, Thomas Müller)</p>
 </li><li>
 <p>Added <code>fields</code> option to Attendee::TextReader to cut off field
 labels;    defaults to <code>true</code> in record (LIR) mode.</p>

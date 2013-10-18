@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Lingo::Attendee::VectorFilter - lingo Application documentation (v1.8.3)</title>
+<title>class Lingo::Attendee::VectorFilter - lingo Application documentation (v1.8.4)</title>
 
 <link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
 
@@ -133,6 +133,10 @@
   
     <li><a href="../../Lingo/Attendee/Dehyphenizer.html">Lingo::Attendee::Dehyphenizer</a>
   
+    <li><a href="../../Lingo/Attendee/Disambiguator.html">Lingo::Attendee::Disambiguator</a>
+  
+    <li><a href="../../Lingo/Attendee/Disambiguator/STATS.html">Lingo::Attendee::Disambiguator::STATS</a>
+  
     <li><a href="../../Lingo/Attendee/Formatter.html">Lingo::Attendee::Formatter</a>
   
     <li><a href="../../Lingo/Attendee/MultiWorder.html">Lingo::Attendee::MultiWorder</a>
@@ -232,6 +236,8 @@
     <li><a href="../../Lingo/Language/Word.html">Lingo::Language::Word</a>
   
     <li><a href="../../Lingo/Language/WordForm.html">Lingo::Language::WordForm</a>
+  
+    <li><a href="../../Lingo/LibraryLoadError.html">Lingo::LibraryLoadError</a>
   
     <li><a href="../../Lingo/LingoError.html">Lingo::LingoError</a>
   
@@ -465,12 +471,12 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
     <span class="ruby-ivar">@src</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;src&#39;</span>, <span class="ruby-keyword">false</span>)
     <span class="ruby-ivar">@src</span> = <span class="ruby-constant">DEFAULT_SRC_SEP</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@src</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span>
 
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">sort</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;sort&#39;</span>, <span class="ruby-string">&#39;normal&#39;</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">sort</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;sort&#39;</span>, <span class="ruby-constant">ENV</span>[<span class="ruby-string">&#39;LINGO_NO_SORT&#39;</span>] <span class="ruby-operator">?</span> <span class="ruby-keyword">false</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;normal&#39;</span>)
       <span class="ruby-ivar">@sort_format</span>, <span class="ruby-ivar">@sort_method</span> = <span class="ruby-identifier">sort</span>.<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;_&#39;</span>, <span class="ruby-value">2</span>)
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-ivar">@vectors</span>, <span class="ruby-ivar">@word_count</span> = [], <span class="ruby-value">0.0</span>
+  <span class="ruby-ivar">@vectors</span>, <span class="ruby-ivar">@word_count</span> = [], <span class="ruby-value">0</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- init-source -->
           
@@ -562,12 +568,12 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
     <span class="ruby-identifier">vec</span> = <span class="ruby-identifier">cnt</span>.<span class="ruby-identifier">sort_by</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span>, <span class="ruby-identifier">c</span><span class="ruby-operator">|</span> [<span class="ruby-operator">-</span><span class="ruby-identifier">c</span>, <span class="ruby-identifier">v</span>] }
 
     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@sort_method</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;rel&#39;</span>
-      <span class="ruby-identifier">vec</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">/=</span> <span class="ruby-ivar">@word_count</span> }
-      <span class="ruby-identifier">fmt</span> = <span class="ruby-string">&#39;%6.5f&#39;</span>
+      <span class="ruby-identifier">fmt</span>, <span class="ruby-identifier">wc</span> = <span class="ruby-string">&#39;%6.5f&#39;</span>, <span class="ruby-ivar">@word_count</span>.<span class="ruby-identifier">to_f</span>
+      <span class="ruby-identifier">vec</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">/=</span> <span class="ruby-identifier">wc</span> }
     <span class="ruby-keyword">end</span>
 
     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@sort_format</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;sto&#39;</span>
-      <span class="ruby-identifier">fmt</span>, <span class="ruby-ivar">@word_count</span> = <span class="ruby-node">&quot;%s {#{fmt}}&quot;</span>, <span class="ruby-value">0.0</span>
+      <span class="ruby-identifier">fmt</span>, <span class="ruby-ivar">@word_count</span> = <span class="ruby-node">&quot;%s {#{fmt}}&quot;</span>, <span class="ruby-value">0</span>
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">fmt</span>.<span class="ruby-identifier">insert</span>(<span class="ruby-value">1</span>, <span class="ruby-string">&#39;2$&#39;</span>) <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39; %1$s&#39;</span>
     <span class="ruby-keyword">end</span>

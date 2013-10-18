@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Lingo::Attendee::MultiWorder - lingo Application documentation (v1.8.3)</title>
+<title>class Lingo::Attendee::MultiWorder - lingo Application documentation (v1.8.4)</title>
 
 <link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
 
@@ -135,6 +135,10 @@
   
     <li><a href="../../Lingo/Attendee/Dehyphenizer.html">Lingo::Attendee::Dehyphenizer</a>
   
+    <li><a href="../../Lingo/Attendee/Disambiguator.html">Lingo::Attendee::Disambiguator</a>
+  
+    <li><a href="../../Lingo/Attendee/Disambiguator/STATS.html">Lingo::Attendee::Disambiguator::STATS</a>
+  
     <li><a href="../../Lingo/Attendee/Formatter.html">Lingo::Attendee::Formatter</a>
   
     <li><a href="../../Lingo/Attendee/MultiWorder.html">Lingo::Attendee::MultiWorder</a>
@@ -234,6 +238,8 @@
     <li><a href="../../Lingo/Language/Word.html">Lingo::Language::Word</a>
   
     <li><a href="../../Lingo/Language/WordForm.html">Lingo::Language::WordForm</a>
+  
+    <li><a href="../../Lingo/LibraryLoadError.html">Lingo::LibraryLoadError</a>
   
     <li><a href="../../Lingo/LingoError.html">Lingo::LingoError</a>
   
@@ -562,7 +568,7 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
   <span class="ruby-identifier">seq</span> = []
 
   <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">obj</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">next</span> [<span class="ruby-identifier">obj</span>] <span class="ruby-keyword">unless</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">WordForm</span>)
+    <span class="ruby-keyword">next</span> <span class="ruby-identifier">seq</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">obj</span>] <span class="ruby-keyword">unless</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">WordForm</span>)
     <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> (<span class="ruby-identifier">form</span> = <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">form</span>) <span class="ruby-operator">==</span> <span class="ruby-constant">CHAR_PUNCT</span>
 
     <span class="ruby-identifier">w</span> = <span class="ruby-identifier">find_word</span>(<span class="ruby-identifier">form</span>, <span class="ruby-ivar">@lex_dic</span>, <span class="ruby-ivar">@lex_gra</span>)

@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Lingo::Database::Source - lingo Application documentation (v1.8.3)</title>
+<title>class Lingo::Database::Source - lingo Application documentation (v1.8.4)</title>
 
 <link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
 
@@ -84,6 +84,8 @@
     
     <li ><a href="#method-i-each">#each</a>
     
+    <li ><a href="#method-i-rejected">#rejected</a>
+    
     <li ><a href="#method-i-set">#set</a>
     
     <li ><a href="#method-i-size">#size</a>
@@ -128,6 +130,10 @@
     <li><a href="../../Lingo/Attendee/Decomposer.html">Lingo::Attendee::Decomposer</a>
   
     <li><a href="../../Lingo/Attendee/Dehyphenizer.html">Lingo::Attendee::Dehyphenizer</a>
+  
+    <li><a href="../../Lingo/Attendee/Disambiguator.html">Lingo::Attendee::Disambiguator</a>
+  
+    <li><a href="../../Lingo/Attendee/Disambiguator/STATS.html">Lingo::Attendee::Disambiguator::STATS</a>
   
     <li><a href="../../Lingo/Attendee/Formatter.html">Lingo::Attendee::Formatter</a>
   
@@ -228,6 +234,8 @@
     <li><a href="../../Lingo/Language/Word.html">Lingo::Language::Word</a>
   
     <li><a href="../../Lingo/Language/WordForm.html">Lingo::Language::WordForm</a>
+  
+    <li><a href="../../Lingo/LibraryLoadError.html">Lingo::LibraryLoadError</a>
   
     <li><a href="../../Lingo/LingoError.html">Lingo::LingoError</a>
   
@@ -395,7 +403,7 @@ gespeichert, die an der Dateiendung <code>.rev</code> zu erkennen ist.</p>
   <span class="ruby-ivar">@wrd</span> = <span class="ruby-node">&quot;(?:#{Language::Char::ANY})+&quot;</span>
   <span class="ruby-ivar">@pat</span> = <span class="ruby-node">/^#{@wrd}$/</span>
 
-  <span class="ruby-ivar">@pos</span> = <span class="ruby-value">0</span>
+  <span class="ruby-ivar">@pos</span> = <span class="ruby-ivar">@rej_cnt</span> = <span class="ruby-value">0</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- new-source -->
           
@@ -447,6 +455,7 @@ gespeichert, die an der Dateiendung <code>.rev</code> zu erkennen ist.</p>
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">length</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">4096</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-ivar">@pat</span>
       <span class="ruby-keyword">yield</span> <span class="ruby-identifier">convert_line</span>(<span class="ruby-identifier">line</span>, <span class="ruby-node">$1</span>, <span class="ruby-node">$2</span>)
     <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@rej_cnt</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
       <span class="ruby-identifier">reject_file</span>.<span class="ruby-identifier">puts</span>(<span class="ruby-identifier">line</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">reject_file</span>
     <span class="ruby-keyword">end</span>
   }
@@ -468,6 +477,39 @@ gespeichert, die an der Dateiendung <code>.rev</code> zu erkennen ist.</p>
       </div><!-- each-method -->
 
     
+      <div id="method-i-rejected" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">rejected</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="rejected-source">
+            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 114</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">rejected</span>
+  [<span class="ruby-ivar">@rej_cnt</span>, <span class="ruby-ivar">@rej</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- rejected-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- rejected-method -->
+
+    
       <div id="method-i-set" class="method-detail ">
         
         <div class="method-heading">
@@ -487,7 +529,7 @@ gespeichert, die an der Dateiendung <code>.rev</code> zu erkennen ist.</p>
 
           
           <div class="method-source-code" id="set-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 109</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 110</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">set</span>(<span class="ruby-identifier">db</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
   <span class="ruby-identifier">db</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">val</span>
 <span class="ruby-keyword">end</span></pre>

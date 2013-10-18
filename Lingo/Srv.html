@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Lingo::Srv - lingo Application documentation (v1.8.3)</title>
+<title>class Lingo::Srv - lingo Application documentation (v1.8.4)</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -75,6 +75,8 @@
     
     <li ><a href="#method-i-doit">#doit</a>
     
+    <li ><a href="#method-i-talk">#talk</a>
+    
   </ul>
 </nav>
 
@@ -115,6 +117,10 @@
     <li><a href="../Lingo/Attendee/Decomposer.html">Lingo::Attendee::Decomposer</a>
   
     <li><a href="../Lingo/Attendee/Dehyphenizer.html">Lingo::Attendee::Dehyphenizer</a>
+  
+    <li><a href="../Lingo/Attendee/Disambiguator.html">Lingo::Attendee::Disambiguator</a>
+  
+    <li><a href="../Lingo/Attendee/Disambiguator/STATS.html">Lingo::Attendee::Disambiguator::STATS</a>
   
     <li><a href="../Lingo/Attendee/Formatter.html">Lingo::Attendee::Formatter</a>
   
@@ -216,6 +222,8 @@
   
     <li><a href="../Lingo/Language/WordForm.html">Lingo::Language::WordForm</a>
   
+    <li><a href="../Lingo/LibraryLoadError.html">Lingo::LibraryLoadError</a>
+  
     <li><a href="../Lingo/LingoError.html">Lingo::LingoError</a>
   
     <li><a href="../Lingo/MissingConfigError.html">Lingo::MissingConfigError</a>
@@ -314,14 +322,10 @@
           <div class="method-source-code" id="doit-source">
             <pre><span class="ruby-comment"># File lib/lingo/srv.rb, line 44</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">doit</span>
-  <span class="ruby-identifier">q</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:q</span>]
-  <span class="ruby-identifier">r</span> = <span class="ruby-constant">LINGO</span>.<span class="ruby-identifier">talk</span>(<span class="ruby-identifier">q</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">q</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">q</span>.<span class="ruby-identifier">empty?</span>
-
-  <span class="ruby-identifier">r</span> = <span class="ruby-identifier">r</span>.<span class="ruby-identifier">inject</span>(<span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span>, <span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>[<span class="ruby-identifier">k</span>] = [] }) { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span>, <span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span> = <span class="ruby-identifier">s</span>.<span class="ruby-identifier">split</span>(<span class="ruby-constant">SRC_SEP</span>, <span class="ruby-value">2</span>); <span class="ruby-identifier">h</span>[<span class="ruby-identifier">b</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">a</span>; <span class="ruby-identifier">h</span>
-  } <span class="ruby-keyword">if</span> <span class="ruby-identifier">r</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">SRC_SEP</span>
-
-  <span class="ruby-identifier">to_json</span>(<span class="ruby-identifier">q</span>, <span class="ruby-identifier">r</span>)
+  <span class="ruby-identifier">to_json</span>(<span class="ruby-identifier">q</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:q</span>], <span class="ruby-keyword">case</span> <span class="ruby-identifier">q</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-constant">String</span> <span class="ruby-keyword">then</span> <span class="ruby-identifier">talk</span>(<span class="ruby-identifier">q</span>)
+    <span class="ruby-keyword">when</span> <span class="ruby-constant">Array</span>  <span class="ruby-keyword">then</span> <span class="ruby-identifier">q</span>.<span class="ruby-identifier">inject</span>({}) { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span>, <span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-identifier">talk</span>(<span class="ruby-identifier">k</span>); <span class="ruby-identifier">h</span> }
+  <span class="ruby-keyword">end</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- doit-source -->
           
@@ -331,6 +335,44 @@
 
         
       </div><!-- doit-method -->
+
+    
+      <div id="method-i-talk" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">talk</span><span
+            class="method-args">(q)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="talk-source">
+            <pre><span class="ruby-comment"># File lib/lingo/srv.rb, line 51</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">talk</span>(<span class="ruby-identifier">q</span>)
+  <span class="ruby-identifier">r</span> = <span class="ruby-constant">LINGO</span>.<span class="ruby-identifier">talk</span>(<span class="ruby-identifier">q</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">q</span>.<span class="ruby-identifier">empty?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">r</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">r</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">SRC_SEP</span>
+
+  <span class="ruby-identifier">r</span>.<span class="ruby-identifier">inject</span>(<span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span>, <span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>[<span class="ruby-identifier">k</span>] = [] }) { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span>, <span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span> = <span class="ruby-identifier">s</span>.<span class="ruby-identifier">split</span>(<span class="ruby-constant">SRC_SEP</span>, <span class="ruby-value">2</span>); <span class="ruby-identifier">h</span>[<span class="ruby-identifier">b</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">a</span>; <span class="ruby-identifier">h</span>
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- talk-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- talk-method -->
 
     
     </section><!-- public-instance-method-details -->
