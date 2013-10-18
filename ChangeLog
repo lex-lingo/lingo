@@ -2,7 +2,7 @@
 
 = Revision history for Lingo
 
-== 1.8.4 [unreleased]
+== 1.8.4 [2013-10-18]
 
 * Attendee::Sequencer accepts regular expression patterns.
 * Attendee::Sequencer substitutes +0+ in the format string for the matched

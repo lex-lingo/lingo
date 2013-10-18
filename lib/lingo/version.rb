@@ -4,7 +4,7 @@ class Lingo
 
     MAJOR = 1
     MINOR = 8
-    TINY  = 3
+    TINY  = 4
 
     class << self
 
