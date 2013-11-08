@@ -1,4 +1,5 @@
-## englisch Dic Stand: 05.08.2007 ohne #e
+# englisch Dic
+# Stand: 05.08.2007 ohne #e
 
 the=the #w
 0th=0th #w

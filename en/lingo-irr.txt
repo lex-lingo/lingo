@@ -1,7 +1,6 @@
+# Wörterbuch der unregelmäßigen Verben
 #
-#  Wörterbuch der unregelmäßigen Verben
-#  
-#  Stand: 26.05.08 / Thomas Müller
+# Stand: 26.05.08 / Thomas Müller
 
 ate=eat #v
 awoke=awake #v

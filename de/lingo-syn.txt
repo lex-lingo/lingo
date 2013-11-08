@@ -1,11 +1,9 @@
+# Synonym-Wörterbuch lingo-syn.txt
+# enthält als Basis für eigene Erweiterungen
+# exemplarisch Synonyme, die mit "a" beginnen
 #
-#    Synonym-Wörterbuch lingo-syn.txt
-#    enthält als Basis für eigene Erweiterungen
-#    exemplarisch Synonyme, die mit "a" beginnen
-#
-#    Stand: 16.03.05 / Klaus Lepsky
-#
-#
+# Stand: 16.03.05 / Klaus Lepsky
+
 aachener kongress=aachen / kongress <1818>
 aal=flussaal
 aalartige fische=aalfische

@@ -2,6 +2,10 @@
 
 = Revision history for Lingo
 
+== 1.8.5 [unreleased]
+
+* Dictionary cleanup.
+
 == 1.8.4 [2013-10-18]
 
 * Attendee::Sequencer accepts regular expression patterns.

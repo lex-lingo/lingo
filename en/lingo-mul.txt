@@ -35,7 +35,7 @@ air force
 air gun
 air hammer
 air lane
-air letter 
+air letter
 air lock
 aircraft carrier
 alkali metal
@@ -140,7 +140,7 @@ audio frequency
 aurora australis
 aurora borealis
 automatic data processing
-automatic flight control 
+automatic flight control
 automatic frequency control
 automatic pilot
 automatic pistol
@@ -198,7 +198,7 @@ band spectrum
 bank acceptance
 bank account
 bank annuities
-bank balance 
+bank balance
 bank bill
 bank book
 bank card
@@ -258,7 +258,7 @@ battle cruiser
 battle fatigue
 battle of britain
 battle station
-battle wagon 
+battle wagon
 bay leaf
 bay lynx
 bay rum

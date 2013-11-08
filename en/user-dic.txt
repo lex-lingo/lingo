@@ -1,5 +1,2 @@
-#   
-#   Musterwörterbuch user-dic.txt als Vorlage
-#   für eigene Benutzerwörterbücher
-#
-#
+# Musterwörterbuch user-dic.txt als Vorlage
+# für eigene Benutzerwörterbücher

@@ -1,10 +1,8 @@
+# Abkürzungswörterbuch lingo-abk.txt
+# enthält Abkürzungen und ihre Auflösungen
 #
-#    Abkürzungswörterbuch lingo-abk.txt
-#    enthält Abkürzungen und ihre Auflösungen
-#     
-#    Stand: 16.03.06 / Jan-Helge Jacobs
-#
-#
+# Stand: 16.03.06 / Jan-Helge Jacobs
+
 abb=abbildung #s
 abk=abkürzung #s
 altdt=altdeutsch #a

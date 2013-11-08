@@ -1,11 +1,9 @@
+# Mehrwort-Wörterbuch lingo-mul.txt
+# enthält als Basis für eigene Erweiterungen
+# exemplarisch Mehrwortbegriffe, die mit "a" beginnen
 #
-#    Mehrwort-Wörterbuch lingo-mul.txt
-#    enthält als Basis für eigene Erweiterungen
-#    exemplarisch Mehrwortbegriffe, die mit "a" beginnen
-#
-#    Stand: 18.10.05 / Klaus Lepsky
-#
-#
+# Stand: 18.10.05 / Klaus Lepsky
+
 albert einstein
 albert ainshtain
 einstein, albert

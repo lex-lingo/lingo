@@ -1,7 +1,9 @@
 # Mehrwortgruppenwörterbuch lingo-mul.txt
 # enthält russische Mehrwortgruppen in der Grundfrom
+#
 # Quelle: WordNet WordNet 3.0 Copyright 2006 by Princeton University
-# URL: http://wordnet.ru/LICENSE.txt 
+# URL: http://wordnet.ru/LICENSE.txt
+#
 # Stand: 07.09.2012
 
 абордажная сабля
@@ -1303,7 +1305,7 @@
 злой дух
 злой поступок
 злоупотребление властью
-знак  
+знак
 знак вставки
 знак долготы над гласным
 знак или буква, заменяющие слово
