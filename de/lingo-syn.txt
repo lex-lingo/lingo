@@ -1,8 +1,8 @@
 #
 #    Synonym-Wörterbuch lingo-syn.txt
-#    enthält als Basis für eigene Erweiterungen 
+#    enthält als Basis für eigene Erweiterungen
 #    exemplarisch Synonyme, die mit "a" beginnen
-# 
+#
 #    Stand: 16.03.05 / Klaus Lepsky
 #
 #
@@ -5404,7 +5404,6 @@ alter=alter mensch
 alter=betagter
 alter <100 jahre>=hundertjähriger
 alter druck=altes buch
-alter ego=alter ego
 alter ego=alter ego
 alter herr=philister <studentenverbindung>
 alter mensch=alter
