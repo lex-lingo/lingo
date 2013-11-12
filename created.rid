@@ -1,8 +1,8 @@
-Fri, 18 Oct 2013 12:17:05 +0200
-README	Fri, 18 Oct 2013 12:11:59 +0200
+Tue, 12 Nov 2013 10:01:55 +0100
+README	Tue, 12 Nov 2013 09:00:25 +0100
 COPYING	Wed, 06 Mar 2013 13:57:17 +0100
-ChangeLog	Fri, 18 Oct 2013 12:13:14 +0200
-lib/lingo.rb	Thu, 10 Oct 2013 14:52:51 +0200
+ChangeLog	Fri, 08 Nov 2013 12:00:59 +0100
+lib/lingo.rb	Tue, 12 Nov 2013 10:01:50 +0100
 lib/lingo/app.rb	Fri, 15 Mar 2013 13:09:52 +0100
 lib/lingo/cli.rb	Mon, 25 Mar 2013 17:17:28 +0100
 lib/lingo/ctl.rb	Wed, 06 Mar 2013 13:57:17 +0100
@@ -13,12 +13,12 @@ lib/lingo/debug.rb	Wed, 06 Mar 2013 13:57:17 +0100
 lib/lingo/error.rb	Tue, 25 Jun 2013 17:09:48 +0200
 lib/lingo/config.rb	Tue, 02 Jul 2013 14:19:06 +0200
 lib/lingo/version.rb	Fri, 18 Oct 2013 12:16:24 +0200
-lib/lingo/attendee.rb	Fri, 18 Oct 2013 12:16:10 +0200
+lib/lingo/attendee.rb	Tue, 12 Nov 2013 10:01:50 +0100
 lib/lingo/database.rb	Mon, 01 Jul 2013 13:55:12 +0200
 lib/lingo/language.rb	Wed, 06 Mar 2013 13:57:17 +0100
 lib/lingo/agenda_item.rb	Wed, 06 Mar 2013 13:57:17 +0100
 lib/lingo/language/char.rb	Mon, 24 Jun 2013 14:27:18 +0200
-lib/lingo/language/word.rb	Fri, 18 Oct 2013 12:16:10 +0200
+lib/lingo/language/word.rb	Tue, 22 Oct 2013 15:40:33 +0200
 lib/lingo/show_progress.rb	Mon, 01 Jul 2013 14:30:25 +0200
 lib/lingo/language/token.rb	Fri, 24 May 2013 12:55:46 +0200
 lib/lingo/database/source.rb	Mon, 01 Jul 2013 14:36:57 +0200
@@ -46,7 +46,6 @@ lib/lingo/attendee/dehyphenizer.rb	Wed, 06 Mar 2013 13:57:17 +0100
 lib/lingo/attendee/multi_worder.rb	Fri, 28 Jun 2013 12:38:06 +0200
 lib/lingo/database/libcdb_store.rb	Wed, 06 Mar 2013 13:57:17 +0100
 lib/lingo/language/lexical_hash.rb	Wed, 06 Mar 2013 13:57:17 +0100
-lib/lingo/attendee/disambiguator.rb	Fri, 18 Oct 2013 12:16:10 +0200
 lib/lingo/attendee/object_filter.rb	Tue, 25 Jun 2013 12:14:59 +0200
 lib/lingo/attendee/vector_filter.rb	Wed, 26 Jun 2013 12:26:09 +0200
 lib/lingo/attendee/word_searcher.rb	Tue, 25 Jun 2013 12:14:59 +0200

@@ -148,10 +148,6 @@
   
     <li><a href="../../Lingo/Attendee/Dehyphenizer.html">Lingo::Attendee::Dehyphenizer</a>
   
-    <li><a href="../../Lingo/Attendee/Disambiguator.html">Lingo::Attendee::Disambiguator</a>
-  
-    <li><a href="../../Lingo/Attendee/Disambiguator/STATS.html">Lingo::Attendee::Disambiguator::STATS</a>
-  
     <li><a href="../../Lingo/Attendee/Formatter.html">Lingo::Attendee::Formatter</a>
   
     <li><a href="../../Lingo/Attendee/MultiWorder.html">Lingo::Attendee::MultiWorder</a>
@@ -496,7 +492,6 @@ extern durch die Klasse <a href="Dictionary.html">Dictionary</a></strong></p>
           <div class="method-source-code" id="3C-3D-3E-source">
             <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 134</span>
 <span class="ruby-keyword">def</span> <span class="ruby-operator">&lt;=&gt;</span>(<span class="ruby-identifier">other</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-value">1</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>)
   <span class="ruby-identifier">other</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span> <span class="ruby-value">1</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">lexicals</span>) <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">other</span>.<span class="ruby-identifier">lexicals</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- 3C-3D-3E-source -->
@@ -910,7 +905,7 @@ extern durch die Klasse <a href="Dictionary.html">Dictionary</a></strong></p>
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 139</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 138</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-identifier">s</span> =  <span class="ruby-node">&quot;&lt;#{form}&quot;</span>
   <span class="ruby-identifier">s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;|#{attr}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">identified?</span>
