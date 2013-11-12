@@ -228,10 +228,10 @@ both Ruby 1.8 and the previous line of Lingo prior to 1.8. This branch will
 receive occasional bug fixes and minor feature updates. However, the bulk of
 the development efforts will be directed towards Lingo 1.8+.
 
-To install the legacy version, download and extract the ZIP archive from
-RubyForge[http://rubyforge.org/frs/?group_id=5663]. No additional dependencies
-are required. This version of Lingo works with both Ruby 1.8 (1.8.5 or higher)
-and 1.9 (1.9.2 or higher).
+To install the legacy version, download and extract the
+{ZIP archive}[http://ixtrieve.fh-koeln.de/buch/lingo-1.7.1.zip].
+No additional dependencies are required. This version of Lingo works
+with both Ruby 1.8 (1.8.5 or higher) and 1.9 (1.9.2 or higher).
 
 The executable is named +lingo.rb+. It's located at the root of the installation
 directory and may only be run from there. See <tt>ruby lingo.rb -h</tt> for
@@ -267,18 +267,16 @@ TODO...
 
 == ISSUES AND CONTRIBUTIONS
 
-If you find bugs or want to suggest new features, please write to the
-{mailing list}[mailto:lingo-users@rubyforge.org] or report them on
-GitHub[http://github.com/lex-lingo/lingo/issues]. Include your Ruby
+If you find bugs or want to suggest new features, please report them
+on GitHub[http://github.com/lex-lingo/lingo/issues]. Include your Ruby
 version (<tt>ruby --version</tt>) and the version of Lingo you are using
 (typically <tt>lingo --version</tt>, provided it's new enough to support
 that flag).
 
-If you want to contribute to Lingo, please fork the project on
-GitHub[http://github.com/lex-lingo/lingo] and submit a
-{pull request}[http://github.com/lex-lingo/lingo/pulls] (bonus points for topic
-branches) or clone the repository[http://github.com/lex-lingo/lingo] locally
-and send your formatted patch to the {developer list}[mailto:lingo-core@rubyforge.org].
+If you want to contribute to Lingo, please fork the project
+on GitHub[http://github.com/lex-lingo/lingo] and submit a
+{pull request}[http://github.com/lex-lingo/lingo/pulls]
+(bonus points for topic branches).
 
 To make sure that Lingo's tests pass, install hen[http://blackwinter.github.com/hen]
 (typically <tt>gem install hen</tt>) and all development dependencies (either
@@ -290,14 +288,12 @@ the full test suite.
 == LINKS
 
 <b></b>
-Website::           http://lex-lingo.de
-Demo::              http://ixtrieve.fh-koeln.de/lingoweb
-Documentation::     http://lex-lingo.github.com/lingo
-Source code::       http://github.com/lex-lingo/lingo
-RubyGem::           http://rubygems.org/gems/lingo
-RubyForge project:: http://rubyforge.org/projects/lingo
-Mailing list::      http://rubyforge.org/mailman/listinfo/lingo-users
-Bug tracker::       http://github.com/lex-lingo/lingo/issues
+Website::       http://lex-lingo.de
+Demo::          http://ixtrieve.fh-koeln.de/lingoweb
+Documentation:: http://lex-lingo.github.com/lingo
+Source code::   http://github.com/lex-lingo/lingo
+RubyGem::       http://rubygems.org/gems/lingo
+Bug tracker::   http://github.com/lex-lingo/lingo/issues
 
 
 == LITERATURE
