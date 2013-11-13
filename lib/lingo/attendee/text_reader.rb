@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2012 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2013 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -26,7 +26,7 @@
 
 require 'find'
 
-%w[filemagic mime/types hpricot pdf-reader].each { |lib|
+%w[filemagic mime/types nokogiri pdf-reader].each { |lib|
   begin
     require lib
   rescue LoadError
@@ -184,10 +184,12 @@ class Lingo
       end
 
       def filter_html(io, xml = false)
-        if Object.const_defined?(:Hpricot)
-          Hpricot(io, xml: xml).inner_text
+        type = xml ? :XML : :HTML
+
+        if Object.const_defined?(:Nokogiri)
+          Nokogiri.send(type, io, nil, ENC).children.map { |x| x.inner_text }.join
         else
-          warn "#{xml ? 'X' : 'HT'}ML filter not available. Please install `hpricot'."
+          warn "#{type} filter not available. Please install `nokogiri'."
           nil
         end
       end
