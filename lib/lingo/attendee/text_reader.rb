@@ -136,8 +136,7 @@ class Lingo
         forward(STR_CMD_FILE, path)
 
         if stdin?(path)
-          io = @lingo.config.stdin.set_encoding(ENC)
-          io = StringIO.new(io.read) if @progress
+          io = string_or_io(@lingo.config.stdin.set_encoding(ENC))
         else
           io, name = File.open(path, 'rb', encoding: ENC), path
         end
@@ -187,7 +186,8 @@ class Lingo
         type = xml ? :XML : :HTML
 
         if Object.const_defined?(:Nokogiri)
-          Nokogiri.send(type, io, nil, ENC).children.map { |x| x.inner_text }.join
+          doc = Nokogiri.send(type, io, nil, ENC)
+          string_or_io(doc.children.map { |x| x.inner_text }.join)
         else
           warn "#{type} filter not available. Please install `nokogiri'."
           nil
@@ -214,6 +214,10 @@ class Lingo
 
       def stdin?(path)
         %w[STDIN -].include?(path)
+      end
+
+      def string_or_io(io)
+        @progress ? StringIO.new(io.is_a?(String) ? io : io.read) : io
       end
 
       def get_files
