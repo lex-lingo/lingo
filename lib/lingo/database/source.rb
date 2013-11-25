@@ -87,7 +87,8 @@ class Lingo
         @src.each_line($/, encoding: ENC) { |line|
           @pos += length = line.bytesize
 
-          next if line =~ /\A\s*#/ || line.strip.empty?
+          line.strip!
+          next if line.empty? || line.start_with?('#')
 
           line.chomp!
           line.replace(Unicode.downcase(line))

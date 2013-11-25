@@ -4,6 +4,8 @@
 
 == 1.8.5 [unreleased]
 
+* Database::Source removes leading and trailing whitespace from dictionary
+  lines.
 * Dictionary cleanup.
 
 == 1.8.4 [2013-10-18]
