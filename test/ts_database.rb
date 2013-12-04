@@ -120,23 +120,10 @@ Wort2=
   end
 
   def test_singleword_crypt
-    config = {
+    compare({
       'txt-format' => 'SingleWord',
       'crypt'      => true
-    }
-
-    compare(config, @singleword, {
-      'd8ac4360a5f707d518212e27dcba9dd42d980f96' => '5116',
-      '81463f9c7e0ad40e329e83d3358232851d50ed9a' => '4d16',
-      '8da4a0c30c912543be2d88da64c0192e577efa9d' => '1107',
-      '2c24b4707e77c74abfb12748317693dc1e43c215' => '5700',
-      '810ff7a76f39febcb1cf67993d4fb29819ce40a6' => '5116',
-      'a28b4ca84ac08aeef4e420445f94f632ad010a30' => '1207',
-      '1496f4febbc647f3ac74b0af11dadbd6322f6732' => '4d1d',
-      'b7501a62cb083be6730a7a179a4ab346d23efe53' => '4b10'
-    })
-
-    compare(config, @singleword) { |db| {
+    }, @singleword) { |db| hash = db.to_h; {
       'wort1'                               => '#s',
       'wort2'                               => '#s',
       'juristische personen'                => '#s',
@@ -145,7 +132,16 @@ Wort2=
       'ganz großer und blöder quatsch'      => '#s',
       'ganz großer und blöder mist'         => '#s',
       'ganz großer und blöder schwach sinn' => '#s'
-    }.each { |key, val| assert_equal([val], db[key]) } }
+    }.each { |key, val|
+      assert_nil(hash[key])
+      assert_equal([val], db[key])
+
+      assert_nil(db[digest = db.crypter.digest(key)])
+      assert_not_equal(key, digest)
+
+      assert_instance_of(String, encrypted = hash[digest])
+      assert_not_equal(val, encrypted)
+    } }
   end
 
   def test_keyvalue

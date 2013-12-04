@@ -68,7 +68,7 @@ class Lingo
 
     end
 
-    attr_reader :backend
+    attr_reader :backend, :crypter
 
     def initialize(id, lingo)
       @id, @lingo, @config, @db = id, lingo, lingo.database_config(id), nil

@@ -24,6 +24,7 @@
 ###############################################################################
 #++
 
+require 'openssl'
 require 'digest/sha1'
 
 class Lingo
@@ -34,31 +35,24 @@ class Lingo
 
     class Crypter
 
-      HEX_CHARS = '0123456789abcdef'.freeze
-
       def digest(key)
         Digest::SHA1.hexdigest(key)
       end
 
       def encode(key, val)
-        [digest(key), crypt(key, val).each_byte.with_object('') { |b, s|
-          b.divmod(16).each { |i| s << HEX_CHARS[i] }
-        }]
+        [digest(key), crypt(:encrypt, key, val)]
       end
 
       def decode(key, val)
-        crypt(key, val.each_byte.each_slice(2).with_object('') { |b, s|
-          q, r = b.map { |i| HEX_CHARS.index(i.chr(ENC)) }
-          s << q * 16 + r
-        })
+        crypt(:decrypt, key, val).force_encoding(ENC)
       end
 
       private
 
-      def crypt(k, v)
-        c, y = '', k.codepoints.reverse_each.cycle
-        v.each_codepoint { |x| c << (x ^ y.next).chr(ENC) }
-        c
+      def crypt(method, key, val)
+        cipher = OpenSSL::Cipher.new('aes-128-cbc').send(method)
+        cipher.iv = cipher.key = digest(key)
+        cipher.update(val) + cipher.final
       end
 
     end

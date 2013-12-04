@@ -6,6 +6,8 @@
 
 * Database::Source removes leading and trailing whitespace from dictionary
   lines.
+* Database::Crypter uses OpenSSL to encrypt/decrypt dictionaries. Note: Can't
+  decrypt dictionaries encrypted with the old scheme anymore.
 * Dictionary cleanup.
 
 == 1.8.4 [2013-10-18]
