@@ -1,0 +1,8 @@
+substantiv,substantiv #a substantiv #s.n
+mehr,mehr #w mehr #s.n mehren #v
+wort,wort #s.n
+gruppe,gruppe #s.f
+modul,modul #s.m|n
+nocken,nock #s.f|m|n nocke #s.f nocken #s.m
+albern,albern #a|v
+fortuna,fortuna #e|s.f

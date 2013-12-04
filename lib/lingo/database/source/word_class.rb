@@ -38,13 +38,28 @@ class Lingo
 
         def initialize(id, lingo)
           super
-          @pat = /^(#{@wrd})#{Regexp.escape(@sep ||= ',')}((?:#{@wrd}#\w)+)$/
+
+          w   = /\w(?:\|\w)*/
+          wc  = /##{w}(?:\.#{w})?/
+          sep = Regexp.escape(@sep ||= ',')
+
+          @pat = /^(#{@wrd})#{sep}((?:#{@wrd}#{wc})+)$/
         end
 
         private
 
         def convert_line(line, key, val)
-          [key.strip, val.strip.gsub(/\s+(?=#)/, '').scan(/\S.*?#\S+/)]
+          values = []
+
+          val.strip.scan(/(\S.*?)\s*#(\S+)/) { |k, v|
+            v, f = v.split('.')
+
+            v.split('|').product(f ? f.split('|') : [nil]) { |w, g|
+              values << "#{k}##{w}##{g}"
+            }
+          }
+
+          [key.strip, values]
         end
 
       end

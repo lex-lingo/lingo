@@ -16,8 +16,8 @@ class LingoTestCase <  Test::Unit::TestCase
   end
 
   def split(t)
-    t =~ /^([^|]+)\|([^|]*)$/
-    [$1 || '', $2 || '']
+    a, b, *c = t.split('|')
+    [a || '', b || '', *c]
   end
 
   def ai(t)
@@ -29,7 +29,8 @@ class LingoTestCase <  Test::Unit::TestCase
   end
 
   def lx(t)
-    Lingo::Language::Lexical.new(*split(t))
+    a, b, *c = split(t)
+    Lingo::Language::Lexical.new(a, [b, *c])
   end
 
   def wd(t, *l)
@@ -68,7 +69,9 @@ class AttendeeTestCase < LingoTestCase
 end
 
 class Lingo
+
   class Attendee
+
     class TestSpooler < self
 
       protected
@@ -100,5 +103,16 @@ class Lingo
       end
 
     end
+
+  end
+
+  class Database
+
+    alias_method :original_convert, :convert
+
+    def convert(verbose = false)
+      original_convert(verbose)
+    end
+
   end
 end

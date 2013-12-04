@@ -2,16 +2,6 @@
 
 require_relative 'test_helper'
 
-class Lingo::Database
-
-  alias_method :original_convert, :convert
-
-  def convert(verbose = false)
-    original_convert(verbose)
-  end
-
-end
-
 class TestDatabase < LingoTestCase
 
   def setup
@@ -195,9 +185,33 @@ Wort2=
       Wort1=#s
       Wort2=
     }, {
-      'wort1' => 'projektion1#h|projektion4#e',
-      'wort2' => 'projektion2#i',
-      'wort3' => 'projektion3#e'
+      'wort1' => 'projektion1#h#|projektion4#e#',
+      'wort2' => 'projektion2#i#',
+      'wort3' => 'projektion3#e#'
+    })
+  end
+
+  def test_wordclass_gender
+    compare({
+      'txt-format' => 'WordClass'
+    }, %q{
+      substantiv,substantiv #a substantiv #s.n
+      mehr,mehr #w mehr #s.n mehren #v
+      wort,wort #s.n
+      gruppe,gruppe #s.f
+      modul,modul #s.m|n
+      nocken,nock #s.f|m|n nocke #s.f nocken #s.m
+      albern,albern #a|v
+      fortuna,fortuna #e|s.f
+    }, {
+      'substantiv' => 'substantiv#a#|substantiv#s#n',
+      'mehr'       => 'mehr#s#n|mehr#w#|mehren#v#',
+      'wort'       => 'wort#s#n',
+      'gruppe'     => 'gruppe#s#f',
+      'modul'      => 'modul#s#m|modul#s#n',
+      'nocken'     => 'nock#s#f|nock#s#m|nock#s#n|nocke#s#f|nocken#s#m',
+      'albern'     => 'albern#a#|albern#v#',
+      'fortuna'    => 'fortuna#e#f|fortuna#s#f'
     })
   end
 

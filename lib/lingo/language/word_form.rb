@@ -36,10 +36,11 @@ class Lingo
 
       include Comparable
 
-      attr_accessor :form, :attr, :src
+      attr_accessor :form, :attr, :gender, :src
 
       def initialize(form, attr = WA_UNSET, src = nil)
-        @form, @attr, @src = form || '', attr || '', src
+        attr, gender = attr
+        @form, @attr, @gender, @src = form || '', attr || '', gender, src
       end
 
       def unknown?
@@ -55,7 +56,7 @@ class Lingo
       end
 
       def to_a
-        [form, attr]
+        [form, attr, gender].compact
       end
 
       def to_s

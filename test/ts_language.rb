@@ -72,6 +72,19 @@ class TestLexicalHash < LingoTestCase
     }
   end
 
+  def test_wordclass_gender
+    lh('tst-gen') { |ds|
+      assert_equal([lx('substantiv|s|n'), lx('substantiv|a')], ds['substantiv'])
+      assert_equal([lx('mehr|s|n'), lx('mehren|v'), lx('mehr|w')], ds['mehr'])
+      assert_equal([lx('wort|s|n')], ds['wort'])
+      assert_equal([lx('gruppe|s|f')], ds['gruppe'])
+      assert_equal([lx('modul|s|m'), lx('modul|s|n')], ds['modul'])
+      assert_equal([lx('nock|s|f'), lx('nock|s|m'), lx('nock|s|n'), lx('nocke|s|f'), lx('nocken|s|m')], ds['nocken'])
+      assert_equal([lx('albern|v'), lx('albern|a')], ds['albern'])
+      assert_equal([lx('fortuna|s|f'), lx('fortuna|e|f')], ds['fortuna'])
+    }
+  end
+
   def test_case
     lh('sys-dic') { |ds|
       assert_equal([lx('abänderung|s')], ds['abänderung'])

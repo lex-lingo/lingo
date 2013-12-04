@@ -4,6 +4,8 @@
 
 == 1.8.5 [unreleased]
 
+* Database::Source::WordClass supports gender information being encoded in the
+  dictionary as well as shorthand notation for multiple word classes/genders.
 * Database::Source removes leading and trailing whitespace from dictionary
   lines.
 * Database::Crypter uses OpenSSL to encrypt/decrypt dictionaries. Note: Can't

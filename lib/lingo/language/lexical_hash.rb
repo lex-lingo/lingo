@@ -54,8 +54,8 @@ class Lingo
 
         res = rec.map { |str|
           str =~ /\A\*\d+\z/ ? str : begin
-            k, w = str.split('#', 2)
-            Lexical.new(k.strip, w || @wc)
+            k, w, g = str.split('#')
+            Lexical.new(k.strip, [w || @wc, g])
           end
         }
 
