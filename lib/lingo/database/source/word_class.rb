@@ -44,9 +44,7 @@ class Lingo
         private
 
         def convert_line(line, key, val)
-          [key = key.strip, val.strip.scan(/(\S.+?)\s*#(\w)/).map! { |v, c|
-            "#{v unless key == v}##{c}"
-          }]
+          [key.strip, val.strip.gsub(/\s+(?=#)/, '').scan(/\S.*?#\S+/)]
         end
 
       end

@@ -46,7 +46,7 @@ class Lingo
         private
 
         def convert_line(line, key, val)
-          [key = key.strip, %W[##{key =~ /\s/ ? @mul : @def}]]
+          [k = key.strip, %W[#{k}##{k =~ /\s/ ? @mul : @def}]]
         end
 
       end

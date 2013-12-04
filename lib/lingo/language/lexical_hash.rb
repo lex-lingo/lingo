@@ -53,12 +53,9 @@ class Lingo
         rec = @src[key = Unicode.downcase(key)] or return
 
         res = rec.map { |str|
-          case str
-            when /^\*\d+$/           then str
-            when /^#(.)$/            then Lexical.new(key, $1)
-            when /^([^#]+?)\s*#(.)$/ then Lexical.new($1,  $2)
-            when /^([^#]+)$/         then Lexical.new($1, @wc)
-            else                          str
+          str =~ /\A\*\d+\z/ ? str : begin
+            k, w = str.split('#', 2)
+            Lexical.new(k.strip, w || @wc)
           end
         }
 

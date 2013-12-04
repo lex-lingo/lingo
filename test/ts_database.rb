@@ -55,14 +55,14 @@ Wort2=
     compare({
       'txt-format' => 'SingleWord'
     }, @singleword, {
-      'wort1'                               => '#s',
-      'wort2'                               => '#s',
-      'juristische personen'                => '#s',
-      'höher schneller weiter'              => '#s',
-      'höher schneller weiter größer'       => '#s',
-      'ganz großer und blöder quatsch'      => '#s',
-      'ganz großer und blöder mist'         => '#s',
-      'ganz großer und blöder schwach sinn' => '#s'
+      'wort1'                               => 'wort1#s',
+      'wort2'                               => 'wort2#s',
+      'juristische personen'                => 'juristische personen#s',
+      'höher schneller weiter'              => 'höher schneller weiter#s',
+      'höher schneller weiter größer'       => 'höher schneller weiter größer#s',
+      'ganz großer und blöder quatsch'      => 'ganz großer und blöder quatsch#s',
+      'ganz großer und blöder mist'         => 'ganz großer und blöder mist#s',
+      'ganz großer und blöder schwach sinn' => 'ganz großer und blöder schwach sinn#s'
     })
   end
 
@@ -71,14 +71,14 @@ Wort2=
       'txt-format' => 'SingleWord',
       'def-wc'     => '*'
     }, @singleword, {
-      'wort1'                               => '#*',
-      'wort2'                               => '#*',
-      'juristische personen'                => '#*',
-      'höher schneller weiter'              => '#*',
-      'höher schneller weiter größer'       => '#*',
-      'ganz großer und blöder quatsch'      => '#*',
-      'ganz großer und blöder mist'         => '#*',
-      'ganz großer und blöder schwach sinn' => '#*'
+      'wort1'                               => 'wort1#*',
+      'wort2'                               => 'wort2#*',
+      'juristische personen'                => 'juristische personen#*',
+      'höher schneller weiter'              => 'höher schneller weiter#*',
+      'höher schneller weiter größer'       => 'höher schneller weiter größer#*',
+      'ganz großer und blöder quatsch'      => 'ganz großer und blöder quatsch#*',
+      'ganz großer und blöder mist'         => 'ganz großer und blöder mist#*',
+      'ganz großer und blöder schwach sinn' => 'ganz großer und blöder schwach sinn#*'
     })
   end
 
@@ -87,14 +87,14 @@ Wort2=
       'txt-format' => 'SingleWord',
       'def-mul-wc' => 'm'
     }, @singleword, {
-      'wort1'                               => '#s',
-      'wort2'                               => '#s',
-      'juristische personen'                => '#m',
-      'höher schneller weiter'              => '#m',
-      'höher schneller weiter größer'       => '#m',
-      'ganz großer und blöder quatsch'      => '#m',
-      'ganz großer und blöder mist'         => '#m',
-      'ganz großer und blöder schwach sinn' => '#m'
+      'wort1'                               => 'wort1#s',
+      'wort2'                               => 'wort2#s',
+      'juristische personen'                => 'juristische personen#m',
+      'höher schneller weiter'              => 'höher schneller weiter#m',
+      'höher schneller weiter größer'       => 'höher schneller weiter größer#m',
+      'ganz großer und blöder quatsch'      => 'ganz großer und blöder quatsch#m',
+      'ganz großer und blöder mist'         => 'ganz großer und blöder mist#m',
+      'ganz großer und blöder schwach sinn' => 'ganz großer und blöder schwach sinn#m'
     })
   end
 
@@ -107,8 +107,8 @@ Wort2=
         'separator'  => '='
       )
     }, @singleword, {
-      'wort1'                           => '#s',
-      'wort2'                           => '#s',
+      'wort1'                           => 'wort1#s',
+      'wort2'                           => 'wort2#s',
       'ganz groß und blöd mist'         => 'ganz großer und blöder mist#s',
       'juristisch person'               => 'juristische personen#s',
       'hoch schnell weit'               => '*4|höher schneller weiter#s',
@@ -124,14 +124,14 @@ Wort2=
       'txt-format' => 'SingleWord',
       'crypt'      => true
     }, @singleword) { |db| hash = db.to_h; {
-      'wort1'                               => '#s',
-      'wort2'                               => '#s',
-      'juristische personen'                => '#s',
-      'höher schneller weiter'              => '#s',
-      'höher schneller weiter größer'       => '#s',
-      'ganz großer und blöder quatsch'      => '#s',
-      'ganz großer und blöder mist'         => '#s',
-      'ganz großer und blöder schwach sinn' => '#s'
+      'wort1'                               => 'wort1#s',
+      'wort2'                               => 'wort2#s',
+      'juristische personen'                => 'juristische personen#s',
+      'höher schneller weiter'              => 'höher schneller weiter#s',
+      'höher schneller weiter größer'       => 'höher schneller weiter größer#s',
+      'ganz großer und blöder quatsch'      => 'ganz großer und blöder quatsch#s',
+      'ganz großer und blöder mist'         => 'ganz großer und blöder mist#s',
+      'ganz großer und blöder schwach sinn' => 'ganz großer und blöder schwach sinn#s'
     }.each { |key, val|
       assert_nil(hash[key])
       assert_equal([val], db[key])

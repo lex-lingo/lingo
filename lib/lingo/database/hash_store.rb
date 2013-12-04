@@ -63,7 +63,7 @@ class Lingo
       # Dup key, because we're reusing everything.
       def _each
        @db.each { |key, val| yield key.dup, val }
-     end
+      end
 
     end
 

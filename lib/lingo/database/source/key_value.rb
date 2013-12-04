@@ -45,8 +45,7 @@ class Lingo
         private
 
         def convert_line(line, key, val)
-          key, val = key.strip, val.strip
-          [key, %W[#{val unless key == val}##{@def}]]
+          [key.strip, %W[#{val.strip}##{@def}]]
         end
 
       end

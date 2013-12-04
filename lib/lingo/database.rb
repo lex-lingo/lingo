@@ -248,12 +248,11 @@ class Lingo
             key.chomp!('.')
 
             if lex && key.include?(sep)
-              k = key.split(sep).map!(&block).join(sep)
+              key = key.split(sep).map!(&block).join(sep)
 
-              c = k.count(sep) + 1
-              self[k.split(sep)[0, 3].join(sep)] = ["#{KEY_REF}#{c}"] if c > 3
-
-              key, val = k, val.map { |v| v.start_with?('#') ? key + v : v }
+              if (cnt = key.count(sep)) > 2
+                self[key.split(sep)[0, 3].join(sep)] = ["#{KEY_REF}#{cnt + 1}"]
+              end
             end
           end
 
