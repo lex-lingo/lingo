@@ -69,9 +69,7 @@ CLEAN.include(
   'bench/tmp.*'
 )
 
-CLOBBER.include(
-  'store', 'doc' ,'pkg/*', PACKAGE_PATH + '.*'
-)
+CLOBBER.include('store')
 
 task :checkdoc do
   docfile = File.join(__DIR__, 'doc', 'index.html')
