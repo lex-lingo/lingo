@@ -230,15 +230,7 @@ class Lingo
     def convert(verbose = @lingo.config.stderr.tty?)
       src = Source.get(@config.fetch('txt-format', 'key_value'), @id, @lingo)
 
-      if lex = @config['use-lex']
-        a = [{ 'source' => lex.split(SEP_RE), 'mode' => @config['lex-mode'] }, @lingo]
-        d, g = Language::Dictionary.new(*a), Language::Grammar.new(*a); a = nil
-
-        sep, block = ' ', lambda { |f|
-          (r = d.find_word(f)).unknown? &&
-            (c = (r = g.find_compound(f)).compo_form) ? c.form : r.norm
-        }
-      end
+      sep, key_map, val_map = prepare_lex
 
       ShowProgress.new(self, src, verbose) { |progress| create {
         src.each { |key, val|
@@ -247,8 +239,9 @@ class Lingo
           if key
             key.chomp!('.')
 
-            if lex && key.include?(sep)
-              key = key.split(sep).map!(&block).join(sep)
+            if sep && key.include?(sep)
+              key = key.split(sep).map!(&key_map).join(sep)
+              val = val.map { |v| val_map[v.split(sep)].join(sep) } if val_map
 
               if (cnt = key.count(sep)) > 2
                 self[key.split(sep)[0, 3].join(sep)] = ["#{KEY_REF}#{cnt + 1}"]
@@ -261,6 +254,46 @@ class Lingo
 
         uptodate!
       } }
+    end
+
+    def prepare_lex
+      use_lex = @config['use-lex'] or return
+
+      args = [{
+        'source' => use_lex.split(SEP_RE),
+        'mode'   => @config['lex-mode']
+      }, @lingo]
+
+      dic = Language::Dictionary.new(*args)
+      gra = Language::Grammar.new(*args)
+
+      args = nil
+
+      if inflect = @config['inflect']
+        inflect = inflect == true ? %w[s e k] : inflect.split(SEP_RE)
+        wc, suffixes = /a/, { 'f' => 'e', 'm' => 'er', 'n' => 'es' }
+      end
+
+      [' ', lambda { |form|
+        (word = dic.find_word(form)).unknown? ? (compo_form =
+          (compo = gra.find_compound(form)).compo_form) ?
+            compo_form.form : compo.norm : word.norm
+      }, inflect && lambda { |forms|
+        last_form = forms.pop
+        head_form = last_form[/.*(?=#)/]
+
+        head = dic.find_word(head_form)
+        head = gra.find_compound(head_form) if head.unknown?
+
+        if head.attr?(*inflect) and
+          suf = suffixes[head.genders.compact.last] and
+          adj = forms.map { |form| (word = dic.find_word(form)).
+            identified? && word.get_class(wc).first || break }
+          forms.zip(adj) { |form, lex| form << suf if form == lex.form }
+        end
+
+        forms << last_form
+      }]
     end
 
   end

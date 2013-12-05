@@ -86,8 +86,16 @@ class Lingo
         end
       end
 
+      def attr?(*attr)
+        !(attrs & attr).empty?
+      end
+
       def attrs(compound_parts = true)
         lexicals(compound_parts).map { |i| i.attr }
+      end
+
+      def genders(compound_parts = true)
+        lexicals(compound_parts).map { |i| i.gender }
       end
 
       def parts

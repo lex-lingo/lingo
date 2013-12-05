@@ -4,6 +4,9 @@
 
 == 1.8.5 [unreleased]
 
+* Multiword dictionaries compiled from base forms can now generate inflected
+  adjectives based on the gender of the head noun; set <tt>inflect: true</tt>
+  in the dictionary config.
 * Database::Source::WordClass supports gender information being encoded in the
   dictionary as well as shorthand notation for multiple word classes/genders.
 * Database::Source removes leading and trailing whitespace from dictionary

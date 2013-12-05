@@ -19,6 +19,26 @@ ganz großer und blöder mist
 ganz großer und blöder schwach sinn
     EOT
 
+    @singleword_inflect = <<-EOT
+Wort1
+Wort2
+juristisch person
+natürliche personen
+natürlichen quatsches
+klug abel
+lang essay
+große kiefer
+warm abendluft
+klar abendluft
+gut abitur
+gut abitur schaffen
+schmal rund zylinder
+der schmal zylinder
+wort mist
+alt bibliothekskatalog
+neu bibliothekskatalög
+    EOT
+
     @keyvalue = <<-EOT
 Wort1*Projektion1
 Wort2*Projektion2
@@ -106,6 +126,96 @@ Wort2=
       'hoch schnell weit groß'          => 'höher schneller weiter größer#s',
       'ganz groß und blöd schwach sinn' => 'ganz großer und blöder schwach sinn#s',
       'ganz groß und'                   => '*5|*6'
+    })
+  end
+
+  def test_singleword_inflect
+    compare({
+      'txt-format' => 'SingleWord',
+      'use-lex'    => set_config('lex',
+        'name'       => 'de/lingo-dic.txt',
+        'txt-format' => 'WordClass',
+        'separator'  => '='
+      ),
+      'inflect'    => true
+    }, @singleword_inflect, {
+      'wort1'                           => 'wort1#s',
+      'wort2'                           => 'wort2#s',
+      'juristisch person'               => 'juristische person#s',
+      'natürlich person'                => 'natürliche personen#s',
+      'natürlich quatsch'               => 'natürlichen quatsches#s',
+      'langen essay'                    => 'langes essay#s',
+      'groß kiefer'                     => 'große kiefer#s',
+      'klug abel'                       => 'kluger abel#s',
+      'warm abendluft'                  => 'warme abendluft#s',
+      'klaren abendluft'                => 'klare abendluft#s',
+      'gut abitur'                      => 'gutes abitur#s',
+      'gut abitur schaff'               => 'gut abitur schaffen#s',
+      'schmal rund zylinder'            => 'schmaler runder zylinder#s',
+      'der schmal zylinder'             => 'der schmal zylinder#s',
+      'wort mist'                       => 'wort mist#s',
+      'alt bibliothekskatalog'          => 'alter bibliothekskatalog#s',
+      'neu bibliothekskatalög'          => 'neu bibliothekskatalög#s'
+    })
+  end
+
+  def test_singleword_inflect_s
+    compare({
+      'txt-format' => 'SingleWord',
+      'use-lex'    => set_config('lex',
+        'name'       => 'de/lingo-dic.txt',
+        'txt-format' => 'WordClass',
+        'separator'  => '='
+      ),
+      'inflect'    => 's'
+    }, @singleword_inflect, {
+      'wort1'                           => 'wort1#s',
+      'wort2'                           => 'wort2#s',
+      'juristisch person'               => 'juristische person#s',
+      'natürlich person'                => 'natürliche personen#s',
+      'natürlich quatsch'               => 'natürlichen quatsches#s',
+      'langen essay'                    => 'langes essay#s',
+      'groß kiefer'                     => 'große kiefer#s',
+      'klug abel'                       => 'klug abel#s',
+      'warm abendluft'                  => 'warme abendluft#s',
+      'klaren abendluft'                => 'klare abendluft#s',
+      'gut abitur'                      => 'gutes abitur#s',
+      'gut abitur schaff'               => 'gut abitur schaffen#s',
+      'schmal rund zylinder'            => 'schmaler runder zylinder#s',
+      'der schmal zylinder'             => 'der schmal zylinder#s',
+      'wort mist'                       => 'wort mist#s',
+      'alt bibliothekskatalog'          => 'alt bibliothekskatalog#s',
+      'neu bibliothekskatalög'          => 'neu bibliothekskatalög#s'
+    })
+  end
+
+  def test_singleword_inflect_e
+    compare({
+      'txt-format' => 'SingleWord',
+      'use-lex'    => set_config('lex',
+        'name'       => 'de/lingo-dic.txt',
+        'txt-format' => 'WordClass',
+        'separator'  => '='
+      ),
+      'inflect'    => 'e'
+    }, @singleword_inflect, {
+      'wort1'                           => 'wort1#s',
+      'wort2'                           => 'wort2#s',
+      'juristisch person'               => 'juristisch person#s',
+      'natürlich person'                => 'natürliche personen#s',
+      'natürlich quatsch'               => 'natürlichen quatsches#s',
+      'langen essay'                    => 'lang essay#s',
+      'klug abel'                       => 'kluger abel#s',
+      'groß kiefer'                     => 'große kiefer#s',
+      'warm abendluft'                  => 'warm abendluft#s',
+      'klaren abendluft'                => 'klar abendluft#s',
+      'gut abitur'                      => 'gut abitur#s',
+      'gut abitur schaff'               => 'gut abitur schaffen#s',
+      'schmal rund zylinder'            => 'schmal rund zylinder#s',
+      'der schmal zylinder'             => 'der schmal zylinder#s',
+      'wort mist'                       => 'wort mist#s',
+      'alt bibliothekskatalog'          => 'alt bibliothekskatalog#s',
+      'neu bibliothekskatalög'          => 'neu bibliothekskatalög#s'
     })
   end
 
