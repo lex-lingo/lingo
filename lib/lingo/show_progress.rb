@@ -28,10 +28,10 @@ class Lingo
 
   class ShowProgress
 
-    def initialize(obj, max, name = nil, doit = true, text = 'progress', nl = true)
-      return yield self unless max && doit
+    def initialize(obj, max, name = nil, doit = true, text = 'progress', nl = true, &block)
+      @doit, @nl, @out = doit, nl, obj.instance_variable_get(:@lingo).config.stderr
 
-      @out = obj.instance_variable_get(:@lingo).config.stderr
+      return handle(&block) unless max && doit
 
       # To get the length of the formatted string we have
       # to actually substitute the placeholder.
@@ -46,15 +46,18 @@ class Lingo
       @clr = ' ' * len + back
 
       print name, ': ' if name
+      print text
+
+      init(max)
+
+      handle(%w[done aborted], &block)
+    end
+
+    def init(max, doit = @doit)
+      return unless max && doit
 
       @rat, @cnt, @next = max / 100.0, 0, 0
-      print text
       step
-
-      yield self
-
-      print "#{@clr} done."
-      print "\n" if nl
     end
 
     def [](value)
@@ -75,6 +78,24 @@ class Lingo
 
     def print(*args)
       @out.print(*args)
+    end
+
+    def handle(msg = nil)
+      suc = false
+
+      res = catch(:cancel) {
+        trap(:INT) { throw(:cancel) }
+        yield self
+        suc = true
+      }
+
+      res = nil if suc
+
+      print @clr, ' ', msg[suc ? 0 : 1], '.' if msg
+      print "\n" if msg && res
+
+      print Array(res).join("\n") if res
+      print "\n" if @nl && (msg || res)
     end
 
   end

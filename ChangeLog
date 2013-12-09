@@ -4,6 +4,8 @@
 
 == 1.8.5 [unreleased]
 
+* Attendee::TextReader learned better PDF-to-text conversion using the
+  +pdftotext+ command; specify <tt>filter: pdftotext</tt> in the config.
 * Multiword dictionaries compiled from base forms can now generate inflected
   adjectives based on the gender of the head noun; set <tt>inflect: true</tt>
   in the dictionary config.

@@ -26,7 +26,7 @@
 
 require 'find'
 
-%w[filemagic mime/types nokogiri pdf-reader].each { |lib|
+%w[filemagic mime/types nokogiri nuggets/file/which pdf-reader].each { |lib|
   begin
     require lib
   rescue LoadError
@@ -135,14 +135,11 @@ class Lingo
       def spool(path)
         forward(STR_CMD_FILE, path)
 
-        if stdin?(path)
-          io = string_or_io(@lingo.config.stdin.set_encoding(ENC))
-        else
-          io, name = File.open(path, 'rb', encoding: ENC), path
-        end
+        io = !stdin?(path) ? open_file(name = path) :
+          string_or_io(@lingo.config.stdin.set_encoding(ENC))
 
         ShowProgress.new(self, @progress && io.size, name) { |progress|
-          filter(io) { |line, pos|
+          filter(io, path, progress) { |line, pos|
             progress[pos]
 
             line.chomp! if @chomp
@@ -160,25 +157,41 @@ class Lingo
         forward(STR_CMD_EOF, path)
       end
 
-      def filter(io)
+      def filter(io, path, progress)
         block = @progress ?
           lambda { |line| yield line, io.pos } :
           lambda { |line| yield line, 0 }
 
-        case @filter == true ? file_type(path, io) : @filter.to_s
-          when /html/i then io = filter_html(io)
-          when /xml/i  then io = filter_html(io, true)
-          when /pdf/i  then filter_pdf(io, &block); return
+        io = case @filter == true ? file_type(io, path) : @filter.to_s
+          when 'pdftotext' then filter_pdftotext(io, path, progress)
+          when /html/i     then filter_html(io)
+          when /xml/i      then filter_html(io, true)
+          when /pdf/i      then filter_pdf(io, &block); return
+          else io
         end
 
-        io.each_line(&block) if io
+        io.each_line(&block)
       end
 
-      def filter_pdf(io, &block)
-        if Object.const_defined?(:PDF) && PDF.const_defined?(:Reader)
-          PDFFilter.filter(io, &block)
+      def filter_pdftotext(io, path, progress)
+        if cmd = File.which(name = 'pdftotext')
+          with_tempfile(name) { |tempfile|
+            pdf_path = stdin?(path) ? tempfile[:pdf, io] : path
+            system(cmd, '-q', pdf_path, txt_path = tempfile[:txt])
+
+            progress.init(File.size(txt_path)) if @progress
+            open_file(txt_path)
+          }
         else
-          warn "PDF filter not available. Please install `pdf-reader'."
+          cancel_filter(:PDF, name, :command)
+        end
+      end
+
+      def filter_pdf(io)
+        if Object.const_defined?(:PDF) && PDF.const_defined?(:Reader)
+          PDF::Reader.new(io).pages.each { |page| yield page.text }
+        else
+          cancel_filter(:PDF, 'pdf-reader')
         end
       end
 
@@ -189,12 +202,11 @@ class Lingo
           doc = Nokogiri.send(type, io, nil, ENC)
           string_or_io(doc.children.map { |x| x.inner_text }.join)
         else
-          warn "#{type} filter not available. Please install `nokogiri'."
-          nil
+          cancel_filter(type, :nokogiri)
         end
       end
 
-      def file_type(path, io)
+      def file_type(io, path)
         if Object.const_defined?(:FileMagic) && io.respond_to?(:rewind)
           type = FileMagic.fm(:mime, simplified: true).buffer(io.read(256))
           io.rewind
@@ -203,13 +215,19 @@ class Lingo
           if type = MIME::Types.of(path).first
             type.content_type
           else
-            warn 'Filters not available. File type could not be determined.'
-            nil
+            cancel('Filters not available. File type could not be determined.')
           end
         else
-          warn "Filters not available. Please install `ruby-filemagic' or `mime-types'."
-          nil
+          cancel("Filters not available. Please install the `ruby-filemagic' or `mime-types' gem.")
         end
+      end
+
+      def cancel_filter(type, name, what = :gem)
+        cancel("#{type} filter not available. Please install the `#{name}' #{what}.")
+      end
+
+      def cancel(msg)
+        throw(:cancel, msg)
       end
 
       def stdin?(path)
@@ -218,6 +236,25 @@ class Lingo
 
       def string_or_io(io)
         @progress ? StringIO.new(io.is_a?(String) ? io : io.read) : io
+      end
+
+      def open_file(path)
+        File.open(path, 'rb', encoding: ENC)
+      end
+
+      def with_tempfile(name)
+        require 'tempfile'
+
+        tempfiles = []
+
+        yield lambda { |ext, io = nil|
+          tempfiles << temp = Tempfile.new([name, ".#{ext}"])
+          temp.write(io.read) if io
+          temp.close
+          temp.path
+        }
+      ensure
+        tempfiles.each(&:unlink)
       end
 
       def get_files
@@ -249,30 +286,6 @@ class Lingo
             @files << File.expand_path(entry)
           end
         }
-      end
-
-      class PDFFilter
-
-        def self.filter(io, &block)
-          PDF::Reader.new.parse(io, new(&block))
-        end
-
-        def initialize(&block)
-          @block = block
-        end
-
-        def show_text(string, *params)
-          @block[string << '|']
-        end
-
-        alias_method :super_show_text,                 :show_text
-        alias_method :move_to_next_line_and_show_text, :show_text
-        alias_method :set_spacing_next_line_show_text, :show_text
-
-        def show_text_with_positioning(params, *)
-          params.each { |param| show_text(param) if param.is_a?(String) }
-        end
-
       end
 
     end
