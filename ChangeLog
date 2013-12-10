@@ -4,32 +4,34 @@
 
 == 1.8.5 [unreleased]
 
-* Attendee::TextReader learned better PDF-to-text conversion using the
+* Lingo::Attendee::TextReader learned better PDF-to-text conversion using the
   +pdftotext+ command; specify <tt>filter: pdftotext</tt> in the config.
 * Multiword dictionaries compiled from base forms can now generate inflected
   adjectives based on the gender of the head noun; set <tt>inflect: true</tt>
   in the dictionary config.
-* Database::Source::WordClass supports gender information being encoded in the
-  dictionary as well as shorthand notation for multiple word classes/genders.
-* Database::Source removes leading and trailing whitespace from dictionary
-  lines.
-* Database::Crypter uses OpenSSL to encrypt/decrypt dictionaries. Note: Can't
-  decrypt dictionaries encrypted with the old scheme anymore.
+* Lingo::Database::Source::WordClass supports gender information being encoded
+  in the dictionary as well as shorthand notation for multiple word
+  classes/genders.
+* Lingo::Database::Source removes leading and trailing whitespace from
+  dictionary lines.
+* Lingo::Database::Crypter uses OpenSSL to encrypt/decrypt dictionaries.
+  Note: Can't decrypt dictionaries encrypted with the old scheme anymore.
 * Dictionary cleanup.
 
 == 1.8.4 [2013-10-18]
 
-* Attendee::Sequencer accepts regular expression patterns.
-* Attendee::Sequencer substitutes +0+ in the format string for the matched
-  pattern.
-* Attendee::NonewordFilter learned +dict+ option to print nonewords in
-  dictionary format.
-* Added progress reporting to Attendee::TextReader for STDIN.
+* Lingo::Attendee::Sequencer accepts regular expression patterns.
+* Lingo::Attendee::Sequencer substitutes +0+ in the format string for the
+  matched pattern.
+* Lingo::Attendee::NonewordFilter learned +dict+ option to print nonewords
+  in dictionary format.
+* Added progress reporting to Lingo::Attendee::TextReader for +STDIN+.
 * <tt>lingoctl demo</tt> reports successful initialization.
-* Russian localization for Lingo Web. (Yulia Dorokhova, Thomas Müller)
-* Lingo Web learned parameter +hl+ to set UI language.
-* Lingo Web displays the configuration in use.
-* Lingo Srv accepts array of query strings in addition to single query string.
+* Russian localization for Lingo::Web. (Yulia Dorokhova, Thomas Müller)
+* Lingo::Web learned parameter +hl+ to set UI language.
+* Lingo::Web displays the configuration in use.
+* Lingo::Srv accepts array of query strings in addition to single query
+  string.
 * Meeting config takes precedence over language config.
 * When dictionary entries are rejected during conversion, the location of the
   reject file will be shown.
@@ -39,7 +41,7 @@
 
 == 1.8.3 [2012-09-20]
 
-* Fixed regression introduced in 1.8.2 where reading input from STDIN was no
+* Fixed regression introduced in 1.8.2 where reading input from +STDIN+ was no
   longer possible.
 * Fixed regression introduced in 1.8.2 where Lingo would no longer run on Ruby
   1.9.2.
@@ -48,40 +50,46 @@
 * Fixed issue with BOM in config files.
 * Modified character handling to accept *any* Unicode letter (_Alphabetic_)
   and digit (<i>Decimal Number</i>).
-* Modified Attendee::Tokenizer to use only hard-coded tokenization rules.
-* Modified Attendee::VectorFilter's +lexicals+ option to be case-sensitive.
-* Improved overall performance and memory usage; Attendee::Sequencer changed
-  the order sequences are inserted into the stream.
-* Eliminated performance penalty caused by Attendee::Abbreviator.
+* Modified Lingo::Attendee::Tokenizer to use only hard-coded tokenization
+  rules.
+* Modified Lingo::Attendee::VectorFilter option +lexicals+ to be
+  case-sensitive.
+* Improved overall performance and memory usage; Lingo::Attendee::Sequencer
+  changed the order sequences are inserted into the stream.
+* Eliminated performance penalty caused by Lingo::Attendee::Abbreviator.
 * Added Russian language support. (Yulia Dorokhova, Thomas Müller)
-* Added +fields+ option to Attendee::TextReader to cut off field labels;
-  defaults to +true+ in record (LIR) mode.
-* Added +skip+ option to Attendee::TextReader to skip lines matching the given
-  pattern.
-* Added +src+ option to Attendee::VectorFilter to print "source" part of
-  compounds.
+* Added +fields+ option to Lingo::Attendee::TextReader to cut off field
+  labels; defaults to +true+ in record (LIR) mode.
+* Added +skip+ option to Lingo::Attendee::TextReader to skip lines matching
+  the given pattern.
+* Added +src+ option to Lingo::Attendee::VectorFilter to print "source" part
+  of compounds.
 * Added +lingosrv+ and +lingoweb+ executables. The former provides a simple
   HTTP endpoint with JSON output; the latter serves a demo web interface.
 * Refactored internal caching.
 * Made dependency on Ruby version >= 1.9.2 explicit.
 * Removed reporting facility (options '--perfmon' and '--status').
 * Learned '--profile' option to collect profiling information while running.
-* Deprecated Language::Grammar option +compositum+ (now +compound+), Config
-  option +textreader+ (now +text_reader+), and Attendee::TextReader option
-  +lir-record-pattern+ (now +records+); they will be removed in Lingo 1.9.
+* Deprecated Lingo::Language::Grammar option +compositum+ (now +compound+),
+  Lingo::Config option +textreader+ (now +text_reader+), and
+  Lingo::Attendee::TextReader option +lir-record-pattern+ (now +records+);
+  they will be removed in Lingo 1.9.
 
 == 1.8.2 [2012-04-19]
 
-* Performance improvements regarding Attendee::VectorFilter's (as well as
-  Attendee::NonewordFilter's) memory usage; set <tt>sort: false</tt> in the config.
-* Added Attendee::Stemmer (implementing Porter's algorithm for suffix stripping).
-* Added progress reporting to Attendee::TextReader; set <tt>progress: true</tt>
+* Performance improvements regarding Lingo::Attendee::VectorFilter (as well
+  as Lingo::Attendee::NonewordFilter) memory usage; set <tt>sort: false</tt>
   in the config.
-* Added directory and glob processing to Attendee::TextReader (new options
-  +glob+ and +recursive+).
-* Renamed Attendee::TextReader's option +lir-record-pattern+ to +records+.
-* Fixed Attendee::Debugger to forward all objects so it can be inserted
-  between any two attendees in the config.
+* Added Lingo::Attendee::Stemmer (implementing Porter's algorithm for suffix
+  stripping).
+* Added progress reporting to Lingo::Attendee::TextReader; set <tt>progress:
+  true</tt> in the config.
+* Added directory and glob processing to Lingo::Attendee::TextReader (new
+  options +glob+ and +recursive+).
+* Renamed Lingo::Attendee::TextReader option +lir-record-pattern+ to
+  +records+.
+* Fixed Lingo::Attendee::Debugger to forward all objects so it can be
+  inserted between any two attendees in the config.
 * Fixed regression introduced in 1.8.0 where Lingo would not use existing
   compiled dictionary when source file is not present.
 * Fixed "invalid byte sequence in UTF-8" on Windows for SDBM store.
@@ -107,39 +115,43 @@
 * Executable may be run from outside installation root directory now.
   See README for further details.
 * Search path for dictionaries and configuration files; plugin system.
-* Textreader can read from STDIN if no files given; leave out the +files+
-  parameter in the config for this to trigger.
+* Lingo::Attendee::TextReader can read from +STDIN+ if no files given;
+  leave out the +files+ parameter in the config for this to trigger.
 * Status/performance details as well as progress information are now
-  printed on STDERR instead of STDOUT in order to not mix with regular
+  printed on +STDERR+ instead of +STDOUT+ in order to not mix with regular
   output. Learned '--log' option to write such information to a file.
 * Additional internal refactorings. (To be continued...)
 
 == 1.7.1 [2011-10-24]
 
-* Multiworder actually finds the *longest* matching multiword group.
-* Multiword entries in SingleWord dictionaries now respect <tt>def-wc</tt>;
-  new parameter <tt>def-mul-wc</tt> to control the word class for multiword
-  entries (defaults to <tt>def-wc</tt>). Use <tt>def-mul-wc: 'm'</tt> in your
-  <tt>.lang</tt> to restore the previous behaviour.
-* New Attendee::Formatter for configurable output formatting as an alternative
-  to Attendee::Textwriter.
-* New basic input filters to enable indexing of HTML/XML (and PDF?) files.
+* Lingo::Attendee::MultiWorder actually finds the *longest* matching multiword
+  group.
+* Multiword entries in Lingo::Database::Source::SingleWord dictionaries now
+  respect <tt>def-wc</tt>; new parameter <tt>def-mul-wc</tt> to control
+  the word class for multiword entries (defaults to <tt>def-wc</tt>). Use
+  <tt>def-mul-wc: 'm'</tt> in your <tt>.lang</tt> to restore the previous
+  behaviour.
+* New Lingo::Attendee::Formatter for configurable output formatting as an
+  alternative to Lingo::Attendee::TextWriter.
+* New basic input filters to enable indexing of HTML/XML (and PDF) files.
 * Updated the system dictionary.
 * Switched license to Affero GPL.
 
 == 1.7.0 [2010-12-15]
 
 * More Ruby 1.9 compatibility.
-* Extended VectorFilter to double as enhanced Non(e)wordFilter.
-* Fixed Sequencer to recognize additional word classes beyond the first.
-* Fixed Sequencer to not prematurely flush the buffer, which led to a
-  decreased recognition rate.
+* Extended Lingo::Attendee::VectorFilter to double as enhanced
+  Lingo::Attendee::NonewordFilter.
+* Fixed Lingo::Attendee::Sequencer to recognize additional word classes beyond
+  the first.
+* Fixed Lingo::Attendee::Sequencer to not prematurely flush the buffer, which
+  led to a decreased recognition rate.
 * Housekeeping.
 
 == 1.6.12 [2010-11-22]
 
 * Ruby 1.9 compatibility, finally.
-* Added lingoweb.rb, a plain & simple web frontend for Lingo.
+* Added <tt>lingoweb.rb</tt>, a plain & simple web frontend for Lingo.
 * Added DIFF-LCS gem directly to Lingo distribution.
 
 == 1.6.11 [2010-02-04]
@@ -147,14 +159,14 @@
 * Redirect Lingo output to <tt>/dev/null</tt> during testing. Indicate error
   with appropriate exit code.
 * Replace usage of command-line diff with cross-plattform Ruby implementation
-  (requires diff-lcs[http://raa.ruby-lang.org/project/diff-lcs/]).
+  (requires diff-lcs[https://rubygems.org/gems/diff-lcs]).
 * Provide alternatives to standard zip command on windows platforms.
 * Use +UNK+ itself if it doesn't have any lexicals.
 * Use compo form instead of word form when lexicalizing compound entry for
   multiword dictionaries.
-* LexicalHash#[] must use target (not source) form.
+* Lingo::Language::LexicalHash#[] must use target (not source) form.
 * Optionally, try to find matches for all lexicals a word has.
-* Make '-' a PRINTABLE_CHAR.
+* Made '-' a +PRINTABLE_CHAR+.
 * Allow synonyms to be considered for multiword matching.
 * Don't use compound parts.
 * Introduced some (more or less arbitrary) line length limit. We can only
@@ -179,15 +191,16 @@
 * BUGFIX: Token wurden durch den Caching-Mechanismus in ihrer Schreibweise
   verändert (Groß-/Kleinschreibung).
 * Englische Wörterbücher, ein Beispiel-Artikel und eine Konfiguration für das
-  Englische wurden aufgenommen. Aufruf mit lingo.rb -c lingo-en.cfg -l en <datei>.
+  Englische wurden aufgenommen. Aufruf mit lingo.rb -c lingo-en.cfg -l en
+  <datei>.
 * Integration der Testumgebung für Entwickler.
 * Die Attendees in den Lingo-Konfigurationsdateien werden automatisch
   verkettet. Dies erspart mühsame Verlinkung von Hand und macht die
   Konfiguration lesbarer.
 * Modified parameters for Tokenizer and building of databases to handle UTF-8
-  correctly. Printable characters from the ASCII charset and every UTF character
-  greater than x80 is now recognized as a non word breaking character. so now
-  diacritical characters are handled well.
+  correctly. Printable characters from the ASCII charset and every UTF
+  character greater than x80 is now recognized as a non word breaking
+  character. so now diacritical characters are handled well.
 * Added a command line option '-p' for lingo.rb for making detailed
   performance mesurements possible for each single attendee.
 * Allow Lingo.new to be called from a different directory. (Still need to
@@ -207,8 +220,9 @@
 
 * <b>Englische Wörterbücher ergänzt</b>
 
-  Lingo kann nun auch Englisch. Dazu muss beim Aufruf von Lingo die Option "-l en"
-  angegeben werden. Ein englischer Artikel ist unter txt/artikel-en.txt zu finden.
+  Lingo kann nun auch Englisch. Dazu muss beim Aufruf von Lingo die Option
+  "-l en" angegeben werden. Ein englischer Artikel ist unter
+  txt/artikel-en.txt zu finden.
 
 == 1.6.5 [2006-09-18]
 
@@ -235,23 +249,24 @@
 
 * <b>Return-Codes</b>
 
-  Bei Aufruf der Hilfe oder bei Fehlersituationen, die intern abgefangen werden,
-  wird der Return-Code 1 gesetzt, um somit bessere Steuerung in der
-  Batchverarbeitung zu ermöglichen.
+  Bei Aufruf der Hilfe oder bei Fehlersituationen, die intern abgefangen
+  werden, wird der Return-Code 1 gesetzt, um somit bessere Steuerung in
+  der Batchverarbeitung zu ermöglichen.
 
 == 1.6.1 [2006-03-22]
 
 * <b>Fehlerkorrektur im Multiworder</b>
 
-  Der Multiworder hat sich in einem seltenen Spezialfall nicht korrekt verhalten. Das
-  ist bereinigt.
+  Der Multiworder hat sich in einem seltenen Spezialfall nicht korrekt
+  verhalten. Das ist bereinigt.
 
 == 1.6.0 [2006-03-20]
 
 * <b>Wörterbücher umbenannt</b>
 
-  Die standardmäßig mitgelieferten Wörterbücher sind umbenannt worden in lingo-xxx.txt
-  und haben als einheitlichen Separator zwischen Schlüssel und Werten das '='-Zeichen.
+  Die standardmäßig mitgelieferten Wörterbücher sind umbenannt worden in
+  lingo-xxx.txt und haben als einheitlichen Separator zwischen Schlüssel
+  und Werten das '='-Zeichen.
 
 * <b>Bereinigungen durchgeführt</b>
 
@@ -261,8 +276,9 @@
 
 * <b>Wörterbücher umbenannt</b>
 
-  Die standardmäßig mitgelieferten Wörterbücher sind umbenannt worden in lingo-xxx.txt und
-  haben als einheitlichen Separator zwischen Schlüssel und Werten das '='-Zeichen.
+  Die standardmäßig mitgelieferten Wörterbücher sind umbenannt worden in
+  lingo-xxx.txt und haben als einheitlichen Separator zwischen Schlüssel
+  und Werten das '='-Zeichen.
 
 * <b>Bereinigungen durchgeführt</b>
 
@@ -272,130 +288,139 @@
 
 * <b>Fehlerkorrektur Multiworder</b>
 
-  Ein klitzekleiner Fehler hat sich doch durch die übereifrig schnelle Bereitstellung
-  der neuen Version eingeschlichen. Ist korrigiert und in die Testroutinen mit aufgenommen.
+  Ein klitzekleiner Fehler hat sich doch durch die übereifrig schnelle
+  Bereitstellung der neuen Version eingeschlichen. Ist korrigiert und in
+  die Testroutinen mit aufgenommen.
 
-* <b>Punkt-Behandlung vollständig überarbeitet (Abbreviator wieder im Einsatz!) => TEIL 2</b>
+* <b>Punkt-Behandlung vollständig überarbeitet (Abbreviator wieder im
+  Einsatz!) => TEIL 2</b>
 
-  ...hatte ich doch vergessen zu erwähnen, dass als Voraussetzung für das Funktionieren
-  der neu eingeführten Punkt-Behandlung ZWINGEND die Tokenizer-Regel 'ABRS' in der
-  <tt>de.lang</tt> auskommentiert werden muss ?:o\
+  ...hatte ich doch vergessen zu erwähnen, dass als Voraussetzung für das
+  Funktionieren der neu eingeführten Punkt-Behandlung ZWINGEND die
+  Tokenizer-Regel 'ABRS' in der <tt>de.lang</tt> auskommentiert werden muss.
 
 == 1.6.0rc2 [2006-03-09]
 
 * <b>Vorsicht bei CFG-Dateien!</b>
 
-  Multiworder und Sequencer vertragen beide einen 'stopper'-Parameter, der in der
-  Regel mit 'PUNCT,OTH_C' vorbelegt ist. Dies soll Token identifizieren, die durch
-  die Regel gleichen Namens im Tokenizer erkannt wurden. Diese Regeln sind jedoch
-  umbenannt worden (weiß nicht mit welcher Version) in 'PUNC' und 'OTHR'. Daher bitte
-  die entsprechenden Einträge ändern auf 'PUNC,OTHR'.
+  Multiworder und Sequencer vertragen beide einen 'stopper'-Parameter, der in
+  der Regel mit 'PUNCT,OTH_C' vorbelegt ist. Dies soll Token identifizieren,
+  die durch die Regel gleichen Namens im Tokenizer erkannt wurden. Diese
+  Regeln sind jedoch umbenannt worden (weiß nicht mit welcher Version) in
+  'PUNC' und 'OTHR'. Daher bitte die entsprechenden Einträge ändern auf
+  'PUNC,OTHR'.
 
-* <b>Punkt-Behandlung vollständig überarbeitet (Abbreviator wieder im Einsatz!)</b>
+* <b>Punkt-Behandlung vollständig überarbeitet (Abbreviator wieder im
+  Einsatz!)</b>
 
-  Die Behandlung des Zeichen '.' wurde komplett neu designet. Das Zeichen '.' kommt
-  grundsätzlich in drei verschiedenen Kontexten vor:
+  Die Behandlung des Zeichen '.' wurde komplett neu designet. Das Zeichen '.'
+  kommt grundsätzlich in drei verschiedenen Kontexten vor:
 
   1. Als Punkt hinter einer Zahl (1. = Erster, 2. = Zweiter,...)
   2. Als Abkürzungspunkt
   3. Der Satzendepunkt
 
-  Der 1. Fall ist sehr sicher durch eine Tokenizer-Regel zu identifizieren und
-  wird daher hier nicht weiter betrachtet. Dabei wird kein Punkt-Token erzeugt,
-  sondern der Punkt im Stammwort mitgegeben (z.B. <1.>).
+  Der 1. Fall ist sehr sicher durch eine Tokenizer-Regel zu identifizieren
+  und wird daher hier nicht weiter betrachtet. Dabei wird kein Punkt-Token
+  erzeugt, sondern der Punkt im Stammwort mitgegeben (z.B. <1.>).
 
-  Zwischen dem 2. und dem 3. Fall macht der Tokenizer keine Unterscheidung mehr.
-  Der Punkt wird als eigenständiges Token erkannt und in den Verarbeitungsstrom
-  weitergereicht. Der Abbreviator versucht nun Abkürzungen anhand von Punkt-Token
-  zu erkennen. Taucht ein Punkt im Zeichenstrom auf, dann wird das vorhergehende Word
-  im Abkürzungswörterbuch nachgeschlagen. Wird das Wort dort gefunden, wird das
-  Punkt-Token aus dem Zeichenstrom entfernt und die Abkürzung als identifiziert
-  weitergereicht.
+  Zwischen dem 2. und dem 3. Fall macht der Tokenizer keine Unterscheidung
+  mehr. Der Punkt wird als eigenständiges Token erkannt und in den
+  Verarbeitungsstrom weitergereicht. Der Abbreviator versucht nun
+  Abkürzungen anhand von Punkt-Token zu erkennen. Taucht ein Punkt im
+  Zeichenstrom auf, dann wird das vorhergehende Word im Abkürzungswörterbuch
+  nachgeschlagen. Wird das Wort dort gefunden, wird das Punkt-Token aus dem
+  Zeichenstrom entfernt und die Abkürzung als identifiziert weitergereicht.
 
-  Bleibt neben dem Satzendepunkt noch der Abkürzungspunkt z.B. in Personennamen
-  (John F. Kennedy). Diese müssen vom Multiworder zuverlässig als Teil einer
-  Mehrwortgruppe erkannt und ggf. ebenfalls entfernt werden. Die zusätzlich
-  aufgebohrtet Testroutinen zeigten ein zuverlässiges Verhalten.
+  Bleibt neben dem Satzendepunkt noch der Abkürzungspunkt z.B. in
+  Personennamen (John F. Kennedy). Diese müssen vom Multiworder zuverlässig
+  als Teil einer Mehrwortgruppe erkannt und ggf. ebenfalls entfernt werden.
+  Die zusätzlich aufgebohrtet Testroutinen zeigten ein zuverlässiges
+  Verhalten.
 
 == 1.6.0rc1 [2006-02-27]
 
 * <b>Grundlegende architektonische Überarbeitung</b>
 
-  Die über ein Jahr gewachsene Struktur von Lingo wurde grundlich überarbeitet.
-  Detailliertere Dokumentation folgt.
+  Die über ein Jahr gewachsene Struktur von Lingo wurde grundlich
+  überarbeitet. Detailliertere Dokumentation folgt.
 
 * <b>Abbreviator entfernt</b>
 
-  Den Attendee Abbreviator gibt es nicht mehr. Seine Funktion wird vom Wordsearcher
-  mit übernommen. Wenn ein Wort nicht erkannt wird, so prüft der Wordsearcher das
-  Wort erneut mit abschließendem Punkt, wenn das nächste Token im Zeichenstrom
-  tatsächlich ein Punkt ist. In diesem Fall wird das Punkt-Token aus dem Datenstrom
-  entfernt.
+  Den Attendee Abbreviator gibt es nicht mehr. Seine Funktion wird vom
+  Wordsearcher mit übernommen. Wenn ein Wort nicht erkannt wird, so prüft
+  der Wordsearcher das Wort erneut mit abschließendem Punkt, wenn das
+  nächste Token im Zeichenstrom tatsächlich ein Punkt ist. In diesem Fall
+  wird das Punkt-Token aus dem Datenstrom entfernt.
 
 * <b>Ocr_variator heißt jetzt Variator</b>
 
-  Kleine kosmetische Anpassung. Der Ocr-Bezug stimmt zwar historisch gesehen noch,
-  mit der eigentlichen Funktion hat es jedoch nichts zu tun.
+  Kleine kosmetische Anpassung. Der Ocr-Bezug stimmt zwar historisch gesehen
+  noch, mit der eigentlichen Funktion hat es jedoch nichts zu tun.
 
 * <b>Decomposer mit zusätzlicher Validitätsprüfung und Kennzeichnung</b>
 
-  Der Decomposer kann bei Bedarf Komposita einer zusätzlichen Prüfung unterziehen.
-  Ist der Schlüssel <tt>de.lang:language/dictionary/compound/skip-sequences</tt>
-  angegeben, der z.B. in der Form <tt>skip-sequences: [ VS ]</tt> definiert wird,
-  wird zusätzlich geprüft, ob das Kompositum mit seinen Teilen diesen Wortklassen
-  entspricht. Hiernach werden Komposita verworfen, die aus Verb-Substantiv-Kombination
-  bestehen. Die Angabe des Parameters ist optional.
-  Zusätzlich werden bei Angabe des Schlüssels <tt>de.lang:language/dictionary/compound/append-wordclass</tt>,
-  der i.d.R einen ein Zeichen langen String enthält, die durch Zerlegung erkannten
-  Wortstämme markiert, in dem ihre Wortklasse das über diesen Schlüssel definierte
-  Zeichen angehangen bekommt.
+  Der Decomposer kann bei Bedarf Komposita einer zusätzlichen Prüfung
+  unterziehen. Ist der Schlüssel
+  <tt>de.lang:language/dictionary/compound/skip-sequences</tt> angegeben, der
+  z.B. in der Form <tt>skip-sequences: [ VS ]</tt> definiert wird, wird
+  zusätzlich geprüft, ob das Kompositum mit seinen Teilen diesen Wortklassen
+  entspricht. Hiernach werden Komposita verworfen, die aus
+  Verb-Substantiv-Kombination bestehen. Die Angabe des Parameters ist
+  optional. Zusätzlich werden bei Angabe des Schlüssels
+  <tt>de.lang:language/dictionary/compound/append-wordclass</tt>, der i.d.R.
+  einen ein Zeichen langen String enthält, die durch Zerlegung erkannten
+  Wortstämme markiert, in dem ihre Wortklasse das über diesen Schlüssel
+  definierte Zeichen angehangen bekommt.
 
 * <b>Install.rb nicht mehr notwendig</b>
 
-  Die Umwandlung von Text-Dateien in SDBM-Dateien erfolgt nicht mehr über Install,
-  sondern durch 'jeden' Lingoaufruf implizit. Beim öffnen der SDBM-Datei wird
-  automatisch die Aktualität geprüft und bei Bedarf eine erneute Übersetzung
-  angestartet.
+  Die Umwandlung von Text-Dateien in SDBM-Dateien erfolgt nicht mehr über
+  Install, sondern durch 'jeden' Lingoaufruf implizit. Beim öffnen der
+  SDBM-Datei wird automatisch die Aktualität geprüft und bei Bedarf eine
+  erneute Übersetzung angestartet.
 
 == 1.5.0 [2005-12-08]
 
 * <b>Sprachkonfiguration aktualisiert</b>
 
-  Die Konfigurationsdatei de.lang ist an produktive Erfahrungen angepasst worden.
-  Insbesondere werden jetzt alle Sonderzeichen der Zeichensätze ISO-8859-1 und
-  Windows-1252 vollständig erkannt, ohne dass laufend Zeichen nachgepflegt werden
-  müssen.
+  Die Konfigurationsdatei de.lang ist an produktive Erfahrungen angepasst
+  worden. Insbesondere werden jetzt alle Sonderzeichen der Zeichensätze
+  ISO-8859-1 und Windows-1252 vollständig erkannt, ohne dass laufend Zeichen
+  nachgepflegt werden müssen.
 
 * <b>Cachable arbeitet jetzt mit Duplikaten</b>
 
-  Objekte, die in den Cache von Datasource, Dictionary oder Grammer übernommen
-  wurden, wurden auch immer als Referenz ausgelesen. Die hatte zur Folge, dass
-  wenn Cacheinhalte im späteren Verlauf der Lingo-Kette verändert wurden, diese
-  Veränderung auch alle nachfolgen aus dem Cache gelesenen Objekte betraf.
-  D.h.: Wird das Wort <von|?> in den Cache geschrieben, so werden alle
-  nachfolgenden Suchanfragen aus dem Cache bedient. So weit so gut. Wenn ein
-  Attendee nach Cacheauslesen der Meinung ist, er müsste für das Objekt das Attribut
-  z.B. auf 'MU?' (Teil einer Mehrwortgruppe) ändern, dann wurde dadurch auch das
-  Element im Cache geändert. Nachfolgende Suchanfragen erhielten somit <von|MU?> als
-  Antwort. Ab jetzt werden nur noch Kopien des Originals in den Cache übernommen,
+  Objekte, die in den Cache von Datasource, Dictionary oder Grammer
+  übernommen wurden, wurden auch immer als Referenz ausgelesen. Die hatte
+  zur Folge, dass wenn Cacheinhalte im späteren Verlauf der Lingo-Kette
+  verändert wurden, diese Veränderung auch alle nachfolgen aus dem Cache
+  gelesenen Objekte betraf. D.h.: Wird das Wort <von|?> in den Cache
+  geschrieben, so werden alle nachfolgenden Suchanfragen aus dem Cache
+  bedient. So weit so gut. Wenn ein Attendee nach Cacheauslesen der Meinung
+  ist, er müsste für das Objekt das Attribut z.B. auf 'MU?' (Teil einer
+  Mehrwortgruppe) ändern, dann wurde dadurch auch das Element im Cache
+  geändert. Nachfolgende Suchanfragen erhielten somit <von|MU?> als Antwort.
+  Ab jetzt werden nur noch Kopien des Originals in den Cache übernommen,
   so das eine versehentliche Veränderung ausgeschlossen wird.
 
 * <b>String hat attr-Methode</b>
 
-  Die Methode _select_ der Klasse _Dictionary_ gibt die gefundenen Lexicals sortiert
-  zurück. Bei der Verarbeitung von Mehrwortwörterbüchern kann jedoch auch z.B. '*5'
-  als Antwort gegeben werden, was dem Multiworder mitteilt, dass es eine Mehrwortgruppe
-  der Länge 5 gibt, die mit genau den drei nachgefragten Wörtern beginnt und der
-  Multiworder eine weitere Abfrage machen soll. Klappt alles wunderbar, nur dass _select_
-  nicht in der Lage ist ein Array aus Lexicals und Strings anhand des attr-Wertes zu
-  sortieren. Jetzt hat die Klasse String eines attr-Wert '' bekommen und die Sortierung
-  funktioniert wieder.
+  Die Methode _select_ der Klasse _Dictionary_ gibt die gefundenen Lexicals
+  sortiert zurück. Bei der Verarbeitung von Mehrwortwörterbüchern kann
+  jedoch auch z.B. '*5' als Antwort gegeben werden, was dem Multiworder
+  mitteilt, dass es eine Mehrwortgruppe der Länge 5 gibt, die mit genau
+  den drei nachgefragten Wörtern beginnt und der Multiworder eine weitere
+  Abfrage machen soll. Klappt alles wunderbar, nur dass _select_ nicht in
+  der Lage ist ein Array aus Lexicals und Strings anhand des attr-Wertes zu
+  sortieren. Jetzt hat hat die Klasse String eines attr-Wert '' bekommen
+  und die Sortierung funktioniert wieder.
 
 * <b>Neues Synonym-Wörterbuch</b>
 
-  Ein sehr gut gepflegtes Synonym-Wörterbuch ist als Beispiel mit aufgenommen worden.
-  Wie beim Mehrwortwörterbuch system_mul.txt sind jedoch nur Einträge mit dem
-  Anfangsbuchstabe 'a' enthalten.
+  Ein sehr gut gepflegtes Synonym-Wörterbuch ist als Beispiel mit
+  aufgenommen worden. Wie beim Mehrwortwörterbuch system_mul.txt
+  sind jedoch nur Einträge mit dem Anfangsbuchstabe 'a' enthalten.
 
 == 1.5.0rc2 [2005-12-06]
 
@@ -413,50 +438,55 @@
 
 * <b>Kompositumerkennung redesigned</b>
 
-  Neben den Klassen für Datenzugriff auf unterster Ebene (Datasource) und dem
-  Wörterbuchzugriff (Dictionary) gibt es nun auch eine Klasse für grammatikalische
-  Spezialitäten (Grammar), welche die Kompositumerkennung aufgenommen hat.
+  Neben den Klassen für Datenzugriff auf unterster Ebene (Datasource) und
+  dem Wörterbuchzugriff (Dictionary) gibt es nun auch eine Klasse für
+  grammatikalische Spezialitäten (Grammar), welche die Kompositumerkennung
+  aufgenommen hat.
 
 * <b>Testroutinen ausgebaut</b>
 
-  Alle bisher per Mail gemeldeten Fehlersituationen sind in die Testroutinen eingebaut
-  worden, so dass sie bei zukünftigen Versionen direkt mit getestet werden. Also
-  weiterhin fleißig per Mail z.B. an error@lex-lingo.de melden.
+  Alle bisher per Mail gemeldeten Fehlersituationen sind in die Testroutinen
+  eingebaut worden, so dass sie bei zukünftigen Versionen direkt mit getestet
+  werden. Also weiterhin fleißig per Mail z.B. an error@lex-lingo.de melden.
 
 * <b>_Stopworder_ getilgt</b>
 
-  Der _Stopworder_ hat seine Schuldigkeit getan. Sein Konzept ist von gestern.
-  Weil er auch durch normale Wörterbuchsuche abbildbar ist, wird hier auf die
-  weitere Pflege verzichtet. <b>Bitte in den Konfig-Dateien berücksichtigen! und
-  WICHTIG: Stopwörter im Wörterbuch ggf. nachpflegen!</b>
+  Der _Stopworder_ hat seine Schuldigkeit getan. Sein Konzept ist von
+  gestern. Weil er auch durch normale Wörterbuchsuche abbildbar ist, wird
+  hier auf die weitere Pflege verzichtet. <b>Bitte in den Konfig-Dateien
+  berücksichtigen! und WICHTIG: Stopwörter im Wörterbuch ggf.
+  nachpflegen!</b>
 
 * <b>Neuer Attendee _Abbreviator_</b>
 
-  Bisher hat der Tokenizer per Konfiguration eine Liste von Abkürzungen mitgeteilt
-  bekommen, die er in einer Textzeile als Token erkennen und in den Datenstrom
-  einfliessen lassen sollte. Die Pflege dieser Konfigurationsdaten fiel vollends
-  aus dem sonst stringenten Wörterbuchkonzept heraus. Daher wurde dies Funktion in
-  den Abbreviator ausgelagert, der sich die bekannten Abkürzungen aus einem eigenen
+  Bisher hat der Tokenizer per Konfiguration eine Liste von Abkürzungen
+  mitgeteilt bekommen, die er in einer Textzeile als Token erkennen und
+  in den Datenstrom einfliessen lassen sollte. Die Pflege dieser
+  Konfigurationsdaten fiel vollends aus dem sonst stringenten
+  Wörterbuchkonzept heraus. Daher wurde dies Funktion in den Abbreviator
+  ausgelagert, der sich die bekannten Abkürzungen aus einem eigenen
   Wörterbuch holt. <b>Bitte in den Konfig-Dateien berücksichtigen!</b>
 
 * <b>Datenformate in <tt>de.lang</tt> vereinfacht</b>
 
   Die Datenformate für den _Tokenizer_ und die _Suffix_e haben sich in der
-  Sprachkonfigurationsdatei de.lang geändert. Sofern eine alte de.lang-Datei mit dieser
-  Version zusammen laufen soll, <b>bitte in den Konfig-Dateien berücksichtigen!</b>
+  Sprachkonfigurationsdatei de.lang geändert. Sofern eine alte de.lang-Datei
+  mit dieser Version zusammen laufen soll, <b>bitte in den Konfig-Dateien
+  berücksichtigen!</b>
 
 * <b>Attendees überarbeitet</b>
 
-  Das Verhalten der Attendees wurde homogenisiert. Als zusätzliche Klasse wurde
-  der BufferedAttendee eingeführt, der den Eingabe-Strom zwischen speichern kann
-  und den angestauten Buffer mit einem mal verarbeiten kann. Dies ist insbesondere
-  förderlich für die Attendees Multiworder und Sequencer, die eine Kette von Objekten
-  untersuchen müssen.
+  Das Verhalten der Attendees wurde homogenisiert. Als zusätzliche Klasse
+  wurde der BufferedAttendee eingeführt, der den Eingabe-Strom zwischen
+  speichern kann und den angestauten Buffer mit einem mal verarbeiten kann.
+  Dies ist insbesondere förderlich für die Attendees Multiworder und
+  Sequencer, die eine Kette von Objekten untersuchen müssen.
 
 * <b>Dokumentation erstellt</b>
 
-  Für alle Attendees gibt es jetzt reichlich Dokumentation, die mit doc/index.html
-  aufgerufen werden kann. Weitere Dokumentation muss noch folgen...
+  Für alle Attendees gibt es jetzt reichlich Dokumentation, die mit
+  doc/index.html aufgerufen werden kann. Weitere Dokumentation muss
+  noch folgen...
 
 == 1.4.2 [2005-10-11]
 
@@ -469,16 +499,17 @@
 
 * <b>_Synonymer_ verarbeitet jetzt WIRKLICH mehrere Wörterbücher</b>
 
-  Aus einem mir bislang unbekannten Grund sind die in der letzten Version gemachten
-  Änderungen nicht übernommen worden. Ist bereinigt.
+  Aus einem mir bislang unbekannten Grund sind die in der letzten Version
+  gemachten Änderungen nicht übernommen worden. Ist bereinigt.
 
 * <b><i>Vector_filter</i> mit geändertem +sort+-Parameter</b>
 
-  Der +sort+-Parameter konnte vormals die Werte +normal+, +count+ und +term+ annehmen.
-  Die Werte +count+ und +term+ wurden durch die Bezeichnungen +term_abs+ und +term_rel+
-  ersetzt. Zusätzlich hinzugekommen sind die Werte +sto_abs+ und +sto_rel+, welche mit
-  den o.g. korrespondieren, der Zahlenwert jedoch in geschweiften Klammern hinter dem
-  Wort stehen. Dies ist notwendig für das _LIR_-Format.
+  Der +sort+-Parameter konnte vormals die Werte +normal+, +count+ und +term+
+  annehmen. Die Werte +count+ und +term+ wurden durch die Bezeichnungen
+  +term_abs+ und +term_rel+ ersetzt. Zusätzlich hinzugekommen sind die Werte
+  +sto_abs+ und +sto_rel+, welche mit den o.g. korrespondieren, der Zahlenwert
+  jedoch in geschweiften Klammern hinter dem Wort stehen. Dies ist notwendig
+  für das _LIR_-Format.
 
 * <b>Für zukünftige Meldungen!</b>
 
@@ -489,13 +520,15 @@
 
 * <b>Neuer Attendee _Sequencer_</b>
 
-  Der _Sequencer_ erkennt Mehrwortgruppen, die nicht über ein Wörterbuch vorgegeben
-  werden müssen, sondern über ihre Wortklassen erkannt werden. Steht z.B. in
-  <tt>de.lang:language/attendees/sequencer/sequences: [ [AS, "2, 1"], [AK, "2, 1"] ]</tt>
-  so werden Wortfolgen der Art Adjektiv-Subjektiv und Adjektiv-Kompositum erkannt
-  und in der in Gänsefüsschen angegebenen Form als Indexeintrag bereitgestellt.
-  So wird 'geniale Indexierung' als 'indexierung, genial' in Form eines zusätzlichen
-  Wortes in den Ausgabestrom eingefügt mit Attribut +SEQ+ und der Wortklasse +q+.
+  Der _Sequencer_ erkennt Mehrwortgruppen, die nicht über ein Wörterbuch
+  vorgegeben werden müssen, sondern über ihre Wortklassen erkannt werden.
+  Steht z.B. in <tt>de.lang:language/attendees/sequencer/sequences:
+  [ [AS, "2, 1"], [AK, "2, 1"] ]</tt> so werden Wortfolgen der Art
+  Adjektiv-Subjektiv und Adjektiv-Kompositum erkannt und in der in
+  Gänsefüsschen angegebenen Form als Indexeintrag bereitgestellt. So wird
+  'geniale Indexierung' als 'indexierung, genial' in Form eines zusätzlichen
+  Wortes in den Ausgabestrom eingefügt mit Attribut +SEQ+ und der Wortklasse
+  +q+.
 
 * <b>Bugfixing Kompositum-Caching</b>
 
@@ -505,41 +538,42 @@
 
 * <b>_Synonymer_ verarbeitet mehrere Wörterbücher</b>
 
-  Mit Angabe des Parameters <tt>mode=all</tt> kann der _Synonymer_ jetzt auch mehrere
-  Wörterbücher verarbeiten.
+  Mit Angabe des Parameters <tt>mode=all</tt> kann der _Synonymer_ jetzt
+  auch mehrere Wörterbücher verarbeiten.
 
 == 1.3.1 [2005-08-18]
 
 * <b>Neuer Attendee _Objectfilter_</b>
 
   Als Basis für eine eher allgemeinere und flexiblere Filter-Möglichkeit im
-  Vergleich zum <i>Noneword_filter</i> kann der _Objectfilter_ alle Arten von Selektion
-  vornehmen. Das Attribut +objects+ ist eine Ruby-Bedingung, die, wenn sie als
-  +false+ ausgewertet wird, dass aktuelle Objekt filtert.
+  Vergleich zum <i>Noneword_filter</i> kann der _Objectfilter_ alle Arten von
+  Selektion vornehmen. Das Attribut +objects+ ist eine Ruby-Bedingung, die,
+  wenn sie als +false+ ausgewertet wird, dass aktuelle Objekt filtert.
 
 == 1.3.0 [2005-08-03]
 
 * <b>Neuer Attendee _Compositizer_</b>
 
-  Die Kompositumzerlegung war bisher im Attendee _Wordsearcher_ enthalten. Dadurch
-  wurden für die Zerlegung immer die gleichen Wörterbücher benutzt, die auf für
-  die Wortsuche verwendet wurden. Durch die Trennung ist eine separate Angabe
-  von Wörterbüchern möglich.
+  Die Kompositumzerlegung war bisher im Attendee _Wordsearcher_ enthalten.
+  Dadurch wurden für die Zerlegung immer die gleichen Wörterbücher benutzt,
+  die auf für die Wortsuche verwendet wurden. Durch die Trennung ist eine
+  separate Angabe von Wörterbüchern möglich.
 
 * <b>Testing</b>
 
   Ausführliche Testroutinen sind erstellt worden, welche die Folge-Releases
   deutlich stabiler machen werden. Innerhalb einer Sekunde sind sämtlich
-  Attendees durchgetestet. Die durchgeführten Tests basieren auf Fehlermeldungen
-  und Anregungen aus vergangenen E-Mails. Sie können jederzeit erweitert werden.
-  In diesem Zusammenhand ist auf die Basisklasse aller Attendees (vorher Lingo)
-  neu erstellt worden. In Verbindung mit der Einführung von YAML als
-  Konfigurationssprache wurden diese automatischen Tests erst möglich.
+  Attendees durchgetestet. Die durchgeführten Tests basieren auf
+  Fehlermeldungen und Anregungen aus vergangenen E-Mails. Sie können
+  jederzeit erweitert werden. In diesem Zusammenhand ist auf die Basisklasse
+  aller Attendees (vorher Lingo) neu erstellt worden. In Verbindung mit der
+  Einführung von YAML als Konfigurationssprache wurden diese automatischen
+  Tests erst möglich.
 
 * <b>YAML</b>
 
-  Bei YAML unbedingt darauf achten, dass keine TABs verwendet werden. YAML ist
-  da sehr empfindlich.
+  Bei YAML unbedingt darauf achten, dass keine TABs verwendet werden. YAML
+  ist da sehr empfindlich.
 
 == 1.2.1 [2005-07-03]
 
@@ -553,35 +587,36 @@
 
 * <b><i>Vector_Filter</i> mit Term-Frequenz</b>
 
-  Wird beim Attendee <i>Vector_filter</i> das Attribut <tt>sort='term'</tt> angegeben,
-  wird statt der absoluten Zahl (wie bei <tt>sort='count'</tt>) die Term-Frequenz
-  eines Wortes ermittelt. Die Term-Frequenz bezieht sich auf die Anzahl Worte in der
-  Datei. Diese wiederum können über das Attribut <tt>no-count</tt> gesteuert werden.
-  Das Attribut entscheidet darüber, welche Wort-Typen nicht in die Gesamtwortanzahl
-  der Worte in der Datei berücksichtigt werden. Default hierfür ist
-  <tt>no-count='PUNCT,OTH_C'</tt>.
+  Wird beim Attendee <i>Vector_filter</i> das Attribut <tt>sort='term'</tt>
+  angegeben, wird statt der absoluten Zahl (wie bei <tt>sort='count'</tt>)
+  die Term-Frequenz eines Wortes ermittelt. Die Term-Frequenz bezieht sich
+  auf die Anzahl Worte in der Datei. Diese wiederum können über das Attribut
+  <tt>no-count</tt> gesteuert werden. Das Attribut entscheidet darüber,
+  welche Wort-Typen nicht in die Gesamtwortanzahl der Worte in der Datei
+  berücksichtigt werden. Default hierfür ist <tt>no-count='PUNCT,OTH_C'</tt>.
 
 * <b>Kompositum-Zerlegung mit weiterer Einschränkung</b>
 
   Ein weiterer Parameter ist für die Kompositumzerlegung hinzugekommen. Als
-  Attribute des Tags <tt>XML:dictionary/compound</tt> können jetzt angegeben werden:
+  Attribute des Tags <tt>XML:dictionary/compound</tt> können jetzt angegeben
+  werden:
 
-    Attribut          Default    Funktion
-    ============================================================================
-    min-word-size        8       Prüft nur Wörter ab dieser Größe auf Kompositum
+    Attribut        Default  Funktion
+    ========================================================================
+    min-word-size      8     Prüft nur Wörter ab dieser Größe auf Kompositum
 
   Die folgenden Attribute werden auf gefundene Komposita angewendet. Das
   Kompositum muss diese Prüfung bestehen, um gewertet zu werden.
 
-    min-avg-part-size    4      Die durchschnittliche Größe aller Wortteile muss
-                                mindestens diesen Wert haben
-    min-part-size        1      Jeder Wortteil muss mindestens so groß sein
-    max-parts            4      Es darf höchstens so viele Wortteile geben.
+    min-avg-part-size  4    Die durchschnittliche Größe aller Wortteile muss
+                            mindestens diesen Wert haben
+    min-part-size      1    Jeder Wortteil muss mindestens so groß sein
+    max-parts          4    Es darf höchstens so viele Wortteile geben.
 
 * <b>Install-Routine um Linux-Kommandos erweitert</b>
 
-  Die Install-Routine sollte jetzt alle Aufgaben sowohl auf Windows wie auch Linux
-  komplett abschließen können.
+  Die Install-Routine sollte jetzt alle Aufgaben sowohl auf Windows wie auch
+  Linux komplett abschließen können.
 
 * <b>Zu lange Datensätze</b>
 
@@ -594,42 +629,42 @@
 
 * <b>Test-Routinen erweitert</b>
 
-  Insbesondere die Sortierung von Lexicals wurde noch einmal intensiv unter die
-  Lupe genommen. Dabei sind ein paar kleine Dinge noch begradigt worden.
+  Insbesondere die Sortierung von Lexicals wurde noch einmal intensiv unter
+  die Lupe genommen. Dabei sind ein paar kleine Dinge noch begradigt worden.
 
 * <b>Install-Routine bereinigt</b>
 
-  Install.rb soll in Richtung Plattformunabhängigkeit weiterentwickelt werden, so
-  dass auch Linux nicht zu kurz kommt. Da fehlen noch ein paar Kommandos, aber
-  die Routine wird euch zu gegebener Zeit fragen :o)
+  Install.rb soll in Richtung Plattformunabhängigkeit weiterentwickelt
+  werden, so dass auch Linux nicht zu kurz kommt. Da fehlen noch ein paar
+  Kommandos, aber die Routine wird euch zu gegebener Zeit fragen :o)
   !!Einzelne Datenbanken können jetzt angesprochen werden!!
   Mit 'install -data -r rdk' werden z.B. alle Datenbanken, die rdk im Namen
-  enthalten, gelöscht und mit 'install -data rdk' auch wieder hergestellt. Das sollte
-  die Pflege der Datenbanken deutlich erleichtern.
+  enthalten, gelöscht und mit 'install -data rdk' auch wieder hergestellt.
+  Das sollte die Pflege der Datenbanken deutlich erleichtern.
 
 * <b>VORSICHT: KNOWN ERROR</b>
 
-  Die Datenbanken werden im Verzeichnis de/store gespeichert. Unter Linux scheint
-  das Erstellen des Verzeichnisses noch nicht die richtigen Rechte mitzugeben.
-  Teste ich noch unter Linux, bis dahin bitte das Unterverzeichnis vor dem Aufruf
-  von Install von Hand anlegen!
+  Die Datenbanken werden im Verzeichnis de/store gespeichert. Unter Linux
+  scheint das Erstellen des Verzeichnisses noch nicht die richtigen Rechte
+  mitzugeben. Teste ich noch unter Linux, bis dahin bitte das Unterverzeichnis
+  vor dem Aufruf von Install von Hand anlegen!
 
 == 1.1.0 [2005-06-18]
 
 * <b>Umstellung der Versionsnummernsystematik</b>
 
   Damit auch Patches und Bugfixes nicht als herrenloses Archiv ausgetauscht
-  werden müssen und jeden besser in Erinnerung verbleibt, wann welche Funktions-
-  erweiterung dazu kam, gelten für die Veränderungen in den Versionsnummern
-  folgende Regeln:
+  werden müssen und jeden besser in Erinnerung verbleibt, wann welche
+  Funktionserweiterung dazu kam, gelten für die Veränderungen in den
+  Versionsnummern folgende Regeln:
     X.0.0  Die erste Stelle kennzeichnet einen grundlegenden architektonischen
-           Umbau von Lingo, wie z.B. den Wechsel von Rubyling auf Lingo. Im Zweifel
-           zählt hierzu auch eine zehnmalige Funktionserweiterung :o)
-    0.X.0  Die zweite Stelle kennzeichnet eine Funktionserweiterung, wie z.B. die
-           Verarbeitung von Mehrwortgruppen.
+           Umbau von Lingo, wie z.B. den Wechsel von Rubyling auf Lingo. Im
+           Zweifel zählt hierzu auch eine zehnmalige Funktionserweiterung :o)
+    0.X.0  Die zweite Stelle kennzeichnet eine Funktionserweiterung, wie z.B.
+           die Verarbeitung von Mehrwortgruppen.
     0.0.X  Die letzte Stelle ist für Bugfixes vorbehalten.
-  Gegebenenfalls kann der Versionsnummer noch ein kleiner Buchstabe folgen, der
-  anzeigt, dass sich lediglich an der Dokumentation etwas geändert hat.
+  Gegebenenfalls kann der Versionsnummer noch ein kleiner Buchstabe folgen,
+  der anzeigt, dass sich lediglich an der Dokumentation etwas geändert hat.
   Gestartet wird mit der 1.1.0 (Erweiterung um Mehrworterkennung), die im
   wesentlichen der Vorversion (alte Systematik) entspricht.
 
@@ -637,46 +672,47 @@
 
 * <b>Datenbankformat und -zugriff vereinheitlicht</b>
 
-  Bisher gab es drei verschiedene Datenformate für Wörterbücher, Synonyme und
-  Mehrwortgruppen. Alle drei Typen finden sich nun in einem universellen Format
-  wieder.
-  Ebenso wurde der Zugriff auf die Daten modifiziert. Wurden vorher je nach Typ
-  einmal eine Liste der erkannten Grundformen (Lexical) als Ergebnis erzeugt und ein
-  anderes mal nur eine Zeichenkette zurück gegeben, werden jetzt alle Zugriffe auf
-  die Daten als Lexical-Liste generiert. Dies hatte Auswirkungen auf die
-  Synonymerkennung, da bisher die die Wortklasse 'y' aus dem Programm und nicht
-  aus den Datendateien kam.
+  Bisher gab es drei verschiedene Datenformate für Wörterbücher, Synonyme
+  und Mehrwortgruppen. Alle drei Typen finden sich nun in einem universellen
+  Format wieder.
+  Ebenso wurde der Zugriff auf die Daten modifiziert. Wurden vorher je nach
+  Typ einmal eine Liste der erkannten Grundformen (Lexical) als Ergebnis
+  erzeugt und ein anderes mal nur eine Zeichenkette zurück gegeben, werden
+  jetzt alle Zugriffe auf die Daten als Lexical-Liste generiert. Dies hatte
+  Auswirkungen auf die Synonymerkennung, da bisher die die Wortklasse 'y'
+  aus dem Programm und nicht aus den Datendateien kam.
 
 * <b>Multiworder verarbeitet mehrere Datenbanken</b>
 
-  Die Verarbeitung von mehreren Datenbanken für einen Zugriff wird normalerweise
-  in der Klasse Dictionary erledigt. Da der Multiworder jedoch die Funktionen der
-  Dictionary-Klasse nicht benötigt, greift er direkt auf die Klasse DataSource zu,
-  welche diese Funktion nicht besitzt. Daher musste die Verarbeitung mehrerer
-  Datendateien im Multiworder selbst erfolgen.
+  Die Verarbeitung von mehreren Datenbanken für einen Zugriff wird
+  normalerweise in der Klasse Dictionary erledigt. Da der Multiworder
+  jedoch die Funktionen der Dictionary-Klasse nicht benötigt, greift er
+  direkt auf die Klasse DataSource zu, welche diese Funktion nicht besitzt.
+  Daher musste die Verarbeitung mehrerer Datendateien im Multiworder selbst
+  erfolgen.
 
 == 1.0.3 [2005-05-21]
 
 * <b>Multiworder fertig!</b>
 
-  Mit dem neuen Attendee Multiworder werden Mehrwortgruppen locker und schnell
-  erkannt. Erkannte Gruppen werden als als zusätzliches (Dummy-)Wort mit in den
-  Datenstrom eingespeist. Die Geschwindigkeit wird dadurch erreicht, dass die
-  Mehrwortgruppen in Ihren jeweiligen Grundformen gespeichert werden. Das ist
-  genau dass, was der Multiworder frei Haus geliefert bekommt. Das klappt
-  wunderbar, wenn für den Multiworder-Lauf und die Ersterstellung des
-  Mehrwörterbuches die gleichen Wörterbücher verwendet werden.
-  Soll heißen, wenn zu einem späteren Zeitpunkt zusätzliche Wörterbücher hinzu
-  gezogen werden, kann eine erneute Erstellung der Mehrwörterbuches Sinn
-  machen, um die Erkennungsquote zu verbessern.
-  Diese Version arbeitet mit einem abgespeckten Mehrwörterbuch.
+  Mit dem neuen Attendee Multiworder werden Mehrwortgruppen locker und
+  schnell erkannt. Erkannte Gruppen werden als als zusätzliches (Dummy-)Wort
+  mit in den Datenstrom eingespeist. Die Geschwindigkeit wird dadurch
+  erreicht, dass die Mehrwortgruppen in Ihren jeweiligen Grundformen
+  gespeichert werden. Das ist genau dass, was der Multiworder frei Haus
+  geliefert bekommt. Das klappt wunderbar, wenn für den Multiworder-Lauf
+  und die Ersterstellung des Mehrwörterbuches die gleichen Wörterbücher
+  verwendet werden. Soll heißen, wenn zu einem späteren Zeitpunkt
+  zusätzliche Wörterbücher hinzu gezogen werden, kann eine erneute
+  Erstellung der Mehrwörterbuches Sinn machen, um die Erkennungsquote zu
+  verbessern. Diese Version arbeitet mit einem abgespeckten Mehrwörterbuch.
 
 * <b>Install.rb weiter ausgebaut</b>
 
-  Die einzelnen Installationsphasen können jetzt auch einzeln aufgerufen werden.
-  Mit den Optionen -data, -test und -docu können die jeweiligen Phasen wiederholt
-  werden. Mit der zusätzlichen Option -r kann auch alles wieder rückgängig gemacht
-  werden.
+  Die einzelnen Installationsphasen können jetzt auch einzeln aufgerufen
+  werden. Mit den Optionen -data, -test und -docu können die jeweiligen
+  Phasen wiederholt werden. Mit der zusätzlichen Option -r kann auch alles
+  wieder rückgängig gemacht werden.
 
 == 1.0.2 [2005-04-30]
 
@@ -689,9 +725,10 @@
 * <b>Forget MySQL</b>
 
   Als erstes filebasiertes Datenzugriffssystem wurde SDBM integriert. Darüber
-  wird MySQL überflüssig. Alle relevanten Daten liegen im Unterverzeichnis /de.
-  Siehe auch de.xml:<datasource>. Vor der ersten Nutzung sollten die SDBM-
-  Dateien mit ruby dbm.rb erzeugt werden. (wird durch install.rb erledigt)
+  wird MySQL überflüssig. Alle relevanten Daten liegen im Unterverzeichnis
+  /de. Siehe auch de.xml:<datasource>. Vor der ersten Nutzung sollten die
+  SDBM-Dateien mit ruby dbm.rb erzeugt werden. (wird durch install.rb
+  erledigt)
 
 * <b>Sortierung im Vector_filter verbessert</b>
 
@@ -712,40 +749,43 @@
 
 * <b>Kompositumverarbeitung im Vector_filter</b>
 
-  Neben der Kompositum-Grundform werden jetzt auch die Grundformen der Wort-
-  Teile mit eingesackt.
+  Neben der Kompositum-Grundform werden jetzt auch die Grundformen der
+  Wort-Teile mit eingesackt.
 
 == 1.0.0 [2005-04-26]
 
 * <b>Dokumentation erstellt</b>
 
-  Sie ist zwar noch teilweise verteilt, aber sie ist da, z.B. in doc/index.html oder
-  in Config.doc. Einigermaßen fertig (war ich nach der Erstellung). Bitte um
-  Feedback was besser geht und was fehlt.
+  Sie ist zwar noch teilweise verteilt, aber sie ist da, z.B. in
+  doc/index.html oder in Config.doc. Einigermaßen fertig (war ich nach
+  der Erstellung). Bitte um Feedback was besser geht und was fehlt.
 
 * <b>Attendees überarbeitet</b>
 
   Sehen jetzt noch einfacher aus. Brauchen nur noch die Methoden
-  init - Zur Bereitstellung von Parametern und Konfiguration für die anderen Meth.
+  init - Zur Bereitstellung von Parametern und Konfiguration für die
+  anderen Meth.
   control - Zur Verarbeitung von Kommandos
   process - Zur Ver- und Bearbeitung von zugestellten Objekten
 
 * <b>Dictionary aufgesplittet</b>
 
-  Da es mittlerweile drei Attendees gibt, die Datenbankzugriff brauchen, ist das
-  Dictionary eine Hauptklasse geworden. Dazu gibt es eine rudimentärere Klasse,
-  auf die das Dictionary sich für den Datenzugriff stützt: Datasource.
-  Diese Klasse nutzt die vollen Möglichkeiten eines eigenen Datencaches, welches
-  die Performance noch einmal deutlich verbessert hat.
+  Da es mittlerweile drei Attendees gibt, die Datenbankzugriff brauchen, ist
+  das Dictionary eine Hauptklasse geworden. Dazu gibt es eine rudimentärere
+  Klasse, auf die das Dictionary sich für den Datenzugriff stützt: Datasource.
+  Diese Klasse nutzt die vollen Möglichkeiten eines eigenen Datencaches,
+  welches die Performance noch einmal deutlich verbessert hat.
 
 * <b>Konfiguration aufgesplittet</b>
 
-  Ja ja, mein Lieblingsthema, aber ohne eine saubere Konfigurationsmöglichkeit ist
-  Lingo leider nix Wert. Gibt jetzt
-  lingo.xml  -  Zur Konfiguration der Kommandozeilenoptionen
-  de.xml    -  Enthält die sprachrelevante Konfiguration
-  <ablauf>.xml - Enthält die Lingo-Konfiguration, z.B. rubyling.xml oder ocr.xml
-  Mit ruby lingo.rb -c <ablauf> kann jeweils eine andere Konfig. gezogen werden.
+  Ja ja, mein Lieblingsthema, aber ohne eine saubere Konfigurationsmöglichkeit
+  ist Lingo leider nix Wert. Gibt jetzt
+  lingo.xml    - Zur Konfiguration der Kommandozeilenoptionen
+  de.xml       - Enthält die sprachrelevante Konfiguration
+  <ablauf>.xml - Enthält die Lingo-Konfiguration, z.B. rubyling.xml oder
+  ocr.xml
+  Mit ruby lingo.rb -c <ablauf> kann jeweils eine andere Konfig. gezogen
+  werden.
 
 == 0.9.8 [2005-04-16]
 
@@ -770,11 +810,12 @@
 
 * <b>Konfiguration mit Lingo.xml</b>
 
-  Konfiguration vollständig überarbeitet. Lingo.cfg heißt jetzt lingo.xml. Mit dieser
-  Endung ist sie leichter mit SciTe editierbar. Die Klasse LingoConfig kann jetzt (fast)
-  generische XML-Syntax verarbeiten. Die Werte werden auf sehr einfache Weise
-  im Code bereitgestellt. Hinzu kommt, dass die Aufruf-Parameter ebenfalls über
-  diesen Weg zur Verfügung stehen. Dokumentation muss folgen :o)
+  Konfiguration vollständig überarbeitet. Lingo.cfg heißt jetzt lingo.xml.
+  Mit dieser Endung ist sie leichter mit SciTe editierbar. Die Klasse
+  LingoConfig kann jetzt (fast) generische XML-Syntax verarbeiten. Die Werte
+  werden auf sehr einfache Weise im Code bereitgestellt. Hinzu kommt, dass
+  die Aufruf-Parameter ebenfalls über diesen Weg zur Verfügung stehen.
+  Dokumentation muss folgen :o)
 
 == 1.4.1 [2005-03-18] (Rubyling)
 
@@ -782,32 +823,34 @@
 
   Programm zeigte keine Reaktion mehr auf Laptop nach Standby. Daher stoppen
   und starten des MySQL-Dienstes eingebaut. Load_wbs.rb von Archiv rubyling_de
-  nach rubyling verschoben (Version aus rubyling_de im nächsten Release entfernen!)
+  nach rubyling verschoben (Version aus rubyling_de im nächsten Release
+  entfernen!)
 
 * <b>Rubyling Parameter korrigiert</b>
 
-  Für Programmtests waren Parameter im Programm verdrahtet. Kommandozeile wurde
-  ignoriert.
+  Für Programmtests waren Parameter im Programm verdrahtet. Kommandozeile
+  wurde ignoriert.
 
 == 1.4.0 [2005-03-18] (Rubyling)
 
 * <b>Interne Klassenhierarchie umgebaut</b>
 
-  In der Datei word.rb sind nun die Klassen unterschieden nach Token, Lexical und
-  Word inkl. weiterer Hilfsklassen.
+  In der Datei word.rb sind nun die Klassen unterschieden nach Token, Lexical
+  und Word inkl. weiterer Hilfsklassen.
 
 * <b>Synonymverarbeitung eingebaut</b>
 
-  Erkannte Worte werden zusätzlich auf Synonyme hin geprüft. Die Liste der Grundformen
-  des Wortes wird dann um die gefundenen Synonyme erweitert. Die Synonym-Wörterbücher
-  sind wie gewohnt in ruby.cfg unter database/synonym konfigurierbar. Derzeit wird
-  openthesaurus als einziges Wörterbuch benutzt. Um openthesaurus zu nutzen, sei
-  das Archiv rubyling_de(v1.0) wärmstens empfohlen.
+  Erkannte Worte werden zusätzlich auf Synonyme hin geprüft. Die Liste der
+  Grundformen des Wortes wird dann um die gefundenen Synonyme erweitert. Die
+  Synonym-Wörterbücher sind wie gewohnt in ruby.cfg unter database/synonym
+  konfigurierbar. Derzeit wird openthesaurus als einziges Wörterbuch benutzt.
+  Um openthesaurus zu nutzen, sei das Archiv rubyling_de (v1.0) wärmstens
+  empfohlen.
 
 * <b>Nicht erkannte Wörter</b>
 
-  Als zusätzliche Datei wird jetzt auch noch eine Endung .non erzeugt, die alle
-  nicht erkannten Wörter beinhaltet
+  Als zusätzliche Datei wird jetzt auch noch eine Endung .non erzeugt, die
+  alle nicht erkannten Wörter beinhaltet
 
 * <b>Schnelle Installation</b>
 
@@ -816,40 +859,42 @@
   dokumentieren. Alle Archive sind so aufgebaut, dass sie im Verzeichnis
   rubyling entpackt werden können.
 
-    Archiv              Ziel           Inhalt
-    ----------------------------------------------------------------------------
-    rubyling(v1.4)      /rubyling      Programm, Konfiguration und Dokumentation
-    rubyling_de(v1.0)   /rubyling/de   Wörterbücher und Programm zum DB-Aufbau
-    rubyling_txt(v1.0)  /rubyling/txt  Texte zum testen
+    Archiv             Ziel          Inhalt
+    --------------------------------------------------------------------------
+    rubyling(v1.4)     /rubyling     Programm, Konfiguration und Dokumentation
+    rubyling_de(v1.0)  /rubyling/de  Wörterbücher und Programm zum DB-Aufbau
+    rubyling_txt(v1.0) /rubyling/txt Texte zum testen
 
 == 1.3.0 [2005-02] (Rubyling)
 
 * <b>Inline-Dokumentation erstellt</b>
 
-  Mit Prozedur make_doc.cmd HTML-Seiten erstellen, dann doc\index.html aufrufen
+  Mit Prozedur make_doc.cmd HTML-Seiten erstellen, dann doc\index.html
+  aufrufen
 
 * <b>Konfiguration komplett überarbeitet</b>
 
-  Eine zentrale Konfigurationsdatei ruby.cfg enthält im XML-Style alle Parameter,
-  z.B. "<parm1 value='15'/>" in Ruby durch $CFG['parm1'] abfragbar. ruby-token.txt
-  und ruby-suffix.txt sind nicht mewhr notwendig.
+  Eine zentrale Konfigurationsdatei ruby.cfg enthält im XML-Style alle
+  Parameter, z.B. "<parm1 value='15'/>" in Ruby durch $CFG['parm1']
+  abfragbar. ruby-token.txt und ruby-suffix.txt sind nicht mewhr notwendig.
 
 * <b>Reduzierung der linguistisch relevanten Klassen auf zwei Klassen</b>
 
-  TextFile erweitert die Klasse File und ermöglicht die Datei-Verarbeitung auf
-  Tokenbasis.
-  Dictionary enthält mit der Methode search() die zentrale Schnittstelle für die
-  Wörterbuch-Recherche (inkl. Stopwörtern, Suffixbehandlung und Kompositumzerlegung).
+  TextFile erweitert die Klasse File und ermöglicht die Datei-Verarbeitung
+  auf Tokenbasis.
+  Dictionary enthält mit der Methode search() die zentrale Schnittstelle
+  für die Wörterbuch-Recherche (inkl. Stopwörtern, Suffixbehandlung und
+  Kompositumzerlegung).
 
-* Rubyling erkennt bei Aufruf automatisch (jetzt richtig) das Dateiobjekt und
-  unterscheidet Textdatei, Verzeichnis und DB-Datei (z.B. lir.txt). In den ersten
-  beiden Fällen werden je Textdatei drei Ausgabedateien erstellt, die eine weitere
-  Verbesserung der Verarbeitung ermöglichen:
+* Rubyling erkennt bei Aufruf automatisch (jetzt richtig) das Dateiobjekt
+  und unterscheidet Textdatei, Verzeichnis und DB-Datei (z.B. lir.txt). In
+  den ersten beiden Fällen werden je Textdatei drei Ausgabedateien erstellt,
+  die eine weitere Verbesserung der Verarbeitung ermöglichen:
     .tok = Textfile in Token je Zeile zerlegt;
     .dic = Token mit Auflösung nach Wörterbuchzugriff;
     .vec = Inhaltsvektor der Datei.
 
 == Rubyling x.x vor dem 01.02.2005
 
-* Diverse Versionen, von denen Klaus meint, sie hätten noch keine eins vor dem Punkt
-  verdient :o(
+* Diverse Versionen, von denen Klaus meint, sie hätten noch keine eins vor
+  dem Punkt verdient :o(
