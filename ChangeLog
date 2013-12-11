@@ -4,6 +4,8 @@
 
 == 1.8.5 [unreleased]
 
+* Compiled dictionaries are updated whenever the Lingo version changes, not
+  only when the source file's size or modification time changes.
 * Lingo::Attendee::TextReader learned better PDF-to-text conversion using the
   +pdftotext+ command; specify <tt>filter: pdftotext</tt> in the config.
 * Multiword dictionaries compiled from base forms can now generate inflected

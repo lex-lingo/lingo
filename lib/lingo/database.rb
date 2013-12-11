@@ -173,7 +173,7 @@ class Lingo
 
     def uptodate?(file = @stofile)
       src = Pathname.new(@srcfile)
-      @source_key = lambda { [src.size, src.mtime].join(FLD_SEP) }
+      @source_key = lambda { [src.size, src.mtime, VERSION].join(FLD_SEP) }
 
       sys_key = open { @db[SYS_KEY] } if File.exist?(file)
       sys_key && (!src.exist? || sys_key == @source_key.call)
