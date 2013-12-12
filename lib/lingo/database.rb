@@ -24,7 +24,7 @@
 ###############################################################################
 #++
 
-require_relative 'database/show_progress'
+require_relative 'database/progress'
 require_relative 'database/crypter'
 require_relative 'database/source'
 
@@ -68,13 +68,11 @@ class Lingo
 
     end
 
-    attr_reader :backend, :crypter
-
     def initialize(id, lingo)
       @id, @lingo, @config, @db = id, lingo, lingo.database_config(id), nil
 
-      @srcfile = Lingo.find(:dict, @config['name'], relax: true)
-      @crypter = @config.has_key?('crypt') && Crypter.new
+      @srcfile = Lingo.find(:dict, config['name'], relax: true)
+      @crypter = config.has_key?('crypt') && Crypter.new
 
       @val = Hash.new { |h, k| h[k] = [] }
 
@@ -92,6 +90,8 @@ class Lingo
 
       convert unless uptodate?
     end
+
+    attr_reader :lingo, :config, :backend, :crypter
 
     def closed?
       !@db || _closed?
@@ -144,7 +144,7 @@ class Lingo
     end
 
     def warn(*msg)
-      @lingo.warn(*msg)
+      lingo.warn(*msg)
     end
 
     private
@@ -227,14 +227,14 @@ class Lingo
       str.force_encoding(ENC)
     end
 
-    def convert(verbose = @lingo.config.stderr.tty?)
-      src = Source.get(@config.fetch('txt-format', 'key_value'), @id, @lingo)
+    def convert(verbose = lingo.config.stderr.tty?)
+      src = Source.get(config.fetch('txt-format', 'key_value'), @id, lingo)
 
       sep, key_map, val_map = prepare_lex
 
-      ShowProgress.new(self, src, verbose) { |progress| create {
+      Progress.new(self, src, verbose) { |progress| create {
         src.each { |key, val|
-          progress[src.pos]
+          progress << src.pos
 
           if key
             key.chomp!('.')
@@ -257,19 +257,19 @@ class Lingo
     end
 
     def prepare_lex
-      use_lex = @config['use-lex'] or return
+      use_lex = config['use-lex'] or return
 
       args = [{
         'source' => use_lex.split(SEP_RE),
-        'mode'   => @config['lex-mode']
-      }, @lingo]
+        'mode'   => config['lex-mode']
+      }, lingo]
 
       dic = Language::Dictionary.new(*args)
       gra = Language::Grammar.new(*args)
 
       args = nil
 
-      if inflect = @config['inflect']
+      if inflect = config['inflect']
         inflect = inflect == true ? %w[s e k] : inflect.split(SEP_RE)
         wc, suffixes = /a/, { 'f' => 'e', 'm' => 'er', 'n' => 'es' }
       end

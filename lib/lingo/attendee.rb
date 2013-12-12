@@ -91,6 +91,8 @@ class Lingo
       @skip_command = false
     end
 
+    attr_reader :lingo
+
     def add_subscriber(subscriber)
       @subscriber.concat(subscriber)
     end
@@ -154,11 +156,11 @@ class Lingo
     end
 
     def dictionary(src, mod)
-      Language::Dictionary.new({ 'source' => src, 'mode' => mod }, @lingo)
+      Language::Dictionary.new({ 'source' => src, 'mode' => mod }, lingo)
     end
 
     def grammar(src, mod)
-      Language::Grammar.new({ 'source' => src, 'mode' => mod }, @lingo)
+      Language::Grammar.new({ 'source' => src, 'mode' => mod }, lingo)
     end
 
     def set_dic
@@ -170,7 +172,7 @@ class Lingo
     end
 
     def warn(*msg)
-      @lingo.warn(*msg)
+      lingo.warn(*msg)
     end
 
     def require_lib(lib)

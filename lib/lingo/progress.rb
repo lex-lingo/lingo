@@ -26,76 +26,64 @@
 
 class Lingo
 
-  class ShowProgress
+  class Progress
 
     def initialize(obj, max, name = nil, doit = true, text = 'progress', nl = true, &block)
-      @doit, @nl, @out = doit, nl, obj.instance_variable_get(:@lingo).config.stderr
+      @doit, @out = doit, obj.lingo.config.stderr
 
-      return handle(&block) unless max && doit
+      if max && doit
+        format = ' [%3d%%]'
+        length = (format % 0).length
 
-      # To get the length of the formatted string we have
-      # to actually substitute the placeholder.
-      fmt = ' [%3d%%]'
-      len = (fmt % 0).length
+        erase = "\b" * length
+        @format = format + erase
 
-      # Now we know how far to "go back" to
-      # overwrite the formatted string...
-      back = "\b" * len
+        print name, ': ' if name
+        print text
 
-      @fmt = fmt       + back
-      @clr = ' ' * len + back
+        init(max)
 
-      print name, ': ' if name
-      print text
+        msg = %w[done aborted]
+      end
 
-      init(max)
+      suc = false
 
-      handle(%w[done aborted], &block)
+      res = catch(:cancel) {
+        trap(:INT) { throw(:cancel) }
+
+        yield self
+
+        suc = true
+        nil
+      }
+
+      print ' ' * length + erase, ' ', msg[suc ? 0 : 1], '.' if msg
+      print "\n" if msg && res
+
+      print Array(res).join("\n") if res
+      print "\n" if nl && (msg || res)
     end
 
     def init(max, doit = @doit)
-      return unless max && doit
-
-      @rat, @cnt, @next = max / 100.0, 0, 0
-      step
+      if max && doit
+        @ratio, @next = max / 100.0, 0
+        self << @count = 0
+      end
     end
 
-    def [](value)
-      if defined?(@cnt)
-        @cnt = value
-        step if @cnt >= @next
+    def <<(value)
+      if defined?(@count) && (@count = value) >= @next
+        percent = @count / @ratio
+        @next = (percent + 1) * @ratio
+
+        print @format % percent if percent.finite?
       end
     end
 
     private
 
-    def step
-      percent = @cnt / @rat
-      @next = (percent + 1) * @rat
-
-      print @fmt % percent if percent.finite?
-    end
-
     def print(*args)
       @out.print(*args)
-    end
-
-    def handle(msg = nil)
-      suc = false
-
-      res = catch(:cancel) {
-        trap(:INT) { throw(:cancel) }
-        yield self
-        suc = true
-      }
-
-      res = nil if suc
-
-      print @clr, ' ', msg[suc ? 0 : 1], '.' if msg
-      print "\n" if msg && res
-
-      print Array(res).join("\n") if res
-      print "\n" if @nl && (msg || res)
     end
 
   end

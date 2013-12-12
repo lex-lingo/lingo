@@ -98,7 +98,7 @@ class Lingo
             @no_sep = true
 
             if stdout?(@ext)
-              @filename, @file = @ext, @lingo.config.stdout
+              @filename, @file = @ext, lingo.config.stdout
             else
               @file = File.open(@filename = File.set_ext(param, ".#{@ext}"), 'w')
             end

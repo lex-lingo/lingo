@@ -86,7 +86,7 @@ class Lingo
         @combine = get_key('combine', false)
         @all     = @combine.is_a?(String) && @combine.downcase == 'all'
 
-        lex_src, lex_mod, d = nil, nil, @lingo.dictionary_config['databases']
+        lex_src, lex_mod, d = nil, nil, lingo.dictionary_config['databases']
 
         (mul_src = get_array('source')).each { |src|
           s, m = d[src].values_at('use-lex', 'lex-mode')

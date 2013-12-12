@@ -28,18 +28,17 @@ class Lingo
 
   class Database
 
-    class ShowProgress < ShowProgress
+    class Progress < Progress
 
       def initialize(obj, src, doit = true)
-        name = obj.instance_variable_get(:@config)['name']
-        super(obj, src.size, name, doit, 'convert', false)
+        super(obj, src.size, obj.config['name'], doit, 'convert', false)
 
-        if defined?(@cnt)
-          cnt, rej = src.rejected
+        if defined?(@count)
+          count, rejected = src.rejected
 
-          if cnt > 0
-            print ' (', cnt, ' rejected'
-            print ': ', rej if rej
+          if count > 0
+            print ' (', count, ' rejected'
+            print ': ', rejected if rejected
             print ')'
           end
 

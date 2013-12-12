@@ -115,7 +115,7 @@ class Lingo
         @filter   = get_key('filter', false)
         @progress = get_key('progress', false)
 
-        @lingo.deprecate('lir-record-pattern', :records, self) if has_key?('lir-record-pattern')
+        lingo.deprecate('lir-record-pattern', :records, self) if has_key?('lir-record-pattern')
 
         @lir  = get_re('records', get_key('lir-record-pattern', nil), %r{^\[(\d+)\.\]})  # DEPRECATE lir-record-pattern
         @cut  = get_re('fields', !!@lir, %r{^.+?:\s*})
@@ -136,11 +136,11 @@ class Lingo
         forward(STR_CMD_FILE, path)
 
         io = !stdin?(path) ? open_file(name = path) :
-          string_or_io(@lingo.config.stdin.set_encoding(ENC))
+          string_or_io(lingo.config.stdin.set_encoding(ENC))
 
-        ShowProgress.new(self, @progress && io.size, name) { |progress|
+        Progress.new(self, @progress && io.size, name) { |progress|
           filter(io, path, progress) { |line, pos|
-            progress[pos]
+            progress << pos
 
             line.chomp! if @chomp
             next if line =~ @skip
