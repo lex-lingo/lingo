@@ -36,13 +36,18 @@ class Lingo
 
       class WordClass < self
 
+        DEFAULT_SEPARATOR = ','
+
+        GENDER_SEPARATOR  = '.'
+
         def initialize(id, lingo)
           super
 
-          a   = '[+]?'
-          w   = '\w%1$s(?:\|\w%1$s)*'
-          wc  = "##{w % a}(?:\\.#{w % ''})?"
-          sep = Regexp.escape(@sep ||= ',')
+          gen = Regexp.escape(GENDER_SEPARATOR)
+          sep = Regexp.escape(@sep ||= DEFAULT_SEPARATOR)
+
+          w, a = '\w%1$s(?:\|\w%1$s)*', '[+]?'
+          wc   = "##{w % a}(?:#{gen}#{w % ''})?"
 
           @pat = /^(#{@wrd})#{sep}((?:#{@wrd}#{wc})+)$/
         end

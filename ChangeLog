@@ -12,6 +12,8 @@
   only when the source file's size or modification time changes.
 * Lingo::Attendee::TextReader learned better PDF-to-text conversion using the
   +pdftotext+ command; specify <tt>filter: pdftotext</tt> in the config.
+* Lingo::Attendee::VectorFilter learned +dict+ option to print words in
+  dictionary format (Lingo::Database::Source::WordClass).
 * Multiword dictionaries compiled from base forms can now generate inflected
   adjectives based on the gender of the head noun; set <tt>inflect: true</tt>
   in the dictionary config.

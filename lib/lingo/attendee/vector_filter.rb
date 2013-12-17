@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2012 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2013 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -90,6 +90,10 @@ class Lingo
           @lex  = get_re('lexicals', '[sy]')
           @skip = get_array('skip', DEFAULT_SKIP, :upcase)
 
+          @dict = get_key('dict', false)
+          @norm = get_key('norm', false) if @dict
+          @dict = Database::Source::WordClass::DEFAULT_SEPARATOR if @dict == true
+
           @src = get_key('src', false)
           @src = DEFAULT_SRC_SEP if @src == true
 
@@ -116,11 +120,27 @@ class Lingo
         elsif obj.is_a?(Word) && !@skip.include?(obj.attr)
           @word_count += 1
 
-          obj.get_class(@lex).each { |lex|
-            vec = Unicode.downcase(lex.form)
-            vec << @src << lex.src if @src && lex.src
-            @sort_format ? @vectors << vec : forward(vec)
-          }
+          if @dict
+            vec, sep = [], Database::Source::WordClass::GENDER_SEPARATOR
+
+            obj.get_class(@lex).each { |lex|
+              str = "#{lex.form} ##{lex.attr}"
+              str << sep << lex.gender if lex.gender
+              vec << str
+            }
+
+            unless vec.empty?
+              wrd = @norm ? obj.lexicals.first.form : obj.form
+              vec = Unicode.downcase("#{wrd}#{@dict}#{vec.join(' ')}")
+              @sort_format ? @vectors << vec : forward(vec)
+            end
+          else
+            obj.get_class(@lex).each { |lex|
+              vec = Unicode.downcase(lex.form)
+              vec << @src << lex.src if @src && lex.src
+              @sort_format ? @vectors << vec : forward(vec)
+            }
+          end
         end
       end
 
