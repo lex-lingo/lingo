@@ -298,10 +298,15 @@ Wort2=
       Wort1=Projektion4 #e
       Wort1=#s
       Wort2=
+      Wort4.illegal
+      Wort4=still illegal
+      Wort4=still illegal#s!
+      Wort4=now we're talking#s+
     }, {
       'wort1' => 'projektion1#h#|projektion4#e#',
       'wort2' => 'projektion2#i#',
-      'wort3' => 'projektion3#e#'
+      'wort3' => 'projektion3#e#',
+      'wort4' => "now we're talking#s+#"
     })
   end
 

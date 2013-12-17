@@ -4,10 +4,10 @@
 
 == 1.8.5 [unreleased]
 
-* Lexicals in Lingo::Language::Word are no longer sorted; in particular,
-  compound parts keep their original order.
 * Dictionary values (projections) are no longer sorted; hence, order of
   definition affects processing.
+* Lexicals in Lingo::Language::Word are no longer sorted; in particular,
+  compound parts keep their original order.
 * Compiled dictionaries are updated whenever the Lingo version changes, not
   only when the source file's size or modification time changes.
 * Lingo::Attendee::TextReader learned better PDF-to-text conversion using the
@@ -18,6 +18,8 @@
 * Lingo::Database::Source::WordClass supports gender information being encoded
   in the dictionary as well as shorthand notation for multiple word
   classes/genders.
+* Lingo::Database::Source::WordClass supports compound parts being encoded in
+  the dictionary by appending <tt>+</tt> to the word class.
 * Lingo::Database::Source removes leading and trailing whitespace from
   dictionary lines.
 * Lingo::Database::Crypter uses OpenSSL to encrypt/decrypt dictionaries.

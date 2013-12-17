@@ -188,6 +188,7 @@ class TestDictionary < LingoTestCase
       assert_equal([lx('knaller|s')], dic.select('knaller'))
       # nur in zweiter Quelle vorhanden
       assert_equal([lx('super indexierungssystem|m')], dic.select('lex-lingo'))
+      assert_equal([lx('wirkungsort|s'), lx('wirkung|s+'), lx('ort|s+')], dic.select('wirkungsort'))
       # in beiden Quellen vorhanden
       assert_equal([lx('a-dur|s'), lx('b-dur|s')], dic.select('a-dur'))
       assert_equal([lx('aas|s')], dic.select('aas'))

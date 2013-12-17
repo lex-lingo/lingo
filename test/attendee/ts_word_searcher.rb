@@ -78,18 +78,20 @@ class TestAttendeeWordSearcher < AttendeeTestCase
     ])
   end
 
-  def test_select_two_sources_mode_def
+  def test_select_two_sources_mode_default
     meet({ 'source' => 'sys-dic,tst-dic' }, [
       tk('Hasennasen|WORD'),
       tk('Knaller|WORD'),
       tk('Lex-Lingo|WORD'),
       tk('A-Dur|WORD'),
+      tk('Wirkungsort|WORD'),
       ai('EOL|')
     ], [
       wd('Hasennasen|?'),
       wd('Knaller|IDF', 'knaller|s'),
       wd('Lex-Lingo|IDF', 'super indexierungssystem|m'),
       wd('A-Dur|IDF', 'a-dur|s', 'b-dur|s'),
+      wd('Wirkungsort|IDF', 'wirkungsort|s', 'wirkung|s+', 'ort|s+'),
       ai('EOL|')
     ])
   end

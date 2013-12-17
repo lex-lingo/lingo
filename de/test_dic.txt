@@ -22,3 +22,4 @@ aargauer,aargauer #s
 aaron,aaron #e
 aas,aas #s
 lex-lingo,super indexierungssystem #m
+wirkungsort,wirkungsort #s wirkung #s+ ort #s+
