@@ -8,9 +8,9 @@ class TestAttendeeVariator < AttendeeTestCase
     meet({ 'source' => 'sys-dic' }, [
       wd('fchwarz|?'), wd('fchilling|?'), wd('iehwarzfchilling|?'), wd('fchiiiirg|?')
     ], [
-      wd('*schwarz|IDF', 'schwarz|s', 'schwarz|a'),
+      wd('*schwarz|IDF', 'schwarz|a', 'schwarz|s'),
       wd('*schilling|IDF', 'schilling|s'),
-      wd('*schwarzschilling|KOM', 'schwarzschilling|k', 'schwarz|s+', 'schwarz|a+', 'schilling|s+'),
+      wd('*schwarzschilling|KOM', 'schwarzschilling|k', 'schwarz|a+', 'schwarz|s+', 'schilling|s+'),
       wd('fchiiiirg|?')
     ])
   end

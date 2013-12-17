@@ -116,7 +116,7 @@ def test_ref(name, cfg = name)
   require 'diff/lcs/ldiff'
 
   cmd = %W[lingo.rb -c #{cfg} txt/#{name}.txt]
-  continue, msg = 0, ["Command failed: #{cmd.join(' ')}"]
+  diff, msg = 0, ["Command failed: #{cmd.join(' ')}"]
 
   Process.ruby(*cmd) { |_, _, o, e|
     IO.interact({}, { o => msg, e => msg })
@@ -124,8 +124,8 @@ def test_ref(name, cfg = name)
 
   Dir["test/ref/#{name}.*"].each { |ref|
     puts "## #{org = ref.sub(/test\/ref/, 'txt')}"
-    continue += Diff::LCS::Ldiff.run(ARGV.clear << '-a' << org << ref)
+    diff += Diff::LCS::Ldiff.run(ARGV.clear << '-a' << org << ref)
   }
 
-  exit continue + 1 unless continue.zero?
+  exit diff + 1 unless diff.zero?
 end

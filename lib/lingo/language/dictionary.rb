@@ -102,9 +102,7 @@ class Lingo
           break unless @all
         }
 
-        lex.sort!
         lex.uniq!
-
         lex
       end
 

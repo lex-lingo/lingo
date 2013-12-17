@@ -10,7 +10,7 @@ class TestAttendeeWordSearcher < AttendeeTestCase
     ], [
       wd('Dies|IDF', 'dies|w'),
       wd('ist|IDF', 'sein|v'),
-      wd('ein|IDF', 'einen|v', 'ein|w'),
+      wd('ein|IDF', 'ein|w', 'einen|v'),
       wd('Test|IDF', 'test|s', 'testen|v'),
       tk('.|PUNC'),
       ai('EOL|')
@@ -23,7 +23,7 @@ class TestAttendeeWordSearcher < AttendeeTestCase
     ], [
       wd('Dies|IDF', 'dies|w'),
       wd('ist|IDF', 'sein|v'),
-      wd('ein|IDF', 'einen|v', 'ein|w'),
+      wd('ein|IDF', 'ein|w', 'einen|v'),
       wd('Test|IDF', 'test|s', 'testen|v'),
       tk('.|PUNC'),
       ai('EOL|')

@@ -67,21 +67,21 @@ class TestLexicalHash < LingoTestCase
   def test_wordclass
     lh('sys-dic') { |ds|
       assert_equal([lx('a-dur|s')], ds['a-dur'])
-      assert_equal([lx('aalen|v'), lx('aalen|e')], ds['aalen'])
+      assert_equal([lx('aalen|e'), lx('aalen|v')], ds['aalen'])
       assert_equal([lx('abarbeitend|a')], ds['abarbeitend'])
     }
   end
 
   def test_wordclass_gender
     lh('tst-gen') { |ds|
-      assert_equal([lx('substantiv|s|n'), lx('substantiv|a')], ds['substantiv'])
-      assert_equal([lx('mehr|s|n'), lx('mehren|v'), lx('mehr|w')], ds['mehr'])
+      assert_equal([lx('substantiv|a'), lx('substantiv|s|n')], ds['substantiv'])
+      assert_equal([lx('mehr|w'), lx('mehr|s|n'), lx('mehren|v')], ds['mehr'])
       assert_equal([lx('wort|s|n')], ds['wort'])
       assert_equal([lx('gruppe|s|f')], ds['gruppe'])
       assert_equal([lx('modul|s|m'), lx('modul|s|n')], ds['modul'])
       assert_equal([lx('nock|s|f'), lx('nock|s|m'), lx('nock|s|n'), lx('nocke|s|f'), lx('nocken|s|m')], ds['nocken'])
-      assert_equal([lx('albern|v'), lx('albern|a')], ds['albern'])
-      assert_equal([lx('fortuna|s|f'), lx('fortuna|e|f')], ds['fortuna'])
+      assert_equal([lx('albern|a'), lx('albern|v')], ds['albern'])
+      assert_equal([lx('fortuna|e|f'), lx('fortuna|s|f')], ds['fortuna'])
     }
   end
 
@@ -96,7 +96,7 @@ class TestLexicalHash < LingoTestCase
   def test_multivalue
     lh('sys-syn') { |ds|
       assert_equal([lx('abbau <chemie>|y'), lx('chemische abbaureaktion|y'), lx('chemischer abbau|y'), lx('photochemischer abbau|y')], ds['abbaureaktion'])
-      assert_equal([lx('dependenz|y'), lx('unselbstständigkeit|y'), lx('unselbständigkeit|y')], ds['abhängigkeit'])
+      assert_equal([lx('dependenz|y'), lx('unselbständigkeit|y'), lx('unselbstständigkeit|y')], ds['abhängigkeit'])
     }
   end
 
@@ -330,7 +330,7 @@ class TestGrammar < LingoTestCase
       # vorderer Teil ist ein Wort mit Suffix => siehe Hasenbraten
       # vorderer Teil ist ein Kompositum
       assert_equal(
-        wd('morgenonkelmantel|KOM', 'morgenonkelmantel|k', 'morgen|s+', 'morgen|w+', 'onkel|s+', 'mantel|s+'),
+        wd('morgenonkelmantel|KOM', 'morgenonkelmantel|k', 'morgen|w+', 'morgen|s+', 'onkel|s+', 'mantel|s+'),
         gra.find_compound('morgenonkelmantel')
       )
 

@@ -14,7 +14,7 @@ class TestAttendeeDecomposer < AttendeeTestCase
     ], [
       wd('Kleinseite|KOM', 'kleinseite|k', 'klein|a+', 'seite|s+'),
       wd('Arrafat-Nachfolger|KOM', 'arrafat-nachfolger|k', 'arrafat|x+', 'nachfolger|s+'),
-      wd('Afganistan-Reisen|KOM', 'afganistan-reise|k', 'afganistan|x+', 'reise|s+', 'reisen|v+'),
+      wd('Afganistan-Reisen|KOM', 'afganistan-reisen|k', 'afganistan|x+', 'reisen|v+', 'reise|s+'),
       wd('Kompositumzerlegung|KOM', 'kompositumzerlegung|k', 'kompositum|s+', 'zerlegung|s+'),
       wd('Kompositumzerlegung|KOM', 'kompositumzerlegung|k', 'kompositum|s+', 'zerlegung|s+')
     ])

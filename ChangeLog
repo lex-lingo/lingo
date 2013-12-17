@@ -6,6 +6,8 @@
 
 * Lexicals in Lingo::Language::Word are no longer sorted; in particular,
   compound parts keep their original order.
+* Dictionary values (projections) are no longer sorted; hence, order of
+  definition affects processing.
 * Compiled dictionaries are updated whenever the Lingo version changes, not
   only when the source file's size or modification time changes.
 * Lingo::Attendee::TextReader learned better PDF-to-text conversion using the
