@@ -36,12 +36,12 @@ class Lingo
 
       include Comparable
 
-      attr_accessor :form, :attr, :gender, :src
-
       def initialize(form, attr = WA_UNSET, src = nil)
         attr, gender = attr
         @form, @attr, @gender, @src = form || '', attr || '', gender, src
       end
+
+      attr_accessor :form, :attr, :gender, :src, :head
 
       def unknown?
         [WA_UNKNOWN, WA_UNKMULPART].include?(attr)
