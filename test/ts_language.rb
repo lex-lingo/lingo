@@ -288,7 +288,7 @@ class TestGrammar < LingoTestCase
       )
 
       assert_equal(
-        wd('benutzerforschung|KOM', 'benutzerforschung|k', 'erforschung|s+', 'benutzen|v+'),
+        wd('benutzerforschung|KOM', 'benutzerforschung|k', 'benutzen|v+', 'erforschung|s+'),
         gra.find_compound('benutzerforschung')
       )
 
@@ -317,7 +317,7 @@ class TestGrammar < LingoTestCase
 
       # hinterer Teil ist ein Kompositum nach Bindestrich
       assert_equal(
-        wd('arrafat-nachfolgebedarf|KOM', 'arrafat-nachfolgebedarf|k', 'bedarf|s+', 'nachfolge|s+', 'arrafat|x+'),
+        wd('arrafat-nachfolgebedarf|KOM', 'arrafat-nachfolgebedarf|k', 'arrafat|x+', 'nachfolge|s+', 'bedarf|s+'),
         gra.find_compound('arrafat-nachfolgebedarf')
       )
 
@@ -330,13 +330,13 @@ class TestGrammar < LingoTestCase
       # vorderer Teil ist ein Wort mit Suffix => siehe Hasenbraten
       # vorderer Teil ist ein Kompositum
       assert_equal(
-        wd('morgenonkelmantel|KOM', 'morgenonkelmantel|k', 'mantel|s+', 'morgen|s+', 'onkel|s+', 'morgen|w+'),
+        wd('morgenonkelmantel|KOM', 'morgenonkelmantel|k', 'morgen|s+', 'morgen|w+', 'onkel|s+', 'mantel|s+'),
         gra.find_compound('morgenonkelmantel')
       )
 
       # vorderer Teil ist ein TakeItAsIs vor Bindestrich / bindestrichversion
       assert_equal(
-        wd('arrafat-nachfolger|KOM', 'arrafat-nachfolger|k', 'nachfolger|s+', 'arrafat|x+'),
+        wd('arrafat-nachfolger|KOM', 'arrafat-nachfolger|k', 'arrafat|x+', 'nachfolger|s+'),
         gra.find_compound('arrafat-nachfolger')
       )
 
@@ -354,7 +354,7 @@ class TestGrammar < LingoTestCase
 
       # normal mit suggestion
       assert_equal(
-        wd('benutzerforschung|KOM', 'benutzerforschung|k', 'erforschung|s+', 'benutzen|v+'),
+        wd('benutzerforschung|KOM', 'benutzerforschung|k', 'benutzen|v+', 'erforschung|s+'),
         gra.find_compound('benutzerforschung')
       )
     }

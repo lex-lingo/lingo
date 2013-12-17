@@ -37,6 +37,7 @@ der schmal zylinder
 wort mist
 alt bibliothekskatalog
 neu bibliothekskatalög
+neu alttitelkatalog
     EOT
 
     @keyvalue = <<-EOT
@@ -155,7 +156,8 @@ Wort2=
       'der schmal zylinder'             => 'der schmal zylinder#s',
       'wort mist'                       => 'wort mist#s',
       'alt bibliothekskatalog'          => 'alter bibliothekskatalog#s',
-      'neu bibliothekskatalög'          => 'neu bibliothekskatalög#s'
+      'neu bibliothekskatalög'          => 'neu bibliothekskatalög#s',
+      'neu alttitelkatalog'             => 'neuer alttitelkatalog#s'
     })
   end
 
@@ -185,7 +187,8 @@ Wort2=
       'der schmal zylinder'             => 'der schmal zylinder#s',
       'wort mist'                       => 'wort mist#s',
       'alt bibliothekskatalog'          => 'alt bibliothekskatalog#s',
-      'neu bibliothekskatalög'          => 'neu bibliothekskatalög#s'
+      'neu bibliothekskatalög'          => 'neu bibliothekskatalög#s',
+      'neu alttitelkatalog'             => 'neu alttitelkatalog#s'
     })
   end
 
@@ -215,7 +218,8 @@ Wort2=
       'der schmal zylinder'             => 'der schmal zylinder#s',
       'wort mist'                       => 'wort mist#s',
       'alt bibliothekskatalog'          => 'alt bibliothekskatalog#s',
-      'neu bibliothekskatalög'          => 'neu bibliothekskatalög#s'
+      'neu bibliothekskatalög'          => 'neu bibliothekskatalög#s',
+      'neu alttitelkatalog'             => 'neu alttitelkatalog#s'
     })
   end
 

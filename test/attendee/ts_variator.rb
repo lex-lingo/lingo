@@ -10,7 +10,7 @@ class TestAttendeeVariator < AttendeeTestCase
     ], [
       wd('*schwarz|IDF', 'schwarz|s', 'schwarz|a'),
       wd('*schilling|IDF', 'schilling|s'),
-      wd('*schwarzschilling|KOM', 'schwarzschilling|k', 'schwarz|a+', 'schilling|s+', 'schwarz|s+'),
+      wd('*schwarzschilling|KOM', 'schwarzschilling|k', 'schwarz|s+', 'schwarz|a+', 'schilling|s+'),
       wd('fchiiiirg|?')
     ])
   end
