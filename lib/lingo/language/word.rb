@@ -127,9 +127,9 @@ class Lingo
         lex = get_class(wc_re).first and lex.form.count(' ') + 1
       end
 
-      def <<(*other)
-        other.flatten!
-        lexicals.concat(other)
+      def <<(*lex)
+        lex.flatten!
+        @lexicals.concat(lex)
         self
       end
 
