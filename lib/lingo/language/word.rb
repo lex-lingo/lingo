@@ -80,10 +80,7 @@ class Lingo
       end
 
       def add_lexicals(lex)
-        unless lex.empty?
-          @lexicals.concat(lex).uniq!
-          Lingo.sort!(@lexicals)
-        end
+        @lexicals.concat(lex).uniq! unless lex.empty?
       end
 
       def attr?(*attr)
