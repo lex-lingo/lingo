@@ -240,7 +240,7 @@ Wort2=
       assert_nil(hash[key])
       assert_equal([val], db[key])
 
-      assert_nil(db[digest = db.crypter.digest(key)])
+      assert_nil(db[digest = Lingo::Database::Crypter.digest(key)])
       assert_not_equal(key, digest)
 
       assert_instance_of(String, encrypted = hash[digest])

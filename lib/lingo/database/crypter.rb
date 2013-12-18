@@ -35,12 +35,12 @@ class Lingo
 
     class Crypter
 
-      def digest(key)
+      def self.digest(key)
         Digest::SHA1.hexdigest(key)
       end
 
       def encode(key, val)
-        [digest(key), crypt(:encrypt, key, val)]
+        [self.class.digest(key), crypt(:encrypt, key, val)]
       end
 
       def decode(key, val)
@@ -51,7 +51,7 @@ class Lingo
 
       def crypt(method, key, val)
         cipher = OpenSSL::Cipher.new('aes-128-cbc').send(method)
-        cipher.iv = cipher.key = digest(key)
+        cipher.iv = cipher.key = self.class.digest(key)
         cipher.update(val) + cipher.final
       end
 

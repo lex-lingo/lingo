@@ -91,7 +91,7 @@ class Lingo
       convert unless uptodate?
     end
 
-    attr_reader :lingo, :config, :backend, :crypter
+    attr_reader :lingo, :config, :backend
 
     def closed?
       !@db || _closed?
@@ -171,9 +171,22 @@ class Lingo
       get_backend(mod) or raise BackendNotAvailableError.new(mod, file)
     end
 
+    def config_hash
+      hashes = [config]
+
+      if use_lex = config['use-lex']
+        hashes << lingo.database_config(use_lex)
+      end
+
+      Crypter.digest(hashes.inspect)
+    end
+
     def uptodate?(file = @stofile)
       src = Pathname.new(@srcfile)
-      @source_key = lambda { [src.size, src.mtime, VERSION].join(FLD_SEP) }
+
+      @source_key = lambda {
+        [src.size, src.mtime, VERSION, config_hash].join(FLD_SEP)
+      }
 
       sys_key = open { @db[SYS_KEY] } if File.exist?(file)
       sys_key && (!src.exist? || sys_key == @source_key.call)
@@ -217,7 +230,7 @@ class Lingo
     end
 
     def _val(key)
-      if val = _get(@crypter ? @crypter.digest(key) : key)
+      if val = _get(@crypter ? Crypter.digest(key) : key)
         _encode!(val)
         @crypter ? @crypter.decode(key, val) : val
       end
