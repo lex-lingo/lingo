@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2012 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2013 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -99,14 +99,6 @@ class Lingo
 
       def genders(compound_parts = true)
         lexicals(compound_parts).map { |i| i.gender }
-      end
-
-      def parts
-        1
-      end
-
-      def min_part_size
-        form.length
       end
 
       # Gibt genau die Grundform der Wortklasse zurück, die der RegExp des Übergabe-Parameters
