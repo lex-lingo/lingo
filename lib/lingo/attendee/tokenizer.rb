@@ -93,7 +93,7 @@ class Lingo
         ['WORD', /^(?:#{CHAR}|#{DIGIT}|-)+/],
         ['PUNC', /^[!,.:;?¡¿]/],
         ['OTHR', /^["$#%&'()*+\-\/<=>@\[\\\]^_{|}~¢£¤¥¦§¨©«¬®¯°±²³´¶·¸¹»¼½¾×÷]/],
-        ['HELP', /^[^ ]*/]
+        ['HELP', /^\S*/]
       ]
 
       class << self
@@ -102,13 +102,16 @@ class Lingo
           RULES.assoc(name)
         end
 
-        def delete(*names)
-          names.each { |name| RULES.delete(rule(name)) }
+        def rules(name)
+          RULES.select { |rule,| rule == name }
         end
 
-        def replace(name, expr)
-          rule = rule(name) or return
-          rule[1] = block_given? ? yield(rule[1]) : expr
+        def delete(*names)
+          names.map { |name| rules(name).each { |rule| RULES.delete(rule) } }
+        end
+
+        def replace(name, expr = nil)
+          rules(name).each { |rule| rule[1] = expr || yield(*rule) }
         end
 
         def insert(*rules)
