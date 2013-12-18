@@ -27,6 +27,8 @@
   dictionary lines.
 * Lingo::Database::Crypter uses OpenSSL to encrypt/decrypt dictionaries.
   Note: Can't decrypt dictionaries encrypted with the old scheme anymore.
+* Eliminated pathological behaviour of the +URLS+ rule in
+  Lingo::Attendee::Tokenizer.
 * Dictionary cleanup.
 
 == 1.8.4 [2013-10-18]
