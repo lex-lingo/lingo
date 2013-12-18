@@ -40,7 +40,7 @@ class Lingo
         DEFAULT_SEPARATOR = '*'
 
         def initialize(id, lingo)
-          super
+          super(id, lingo, Language::LA_UNKNOWN)
           @pat = /^(#{@wrd})#{Regexp.escape(@sep ||= DEFAULT_SEPARATOR)}(#{@wrd})$/
         end
 

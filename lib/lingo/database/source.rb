@@ -53,7 +53,7 @@ class Lingo
 
       attr_reader :pos
 
-      def initialize(id, lingo)
+      def initialize(id, lingo, def_wc_default = nil)
         @config = lingo.database_config(id)
 
         source_file = Lingo.find(:dict, name = @config['name'], relax: true)
@@ -68,7 +68,8 @@ class Lingo
 
         raise SourceFileNotFoundError.new(name, id) unless @src.exist?
 
-        @def = @config.fetch('def-wc', Language::LA_UNKNOWN).downcase
+        @def = @config.fetch('def-wc', def_wc_default)
+        @def = @def.downcase if @def
         @sep = @config['separator']
 
         @wrd = "(?:#{Language::Char::ANY})+"

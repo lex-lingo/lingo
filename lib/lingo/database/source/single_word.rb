@@ -37,16 +37,15 @@ class Lingo
       class SingleWord < self
 
         def initialize(id, lingo)
-          super
+          super(id, lingo, Language::LA_NOUN)
           @pat = /^(#{@wrd})$/
-          @def = @config.fetch('def-wc',     's').downcase
           @mul = @config.fetch('def-mul-wc', @def).downcase
         end
 
         private
 
         def convert_line(line, key, val)
-          [k = key.strip, %W[#{k}##{k =~ /\s/ ? @mul : @def}]]
+          [k = key.strip, %W[#{k}##{k.include?(' ') ? @mul : @def}]]
         end
 
       end

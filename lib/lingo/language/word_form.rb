@@ -37,8 +37,8 @@ class Lingo
       include Comparable
 
       def initialize(form, attr = WA_UNSET, src = nil)
-        attr, gender = attr
-        @form, @attr, @gender, @src = form || '', attr || '', gender, src
+        attr, @gender = attr
+        @form, @attr, @src = form || '', attr || '', src
       end
 
       attr_accessor :form, :attr, :gender, :src, :head

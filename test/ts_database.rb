@@ -344,21 +344,17 @@ Wort2=
       Rasen;Gras;Grüne Fläche
       Rasen;Rennen;Wettrennen
     }, {
-      '^0'           => 'hasen|nasen|vasen|rasen',
-      '^1'           => 'gold|edelmetall|mehrwert',
-      '^2'           => 'rasen|gras|grüne fläche',
-      '^3'           => 'rasen|rennen|wettrennen',
-      'hasen'        => '^0',
-      'nasen'        => '^0',
-      'rasen'        => '^0|^2|^3',
-      'vasen'        => '^0',
-      'edelmetall'   => '^1',
-      'gold'         => '^1',
-      'mehrwert'     => '^1',
-      'gras'         => '^2',
-      'grüne fläche' => '^2',
-      'wettrennen'   => '^3',
-      'rennen'       => '^3'
+      'hasen'        => 'hasen|nasen|vasen|rasen',
+      'nasen'        => 'hasen|nasen|vasen|rasen',
+      'vasen'        => 'hasen|nasen|vasen|rasen',
+      'rasen'        => 'hasen|nasen|vasen|rasen|gras|grüne fläche|rennen|wettrennen',
+      'gold'         => 'gold|edelmetall|mehrwert',
+      'edelmetall'   => 'gold|edelmetall|mehrwert',
+      'mehrwert'     => 'gold|edelmetall|mehrwert',
+      'gras'         => 'rasen|gras|grüne fläche',
+      'grüne fläche' => 'rasen|gras|grüne fläche',
+      'rennen'       => 'rasen|rennen|wettrennen',
+      'wettrennen'   => 'rasen|rennen|wettrennen'
     })
   end
 

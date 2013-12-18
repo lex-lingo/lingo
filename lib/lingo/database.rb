@@ -40,14 +40,10 @@ class Lingo
   class Database
 
     FLD_SEP = '|'
-    IDX_REF = '^'
     KEY_REF = '*'
     SYS_KEY = '~'
 
-    IDX_REF_ESC = Regexp.escape(IDX_REF)
     KEY_REF_ESC = Regexp.escape(KEY_REF)
-
-    INDEX_PATTERN = %r{\A#{IDX_REF_ESC}\d+\z}
 
     BACKENDS       = []
     BACKEND_BY_EXT = {}
@@ -125,12 +121,7 @@ class Lingo
 
     def [](key)
       val = _val(key) unless closed?
-      return unless val
-
-      # Äquvalenzklassen behandeln
-      val.split(FLD_SEP).map { |v|
-        v =~ INDEX_PATTERN ? _val(v) : v
-      }.compact.join(FLD_SEP).split(FLD_SEP)
+      val.split(FLD_SEP) if val
     end
 
     def []=(key, val)

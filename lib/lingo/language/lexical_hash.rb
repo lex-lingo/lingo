@@ -41,7 +41,6 @@ class Lingo
       end
 
       def initialize(id, lingo)
-        @wc  = lingo.database_config(id).fetch('def-wc', LA_UNKNOWN)
         @src = Database.open(id, lingo)
       end
 
@@ -54,8 +53,8 @@ class Lingo
 
         res = rec.map { |str|
           str =~ /\A\*\d+\z/ ? str : begin
-            k, w, g = str.split('#')
-            Lexical.new(k.strip, [w || @wc, g])
+            k, *w = str.split('#')
+            Lexical.new(k.strip, w)
           end
         }
 

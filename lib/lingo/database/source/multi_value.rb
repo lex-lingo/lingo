@@ -41,12 +41,11 @@ class Lingo
         def initialize(id, lingo)
           super
           @pat = /^#{@wrd}(?:#{Regexp.escape(@sep ||= DEFAULT_SEPARATOR)}#{@wrd})*$/
-          @idx = -1
         end
 
         def set(db, key, val)
-          db[key = "#{IDX_REF}#{@idx += 1}"] = val
-          val.each { |v| db[v] = [key] }
+          values = val.map { |v| @def ? "#{v}##{@def}" : v }
+          val.each { |v| db[v] = values }
         end
 
         private
