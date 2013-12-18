@@ -42,7 +42,7 @@ class Lingo
       def process(obj)
         if obj.is_a?(Word) && obj.unknown?
           stem = stem(Unicode.downcase(obj.form), @all)
-          obj.add_lexicals([Lexical.new(stem, @wc)]) if stem
+          obj << Lexical.new(stem, @wc) if stem
         end
 
         forward(obj)

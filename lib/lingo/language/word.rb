@@ -75,6 +75,8 @@ class Lingo
         @lexicals = []
       end
 
+      attr_writer :lexicals
+
       def lexicals(compound_parts = true)
         if !compound_parts && attr == WA_COMPOUND
           @lexicals.select { |lex| lex.attr == LA_COMPOUND }
@@ -83,12 +85,8 @@ class Lingo
         end
       end
 
-      def lexicals=(lex)
-        @lexicals = lex.uniq
-      end
-
       def add_lexicals(lex)
-        @lexicals.concat(lex).uniq! unless lex.empty?
+        @lexicals.concat(lex - @lexicals)
       end
 
       def attr?(*attr)

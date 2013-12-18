@@ -8,6 +8,7 @@
   definition affects processing.
 * Lexicals in Lingo::Language::Word are no longer sorted; in particular,
   compound parts keep their original order.
+* Lexicals in Lingo::Language::Word are no longer cleaned from duplicates.
 * Compiled dictionaries are updated whenever the Lingo version or their
   configuration changes, not only when the source file's size or modification
   time changes.

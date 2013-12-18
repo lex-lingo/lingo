@@ -298,6 +298,11 @@ class TestGrammar < LingoTestCase
         gra.find_compound('clustersuche')
       )
 
+      assert_equal(
+        wd('titelkatalogstitel|KOM', 'titelkatalogstitel|k', 'titel|s+', 'katalog|s+', 'titel|s+'),
+        gra.find_compound('titelkatalogstitel')
+      )
+
       # hinterer Teil ist ein Wort mit Suffix
       assert_equal(
         wd('hasenbraten|KOM', 'hasenbraten|k', 'hase|s+', 'braten|v+'),
@@ -367,7 +372,7 @@ class TestGrammar < LingoTestCase
 
   def test_max_parts
     lg { |gra|
-      assert_equal(wd('baumsbaumsbaum|KOM', 'baumsbaumsbaum|k', 'baum|s+'), gra.find_compound('baumsbaumsbaum'))
+      assert_equal(wd('baumsbaumsbaum|KOM', 'baumsbaumsbaum|k', 'baum|s+', 'baum|s+', 'baum|s+'), gra.find_compound('baumsbaumsbaum'))
       assert_equal(wd('baumsbaumsbaumsbaumsbaumsbaum|?'), gra.find_compound('baumsbaumsbaumsbaumsbaumsbaum'))
     }
   end
