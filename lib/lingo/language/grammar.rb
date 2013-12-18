@@ -85,7 +85,7 @@ class Lingo
           com = Word.new(str, WA_UNKNOWN), str, level, tail
         ) { |lex|
           com.attr = WA_COMPOUND
-          com.head = lex.last
+          com.head = Word.new_compound_head(lex)
           com.lexicals = lex.each { |l|
             l.attr += @append_wc unless l.attr == LA_COMPOUND
           }

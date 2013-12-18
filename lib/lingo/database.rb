@@ -270,7 +270,7 @@ class Lingo
       args = nil
 
       if inflect = config['inflect']
-        inflect = inflect == true ? %w[s e k] : inflect.split(SEP_RE)
+        inflect = inflect == true ? %w[s e] : inflect.split(SEP_RE)
         wc, suffixes = /a/, { 'f' => 'e', 'm' => 'er', 'n' => 'es' }
       end
 
@@ -283,10 +283,11 @@ class Lingo
         head_form = last_form[/.*(?=#)/]
 
         head = dic.find_word(head_form)
-        head = gra.find_compound(head_form) if head.unknown?
+        comp = gra.find_compound(head_form) if head.unknown?
+        head = comp.head if comp && !comp.unknown?
 
         if head.attr?(*inflect) and
-          suf = suffixes[head.genders.compact.last] and
+          suf = suffixes[head.genders.compact.first] and
           adj = forms.map { |form| (word = dic.find_word(form)).
             identified? && word.get_class(wc).first || break }
           forms.zip(adj) { |form, lex| form << suf if form == lex.form }

@@ -43,6 +43,18 @@ class Lingo
           new_lexicals(form, attr, Lexical.new(form, lex_attr))
         end
 
+        def new_compound_head(lex, attr = WA_UNSET)
+          form, head_lex = nil, []
+
+          lex.reverse_each { |l|
+            src =  l.src
+            form ||= src
+            form  != src ? break : head_lex.unshift(l.dup)
+          }
+
+          new_lexicals(form, attr, head_lex)
+        end
+
       end
 
       # Exakte Representation der originären Zeichenkette, so wie sie im Satz

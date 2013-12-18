@@ -145,7 +145,7 @@ Wort2=
       'juristisch person'               => 'juristische person#s',
       'natürlich person'                => 'natürliche personen#s',
       'natürlich quatsch'               => 'natürlichen quatsches#s',
-      'lang essay'                      => 'langes essay#s',
+      'lang essay'                      => 'langer essay#s',
       'groß kiefer'                     => 'große kiefer#s',
       'klug abel'                       => 'kluger abel#s',
       'warm abendluft'                  => 'warme abendluft#s',
@@ -176,7 +176,7 @@ Wort2=
       'juristisch person'               => 'juristische person#s',
       'natürlich person'                => 'natürliche personen#s',
       'natürlich quatsch'               => 'natürlichen quatsches#s',
-      'lang essay'                      => 'langes essay#s',
+      'lang essay'                      => 'langer essay#s',
       'groß kiefer'                     => 'große kiefer#s',
       'klug abel'                       => 'klug abel#s',
       'warm abendluft'                  => 'warme abendluft#s',
@@ -186,9 +186,9 @@ Wort2=
       'schmal rund zylinder'            => 'schmaler runder zylinder#s',
       'der schmal zylinder'             => 'der schmal zylinder#s',
       'wort mist'                       => 'wort mist#s',
-      'alt bibliothekskatalog'          => 'alt bibliothekskatalog#s',
+      'alt bibliothekskatalog'          => 'alter bibliothekskatalog#s',
       'neu bibliothekskatalög'          => 'neu bibliothekskatalög#s',
-      'neu alttitelkatalog'             => 'neu alttitelkatalog#s'
+      'neu alttitelkatalog'             => 'neuer alttitelkatalog#s'
     })
   end
 
