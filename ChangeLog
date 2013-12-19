@@ -22,8 +22,9 @@
 * Lingo::Database::Source::WordClass supports gender information being encoded
   in the dictionary as well as shorthand notation for multiple word
   classes/genders.
-* Lingo::Database::Source::WordClass supports compound parts being encoded in
-  the dictionary by appending <tt>+</tt> to the word class.
+* Lingo::Database::Source::WordClass supports compounds being encoded in the
+  dictionary (appending <tt>+</tt> to their parts' word classes is
+  recommended).
 * Lingo::Database::Source removes leading and trailing whitespace from
   dictionary lines.
 * Lingo::Database::Crypter uses OpenSSL to encrypt/decrypt dictionaries.

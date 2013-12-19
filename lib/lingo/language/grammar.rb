@@ -79,17 +79,9 @@ class Lingo
       # find_compound arbeitet in verschiedenen Leveln, da die Methode auch rekursiv aufgerufen wird. Ein Level größer 1
       # entspricht daher einem rekursiven Aufruf
       def find_compound(str, level = 1, tail = false)
-        return permute_compound([[], [], ''], str, level, tail) if level != 1
-
-        (@_compound ||= {})[str] ||= permute_compound(
-          com = Word.new(str, WA_UNKNOWN), str, level, tail
-        ) { |lex|
-          com.attr = WA_COMPOUND
-          com.head = Word.new_compound_head(lex)
-          com.lexicals = lex.each { |l|
-            l.attr += @append_wc unless l.attr == LA_COMPOUND
-          }
-        }
+        level == 1 ? (@_compound ||= {})[str] ||=
+          permute_compound(Word.new(str, WA_UNKNOWN), str, level, tail) :
+          permute_compound([[], [], ''],              str, level, tail)
       end
 
       private
@@ -116,7 +108,9 @@ class Lingo
             }
           end
 
-          block_given? ? yield(lex) : ret = res if !lex.empty? &&
+          level > 1 ? ret = res : ret.identify(lex.each { |l|
+            l.attr += @append_wc unless l.attr == LA_COMPOUND
+          }, WA_COMPOUND) if !lex.empty? &&
             sta.size              <= @max_parts         &&
             sta.min               >= @min_part_size     &&
             str.length / sta.size >= @min_avg_part_size &&

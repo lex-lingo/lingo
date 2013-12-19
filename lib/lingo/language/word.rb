@@ -47,12 +47,14 @@ class Lingo
           form, head_lex = nil, []
 
           lex.reverse_each { |l|
-            src =  l.src
+            src =  l.src ||= l.form
             form ||= src
             form  != src ? break : head_lex.unshift(l.dup)
           }
 
-          new_lexicals(form, attr, head_lex)
+          head_lex.each { |l| l.attr = l.attr[/\w+/] }.uniq!
+
+          new_lexicals(form, attr, head_lex) if form
         end
 
       end
@@ -101,16 +103,23 @@ class Lingo
         lexicals(compound_parts).map { |i| i.gender }
       end
 
+      def identify(lex, wc = nil)
+        return self if lex.empty?
+
+        self.lexicals = lex
+        self.attr = wc ||= attr?(LA_COMPOUND) ? WA_COMPOUND : WA_IDENTIFIED
+        self.head = self.class.new_compound_head(lex) if wc == WA_COMPOUND
+
+        self
+      end
+
       # Gibt genau die Grundform der Wortklasse zurück, die der RegExp des Übergabe-Parameters
       # entspricht, z.B. <tt>word.get_wc(/a/) = ['abgeschoben', '#a']</tt>
       def get_class(wc_re)
         wc_re = Regexp.new(wc_re) unless wc_re.is_a?(Regexp)
 
-        unless lexicals.empty?
+        lexicals.empty? ? attr =~ wc_re ? [self] : [] :
           lexicals.select { |lex| lex.attr =~ wc_re }
-        else
-          attr =~ wc_re ? [self] : []
-        end
       end
 
       def norm

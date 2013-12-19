@@ -288,7 +288,7 @@ class Lingo
 
         head = dic.find_word(head_form)
         comp = gra.find_compound(head_form) if head.unknown?
-        head = comp.head if comp && !comp.unknown?
+        head = comp.head || comp if comp && !comp.unknown?
 
         if head.attr?(*inflect) and
           suf = suffixes[head.genders.compact.first] and

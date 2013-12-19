@@ -303,6 +303,16 @@ class TestGrammar < LingoTestCase
         gra.find_compound('titelkatalogstitel')
       )
 
+      assert_equal(
+        wd('titelkatalogstiteltitel|KOM', 'titelkatalogstiteltitel|k', 'titel|s+', 'katalog|s+', 'titel|s+', 'titel|s+'),
+        gra.find_compound('titelkatalogstiteltitel')
+      )
+
+      assert_equal(
+        wd('titelbestandsbestände|KOM', 'titelbestandsbestand|k', 'titel|s+', 'bestand|s+', 'bestand|s+', 'bestehen|v+'),
+        gra.find_compound('titelbestandsbestände')
+      )
+
       # hinterer Teil ist ein Wort mit Suffix
       assert_equal(
         wd('hasenbraten|KOM', 'hasenbraten|k', 'hase|s+', 'braten|v+'),
@@ -363,6 +373,32 @@ class TestGrammar < LingoTestCase
         wd('benutzerforschung|KOM', 'benutzerforschung|k', 'benutzen|v+', 'erforschung|s+'),
         gra.find_compound('benutzerforschung')
       )
+    }
+  end
+
+  def test_head
+    lg { |gra|
+      assert_equal(
+        wd('suche|-', 'suche|s', 'suchen|v'),
+        gra.find_compound('clustersuche').head
+      )
+
+      assert_equal(
+        wd('titel|-', 'titel|s'),
+        gra.find_compound('titelkatalogstitel').head
+      )
+
+      assert_equal(
+        wd('titel|-', 'titel|s'),
+        gra.find_compound('titelkatalogstiteltitel').head
+      )
+
+      assert_equal(
+        wd('bestand|-', 'bestand|s', 'bestehen|v'),
+        gra.find_compound('titelbestandsbestände').head
+      )
+
+      assert_nil(gra.find_compound('bibliothekskatalög').head)
     }
   end
 

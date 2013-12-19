@@ -70,12 +70,8 @@ class Lingo
       #
       # Erstellt aus dem String ein Wort und sucht nach diesem im Wörterbuch.
       def find_word(str)
-        (@_word ||= {})[str] ||= Word.new(str, WA_UNKNOWN).tap { |w|
-          unless (lexicals = select_with_suffix(str)).empty?
-            w.lexicals = lexicals
-            w.attr = WA_IDENTIFIED
-          end
-        }
+        (@_word ||= {})[str] ||=
+          Word.new(str, WA_UNKNOWN).identify(select_with_suffix(str))
       end
 
       def find_synonyms(obj, syn = [])
