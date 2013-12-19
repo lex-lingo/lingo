@@ -26,7 +26,7 @@ begin
       summary:      'The full-featured automatic indexing system',
       authors:      ['John Vorhauer', 'Jens Wille'],
       email:        ['lingo@vorhauer.de', 'jens.wille@gmail.com'],
-      license:      'AGPL',
+      license:      'AGPL-3.0',
       homepage:     'http://lex-lingo.de',
       description:  <<-EOT,
 Lingo is an open source indexing system for research and teachings.
