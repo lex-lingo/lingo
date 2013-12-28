@@ -166,7 +166,9 @@ class Lingo
       hashes = [config]
 
       if use_lex = config['use-lex']
-        hashes << lingo.database_config(use_lex)
+        hashes.concat(lingo.
+          dictionary_config['databases'].
+          values_at(*use_lex.split(SEP_RE)))
       end
 
       Crypter.digest(hashes.inspect)
