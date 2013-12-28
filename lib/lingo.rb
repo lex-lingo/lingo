@@ -245,7 +245,7 @@ class Lingo
   def database_config(id)
     dictionary_config['databases'][id].tap { |cfg|
       raise NoDatabaseConfigError.new(id) unless cfg
-      raise InvalidDatabaseConfigError.new(id) unless cfg.has_key?('name')
+      raise InvalidDatabaseConfigError.new(id) unless cfg.key?('name')
     }
   end
 

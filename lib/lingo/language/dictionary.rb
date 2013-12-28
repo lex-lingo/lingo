@@ -39,7 +39,7 @@ class Lingo
       end
 
       def initialize(config, lingo)
-        unless config.has_key?('source')
+        unless config.key?('source')
           raise ArgumentError, "Required parameter `source' missing."
         end
 

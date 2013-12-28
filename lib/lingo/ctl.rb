@@ -36,7 +36,7 @@ class Lingo
     PROGNAME, OPTIONS = File.basename(PROG), {}
 
     COMMANDS, ALIASES = {}, Hash.new { |h, k|
-      h[k] = COMMANDS.has_key?(k) ? k : 'usage'
+      h[k] = COMMANDS.key?(k) ? k : 'usage'
     }
 
     USAGE = <<-EOT

@@ -68,7 +68,7 @@ class Lingo
       @id, @lingo, @config, @db = id, lingo, lingo.database_config(id), nil
 
       @srcfile = Lingo.find(:dict, config['name'], relax: true)
-      @crypter = config.has_key?('crypt') && Crypter.new
+      @crypter = config.key?('crypt') && Crypter.new
 
       @val = Hash.new { |h, k| h[k] = [] }
 

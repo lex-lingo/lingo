@@ -46,7 +46,7 @@ class Lingo
       def initialize(config, lingo)
         @dic, @suggestions = Dictionary.new(config, lingo), []
 
-        lingo.deprecate(:compositum, :compound, self) if lingo.dictionary_config.has_key?('compositum')
+        lingo.deprecate(:compositum, :compound, self) if lingo.dictionary_config.key?('compositum')
 
         cfg = lingo.dictionary_config['compound'] ||
               lingo.dictionary_config['compositum']  # DEPRECATE compositum

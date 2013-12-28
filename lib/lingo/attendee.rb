@@ -135,7 +135,7 @@ class Lingo
     end
 
     def has_key?(key)
-      @config && @config.has_key?(key)
+      @config && @config.key?(key)
     end
 
     def get_key(key, default = nodefault = true)
