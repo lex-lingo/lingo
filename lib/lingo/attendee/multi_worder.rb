@@ -201,7 +201,7 @@ class Lingo
 
           seq.shift.product(*seq) { |key|
             @mul_dic.select(key.join(' '), mul)
-            break unless @all_keys || mul.empty?
+            break unless @all || mul.empty?
           } && mul.uniq!
 
           mul
