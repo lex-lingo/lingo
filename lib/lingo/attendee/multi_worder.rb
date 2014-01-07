@@ -119,9 +119,8 @@ class Lingo
       def process_buffer
         unless form_at(0) == CHAR_PUNCT
           unless (res = check_multiword_key(3)).empty?
-            len = res.map { |r|
-              r.is_a?(Lexical) ? r.form.split(' ').size : r[/^\*(\d+)/, 1].to_i
-            }.sort!.reverse!
+            len = res.map { |r| r.is_a?(Lexical) ? r.form.count(' ') + 1 : r }
+            len.sort!.reverse!
 
             unless (max = len.first) > 3
               create_and_forward_multiword(3, res)

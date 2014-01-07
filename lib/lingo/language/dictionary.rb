@@ -30,8 +30,6 @@ class Lingo
 
     class Dictionary
 
-      KEY_REF_RE = %r{\A#{Database::KEY_REF_ESC}\d+}
-
       def self.open(*args)
         yield dictionary = new(*args)
       ensure
@@ -78,10 +76,10 @@ class Lingo
         lex = obj.lexicals
         lex = [obj] if lex.empty? && obj.unknown?
 
-        com, ref = obj.attr == WA_COMPOUND, KEY_REF_RE
+        com = obj.attr == WA_COMPOUND
 
         lex.each { |l|
-          select(l.form, syn) { |i| i =~ ref } unless com &&
+          select(l.form, syn) unless com &&
             l.attr != LA_COMPOUND || l.attr == LA_SYNONYM
         }
 

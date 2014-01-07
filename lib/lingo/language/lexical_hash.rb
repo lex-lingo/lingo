@@ -34,6 +34,8 @@ class Lingo
 
     class LexicalHash
 
+      KEY_REF_RE = %r{\A#{Regexp.escape(Database::KEY_REF)}(\d+)\z}o
+
       def self.open(*args)
         yield lexical_hash = new(*args)
       ensure
@@ -52,7 +54,7 @@ class Lingo
         rec = @src[Unicode.downcase(key)] or return
 
         res = rec.map { |str|
-          str =~ /\A\*\d+\z/ ? str : begin
+          str =~ KEY_REF_RE ? $1.to_i : begin
             k, *w = str.split('#')
             Lexical.new(k.strip, w)
           end

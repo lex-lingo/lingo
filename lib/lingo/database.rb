@@ -43,8 +43,6 @@ class Lingo
     KEY_REF = '*'
     SYS_KEY = '~'
 
-    KEY_REF_ESC = Regexp.escape(KEY_REF)
-
     BACKENDS       = []
     BACKEND_BY_EXT = {}
 
