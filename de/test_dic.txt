@@ -23,3 +23,4 @@ aaron,aaron #e
 aas,aas #s
 lex-lingo,super indexierungssystem #m
 wirkungsort,wirkungsort #s wirkung #s+ ort #s+
+zettelkatalog,zettelkatalog #k zettel #s+ katalog #s+

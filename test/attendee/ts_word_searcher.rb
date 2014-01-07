@@ -85,6 +85,7 @@ class TestAttendeeWordSearcher < AttendeeTestCase
       tk('Lex-Lingo|WORD'),
       tk('A-Dur|WORD'),
       tk('Wirkungsort|WORD'),
+      tk('Zettelkatalog|WORD'),
       ai('EOL|')
     ], [
       wd('Hasennasen|?'),
@@ -92,6 +93,7 @@ class TestAttendeeWordSearcher < AttendeeTestCase
       wd('Lex-Lingo|IDF', 'super indexierungssystem|m'),
       wd('A-Dur|IDF', 'a-dur|s', 'b-dur|s'),
       wd('Wirkungsort|IDF', 'wirkungsort|s', 'wirkung|s+', 'ort|s+'),
+      wd('Zettelkatalog|KOM', 'zettelkatalog|k', 'zettel|s+', 'katalog|s+'),
       ai('EOL|')
     ])
   end
