@@ -90,6 +90,7 @@ class Lingo
       end
 
       def control(cmd, param)
+        # can control
       end
 
       def process(obj)
