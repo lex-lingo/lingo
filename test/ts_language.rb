@@ -27,9 +27,9 @@ class TestLexicalHash < LingoTestCase
 
   def test_cache
     lh('sys-dic') { |ds|
-      assert_equal([lx('regen|s'), lx('regen|v'), lx('rege|a')], ds['regen'])
-      assert_equal([lx('regen|s'), lx('regen|v'), lx('rege|a')], ds['regen'])
-      assert_equal([lx('regen|s'), lx('regen|v'), lx('rege|a')], ds['regen'])
+      assert_equal([lx('regen|s|m'), lx('regen|s|n'), lx('regen|v'), lx('rege|a')], ds['regen'])
+      assert_equal([lx('regen|s|m'), lx('regen|s|n'), lx('regen|v'), lx('rege|a')], ds['regen'])
+      assert_equal([lx('regen|s|m'), lx('regen|s|n'), lx('regen|v'), lx('rege|a')], ds['regen'])
     }
   end
 
