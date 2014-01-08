@@ -66,7 +66,7 @@ class TestLexicalHash < LingoTestCase
 
   def test_wordclass
     lh('sys-dic') { |ds|
-      assert_equal([lx('a-dur|s')], ds['a-dur'])
+      assert_equal([lx('a-dur|s|m'), lx('a-dur|s|n')], ds['a-dur'])
       assert_equal([lx('aalen|e'), lx('aalen|v')], ds['aalen'])
       assert_equal([lx('abarbeitend|a')], ds['abarbeitend'])
     }
@@ -149,7 +149,7 @@ class TestDictionary < LingoTestCase
       # nur in zweiter Quelle vorhanden
       assert_equal([lx('super indexierungssystem|m')], dic.select('lex-lingo'))
       # in beiden Quellen vorhanden
-      assert_equal([lx('a-dur|s')], dic.select('a-dur'))
+      assert_equal([lx('a-dur|s|m'), lx('a-dur|s|n')], dic.select('a-dur'))
     }
   end
 
@@ -175,8 +175,8 @@ class TestDictionary < LingoTestCase
       # nur in zweiter Quelle vorhanden
       assert_equal([lx('super indexierungssystem|m')], dic.select('lex-lingo'))
       # in beiden Quellen vorhanden
-      assert_equal([lx('a-dur|s'), lx('b-dur|s')], dic.select('a-dur'))
-      assert_equal([lx('aas|s')], dic.select('aas'))
+      assert_equal([lx('a-dur|s|m'), lx('a-dur|s|n'), lx('b-dur|s')], dic.select('a-dur'))
+      assert_equal([lx('aas|s|n'), lx('aas|s')], dic.select('aas'))
     }
   end
 
@@ -191,8 +191,8 @@ class TestDictionary < LingoTestCase
       assert_equal([lx('wirkungsort|s'), lx('wirkung|s+'), lx('ort|s+')], dic.select('wirkungsort'))
       assert_equal([lx('zettelkatalog|k'), lx('zettel|s+'), lx('katalog|s+')], dic.select('zettelkatalog'))
       # in beiden Quellen vorhanden
-      assert_equal([lx('a-dur|s'), lx('b-dur|s')], dic.select('a-dur'))
-      assert_equal([lx('aas|s')], dic.select('aas'))
+      assert_equal([lx('a-dur|s|m'), lx('a-dur|s|n'), lx('b-dur|s')], dic.select('a-dur'))
+      assert_equal([lx('aas|s|n'), lx('aas|s')], dic.select('aas'))
     }
   end
 
@@ -275,7 +275,7 @@ class TestGrammar < LingoTestCase
       )
 
       assert_equal(
-        wd('cd-rom-technologie|KOM', 'cd-rom-technologie|k', 'cd-rom|s+', 'technologie|s+'),
+        wd('cd-rom-technologie|KOM', 'cd-rom-technologie|k', 'cd-rom|s+|f', 'cd-rom|s+|m', 'technologie|s+|f'),
         gra.find_compound('cd-rom-technologie')
       )
 
@@ -359,7 +359,7 @@ class TestGrammar < LingoTestCase
 
       # bindestrichversion zwei-teilig
       assert_equal(
-        wd('cd-rom-technologie|KOM', 'cd-rom-technologie|k', 'cd-rom|s+', 'technologie|s+'),
+        wd('cd-rom-technologie|KOM', 'cd-rom-technologie|k', 'cd-rom|s+|f', 'cd-rom|s+|m', 'technologie|s+|f'),
         gra.find_compound('cd-rom-technologie')
       )
 

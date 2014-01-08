@@ -41,7 +41,7 @@ class TestAttendeeWordSearcher < AttendeeTestCase
       wd('Hasennasen|?'),
       wd('Knaller|IDF', 'knaller|s'),
       wd('Lex-Lingo|IDF', 'super indexierungssystem|m'),
-      wd('A-Dur|IDF', 'a-dur|s'),
+      wd('A-Dur|IDF', 'a-dur|s|m', 'a-dur|s|n'),
       ai('EOL|')
     ])
   end
@@ -73,7 +73,7 @@ class TestAttendeeWordSearcher < AttendeeTestCase
       wd('Hasennasen|?'),
       wd('Knaller|IDF', 'knaller|s'),
       wd('Lex-Lingo|IDF', 'super indexierungssystem|m'),
-      wd('A-Dur|IDF', 'a-dur|s', 'b-dur|s'),
+      wd('A-Dur|IDF', 'a-dur|s|m', 'a-dur|s|n', 'b-dur|s'),
       ai('EOL|')
     ])
   end
@@ -91,7 +91,7 @@ class TestAttendeeWordSearcher < AttendeeTestCase
       wd('Hasennasen|?'),
       wd('Knaller|IDF', 'knaller|s'),
       wd('Lex-Lingo|IDF', 'super indexierungssystem|m'),
-      wd('A-Dur|IDF', 'a-dur|s', 'b-dur|s'),
+      wd('A-Dur|IDF', 'a-dur|s|m', 'a-dur|s|n', 'b-dur|s'),
       wd('Wirkungsort|IDF', 'wirkungsort|s', 'wirkung|s+', 'ort|s+'),
       wd('Zettelkatalog|KOM', 'zettelkatalog|k', 'zettel|s+', 'katalog|s+'),
       ai('EOL|')

@@ -70,6 +70,7 @@
 0.00140 aller
 0.00140 altstädter
 0.00140 basis
+0.00140 deutsche
 0.00140 dokumentbeschreibung
 0.00140 friedhof
 0.00140 gemeinsam
@@ -78,6 +79,7 @@
 0.00140 möglichkeit
 0.00140 objektbeschreibung
 0.00140 objektdokumentation
+0.00140 rolle
 0.00140 situation
 0.00140 stark
 0.00140 statistisch
@@ -162,6 +164,7 @@
 0.00093 schlagwortnormdatei
 0.00093 sehr
 0.00093 stehen
+0.00093 teil
 0.00093 terminologie
 0.00093 unternehmen
 0.00093 verwendend
@@ -186,7 +189,6 @@
 0.00070 bibliographie
 0.00070 bibliothek
 0.00070 bibliothekswesen
-0.00070 deutsche
 0.00070 dokumentationssprache
 0.00070 dokumentkollektion
 0.00070 eben
@@ -252,6 +254,7 @@
 0.00047 aktuell
 0.00047 allen
 0.00047 analyse
+0.00047 angel
 0.00047 ansatz
 0.00047 anwendung
 0.00047 arbeitend
@@ -326,12 +329,14 @@
 0.00047 gesamtheit
 0.00047 getroffen
 0.00047 gezeigt
+0.00047 grad
 0.00047 grammatikalisch
 0.00047 hilfsmittel
 0.00047 inhaltsanalyse
 0.00047 insgesamt
 0.00047 instanz
 0.00047 integration
+0.00047 italia
 0.00047 jahrhundert
 0.00047 katalogorientiert
 0.00047 kategorie
@@ -348,6 +353,7 @@
 0.00047 lexikalisch
 0.00047 linguistisch
 0.00047 malerei
+0.00047 mangel
 0.00047 modell
 0.00047 nicht-ansetzungsformen
 0.00047 normierend
@@ -365,7 +371,6 @@
 0.00047 rechten
 0.00047 regel
 0.00047 regeln
-0.00047 rolle
 0.00047 rollen
 0.00047 schlagwortmethode
 0.00047 schreibweise
@@ -389,7 +394,6 @@
 0.00047 system
 0.00047 tafelbild
 0.00047 technisch
-0.00047 teil
 0.00047 teilen
 0.00047 teilmenge
 0.00047 thematisch
@@ -441,7 +445,6 @@
 0.00023 alttitelbestand
 0.00023 anforderung
 0.00023 angeboten
-0.00023 angel
 0.00023 angereichert
 0.00023 angewachsen
 0.00023 angleichung
@@ -625,7 +628,6 @@
 0.00023 gewissen
 0.00023 gewonnen
 0.00023 geworden
-0.00023 grad
 0.00023 grenzen
 0.00023 grund
 0.00023 hand
@@ -659,7 +661,6 @@
 0.00023 informationsverdichtung
 0.00023 interesse
 0.00023 invertierung
-0.00023 italia
 0.00023 italien
 0.00023 jahr
 0.00023 jürgen
@@ -722,7 +723,6 @@
 0.00023 machen
 0.00023 madonna
 0.00023 maler
-0.00023 mangel
 0.00023 maschinell
 0.00023 medienbeschreibung
 0.00023 mehrere
