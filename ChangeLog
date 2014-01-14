@@ -12,6 +12,8 @@
 * Compiled dictionaries are updated whenever the Lingo version or their
   configuration changes, not only when the source file's size or modification
   time changes.
+* Lingo::Attendee::Synonymer learned <tt>compound-parts</tt> option to also
+  generate synonyms for compound parts when set to +true+.
 * Lingo::Attendee::TextReader learned better PDF-to-text conversion using the
   +pdftotext+ command; specify <tt>filter: pdftotext</tt> in the config.
 * Lingo::Attendee::VectorFilter learned +dict+ option to print words in

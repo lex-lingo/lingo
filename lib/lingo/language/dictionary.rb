@@ -72,11 +72,11 @@ class Lingo
           Word.new(str, WA_UNKNOWN).identify(select_with_suffix(str))
       end
 
-      def find_synonyms(obj, syn = [])
+      def find_synonyms(obj, syn = [], com = true)
         lex = obj.lexicals
         lex = [obj] if lex.empty? && obj.unknown?
 
-        com = obj.attr == WA_COMPOUND
+        com &&= obj.attr == WA_COMPOUND
 
         lex.each { |l|
           select(l.form, syn) unless com &&

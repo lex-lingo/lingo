@@ -74,6 +74,7 @@ class Lingo
 
       def init
         set_dic
+        @com = !get_key('compound-parts', false)
         @skip = get_array('skip', WA_UNKNOWN, :upcase)
       end
 
@@ -83,7 +84,7 @@ class Lingo
 
       def process(obj)
         if obj.is_a?(Word) && !@skip.include?(obj.attr)
-          obj.add_lexicals(@dic.find_synonyms(obj))
+          obj.add_lexicals(@dic.find_synonyms(obj, [], @com))
         end
 
         forward(obj)
