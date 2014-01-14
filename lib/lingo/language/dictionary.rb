@@ -106,7 +106,13 @@ class Lingo
       def select_with_suffix(str)
         select(str) { |lex|
           each_affix(str) { |form, attr|
-            select(form).each { |l| lex << l if attr == l.attr[/\w+/] }
+            unless (selected = select(form)).empty?
+              if selected.first.attr == LA_COMPOUND
+                lex.concat(selected) if selected.last.attr?(attr)
+              else
+                selected.each { |l| lex << l if l.attr?(attr) }
+              end
+            end
           }
         }
       end

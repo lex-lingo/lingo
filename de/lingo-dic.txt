@@ -56856,5 +56856,3 @@ zynismus=zynismus #s.m
 zypern=zypern #e.n
 zypresse=zypresse #s.f
 zyste=zyste #s.f
-#zettelkatalog=zettelkatalog #k zettel #s+ katalog #a+
-#wirkungsort=wirkungsort #s wirkung #s+ ort #s+

@@ -36,6 +36,10 @@ class Lingo
 
     class Lexical < WordForm
 
+      def attr?(attr)
+        self.attr.start_with?(attr)
+      end
+
       def <=>(other)
         return 1 unless other.is_a?(self.class)
 
