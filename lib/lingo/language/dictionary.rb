@@ -91,12 +91,11 @@ class Lingo
       # Sucht alle Wörterbücher durch und gibt den ersten Treffer zurück (+mode = first+), oder alle Treffer (+mode = all+)
       def select(str, lex = [])
         @src.each { |src|
-          l = src[str] or next
-          lex.concat(block_given? ? l.delete_if { |i| yield i } : l)
+          lex.concat(src[str] || next)
           break unless @all
         }
 
-        lex.uniq!
+        lex.empty? && block_given? ? yield(lex) : lex.uniq!
         lex
       end
 
@@ -105,7 +104,11 @@ class Lingo
       # Sucht alle Wörterbücher durch und gibt den ersten Treffer zurück (+mode = first+), oder alle Treffer (+mode = all+).
       # Sucht dabei auch Wörter, die um wortklassenspezifische Suffixe bereinigt wurden.
       def select_with_suffix(str)
-        select_with_affix(:suffix, str)
+        select(str) { |lex|
+          each_affix(str) { |form, attr|
+            select(form).each { |l| lex << l if attr == l.attr[/\w+/] }
+          }
+        }
       end
 
       # _dic_.select_with_infix( _aString_ ) -> _ArrayOfLexicals_
@@ -113,44 +116,15 @@ class Lingo
       # Sucht alle Wörterbücher durch und gibt den ersten Treffer zurück (+mode = first+), oder alle Treffer (+mode = all+).
       # Sucht dabei auch Wörter, die eine Fugung am Ende haben.
       def select_with_infix(str)
-        select_with_affix(:infix, str)
-      end
-
-      # _dic_.suffix_lexicals( _aString_ ) -> _ArrayOfLexicals_
-      #
-      # Gibt alle möglichen Lexicals zurück, die von der Endung her auf den String anwendbar sind:
-      #
-      # dic.suffix_lexicals("Hasens") -> [(hasen/s), (hasen/e), (has/e)]
-      def suffix_lexicals(str)
-        affix_lexicals(:suffix, str)
-      end
-
-      # _dic_.gap_lexicals( _aString_ ) -> _ArrayOfLexicals_
-      #
-      # Gibt alle möglichen Lexicals zurück, die von der Endung her auf den String anwendbar sind:
-      def infix_lexicals(str)
-        affix_lexicals(:infix, str)
-      end
-
-      private
-
-      def select_with_affix(affix, str)
-        lex = select(str)
-
-        affix_lexicals(affix, str).each { |a| select(a.form, lex) { |b|
-          affix == :suffix && a.attr != b.attr[/\w+/]
-        } } if lex.empty?
-
-        lex
-      end
-
-      def affix_lexicals(affix, str)
-        lex = instance_variable_get("@#{affix}es").map { |r, e, t|
-          Lexical.new("#{$`}#{e == '*' ? '' : e}#{$'}", t) if str =~ r
+        select(str) { |lex|
+          each_affix(str, :infix) { |form, _| select(form, lex) }
         }
+      end
 
-        lex.compact!
-        lex
+      def each_affix(str, affix = :suffix)
+        instance_variable_get("@#{affix}es").each { |r, e, t|
+          yield "#{$`}#{e == '*' ? '' : e}#{$'}", t if str =~ r
+        }
       end
 
     end

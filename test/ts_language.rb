@@ -198,16 +198,16 @@ class TestDictionary < LingoTestCase
 
   def test_suffix_lexicals
     ld('source' => %w[sys-dic]) { |dic|
-      assert_equal([lx('mau|s'), lx('mauer|s')], dic.suffix_lexicals('mauern'))
-      assert_equal([lx('hasen|s'), lx('hasen|v'), lx('hasen|e')], dic.suffix_lexicals('hasens'))
-      assert_equal([lx('schönst|s'), lx('schön|a'), lx('schönst|a')], dic.suffix_lexicals('schönster'))
-      assert_equal([lx('segnen|v'), lx('segneen|v')], dic.suffix_lexicals('segnet'))
+      assert_equal([lx('mau|s'), lx('mauer|s')], ax(dic, 'mauern'))
+      assert_equal([lx('hasen|s'), lx('hasen|v'), lx('hasen|e')], ax(dic, 'hasens'))
+      assert_equal([lx('schönst|s'), lx('schön|a'), lx('schönst|a')], ax(dic, 'schönster'))
+      assert_equal([lx('segnen|v'), lx('segneen|v')], ax(dic, 'segnet'))
     }
   end
 
   def test_infix_lexicals
     ld('source' => %w[sys-dic]) { |dic|
-      assert_equal( [lx('information|s'), lx('information|v'), lx('information|e')], dic.suffix_lexicals('informations'))
+      assert_equal( [lx('information|f'), lx('informationsen|f')], ax(dic, 'informations', :infix))
     }
   end
 
@@ -222,7 +222,7 @@ class TestDictionary < LingoTestCase
 
   def test_select_with_infix
     ld('source' => %w[sys-dic]) { |dic|
-      assert_equal( [lx('information|s'), lx('information|v'), lx('information|e')], dic.suffix_lexicals('informations'))
+      assert_equal( [lx('information|f'), lx('informationsen|f')], ax(dic, 'informations', :infix))
     }
   end
 
@@ -236,6 +236,10 @@ class TestDictionary < LingoTestCase
 
   def ld(cfg, &block)
     Lingo::Language::Dictionary.open(cfg, @lingo, &block)
+  end
+
+  def ax(dic, *args)
+    [].tap { |x| dic.each_affix(*args) { |*a| x << Lingo::Language::Lexical.new(*a) } }
   end
 
 end
