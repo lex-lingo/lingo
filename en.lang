@@ -40,62 +40,62 @@
 #           definiert sein, da es sonst noch nicht existiert!
 #
 
-#    lingo language definition
 ---
 language:
   name: 'Englisch'
 
   dictionary:
     databases:
-      #    Systemwörterbücher
+      # System dictionaries
       sys-dic: { name: en/lingo-dic.txt, txt-format: WordClass, separator: '=' }
-      sys-syn: { name: en/lingo-syn.txt, txt-format: KeyValue, separator: '=', def-wc: y }
-      sys-mul: { name: en/lingo-mul.txt, txt-format: SingleWord, use-lex: 'sys-dic', def-wc: m }
+      sys-syn: { name: en/lingo-syn.txt, txt-format: KeyValue,  separator: '=',    def-wc: y }
+      sys-mul: { name: en/lingo-mul.txt, txt-format: SingleWord, use-lex: sys-dic, def-wc: m }
       sys-irr: { name: en/lingo-irr.txt, txt-format: WordClass, separator: '=' }
       sys-wdn: { name: en/lingo-wdn.txt, txt-format: WordClass, separator: '=' }
-      #    Benutzerwörterbücher
-      usr-dic: { name: en/user-dic.txt, txt-format: WordClass, separator: '=' }
+
+      # User dictionaries
+      usr-dic: { name: en/user-dic.txt,  txt-format: WordClass, separator: '=' }
 
     compound:
-      min-word-size: "7"
-      min-part-size: "3"
-      max-parts: "5"
-      min-avg-part-size: "4"
-      append-wordclass: "+"
+      min-word-size:     '7'
+      min-part-size:     '3'
+      max-parts:         '5'
+      min-avg-part-size: '4'
+      append-wordclass:  '+'
       skip-sequences: [ xx ]
 
     suffix:
-      #    Suffixliste, Stand: *****ENGLISCH****
-      #    Suffixklasse:   s = Substantiv, a = Adjektiv, v = Verb, e = Eigenwort, f = Fugung
-      #    Suffixe je Klasse:   "<suffix>['/'<ersetzung>][ <suffix>['/'<ersetzung>]]"
-      - [s, " es s ves/f ves/fe ies/y "]
-      - [a, " er est r st ier/y iest/y "]
-      - [v, " d ed en es ing s ing/e "]
-      - [e, " s "]
-      - [f, ""]
+      # Suffixliste, Stand: *****ENGLISCH****
+      # Suffixklasse: s = Substantiv, a = Adjektiv, v = Verb, e = Eigenwort, f = Fugung
+      # Suffixe je Klasse: "<suffix>['/'<ersetzung>][ <suffix>['/'<ersetzung>]]"
+      - [s, 'es s ves/f ves/fe ies/y']
+      - [a, 'er est r st ier/y iest/y']
+      - [v, 'd ed en es ing s ing/e']
+      - [e, 's']
+      - [f, '']
 
   attendees:
     variator:
       variations:
-        - [ ieh, sch ]
-        - [ fec, see ]
-        - [ it,  st  ]
-        - [ fch, sch ]
-        - [ fp,  sp  ]
-        - [ f,   s   ]
-        - [ c,   e   ]
-        - [ ffc, sse ]
-        - [ ff,  ss  ]
-        - [ e,   c   ]
-        - [ ni,  m   ]
-        - [ feh, sch ]
-        - [ lt,  st  ]
-        - [ il,  st  ]
-        - [ ftc, ste ]
-        - [ ft,  st  ]
-        - [ fl,  st  ]
-        - [ li,  h   ]
-        - [ i,   s   ]
+        - [ieh, sch]
+        - [fec, see]
+        - [it,  st ]
+        - [fch, sch]
+        - [fp,  sp ]
+        - [f,   s  ]
+        - [c,   e  ]
+        - [ffc, sse]
+        - [ff,  ss ]
+        - [e,   c  ]
+        - [ni,  m  ]
+        - [feh, sch]
+        - [lt,  st ]
+        - [il,  st ]
+        - [ftc, ste]
+        - [ft,  st ]
+        - [fl,  st ]
+        - [li,  h  ]
+        - [i,   s  ]
 
     sequencer:
-      sequences: [ [AS, "2, 1"], [AK, "2, 1"], [AAK, "3, 1 2"], [AAS, "3, 1 2"] ]
+      sequences: [ [AS, '2, 1'], [AK, '2, 1'], [AAK, '3, 1 2'], [AAS, '3, 1 2'] ]

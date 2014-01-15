@@ -40,69 +40,69 @@
 #           definiert sein, da es sonst noch nicht existiert!
 #
 
-#    lingo language definition
---- 
+---
 language:
   name: 'Deutsch'
 
   dictionary:
     databases:
-      #    Systemwörterbücher
+      # System dictionaries
       sys-dic: { name: de/lingo-dic.txt, txt-format: WordClass, separator: '=' }
       sys-abk: { name: de/lingo-abk.txt, txt-format: WordClass, separator: '=' }
-      sys-syn: { name: de/lingo-syn.txt, txt-format: KeyValue, separator: '=', def-wc: y }
-      sys-mul: { name: de/lingo-mul.txt, txt-format: SingleWord, use-lex: 'sys-dic', def-wc: m }
-      #    Benutzerwörterbücher
-      usr-dic: { name: de/user-dic.txt, txt-format: WordClass, separator: '=' }
+      sys-syn: { name: de/lingo-syn.txt, txt-format: KeyValue,  separator: '=',    def-wc: y }
+      sys-mul: { name: de/lingo-mul.txt, txt-format: SingleWord, use-lex: sys-dic, def-wc: m }
 
-      #    Testwörterbücher
-      tst-dic: { name: de/test_dic.txt, txt-format: WordClass }                # TEST: Lesen von zwei Quellen
-      tst-syn: { name: de/test_syn.txt, txt-format: MultiValue, def-wc: 'y' }  # TEST: Mehrere Datenquellen
-      tst-mul: { name: de/test_mul.txt, use-lex: 'sys-dic', def-wc: m }        # TEST: Mehrere Multiwörterbücher
-      tst-mu2: { name: de/test_mu2.txt, use-lex: 'sys-dic', def-wc: m }        # TEST: Mehrere Multiwörterbücher
-      tst-sgw: { name: de/test_sgw.txt, txt-format: SingleWord }               # TEST: SingleWord-Format
-      tst-gen: { name: de/test_gen.txt, txt-format: WordClass }                # TEST: Genus
+      # User dictionaries
+      usr-dic: { name: de/user-dic.txt,  txt-format: WordClass, separator: '=' }
+
+      # Test dictionaries
+      tst-dic: { name: de/test_dic.txt, txt-format: WordClass }              # TEST: Lesen von zwei Quellen
+      tst-syn: { name: de/test_syn.txt, txt-format: MultiValue, def-wc: y }  # TEST: Mehrere Datenquellen
+      tst-mul: { name: de/test_mul.txt, use-lex: sys-dic, def-wc: m }        # TEST: Mehrere Multiwörterbücher
+      tst-mu2: { name: de/test_mu2.txt, use-lex: sys-dic, def-wc: m }        # TEST: Mehrere Multiwörterbücher
+      tst-sgw: { name: de/test_sgw.txt, txt-format: SingleWord }             # TEST: SingleWord-Format
+      tst-gen: { name: de/test_gen.txt, txt-format: WordClass }              # TEST: Genus
 
     compound:
-      min-word-size: "7"
-      min-part-size: "3"
-      max-parts: "5"
-      min-avg-part-size: "4"
-      append-wordclass: "+"
+      min-word-size:     '7'
+      min-part-size:     '3'
+      max-parts:         '5'
+      min-avg-part-size: '4'
+      append-wordclass:  '+'
       skip-sequences: [ xx ]
 
     suffix:
-      #    Suffixliste, Stand: 30-06-2005
-      #    Suffixklasse:   s = Substantiv, a = Adjektiv, v = Verb, e = Eigenwort, f = Fugung
-      #    Suffixe je Klasse:   "<suffix>['/'<ersetzung>][ <suffix>['/'<ersetzung>]]"
-      - [s, "e en er ern es n s se sen ses"]
-      - [a, "este ste ster sten stes ester estes esten e em en er ere eren erer eres es erem"]
-      - [v, "e/en en/en est/en et/en st/en t/en te/en ten/en eten/en ete/en etest/en s"]
-      - [e, "s"]
-      - [f, "s n e en es er ch/che /en"]
+      # Suffixliste, Stand: 30-06-2005
+      # Suffixklasse: s = Substantiv, a = Adjektiv, v = Verb, e = Eigenwort, f = Fugung
+      # Suffixe je Klasse: "<suffix>['/'<ersetzung>][ <suffix>['/'<ersetzung>]]"
+      - [s, 'e en er ern es n s se sen ses']
+      - [a, 'este ste ster sten stes ester estes esten e em en er ere eren erer eres es erem']
+      - [v, 'e/en en/en est/en et/en st/en t/en te/en ten/en eten/en ete/en etest/en s']
+      - [e, 's']
+      - [f, 's n e en es er ch/che /en']
 
   attendees:
     variator:
       variations:
-        - [ ieh, sch ]
-        - [ fec, see ]
-        - [ it,  st  ]
-        - [ fch, sch ]
-        - [ fp,  sp  ]
-        - [ f,   s   ]
-        - [ c,   e   ]
-        - [ ffc, sse ]
-        - [ ff,  ss  ]
-        - [ e,   c   ]
-        - [ ni,  m   ]
-        - [ feh, sch ]
-        - [ lt,  st  ]
-        - [ il,  st  ]
-        - [ ftc, ste ]
-        - [ ft,  st  ]
-        - [ fl,  st  ]
-        - [ li,  h   ]
-        - [ i,   s   ]
+        - [ieh, sch]
+        - [fec, see]
+        - [it,  st ]
+        - [fch, sch]
+        - [fp,  sp ]
+        - [f,   s  ]
+        - [c,   e  ]
+        - [ffc, sse]
+        - [ff,  ss ]
+        - [e,   c  ]
+        - [ni,  m  ]
+        - [feh, sch]
+        - [lt,  st ]
+        - [il,  st ]
+        - [ftc, ste]
+        - [ft,  st ]
+        - [fl,  st ]
+        - [li,  h  ]
+        - [i,   s  ]
 
     sequencer:
-      sequences: [ [AS, "2, 1"], [AK, "2, 1"], [AAK, "3, 1 2"], [AAS, "3, 1 2"] ]
+      sequences: [ [AS, '2, 1'], [AK, '2, 1'], [AAK, '3, 1 2'], [AAS, '3, 1 2'] ]
