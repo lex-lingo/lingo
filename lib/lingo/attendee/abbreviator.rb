@@ -74,6 +74,7 @@ class Lingo
 
       def init
         set_dic
+        @abbr = nil
       end
 
       def control(cmd, param)

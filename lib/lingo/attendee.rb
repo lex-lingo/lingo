@@ -83,6 +83,8 @@ class Lingo
       # Make sure config exists
       lingo.dictionary_config
 
+      @dic = @gra = nil
+
       init if self.class.method_defined?(:init)
 
       @can_control = self.class.method_defined?(:control)
