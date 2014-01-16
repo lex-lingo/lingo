@@ -274,14 +274,14 @@ class Lingo
       args = nil
 
       if inflect = config['inflect']
-        inflect = inflect == true ? %w[s e] : inflect.split(SEP_RE)
+        inflect, wc = inflect == true ? %w[s e] : inflect.split(SEP_RE), 'a'
 
-        wc, re, suffixes = /a/, /\A[^#]+/, {
-          'f' => 'e',   # feminine
-          'm' => 'er',  # masculine
-          'n' => 'es',  # neuter
-          'p' => 'e'    # plurale tantum
-        }
+        if cfg = lingo.dictionary_config['inflect'] and suffixes = cfg[wc]
+          wc, re = /#{wc}/, /\A[^#]+/
+        else
+          warn "#{self.class}: No suffixes to inflect ##{wc}: #{@id}"
+          inflect = false
+        end
       end
 
       [' ', lambda { |form|

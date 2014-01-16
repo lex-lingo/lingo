@@ -81,6 +81,13 @@ language:
       - [e, 's']
       - [f, 's n e en es er ch/che /en']
 
+    inflect:
+      a:  # adjectives
+        f: e   # feminine
+        m: er  # masculine
+        n: es  # neuter
+        p: e   # plurale tantum
+
   attendees:
     variator:
       variations:
