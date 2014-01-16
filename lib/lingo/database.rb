@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2013 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2014 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -275,29 +275,53 @@ class Lingo
 
       if inflect = config['inflect']
         inflect = inflect == true ? %w[s e] : inflect.split(SEP_RE)
-        wc, suffixes = /a/, { 'f' => 'e', 'm' => 'er', 'n' => 'es' }
+
+        wc, re, suffixes = /a/, /\A[^#]+/, {
+          'f' => 'e',   # feminine
+          'm' => 'er',  # masculine
+          'n' => 'es',  # neuter
+          'p' => 'e'    # plurale tantum
+        }
       end
 
       [' ', lambda { |form|
-        (word = dic.find_word(form)).unknown? ? (compo_form =
-          (compo = gra.find_compound(form)).compo_form) ?
-            compo_form.form : compo.norm : word.norm
-      }, inflect && lambda { |forms|
-        last_form = forms.pop
-        head_form = last_form[/.*(?=#)/]
+        word = dic.find_word(form)
 
-        head = dic.find_word(head_form)
-        comp = gra.find_compound(head_form) if head.unknown?
-        head = comp.head || comp if comp && !comp.unknown?
+        if word.unknown?
+          compo = gra.find_compound(form)
 
-        if head.attr?(*inflect) and
-          suf = suffixes[head.genders.compact.first] and
-          adj = forms.map { |form| (word = dic.find_word(form)).
-            identified? && word.get_class(wc).first || break }
-          forms.zip(adj) { |form, lex| form << suf if form == lex.form }
+          if compo_form = compo.compo_form
+            compo_form.form
+          else
+            compo.norm
+          end
+        else
+          word.norm
         end
+      }, inflect && lambda { |forms|
+        inflectables = []
 
-        forms << last_form
+        forms.each { |form|
+          word = dic.find_word(word_form = form[re])
+
+          if word.identified? and lexical = word.get_class(wc).first
+            inflectables << form if form == lexical.form
+          else
+            unless inflectables.empty?
+              comp = gra.find_compound(word_form) if word.unknown?
+              word = comp.head || comp if comp && !comp.unknown?
+
+              if word.attr?(*inflect)
+                suffix = suffixes[word.genders.compact.first]
+                inflectables.each { |lex_form| lex_form << suffix } if suffix
+              end
+            end
+
+            break
+          end
+        }
+
+        forms
       }]
     end
 

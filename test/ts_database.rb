@@ -32,6 +32,7 @@ warm abendluft
 klar abendluft
 gut abitur
 gut abitur schaffen
+ein gut abitur
 schmal rund zylinder
 der schmal zylinder
 wort mist
@@ -151,7 +152,8 @@ Wort2=
       'warm abendluft'                  => 'warme abendluft#s',
       'klar abendluft'                  => 'klare abendluft#s',
       'gut abitur'                      => 'gutes abitur#s',
-      'gut abitur schaff'               => 'gut abitur schaffen#s',
+      'gut abitur schaff'               => 'gutes abitur schaffen#s',
+      'ein gut abitur'                  => 'ein gut abitur#s',
       'schmal rund zylinder'            => 'schmaler runder zylinder#s',
       'der schmal zylinder'             => 'der schmal zylinder#s',
       'wort mist'                       => 'wort mist#s',
@@ -182,7 +184,8 @@ Wort2=
       'warm abendluft'                  => 'warme abendluft#s',
       'klar abendluft'                  => 'klare abendluft#s',
       'gut abitur'                      => 'gutes abitur#s',
-      'gut abitur schaff'               => 'gut abitur schaffen#s',
+      'gut abitur schaff'               => 'gutes abitur schaffen#s',
+      'ein gut abitur'                  => 'ein gut abitur#s',
       'schmal rund zylinder'            => 'schmaler runder zylinder#s',
       'der schmal zylinder'             => 'der schmal zylinder#s',
       'wort mist'                       => 'wort mist#s',
@@ -214,6 +217,7 @@ Wort2=
       'klar abendluft'                  => 'klar abendluft#s',
       'gut abitur'                      => 'gut abitur#s',
       'gut abitur schaff'               => 'gut abitur schaffen#s',
+      'ein gut abitur'                  => 'ein gut abitur#s',
       'schmal rund zylinder'            => 'schmal rund zylinder#s',
       'der schmal zylinder'             => 'der schmal zylinder#s',
       'wort mist'                       => 'wort mist#s',
