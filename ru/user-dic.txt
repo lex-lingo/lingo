@@ -1,0 +1,6 @@
+# Musterwörterbuch user-dic.txt als Vorlage
+# für eigene Benutzerwörterbücher
+
+хлеб=хлеб #s
+сыр=сыр #s
+спать=спать #v
