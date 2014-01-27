@@ -49,9 +49,13 @@ class Lingo
       suc = false
 
       res = catch(:cancel) {
-        trap(:INT) { throw(:cancel) }
+        int = trap(:INT) { throw(:cancel) }
 
-        yield self
+        begin
+          yield self
+        ensure
+          trap(:INT, &int)
+        end
 
         suc = true
         nil
