@@ -163,14 +163,15 @@ class Lingo
           end
         end
 
-        { flex => fform, blex => bform }.each { |a, f|
-          a.each { |l| l.src ||= f }
+        forms = [[flex, fform], [blex, bform]].each { |ary|
+          ary.shift.each { |lex| lex.src ||= ary.first }
         }
 
-        flex.concat(blex).delete_if { |l| l.attr == LA_COMPOUND }.
-          unshift(Lexical.new(fform + infix + bform, LA_COMPOUND))
+        flex.concat(blex).delete_if { |lex| lex.attr == LA_COMPOUND }
 
-        [flex, sta, seq.join]
+        [forms.shift.product(*forms).map { |front, back|
+          Lexical.new(front + infix + back, LA_COMPOUND)
+        }.concat(flex), sta, seq.join]
       end
 
     end
