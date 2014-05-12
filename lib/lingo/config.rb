@@ -124,6 +124,9 @@ class Lingo
     def load_config(key, type = key.to_sym)
       file = Lingo.find(type, @opts[key]) { quit }
       File.open(file, encoding: ENC) { |f| @opts.update(SafeYAML.load(f)) }
+    rescue Psych::SyntaxError => err
+      err.message << " (in #{file})"
+      raise
     end
 
   end
