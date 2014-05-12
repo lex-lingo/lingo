@@ -1,6 +1,5 @@
 = Lingo - A full-featured automatic indexing system
 
-<b></b>
 * {Version}[rdoc-label:label-VERSION]
 * {Description}[rdoc-label:label-DESCRIPTION]
   * {Introduction}[rdoc-label:label-Introduction]
@@ -287,13 +286,13 @@ the full test suite.
 
 == LINKS
 
-<b></b>
 Website::       http://lex-lingo.de
 Demo::          http://ixtrieve.fh-koeln.de/lingoweb
-Documentation:: http://lex-lingo.github.com/lingo
-Source code::   http://github.com/lex-lingo/lingo
-RubyGem::       http://rubygems.org/gems/lingo
-Bug tracker::   http://github.com/lex-lingo/lingo/issues
+Documentation:: https://lex-lingo.github.io/lingo/
+Source code::   https://github.com/lex-lingo/lingo
+RubyGem::       https://rubygems.org/gems/lingo
+Bug tracker::   https://github.com/lex-lingo/lingo/issues
+Travis CI::     https://travis-ci.org/lex-lingo/lingo
 
 
 == LITERATURE
@@ -329,7 +328,7 @@ Lingo is based on a collective development by Klaus Lepsky and John Vorhauer.
 == LICENSE AND COPYRIGHT
 
 Copyright (C) 2005-2007 John Vorhauer
-Copyright (C) 2007-2013 John Vorhauer, Jens Wille
+Copyright (C) 2007-2014 John Vorhauer, Jens Wille
 
 Lingo is free software: you can redistribute it and/or modify it under the
 terms of the GNU Affero General Public License as published by the Free
