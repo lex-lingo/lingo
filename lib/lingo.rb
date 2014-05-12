@@ -234,12 +234,12 @@ class Lingo
 
   def config
     @config ||= Config.new(*@config_args)
+  rescue => err
+    raise ConfigLoadError.new(err)
   end
 
   def dictionary_config
     @dictionary_config ||= config['language/dictionary']
-  rescue => err
-    raise ConfigLoadError.new(err)
   end
 
   def database_config(id)
