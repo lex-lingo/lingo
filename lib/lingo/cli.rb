@@ -24,11 +24,11 @@
 ###############################################################################
 #++
 
-require 'nuggets/cli'
+require 'cyclops'
 
 class Lingo
 
-  class CLI < ::Nuggets::CLI
+  class CLI < Cyclops
 
     class << self
 
@@ -55,26 +55,18 @@ class Lingo
     end
 
     def opts(opts)
-      opts.on('-c', '--config YAML', "Config file [Default: #{defaults[:config]}#{' (currently not present)' unless File.readable?(defaults[:config])}]") { |config|
-        options[:config] = config
-      }
+      opts.option(:language__LANG, "Language for processing [Default: #{defaults[:language]}]")
 
-      opts.separator ''
+      opts.separator
 
-      opts.on('-l', '--language LANG', "Language for processing [Default: #{defaults[:language]}]") { |language|
-        options[:language] = language
-      }
-
-      opts.separator ''
-
-      opts.on('-L', '--log FILE', 'Log file to print debug information to') { |log|
+      opts.option(:log__FILE, :L, 'Log file to print debug information to') { |log|
         options[:log] = stderr.reopen(log == '-' ? stdout : File.open(log, 'a+', encoding: ENC))
       }
 
-      opts.separator ''
+      opts.separator
 
-      opts.on('-P', '--profile PATH', 'Print profiling results') { |profile|
-        options[:profile] = profile == '-' ? stdout : profile
+      opts.option(:profile__PATH, :P, 'Print profiling results') { |profile|
+        options[:profile] = stdout if profile == '-'
       }
     end
 

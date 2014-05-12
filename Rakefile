@@ -46,6 +46,7 @@ The main functions of Lingo are:
       ].to_a,
       required_ruby_version: '>= 1.9.2',
       dependencies: [
+        'cyclops',
         'highline',
         ['ruby-nuggets', '>= 0.9.2'],
         'sinatra-bells',
