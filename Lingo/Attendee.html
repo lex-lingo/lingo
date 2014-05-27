@@ -2,90 +2,71 @@
 
 <html>
 <head>
-<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta charset="UTF-8">
 
 <title>class Lingo::Attendee - lingo Application documentation (v1.8.4)</title>
 
-<link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
+<link href="../fonts.css" rel="stylesheet">
+<link href="../rdoc.css" rel="stylesheet">
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
 </script>
 
-<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
-<script type="text/javascript" charset="utf-8" src="../js/navigation.js"></script>
-<script type="text/javascript" charset="utf-8" src="../js/search_index.js"></script>
-<script type="text/javascript" charset="utf-8" src="../js/search.js"></script>
-<script type="text/javascript" charset="utf-8" src="../js/searcher.js"></script>
-<script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
+<script src="../js/jquery.js"></script>
+<script src="../js/navigation.js"></script>
+<script src="../js/search_index.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/searcher.js"></script>
+<script src="../js/darkfish.js"></script>
 
 
-<body id="top" class="class">
-<nav id="metadata">
-  <nav id="home-section" class="section">
-  <h3 class="section-header">
-    <a href="../index.html">Home</a>
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
     <a href="../table_of_contents.html#classes">Classes</a>
     <a href="../table_of_contents.html#methods">Methods</a>
-  </h3>
-</nav>
+  </div>
+</div>
 
-
-  <nav id="search-section" class="section project-section" class="initially-hidden">
+    <div id="search-section" role="search" class="project-section initially-hidden">
   <form action="#" method="get" accept-charset="utf-8">
-    <h3 class="section-header">
-      <input type="text" name="search" placeholder="Search" id="search-field"
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
              title="Type to search, Up and Down to navigate, Enter to load">
-    </h3>
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
   </form>
+</div>
 
-  <ul id="search-results" class="initially-hidden"></ul>
-</nav>
-
+  </div>
 
   
-
-  <div id="file-metadata">
-    <nav id="file-list-section" class="section">
-  <h3 class="section-header">Defined In</h3>
-  <ul>
-    <li>lib/lingo/attendee.rb
-    <li>lib/lingo/attendee/abbreviator.rb
-    <li>lib/lingo/attendee/debugger.rb
-    <li>lib/lingo/attendee/decomposer.rb
-    <li>lib/lingo/attendee/dehyphenizer.rb
-    <li>lib/lingo/attendee/formatter.rb
-    <li>lib/lingo/attendee/multi_worder.rb
-    <li>lib/lingo/attendee/noneword_filter.rb
-    <li>lib/lingo/attendee/object_filter.rb
-    <li>lib/lingo/attendee/sequencer.rb
-    <li>lib/lingo/attendee/stemmer.rb
-    <li>lib/lingo/attendee/stemmer/porter.rb
-    <li>lib/lingo/attendee/synonymer.rb
-    <li>lib/lingo/attendee/text_reader.rb
-    <li>lib/lingo/attendee/text_writer.rb
-    <li>lib/lingo/attendee/tokenizer.rb
-    <li>lib/lingo/attendee/variator.rb
-    <li>lib/lingo/attendee/vector_filter.rb
-    <li>lib/lingo/attendee/word_searcher.rb
-  </ul>
-</nav>
-
-    
-  </div>
 
   <div id="class-metadata">
     
-    <nav id="parent-class-section" class="section">
-  <h3 class="section-header">Parent</h3>
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
   
   <p class="link">Object
   
-</nav>
+</div>
 
-    <!-- Included Modules -->
-<nav id="includes-section" class="section">
-  <h3 class="section-header">Included Modules</h3>
+    <div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
 
   <ul class="link-list">
   
@@ -94,14 +75,14 @@
   
   
   </ul>
-</nav>
+</div>
 
     
     <!-- Method Quickref -->
-<nav id="method-list-section" class="section">
-  <h3 class="section-header">Methods</h3>
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
 
-  <ul class="link-list">
+  <ul class="link-list" role="directory">
     
     <li ><a href="#method-c-new">::new</a>
     
@@ -142,196 +123,26 @@
     <li ><a href="#method-i-warn">#warn</a>
     
   </ul>
-</nav>
-
-  </div>
-
-  <div id="project-metadata">
-    <nav id="fileindex-section" class="section project-section">
-  <h3 class="section-header">Pages</h3>
-
-  <ul>
-  
-    <li class="file"><a href="../COPYING.html">COPYING</a>
-  
-    <li class="file"><a href="../ChangeLog.html">ChangeLog</a>
-  
-    <li class="file"><a href="../README.html">README</a>
-  
-  </ul>
-</nav>
-
-    <nav id="classindex-section" class="section project-section">
-  <h3 class="section-header">Class and Module Index</h3>
-
-  <ul class="link-list">
-  
-    <li><a href="../Lingo.html">Lingo</a>
-  
-    <li><a href="../Lingo/AgendaItem.html">Lingo::AgendaItem</a>
-  
-    <li><a href="../Lingo/App.html">Lingo::App</a>
-  
-    <li><a href="../Lingo/Attendee.html">Lingo::Attendee</a>
-  
-    <li><a href="../Lingo/Attendee/Abbreviator.html">Lingo::Attendee::Abbreviator</a>
-  
-    <li><a href="../Lingo/Attendee/Debugger.html">Lingo::Attendee::Debugger</a>
-  
-    <li><a href="../Lingo/Attendee/Decomposer.html">Lingo::Attendee::Decomposer</a>
-  
-    <li><a href="../Lingo/Attendee/Dehyphenizer.html">Lingo::Attendee::Dehyphenizer</a>
-  
-    <li><a href="../Lingo/Attendee/Formatter.html">Lingo::Attendee::Formatter</a>
-  
-    <li><a href="../Lingo/Attendee/MultiWorder.html">Lingo::Attendee::MultiWorder</a>
-  
-    <li><a href="../Lingo/Attendee/NonewordFilter.html">Lingo::Attendee::NonewordFilter</a>
-  
-    <li><a href="../Lingo/Attendee/ObjectFilter.html">Lingo::Attendee::ObjectFilter</a>
-  
-    <li><a href="../Lingo/Attendee/Sequencer.html">Lingo::Attendee::Sequencer</a>
-  
-    <li><a href="../Lingo/Attendee/Stemmer.html">Lingo::Attendee::Stemmer</a>
-  
-    <li><a href="../Lingo/Attendee/Stemmer/Porter.html">Lingo::Attendee::Stemmer::Porter</a>
-  
-    <li><a href="../Lingo/Attendee/Synonymer.html">Lingo::Attendee::Synonymer</a>
-  
-    <li><a href="../Lingo/Attendee/TextReader.html">Lingo::Attendee::TextReader</a>
-  
-    <li><a href="../Lingo/Attendee/TextReader/PDFFilter.html">Lingo::Attendee::TextReader::PDFFilter</a>
-  
-    <li><a href="../Lingo/Attendee/TextWriter.html">Lingo::Attendee::TextWriter</a>
-  
-    <li><a href="../Lingo/Attendee/Tokenizer.html">Lingo::Attendee::Tokenizer</a>
-  
-    <li><a href="../Lingo/Attendee/Variator.html">Lingo::Attendee::Variator</a>
-  
-    <li><a href="../Lingo/Attendee/VectorFilter.html">Lingo::Attendee::VectorFilter</a>
-  
-    <li><a href="../Lingo/Attendee/WordSearcher.html">Lingo::Attendee::WordSearcher</a>
-  
-    <li><a href="../Lingo/BackendNotAvailableError.html">Lingo::BackendNotAvailableError</a>
-  
-    <li><a href="../Lingo/BackendNotFoundError.html">Lingo::BackendNotFoundError</a>
-  
-    <li><a href="../Lingo/BufferedAttendee.html">Lingo::BufferedAttendee</a>
-  
-    <li><a href="../Lingo/CLI.html">Lingo::CLI</a>
-  
-    <li><a href="../Lingo/Call.html">Lingo::Call</a>
-  
-    <li><a href="../Lingo/Config.html">Lingo::Config</a>
-  
-    <li><a href="../Lingo/ConfigError.html">Lingo::ConfigError</a>
-  
-    <li><a href="../Lingo/ConfigLoadError.html">Lingo::ConfigLoadError</a>
-  
-    <li><a href="../Lingo/Ctl.html">Lingo::Ctl</a>
-  
-    <li><a href="../Lingo/Database.html">Lingo::Database</a>
-  
-    <li><a href="../Lingo/Database/Crypter.html">Lingo::Database::Crypter</a>
-  
-    <li><a href="../Lingo/Database/GDBMStore.html">Lingo::Database::GDBMStore</a>
-  
-    <li><a href="../Lingo/Database/HashStore.html">Lingo::Database::HashStore</a>
-  
-    <li><a href="../Lingo/Database/LibCDBStore.html">Lingo::Database::LibCDBStore</a>
-  
-    <li><a href="../Lingo/Database/SDBMStore.html">Lingo::Database::SDBMStore</a>
-  
-    <li><a href="../Lingo/Database/ShowProgress.html">Lingo::Database::ShowProgress</a>
-  
-    <li><a href="../Lingo/Database/Source.html">Lingo::Database::Source</a>
-  
-    <li><a href="../Lingo/Database/Source/KeyValue.html">Lingo::Database::Source::KeyValue</a>
-  
-    <li><a href="../Lingo/Database/Source/MultiKey.html">Lingo::Database::Source::MultiKey</a>
-  
-    <li><a href="../Lingo/Database/Source/MultiValue.html">Lingo::Database::Source::MultiValue</a>
-  
-    <li><a href="../Lingo/Database/Source/SingleWord.html">Lingo::Database::Source::SingleWord</a>
-  
-    <li><a href="../Lingo/Database/Source/WordClass.html">Lingo::Database::Source::WordClass</a>
-  
-    <li><a href="../Lingo/DatabaseError.html">Lingo::DatabaseError</a>
-  
-    <li><a href="../Lingo/Debug.html">Lingo::Debug</a>
-  
-    <li><a href="../Lingo/FileNotFoundError.html">Lingo::FileNotFoundError</a>
-  
-    <li><a href="../Lingo/InvalidDatabaseConfigError.html">Lingo::InvalidDatabaseConfigError</a>
-  
-    <li><a href="../Lingo/Language.html">Lingo::Language</a>
-  
-    <li><a href="../Lingo/Language/Char.html">Lingo::Language::Char</a>
-  
-    <li><a href="../Lingo/Language/Dictionary.html">Lingo::Language::Dictionary</a>
-  
-    <li><a href="../Lingo/Language/Grammar.html">Lingo::Language::Grammar</a>
-  
-    <li><a href="../Lingo/Language/Lexical.html">Lingo::Language::Lexical</a>
-  
-    <li><a href="../Lingo/Language/LexicalHash.html">Lingo::Language::LexicalHash</a>
-  
-    <li><a href="../Lingo/Language/Token.html">Lingo::Language::Token</a>
-  
-    <li><a href="../Lingo/Language/Word.html">Lingo::Language::Word</a>
-  
-    <li><a href="../Lingo/Language/WordForm.html">Lingo::Language::WordForm</a>
-  
-    <li><a href="../Lingo/LibraryLoadError.html">Lingo::LibraryLoadError</a>
-  
-    <li><a href="../Lingo/LingoError.html">Lingo::LingoError</a>
-  
-    <li><a href="../Lingo/MissingConfigError.html">Lingo::MissingConfigError</a>
-  
-    <li><a href="../Lingo/NameNotFoundError.html">Lingo::NameNotFoundError</a>
-  
-    <li><a href="../Lingo/NoDatabaseConfigError.html">Lingo::NoDatabaseConfigError</a>
-  
-    <li><a href="../Lingo/NoWritableStoreError.html">Lingo::NoWritableStoreError</a>
-  
-    <li><a href="../Lingo/ShowProgress.html">Lingo::ShowProgress</a>
-  
-    <li><a href="../Lingo/SourceFileNotFoundError.html">Lingo::SourceFileNotFoundError</a>
-  
-    <li><a href="../Lingo/Srv.html">Lingo::Srv</a>
-  
-    <li><a href="../Lingo/Version.html">Lingo::Version</a>
-  
-    <li><a href="../Lingo/Web.html">Lingo::Web</a>
-  
-    <li><a href="../Lingo/Web/Rack.html">Lingo::Web::Rack</a>
-  
-    <li><a href="../Lingo/Web/Rack/Auth.html">Lingo::Web::Rack::Auth</a>
-  
-    <li><a href="../Nuggets.html">Nuggets</a>
-  
-    <li><a href="../YAML.html">YAML</a>
-  
-  </ul>
-</nav>
+</div>
 
   </div>
 </nav>
 
-<div id="documentation">
-  <h1 class="class">class Lingo::Attendee</h1>
+<main role="main" aria-labelledby="class-Lingo::Attendee">
+  <h1 id="class-Lingo::Attendee" class="class">
+    class Lingo::Attendee
+  </h1>
 
-  <div id="description" class="description">
+  <section class="description">
     
-<p><a href="../Lingo.html">Lingo</a> ist als universelles Indexierungssystem
-entworfen worden. Seine Stärke liegt in der einfachen Konfigurierbarkeit
-für spezifische Aufgaben und in der schnelle Entwicklung weiterer
-Funktionen durch systematischen Kapselung der Komplexität auf kleine
-Verarbeitungseinheiten. Die kleinste Verarbeitungseinheit wird <a
-href="Attendee.html">Attendee</a> genannt. Um ein gewünschtes
-Verarbeitungsergebnis zu bekommen, werden die benötigten Attendees einfach
-in einer Reihe hinter einander geschaltet. Ein einfaches Beispiel hierfür
-ist eine direkte Verbindung zwischen einem <a
+<p>Lingo ist als universelles Indexierungssystem entworfen worden. Seine
+Stärke liegt in der einfachen Konfigurierbarkeit für spezifische Aufgaben
+und in der schnelle Entwicklung weiterer Funktionen durch systematischen
+Kapselung der Komplexität auf kleine Verarbeitungseinheiten. Die kleinste
+Verarbeitungseinheit wird <a href="Attendee.html">Attendee</a> genannt. Um
+ein gewünschtes Verarbeitungsergebnis zu bekommen, werden die benötigten
+Attendees einfach in einer Reihe hinter einander geschaltet. Ein einfaches
+Beispiel hierfür ist eine direkte Verbindung zwischen einem <a
 href="Attendee.html#Textreader">Textreader</a>, einem <a
 href="Attendee/Tokenizer.html">Tokenizer</a> und einem <a
 href="Attendee.html#Textwriter">Textwriter</a>. Alle drei Klassen sind von
@@ -394,7 +205,7 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
 <p>schreibt verarbeitungsstatistiken</p>
 </li></ul>
 
-  </div><!-- description -->
+  </section>
 
   
   
@@ -405,114 +216,115 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
     
 
     
-    <!-- Constants -->
-    <section id="constants-list" class="section">
-      <h3 class="section-header">Constants</h3>
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
       <dl>
       
         <dt id="DEFAULT_SKIP">DEFAULT_SKIP
         
-        <dd class="description">
+        <dd>
         
       
         <dt id="Multi_worder">Multi_worder
         
-        <dd class="description">
+        <dd>
         
       
         <dt id="Multiworder">Multiworder
         
-        <dd class="description"><p>For backwards compatibility.</p>
+        <dd><p>For backwards compatibility.</p>
         
       
         <dt id="Noneword_filter">Noneword_filter
         
-        <dd class="description">
+        <dd>
         
       
         <dt id="Nonewordfilter">Nonewordfilter
         
-        <dd class="description"><p>For backwards compatibility.</p>
+        <dd><p>For backwards compatibility.</p>
         
       
         <dt id="Object_filter">Object_filter
         
-        <dd class="description">
+        <dd>
         
       
         <dt id="Objectfilter">Objectfilter
         
-        <dd class="description"><p>For backwards compatibility.</p>
+        <dd><p>For backwards compatibility.</p>
         
       
         <dt id="STR_CMD_EOF">STR_CMD_EOF
         
-        <dd class="description">
+        <dd>
         
       
         <dt id="STR_CMD_EOL">STR_CMD_EOL
         
-        <dd class="description">
+        <dd>
         
       
         <dt id="STR_CMD_FILE">STR_CMD_FILE
         
-        <dd class="description">
+        <dd>
         
       
         <dt id="STR_CMD_LIR">STR_CMD_LIR
         
-        <dd class="description">
+        <dd>
         
       
         <dt id="STR_CMD_RECORD">STR_CMD_RECORD
         
-        <dd class="description">
+        <dd>
         
       
         <dt id="STR_CMD_TALK">STR_CMD_TALK
         
-        <dd class="description">
+        <dd>
         
       
         <dt id="Text_reader">Text_reader
         
-        <dd class="description">
+        <dd>
         
       
         <dt id="Text_writer">Text_writer
         
-        <dd class="description">
+        <dd>
         
       
         <dt id="Textreader">Textreader
         
-        <dd class="description"><p>For backwards compatibility.</p>
+        <dd><p>For backwards compatibility.</p>
         
       
         <dt id="Textwriter">Textwriter
         
-        <dd class="description"><p>For backwards compatibility.</p>
+        <dd><p>For backwards compatibility.</p>
         
       
         <dt id="Vector_filter">Vector_filter
         
-        <dd class="description">
+        <dd>
         
       
         <dt id="Vectorfilter">Vectorfilter
         
-        <dd class="description"><p>For backwards compatibility.</p>
+        <dd><p>For backwards compatibility.</p>
         
       
         <dt id="Word_searcher">Word_searcher
         
-        <dd class="description">
+        <dd>
         
       
         <dt id="Wordsearcher">Wordsearcher
         
-        <dd class="description"><p>For backwards compatibility.</p>
+        <dd><p>For backwards compatibility.</p>
         
       
       </dl>
@@ -520,11 +332,33 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
     
 
     
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
 
-    <!-- Methods -->
+      
+      <div id="attribute-i-lingo" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">lingo</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+    </section>
     
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
-      <h3 class="section-header">Public Class Methods</h3>
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
 
     
       <div id="method-c-new" class="method-detail ">
@@ -553,6 +387,8 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
   <span class="ruby-comment"># Make sure config exists</span>
   <span class="ruby-identifier">lingo</span>.<span class="ruby-identifier">dictionary_config</span>
 
+  <span class="ruby-ivar">@dic</span> = <span class="ruby-ivar">@gra</span> = <span class="ruby-keyword">nil</span>
+
   <span class="ruby-identifier">init</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">method_defined?</span>(<span class="ruby-value">:init</span>)
 
   <span class="ruby-ivar">@can_control</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">method_defined?</span>(<span class="ruby-value">:control</span>)
@@ -560,20 +396,22 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
 
   <span class="ruby-ivar">@skip_command</span> = <span class="ruby-keyword">false</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- new-source -->
+          </div>
           
         </div>
 
         
 
         
-      </div><!-- new-method -->
+      </div>
 
     
-    </section><!-- public-class-method-details -->
+    </section>
   
-     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
-      <h3 class="section-header">Public Instance Methods</h3>
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
 
     
       <div id="method-i-add_subscriber" class="method-detail ">
@@ -595,18 +433,18 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
 
           
           <div class="method-source-code" id="add_subscriber-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 93</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 97</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">add_subscriber</span>(<span class="ruby-identifier">subscriber</span>)
   <span class="ruby-ivar">@subscriber</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">subscriber</span>)
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- add_subscriber-source -->
+          </div>
           
         </div>
 
         
 
         
-      </div><!-- add_subscriber-method -->
+      </div>
 
     
       <div id="method-i-listen" class="method-detail ">
@@ -628,7 +466,7 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
 
           
           <div class="method-source-code" id="listen-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 97</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 101</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">listen</span>(<span class="ruby-identifier">obj</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">AgendaItem</span>)
     <span class="ruby-identifier">args</span> = <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">to_a</span>
@@ -638,14 +476,14 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
     <span class="ruby-ivar">@can_process</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">process</span>(<span class="ruby-identifier">obj</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">obj</span>)
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- listen-source -->
+          </div>
           
         </div>
 
         
 
         
-      </div><!-- listen-method -->
+      </div>
 
     
       <div id="method-i-talk" class="method-detail ">
@@ -667,24 +505,26 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
 
           
           <div class="method-source-code" id="talk-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 107</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 111</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">talk</span>(<span class="ruby-identifier">obj</span>)
   <span class="ruby-ivar">@subscriber</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">attendee</span><span class="ruby-operator">|</span> <span class="ruby-identifier">attendee</span>.<span class="ruby-identifier">listen</span>(<span class="ruby-identifier">obj</span>) }
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- talk-source -->
+          </div>
           
         </div>
 
         
 
         
-      </div><!-- talk-method -->
+      </div>
 
     
-    </section><!-- public-instance-method-details -->
+    </section>
   
-     <section id="private-instance-5Buntitled-5D-method-details" class="method-section section">
-      <h3 class="section-header">Private Instance Methods</h3>
+     <section id="private-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Private Instance Methods</h3>
+       </header>
 
     
       <div id="method-i-dictionary" class="method-detail ">
@@ -706,18 +546,18 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
 
           
           <div class="method-source-code" id="dictionary-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 155</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 159</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">dictionary</span>(<span class="ruby-identifier">src</span>, <span class="ruby-identifier">mod</span>)
-  <span class="ruby-constant">Language</span><span class="ruby-operator">::</span><span class="ruby-constant">Dictionary</span>.<span class="ruby-identifier">new</span>({ <span class="ruby-string">&#39;source&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">src</span>, <span class="ruby-string">&#39;mode&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">mod</span> }, <span class="ruby-ivar">@lingo</span>)
+  <span class="ruby-constant">Language</span><span class="ruby-operator">::</span><span class="ruby-constant">Dictionary</span>.<span class="ruby-identifier">new</span>({ <span class="ruby-string">&#39;source&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">src</span>, <span class="ruby-string">&#39;mode&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">mod</span> }, <span class="ruby-identifier">lingo</span>)
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- dictionary-source -->
+          </div>
           
         </div>
 
         
 
         
-      </div><!-- dictionary-method -->
+      </div>
 
     
       <div id="method-i-find_word" class="method-detail ">
@@ -739,19 +579,19 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
 
           
           <div class="method-source-code" id="find_word-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 113</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 117</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find_word</span>(<span class="ruby-identifier">f</span>, <span class="ruby-identifier">d</span> = <span class="ruby-ivar">@dic</span>, <span class="ruby-identifier">g</span> = <span class="ruby-ivar">@gra</span>)
   <span class="ruby-identifier">w</span> = <span class="ruby-identifier">d</span>.<span class="ruby-identifier">find_word</span>(<span class="ruby-identifier">f</span>)
   <span class="ruby-identifier">g</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">block_given?</span> <span class="ruby-operator">?</span> <span class="ruby-operator">!</span><span class="ruby-keyword">yield</span>(<span class="ruby-identifier">w</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">w</span>.<span class="ruby-identifier">unknown?</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">g</span>.<span class="ruby-identifier">find_compound</span>(<span class="ruby-identifier">f</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">w</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- find_word-source -->
+          </div>
           
         </div>
 
         
 
         
-      </div><!-- find_word-method -->
+      </div>
 
     
       <div id="method-i-flush" class="method-detail ">
@@ -773,18 +613,18 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
 
           
           <div class="method-source-code" id="flush-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 130</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 134</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">flush</span>(<span class="ruby-identifier">buffer</span>)
   <span class="ruby-identifier">buffer</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">i</span>) }.<span class="ruby-identifier">clear</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- flush-source -->
+          </div>
           
         </div>
 
         
 
         
-      </div><!-- flush-method -->
+      </div>
 
     
       <div id="method-i-forward" class="method-detail ">
@@ -806,18 +646,18 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
 
           
           <div class="method-source-code" id="forward-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 126</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 130</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">obj</span>, <span class="ruby-identifier">param</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">talk</span>(<span class="ruby-identifier">param</span> <span class="ruby-operator">?</span> <span class="ruby-constant">AgendaItem</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">obj</span>, <span class="ruby-identifier">param</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">obj</span>)
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- forward-source -->
+          </div>
           
         </div>
 
         
 
         
-      </div><!-- forward-method -->
+      </div>
 
     
       <div id="method-i-get_array" class="method-detail ">
@@ -839,20 +679,20 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
 
           
           <div class="method-source-code" id="get_array-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 143</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 147</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_array</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">method</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">ary</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span>).<span class="ruby-identifier">split</span>(<span class="ruby-constant">SEP_RE</span>)
   <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">map!</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">method</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">method</span>
   <span class="ruby-identifier">ary</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- get_array-source -->
+          </div>
           
         </div>
 
         
 
         
-      </div><!-- get_array-method -->
+      </div>
 
     
       <div id="method-i-get_key" class="method-detail ">
@@ -874,19 +714,19 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
 
           
           <div class="method-source-code" id="get_key-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 138</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 142</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_key</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span> = <span class="ruby-identifier">nodefault</span> = <span class="ruby-keyword">true</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">MissingConfigError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">key</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">nodefault</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">key</span>)
   <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span>)
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- get_key-source -->
+          </div>
           
         </div>
 
         
 
         
-      </div><!-- get_key-method -->
+      </div>
 
     
       <div id="method-i-get_re" class="method-detail ">
@@ -908,20 +748,20 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
 
           
           <div class="method-source-code" id="get_re-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 149</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 153</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_re</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">standard</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span>)
     <span class="ruby-identifier">value</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">standard</span> <span class="ruby-operator">:</span> <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">value</span>)
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- get_re-source -->
+          </div>
           
         </div>
 
         
 
         
-      </div><!-- get_re-method -->
+      </div>
 
     
       <div id="method-i-grammar" class="method-detail ">
@@ -943,18 +783,18 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
 
           
           <div class="method-source-code" id="grammar-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 159</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 163</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">grammar</span>(<span class="ruby-identifier">src</span>, <span class="ruby-identifier">mod</span>)
-  <span class="ruby-constant">Language</span><span class="ruby-operator">::</span><span class="ruby-constant">Grammar</span>.<span class="ruby-identifier">new</span>({ <span class="ruby-string">&#39;source&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">src</span>, <span class="ruby-string">&#39;mode&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">mod</span> }, <span class="ruby-ivar">@lingo</span>)
+  <span class="ruby-constant">Language</span><span class="ruby-operator">::</span><span class="ruby-constant">Grammar</span>.<span class="ruby-identifier">new</span>({ <span class="ruby-string">&#39;source&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">src</span>, <span class="ruby-string">&#39;mode&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">mod</span> }, <span class="ruby-identifier">lingo</span>)
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- grammar-source -->
+          </div>
           
         </div>
 
         
 
         
-      </div><!-- grammar-method -->
+      </div>
 
     
       <div id="method-i-has_key-3F" class="method-detail ">
@@ -976,18 +816,18 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
 
           
           <div class="method-source-code" id="has_key-3F-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 134</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 138</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">key</span>)
-  <span class="ruby-ivar">@config</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">key</span>)
+  <span class="ruby-ivar">@config</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">key</span>)
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- has_key-3F-source -->
+          </div>
           
         </div>
 
         
 
         
-      </div><!-- has_key-3F-method -->
+      </div>
 
     
       <div id="method-i-require_lib" class="method-detail ">
@@ -1009,20 +849,20 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
 
           
           <div class="method-source-code" id="require_lib-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 175</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 179</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">require_lib</span>(<span class="ruby-identifier">lib</span>)
   <span class="ruby-identifier">require</span> <span class="ruby-identifier">lib</span>
 <span class="ruby-keyword">rescue</span> <span class="ruby-constant">LoadError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">err</span>
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">LibraryLoadError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>, <span class="ruby-identifier">lib</span>, <span class="ruby-identifier">err</span>)
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- require_lib-source -->
+          </div>
           
         </div>
 
         
 
         
-      </div><!-- require_lib-method -->
+      </div>
 
     
       <div id="method-i-set_dic" class="method-detail ">
@@ -1044,18 +884,18 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
 
           
           <div class="method-source-code" id="set_dic-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 163</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 167</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">set_dic</span>
   <span class="ruby-ivar">@dic</span> = <span class="ruby-identifier">dictionary</span>(<span class="ruby-identifier">get_array</span>(<span class="ruby-string">&#39;source&#39;</span>), <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;mode&#39;</span>, <span class="ruby-string">&#39;all&#39;</span>))
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- set_dic-source -->
+          </div>
           
         </div>
 
         
 
         
-      </div><!-- set_dic-method -->
+      </div>
 
     
       <div id="method-i-set_gra" class="method-detail ">
@@ -1077,18 +917,18 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
 
           
           <div class="method-source-code" id="set_gra-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 167</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 171</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">set_gra</span>
   <span class="ruby-ivar">@gra</span> = <span class="ruby-identifier">grammar</span>(<span class="ruby-identifier">get_array</span>(<span class="ruby-string">&#39;source&#39;</span>), <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;mode&#39;</span>, <span class="ruby-string">&#39;all&#39;</span>))
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- set_gra-source -->
+          </div>
           
         </div>
 
         
 
         
-      </div><!-- set_gra-method -->
+      </div>
 
     
       <div id="method-i-skip_command" class="method-detail ">
@@ -1110,18 +950,18 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
 
           
           <div class="method-source-code" id="skip_command-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 118</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 122</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">skip_command</span>
   <span class="ruby-ivar">@skip_command</span> = <span class="ruby-keyword">true</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- skip_command-source -->
+          </div>
           
         </div>
 
         
 
         
-      </div><!-- skip_command-method -->
+      </div>
 
     
       <div id="method-i-skip_command-21" class="method-detail ">
@@ -1143,18 +983,18 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
 
           
           <div class="method-source-code" id="skip_command-21-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 122</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 126</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">skip_command!</span>
   <span class="ruby-ivar">@skip_command</span>.<span class="ruby-identifier">tap</span> { <span class="ruby-ivar">@skip_command</span> <span class="ruby-operator">&amp;&amp;=</span> <span class="ruby-keyword">false</span> }
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- skip_command-21-source -->
+          </div>
           
         </div>
 
         
 
         
-      </div><!-- skip_command-21-method -->
+      </div>
 
     
       <div id="method-i-warn" class="method-detail ">
@@ -1176,30 +1016,29 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
 
           
           <div class="method-source-code" id="warn-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 171</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 175</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">warn</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">msg</span>)
-  <span class="ruby-ivar">@lingo</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">msg</span>)
+  <span class="ruby-identifier">lingo</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">msg</span>)
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- warn-source -->
+          </div>
           
         </div>
 
         
 
         
-      </div><!-- warn-method -->
+      </div>
 
     
-    </section><!-- private-instance-method-details -->
+    </section>
   
-  </section><!-- 5Buntitled-5D -->
+  </section>
+</main>
 
-</div><!-- documentation -->
 
-
-<footer id="validator-badges">
-  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.1.
-  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

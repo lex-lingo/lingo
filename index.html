@@ -2,68 +2,77 @@
 
 <html>
 <head>
-<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta charset="UTF-8">
 
 <title>lingo Application documentation (v1.8.4)</title>
 
-<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+<link href="./fonts.css" rel="stylesheet">
+<link href="./rdoc.css" rel="stylesheet">
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
 </script>
 
-<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
-<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
-<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
-<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
-<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
-<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+<script src="./js/jquery.js"></script>
+<script src="./js/navigation.js"></script>
+<script src="./js/search_index.js"></script>
+<script src="./js/search.js"></script>
+<script src="./js/searcher.js"></script>
+<script src="./js/darkfish.js"></script>
 
 
-<body>
-<nav id="metadata">
-  <nav id="home-section" class="section">
-  <h3 class="section-header">
-    <a href="./index.html">Home</a>
+<body id="top" role="document" class="file">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
     <a href="./table_of_contents.html#classes">Classes</a>
     <a href="./table_of_contents.html#methods">Methods</a>
-  </h3>
-</nav>
+  </div>
+</div>
 
 
-  <nav id="search-section" class="section project-section" class="initially-hidden">
+    <div id="search-section" role="search" class="project-section initially-hidden">
   <form action="#" method="get" accept-charset="utf-8">
-    <h3 class="section-header">
-      <input type="text" name="search" placeholder="Search" id="search-field"
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
              title="Type to search, Up and Down to navigate, Enter to load">
-    </h3>
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
   </form>
+</div>
 
-  <ul id="search-results" class="initially-hidden"></ul>
-</nav>
-
+  </div>
 
   <div id="project-metadata">
-    <nav id="fileindex-section" class="section project-section">
-  <h3 class="section-header">Pages</h3>
-
-  <ul>
-  
-    <li class="file"><a href="./COPYING.html">COPYING</a>
-  
-    <li class="file"><a href="./ChangeLog.html">ChangeLog</a>
-  
-    <li class="file"><a href="./README.html">README</a>
-  
-  </ul>
-</nav>
-
-    <nav id="classindex-section" class="section project-section">
-  <h3 class="section-header">Class and Module Index</h3>
+    <div id="fileindex-section" class="nav-section">
+  <h3>Pages</h3>
 
   <ul class="link-list">
   
-    <li><a href="./Lingo.html">Lingo</a>
+    <li><a href="./COPYING.html">COPYING</a>
+  
+    <li><a href="./ChangeLog.html">ChangeLog</a>
+  
+    <li><a href="./README.html">README</a>
+  
+  </ul>
+</div>
+
+    <div id="classindex-section" class="nav-section">
+  <h3>Class and Module Index</h3>
+
+  <ul class="link-list">
   
     <li><a href="./Lingo/AgendaItem.html">Lingo::AgendaItem</a>
   
@@ -96,8 +105,6 @@
     <li><a href="./Lingo/Attendee/Synonymer.html">Lingo::Attendee::Synonymer</a>
   
     <li><a href="./Lingo/Attendee/TextReader.html">Lingo::Attendee::TextReader</a>
-  
-    <li><a href="./Lingo/Attendee/TextReader/PDFFilter.html">Lingo::Attendee::TextReader::PDFFilter</a>
   
     <li><a href="./Lingo/Attendee/TextWriter.html">Lingo::Attendee::TextWriter</a>
   
@@ -137,9 +144,9 @@
   
     <li><a href="./Lingo/Database/LibCDBStore.html">Lingo::Database::LibCDBStore</a>
   
-    <li><a href="./Lingo/Database/SDBMStore.html">Lingo::Database::SDBMStore</a>
+    <li><a href="./Lingo/Database/Progress.html">Lingo::Database::Progress</a>
   
-    <li><a href="./Lingo/Database/ShowProgress.html">Lingo::Database::ShowProgress</a>
+    <li><a href="./Lingo/Database/SDBMStore.html">Lingo::Database::SDBMStore</a>
   
     <li><a href="./Lingo/Database/Source.html">Lingo::Database::Source</a>
   
@@ -191,7 +198,7 @@
   
     <li><a href="./Lingo/NoWritableStoreError.html">Lingo::NoWritableStoreError</a>
   
-    <li><a href="./Lingo/ShowProgress.html">Lingo::ShowProgress</a>
+    <li><a href="./Lingo/Progress.html">Lingo::Progress</a>
   
     <li><a href="./Lingo/SourceFileNotFoundError.html">Lingo::SourceFileNotFoundError</a>
   
@@ -201,25 +208,16 @@
   
     <li><a href="./Lingo/Web.html">Lingo::Web</a>
   
-    <li><a href="./Lingo/Web/Rack.html">Lingo::Web::Rack</a>
-  
-    <li><a href="./Lingo/Web/Rack/Auth.html">Lingo::Web::Rack::Auth</a>
-  
-    <li><a href="./Nuggets.html">Nuggets</a>
-  
-    <li><a href="./YAML.html">YAML</a>
-  
   </ul>
-</nav>
+</div>
 
   </div>
 </nav>
 
-<div id="documentation" class="description">
+<main role="main">
 
-<h1 id="label-Lingo+-+A+full-featured+automatic+indexing+system"><a href="Lingo.html">Lingo</a> - A full-featured automatic indexing system<span><a href="#label-Lingo+-+A+full-featured+automatic+indexing+system">&para;</a> <a href="#documentation">&uarr;</a></span></h1>
 
-<p></p>
+<h1 id="label-Lingo+-+A+full-featured+automatic+indexing+system">Lingo - A full-featured automatic indexing system<span><a href="#label-Lingo+-+A+full-featured+automatic+indexing+system">&para;</a> <a href="#documentation">&uarr;</a></span></h1>
 <ul><li>
 <p><a href="#label-VERSION">Version</a></p>
 </li><li>
@@ -255,6 +253,15 @@ configuration file lookup</a></p>
 <p><a href="#label-Language+definition">Language definition</a></p>
 </li><li>
 <p><a href="#label-Dictionaries">Dictionaries</a></p>
+<ul><li>
+<p><a href="#label-Encoding+word+classes+and+gender+information">Encoding word
+classes and gender information</a></p>
+</li><li>
+<p><a href="#label-Lexicalizing+multiword+expressions">Lexicalizing multiword
+expressions</a></p>
+</li><li>
+<p><a href="#label-Lexicalizing+compounds">Lexicalizing compounds</a></p>
+</li></ul>
 </li></ul>
 </li><li>
 <p><a href="#label-ISSUES+AND+CONTRIBUTIONS">Issues and Contributions</a></p>
@@ -262,6 +269,11 @@ configuration file lookup</a></p>
 <p><a href="#label-LINKS">Links</a></p>
 </li><li>
 <p><a href="#label-LITERATURE">Literature</a></p>
+<ul><li>
+<p><a href="#label-Background+and+Theory">Background and Theory</a></p>
+</li><li>
+<p><a href="#label-Research+publications">Research publications</a></p>
+</li></ul>
 </li><li>
 <p><a href="#label-CREDITS">Credits</a></p>
 </li><li>
@@ -270,20 +282,19 @@ configuration file lookup</a></p>
 
 <h2 id="label-VERSION">VERSION<span><a href="#label-VERSION">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 
-<p>This documentation refers to <a href="Lingo.html">Lingo</a> version 1.8.4</p>
+<p>This documentation refers to Lingo version 1.8.4</p>
 
 <h2 id="label-DESCRIPTION">DESCRIPTION<span><a href="#label-DESCRIPTION">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 
-<p><a href="Lingo.html">Lingo</a> is an open source indexing system for
-research and teachings. The main functions of <a
-href="Lingo.html">Lingo</a> are:</p>
+<p>Lingo is an open source indexing system for research and teachings. The
+main functions of Lingo are:</p>
 <ul><li>
 <p>identification of (i.e. reduction to) basic word form by means of
 dictionaries and suffix lists</p>
 </li><li>
 <p>algorithmic decomposition</p>
 </li><li>
-<p>dictionary-based synonymisation and identification of phrases</p>
+<p>dictionary-based synonymization and identification of phrases</p>
 </li><li>
 <p>generic identification of phrases/word sequences based on patterns of word
 classes</p>
@@ -291,59 +302,54 @@ classes</p>
 
 <h3 id="label-Introduction">Introduction<span><a href="#label-Introduction">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
 
-<p>If you want to perform linguistic analysis on some text, <a
-href="Lingo.html">Lingo</a> is there to support your endeavour with all its
-flexibility and extendability. <a href="Lingo.html">Lingo</a> enables you
-to assemble a network of practically unlimited functionality from modules
-with limited functions. This network is built by configuration files.
-Here&#39;s a minimal example:</p>
+<p>Lingo allows flexible and extendable linguistic analysis of text files.
+Here is a minimal configuration example to analyse this <a
+href="README.html">README</a> file:</p>
 
 <pre>meeting:
   attendees:
     - text_reader: { files: &#39;README&#39; }
     - debugger:    { eval: &#39;true&#39;, ceval: &#39;cmd!=&quot;EOL&quot;&#39;, prompt: &#39;&lt;debug&gt;: &#39; }</pre>
 
-<p><a href="Lingo.html">Lingo</a> is told to invite two attendees. And <a
-href="Lingo.html">Lingo</a> wants them to talk to each other, hence the
-name <a href="Lingo.html">Lingo</a> (= the technical language).</p>
+<p>Lingo is told to invite two attendees and wants them to talk to each other,
+hence the name Lingo (= the technical language).</p>
 
-<p>The first attendee is the <code>text_reader</code>
-(Lingo::Attendee::TextReader). It can read files (as well as standard
-input) and communicate its content to other attendees. For this purpose the
+<p>The first attendee is the <a
+href="Lingo/Attendee/TextReader.html">text_reader</a>. It can read files
+and communicates their content to other attendees. For this purpose, the
 <code>text_reader</code> is given an output channel. Everything that the
 <code>text_reader</code> has to say is steered through this channel. It
-will do nothing further until <a href="Lingo.html">Lingo</a> will tell the
-first attendee to speak. Then the <code>text_reader</code> will open the
-file <code>README</code> (<code>files</code> parameter) and babble the
-content to the world via its output channel.</p>
+will do nothing further until Lingo tells the first attendee to speak. Then
+the <code>text_reader</code> will open the file <code>README</code> (as per
+the <code>files</code> parameter) and pass the content to the other
+attendees via its output channel.</p>
 
-<p>The second attendee <code>debugger</code> (Lingo::Attendee::Debugger) does
-nothing else than to put everything on the console (standard error,
-actually) that comes into its input channel. If you write the <a
-href="Lingo.html">Lingo</a> configuration which is shown above as an
-example into the file <code>readme.cfg</code> and then run <code>lingo -c
-readme -l en</code>, the result will look something like this:</p>
+<p>The second attendee, <a
+href="rdoc-refLingo::Attendee::Debugger">debugger</a>, does nothing else
+than to put everything on the console (standard error) that comes into its
+input channel. If you write the Lingo configuration which is shown above as
+an example into the file <code>readme.cfg</code> and then run <code>lingo
+-c readme -l en</code>, the result will look something like this:</p>
 
 <pre>&lt;debug&gt;:  *FILE(&#39;README&#39;)
 &lt;debug&gt;:  &quot;= Lingo - [...]&quot;
 ...
-&lt;debug&gt;:  &quot;If you want to perform linguistic analysis on some text, [...]&quot;
-&lt;debug&gt;:  &quot;support your endeavour with all its flexibility and [...]&quot;
+&lt;debug&gt;:  &quot;Lingo allows flexible and extendable linguistic analysis [...]&quot;
+&lt;debug&gt;:  &quot;is a minimal configuration example to analyse this README [...]&quot;
 ...
 &lt;debug&gt;:  *EOF(&#39;README&#39;)</pre>
 
-<p>What we see are lines with an asterisk (*) and lines without. That&#39;s
-because <a href="Lingo.html">Lingo</a> distinguishes between commands and
-data. The <code>text_reader</code> did not only read the content of the
-file, but also communicated through the commands when a file begins and
-when it ends. This can (and will) be an important piece of information for
-other attendees that will be added later.</p>
+<p>What we see are lines beginning with an asterisk (<code>*</code>) and lines
+without. That&#39;s because Lingo distinguishes between commands and data.
+The <code>text_reader</code> did not only read the content of the file, but
+also communicated through the commands when a file began and when it ended.
+This can (and will) be an important piece of information for other
+attendees that will be added later.</p>
 
 <p>To try out Lingo&#39;s functionality without installing it first, have a
 look at <a href="http://ixtrieve.fh-koeln.de/lingoweb">Lingo Web</a>. There
-you can enter some text and see the debug output <a
-href="Lingo.html">Lingo</a> generated, including tokenization, word
-identification, decomposition, etc.</p>
+you can enter some text and see the debug output Lingo generated –
+including tokenization, word identification, decomposition, etc.</p>
 
 <h3 id="label-Attendees">Attendees<span><a href="#label-Attendees">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
 
@@ -351,64 +357,80 @@ identification, decomposition, etc.</p>
 more information see each attendee&#39;s documentation):</p>
 <dl class="rdoc-list note-list"><dt><code>text_reader</code>
 <dd>
-<p>Reads files and puts their content into the channels line by line.
-(Lingo::Attendee::TextReader)</p>
+<p>Reads files (or standard input) and puts their content into the channels
+line by line. (see <a
+href="Lingo/Attendee/TextReader.html">Lingo::Attendee::TextReader</a>)</p>
 </dd><dt><code>tokenizer</code>
 <dd>
-<p>Dissects lines into defined character strings, i.e. tokens.
-(Lingo::Attendee::Tokenizer)</p>
+<p>Dissects lines into defined character strings, i.e. tokens. (see <a
+href="Lingo/Attendee/Tokenizer.html">Lingo::Attendee::Tokenizer</a>)</p>
 </dd><dt><code>abbreviator</code>
 <dd>
 <p>Identifies abbreviations and produces the long form if listed in a
-dictionary. (Lingo::Attendee::Abbreviator)</p>
+dictionary. (see <a
+href="Lingo/Attendee/Abbreviator.html">Lingo::Attendee::Abbreviator</a>)</p>
 </dd><dt><code>word_searcher</code>
 <dd>
-<p>Identifies tokens and turns them into words for further processing. To do
-this right it looks into the dictionary. (Lingo::Attendee::WordSearcher)</p>
+<p>Identifies tokens and turns them into words for further processing. To this
+end, it consults the dictionaries. (see <a
+href="Lingo/Attendee/WordSearcher.html">Lingo::Attendee::WordSearcher</a>)</p>
+</dd><dt><code>stemmer</code>
+<dd>
+<p>Identifies tokens not identified by the <code>word_searcher</code> by means
+of stemming. (see <a
+href="Lingo/Attendee/Stemmer.html">Lingo::Attendee::Stemmer</a>)</p>
 </dd><dt><code>decomposer</code>
 <dd>
-<p>Tests any character strings not identified by the
-<code>word_searcher</code> for being compounds.
-(Lingo::Attendee::Decomposer)</p>
+<p>Tests any tokens not identified by the <code>word_searcher</code> for being
+compounds. (see <a
+href="Lingo/Attendee/Decomposer.html">Lingo::Attendee::Decomposer</a>)</p>
 </dd><dt><code>synonymer</code>
 <dd>
-<p>Extends words with synonyms. (Lingo::Attendee::Synonymer)</p>
+<p>Extends words with their synonyms. (see <a
+href="Lingo/Attendee/Synonymer.html">Lingo::Attendee::Synonymer</a>)</p>
 </dd><dt><code>noneword_filter</code>
 <dd>
 <p>Filters out everything and lets through only those tokens that are unknown.
-(Lingo::Attendee::NonewordFilter)</p>
+(see <a
+href="Lingo/Attendee/NonewordFilter.html">Lingo::Attendee::NonewordFilter</a>)</p>
 </dd><dt><code>vector_filter</code>
 <dd>
 <p>Filters out everything and lets through only those tokens that are
-considered useful for indexing. (Lingo::Attendee::VectorFilter)</p>
+considered useful for indexing. (see <a
+href="Lingo/Attendee/VectorFilter.html">Lingo::Attendee::VectorFilter</a>)</p>
 </dd><dt><code>object_filter</code>
 <dd>
-<p>Similar to the <code>vector_filter</code>. (Lingo::Attendee::ObjectFilter)</p>
+<p>Similar to the <code>vector_filter</code>. (see <a
+href="Lingo/Attendee/ObjectFilter.html">Lingo::Attendee::ObjectFilter</a>)</p>
 </dd><dt><code>text_writer</code>
 <dd>
-<p>Writes anything that it receives into a file (or to standard output).
-(Lingo::Attendee::TextWriter)</p>
+<p>Writes anything that it receives into a file (or to standard output). (see
+<a href="Lingo/Attendee/TextWriter.html">Lingo::Attendee::TextWriter</a>)</p>
 </dd><dt><code>formatter</code>
 <dd>
 <p>Similar to the <code>text_writer</code>, but allows for custom output
-formats. (Lingo::Attendee::Formatter)</p>
+formats. (see <a
+href="Lingo/Attendee/Formatter.html">Lingo::Attendee::Formatter</a>)</p>
 </dd><dt><code>debugger</code>
 <dd>
-<p>Shows everything for debugging. (Lingo::Attendee::Debugger)</p>
+<p>Shows everything for debugging. (see <a
+href="Lingo/Attendee/Debugger.html">Lingo::Attendee::Debugger</a>)</p>
 </dd><dt><code>variator</code>
 <dd>
-<p>Tries to correct spelling errors and the like. (Lingo::Attendee::Variator)</p>
+<p>Tries to correct spelling errors and the like. (see <a
+href="Lingo/Attendee/Variator.html">Lingo::Attendee::Variator</a>)</p>
 </dd><dt><code>dehyphenizer</code>
 <dd>
-<p>Tries to undo hyphenation. (Lingo::Attendee::Dehyphenizer)</p>
+<p>Tries to undo hyphenation. (see <a
+href="Lingo/Attendee/Dehyphenizer.html">Lingo::Attendee::Dehyphenizer</a>)</p>
 </dd><dt><code>multi_worder</code>
 <dd>
-<p>Identifies phrases (word sequences) based on a multiword dictionary.
-(Lingo::Attendee::MultiWorder)</p>
+<p>Identifies phrases (word sequences) based on a multiword dictionary. (see
+<a href="Lingo/Attendee/MultiWorder.html">Lingo::Attendee::MultiWorder</a>)</p>
 </dd><dt><code>sequencer</code>
 <dd>
-<p>Identifies phrases (word sequences) based on patterns of word classes.
-(Lingo::Attendee::Sequencer)</p>
+<p>Identifies phrases (word sequences) based on patterns of word classes. (see
+<a href="Lingo/Attendee/Sequencer.html">Lingo::Attendee::Sequencer</a>)</p>
 </dd></dl>
 
 <p>Furthermore, it may be useful to have a look at the configuration files
@@ -416,34 +438,68 @@ formats. (Lingo::Attendee::Formatter)</p>
 
 <h3 id="label-Filters">Filters<span><a href="#label-Filters">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
 
-<p><a href="Lingo.html">Lingo</a> is able to read HTML, XML, and PDF in
-addition to plain text.</p>
+<p>Lingo is able to read HTML, XML, and PDF in addition to plain text.</p>
 
-<p>TODO: Examples.</p>
+<p><em>Examples</em>:</p>
+
+<p>Read any file, guessing the correct type automatically:</p>
+
+<pre>- text_reader:     { files: $(files), filter: true }</pre>
+
+<p>Read HTML files specifically (accordingly for XML):</p>
+
+<pre>- text_reader:     { files: $(files), filter: &#39;html&#39; }</pre>
+
+<p>Read PDF files, either with the <a
+href="http://rubygems.org/gems/pdf-reader">pdf-reader</a> gem (default):</p>
+
+<pre>- text_reader:     { files: $(files), filter: &#39;pdf&#39; }</pre>
+
+<p>or with the <a href="http://en.wikipedia.org/wiki/Pdftotext">pdftotext</a>
+command line tool:</p>
+
+<pre>- text_reader:     { files: $(files), filter: &#39;pdftotext&#39; }</pre>
 
 <h3 id="label-Markup">Markup<span><a href="#label-Markup">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
 
-<p><a href="Lingo.html">Lingo</a> is able to parse HTML/XML and MediaWiki
-markup.</p>
+<p>Lingo is able to, in a limited form, parse HTML/XML and <a
+href="http://mediawiki.org/wiki/Help:Formatting">MediaWiki</a> markup.</p>
 
-<p>TODO: Examples.</p>
+<p><em>Examples</em>:</p>
+
+<p>Identify HTML/XML tags in the input stream:</p>
+
+<pre>- tokenizer:       { tags: true }</pre>
+
+<p>Identify MediaWiki markup in the input stream:</p>
+
+<pre>- tokenizer:       { wiki: true }</pre>
 
 <h3 id="label-Inline+annotation">Inline annotation<span><a href="#label-Inline+annotation">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
 
-<p><a href="Lingo.html">Lingo</a> is able to annotate input text inline,
-instead of printing results to external files.</p>
+<p>Lingo is able to annotate input text inline, instead of printing results
+out of context to external files.</p>
 
-<p>TODO: Examples.</p>
+<p><em>Example</em>:</p>
+
+<pre># keep line endings
+- text_reader:     { files: $(files), chomp: false }
+# keep whitespace
+- tokenizer:       { space: true }
+# do processing...
+- word_searcher:   { source: sys-dic, mode: first }
+# insert formatted results (e.g. &quot;[[Name::lingo|Lingo]] got these [[Noun::word|words]].&quot;)
+- formatter:       { ext: out, format: &#39;[[%3$s::%2$s|%1$s]]&#39;, map: { e: Name, s: Noun } }</pre>
 
 <h3 id="label-Plugins">Plugins<span><a href="#label-Plugins">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
 
-<p><a href="Lingo.html">Lingo</a> has a plugin system that allows you to
-implement additional features (e.g. add new attendees) or modify existing
-ones. Just create a file named <code>lingo_plugin.rb</code> in your
-Gem&#39;s <code>lib</code> directory or any directory that&#39;s in
-<code>$LOAD_PATH</code>. You can also define an environment variable
-<code>LINGO_PLUGIN_PATH</code> (by default <code>~/.lingo/plugins</code>)
-with additional directories to load plugins from (<code>*.rb</code>).</p>
+<p>Lingo has a plugin system that allows you to implement additional features
+(e.g. add new attendees) or modify existing ones. Just create a file named
+<code>lingo_plugin.rb</code> in your Gem&#39;s <code>lib</code> directory
+or any directory that&#39;s in <code>$LOAD_PATH</code>. You can also define
+an environment variable <code>LINGO_PLUGIN_PATH</code> (by default
+<code>~/.lingo/plugins</code>) with additional directories to load plugins
+from (<code>*.rb</code>).</p>
 
 <p>A dedicated API to support writing and integrating plugins will be added in
 the future.</p>
@@ -455,68 +511,65 @@ basis for further discussion.</p>
 
 <h2 id="label-INSTALLATION+AND+USAGE">INSTALLATION AND USAGE<span><a href="#label-INSTALLATION+AND+USAGE">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 
-<p>Since version 1.8.0, <a href="Lingo.html">Lingo</a> is available as a
-RubyGem. So a simple <code>gem install lingo</code> will install <a
-href="Lingo.html">Lingo</a> and its dependencies (you might want to run
-that command with administrator privileges, depending on your environment).
-Then you can call the <code>lingo</code> executable to process your data.
-See <code>lingo --help</code> for starters.</p>
+<p>Since version 1.8.0, Lingo is available as a <a
+href="http://rubygems.org/gems/lingo">RubyGem</a>. So a simple <code>gem
+install lingo</code> will install Lingo and its dependencies. You might
+want to run that command with administrator privileges, depending on your
+environment. Then you can call the <code>lingo</code> executable to process
+your text files. See <code>lingo --help</code> for available options.</p>
 
-<p>Please note that <a href="Lingo.html">Lingo</a> requires Ruby version 1.9.2
-or higher to run (<a href="http://ruby-lang.org/en/downloads/">2.0.0</a> is
-the currently recommended version). If you want to use <a
-href="Lingo.html">Lingo</a> on Ruby 1.8, please refer to the legacy version
-(see below).</p>
+<p>Please note that Lingo requires Ruby version 1.9.2 or higher to run (<a
+href="http://ruby-lang.org/en/downloads/">2.0.0</a> is the currently
+recommended version). If you want to use Lingo on Ruby 1.8, please refer to
+the <a href="#label-Legacy+version">legacy version</a>.</p>
 
-<p>Since <a href="Lingo.html">Lingo</a> depends on native extensions, you need
-to make sure that development files for your Ruby version are installed. On
-Debian-based Linux platforms they are included in the package
-<code>ruby1.9.1-dev</code>; other distributions may have a similarly named
-package. On Windows those development files are currently not required.</p>
+<p>Since Lingo depends on native extensions, you need to make sure that
+development files for your Ruby version are installed. On Debian-based
+Linux platforms they are included in the package <code>ruby-dev</code>;
+other distributions may have a similarly named package. On Windows those
+development files are currently not required.</p>
 
-<p>Prior to version 1.8.0, <a href="Lingo.html">Lingo</a> expected to be run
-from its installation directory. This is no longer necessary. But if you
-prefer that use case, you can either download and extract an <a
+<p>Prior to version 1.8.0, Lingo expected to be run from its installation
+directory. This is no longer necessary. But if you prefer that use case,
+you can either download and extract an <a
 href="http://github.com/lex-lingo/lingo/releases">archive file</a> or
 unpack the Gem archive (<code>gem unpack lingo</code>); or you can install
-the legacy version of <a href="Lingo.html">Lingo</a> (see below).</p>
+the legacy version of Lingo (see below).</p>
 
 <h3 id="label-Dictionary+and+configuration+file+lookup">Dictionary and configuration file lookup<span><a href="#label-Dictionary+and+configuration+file+lookup">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
 
-<p><a href="Lingo.html">Lingo</a> will search different locations to find
-dictionaries and configuration files. By default, these are the current
-directory, your personal <a href="Lingo.html">Lingo</a> directory
-(<code>~/.lingo</code>) and the installation directory (in that order). You
-can control this lookup path by either moving files up the chain (using the
-<code>lingoctl</code> executable) or by setting various environment
-variables.</p>
+<p>Lingo will search different locations to find dictionaries and
+configuration files. By default, these are the current working directory,
+your personal Lingo directory (<code>~/.lingo</code>) and the installation
+directory (in that order). You can control this lookup path by either
+moving files up the chain (using the <code>lingoctl</code> executable) or
+by setting various environment variables.</p>
 
 <p>With <code>lingoctl</code> you can copy dictionaries and configuration
-files from your personal <a href="Lingo.html">Lingo</a> directory or the
-installation directory to the current directory so you can modify them and
-they will take precedence over the original ones. See <code>lingoctl
---help</code> for usage information.</p>
+files from your personal Lingo directory or the installation directory to
+the current working directory so you can modify them and they will take
+precedence over the original ones. See <code>lingoctl --help</code> for
+usage information.</p>
 
-<p>In order to change the search path in itself, you can define the
+<p>In order to change the search path itself, you can define the
 <code>LINGO_PATH</code> environment variable as a whole or its individual
-parts <code>LINGO_CURR</code> (the local <a href="Lingo.html">Lingo</a>
-directory), <code>LINGO_HOME</code> (your personal <a
-href="Lingo.html">Lingo</a> directory), and <code>LINGO_BASE</code> (the
-system-wide <a href="Lingo.html">Lingo</a> directory).</p>
+parts <code>LINGO_CURR</code> (the local Lingo directory),
+<code>LINGO_HOME</code> (your personal Lingo directory), and
+<code>LINGO_BASE</code> (the system-wide Lingo directory).</p>
 
-<p>Inside of any of these directories dictionaries and configuration files are
-typically organized in the following directory structure:</p>
-<dl class="rdoc-list note-list"><dt><code>config</code>
+<p>Inside of any of these directories, dictionaries and configuration files
+are typically organized in the following directory structure:</p>
+<dl class="rdoc-list note-list"><dt><code>config/</code>
 <dd>
 <p>Configuration files (<code>*.cfg</code>).</p>
-</dd><dt><code>dict</code>
+</dd><dt><code>dict/</code>
 <dd>
-<p>Dictionary source files (<code>*.txt</code>); in language-specific
-subdirectories (<code>de</code>, <code>en</code>, …).</p>
-</dd><dt><code>lang</code>
+<p>Dictionary source files (<code>*.txt</code>) in language-specific
+subdirectories (<code>de/</code>, <code>en/</code>, …).</p>
+</dd><dt><code>lang/</code>
 <dd>
 <p>Language definition files (<code>*.lang</code>).</p>
-</dd><dt><code>store</code>
+</dd><dt><code>store/</code>
 <dd>
 <p>Compiled dictionaries, generated from source files.</p>
 </dd></dl>
@@ -525,19 +578,17 @@ subdirectories (<code>de</code>, <code>en</code>, …).</p>
 
 <h3 id="label-Legacy+version">Legacy version<span><a href="#label-Legacy+version">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
 
-<p>As <a href="Lingo.html">Lingo</a> 1.8 introduced some major disruptions and
-no longer runs on Ruby 1.8, there is a maintenance branch for <a
-href="Lingo.html">Lingo</a> 1.7.x that will remain compatible with both
-Ruby 1.8 and the previous line of <a href="Lingo.html">Lingo</a> prior to
-1.8. This branch will receive occasional bug fixes and minor feature
-updates. However, the bulk of the development efforts will be directed
-towards <a href="Lingo.html">Lingo</a> 1.8+.</p>
+<p>As Lingo 1.8 introduced some major disruptions and no longer runs on Ruby
+1.8, there is a maintenance branch for Lingo 1.7.x that will remain
+compatible with both Ruby 1.8 and the previous line of Lingo prior to 1.8.
+This branch may receive occasional bug fixes and minor feature updates.
+However, the bulk of the development efforts will be directed towards Lingo
+1.8+.</p>
 
 <p>To install the legacy version, download and extract the <a
 href="http://ixtrieve.fh-koeln.de/buch/lingo-1.7.1.zip">ZIP archive</a>. No
-additional dependencies are required. This version of <a
-href="Lingo.html">Lingo</a> works with both Ruby 1.8 (1.8.5 or higher) and
-1.9 (1.9.2 or higher).</p>
+additional dependencies are required. This version of Lingo works with both
+Ruby 1.8 (1.8.5 or higher) and 1.9 (1.9.2 or higher).</p>
 
 <p>The executable is named <code>lingo.rb</code>. It&#39;s located at the root
 of the installation directory and may only be run from there. See
@@ -546,27 +597,109 @@ of the installation directory and may only be run from there. See
 <p>Configuration and language definition files are also located at the root of
 the installation directory (<code>*.cfg</code> and <code>*.lang</code>,
 respectively). Dictionary source files are found in language-specific
-subdirectories (<code>de</code>, <code>en</code>, …) and are named
+subdirectories (<code>de/</code>, <code>en/</code>, …) and are named
 <code>*.txt</code>. The compiled dictionaries are found beneath these
-subdirectories in a directory named <code>store</code>.</p>
+language subdirectories in a directory named <code>store/</code>.</p>
 
 <h2 id="label-FILE+FORMATS">FILE FORMATS<span><a href="#label-FILE+FORMATS">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 
-<p><a href="Lingo.html">Lingo</a> uses three different types of files to
-determine its behaviour. Configuration files control the details of the
-indexing process. Language definitions specify grammar rules and
-dictionaries available for indexing. Dictionaries, finally, hold the
+<p>Lingo uses three different types of files to determine its behaviour: <a
+href="#label-Configuration">configuration files</a> control the details of
+the indexing process; <a href="#label-Language+definition">language
+definitions</a> specify grammar rules and dictionaries available for
+indexing; <a href="#label-Dictionaries">dictionaries</a>, finally, hold the
 vocabulary used in indexing the input text and producing the results.</p>
 
 <h3 id="label-Configuration">Configuration<span><a href="#label-Configuration">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
 
-<p>TODO…</p>
+<p>Configuration files are defined in the <a href="http://yaml.org/">YAML</a>
+syntax. They specify the <a href="#label-Attendees">attendees</a> to call
+in order and the options to provide them with. The first attendee in any
+indexing process is the <a
+href="Lingo/Attendee/TextReader.html">text_reader</a>, who reads the input
+text and passes it on to the other attendees. Every attendee transforms or
+extends the input stream and automatically sends everything down to the
+next attendee. This process may be customized by explicitly specifying the
+input and/or output channels of individual attendees with the
+<code>in</code> and <code>out</code> options.</p>
+
+<p><em>Example</em>:</p>
+
+<pre># input is taken from the previous attendee,
+# output is sent to the named channel &quot;syn&quot;
+- synonymer:       { skip: &#39;?,t&#39;, source: sys-syn, out: syn }
+
+# input is taken from the named channel &quot;syn&quot;,
+# output is sent to the next attendee
+- vector_filter:   { in: syn, lexicals: y, sort: term_abs }
+
+# input is taken from the previous attendee,
+# output is sent to the next attendee
+- text_writer:     { ext: syn, sep: &quot;\n&quot; }
+
+# input is taken from the named channel &quot;syn&quot;
+# (ignoring the output of the previous attendee),
+# output is sent to the next attendee
+- vector_filter:   { in: syn, lexicals: m }
+
+# input is taken from the previous attendee,
+# output is sent to the next attendee
+- text_writer:     { ext: mul, sep: &quot;\n&quot; }</pre>
 
 <h3 id="label-Language+definition">Language definition<span><a href="#label-Language+definition">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
 
-<p>TODO…</p>
+<p>Language definitions, like <a href="#label-Configuration">configuration
+files</a>, are defined in the <a href="http://yaml.org/">YAML</a> syntax.
+They specify the <a href="#label-Dictionaries">dictionaries</a> to be used
+as well as the grammar rules according to which the input shall be
+processed. These settings do not necessarily have to coincide with an
+existing language, they are application-specific.</p>
 
 <h3 id="label-Dictionaries">Dictionaries<span><a href="#label-Dictionaries">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Dictionaries come in different varieties and encode the knowledge about the
+vocabulary used for indexing and analysis.</p>
+
+<p>Supported dictionary formats:</p>
+<dl class="rdoc-list note-list"><dt><code>SingleWord</code>
+<dd>
+<p>One word (projection) per line. E.g. <code>open source</code>. (see <a
+href="Lingo/Database/Source/SingleWord.html">Lingo::Database::Source::SingleWord</a>)</p>
+</dd><dt><code>MultiValue</code>
+<dd>
+<p>Multiple words per line (separated with a unique symbol), all of which are
+interpreted as belonging to a single equivalence class. E.g.
+<code>fax;telefax;facsimile</code>. (see <a
+href="Lingo/Database/Source/MultiValue.html">Lingo::Database::Source::MultiValue</a>)</p>
+</dd><dt><code>MultiKey</code>
+<dd>
+<p>Similar to <code>MultiValue</code>, except that the first word will be
+treated as the preferred term (descriptor). E.g.
+<code>fax;telefax;facsimile</code>. (see <a
+href="Lingo/Database/Source/MultiKey.html">Lingo::Database::Source::MultiKey</a>)</p>
+</dd><dt><code>KeyValue</code>
+<dd>
+<p>One word and its associated projection per line, separated with a unique
+symbol. E.g. <code>abfrage*query</code>. (see <a
+href="Lingo/Database/Source/KeyValue.html">Lingo::Database::Source::KeyValue</a>)</p>
+</dd><dt><code>WordClass</code>
+<dd>
+<p>Similar to <code>KeyValue</code>, except that the projection may consist of
+multiple lexicalizations, each with its own word class and (optional)
+gender information. E.g. <code>abort,abort #s|v</code>, which is equivalent
+to <code>abort,abort #s abort #v</code>. (see <a
+href="Lingo/Database/Source/WordClass.html">Lingo::Database::Source::WordClass</a>)</p>
+</dd></dl>
+
+<h4 id="label-Encoding+word+classes+and+gender+information">Encoding word classes and gender information<span><a href="#label-Encoding+word+classes+and+gender+information">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<p>TODO…</p>
+
+<h4 id="label-Lexicalizing+multiword+expressions">Lexicalizing multiword expressions<span><a href="#label-Lexicalizing+multiword+expressions">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<p>TODO…</p>
+
+<h4 id="label-Lexicalizing+compounds">Lexicalizing compounds<span><a href="#label-Lexicalizing+compounds">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
 
 <p>TODO…</p>
 
@@ -574,25 +707,22 @@ vocabulary used in indexing the input text and producing the results.</p>
 
 <p>If you find bugs or want to suggest new features, please report them on <a
 href="http://github.com/lex-lingo/lingo/issues">GitHub</a>. Include your
-Ruby version (<code>ruby --version</code>) and the version of <a
-href="Lingo.html">Lingo</a> you are using (typically <code>lingo
---version</code>, provided it&#39;s new enough to support that flag).</p>
+Ruby version (<code>ruby --version</code>) and the version of Lingo you are
+using (<code>lingo --version</code>).</p>
 
-<p>If you want to contribute to <a href="Lingo.html">Lingo</a>, please fork
-the project on <a href="http://github.com/lex-lingo/lingo">GitHub</a> and
-submit a <a href="http://github.com/lex-lingo/lingo/pulls">pull request</a>
-(bonus points for topic branches).</p>
+<p>If you want to contribute to Lingo, please fork the project on <a
+href="http://github.com/lex-lingo/lingo">GitHub</a> and submit a <a
+href="http://github.com/lex-lingo/lingo/pulls">pull request</a> (bonus
+points for topic branches).</p>
 
 <p>To make sure that Lingo&#39;s tests pass, install <a
 href="http://blackwinter.github.com/hen">hen</a> (typically <code>gem
-install hen</code>) and all development dependencies (either <code>gem
+install hen</code>) and all development dependencies (either with <code>gem
 install --development lingo</code> or manually; see <code>rake
 gem:dependencies</code>). Then run <code>rake test</code> for the basic
 tests or <code>rake test:all</code> for the full test suite.</p>
 
 <h2 id="label-LINKS">LINKS<span><a href="#label-LINKS">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
-
-<p></p>
 <dl class="rdoc-list note-list"><dt>Website
 <dd>
 <p><a href="http://lex-lingo.de">lex-lingo.de</a></p>
@@ -602,66 +732,94 @@ tests or <code>rake test:all</code> for the full test suite.</p>
 href="http://ixtrieve.fh-koeln.de/lingoweb">ixtrieve.fh-koeln.de/lingoweb</a></p>
 </dd><dt>Documentation
 <dd>
-<p><a href="http://lex-lingo.github.com/lingo">lex-lingo.github.com/lingo</a></p>
+<p><a href="https://lex-lingo.github.com/lingo">lex-lingo.github.com/lingo</a></p>
 </dd><dt>Source code
 <dd>
-<p><a href="http://github.com/lex-lingo/lingo">github.com/lex-lingo/lingo</a></p>
+<p><a href="https://github.com/lex-lingo/lingo">github.com/lex-lingo/lingo</a></p>
 </dd><dt>RubyGem
 <dd>
-<p><a href="http://rubygems.org/gems/lingo">rubygems.org/gems/lingo</a></p>
+<p><a href="https://rubygems.org/gems/lingo">rubygems.org/gems/lingo</a></p>
 </dd><dt>Bug tracker
 <dd>
 <p><a
-href="http://github.com/lex-lingo/lingo/issues">github.com/lex-lingo/lingo/issues</a></p>
+href="https://github.com/lex-lingo/lingo/issues">github.com/lex-lingo/lingo/issues</a></p>
+</dd><dt>Travis CI
+<dd>
+<p><a
+href="https://travis-ci.org/lex-lingo/lingo">travis-ci.org/lex-lingo/lingo</a></p>
 </dd></dl>
 
 <h2 id="label-LITERATURE">LITERATURE<span><a href="#label-LITERATURE">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 
-<p></p>
+<h3 id="label-Background+and+Theory">Background and Theory<span><a href="#label-Background+and+Theory">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
 <ul><li>
-<p>Lepsky, K., Vorhauer, J.: <em><a
-href="http://dx.doi.org/10.1515/ABITECH.2006.26.1.18">Lingo: ein open
-source System für die automatische Indexierung deutschsprachiger
-Dokumente</a></em>. (German) In: ABI Technik 26, 2006. p. 18-29.</p>
-</li><li>
-<p>Gödert, W., Lepsky, K., Nagelschmidt, M.: <em><a
+<p>Gödert, W.; Lepsky, K.; Nagelschmidt, M.: <em><a
 href="http://dx.doi.org/10.1007/978-3-642-23513-9">Informationserschließung
 und Automatisches Indexieren: ein Lehr- und Arbeitsbuch</a></em>. (German)
 Berlin etc.: Springer, 2012.</p>
+</li><li>
+<p>Lepsky, K.; Vorhauer, J.: <em><a
+href="http://dx.doi.org/10.1515/ABITECH.2006.26.1.18">Lingo: ein open
+source System für die automatische Indexierung deutschsprachiger
+Dokumente</a></em>. (German) In: ABI Technik 26 (1), 2006. pp 18-29.</p>
 </li><li>
 <p>Nohr, H.: <em><a
 href="http://logos-verlag.de/cgi-bin/buch/isbn/0121">Grundlagen der
 automatischen Indexierung: ein Lehrbuch</a></em>. (German) Berlin: Logos,
 2005.</p>
 </li><li>
-<p>Hausser, R.: <em><a
-href="http://zentralblatt-math.org/zbmath/search/?an=0956.68141">Grundlagen
+<p>Hausser, R.: <em><a href="http://zbmath.org/?q=an:0956.68141">Grundlagen
 der Computerlinguistik. Mensch-Maschine-Kommunikation in natürlicher
 Sprache</a></em>. (German) Berlin etc.: Springer, 2000.</p>
 </li><li>
-<p>Allen, J.: <em><a
-href="http://zentralblatt-math.org/zbmath/search/?an=0851.68106">Natural
+<p>Allen, J.: <em><a href="http://zbmath.org/?q=an:0851.68106">Natural
 language understanding</a></em>. (English) Redwood City, CA:
 Benjamin/Cummings, 1995.</p>
 </li><li>
 <p>Grishman, R.: <em><a
-href="http://dx.doi.org/10.2277/0521310385">Computational linguistics: an
+href="http://cambridge.org/9780521310383">Computational linguistics: an
 introduction</a></em>. (English) Cambridge: Cambridge Univ. Press, 1986.</p>
 </li><li>
-<p>Salton, G., McGill, M.: <em><a
-href="http://zentralblatt-math.org/zbmath/search/?an=0523.68084">Introduction
-to modern information retrieval</a></em>. (English) New York etc.:
-McGraw-Hill, 1983.</p>
+<p>Salton, G.; McGill, M.: <em><a
+href="http://zbmath.org/?q=an:0523.68084">Introduction to modern
+information retrieval</a></em>. (English) New York etc.: McGraw-Hill, 1983.</p>
 </li><li>
 <p>Porter, M.: <em><a href="http://tartarus.org/~martin/PorterStemmer/">An
-algorithm for suffix stripping</a></em>. (English) In: Program 14, 1980. p.
-130-137.</p>
+algorithm for suffix stripping</a></em>. (English) In: Program 14 (3),
+1980. pp 130-137.</p>
+</li></ul>
+
+<h3 id="label-Research+publications">Research publications<span><a href="#label-Research+publications">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+<ul><li>
+<p>Bredack, J.; Lepsky, K.: <em><a
+href="http://dx.doi.org/10.1515/abitech-2014-0002">Automatische Extraktion
+von Fachterminologie aus Volltexten</a></em>. (German) In: ABI Technik 34
+(1), 2014. pp 2-12.</p>
+</li><li>
+<p>Bredack, J.: <em><a
+href="http://ixtrieve.fh-koeln.de/lehre/bredack-2013.pdf">Terminologieextraktion
+von Mehrwortgruppen in kunsthistorischen Fachtexten</a></em>. (German)
+Köln: Fachhochschule Köln, 2013.</p>
+</li><li>
+<p>Maylein, L.; Langenstein, A.: <em><a
+href="http://b-i-t-online.de/heft/2013-03-fachbeitrag-maylein.pdf">Neues
+vom Relevanz-Ranking im HEIDI-Katalog der Universitätsbibliothek
+Heidelberg</a></em>. (German) In: b.i.t.online 16 (3), 2013. pp 190-200.</p>
+</li><li>
+<p>Gödert, W.: <em><a href="http://arxiv.org/abs/1210.0852">Detecting
+multiword phrases in mathematical text corpora</a></em>. (English)
+arXiv:1210.0852 [cs.CL], 2012.</p>
+</li><li>
+<p>Schiffer, R.: <em><a
+href="http://ixtrieve.fh-koeln.de/lehre/schiffer-2007.pdf">Automatisches
+Indexieren technischer Kongressschriften</a></em>. (German) Köln:
+Fachhochschule Köln, 2007.</p>
 </li></ul>
 
 <h2 id="label-CREDITS">CREDITS<span><a href="#label-CREDITS">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 
-<p><a href="Lingo.html">Lingo</a> is based on a collective development by
-Klaus Lepsky and John Vorhauer.</p>
+<p>Lingo is based on a collective development by Klaus Lepsky and John
+Vorhauer.</p>
 
 <h3 id="label-Authors">Authors<span><a href="#label-Authors">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
 <ul><li>
@@ -688,28 +846,29 @@ href="mailto:jdorokhova@hse.ru">jdorokhova@hse.ru</a>&gt;</p>
 
 <h2 id="label-LICENSE+AND+COPYRIGHT">LICENSE AND COPYRIGHT<span><a href="#label-LICENSE+AND+COPYRIGHT">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 
-<p>Copyright (C) 2005-2007 John Vorhauer Copyright (C) 2007-2013 John
+<p>Copyright (C) 2005-2007 John Vorhauer Copyright (C) 2007-2014 John
 Vorhauer, Jens Wille</p>
 
-<p><a href="Lingo.html">Lingo</a> is free software: you can redistribute it
-and/or modify it under the terms of the GNU Affero General Public License
-as published by the Free Software Foundation, either version 3 of the
-License, or (at your option) any later version.</p>
+<p>Lingo is free software: you can redistribute it and/or modify it under the
+terms of the GNU Affero General Public License as published by the Free
+Software Foundation, either version 3 of the License, or (at your option)
+any later version.</p>
 
-<p><a href="Lingo.html">Lingo</a> is distributed in the hope that it will be
-useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero
-General Public License for more details.</p>
+<p>Lingo is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for
+more details.</p>
 
 <p>You should have received a copy of the GNU Affero General Public License
-along with <a href="Lingo.html">Lingo</a>. If not, see &lt;<a
+along with Lingo. If not, see &lt;<a
 href="http://www.gnu.org/licenses">www.gnu.org/licenses</a>/&gt;.</p>
-</div>
+</main>
 
 
-<footer id="validator-badges">
-  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.1.
-  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

@@ -2,279 +2,109 @@
 
 <html>
 <head>
-<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta charset="UTF-8">
 
 <title>class Lingo::Attendee::ObjectFilter - lingo Application documentation (v1.8.4)</title>
 
-<link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
+<link href="../../fonts.css" rel="stylesheet">
+<link href="../../rdoc.css" rel="stylesheet">
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
 </script>
 
-<script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
-<script type="text/javascript" charset="utf-8" src="../../js/navigation.js"></script>
-<script type="text/javascript" charset="utf-8" src="../../js/search_index.js"></script>
-<script type="text/javascript" charset="utf-8" src="../../js/search.js"></script>
-<script type="text/javascript" charset="utf-8" src="../../js/searcher.js"></script>
-<script type="text/javascript" charset="utf-8" src="../../js/darkfish.js"></script>
+<script src="../../js/jquery.js"></script>
+<script src="../../js/navigation.js"></script>
+<script src="../../js/search_index.js"></script>
+<script src="../../js/search.js"></script>
+<script src="../../js/searcher.js"></script>
+<script src="../../js/darkfish.js"></script>
 
 
-<body id="top" class="class">
-<nav id="metadata">
-  <nav id="home-section" class="section">
-  <h3 class="section-header">
-    <a href="../../index.html">Home</a>
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
     <a href="../../table_of_contents.html#classes">Classes</a>
     <a href="../../table_of_contents.html#methods">Methods</a>
-  </h3>
-</nav>
+  </div>
+</div>
 
-
-  <nav id="search-section" class="section project-section" class="initially-hidden">
+    <div id="search-section" role="search" class="project-section initially-hidden">
   <form action="#" method="get" accept-charset="utf-8">
-    <h3 class="section-header">
-      <input type="text" name="search" placeholder="Search" id="search-field"
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
              title="Type to search, Up and Down to navigate, Enter to load">
-    </h3>
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
   </form>
+</div>
 
-  <ul id="search-results" class="initially-hidden"></ul>
-</nav>
-
+  </div>
 
   
-<div id="table-of-contents">
-  <nav class="section">
-    <h3 class="section-header">Table of Contents</h3>
-    <ul>
-      <li><a href="#label-M%C3%B6gliche+Verlinkung">Mögliche Verlinkung</a>
-      <li><a href="#label-Parameter">Parameter</a>
-      <li><a href="#label-Beispiele">Beispiele</a>
-    </ul>
-  </nav>
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+  <ul class="link-list" role="directory">
+    <li><a href="#class-Lingo::Attendee::ObjectFilter-label-M%C3%B6gliche+Verlinkung">Mögliche Verlinkung</a>
+    <li><a href="#class-Lingo::Attendee::ObjectFilter-label-Parameter">Parameter</a>
+    <li><a href="#class-Lingo::Attendee::ObjectFilter-label-Beispiele">Beispiele</a>
+  </ul>
 </div>
 
 
-  <div id="file-metadata">
-    <nav id="file-list-section" class="section">
-  <h3 class="section-header">Defined In</h3>
-  <ul>
-    <li>lib/lingo/attendee/object_filter.rb
-  </ul>
-</nav>
-
-    
-  </div>
-
   <div id="class-metadata">
     
-    <nav id="parent-class-section" class="section">
-  <h3 class="section-header">Parent</h3>
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
   
   <p class="link">self
   
-</nav>
+</div>
 
     
     
     <!-- Method Quickref -->
-<nav id="method-list-section" class="section">
-  <h3 class="section-header">Methods</h3>
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
 
-  <ul class="link-list">
+  <ul class="link-list" role="directory">
     
     <li ><a href="#method-i-init">#init</a>
     
     <li ><a href="#method-i-process">#process</a>
     
   </ul>
-</nav>
-
-  </div>
-
-  <div id="project-metadata">
-    <nav id="fileindex-section" class="section project-section">
-  <h3 class="section-header">Pages</h3>
-
-  <ul>
-  
-    <li class="file"><a href="../../COPYING.html">COPYING</a>
-  
-    <li class="file"><a href="../../ChangeLog.html">ChangeLog</a>
-  
-    <li class="file"><a href="../../README.html">README</a>
-  
-  </ul>
-</nav>
-
-    <nav id="classindex-section" class="section project-section">
-  <h3 class="section-header">Class and Module Index</h3>
-
-  <ul class="link-list">
-  
-    <li><a href="../../Lingo.html">Lingo</a>
-  
-    <li><a href="../../Lingo/AgendaItem.html">Lingo::AgendaItem</a>
-  
-    <li><a href="../../Lingo/App.html">Lingo::App</a>
-  
-    <li><a href="../../Lingo/Attendee.html">Lingo::Attendee</a>
-  
-    <li><a href="../../Lingo/Attendee/Abbreviator.html">Lingo::Attendee::Abbreviator</a>
-  
-    <li><a href="../../Lingo/Attendee/Debugger.html">Lingo::Attendee::Debugger</a>
-  
-    <li><a href="../../Lingo/Attendee/Decomposer.html">Lingo::Attendee::Decomposer</a>
-  
-    <li><a href="../../Lingo/Attendee/Dehyphenizer.html">Lingo::Attendee::Dehyphenizer</a>
-  
-    <li><a href="../../Lingo/Attendee/Formatter.html">Lingo::Attendee::Formatter</a>
-  
-    <li><a href="../../Lingo/Attendee/MultiWorder.html">Lingo::Attendee::MultiWorder</a>
-  
-    <li><a href="../../Lingo/Attendee/NonewordFilter.html">Lingo::Attendee::NonewordFilter</a>
-  
-    <li><a href="../../Lingo/Attendee/ObjectFilter.html">Lingo::Attendee::ObjectFilter</a>
-  
-    <li><a href="../../Lingo/Attendee/Sequencer.html">Lingo::Attendee::Sequencer</a>
-  
-    <li><a href="../../Lingo/Attendee/Stemmer.html">Lingo::Attendee::Stemmer</a>
-  
-    <li><a href="../../Lingo/Attendee/Stemmer/Porter.html">Lingo::Attendee::Stemmer::Porter</a>
-  
-    <li><a href="../../Lingo/Attendee/Synonymer.html">Lingo::Attendee::Synonymer</a>
-  
-    <li><a href="../../Lingo/Attendee/TextReader.html">Lingo::Attendee::TextReader</a>
-  
-    <li><a href="../../Lingo/Attendee/TextReader/PDFFilter.html">Lingo::Attendee::TextReader::PDFFilter</a>
-  
-    <li><a href="../../Lingo/Attendee/TextWriter.html">Lingo::Attendee::TextWriter</a>
-  
-    <li><a href="../../Lingo/Attendee/Tokenizer.html">Lingo::Attendee::Tokenizer</a>
-  
-    <li><a href="../../Lingo/Attendee/Variator.html">Lingo::Attendee::Variator</a>
-  
-    <li><a href="../../Lingo/Attendee/VectorFilter.html">Lingo::Attendee::VectorFilter</a>
-  
-    <li><a href="../../Lingo/Attendee/WordSearcher.html">Lingo::Attendee::WordSearcher</a>
-  
-    <li><a href="../../Lingo/BackendNotAvailableError.html">Lingo::BackendNotAvailableError</a>
-  
-    <li><a href="../../Lingo/BackendNotFoundError.html">Lingo::BackendNotFoundError</a>
-  
-    <li><a href="../../Lingo/BufferedAttendee.html">Lingo::BufferedAttendee</a>
-  
-    <li><a href="../../Lingo/CLI.html">Lingo::CLI</a>
-  
-    <li><a href="../../Lingo/Call.html">Lingo::Call</a>
-  
-    <li><a href="../../Lingo/Config.html">Lingo::Config</a>
-  
-    <li><a href="../../Lingo/ConfigError.html">Lingo::ConfigError</a>
-  
-    <li><a href="../../Lingo/ConfigLoadError.html">Lingo::ConfigLoadError</a>
-  
-    <li><a href="../../Lingo/Ctl.html">Lingo::Ctl</a>
-  
-    <li><a href="../../Lingo/Database.html">Lingo::Database</a>
-  
-    <li><a href="../../Lingo/Database/Crypter.html">Lingo::Database::Crypter</a>
-  
-    <li><a href="../../Lingo/Database/GDBMStore.html">Lingo::Database::GDBMStore</a>
-  
-    <li><a href="../../Lingo/Database/HashStore.html">Lingo::Database::HashStore</a>
-  
-    <li><a href="../../Lingo/Database/LibCDBStore.html">Lingo::Database::LibCDBStore</a>
-  
-    <li><a href="../../Lingo/Database/SDBMStore.html">Lingo::Database::SDBMStore</a>
-  
-    <li><a href="../../Lingo/Database/ShowProgress.html">Lingo::Database::ShowProgress</a>
-  
-    <li><a href="../../Lingo/Database/Source.html">Lingo::Database::Source</a>
-  
-    <li><a href="../../Lingo/Database/Source/KeyValue.html">Lingo::Database::Source::KeyValue</a>
-  
-    <li><a href="../../Lingo/Database/Source/MultiKey.html">Lingo::Database::Source::MultiKey</a>
-  
-    <li><a href="../../Lingo/Database/Source/MultiValue.html">Lingo::Database::Source::MultiValue</a>
-  
-    <li><a href="../../Lingo/Database/Source/SingleWord.html">Lingo::Database::Source::SingleWord</a>
-  
-    <li><a href="../../Lingo/Database/Source/WordClass.html">Lingo::Database::Source::WordClass</a>
-  
-    <li><a href="../../Lingo/DatabaseError.html">Lingo::DatabaseError</a>
-  
-    <li><a href="../../Lingo/Debug.html">Lingo::Debug</a>
-  
-    <li><a href="../../Lingo/FileNotFoundError.html">Lingo::FileNotFoundError</a>
-  
-    <li><a href="../../Lingo/InvalidDatabaseConfigError.html">Lingo::InvalidDatabaseConfigError</a>
-  
-    <li><a href="../../Lingo/Language.html">Lingo::Language</a>
-  
-    <li><a href="../../Lingo/Language/Char.html">Lingo::Language::Char</a>
-  
-    <li><a href="../../Lingo/Language/Dictionary.html">Lingo::Language::Dictionary</a>
-  
-    <li><a href="../../Lingo/Language/Grammar.html">Lingo::Language::Grammar</a>
-  
-    <li><a href="../../Lingo/Language/Lexical.html">Lingo::Language::Lexical</a>
-  
-    <li><a href="../../Lingo/Language/LexicalHash.html">Lingo::Language::LexicalHash</a>
-  
-    <li><a href="../../Lingo/Language/Token.html">Lingo::Language::Token</a>
-  
-    <li><a href="../../Lingo/Language/Word.html">Lingo::Language::Word</a>
-  
-    <li><a href="../../Lingo/Language/WordForm.html">Lingo::Language::WordForm</a>
-  
-    <li><a href="../../Lingo/LibraryLoadError.html">Lingo::LibraryLoadError</a>
-  
-    <li><a href="../../Lingo/LingoError.html">Lingo::LingoError</a>
-  
-    <li><a href="../../Lingo/MissingConfigError.html">Lingo::MissingConfigError</a>
-  
-    <li><a href="../../Lingo/NameNotFoundError.html">Lingo::NameNotFoundError</a>
-  
-    <li><a href="../../Lingo/NoDatabaseConfigError.html">Lingo::NoDatabaseConfigError</a>
-  
-    <li><a href="../../Lingo/NoWritableStoreError.html">Lingo::NoWritableStoreError</a>
-  
-    <li><a href="../../Lingo/ShowProgress.html">Lingo::ShowProgress</a>
-  
-    <li><a href="../../Lingo/SourceFileNotFoundError.html">Lingo::SourceFileNotFoundError</a>
-  
-    <li><a href="../../Lingo/Srv.html">Lingo::Srv</a>
-  
-    <li><a href="../../Lingo/Version.html">Lingo::Version</a>
-  
-    <li><a href="../../Lingo/Web.html">Lingo::Web</a>
-  
-    <li><a href="../../Lingo/Web/Rack.html">Lingo::Web::Rack</a>
-  
-    <li><a href="../../Lingo/Web/Rack/Auth.html">Lingo::Web::Rack::Auth</a>
-  
-    <li><a href="../../Nuggets.html">Nuggets</a>
-  
-    <li><a href="../../YAML.html">YAML</a>
-  
-  </ul>
-</nav>
+</div>
 
   </div>
 </nav>
 
-<div id="documentation">
-  <h1 class="class">class Lingo::Attendee::ObjectFilter</h1>
+<main role="main" aria-labelledby="class-Lingo::Attendee::ObjectFilter">
+  <h1 id="class-Lingo::Attendee::ObjectFilter" class="class">
+    class Lingo::Attendee::ObjectFilter
+  </h1>
 
-  <div id="description" class="description">
+  <section class="description">
     
 <p>Der <a href="ObjectFilter.html">ObjectFilter</a> ermöglicht es, beliebige
 Objekte aus dem Datenstrom herauszufiltern. Um die gewünschten Objekte zu
-identifizieren, sind ein paar Ruby-Kenntnisse und das Wissen um die <a
-href="../../Lingo.html">Lingo</a> Klassen notwendig. Hier sollen kurz die
-häufigsten Fälle angesprochen werden:</p>
+identifizieren, sind ein paar Ruby-Kenntnisse und das Wissen um die Lingo
+Klassen notwendig. Hier sollen kurz die häufigsten Fälle angesprochen
+werden:</p>
 
 <p>Filtern nach einem bestimmten Typ, z.B. Token oder Word wird beispielsweise
 durch den Ausdruck &#39;obj.kind_of?(Word)&#39; ermöglicht. Token und Words
@@ -287,7 +117,7 @@ werden. Wie bereits gezeigt, können Bedingungen durch logisches UND
 <code>form</code> kann genutzt werden, um auf den Text eines Objektes
 zuzugreifen, z.B. &#39;obj.form==“John”&#39;.</p>
 
-<h3 id="label-M%C3%B6gliche+Verlinkung">Mögliche Verlinkung<span><a href="#label-M%C3%B6gliche+Verlinkung">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+<h3 id="class-Lingo::Attendee::ObjectFilter-label-M%C3%B6gliche+Verlinkung">Mögliche Verlinkung<span><a href="#class-Lingo::Attendee::ObjectFilter-label-M%C3%B6gliche+Verlinkung">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
 <dl class="rdoc-list note-list"><dt>Erwartet
 <dd>
 <p>Daten beliebigen Typs von allen Attendees</p>
@@ -296,7 +126,7 @@ zuzugreifen, z.B. &#39;obj.form==“John”&#39;.</p>
 <p>Daten, die der als Parameter übergebenen Bedingung entsprechen</p>
 </dd></dl>
 
-<h3 id="label-Parameter">Parameter<span><a href="#label-Parameter">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+<h3 id="class-Lingo::Attendee::ObjectFilter-label-Parameter">Parameter<span><a href="#class-Lingo::Attendee::ObjectFilter-label-Parameter">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
 
 <p>Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der
 Voreinstellung). Alle anderen Parameter müssen zwingend angegeben werden.</p>
@@ -312,7 +142,7 @@ Voreinstellung). Alle anderen Parameter müssen zwingend angegeben werden.</p>
 Wahr ausgewertet wird, das Objekt weiterleitet und ansonsten filtert.</p>
 </dd></dl>
 
-<h3 id="label-Beispiele">Beispiele<span><a href="#label-Beispiele">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+<h3 id="class-Lingo::Attendee::ObjectFilter-label-Beispiele">Beispiele<span><a href="#class-Lingo::Attendee::ObjectFilter-label-Beispiele">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
 
 <p>Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration
 <code>t1.cfg</code></p>
@@ -333,7 +163,7 @@ out&gt; &lt;Indexierung = [(indexierung/s)]&gt;
 out&gt; *EOL(&#39;test.txt&#39;)
 out&gt; *EOF(&#39;test.txt&#39;)</pre>
 
-  </div><!-- description -->
+  </section>
 
   
   
@@ -347,10 +177,11 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
 
     
 
-    <!-- Methods -->
     
-     <section id="protected-instance-5Buntitled-5D-method-details" class="method-section section">
-      <h3 class="section-header">Protected Instance Methods</h3>
+     <section id="protected-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Protected Instance Methods</h3>
+       </header>
 
     
       <div id="method-i-init" class="method-detail ">
@@ -376,14 +207,14 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">init</span>
   <span class="ruby-ivar">@obj_eval</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;objects&#39;</span>, <span class="ruby-string">&#39;true&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- init-source -->
+          </div>
           
         </div>
 
         
 
         
-      </div><!-- init-method -->
+      </div>
 
     
       <div id="method-i-process" class="method-detail ">
@@ -409,26 +240,25 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">process</span>(<span class="ruby-identifier">obj</span>)
   <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">obj</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">eval</span>(<span class="ruby-ivar">@obj_eval</span>)
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- process-source -->
+          </div>
           
         </div>
 
         
 
         
-      </div><!-- process-method -->
+      </div>
 
     
-    </section><!-- protected-instance-method-details -->
+    </section>
   
-  </section><!-- 5Buntitled-5D -->
+  </section>
+</main>
 
-</div><!-- documentation -->
 
-
-<footer id="validator-badges">
-  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.1.
-  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 
