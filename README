@@ -16,9 +16,14 @@
   * {Configuration}[rdoc-label:label-Configuration]
   * {Language definition}[rdoc-label:label-Language+definition]
   * {Dictionaries}[rdoc-label:label-Dictionaries]
+    * {Encoding word classes and gender information}[rdoc-label:label-Encoding+word+classes+and+gender+information]
+    * {Lexicalizing multiword expressions}[rdoc-label:label-Lexicalizing+multiword+expressions]
+    * {Lexicalizing compounds}[rdoc-label:label-Lexicalizing+compounds]
 * {Issues and Contributions}[rdoc-label:label-ISSUES+AND+CONTRIBUTIONS]
 * {Links}[rdoc-label:label-LINKS]
 * {Literature}[rdoc-label:label-LITERATURE]
+  * {Background and Theory}[rdoc-label:label-Background+and+Theory]
+  * {Research publications}[rdoc-label:label-Research+publications]
 * {Credits}[rdoc-label:label-CREDITS]
 * {License and Copyright}[rdoc-label:label-LICENSE+AND+COPYRIGHT]
 
@@ -35,57 +40,54 @@ functions of Lingo are:
 * identification of (i.e. reduction to) basic word form by means of dictionaries
   and suffix lists
 * algorithmic decomposition
-* dictionary-based synonymisation and identification of phrases
+* dictionary-based synonymization and identification of phrases
 * generic identification of phrases/word sequences based on patterns of word
   classes
 
 === Introduction
 
-If you want to perform linguistic analysis on some text, Lingo is there to
-support your endeavour with all its flexibility and extendability. Lingo
-enables you to assemble a network of practically unlimited functionality
-from modules with limited functions. This network is built by configuration
-files. Here's a minimal example:
+Lingo allows flexible and extendable linguistic analysis of text files. Here
+is a minimal configuration example to analyse this README file:
 
   meeting:
     attendees:
       - text_reader: { files: 'README' }
       - debugger:    { eval: 'true', ceval: 'cmd!="EOL"', prompt: '<debug>: ' }
 
-Lingo is told to invite two attendees. And Lingo wants them to talk to each
-other, hence the name Lingo (= the technical language).
+Lingo is told to invite two attendees and wants them to talk to each other,
+hence the name Lingo (= the technical language).
 
-The first attendee is the +text_reader+ (Lingo::Attendee::TextReader). It can
-read files (as well as standard input) and communicate its content to other
-attendees. For this purpose the +text_reader+ is given an output channel.
-Everything that the +text_reader+ has to say is steered through this channel.
-It will do nothing further until Lingo will tell the first attendee to speak.
-Then the +text_reader+ will open the file +README+ (<tt>files</tt> parameter)
-and babble the content to the world via its output channel.
+The first attendee is the text_reader[rdoc-ref:Lingo::Attendee::TextReader].
+It can read files and communicates their content to other attendees. For this
+purpose, the +text_reader+ is given an output channel. Everything that the
++text_reader+ has to say is steered through this channel. It will do nothing
+further until Lingo tells the first attendee to speak. Then the +text_reader+
+will open the file +README+ (as per the +files+ parameter) and pass the content
+to the other attendees via its output channel.
 
-The second attendee +debugger+ (Lingo::Attendee::Debugger) does nothing else
-than to put everything on the console (standard error, actually) that comes
-into its input channel. If you write the Lingo configuration which is shown
-above as an example into the file <tt>readme.cfg</tt> and then run <tt>lingo
--c readme -l en</tt>, the result will look something like this:
+The second attendee, debugger[rdoc-refLingo::Attendee::Debugger], does nothing
+else than to put everything on the console (standard error) that comes into its
+input channel. If you write the Lingo configuration which is shown above as an
+example into the file <tt>readme.cfg</tt> and then run <tt>lingo -c readme -l en</tt>,
+the result will look something like this:
 
   <debug>:  *FILE('README')
   <debug>:  "= Lingo - [...]"
   ...
-  <debug>:  "If you want to perform linguistic analysis on some text, [...]"
-  <debug>:  "support your endeavour with all its flexibility and [...]"
+  <debug>:  "Lingo allows flexible and extendable linguistic analysis [...]"
+  <debug>:  "is a minimal configuration example to analyse this README [...]"
   ...
   <debug>:  *EOF('README')
 
-What we see are lines with an asterisk (*) and lines without. That's because
-Lingo distinguishes between commands and data. The +text_reader+ did not only
-read the content of the file, but also communicated through the commands when
-a file begins and when it ends. This can (and will) be an important piece of
-information for other attendees that will be added later.
+What we see are lines beginning with an asterisk (<tt>*</tt>) and lines without.
+That's because Lingo distinguishes between commands and data. The +text_reader+
+did not only read the content of the file, but also communicated through the
+commands when a file began and when it ended. This can (and will) be an
+important piece of information for other attendees that will be added later.
 
 To try out Lingo's functionality without installing it first, have a look at
 {Lingo Web}[http://ixtrieve.fh-koeln.de/lingoweb]. There you can enter some
-text and see the debug output Lingo generated, including tokenization, word
+text and see the debug output Lingo generated -- including tokenization, word
 identification, decomposition, etc.
 
 === Attendees
@@ -93,35 +95,42 @@ identification, decomposition, etc.
 Available attendees that can be used for solving a specific problem (for more
 information see each attendee's documentation):
 
-<tt>text_reader</tt>::     Reads files and puts their content into the channels line by
-                           line. (Lingo::Attendee::TextReader)
-<tt>tokenizer</tt>::       Dissects lines into defined character strings, i.e. tokens.
-                           (Lingo::Attendee::Tokenizer)
-<tt>abbreviator</tt>::     Identifies abbreviations and produces the long form if listed
-                           in a dictionary. (Lingo::Attendee::Abbreviator)
-<tt>word_searcher</tt>::   Identifies tokens and turns them into words for further
-                           processing. To do this right it looks into the dictionary.
-                           (Lingo::Attendee::WordSearcher)
-<tt>decomposer</tt>::      Tests any character strings not identified by the +word_searcher+
-                           for being compounds. (Lingo::Attendee::Decomposer)
-<tt>synonymer</tt>::       Extends words with synonyms. (Lingo::Attendee::Synonymer)
-<tt>noneword_filter</tt>:: Filters out everything and lets through only those tokens that
-                           are unknown. (Lingo::Attendee::NonewordFilter)
-<tt>vector_filter</tt>::   Filters out everything and lets through only those tokens that are
-                           considered useful for indexing. (Lingo::Attendee::VectorFilter)
-<tt>object_filter</tt>::   Similar to the +vector_filter+. (Lingo::Attendee::ObjectFilter)
-<tt>text_writer</tt>::     Writes anything that it receives into a file (or to standard
-                           output). (Lingo::Attendee::TextWriter)
-<tt>formatter</tt>::       Similar to the +text_writer+, but allows for custom output formats.
-                           (Lingo::Attendee::Formatter)
-<tt>debugger</tt>::        Shows everything for debugging. (Lingo::Attendee::Debugger)
-<tt>variator</tt>::        Tries to correct spelling errors and the like.
-                           (Lingo::Attendee::Variator)
-<tt>dehyphenizer</tt>::    Tries to undo hyphenation. (Lingo::Attendee::Dehyphenizer)
-<tt>multi_worder</tt>::    Identifies phrases (word sequences) based on a multiword
-                           dictionary. (Lingo::Attendee::MultiWorder)
-<tt>sequencer</tt>::       Identifies phrases (word sequences) based on patterns of word
-                           classes. (Lingo::Attendee::Sequencer)
++text_reader+::     Reads files (or standard input) and puts their content into
+                    the channels line by line. (see Lingo::Attendee::TextReader)
++tokenizer+::       Dissects lines into defined character strings, i.e. tokens.
+                    (see Lingo::Attendee::Tokenizer)
++abbreviator+::     Identifies abbreviations and produces the long form if
+                    listed in a dictionary. (see Lingo::Attendee::Abbreviator)
++word_searcher+::   Identifies tokens and turns them into words for further
+                    processing. To this end, it consults the dictionaries.
+                    (see Lingo::Attendee::WordSearcher)
++stemmer+::         Identifies tokens not identified by the +word_searcher+ by
+                    means of stemming. (see Lingo::Attendee::Stemmer)
++decomposer+::      Tests any tokens not identified by the +word_searcher+ for
+                    being compounds. (see Lingo::Attendee::Decomposer)
++synonymer+::       Extends words with their synonyms. (see
+                    Lingo::Attendee::Synonymer)
++noneword_filter+:: Filters out everything and lets through only those tokens
+                    that are unknown. (see Lingo::Attendee::NonewordFilter)
++vector_filter+::   Filters out everything and lets through only those tokens
+                    that are considered useful for indexing. (see
+                    Lingo::Attendee::VectorFilter)
++object_filter+::   Similar to the +vector_filter+. (see
+                    Lingo::Attendee::ObjectFilter)
++text_writer+::     Writes anything that it receives into a file (or to
+                    standard output). (see Lingo::Attendee::TextWriter)
++formatter+::       Similar to the +text_writer+, but allows for custom output
+                    formats. (see Lingo::Attendee::Formatter)
++debugger+::        Shows everything for debugging. (see
+                    Lingo::Attendee::Debugger)
++variator+::        Tries to correct spelling errors and the like. (see
+                    Lingo::Attendee::Variator)
++dehyphenizer+::    Tries to undo hyphenation. (see
+                    Lingo::Attendee::Dehyphenizer)
++multi_worder+::    Identifies phrases (word sequences) based on a multiword
+                    dictionary. (see Lingo::Attendee::MultiWorder)
++sequencer+::       Identifies phrases (word sequences) based on patterns of
+                    word classes. (see Lingo::Attendee::Sequencer)
 
 Furthermore, it may be useful to have a look at the configuration files
 <tt>lingo.cfg</tt> and <tt>en.lang</tt>.
@@ -130,29 +139,64 @@ Furthermore, it may be useful to have a look at the configuration files
 
 Lingo is able to read HTML, XML, and PDF in addition to plain text.
 
-TODO: Examples.
+_Examples_:
+
+Read any file, guessing the correct type automatically:
+
+  - text_reader:     { files: $(files), filter: true }
+
+Read HTML files specifically (accordingly for XML):
+
+  - text_reader:     { files: $(files), filter: 'html' }
+
+Read PDF files, either with the pdf-reader[http://rubygems.org/gems/pdf-reader]
+gem (default):
+
+  - text_reader:     { files: $(files), filter: 'pdf' }
+
+or with the pdftotext[http://en.wikipedia.org/wiki/Pdftotext] command line tool:
+
+  - text_reader:     { files: $(files), filter: 'pdftotext' }
 
 === Markup
 
-Lingo is able to parse HTML/XML and MediaWiki markup.
+Lingo is able to, in a limited form, parse HTML/XML and
+MediaWiki[http://mediawiki.org/wiki/Help:Formatting] markup.
 
-TODO: Examples.
+_Examples_:
+
+Identify HTML/XML tags in the input stream:
+
+  - tokenizer:       { tags: true }
+
+Identify MediaWiki markup in the input stream:
+
+  - tokenizer:       { wiki: true }
 
 === Inline annotation
 
-Lingo is able to annotate input text inline, instead of printing results to
-external files.
+Lingo is able to annotate input text inline, instead of printing results out
+of context to external files.
 
-TODO: Examples.
+_Example_:
+
+  # keep line endings
+  - text_reader:     { files: $(files), chomp: false }
+  # keep whitespace
+  - tokenizer:       { space: true }
+  # do processing...
+  - word_searcher:   { source: sys-dic, mode: first }
+  # insert formatted results (e.g. "[[Name::lingo|Lingo]] got these [[Noun::word|words]].")
+  - formatter:       { ext: out, format: '[[%3$s::%2$s|%1$s]]', map: { e: Name, s: Noun } }
 
 === Plugins
 
 Lingo has a plugin system that allows you to implement additional features
 (e.g. add new attendees) or modify existing ones. Just create a file named
 +lingo_plugin.rb+ in your Gem's +lib+ directory or any directory that's in
-<tt>$LOAD_PATH</tt>. You can also define an environment variable +LINGO_PLUGIN_PATH+
-(by default <tt>~/.lingo/plugins</tt>) with additional directories to load
-plugins from (<tt>*.rb</tt>).
+<tt>$LOAD_PATH</tt>. You can also define an environment variable
++LINGO_PLUGIN_PATH+ (by default <tt>~/.lingo/plugins</tt>) with additional
+directories to load plugins from (<tt>*.rb</tt>).
 
 A dedicated API to support writing and integrating plugins will be added in
 the future.
@@ -166,20 +210,21 @@ for further discussion.
 
 == INSTALLATION AND USAGE
 
-Since version 1.8.0, Lingo is available as a RubyGem. So a simple <tt>gem
-install lingo</tt> will install Lingo and its dependencies (you might want
-to run that command with administrator privileges, depending on your
-environment). Then you can call the +lingo+ executable to process your
-data. See <tt>lingo --help</tt> for starters.
+Since version 1.8.0, Lingo is available as a
+RubyGem[http://rubygems.org/gems/lingo]. So a simple <tt>gem install lingo</tt>
+will install Lingo and its dependencies. You might want to run that command
+with administrator privileges, depending on your environment. Then you can call
+the +lingo+ executable to process your text files. See <tt>lingo --help</tt>
+for available options.
 
 Please note that Lingo requires Ruby version 1.9.2 or higher to run
 (2.0.0[http://ruby-lang.org/en/downloads/] is the currently recommended
-version). If you want to use Lingo on Ruby 1.8, please refer to the legacy
-version (see below).
+version). If you want to use Lingo on Ruby 1.8, please refer to the
+{legacy version}[rdoc-label:label-Legacy+version].
 
 Since Lingo depends on native extensions, you need to make sure that
 development files for your Ruby version are installed. On Debian-based
-Linux platforms they are included in the package <tt>ruby1.9.1-dev</tt>;
+Linux platforms they are included in the package <tt>ruby-dev</tt>;
 other distributions may have a similarly named package. On Windows those
 development files are currently not required.
 
@@ -193,29 +238,29 @@ version of Lingo (see below).
 === Dictionary and configuration file lookup
 
 Lingo will search different locations to find dictionaries and configuration
-files. By default, these are the current directory, your personal Lingo
+files. By default, these are the current working directory, your personal Lingo
 directory (<tt>~/.lingo</tt>) and the installation directory (in that order).
 You can control this lookup path by either moving files up the chain (using
 the +lingoctl+ executable) or by setting various environment variables.
 
 With +lingoctl+ you can copy dictionaries and configuration files from your
-personal Lingo directory or the installation directory to the current
+personal Lingo directory or the installation directory to the current working
 directory so you can modify them and they will take precedence over the
 original ones. See <tt>lingoctl --help</tt> for usage information.
 
-In order to change the search path in itself, you can define the
+In order to change the search path itself, you can define the
 +LINGO_PATH+ environment variable as a whole or its individual parts
 +LINGO_CURR+ (the local Lingo directory), +LINGO_HOME+ (your personal
 Lingo directory), and +LINGO_BASE+ (the system-wide Lingo directory).
 
-Inside of any of these directories dictionaries and configuration files are
+Inside of any of these directories, dictionaries and configuration files are
 typically organized in the following directory structure:
 
-<tt>config</tt>:: Configuration files (<tt>*.cfg</tt>).
-<tt>dict</tt>::   Dictionary source files (<tt>*.txt</tt>); in
-                  language-specific subdirectories (+de+, +en+, ...).
-<tt>lang</tt>::   Language definition files (<tt>*.lang</tt>).
-<tt>store</tt>::  Compiled dictionaries, generated from source files.
+<tt>config/</tt>:: Configuration files (<tt>*.cfg</tt>).
+<tt>dict/</tt>::   Dictionary source files (<tt>*.txt</tt>) in
+                   language-specific subdirectories (+de/+, +en/+, ...).
+<tt>lang/</tt>::   Language definition files (<tt>*.lang</tt>).
+<tt>store/</tt>::  Compiled dictionaries, generated from source files.
 
 But for compatibility reasons these naming conventions are not enforced.
 
@@ -223,7 +268,7 @@ But for compatibility reasons these naming conventions are not enforced.
 
 As Lingo 1.8 introduced some major disruptions and no longer runs on Ruby 1.8,
 there is a maintenance branch for Lingo 1.7.x that will remain compatible with
-both Ruby 1.8 and the previous line of Lingo prior to 1.8. This branch will
+both Ruby 1.8 and the previous line of Lingo prior to 1.8. This branch may
 receive occasional bug fixes and minor feature updates. However, the bulk of
 the development efforts will be directed towards Lingo 1.8+.
 
@@ -238,28 +283,98 @@ usage instructions.
 
 Configuration and language definition files are also located at the root of the
 installation directory (<tt>*.cfg</tt> and <tt>*.lang</tt>, respectively).
-Dictionary source files are found in language-specific subdirectories (+de+,
-+en+, ...) and are named <tt>*.txt</tt>. The compiled dictionaries are found
-beneath these subdirectories in a directory named <tt>store</tt>.
+Dictionary source files are found in language-specific subdirectories (+de/+,
++en/+, ...) and are named <tt>*.txt</tt>. The compiled dictionaries are found
+beneath these language subdirectories in a directory named <tt>store/</tt>.
 
 
 == FILE FORMATS
 
-Lingo uses three different types of files to determine its behaviour.
-Configuration files control the details of the indexing process. Language
-definitions specify grammar rules and dictionaries available for indexing.
-Dictionaries, finally, hold the vocabulary used in indexing the input text
-and producing the results.
+Lingo uses three different types of files to determine its behaviour:
+{configuration files}[rdoc-label:label-Configuration] control the details of the
+indexing process; {language definitions}[rdoc-label:label-Language+definition]
+specify grammar rules and dictionaries available for indexing;
+dictionaries[rdoc-label:label-Dictionaries], finally, hold the
+vocabulary used in indexing the input text and producing the results.
 
 === Configuration
 
-TODO...
+Configuration files are defined in the YAML[http://yaml.org/] syntax. They
+specify the attendees[rdoc-label:label-Attendees] to call in order and the
+options to provide them with. The first attendee in any indexing process is
+the text_reader[rdoc-ref:Lingo::Attendee::TextReader], who reads the input
+text and passes it on to the other attendees. Every attendee transforms or
+extends the input stream and automatically sends everything down to the next
+attendee. This process may be customized by explicitly specifying the input
+and/or output channels of individual attendees with the +in+ and +out+ options.
+
+_Example_:
+
+  # input is taken from the previous attendee,
+  # output is sent to the named channel "syn"
+  - synonymer:       { skip: '?,t', source: sys-syn, out: syn }
+  
+  # input is taken from the named channel "syn",
+  # output is sent to the next attendee
+  - vector_filter:   { in: syn, lexicals: y, sort: term_abs }
+  
+  # input is taken from the previous attendee,
+  # output is sent to the next attendee
+  - text_writer:     { ext: syn, sep: "\n" }
+  
+  # input is taken from the named channel "syn"
+  # (ignoring the output of the previous attendee),
+  # output is sent to the next attendee
+  - vector_filter:   { in: syn, lexicals: m }
+  
+  # input is taken from the previous attendee,
+  # output is sent to the next attendee
+  - text_writer:     { ext: mul, sep: "\n" }
 
 === Language definition
 
-TODO...
+Language definitions, like {configuration files}[rdoc-label:label-Configuration],
+are defined in the YAML[http://yaml.org/] syntax. They specify the
+dictionaries[rdoc-label:label-Dictionaries] to be used as well as the grammar
+rules according to which the input shall be processed. These settings do not
+necessarily have to coincide with an existing language, they are
+application-specific.
 
 === Dictionaries
+
+Dictionaries come in different varieties and encode the knowledge about the
+vocabulary used for indexing and analysis.
+
+Supported dictionary formats:
+
++SingleWord+:: One word (projection) per line. E.g. <tt>open source</tt>. (see
+               Lingo::Database::Source::SingleWord)
++MultiValue+:: Multiple words per line (separated with a unique symbol), all of
+               which are interpreted as belonging to a single equivalence class.
+               E.g. <tt>fax;telefax;facsimile</tt>. (see
+               Lingo::Database::Source::MultiValue)
++MultiKey+::   Similar to +MultiValue+, except that the first word will be
+               treated as the preferred term (descriptor). E.g.
+               <tt>fax;telefax;facsimile</tt>. (see
+               Lingo::Database::Source::MultiKey)
++KeyValue+::   One word and its associated projection per line, separated with
+               a unique symbol. E.g. <tt>abfrage*query</tt>. (see
+               Lingo::Database::Source::KeyValue)
++WordClass+::  Similar to +KeyValue+, except that the projection may consist of
+               multiple lexicalizations, each with its own word class and
+               (optional) gender information. E.g. <tt>abort,abort #s|v</tt>,
+               which is equivalent to <tt>abort,abort #s abort #v</tt>. (see
+               Lingo::Database::Source::WordClass)
+
+==== Encoding word classes and gender information
+
+TODO...
+
+==== Lexicalizing multiword expressions
+
+TODO...
+
+==== Lexicalizing compounds
 
 TODO...
 
@@ -269,8 +384,7 @@ TODO...
 If you find bugs or want to suggest new features, please report them
 on GitHub[http://github.com/lex-lingo/lingo/issues]. Include your Ruby
 version (<tt>ruby --version</tt>) and the version of Lingo you are using
-(typically <tt>lingo --version</tt>, provided it's new enough to support
-that flag).
+(<tt>lingo --version</tt>).
 
 If you want to contribute to Lingo, please fork the project
 on GitHub[http://github.com/lex-lingo/lingo] and submit a
@@ -278,7 +392,7 @@ on GitHub[http://github.com/lex-lingo/lingo] and submit a
 (bonus points for topic branches).
 
 To make sure that Lingo's tests pass, install hen[http://blackwinter.github.com/hen]
-(typically <tt>gem install hen</tt>) and all development dependencies (either
+(typically <tt>gem install hen</tt>) and all development dependencies (either with
 <tt>gem install --development lingo</tt> or manually; see <tt>rake gem:dependencies</tt>).
 Then run <tt>rake test</tt> for the basic tests or <tt>rake test:all</tt> for
 the full test suite.
@@ -288,7 +402,7 @@ the full test suite.
 
 Website::       http://lex-lingo.de
 Demo::          http://ixtrieve.fh-koeln.de/lingoweb
-Documentation:: https://lex-lingo.github.io/lingo/
+Documentation:: https://lex-lingo.github.com/lingo
 Source code::   https://github.com/lex-lingo/lingo
 RubyGem::       https://rubygems.org/gems/lingo
 Bug tracker::   https://github.com/lex-lingo/lingo/issues
@@ -297,15 +411,24 @@ Travis CI::     https://travis-ci.org/lex-lingo/lingo
 
 == LITERATURE
 
-<b></b>
-* Lepsky, K., Vorhauer, J.: <em>{Lingo: ein open source System für die automatische Indexierung deutschsprachiger Dokumente}[http://dx.doi.org/10.1515/ABITECH.2006.26.1.18]</em>. (German) In: ABI Technik 26, 2006. p. 18-29.
-* Gödert, W., Lepsky, K., Nagelschmidt, M.: <em>{Informationserschließung und Automatisches Indexieren: ein Lehr- und Arbeitsbuch}[http://dx.doi.org/10.1007/978-3-642-23513-9]</em>. (German) Berlin etc.: Springer, 2012.
+=== Background and Theory
+
+* Gödert, W.; Lepsky, K.; Nagelschmidt, M.: <em>{Informationserschließung und Automatisches Indexieren: ein Lehr- und Arbeitsbuch}[http://dx.doi.org/10.1007/978-3-642-23513-9]</em>. (German) Berlin etc.: Springer, 2012.
+* Lepsky, K.; Vorhauer, J.: <em>{Lingo: ein open source System für die automatische Indexierung deutschsprachiger Dokumente}[http://dx.doi.org/10.1515/ABITECH.2006.26.1.18]</em>. (German) In: ABI Technik 26 (1), 2006. pp 18-29.
 * Nohr, H.: <em>{Grundlagen der automatischen Indexierung: ein Lehrbuch}[http://logos-verlag.de/cgi-bin/buch/isbn/0121]</em>. (German) Berlin: Logos, 2005.
-* Hausser, R.: <em>{Grundlagen der Computerlinguistik. Mensch-Maschine-Kommunikation in natürlicher Sprache}[http://zentralblatt-math.org/zbmath/search/?an=0956.68141]</em>. (German) Berlin etc.: Springer, 2000.
-* Allen, J.: <em>{Natural language understanding}[http://zentralblatt-math.org/zbmath/search/?an=0851.68106]</em>. (English) Redwood City, CA: Benjamin/Cummings, 1995.
-* Grishman, R.: <em>{Computational linguistics: an introduction}[http://dx.doi.org/10.2277/0521310385]</em>. (English) Cambridge: Cambridge Univ. Press, 1986.
-* Salton, G., McGill, M.: <em>{Introduction to modern information retrieval}[http://zentralblatt-math.org/zbmath/search/?an=0523.68084]</em>. (English) New York etc.: McGraw-Hill, 1983.
-* Porter, M.: <em>{An algorithm for suffix stripping}[http://tartarus.org/~martin/PorterStemmer/]</em>. (English) In: Program 14, 1980. p. 130-137.
+* Hausser, R.: <em>{Grundlagen der Computerlinguistik. Mensch-Maschine-Kommunikation in natürlicher Sprache}[http://zbmath.org/?q=an:0956.68141]</em>. (German) Berlin etc.: Springer, 2000.
+* Allen, J.: <em>{Natural language understanding}[http://zbmath.org/?q=an:0851.68106]</em>. (English) Redwood City, CA: Benjamin/Cummings, 1995.
+* Grishman, R.: <em>{Computational linguistics: an introduction}[http://cambridge.org/9780521310383]</em>. (English) Cambridge: Cambridge Univ. Press, 1986.
+* Salton, G.; McGill, M.: <em>{Introduction to modern information retrieval}[http://zbmath.org/?q=an:0523.68084]</em>. (English) New York etc.: McGraw-Hill, 1983.
+* Porter, M.: <em>{An algorithm for suffix stripping}[http://tartarus.org/~martin/PorterStemmer/]</em>. (English) In: Program 14 (3), 1980. pp 130-137.
+
+=== Research publications
+
+* Bredack, J.; Lepsky, K.: <em>{Automatische Extraktion von Fachterminologie aus Volltexten}[http://dx.doi.org/10.1515/abitech-2014-0002]</em>. (German) In: ABI Technik 34 (1), 2014. pp 2-12.
+* Bredack, J.: <em>{Terminologieextraktion von Mehrwortgruppen in kunsthistorischen Fachtexten}[http://ixtrieve.fh-koeln.de/lehre/bredack-2013.pdf]</em>. (German) Köln: Fachhochschule Köln, 2013.
+* Maylein, L.; Langenstein, A.: <em>{Neues vom Relevanz-Ranking im HEIDI-Katalog der Universitätsbibliothek Heidelberg}[http://b-i-t-online.de/heft/2013-03-fachbeitrag-maylein.pdf]</em>. (German) In: b.i.t.online 16 (3), 2013. pp 190-200.
+* Gödert, W.: <em>{Detecting multiword phrases in mathematical text corpora}[http://arxiv.org/abs/1210.0852]</em>. (English) arXiv:1210.0852 [cs.CL], 2012.
+* Schiffer, R.: <em>{Automatisches Indexieren technischer Kongressschriften}[http://ixtrieve.fh-koeln.de/lehre/schiffer-2007.pdf]</em>. (German) Köln: Fachhochschule Köln, 2007.
 
 
 == CREDITS
