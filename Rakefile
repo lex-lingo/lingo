@@ -48,7 +48,7 @@ The main functions of Lingo are:
       dependencies: [
         'cyclops',
         'highline',
-        ['ruby-nuggets', '>= 0.9.2'],
+        'nuggets',
         'sinatra-bells',
         'sinatra-contrib',
         'unicode'
