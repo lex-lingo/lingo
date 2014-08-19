@@ -89,7 +89,7 @@ class Lingo
     end
 
     def to_s
-      error("An error occured when trying to #{action} `#{file}'")
+      error("An error occured while trying to #{action} `#{file}'")
     end
 
   end
@@ -194,7 +194,29 @@ class Lingo
     end
 
     def to_s
-      error("#{class_name}: An error occured while trying to load '#{lib}'")
+      error("#{class_name}: An error occured while trying to load `#{lib}'")
+    end
+
+  end
+
+  class TokenizeError < LingoError
+
+    attr_reader :line, :file, :num, :err
+
+    def initialize(line, file, num, err)
+      @line, @file, @num, @err = line, file, num, err
+    end
+
+    def to_s
+      line, file = self.line, self.file
+
+      if line.is_a?(String) && line.length > 48
+        line = line[0, 45] + '...'
+      end
+
+      file &&= "#{file}:#{num}: "
+
+      error("An error occured while trying to tokenize #{file}#{line.inspect}")
     end
 
   end

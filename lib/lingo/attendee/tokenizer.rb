@@ -157,14 +157,15 @@ class Lingo
 
         @rules = RULES.reject { |name, _| skip.include?(name) }
 
-        @filename = @cont = nil
+        @filename = @linenum = @cont = nil
       end
 
       def control(cmd, param)
         case cmd
-          when STR_CMD_FILE then @filename = param
-          when STR_CMD_LIR  then @filename = nil
-          when STR_CMD_EOF  then @cont     = nil
+          when STR_CMD_FILE then @filename, @linenum = param, 1
+          when STR_CMD_LIR  then @filename, @linenum = nil, nil
+          when STR_CMD_EOL  then @linenum += 1 if @linenum
+          when STR_CMD_EOF  then @cont = nil
         end
       end
 
@@ -217,6 +218,8 @@ class Lingo
           end
         }
         end
+      rescue => err
+        raise TokenizeError.new(line, @filename, @linenum, err)
       end
 
     end
