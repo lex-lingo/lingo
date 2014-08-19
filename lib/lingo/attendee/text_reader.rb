@@ -263,7 +263,8 @@ class Lingo
         @files = []
 
         Array(get_key('files', '-')).each { |path|
-          stdin?(path) ? @files << path : add_files(path, *args)
+          stdin?(path) ? @files << path :
+            add_files(File.expand_path(path), *args)
         }
       end
 
@@ -276,14 +277,14 @@ class Lingo
             if recursive
               Find.find(entry) { |match|
                 if File.file?(match) && File.fnmatch?(glob, match)
-                  @files << File.expand_path(match)
+                  @files << match
                 end
               }
             else
               add_files(File.join(entry, glob), glob)
             end
           else
-            @files << File.expand_path(entry)
+            @files << entry
           end
         }
       end
