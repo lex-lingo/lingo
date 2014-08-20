@@ -53,14 +53,14 @@ class Lingo
       r = LINGO.talk(q) unless q.empty?
       return r unless r && SRC_SEP
 
-      r.inject(Hash.new { |h, k| h[k] = [] }) { |h, s|
-        a, b = s.split(SRC_SEP, 2); h[b] << a; h
-      }
-    end
+      s = Hash.new { |h, k| h[k] = [] }
 
-    if ENV['LINGO_NO_SORT']
-      alias_method :_talk, :talk
-      def talk(q) _talk(q).to_a end
+      r.each { |t|
+        a, b = t.split(SRC_SEP, 2)
+        s[b] << a
+      }
+
+      ENV['LINGO_NO_SORT'] ? s.to_a : s
     end
 
   end
