@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2012 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2014 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -110,6 +110,8 @@ Usage: #{PROG} <command> [arguments] [options]
       target = File.join(path_for_scope(:local), Lingo.basepath(what, source))
 
       usage('Source and target are the same.') if source == target
+
+      return unless overwrite?(target)
 
       FileUtils.mkdir_p(File.dirname(target))
       FileUtils.cp(source, target, verbose: true)
@@ -238,6 +240,25 @@ Usage: #{PROG} <command> [arguments] [options]
       files = list(what, false)
       files.select! { |i| yield i } if block_given?
       files.each { |file| ARGV.replace([file]); copy(what) }
+    end
+
+    def overwrite?(target, unlink = false)
+      !File.exist?(target) || if agree?("#{target} already exists. Overwrite?")
+        File.unlink(target) if unlink
+        true
+      end
+    end
+
+    def agree?(msg)
+      print "#{msg} (y/n) [n] "
+
+      case answer = $stdin.gets.chomp
+        when /\Ano?\z/i, ''  then nil
+        when /\Ay(?:es)?\z/i then true
+        else puts 'Please enter "yes" or "no".'; agree?(msg)
+      end
+    rescue Interrupt
+      abort ''
     end
 
   end

@@ -36,6 +36,7 @@
 * Fixed regression introduced in 1.8.2 where <tt>combine: all</tt> would no
   longer work in Lingo::Attendee::MultiWorder.
 * Updated and extended Russian dictionaries. (Yulia Dorokhova, Thomas Müller)
+* +lingoctl+ no longer overwrites existing files without confirmation.
 * Dictionary cleanup.
 
 == 1.8.4 [2013-10-18]
