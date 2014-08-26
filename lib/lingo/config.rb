@@ -56,8 +56,12 @@ class Lingo
       end
     end
 
+    def to_h
+      @opts
+    end
+
     def [](key)
-      key_to_nodes(key).inject(@opts) { |hash, node| hash[node] }
+      key_to_nodes(key).inject(to_h) { |hash, node| hash[node] }
     end
 
     def []=(key, val)
