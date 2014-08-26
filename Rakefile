@@ -49,7 +49,6 @@ The main functions of Lingo are:
         'cyclops',
         'nuggets',
         'sinatra-bells',
-        'sinatra-contrib',
         'unicode'
       ],
       development_dependencies: [

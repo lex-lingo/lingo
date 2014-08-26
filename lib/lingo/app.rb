@@ -28,7 +28,6 @@ require 'json'
 require 'optparse'
 require 'shellwords'
 require 'sinatra/bells'
-require 'sinatra/cookies'
 
 class Lingo
 
@@ -38,7 +37,6 @@ class Lingo
 
       def init_app(file, *args, &block)
         set_root(file)
-        helpers(Sinatra::Cookies)
         parse_options(*args, &block)
       end
 
