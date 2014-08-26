@@ -25,6 +25,9 @@
 #++
 
 require 'optparse'
+require 'zip'
+
+Zip.unicode_names = true
 
 class Lingo
 
@@ -79,6 +82,7 @@ Usage: #{PROG} <command> [arguments] [options]
     }
 
     { demo:    [:d, 'Initialize demo directory', '[path]', 'current directory'],
+      archive: [:a, 'Create archive of directory', '[path]', 'current directory'],
       rackup:  [:r, 'Print path to rackup file', 'name'],
       path:    [:p, 'Print search path for dictionaries and configurations'],
       help:    [:h, 'Print help for available commands'],
@@ -115,6 +119,30 @@ Usage: #{PROG} <command> [arguments] [options]
 
       FileUtils.mkdir_p(File.dirname(target))
       FileUtils.cp(source, target, verbose: true)
+    end
+
+    def do_archive
+      OPTIONS.update(path: ARGV.shift, scope: :local)
+      no_args
+
+      source = File.expand_path(path_for_scope.first)
+      target = "#{source}.zip"
+
+      abort "No such directory: #{source}" unless Dir.exist?(source)
+
+      return unless overwrite?(target, true)
+
+      base, name = File.split(source)
+
+      Dir.chdir(base) {
+        Zip::File.open(target, Zip::File::CREATE) { |zipfile|
+          Dir[File.join(name, '**', '*')].each { |file|
+            zipfile.add(file, file)
+          }
+        }
+      }
+
+      puts "Directory successfully archived at `#{target}'."
     end
 
     def do_clearstore

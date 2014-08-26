@@ -37,6 +37,7 @@
   longer work in Lingo::Attendee::MultiWorder.
 * Updated and extended Russian dictionaries. (Yulia Dorokhova, Thomas Müller)
 * +lingoctl+ no longer overwrites existing files without confirmation.
+* +lingoctl+ learned +archive+ command.
 * Dictionary cleanup.
 
 == 1.8.4 [2013-10-18]

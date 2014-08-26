@@ -48,6 +48,7 @@ The main functions of Lingo are:
       dependencies: [
         'cyclops',
         'nuggets',
+        'rubyzip',
         'sinatra-bells',
         'unicode'
       ],
