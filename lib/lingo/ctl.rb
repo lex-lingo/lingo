@@ -123,8 +123,10 @@ Usage: #{PROG} <command> [arguments] [options]
     end
 
     def do_demo
-      OPTIONS.update(path: path = ARGV.shift, scope: :system)
+      OPTIONS.update(path: ARGV.shift, scope: :system)
       no_args
+
+      path = path_for_scope(:local).first
 
       copy_list(:config) { |i| !File.basename(i).start_with?('test') }
       copy_list(:lang)
