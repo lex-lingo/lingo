@@ -18,6 +18,9 @@
   +pdftotext+ command; specify <tt>filter: pdftotext</tt> in the config.
 * Lingo::Attendee::VectorFilter learned +dict+ option to print words in
   dictionary format (viz. Lingo::Database::Source::WordClass).
+* Lingo::Attendee::VectorFilter learned +preamble+ option to print current
+  configuration to the beginning of the log file (<tt>debug: 'true'</tt>);
+  set <tt>preamble: false</tt> to disable.
 * Multiword dictionaries compiled from base forms can now generate inflected
   adjectives based on the gender of the head noun; set <tt>inflect: true</tt>
   in the dictionary config.
@@ -141,7 +144,7 @@
   leave out the +files+ parameter in the config for this to trigger.
 * Status/performance details as well as progress information are now
   printed on +STDERR+ instead of +STDOUT+ in order to not mix with regular
-  output. Learned '--log' option to write such information to a file.
+  output. Learned <tt>--log</tt> option to write such information to a file.
 * Additional internal refactorings. (To be continued...)
 
 == 1.7.1 [2011-10-24]

@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2013 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2014 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -86,6 +86,7 @@ class Lingo
       def init
         if @debug = get_key('debug', false)
           @prompt = get_key('prompt', 'lex:) ')
+          @preamble = get_key('preamble', true)
         else
           @lex  = get_re('lexicals', '[sy]')
           @skip = get_array('skip', DEFAULT_SKIP, :upcase)
@@ -116,6 +117,7 @@ class Lingo
 
       def process(obj)
         if @debug
+          forward((@preamble = nil; @lingo.config.to_h.to_yaml)) if @preamble
           forward("#{@prompt} #{obj.inspect}") if eval(@debug)
         elsif obj.is_a?(Word) && !@skip.include?(obj.attr)
           @word_count += 1
