@@ -61,7 +61,11 @@ class Lingo
           o.on('-x',        'turn on the mutex lock (default is off)')       {     set :lock, true }
         }.parse!(argv)
 
+        abort banner unless argv.empty?
+
         ARGV.unshift(*yield) if block_given?
+      rescue OptionParser::ParseError => err
+        abort "#{err}\n#{banner}"
       end
 
       def rackup(name)
