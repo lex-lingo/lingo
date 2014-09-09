@@ -42,6 +42,11 @@ class Lingo
     get('/')  { doit }
     post('/') { doit }
 
+    post('/raw') {
+      content_type :text
+      LINGO.talk(request.body, true)
+    }
+
     def doit
       to_json(q = params[:q], case q
         when String then talk(q)
