@@ -48,7 +48,7 @@ class Lingo
       end
     end
 
-    def talk(str)
+    def talk(str, raw = false)
       config.stdin.reopen(str)
 
       start
@@ -57,13 +57,17 @@ class Lingo
         io = config.send(key)
         io.rewind
 
-        lines = io.readlines.each { |i| i.chomp! }
+        lines = io.readlines
 
         io.truncate(0)
         io.rewind
 
         lines
       }
+
+      return res.join if raw
+
+      res.each { |i| i.chomp! }
 
       block_given? ? res.map! { |i| yield i } : begin
         res.sort! unless ENV['LINGO_NO_SORT']
