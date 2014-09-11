@@ -42,7 +42,7 @@ The main functions of Lingo are:
       extra_files:  FileList[
         'lingo.rb', 'lingo{,-call}.cfg', 'lir.cfg',
         '{de,en,ru}.lang', '{de,en,ru}/{lingo-*,user-dic,test_*}.txt',
-        'txt/{artikel{,-en,-ru},lir}.txt', 'lib/lingo/{srv,web}/**/*'
+        'txt/{artikel{,-en,-ru},lir}.txt', 'lib/lingo/{srv,web}/**/{,.}*'
       ].to_a,
       required_ruby_version: '>= 1.9.2',
       dependencies: [

@@ -8,6 +8,10 @@
   * {Markup}[rdoc-label:label-Markup]
   * {Inline annotation}[rdoc-label:label-Inline+annotation]
   * {Plugins}[rdoc-label:label-Plugins]
+  * {Server}[rdoc-label:label-Server]
+    * {JSON endpoint}[rdoc-label:label-JSON+endpoint]
+    * {Raw endpoint}[rdoc-label:label-Raw+endpoint]
+    * {Deployment}[rdoc-label:label-Deployment]
 * {Example}[rdoc-label:label-EXAMPLE]
 * {Installation and Usage}[rdoc-label:label-INSTALLATION+AND+USAGE]
   * {Dictionary and configuration file lookup}[rdoc-label:label-Dictionary+and+configuration+file+lookup]
@@ -25,6 +29,8 @@
   * {Background and Theory}[rdoc-label:label-Background+and+Theory]
   * {Research publications}[rdoc-label:label-Research+publications]
 * {Credits}[rdoc-label:label-CREDITS]
+  * {Authors}[rdoc-label:label-Authors]
+  * {Contributors}[rdoc-label:label-Contributors]
 * {License and Copyright}[rdoc-label:label-LICENSE+AND+COPYRIGHT]
 
 == VERSION
@@ -200,6 +206,131 @@ directories to load plugins from (<tt>*.rb</tt>).
 
 A dedicated API to support writing and integrating plugins will be added in
 the future.
+
+=== Server
+
+Lingo comes with a server daemon Lingo::Srv that exposes an HTTP interface to
+Lingo's functionality. The configuration needs to ensure that input is read
+from standard input (<tt>files: STDIN</tt> on +text_reader+) and output is
+written to standard output (<tt>ext: STDOUT</tt> on +text_writer+).
+
+_Example_: Start Lingo server on port 6789 with language configuration +en+
+and default configuration file; server options come before <tt>--</tt>, Lingo
+options come after.
+
+  > lingosrv -p 6789 -- -l en
+
+You can also pass Lingo options through the +LINGO_SRV_OPTS+ environment
+variable (e.g., <tt>LINGO_SRV_OPTS='-l en -c /path/to/your/srv.cfg'</tt>).
+
+==== JSON endpoint
+
+_Example_: Ask the server about "Lingo server"; returns JSON data (output
+formatted for clarity).
+
+  > curl 'http://localhost:6789/?q=Lingo+server'
+  {
+    "Lingo server" : [
+      " <Lingo = [(lingo/s), (lingo/e)]>",
+      " <server = [(server/s)]>"
+    ]
+  }
+
+_Example_: Ask the server about "Lingo" and "server"; returns JSON data (output
+formatted for clarity).
+
+  > curl -g 'http://localhost:6789/?q[]=Lingo&q[]=server'
+  {
+    "[\"Lingo\", \"server\"]" : {
+      "Lingo" : [
+        " <Lingo = [(lingo/s), (lingo/e)]>"
+      ],
+      "server" : [
+        " <server = [(server/s)]>"
+      ]
+    }
+  }
+
+==== Raw endpoint
+
+_Example_: Ask the server about "Lingo server"; returns raw Lingo response.
+
+  > curl --data 'Lingo server' http://localhost:6789/raw
+  <Lingo = [(lingo/s), (lingo/e)]>
+  <server = [(server/s)]>
+
+_Example_: Ask the server about this file; returns raw Lingo response (output
+truncated for clarity).
+
+  > curl --data @README -H 'Content-Type: text/plain' http://localhost:6789/raw
+  :=/OTHR:
+  <Lingo = [(lingo/s), (lingo/e)]>
+  <-|?>
+  <A|?>
+  <full-featured|KOM = [(full-featured/k), (full/s+), (full/a+), (full/v+), (featured/a+)]>
+  <automatic = [(automatic/s), (automatic/a)]>
+  <indexing = [(index/v)]>
+  <system = [(system/s)]>
+  [...]
+
+==== Deployment
+
+Lingo::Srv can be started directly through the provided command-line executable
++lingosrv+ (see above) or through any other Rack[http://rack.github.com/]
+-compatible deployment option; a +rackup+ file is included (see <tt>lingoctl
+rackup srv</tt>).
+
+_Example_: To deploy Lingo::Srv with Passenger[http://phusionpassenger.com/]
+on Apache, create a symlink in the DocumentRoot pointing to the app's
+<tt>public/</tt> directory; adjust the paths according to your environment
+(you can use current_gem[http://blackwinter.github.com/current_gem] to
+create a stable gem path):
+
+  /var/www
+    |
+    +-- lingo-srv -> /usr/lib/ruby/gems/2.1.0/gems/lingo-x.y.z/lib/lingo/srv/public
+
+Then put the following snippet in Apache's VirtualHost configuration:
+
+  <VirtualHost *:80>
+    ...
+
+    RackBaseURI /lingo-srv
+    <Directory /var/www/lingo-srv>
+      Options -MultiViews
+      SetEnv LINGO_SRV_OPTS "-l en"  # <-- Optionally set Lingo options
+    </Directory>
+  </VirtualHost>
+
+In order to provide your own +rackup+ file and Lingo configuration, create a
+directory with those files:
+
+  /srv/lingo-srv
+    |
+    +-- config.ru
+    |
+    +-- lingosrv.cfg
+
+And then point Passenger at it:
+
+  <VirtualHost *:80>
+    ...
+
+    RackBaseURI /lingo-srv
+    <Directory /var/www/lingo-srv>
+      Options -MultiViews
+      PassengerAppRoot /srv/lingo-srv  # <-- Add this line
+    </Directory>
+  </VirtualHost>
+
+Restart Apache and test the result (output formatted for clarity):
+
+  > curl http://localhost/lingo-srv/about
+  {
+    "Lingo::Srv" : {
+      "version" : "x.y.z"
+    }
+  }
 
 
 == EXAMPLE
