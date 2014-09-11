@@ -41,18 +41,18 @@
     <form action="<%= url_for '/' %>" method="post">
       <div>
         <fieldset><legend><strong><%= t 'Input', 'Eingabe', 'ввод данных' %></strong></legend>
-          <textarea name="q" rows="20" cols="50"><%= @q %></textarea>
+          <textarea name="q" rows="20" cols="50"><%=h @q %></textarea>
         </fieldset>
 
         <fieldset><legend><strong><%= t 'Output', 'Ausgabe', 'вывод данных' %></strong></legend>
-          <textarea readonly="readonly" rows="20" cols="50"><%= @r %></textarea>
+          <textarea readonly="readonly" rows="20" cols="50"><%=h @r %></textarea>
         </fieldset>
 
         <br />
 
         <strong><%= t 'Language', 'Sprache', 'язык' %></strong> = <select name="l">
         <% for l in L %>
-          <option value="<%= l %>"<%= ' selected="selected"' if l == @l %>><%= l %></option>
+          <option value="<%=h l %>"<%= ' selected="selected"' if l == @l %>><%=h l %></option>
         <% end %>
         </select>
 
@@ -144,7 +144,7 @@
   <div id="footer">
     <em>powered by</em> <a href="http://lex-lingo.de">Lingo</a>
     <em>and</em> <a href="http://www.sinatrarb.com">Sinatra</a>
-    — <strong>v<%= Lingo::VERSION %></strong>
+    — <strong>v<%=h Lingo::VERSION %></strong>
   </div>
 </body>
 </html>

@@ -50,8 +50,8 @@ class Lingo
 
     LINGO = Hash.new { |h, k| h[k] = Lingo.call(cfg, ['-l', k]) }
 
-    CFG, s = '', StringScanner.new('')
-    c = lambda { |n| %Q{<span style="color:#{n}">#{s.matched}</span>} }
+    CFG, s, h = '', StringScanner.new(''), ERB::Util.method(:h)
+    c = lambda { |n| %Q{<span style="color:#{n}">#{h[s.matched]}</span>} }
 
     File.foreach(cfg) { |line|
       s.string = line.chomp
