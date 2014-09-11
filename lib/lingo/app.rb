@@ -38,6 +38,8 @@ class Lingo
       def init_app(file, *args, &block)
         set_root(file)
         parse_options(*args, &block)
+
+        get('/about') { to_json(self.class, version: VERSION) }
       end
 
       def parse_options(lingo_options = false)
