@@ -93,8 +93,10 @@
   HTTP endpoint with JSON output; the latter serves a demo web interface.
 * Refactored internal caching.
 * Made dependency on Ruby version >= 1.9.2 explicit.
-* Removed reporting facility (options '--perfmon' and '--status').
-* Learned '--profile' option to collect profiling information while running.
+* Removed reporting facility (options <tt>--perfmon</tt> and
+  <tt>--status</tt>).
+* Learned <tt>--profile</tt> option to collect profiling information while
+  running.
 * Deprecated Lingo::Language::Grammar option +compositum+ (now +compound+),
   Lingo::Config option +textreader+ (now +text_reader+), and
   Lingo::Attendee::TextReader option +lir-record-pattern+ (now +records+);
@@ -196,7 +198,7 @@
 * Don't use compound parts.
 * Introduced some (more or less arbitrary) line length limit. We can only
   store values of a certain length anyway (with SDBM). Entries exceeding this
-  limit will be rejected and logged in the .rev file.
+  limit will be rejected and logged in the <tt>.rev</tt> file.
 
 == 1.6.10 [2009-11-09]
 
@@ -216,8 +218,8 @@
 * BUGFIX: Token wurden durch den Caching-Mechanismus in ihrer Schreibweise
   verändert (Groß-/Kleinschreibung).
 * Englische Wörterbücher, ein Beispiel-Artikel und eine Konfiguration für das
-  Englische wurden aufgenommen. Aufruf mit lingo.rb -c lingo-en.cfg -l en
-  <datei>.
+  Englische wurden aufgenommen. Aufruf mit <tt>lingo.rb -c lingo-en.cfg -l en
+  <datei></tt>.
 * Integration der Testumgebung für Entwickler.
 * Die Attendees in den Lingo-Konfigurationsdateien werden automatisch
   verkettet. Dies erspart mühsame Verlinkung von Hand und macht die
@@ -226,7 +228,7 @@
   correctly. Printable characters from the ASCII charset and every UTF
   character greater than x80 is now recognized as a non word breaking
   character. so now diacritical characters are handled well.
-* Added a command line option '-p' for lingo.rb for making detailed
+* Added a command line option <tt>-p</tt> for lingo.rb for making detailed
   performance mesurements possible for each single attendee.
 * Allow Lingo.new to be called from a different directory. (Still need to
   Dir.chdir to #talk because of the dictionaries...).
@@ -246,7 +248,7 @@
 * <b>Englische Wörterbücher ergänzt</b>
 
   Lingo kann nun auch Englisch. Dazu muss beim Aufruf von Lingo die Option
-  "-l en" angegeben werden. Ein englischer Artikel ist unter
+  <tt>-l en</tt> angegeben werden. Ein englischer Artikel ist unter
   txt/artikel-en.txt zu finden.
 
 == 1.6.5 [2006-09-18]
