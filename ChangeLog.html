@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>ChangeLog - lingo Application documentation (v1.8.4)</title>
+<title>ChangeLog - lingo Application documentation (v1.8.5)</title>
 
 <link href="./fonts.css" rel="stylesheet">
 <link href="./rdoc.css" rel="stylesheet">
@@ -59,7 +59,7 @@
 
   <ul class="link-list" role="directory">
     <li><a href="#label-Revision+history+for+Lingo">Revision history for Lingo</a>
-    <li><a href="#label-1.8.5+%5Bunreleased%5D">1.8.5 [unreleased]</a>
+    <li><a href="#label-1.8.5+%5B2014-10-02%5D">1.8.5 [2014-10-02]</a>
     <li><a href="#label-1.8.4+%5B2013-10-18%5D">1.8.4 [2013-10-18]</a>
     <li><a href="#label-1.8.3+%5B2012-09-20%5D">1.8.3 [2012-09-20]</a>
     <li><a href="#label-1.8.2+%5B2012-04-19%5D">1.8.2 [2012-04-19]</a>
@@ -134,7 +134,7 @@
 
 <h1 id="label-Revision+history+for+Lingo">Revision history for Lingo<span><a href="#label-Revision+history+for+Lingo">&para;</a> <a href="#documentation">&uarr;</a></span></h1>
 
-<h2 id="label-1.8.5+%5Bunreleased%5D">1.8.5 [unreleased]<span><a href="#label-1.8.5+%5Bunreleased%5D">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+<h2 id="label-1.8.5+%5B2014-10-02%5D">1.8.5 [2014-10-02]<span><a href="#label-1.8.5+%5B2014-10-02%5D">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 <ul><li>
 <p>Dictionary values (projections) are no longer sorted; hence, order of   
 definition affects processing.</p>
@@ -164,6 +164,12 @@ learned <code>dict</code> option to print words in    dictionary format
 (viz. <a
 href="Lingo/Database/Source/WordClass.html">Lingo::Database::Source::WordClass</a>).</p>
 </li><li>
+<p><a
+href="Lingo/Attendee/VectorFilter.html">Lingo::Attendee::VectorFilter</a>
+learned <code>preamble</code> option to print current    configuration to
+the beginning of the log file (<code>debug: &#39;true&#39;</code>);   set
+<code>preamble: false</code> to disable.</p>
+</li><li>
 <p>Multiword dictionaries compiled from base forms can now generate inflected 
 adjectives based on the gender of the head noun; set <code>inflect:
 true</code>   in the dictionary config.</p>
@@ -185,6 +191,9 @@ leading and trailing whitespace from    dictionary lines.</p>
 OpenSSL to encrypt/decrypt dictionaries.    Note: Can&#39;t decrypt
 dictionaries encrypted with the old scheme anymore.</p>
 </li><li>
+<p><a href="Lingo/Attendee/Tokenizer.html">Lingo::Attendee::Tokenizer</a>
+learned subset of MediaWiki syntax.</p>
+</li><li>
 <p>Eliminated pathological behaviour of the <code>URLS</code> rule in    <a
 href="Lingo/Attendee/Tokenizer.html">Lingo::Attendee::Tokenizer</a>.</p>
 </li><li>
@@ -193,6 +202,11 @@ no    longer work in <a
 href="Lingo/Attendee/MultiWorder.html">Lingo::Attendee::MultiWorder</a>.</p>
 </li><li>
 <p>Updated and extended Russian dictionaries. (Yulia Dorokhova, Thomas Müller)</p>
+</li><li>
+<p><code>lingoctl</code> no longer overwrites existing files without
+confirmation.</p>
+</li><li>
+<p><code>lingoctl</code> learned <code>archive</code> command.</p>
 </li><li>
 <p>Dictionary cleanup.</p>
 </li></ul>
@@ -293,11 +307,11 @@ serves a demo web interface.</p>
 </li><li>
 <p>Made dependency on Ruby version &gt;= 1.9.2 explicit.</p>
 </li><li>
-<p>Removed reporting facility (options &#39;–perfmon&#39; and
-&#39;–status&#39;).</p>
+<p>Removed reporting facility (options <code>--perfmon</code> and   
+<code>--status</code>).</p>
 </li><li>
-<p>Learned &#39;–profile&#39; option to collect profiling information while
-running.</p>
+<p>Learned <code>--profile</code> option to collect profiling information
+while    running.</p>
 </li><li>
 <p>Deprecated <a
 href="Lingo/Language/Grammar.html">Lingo::Language::Grammar</a> option
@@ -386,8 +400,8 @@ can read from <code>STDIN</code> if no files given;    leave out the
 </li><li>
 <p>Status/performance details as well as progress information are now   
 printed on <code>STDERR</code> instead of <code>STDOUT</code> in order to
-not mix with regular   output. Learned &#39;–log&#39; option to write such
-information to a file.</p>
+not mix with regular   output. Learned <code>--log</code> option to write
+such information to a file.</p>
 </li><li>
 <p>Additional internal refactorings. (To be continued…)</p>
 </li></ul>
@@ -475,7 +489,7 @@ must use target (not source) form.</p>
 </li><li>
 <p>Introduced some (more or less arbitrary) line length limit. We can only   
 store values of a certain length anyway (with SDBM). Entries exceeding this
-limit will be rejected and logged in the .rev file.</p>
+limit will be rejected and logged in the <code>.rev</code> file.</p>
 </li></ul>
 
 <h2 id="label-1.6.10+%5B2009-11-09%5D">1.6.10 [2009-11-09]<span><a href="#label-1.6.10+%5B2009-11-09%5D">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
@@ -502,8 +516,8 @@ series.</p>
 verändert (Groß-/Kleinschreibung).</p>
 </li><li>
 <p>Englische Wörterbücher, ein Beispiel-Artikel und eine Konfiguration für das
-Englische wurden aufgenommen. Aufruf mit lingo.rb -c lingo-en.cfg -l en  
-&lt;datei&gt;.</p>
+Englische wurden aufgenommen. Aufruf mit <code>lingo.rb -c lingo-en.cfg -l
+en   &lt;datei&gt;</code>.</p>
 </li><li>
 <p>Integration der Testumgebung für Entwickler.</p>
 </li><li>
@@ -516,8 +530,8 @@ correctly. Printable characters from the ASCII charset and every UTF
 character greater than x80 is now recognized as a non word breaking  
 character. so now diacritical characters are handled well.</p>
 </li><li>
-<p>Added a command line option &#39;-p&#39; for lingo.rb for making detailed  
-performance mesurements possible for each single attendee.</p>
+<p>Added a command line option <code>-p</code> for lingo.rb for making
+detailed    performance mesurements possible for each single attendee.</p>
 </li><li>
 <p>Allow <a href="Lingo.html#method-c-new">Lingo.new</a> to be called from a
 different directory. (Still need to    Dir.chdir to talk because of the
@@ -548,7 +562,7 @@ and get an array back.</p>
 <p><strong>Englische Wörterbücher ergänzt</strong></p>
 
 <p>Lingo kann nun auch Englisch. Dazu muss beim Aufruf von Lingo die Option
-“-l en” angegeben werden. Ein englischer Artikel ist unter
+<code>-l en</code> angegeben werden. Ein englischer Artikel ist unter
 txt/artikel-en.txt zu finden.</p>
 </li></ul>
 
@@ -1276,7 +1290,7 @@ dem Punkt verdient :o(</p>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.1.
+  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.2.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

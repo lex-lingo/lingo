@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>Table of Contents - lingo Application documentation (v1.8.4)</title>
+<title>Table of Contents - lingo Application documentation (v1.8.5)</title>
 
 <link href="./fonts.css" rel="stylesheet">
 <link href="./rdoc.css" rel="stylesheet">
@@ -23,7 +23,7 @@
 
 <body id="top" class="table-of-contents">
 <main role="main">
-<h1 class="class">Table of Contents - lingo Application documentation (v1.8.4)</h1>
+<h1 class="class">Table of Contents - lingo Application documentation (v1.8.5)</h1>
 
 <h2 id="pages">Pages</h2>
 <ul>
@@ -39,7 +39,7 @@
 
     <ul>
       <li><a href="ChangeLog.html#label-Revision+history+for+Lingo">Revision history for Lingo</a>
-      <li><a href="ChangeLog.html#label-1.8.5+%5Bunreleased%5D">1.8.5 [unreleased]</a>
+      <li><a href="ChangeLog.html#label-1.8.5+%5B2014-10-02%5D">1.8.5 [2014-10-02]</a>
       <li><a href="ChangeLog.html#label-1.8.4+%5B2013-10-18%5D">1.8.4 [2013-10-18]</a>
       <li><a href="ChangeLog.html#label-1.8.3+%5B2012-09-20%5D">1.8.3 [2012-09-20]</a>
       <li><a href="ChangeLog.html#label-1.8.2+%5B2012-04-19%5D">1.8.2 [2012-04-19]</a>
@@ -103,6 +103,10 @@
       <li><a href="README.html#label-Markup">Markup</a>
       <li><a href="README.html#label-Inline+annotation">Inline annotation</a>
       <li><a href="README.html#label-Plugins">Plugins</a>
+      <li><a href="README.html#label-Server">Server</a>
+      <li><a href="README.html#label-JSON+endpoint">JSON endpoint</a>
+      <li><a href="README.html#label-Raw+endpoint">Raw endpoint</a>
+      <li><a href="README.html#label-Deployment">Deployment</a>
       <li><a href="README.html#label-EXAMPLE">EXAMPLE</a>
       <li><a href="README.html#label-INSTALLATION+AND+USAGE">INSTALLATION AND USAGE</a>
       <li><a href="README.html#label-Dictionary+and+configuration+file+lookup">Dictionary and configuration file lookup</a>
@@ -419,6 +423,9 @@
   <li class="class">
     <a href="Lingo/Srv.html">Lingo::Srv</a>
   </li>
+  <li class="class">
+    <a href="Lingo/TokenizeError.html">Lingo::TokenizeError</a>
+  </li>
   <li class="module">
     <a href="Lingo/Version.html">Lingo::Version</a>
   </li>
@@ -429,6 +436,11 @@
 
 <h2 id="methods">Methods</h2>
 <ul>
+
+  <li class="method">
+    <a href="Lingo/Language/Token.html#method-c-clean">::clean</a>
+    &mdash;
+    <span class="container">Lingo::Language::Token</span>
 
   <li class="method">
     <a href="Lingo/Ctl.html#method-c-cmd">::cmd</a>
@@ -446,29 +458,19 @@
     <span class="container">Lingo::Database::Source</span>
 
   <li class="method">
-    <a href="Lingo/Language/Word.html#method-c-new">::new</a>
+    <a href="Lingo/Database/Source/KeyValue.html#method-c-new">::new</a>
     &mdash;
-    <span class="container">Lingo::Language::Word</span>
+    <span class="container">Lingo::Database::Source::KeyValue</span>
 
   <li class="method">
-    <a href="Lingo/Database/Source/SingleWord.html#method-c-new">::new</a>
+    <a href="Lingo/FileNotFoundError.html#method-c-new">::new</a>
     &mdash;
-    <span class="container">Lingo::Database::Source::SingleWord</span>
+    <span class="container">Lingo::FileNotFoundError</span>
 
   <li class="method">
-    <a href="Lingo/BufferedAttendee.html#method-c-new">::new</a>
+    <a href="Lingo/ConfigLoadError.html#method-c-new">::new</a>
     &mdash;
-    <span class="container">Lingo::BufferedAttendee</span>
-
-  <li class="method">
-    <a href="Lingo/Config.html#method-c-new">::new</a>
-    &mdash;
-    <span class="container">Lingo::Config</span>
-
-  <li class="method">
-    <a href="Lingo/DatabaseError.html#method-c-new">::new</a>
-    &mdash;
-    <span class="container">Lingo::DatabaseError</span>
+    <span class="container">Lingo::ConfigLoadError</span>
 
   <li class="method">
     <a href="Lingo/Database/Source/MultiValue.html#method-c-new">::new</a>
@@ -481,64 +483,9 @@
     <span class="container">Lingo::Language::WordForm</span>
 
   <li class="method">
-    <a href="Lingo/Database/Source/MultiKey.html#method-c-new">::new</a>
-    &mdash;
-    <span class="container">Lingo::Database::Source::MultiKey</span>
-
-  <li class="method">
-    <a href="Lingo/Database/Source/KeyValue.html#method-c-new">::new</a>
-    &mdash;
-    <span class="container">Lingo::Database::Source::KeyValue</span>
-
-  <li class="method">
-    <a href="Lingo/ConfigError.html#method-c-new">::new</a>
-    &mdash;
-    <span class="container">Lingo::ConfigError</span>
-
-  <li class="method">
-    <a href="Lingo/ConfigLoadError.html#method-c-new">::new</a>
-    &mdash;
-    <span class="container">Lingo::ConfigLoadError</span>
-
-  <li class="method">
-    <a href="Lingo/Database/Source.html#method-c-new">::new</a>
-    &mdash;
-    <span class="container">Lingo::Database::Source</span>
-
-  <li class="method">
     <a href="Lingo/Database.html#method-c-new">::new</a>
     &mdash;
     <span class="container">Lingo::Database</span>
-
-  <li class="method">
-    <a href="Lingo/Progress.html#method-c-new">::new</a>
-    &mdash;
-    <span class="container">Lingo::Progress</span>
-
-  <li class="method">
-    <a href="Lingo/Call.html#method-c-new">::new</a>
-    &mdash;
-    <span class="container">Lingo::Call</span>
-
-  <li class="method">
-    <a href="Lingo.html#method-c-new">::new</a>
-    &mdash;
-    <span class="container">Lingo</span>
-
-  <li class="method">
-    <a href="Lingo/Database/Progress.html#method-c-new">::new</a>
-    &mdash;
-    <span class="container">Lingo::Database::Progress</span>
-
-  <li class="method">
-    <a href="Lingo/Database/Source/WordClass.html#method-c-new">::new</a>
-    &mdash;
-    <span class="container">Lingo::Database::Source::WordClass</span>
-
-  <li class="method">
-    <a href="Lingo/FileNotFoundError.html#method-c-new">::new</a>
-    &mdash;
-    <span class="container">Lingo::FileNotFoundError</span>
 
   <li class="method">
     <a href="Lingo/SourceFileNotFoundError.html#method-c-new">::new</a>
@@ -551,44 +498,14 @@
     <span class="container">Lingo::NameNotFoundError</span>
 
   <li class="method">
-    <a href="Lingo/Language/LexicalHash.html#method-c-new">::new</a>
-    &mdash;
-    <span class="container">Lingo::Language::LexicalHash</span>
-
-  <li class="method">
     <a href="Lingo/LibraryLoadError.html#method-c-new">::new</a>
     &mdash;
     <span class="container">Lingo::LibraryLoadError</span>
 
   <li class="method">
-    <a href="Lingo/BackendNotAvailableError.html#method-c-new">::new</a>
+    <a href="Lingo/TokenizeError.html#method-c-new">::new</a>
     &mdash;
-    <span class="container">Lingo::BackendNotAvailableError</span>
-
-  <li class="method">
-    <a href="Lingo/Language/Dictionary.html#method-c-new">::new</a>
-    &mdash;
-    <span class="container">Lingo::Language::Dictionary</span>
-
-  <li class="method">
-    <a href="Lingo/AgendaItem.html#method-c-new">::new</a>
-    &mdash;
-    <span class="container">Lingo::AgendaItem</span>
-
-  <li class="method">
-    <a href="Lingo/Language/Grammar.html#method-c-new">::new</a>
-    &mdash;
-    <span class="container">Lingo::Language::Grammar</span>
-
-  <li class="method">
-    <a href="Lingo/Attendee.html#method-c-new">::new</a>
-    &mdash;
-    <span class="container">Lingo::Attendee</span>
-
-  <li class="method">
-    <a href="Lingo/BackendNotFoundError.html#method-c-new">::new</a>
-    &mdash;
-    <span class="container">Lingo::BackendNotFoundError</span>
+    <span class="container">Lingo::TokenizeError</span>
 
   <li class="method">
     <a href="Lingo/NoWritableStoreError.html#method-c-new">::new</a>
@@ -596,7 +513,107 @@
     <span class="container">Lingo::NoWritableStoreError</span>
 
   <li class="method">
-    <a href="Lingo/Language/Dictionary.html#method-c-open">::open</a>
+    <a href="Lingo/Call.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Lingo::Call</span>
+
+  <li class="method">
+    <a href="Lingo/Database/Source/MultiKey.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Lingo::Database::Source::MultiKey</span>
+
+  <li class="method">
+    <a href="Lingo/BackendNotFoundError.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Lingo::BackendNotFoundError</span>
+
+  <li class="method">
+    <a href="Lingo.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Lingo</span>
+
+  <li class="method">
+    <a href="Lingo/Database/Source/SingleWord.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Lingo::Database::Source::SingleWord</span>
+
+  <li class="method">
+    <a href="Lingo/Config.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Lingo::Config</span>
+
+  <li class="method">
+    <a href="Lingo/Database/Progress.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Lingo::Database::Progress</span>
+
+  <li class="method">
+    <a href="Lingo/BufferedAttendee.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Lingo::BufferedAttendee</span>
+
+  <li class="method">
+    <a href="Lingo/Language/Word.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Lingo::Language::Word</span>
+
+  <li class="method">
+    <a href="Lingo/Database/Source.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Lingo::Database::Source</span>
+
+  <li class="method">
+    <a href="Lingo/Language/Token.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Lingo::Language::Token</span>
+
+  <li class="method">
+    <a href="Lingo/Progress.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Lingo::Progress</span>
+
+  <li class="method">
+    <a href="Lingo/BackendNotAvailableError.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Lingo::BackendNotAvailableError</span>
+
+  <li class="method">
+    <a href="Lingo/AgendaItem.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Lingo::AgendaItem</span>
+
+  <li class="method">
+    <a href="Lingo/DatabaseError.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Lingo::DatabaseError</span>
+
+  <li class="method">
+    <a href="Lingo/Language/Grammar.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Lingo::Language::Grammar</span>
+
+  <li class="method">
+    <a href="Lingo/ConfigError.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Lingo::ConfigError</span>
+
+  <li class="method">
+    <a href="Lingo/Database/Source/WordClass.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Lingo::Database::Source::WordClass</span>
+
+  <li class="method">
+    <a href="Lingo/Language/LexicalHash.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Lingo::Language::LexicalHash</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Lingo::Attendee</span>
+
+  <li class="method">
+    <a href="Lingo/Language/Dictionary.html#method-c-new">::new</a>
     &mdash;
     <span class="container">Lingo::Language::Dictionary</span>
 
@@ -611,6 +628,11 @@
     <span class="container">Lingo::Language::Grammar</span>
 
   <li class="method">
+    <a href="Lingo/Language/Dictionary.html#method-c-open">::open</a>
+    &mdash;
+    <span class="container">Lingo::Language::Dictionary</span>
+
+  <li class="method">
     <a href="Lingo/Language/Word.html#method-i-3C-3C">#&lt;&lt;</a>
     &mdash;
     <span class="container">Lingo::Language::Word</span>
@@ -619,11 +641,6 @@
     <a href="Lingo/Progress.html#method-i-3C-3C">#&lt;&lt;</a>
     &mdash;
     <span class="container">Lingo::Progress</span>
-
-  <li class="method">
-    <a href="Lingo/AgendaItem.html#method-i-3C-3D-3E">#&lt;=&gt;</a>
-    &mdash;
-    <span class="container">Lingo::AgendaItem</span>
 
   <li class="method">
     <a href="Lingo/Language/Lexical.html#method-i-3C-3D-3E">#&lt;=&gt;</a>
@@ -636,6 +653,11 @@
     <span class="container">Lingo::Language::Word</span>
 
   <li class="method">
+    <a href="Lingo/AgendaItem.html#method-i-3C-3D-3E">#&lt;=&gt;</a>
+    &mdash;
+    <span class="container">Lingo::AgendaItem</span>
+
+  <li class="method">
     <a href="Lingo/Language/WordForm.html#method-i-3C-3D-3E">#&lt;=&gt;</a>
     &mdash;
     <span class="container">Lingo::Language::WordForm</span>
@@ -646,9 +668,9 @@
     <span class="container">Lingo::Language::WordForm</span>
 
   <li class="method">
-    <a href="Lingo/Database.html#method-i-5B-5D">#[]</a>
+    <a href="Lingo/Language/LexicalHash.html#method-i-5B-5D">#[]</a>
     &mdash;
-    <span class="container">Lingo::Database</span>
+    <span class="container">Lingo::Language::LexicalHash</span>
 
   <li class="method">
     <a href="Lingo/Config.html#method-i-5B-5D">#[]</a>
@@ -656,9 +678,9 @@
     <span class="container">Lingo::Config</span>
 
   <li class="method">
-    <a href="Lingo/Language/LexicalHash.html#method-i-5B-5D">#[]</a>
+    <a href="Lingo/Database.html#method-i-5B-5D">#[]</a>
     &mdash;
-    <span class="container">Lingo::Language::LexicalHash</span>
+    <span class="container">Lingo::Database</span>
 
   <li class="method">
     <a href="Lingo/Database.html#method-i-5B-5D-3D">#[]=</a>
@@ -731,19 +753,14 @@
     <span class="container">Lingo::Attendee::Tokenizer</span>
 
   <li class="method">
-    <a href="Lingo/Database/HashStore.html#method-i-_open">#_open</a>
-    &mdash;
-    <span class="container">Lingo::Database::HashStore</span>
-
-  <li class="method">
     <a href="Lingo/Database/LibCDBStore.html#method-i-_open">#_open</a>
     &mdash;
     <span class="container">Lingo::Database::LibCDBStore</span>
 
   <li class="method">
-    <a href="Lingo/Database/SDBMStore.html#method-i-_open">#_open</a>
+    <a href="Lingo/Database/HashStore.html#method-i-_open">#_open</a>
     &mdash;
-    <span class="container">Lingo::Database::SDBMStore</span>
+    <span class="container">Lingo::Database::HashStore</span>
 
   <li class="method">
     <a href="Lingo/Database/GDBMStore.html#method-i-_open">#_open</a>
@@ -754,6 +771,11 @@
     <a href="Lingo/Database.html#method-i-_open">#_open</a>
     &mdash;
     <span class="container">Lingo::Database</span>
+
+  <li class="method">
+    <a href="Lingo/Database/SDBMStore.html#method-i-_open">#_open</a>
+    &mdash;
+    <span class="container">Lingo::Database::SDBMStore</span>
 
   <li class="method">
     <a href="Lingo/Database.html#method-i-_set">#_set</a>
@@ -786,6 +808,11 @@
     <span class="container">Lingo::Attendee</span>
 
   <li class="method">
+    <a href="Lingo/Ctl.html#method-i-agree-3F">#agree?</a>
+    &mdash;
+    <span class="container">Lingo::Ctl</span>
+
+  <li class="method">
     <a href="Lingo/Attendee/Tokenizer.html#method-i-append">#append</a>
     &mdash;
     <span class="container">Lingo::Attendee::Tokenizer</span>
@@ -796,14 +823,14 @@
     <span class="container">Lingo</span>
 
   <li class="method">
-    <a href="Lingo/Language/Word.html#method-i-attr-3F">#attr?</a>
-    &mdash;
-    <span class="container">Lingo::Language::Word</span>
-
-  <li class="method">
     <a href="Lingo/Language/Lexical.html#method-i-attr-3F">#attr?</a>
     &mdash;
     <span class="container">Lingo::Language::Lexical</span>
+
+  <li class="method">
+    <a href="Lingo/Language/Word.html#method-i-attr-3F">#attr?</a>
+    &mdash;
+    <span class="container">Lingo::Language::Word</span>
 
   <li class="method">
     <a href="Lingo/Language/Word.html#method-i-attrs">#attrs</a>
@@ -826,14 +853,14 @@
     <span class="container">Lingo</span>
 
   <li class="method">
-    <a href="Lingo/Call.html#method-i-call">#call</a>
-    &mdash;
-    <span class="container">Lingo::Call</span>
-
-  <li class="method">
     <a href="Lingo.html#method-i-call">#call</a>
     &mdash;
     <span class="container">Lingo</span>
+
+  <li class="method">
+    <a href="Lingo/Call.html#method-i-call">#call</a>
+    &mdash;
+    <span class="container">Lingo::Call</span>
 
   <li class="method">
     <a href="Lingo/Attendee/TextReader.html#method-i-cancel">#cancel</a>
@@ -856,9 +883,9 @@
     <span class="container">Lingo::LingoError</span>
 
   <li class="method">
-    <a href="Lingo/Language/Grammar.html#method-i-close">#close</a>
+    <a href="Lingo/Database.html#method-i-close">#close</a>
     &mdash;
-    <span class="container">Lingo::Language::Grammar</span>
+    <span class="container">Lingo::Database</span>
 
   <li class="method">
     <a href="Lingo/Language/Dictionary.html#method-i-close">#close</a>
@@ -866,9 +893,9 @@
     <span class="container">Lingo::Language::Dictionary</span>
 
   <li class="method">
-    <a href="Lingo/Language/LexicalHash.html#method-i-close">#close</a>
+    <a href="Lingo/Language/Grammar.html#method-i-close">#close</a>
     &mdash;
-    <span class="container">Lingo::Language::LexicalHash</span>
+    <span class="container">Lingo::Language::Grammar</span>
 
   <li class="method">
     <a href="Lingo/Database/HashStore.html#method-i-close">#close</a>
@@ -876,9 +903,9 @@
     <span class="container">Lingo::Database::HashStore</span>
 
   <li class="method">
-    <a href="Lingo/Database.html#method-i-close">#close</a>
+    <a href="Lingo/Language/LexicalHash.html#method-i-close">#close</a>
     &mdash;
-    <span class="container">Lingo::Database</span>
+    <span class="container">Lingo::Language::LexicalHash</span>
 
   <li class="method">
     <a href="Lingo/Database.html#method-i-closed-3F">#closed?</a>
@@ -901,9 +928,29 @@
     <span class="container">Lingo::Database</span>
 
   <li class="method">
+    <a href="Lingo/Attendee/TextWriter.html#method-i-control">#control</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::TextWriter</span>
+
+  <li class="method">
     <a href="Lingo/Attendee/VectorFilter.html#method-i-control">#control</a>
     &mdash;
     <span class="container">Lingo::Attendee::VectorFilter</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee/Debugger.html#method-i-control">#control</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::Debugger</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee/Variator.html#method-i-control">#control</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::Variator</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee/Decomposer.html#method-i-control">#control</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::Decomposer</span>
 
   <li class="method">
     <a href="Lingo/Attendee/TextReader.html#method-i-control">#control</a>
@@ -916,6 +963,16 @@
     <span class="container">Lingo::Attendee::WordSearcher</span>
 
   <li class="method">
+    <a href="Lingo/Attendee/Tokenizer.html#method-i-control">#control</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::Tokenizer</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee/NonewordFilter.html#method-i-control">#control</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::NonewordFilter</span>
+
+  <li class="method">
     <a href="Lingo/Attendee/Synonymer.html#method-i-control">#control</a>
     &mdash;
     <span class="container">Lingo::Attendee::Synonymer</span>
@@ -926,49 +983,19 @@
     <span class="container">Lingo::Attendee::MultiWorder</span>
 
   <li class="method">
+    <a href="Lingo/Attendee/Dehyphenizer.html#method-i-control">#control</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::Dehyphenizer</span>
+
+  <li class="method">
     <a href="Lingo/Attendee/Abbreviator.html#method-i-control">#control</a>
     &mdash;
     <span class="container">Lingo::Attendee::Abbreviator</span>
 
   <li class="method">
-    <a href="Lingo/Attendee/Tokenizer.html#method-i-control">#control</a>
-    &mdash;
-    <span class="container">Lingo::Attendee::Tokenizer</span>
-
-  <li class="method">
-    <a href="Lingo/Attendee/TextWriter.html#method-i-control">#control</a>
-    &mdash;
-    <span class="container">Lingo::Attendee::TextWriter</span>
-
-  <li class="method">
-    <a href="Lingo/Attendee/Debugger.html#method-i-control">#control</a>
-    &mdash;
-    <span class="container">Lingo::Attendee::Debugger</span>
-
-  <li class="method">
-    <a href="Lingo/Attendee/Decomposer.html#method-i-control">#control</a>
-    &mdash;
-    <span class="container">Lingo::Attendee::Decomposer</span>
-
-  <li class="method">
     <a href="Lingo/Attendee/Sequencer.html#method-i-control">#control</a>
     &mdash;
     <span class="container">Lingo::Attendee::Sequencer</span>
-
-  <li class="method">
-    <a href="Lingo/Attendee/Variator.html#method-i-control">#control</a>
-    &mdash;
-    <span class="container">Lingo::Attendee::Variator</span>
-
-  <li class="method">
-    <a href="Lingo/Attendee/NonewordFilter.html#method-i-control">#control</a>
-    &mdash;
-    <span class="container">Lingo::Attendee::NonewordFilter</span>
-
-  <li class="method">
-    <a href="Lingo/Attendee/Dehyphenizer.html#method-i-control">#control</a>
-    &mdash;
-    <span class="container">Lingo::Attendee::Dehyphenizer</span>
 
   <li class="method">
     <a href="Lingo/BufferedAttendee.html#method-i-control_multi">#control_multi</a>
@@ -981,6 +1008,16 @@
     <span class="container">Lingo::Database</span>
 
   <li class="method">
+    <a href="Lingo/Database/Source/SingleWord.html#method-i-convert_line">#convert_line</a>
+    &mdash;
+    <span class="container">Lingo::Database::Source::SingleWord</span>
+
+  <li class="method">
+    <a href="Lingo/Database/Source/KeyValue.html#method-i-convert_line">#convert_line</a>
+    &mdash;
+    <span class="container">Lingo::Database::Source::KeyValue</span>
+
+  <li class="method">
     <a href="Lingo/Database/Source/MultiKey.html#method-i-convert_line">#convert_line</a>
     &mdash;
     <span class="container">Lingo::Database::Source::MultiKey</span>
@@ -991,19 +1028,9 @@
     <span class="container">Lingo::Database::Source::WordClass</span>
 
   <li class="method">
-    <a href="Lingo/Database/Source/SingleWord.html#method-i-convert_line">#convert_line</a>
-    &mdash;
-    <span class="container">Lingo::Database::Source::SingleWord</span>
-
-  <li class="method">
     <a href="Lingo/Database/Source/MultiValue.html#method-i-convert_line">#convert_line</a>
     &mdash;
     <span class="container">Lingo::Database::Source::MultiValue</span>
-
-  <li class="method">
-    <a href="Lingo/Database/Source/KeyValue.html#method-i-convert_line">#convert_line</a>
-    &mdash;
-    <span class="container">Lingo::Database::Source::KeyValue</span>
 
   <li class="method">
     <a href="Lingo/Ctl.html#method-i-copy">#copy</a>
@@ -1016,14 +1043,14 @@
     <span class="container">Lingo::Ctl</span>
 
   <li class="method">
-    <a href="Lingo/Database/LibCDBStore.html#method-i-create">#create</a>
-    &mdash;
-    <span class="container">Lingo::Database::LibCDBStore</span>
-
-  <li class="method">
     <a href="Lingo/Database.html#method-i-create">#create</a>
     &mdash;
     <span class="container">Lingo::Database</span>
+
+  <li class="method">
+    <a href="Lingo/Database/LibCDBStore.html#method-i-create">#create</a>
+    &mdash;
+    <span class="container">Lingo::Database::LibCDBStore</span>
 
   <li class="method">
     <a href="Lingo/Attendee/MultiWorder.html#method-i-create_and_forward_multiword">#create_and_forward_multiword</a>
@@ -1076,14 +1103,14 @@
     <span class="container">Lingo::Attendee::Tokenizer</span>
 
   <li class="method">
-    <a href="Lingo.html#method-i-deprecate">#deprecate</a>
-    &mdash;
-    <span class="container">Lingo</span>
-
-  <li class="method">
     <a href="Lingo/Config.html#method-i-deprecate">#deprecate</a>
     &mdash;
     <span class="container">Lingo::Config</span>
+
+  <li class="method">
+    <a href="Lingo.html#method-i-deprecate">#deprecate</a>
+    &mdash;
+    <span class="container">Lingo</span>
 
   <li class="method">
     <a href="Lingo/Attendee.html#method-i-dictionary">#dictionary</a>
@@ -1094,6 +1121,11 @@
     <a href="Lingo.html#method-i-dictionary_config">#dictionary_config</a>
     &mdash;
     <span class="container">Lingo</span>
+
+  <li class="method">
+    <a href="Lingo/Ctl.html#method-i-do_archive">#do_archive</a>
+    &mdash;
+    <span class="container">Lingo::Ctl</span>
 
   <li class="method">
     <a href="Lingo/Ctl.html#method-i-do_clearstore">#do_clearstore</a>
@@ -1131,14 +1163,14 @@
     <span class="container">Lingo::Ctl</span>
 
   <li class="method">
-    <a href="Lingo/Srv.html#method-i-doit">#doit</a>
-    &mdash;
-    <span class="container">Lingo::Srv</span>
-
-  <li class="method">
     <a href="Lingo/Web.html#method-i-doit">#doit</a>
     &mdash;
     <span class="container">Lingo::Web</span>
+
+  <li class="method">
+    <a href="Lingo/Srv.html#method-i-doit">#doit</a>
+    &mdash;
+    <span class="container">Lingo::Srv</span>
 
   <li class="method">
     <a href="Lingo/Database/Source.html#method-i-each">#each</a>
@@ -1201,14 +1233,14 @@
     <span class="container">Lingo::Attendee::TextReader</span>
 
   <li class="method">
-    <a href="Lingo/Ctl.html#method-i-find">#find</a>
-    &mdash;
-    <span class="container">Lingo::Ctl</span>
-
-  <li class="method">
     <a href="Lingo.html#method-i-find">#find</a>
     &mdash;
     <span class="container">Lingo</span>
+
+  <li class="method">
+    <a href="Lingo/Ctl.html#method-i-find">#find</a>
+    &mdash;
+    <span class="container">Lingo::Ctl</span>
 
   <li class="method">
     <a href="Lingo/Language/Grammar.html#method-i-find_compound">#find_compound</a>
@@ -1236,14 +1268,14 @@
     <span class="container">Lingo::Language::Dictionary</span>
 
   <li class="method">
-    <a href="Lingo/Attendee.html#method-i-find_word">#find_word</a>
-    &mdash;
-    <span class="container">Lingo::Attendee</span>
-
-  <li class="method">
     <a href="Lingo/Language/Dictionary.html#method-i-find_word">#find_word</a>
     &mdash;
     <span class="container">Lingo::Language::Dictionary</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee.html#method-i-find_word">#find_word</a>
+    &mdash;
+    <span class="container">Lingo::Attendee</span>
 
   <li class="method">
     <a href="Lingo/Attendee.html#method-i-flush">#flush</a>
@@ -1266,9 +1298,19 @@
     <span class="container">Lingo::Attendee</span>
 
   <li class="method">
+    <a href="Lingo/Attendee/Tokenizer.html#method-i-forward_nest">#forward_nest</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::Tokenizer</span>
+
+  <li class="method">
     <a href="Lingo/BufferedAttendee.html#method-i-forward_number_of_token">#forward_number_of_token</a>
     &mdash;
     <span class="container">Lingo::BufferedAttendee</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee/Tokenizer.html#method-i-forward_token">#forward_token</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::Tokenizer</span>
 
   <li class="method">
     <a href="Lingo/Language/Word.html#method-i-full_compound-3F">#full_compound?</a>
@@ -1351,9 +1393,54 @@
     <span class="container">Lingo</span>
 
   <li class="method">
+    <a href="Lingo/Attendee/MultiWorder.html#method-i-init">#init</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::MultiWorder</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee/Dehyphenizer.html#method-i-init">#init</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::Dehyphenizer</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee/WordSearcher.html#method-i-init">#init</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::WordSearcher</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee/TextReader.html#method-i-init">#init</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::TextReader</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee/ObjectFilter.html#method-i-init">#init</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::ObjectFilter</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee/Formatter.html#method-i-init">#init</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::Formatter</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee/TextWriter.html#method-i-init">#init</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::TextWriter</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee/Variator.html#method-i-init">#init</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::Variator</span>
+
+  <li class="method">
     <a href="Lingo/Progress.html#method-i-init">#init</a>
     &mdash;
     <span class="container">Lingo::Progress</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee/Sequencer.html#method-i-init">#init</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::Sequencer</span>
 
   <li class="method">
     <a href="Lingo/Attendee/Stemmer.html#method-i-init">#init</a>
@@ -1361,9 +1448,14 @@
     <span class="container">Lingo::Attendee::Stemmer</span>
 
   <li class="method">
-    <a href="Lingo/Attendee/TextWriter.html#method-i-init">#init</a>
+    <a href="Lingo/Attendee/NonewordFilter.html#method-i-init">#init</a>
     &mdash;
-    <span class="container">Lingo::Attendee::TextWriter</span>
+    <span class="container">Lingo::Attendee::NonewordFilter</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee/Tokenizer.html#method-i-init">#init</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::Tokenizer</span>
 
   <li class="method">
     <a href="Lingo/Attendee/Decomposer.html#method-i-init">#init</a>
@@ -1376,59 +1468,9 @@
     <span class="container">Lingo::Attendee::Debugger</span>
 
   <li class="method">
-    <a href="Lingo/Attendee/MultiWorder.html#method-i-init">#init</a>
-    &mdash;
-    <span class="container">Lingo::Attendee::MultiWorder</span>
-
-  <li class="method">
-    <a href="Lingo/Attendee/NonewordFilter.html#method-i-init">#init</a>
-    &mdash;
-    <span class="container">Lingo::Attendee::NonewordFilter</span>
-
-  <li class="method">
     <a href="Lingo/Attendee/Abbreviator.html#method-i-init">#init</a>
     &mdash;
     <span class="container">Lingo::Attendee::Abbreviator</span>
-
-  <li class="method">
-    <a href="Lingo/Attendee/Dehyphenizer.html#method-i-init">#init</a>
-    &mdash;
-    <span class="container">Lingo::Attendee::Dehyphenizer</span>
-
-  <li class="method">
-    <a href="Lingo/Attendee/Tokenizer.html#method-i-init">#init</a>
-    &mdash;
-    <span class="container">Lingo::Attendee::Tokenizer</span>
-
-  <li class="method">
-    <a href="Lingo/Attendee/Variator.html#method-i-init">#init</a>
-    &mdash;
-    <span class="container">Lingo::Attendee::Variator</span>
-
-  <li class="method">
-    <a href="Lingo/Attendee/ObjectFilter.html#method-i-init">#init</a>
-    &mdash;
-    <span class="container">Lingo::Attendee::ObjectFilter</span>
-
-  <li class="method">
-    <a href="Lingo/Attendee/VectorFilter.html#method-i-init">#init</a>
-    &mdash;
-    <span class="container">Lingo::Attendee::VectorFilter</span>
-
-  <li class="method">
-    <a href="Lingo/Attendee/Sequencer.html#method-i-init">#init</a>
-    &mdash;
-    <span class="container">Lingo::Attendee::Sequencer</span>
-
-  <li class="method">
-    <a href="Lingo/Attendee/TextReader.html#method-i-init">#init</a>
-    &mdash;
-    <span class="container">Lingo::Attendee::TextReader</span>
-
-  <li class="method">
-    <a href="Lingo/Attendee/WordSearcher.html#method-i-init">#init</a>
-    &mdash;
-    <span class="container">Lingo::Attendee::WordSearcher</span>
 
   <li class="method">
     <a href="Lingo/Attendee/Synonymer.html#method-i-init">#init</a>
@@ -1436,9 +1478,9 @@
     <span class="container">Lingo::Attendee::Synonymer</span>
 
   <li class="method">
-    <a href="Lingo/Attendee/Formatter.html#method-i-init">#init</a>
+    <a href="Lingo/Attendee/VectorFilter.html#method-i-init">#init</a>
     &mdash;
-    <span class="container">Lingo::Attendee::Formatter</span>
+    <span class="container">Lingo::Attendee::VectorFilter</span>
 
   <li class="method">
     <a href="Lingo/App.html#method-i-init_app">#init_app</a>
@@ -1461,14 +1503,14 @@
     <span class="container">Lingo::Attendee::Tokenizer</span>
 
   <li class="method">
-    <a href="Lingo/Language/WordForm.html#method-i-inspect">#inspect</a>
-    &mdash;
-    <span class="container">Lingo::Language::WordForm</span>
-
-  <li class="method">
     <a href="Lingo/AgendaItem.html#method-i-inspect">#inspect</a>
     &mdash;
     <span class="container">Lingo::AgendaItem</span>
+
+  <li class="method">
+    <a href="Lingo/Language/WordForm.html#method-i-inspect">#inspect</a>
+    &mdash;
+    <span class="container">Lingo::Language::WordForm</span>
 
   <li class="method">
     <a href="Lingo.html#method-i-invite">#invite</a>
@@ -1576,6 +1618,11 @@
     <span class="container">Lingo::CLI</span>
 
   <li class="method">
+    <a href="Lingo/Ctl.html#method-i-overwrite-3F">#overwrite?</a>
+    &mdash;
+    <span class="container">Lingo::Ctl</span>
+
+  <li class="method">
     <a href="Lingo/App.html#method-i-parse_options">#parse_options</a>
     &mdash;
     <span class="container">Lingo::App</span>
@@ -1616,14 +1663,39 @@
     <span class="container">Lingo::Progress</span>
 
   <li class="method">
+    <a href="Lingo/Attendee/TextWriter.html#method-i-process">#process</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::TextWriter</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee/Decomposer.html#method-i-process">#process</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::Decomposer</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee/Formatter.html#method-i-process">#process</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::Formatter</span>
+
+  <li class="method">
     <a href="Lingo/Attendee/Debugger.html#method-i-process">#process</a>
     &mdash;
     <span class="container">Lingo::Attendee::Debugger</span>
 
   <li class="method">
-    <a href="Lingo/Attendee/VectorFilter.html#method-i-process">#process</a>
+    <a href="Lingo/Attendee/NonewordFilter.html#method-i-process">#process</a>
     &mdash;
-    <span class="container">Lingo::Attendee::VectorFilter</span>
+    <span class="container">Lingo::Attendee::NonewordFilter</span>
+
+  <li class="method">
+    <a href="Lingo/BufferedAttendee.html#method-i-process">#process</a>
+    &mdash;
+    <span class="container">Lingo::BufferedAttendee</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee/ObjectFilter.html#method-i-process">#process</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::ObjectFilter</span>
 
   <li class="method">
     <a href="Lingo/Attendee/Abbreviator.html#method-i-process">#process</a>
@@ -1631,9 +1703,19 @@
     <span class="container">Lingo::Attendee::Abbreviator</span>
 
   <li class="method">
-    <a href="Lingo/Attendee/Decomposer.html#method-i-process">#process</a>
+    <a href="Lingo/Attendee/WordSearcher.html#method-i-process">#process</a>
     &mdash;
-    <span class="container">Lingo::Attendee::Decomposer</span>
+    <span class="container">Lingo::Attendee::WordSearcher</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee/VectorFilter.html#method-i-process">#process</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::VectorFilter</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee/Stemmer.html#method-i-process">#process</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::Stemmer</span>
 
   <li class="method">
     <a href="Lingo/Attendee/Synonymer.html#method-i-process">#process</a>
@@ -1651,39 +1733,9 @@
     <span class="container">Lingo::Attendee::Variator</span>
 
   <li class="method">
-    <a href="Lingo/Attendee/TextWriter.html#method-i-process">#process</a>
-    &mdash;
-    <span class="container">Lingo::Attendee::TextWriter</span>
-
-  <li class="method">
-    <a href="Lingo/Attendee/Formatter.html#method-i-process">#process</a>
-    &mdash;
-    <span class="container">Lingo::Attendee::Formatter</span>
-
-  <li class="method">
-    <a href="Lingo/BufferedAttendee.html#method-i-process">#process</a>
+    <a href="Lingo/BufferedAttendee.html#method-i-process_buffer">#process_buffer</a>
     &mdash;
     <span class="container">Lingo::BufferedAttendee</span>
-
-  <li class="method">
-    <a href="Lingo/Attendee/NonewordFilter.html#method-i-process">#process</a>
-    &mdash;
-    <span class="container">Lingo::Attendee::NonewordFilter</span>
-
-  <li class="method">
-    <a href="Lingo/Attendee/WordSearcher.html#method-i-process">#process</a>
-    &mdash;
-    <span class="container">Lingo::Attendee::WordSearcher</span>
-
-  <li class="method">
-    <a href="Lingo/Attendee/ObjectFilter.html#method-i-process">#process</a>
-    &mdash;
-    <span class="container">Lingo::Attendee::ObjectFilter</span>
-
-  <li class="method">
-    <a href="Lingo/Attendee/Stemmer.html#method-i-process">#process</a>
-    &mdash;
-    <span class="container">Lingo::Attendee::Stemmer</span>
 
   <li class="method">
     <a href="Lingo/Attendee/Sequencer.html#method-i-process_buffer">#process_buffer</a>
@@ -1691,17 +1743,17 @@
     <span class="container">Lingo::Attendee::Sequencer</span>
 
   <li class="method">
-    <a href="Lingo/Attendee/Dehyphenizer.html#method-i-process_buffer">#process_buffer</a>
-    &mdash;
-    <span class="container">Lingo::Attendee::Dehyphenizer</span>
-
-  <li class="method">
     <a href="Lingo/Attendee/MultiWorder.html#method-i-process_buffer">#process_buffer</a>
     &mdash;
     <span class="container">Lingo::Attendee::MultiWorder</span>
 
   <li class="method">
-    <a href="Lingo/BufferedAttendee.html#method-i-process_buffer">#process_buffer</a>
+    <a href="Lingo/Attendee/Dehyphenizer.html#method-i-process_buffer">#process_buffer</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::Dehyphenizer</span>
+
+  <li class="method">
+    <a href="Lingo/BufferedAttendee.html#method-i-process_buffer-3F">#process_buffer?</a>
     &mdash;
     <span class="container">Lingo::BufferedAttendee</span>
 
@@ -1709,11 +1761,6 @@
     <a href="Lingo/Attendee/Sequencer.html#method-i-process_buffer-3F">#process_buffer?</a>
     &mdash;
     <span class="container">Lingo::Attendee::Sequencer</span>
-
-  <li class="method">
-    <a href="Lingo/BufferedAttendee.html#method-i-process_buffer-3F">#process_buffer?</a>
-    &mdash;
-    <span class="container">Lingo::BufferedAttendee</span>
 
   <li class="method">
     <a href="Lingo/Debug.html#method-i-profile">#profile</a>
@@ -1816,6 +1863,11 @@
     <span class="container">Lingo::Attendee::VectorFilter</span>
 
   <li class="method">
+    <a href="Lingo/Database/Source/MultiValue.html#method-i-set">#set</a>
+    &mdash;
+    <span class="container">Lingo::Database::Source::MultiValue</span>
+
+  <li class="method">
     <a href="Lingo/Database/Source/MultiKey.html#method-i-set">#set</a>
     &mdash;
     <span class="container">Lingo::Database::Source::MultiKey</span>
@@ -1824,11 +1876,6 @@
     <a href="Lingo/Database/Source.html#method-i-set">#set</a>
     &mdash;
     <span class="container">Lingo::Database::Source</span>
-
-  <li class="method">
-    <a href="Lingo/Database/Source/MultiValue.html#method-i-set">#set</a>
-    &mdash;
-    <span class="container">Lingo::Database::Source::MultiValue</span>
 
   <li class="method">
     <a href="Lingo/Attendee.html#method-i-set_dic">#set_dic</a>
@@ -1936,14 +1983,19 @@
     <span class="container">Lingo::AgendaItem</span>
 
   <li class="method">
+    <a href="Lingo/Language/WordForm.html#method-i-to_a">#to_a</a>
+    &mdash;
+    <span class="container">Lingo::Language::WordForm</span>
+
+  <li class="method">
     <a href="Lingo/Version.html#method-i-to_a">#to_a</a>
     &mdash;
     <span class="container">Lingo::Version</span>
 
   <li class="method">
-    <a href="Lingo/Language/WordForm.html#method-i-to_a">#to_a</a>
+    <a href="Lingo/Config.html#method-i-to_h">#to_h</a>
     &mdash;
-    <span class="container">Lingo::Language::WordForm</span>
+    <span class="container">Lingo::Config</span>
 
   <li class="method">
     <a href="Lingo/Database.html#method-i-to_h">#to_h</a>
@@ -1956,14 +2008,9 @@
     <span class="container">Lingo::App</span>
 
   <li class="method">
-    <a href="Lingo/InvalidDatabaseConfigError.html#method-i-to_s">#to_s</a>
+    <a href="Lingo/ConfigLoadError.html#method-i-to_s">#to_s</a>
     &mdash;
-    <span class="container">Lingo::InvalidDatabaseConfigError</span>
-
-  <li class="method">
-    <a href="Lingo/Language/Word.html#method-i-to_s">#to_s</a>
-    &mdash;
-    <span class="container">Lingo::Language::Word</span>
+    <span class="container">Lingo::ConfigLoadError</span>
 
   <li class="method">
     <a href="Lingo/LibraryLoadError.html#method-i-to_s">#to_s</a>
@@ -1971,14 +2018,14 @@
     <span class="container">Lingo::LibraryLoadError</span>
 
   <li class="method">
-    <a href="Lingo/Language/WordForm.html#method-i-to_s">#to_s</a>
+    <a href="Lingo/NameNotFoundError.html#method-i-to_s">#to_s</a>
     &mdash;
-    <span class="container">Lingo::Language::WordForm</span>
+    <span class="container">Lingo::NameNotFoundError</span>
 
   <li class="method">
-    <a href="Lingo/SourceFileNotFoundError.html#method-i-to_s">#to_s</a>
+    <a href="Lingo/Language/Lexical.html#method-i-to_s">#to_s</a>
     &mdash;
-    <span class="container">Lingo::SourceFileNotFoundError</span>
+    <span class="container">Lingo::Language::Lexical</span>
 
   <li class="method">
     <a href="Lingo/FileNotFoundError.html#method-i-to_s">#to_s</a>
@@ -1991,9 +2038,9 @@
     <span class="container">Lingo::MissingConfigError</span>
 
   <li class="method">
-    <a href="Lingo/Language/Token.html#method-i-to_s">#to_s</a>
+    <a href="Lingo/InvalidDatabaseConfigError.html#method-i-to_s">#to_s</a>
     &mdash;
-    <span class="container">Lingo::Language::Token</span>
+    <span class="container">Lingo::InvalidDatabaseConfigError</span>
 
   <li class="method">
     <a href="Lingo/NoDatabaseConfigError.html#method-i-to_s">#to_s</a>
@@ -2001,9 +2048,9 @@
     <span class="container">Lingo::NoDatabaseConfigError</span>
 
   <li class="method">
-    <a href="Lingo/ConfigLoadError.html#method-i-to_s">#to_s</a>
+    <a href="Lingo/TokenizeError.html#method-i-to_s">#to_s</a>
     &mdash;
-    <span class="container">Lingo::ConfigLoadError</span>
+    <span class="container">Lingo::TokenizeError</span>
 
   <li class="method">
     <a href="Lingo/DatabaseError.html#method-i-to_s">#to_s</a>
@@ -2026,14 +2073,24 @@
     <span class="container">Lingo::NoWritableStoreError</span>
 
   <li class="method">
-    <a href="Lingo/Language/Lexical.html#method-i-to_s">#to_s</a>
+    <a href="Lingo/Language/WordForm.html#method-i-to_s">#to_s</a>
     &mdash;
-    <span class="container">Lingo::Language::Lexical</span>
+    <span class="container">Lingo::Language::WordForm</span>
 
   <li class="method">
-    <a href="Lingo/NameNotFoundError.html#method-i-to_s">#to_s</a>
+    <a href="Lingo/Language/Token.html#method-i-to_s">#to_s</a>
     &mdash;
-    <span class="container">Lingo::NameNotFoundError</span>
+    <span class="container">Lingo::Language::Token</span>
+
+  <li class="method">
+    <a href="Lingo/Language/Word.html#method-i-to_s">#to_s</a>
+    &mdash;
+    <span class="container">Lingo::Language::Word</span>
+
+  <li class="method">
+    <a href="Lingo/SourceFileNotFoundError.html#method-i-to_s">#to_s</a>
+    &mdash;
+    <span class="container">Lingo::SourceFileNotFoundError</span>
 
   <li class="method">
     <a href="Lingo/Version.html#method-i-to_s">#to_s</a>
@@ -2047,6 +2104,26 @@
 
   <li class="method">
     <a href="Lingo/Attendee/Tokenizer.html#method-i-tokenize">#tokenize</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::Tokenizer</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee/Tokenizer.html#method-i-tokenize_line">#tokenize_line</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::Tokenizer</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee/Tokenizer.html#method-i-tokenize_nest">#tokenize_nest</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::Tokenizer</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee/Tokenizer.html#method-i-tokenize_open">#tokenize_open</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::Tokenizer</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee/Tokenizer.html#method-i-tokenize_rule">#tokenize_rule</a>
     &mdash;
     <span class="container">Lingo::Attendee::Tokenizer</span>
 
@@ -2071,14 +2148,14 @@
     <span class="container">Lingo::Database::HashStore</span>
 
   <li class="method">
-    <a href="Lingo/Database/SDBMStore.html#method-i-uptodate-3F">#uptodate?</a>
-    &mdash;
-    <span class="container">Lingo::Database::SDBMStore</span>
-
-  <li class="method">
     <a href="Lingo/Database.html#method-i-uptodate-3F">#uptodate?</a>
     &mdash;
     <span class="container">Lingo::Database</span>
+
+  <li class="method">
+    <a href="Lingo/Database/SDBMStore.html#method-i-uptodate-3F">#uptodate?</a>
+    &mdash;
+    <span class="container">Lingo::Database::SDBMStore</span>
 
   <li class="method">
     <a href="Lingo/Web.html#method-i-url_for">#url_for</a>
@@ -2111,14 +2188,14 @@
     <span class="container">Lingo</span>
 
   <li class="method">
-    <a href="Lingo/Database.html#method-i-warn">#warn</a>
-    &mdash;
-    <span class="container">Lingo::Database</span>
-
-  <li class="method">
     <a href="Lingo/Attendee.html#method-i-warn">#warn</a>
     &mdash;
     <span class="container">Lingo::Attendee</span>
+
+  <li class="method">
+    <a href="Lingo/Config.html#method-i-warn">#warn</a>
+    &mdash;
+    <span class="container">Lingo::Config</span>
 
   <li class="method">
     <a href="Lingo.html#method-i-warn">#warn</a>
@@ -2126,9 +2203,9 @@
     <span class="container">Lingo</span>
 
   <li class="method">
-    <a href="Lingo/Config.html#method-i-warn">#warn</a>
+    <a href="Lingo/Database.html#method-i-warn">#warn</a>
     &mdash;
-    <span class="container">Lingo::Config</span>
+    <span class="container">Lingo::Database</span>
 
   <li class="method">
     <a href="Lingo/Attendee/TextReader.html#method-i-with_tempfile">#with_tempfile</a>
@@ -2145,7 +2222,7 @@
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.1.
+  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.2.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

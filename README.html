@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>README - lingo Application documentation (v1.8.4)</title>
+<title>README - lingo Application documentation (v1.8.5)</title>
 
 <link href="./fonts.css" rel="stylesheet">
 <link href="./rdoc.css" rel="stylesheet">
@@ -67,6 +67,10 @@
     <li><a href="#label-Markup">Markup</a>
     <li><a href="#label-Inline+annotation">Inline annotation</a>
     <li><a href="#label-Plugins">Plugins</a>
+    <li><a href="#label-Server">Server</a>
+    <li><a href="#label-JSON+endpoint">JSON endpoint</a>
+    <li><a href="#label-Raw+endpoint">Raw endpoint</a>
+    <li><a href="#label-Deployment">Deployment</a>
     <li><a href="#label-EXAMPLE">EXAMPLE</a>
     <li><a href="#label-INSTALLATION+AND+USAGE">INSTALLATION AND USAGE</a>
     <li><a href="#label-Dictionary+and+configuration+file+lookup">Dictionary and configuration file lookup</a>
@@ -128,6 +132,15 @@
 <p><a href="#label-Inline+annotation">Inline annotation</a></p>
 </li><li>
 <p><a href="#label-Plugins">Plugins</a></p>
+</li><li>
+<p><a href="#label-Server">Server</a></p>
+<ul><li>
+<p><a href="#label-JSON+endpoint">JSON endpoint</a></p>
+</li><li>
+<p><a href="#label-Raw+endpoint">Raw endpoint</a></p>
+</li><li>
+<p><a href="#label-Deployment">Deployment</a></p>
+</li></ul>
 </li></ul>
 </li><li>
 <p><a href="#label-EXAMPLE">Example</a></p>
@@ -170,13 +183,18 @@ expressions</a></p>
 </li></ul>
 </li><li>
 <p><a href="#label-CREDITS">Credits</a></p>
+<ul><li>
+<p><a href="#label-Authors">Authors</a></p>
+</li><li>
+<p><a href="#label-Contributors">Contributors</a></p>
+</li></ul>
 </li><li>
 <p><a href="#label-LICENSE+AND+COPYRIGHT">License and Copyright</a></p>
 </li></ul>
 
 <h2 id="label-VERSION">VERSION<span><a href="#label-VERSION">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 
-<p>This documentation refers to Lingo version 1.8.4</p>
+<p>This documentation refers to Lingo version 1.8.5</p>
 
 <h2 id="label-DESCRIPTION">DESCRIPTION<span><a href="#label-DESCRIPTION">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 
@@ -398,6 +416,135 @@ from (<code>*.rb</code>).</p>
 <p>A dedicated API to support writing and integrating plugins will be added in
 the future.</p>
 
+<h3 id="label-Server">Server<span><a href="#label-Server">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Lingo comes with a server daemon <a href="Lingo/Srv.html">Lingo::Srv</a>
+that exposes an HTTP interface to Lingo&#39;s functionality. The
+configuration needs to ensure that input is read from standard input
+(<code>files: STDIN</code> on <code>text_reader</code>) and output is
+written to standard output (<code>ext: STDOUT</code> on
+<code>text_writer</code>).</p>
+
+<p><em>Example</em>: Start Lingo server on port 6789 with language
+configuration <code>en</code> and default configuration file; server
+options come before <code>--</code>, Lingo options come after.</p>
+
+<pre>&gt; lingosrv -p 6789 -- -l en</pre>
+
+<p>You can also pass Lingo options through the <code>LINGO_SRV_OPTS</code>
+environment variable (e.g., <code>LINGO_SRV_OPTS=&#39;-l en -c
+/path/to/your/srv.cfg&#39;</code>).</p>
+
+<h4 id="label-JSON+endpoint">JSON endpoint<span><a href="#label-JSON+endpoint">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<p><em>Example</em>: Ask the server about “Lingo server”; returns JSON data
+(output formatted for clarity).</p>
+
+<pre>&gt; curl &#39;http://localhost:6789/?q=Lingo+server&#39;
+{
+  &quot;Lingo server&quot; : [
+    &quot; &lt;Lingo = [(lingo/s), (lingo/e)]&gt;&quot;,
+    &quot; &lt;server = [(server/s)]&gt;&quot;
+  ]
+}</pre>
+
+<p><em>Example</em>: Ask the server about “Lingo” and “server”; returns JSON
+data (output formatted for clarity).</p>
+
+<pre>&gt; curl -g &#39;http://localhost:6789/?q[]=Lingo&amp;q[]=server&#39;
+{
+  &quot;[\&quot;Lingo\&quot;, \&quot;server\&quot;]&quot; : {
+    &quot;Lingo&quot; : [
+      &quot; &lt;Lingo = [(lingo/s), (lingo/e)]&gt;&quot;
+    ],
+    &quot;server&quot; : [
+      &quot; &lt;server = [(server/s)]&gt;&quot;
+    ]
+  }
+}</pre>
+
+<h4 id="label-Raw+endpoint">Raw endpoint<span><a href="#label-Raw+endpoint">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<p><em>Example</em>: Ask the server about “Lingo server”; returns raw Lingo
+response.</p>
+
+<pre>&gt; curl --data &#39;Lingo server&#39; http://localhost:6789/raw
+&lt;Lingo = [(lingo/s), (lingo/e)]&gt;
+&lt;server = [(server/s)]&gt;</pre>
+
+<p><em>Example</em>: Ask the server about this file; returns raw Lingo
+response (output truncated for clarity).</p>
+
+<pre>&gt; curl --data @README -H &#39;Content-Type: text/plain&#39; http://localhost:6789/raw
+:=/OTHR:
+&lt;Lingo = [(lingo/s), (lingo/e)]&gt;
+&lt;-|?&gt;
+&lt;A|?&gt;
+&lt;full-featured|KOM = [(full-featured/k), (full/s+), (full/a+), (full/v+), (featured/a+)]&gt;
+&lt;automatic = [(automatic/s), (automatic/a)]&gt;
+&lt;indexing = [(index/v)]&gt;
+&lt;system = [(system/s)]&gt;
+[...]</pre>
+
+<h4 id="label-Deployment">Deployment<span><a href="#label-Deployment">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<p><a href="Lingo/Srv.html">Lingo::Srv</a> can be started directly through the
+provided command-line executable <code>lingosrv</code> (see above) or
+through any other <a href="http://rack.github.com/">Rack</a> -compatible
+deployment option; a <code>rackup</code> file is included (see
+<code>lingoctl rackup srv</code>).</p>
+
+<p><em>Example</em>: To deploy <a href="Lingo/Srv.html">Lingo::Srv</a> with <a
+href="http://phusionpassenger.com/">Passenger</a> on Apache, create a
+symlink in the DocumentRoot pointing to the app&#39;s <code>public/</code>
+directory; adjust the paths according to your environment (you can use <a
+href="http://blackwinter.github.com/current_gem">current_gem</a> to create
+a stable gem path):</p>
+
+<pre>/var/www
+  |
+  +-- lingo-srv -&gt; /usr/lib/ruby/gems/2.1.0/gems/lingo-x.y.z/lib/lingo/srv/public</pre>
+
+<p>Then put the following snippet in Apache&#39;s VirtualHost configuration:</p>
+
+<pre>&lt;VirtualHost *:80&gt;
+  ...
+  RackBaseURI /lingo-srv
+  &lt;Directory /var/www/lingo-srv&gt;
+    Options -MultiViews
+    SetEnv LINGO_SRV_OPTS &quot;-l en&quot;  # &lt;-- Optionally set Lingo options
+  &lt;/Directory&gt;
+&lt;/VirtualHost&gt;</pre>
+
+<p>In order to provide your own <code>rackup</code> file and Lingo
+configuration, create a directory with those files:</p>
+
+<pre>/srv/lingo-srv
+  |
+  +-- config.ru
+  |
+  +-- lingosrv.cfg</pre>
+
+<p>And then point Passenger at it:</p>
+
+<pre>&lt;VirtualHost *:80&gt;
+  ...
+  RackBaseURI /lingo-srv
+  &lt;Directory /var/www/lingo-srv&gt;
+    Options -MultiViews
+    PassengerAppRoot /srv/lingo-srv  # &lt;-- Add this line
+  &lt;/Directory&gt;
+&lt;/VirtualHost&gt;</pre>
+
+<p>Restart Apache and test the result (output formatted for clarity):</p>
+
+<pre>&gt; curl http://localhost/lingo-srv/about
+{
+  &quot;Lingo::Srv&quot; : {
+    &quot;version&quot; : &quot;x.y.z&quot;
+  }
+}</pre>
+
 <h2 id="label-EXAMPLE">EXAMPLE<span><a href="#label-EXAMPLE">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 
 <p>TODO: Full-fledged example to show off Lingo&#39;s features and provide a
@@ -412,8 +559,8 @@ want to run that command with administrator privileges, depending on your
 environment. Then you can call the <code>lingo</code> executable to process
 your text files. See <code>lingo --help</code> for available options.</p>
 
-<p>Please note that Lingo requires Ruby version 1.9.2 or higher to run (<a
-href="http://ruby-lang.org/en/downloads/">2.0.0</a> is the currently
+<p>Please note that Lingo requires Ruby version 1.9.3 or higher to run (<a
+href="http://ruby-lang.org/en/downloads/">2.1.3</a> is the currently
 recommended version). If you want to use Lingo on Ruby 1.8, please refer to
 the <a href="#label-Legacy+version">legacy version</a>.</p>
 
@@ -762,7 +909,7 @@ href="http://www.gnu.org/licenses">www.gnu.org/licenses</a>/&gt;.</p>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.1.
+  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.2.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

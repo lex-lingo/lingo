@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::NameNotFoundError - lingo Application documentation (v1.8.5)</title>
+<title>class Lingo::TokenizeError - lingo Application documentation (v1.8.5)</title>
 
 <link href="../fonts.css" rel="stylesheet">
 <link href="../rdoc.css" rel="stylesheet">
@@ -83,9 +83,9 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-Lingo::NameNotFoundError">
-  <h1 id="class-Lingo::NameNotFoundError" class="class">
-    class Lingo::NameNotFoundError
+<main role="main" aria-labelledby="class-Lingo::TokenizeError">
+  <h1 id="class-Lingo::TokenizeError" class="class">
+    class Lingo::TokenizeError
   </h1>
 
   <section class="description">
@@ -109,9 +109,9 @@
       </header>
 
       
-      <div id="attribute-i-klass" class="method-detail">
+      <div id="attribute-i-err" class="method-detail">
         <div class="method-heading attribute-method-heading">
-          <span class="method-name">klass</span><span
+          <span class="method-name">err</span><span
             class="attribute-access-type">[R]</span>
         </div>
 
@@ -122,9 +122,35 @@
         </div>
       </div>
       
-      <div id="attribute-i-name" class="method-detail">
+      <div id="attribute-i-file" class="method-detail">
         <div class="method-heading attribute-method-heading">
-          <span class="method-name">name</span><span
+          <span class="method-name">file</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-line" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">line</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-num" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">num</span><span
             class="attribute-access-type">[R]</span>
         </div>
 
@@ -149,7 +175,7 @@
         
         <div class="method-heading">
           <span class="method-name">new</span><span
-            class="method-args">(klass, name)</span>
+            class="method-args">(line, file, num, err)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -164,9 +190,9 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/lingo/error.rb, line 177</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">klass</span>, <span class="ruby-identifier">name</span>)
-  <span class="ruby-ivar">@klass</span>, <span class="ruby-ivar">@name</span> = <span class="ruby-identifier">klass</span>, <span class="ruby-identifier">name</span>
+            <pre><span class="ruby-comment"># File lib/lingo/error.rb, line 205</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">line</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">num</span>, <span class="ruby-identifier">err</span>)
+  <span class="ruby-ivar">@line</span>, <span class="ruby-ivar">@file</span>, <span class="ruby-ivar">@num</span>, <span class="ruby-ivar">@err</span> = <span class="ruby-identifier">line</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">num</span>, <span class="ruby-identifier">err</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -205,9 +231,17 @@
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/lingo/error.rb, line 181</span>
+            <pre><span class="ruby-comment"># File lib/lingo/error.rb, line 209</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
-  <span class="ruby-node">&quot;No such #{class_name} type `#{name}&#39;.&quot;</span>
+  <span class="ruby-identifier">line</span>, <span class="ruby-identifier">file</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">line</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">file</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">48</span>
+    <span class="ruby-identifier">line</span> = <span class="ruby-identifier">line</span>[<span class="ruby-value">0</span>, <span class="ruby-value">45</span>] <span class="ruby-operator">+</span> <span class="ruby-string">&#39;...&#39;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">file</span> <span class="ruby-operator">&amp;&amp;=</span> <span class="ruby-node">&quot;#{file}:#{num}: &quot;</span>
+
+  <span class="ruby-identifier">error</span>(<span class="ruby-node">&quot;An error occured while trying to tokenize #{file}#{line.inspect}&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           

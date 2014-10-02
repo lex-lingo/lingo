@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::Language::Token - lingo Application documentation (v1.8.4)</title>
+<title>class Lingo::Language::Token - lingo Application documentation (v1.8.5)</title>
 
 <link href="../../fonts.css" rel="stylesheet">
 <link href="../../rdoc.css" rel="stylesheet">
@@ -73,6 +73,10 @@
 
   <ul class="link-list" role="directory">
     
+    <li ><a href="#method-c-clean">::clean</a>
+    
+    <li class="calls-super" ><a href="#method-c-new">::new</a>
+    
     <li ><a href="#method-i-to_s">#to_s</a>
     
     <li ><a href="#method-i-word-3F">#word?</a>
@@ -97,7 +101,8 @@ der Regel entspricht, die dieses Wort identifiziert hat.</p>
 
 <p>Steht z.B. in ruby.cfg eine Regel zur Erkennung einer Zahl, die mit NUM
 bezeichnet wird, so wird dies dem <a href="Token.html">Token</a>
-angeheftet, z.B. Token.new(&#39;100&#39;, &#39;NUM&#39;) -&gt; #100/NUM#</p>
+angeheftet, z.B. <a href="Token.html#method-c-new">::new</a>(&#39;100&#39;,
+&#39;NUM&#39;) -&gt; #100/NUM#</p>
 
   </section>
 
@@ -114,6 +119,86 @@ angeheftet, z.B. Token.new(&#39;100&#39;, &#39;NUM&#39;) -&gt; #100/NUM#</p>
     
 
     
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-clean" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">clean</span><span
+            class="method-args">(attr)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="clean-source">
+            <pre><span class="ruby-comment"># File lib/lingo/language/token.rb, line 39</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">clean</span>(<span class="ruby-identifier">attr</span>)
+  <span class="ruby-identifier">attr</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/:.*/</span>, <span class="ruby-string">&#39;&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(*)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              
+            </div>
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/lingo/language/token.rb, line 43</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-operator">*</span>)
+  <span class="ruby-keyword">super</span>
+  <span class="ruby-ivar">@attr</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">clean</span>(<span class="ruby-identifier">attr</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Instance Methods</h3>
@@ -139,7 +224,7 @@ angeheftet, z.B. Token.new(&#39;100&#39;, &#39;NUM&#39;) -&gt; #100/NUM#</p>
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/token.rb, line 43</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/token.rb, line 52</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-node">&quot;:#{super}:&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -172,7 +257,7 @@ angeheftet, z.B. Token.new(&#39;100&#39;, &#39;NUM&#39;) -&gt; #100/NUM#</p>
 
           
           <div class="method-source-code" id="word-3F-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/token.rb, line 39</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/token.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">word?</span>
   <span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-constant">TA_WORD</span>
 <span class="ruby-keyword">end</span></pre>
@@ -194,7 +279,7 @@ angeheftet, z.B. Token.new(&#39;100&#39;, &#39;NUM&#39;) -&gt; #100/NUM#</p>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.1.
+  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.2.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 
