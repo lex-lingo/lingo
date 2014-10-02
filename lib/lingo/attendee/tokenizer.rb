@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2012 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2014 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -82,19 +82,30 @@ class Lingo
 
       CHAR, DIGIT = Char::CHAR, Char::DIGIT
 
+      PROTO = '(?:news|https?|ftps?)://'
+
       RULES = [
-        ['WIKI', /^=+.+=+$/],
         ['SPAC', /^\s+/],
-        ['HTML', /^<[^>]+>/],
-        ['WIKI', /^\[\[.+?\]\]/],
+        ['WIKI', /^=+.+=+|^__[A-Z]+__/],
         ['NUMS', /^[+-]?(?:\d{4,}|\d{1,3}(?:\.\d{3,3})*)(?:\.|(?:,\d+)?%?)/],
-        ['URLS', /^(?:www\.|mailto:|(?:news|https?|ftps?):\/\/|\S+?[._]\S+?@\S+?\.)\S+/],
+        ['URLS', /^(?:www\.|mailto:|#{PROTO}|\S+?[._]\S+?@\S+?\.)\S+/],
         ['ABRV', /^(?:(?:(?:#{CHAR})+\.)+)(?:#{CHAR})+/],
         ['WORD', /^(?:#{CHAR}|#{DIGIT}|-)+/],
-        ['PUNC', /^[!,.:;?¡¿]/],
-        ['OTHR', /^["$#%&'()*+\-\/<=>@\[\\\]^_{|}~¢£¤¥¦§¨©«¬®¯°±²³´¶·¸¹»¼½¾×÷]/],
-        ['HELP', /^\S*/]
+        ['PUNC', /^[!,.:;?¡¿]+/]
       ]
+
+      OTHER = [
+        ['OTHR', /^["$#%&'()*+\/<=>@\[\\\]^_{|}~¢£¤¥¦§¨©«¬®¯°±²³´¶·¸¹»¼½¾×÷]/],
+        ['HELP', /^\S+/]
+      ]
+
+      NESTS = {
+        'HTML'          => ['<',   '>'],
+        'WIKI:VARIABLE' => ['{{{', '}}}'],
+        'WIKI:TEMPLATE' => ['{{',  '}}'],
+        'WIKI:LINK_INT' => ['[[',  ']]'],
+        'WIKI:LINK_EXT' => [/^\[\s*#{PROTO}/, ']']
+      }
 
       class << self
 
@@ -155,9 +166,23 @@ class Lingo
         skip << 'HTML' unless @tags
         skip << 'WIKI' unless @wiki
 
-        @rules = RULES.reject { |name, _| skip.include?(name) }
+        [@rules = RULES.dup, @nests = NESTS.dup].each { |hash|
+          hash.delete_if { |name, _| skip.include?(Token.clean(name)) }
+        }
 
-        @filename = @linenum = @cont = nil
+        @nest, nest_re = [], []
+
+        @nests.each { |name, re|
+          re.map!.with_index { |r, i| r.is_a?(Regexp) ?
+            r : /^#{'.*?' if i > 0}#{Regexp.escape(r)}/ }
+
+          nest_re << "(?<#{name}>#{Regexp.new(
+            re[0].source.sub(/^\^/, ''), re[0].options)})"
+        }
+
+        @nest_re = /^(?<_>.*?)(?:#{nest_re.join('|')})/
+
+        @filename = @linenum = nil
       end
 
       def control(cmd, param)
@@ -165,13 +190,13 @@ class Lingo
           when STR_CMD_FILE then @filename, @linenum = param, 1
           when STR_CMD_LIR  then @filename, @linenum = nil, nil
           when STR_CMD_EOL  then @linenum += 1 if @linenum
-          when STR_CMD_EOF  then @cont = nil
+          when STR_CMD_EOF  then @nest.clear
         end
       end
 
       def process(obj)
         if obj.is_a?(String)
-          tokenize(obj) { |*i| forward(Token.new(*i)) }
+          tokenize(obj)
           forward(STR_CMD_EOL, @filename) if @filename
         else
           forward(obj)
@@ -182,44 +207,64 @@ class Lingo
 
       # tokenize("Eine Zeile.")  ->  [:Eine/WORD:, :Zeile/WORD:, :./PUNC:]
       def tokenize(line)
-        case @cont
-          when 'HTML'
-            if line =~ /^[^<>]*>/
-              yield $&, @cont
-              line, @cont = $', nil
-            else
-              yield line, @cont
-              return
-            end
-          when 'WIKI'
-            if line =~ /^[^\[\]]*\]\]/
-              yield $&, @cont
-              line, @cont = $', nil
-            else
-              yield line, @cont
-              return
-            end
-          when nil
-            if @tags && line =~ /<[^<>]*$/
-              yield $&, @cont = 'HTML'
-              line = $`
-            end
+        @nest.empty? ? tokenize_line(line) : tokenize_nest(line)
+      rescue => err
+        raise err if err.is_a?(TokenizeError)
+        raise TokenizeError.new(line, @filename, @linenum, err)
+      end
 
-            if @wiki && line =~ /\[\[[^\[\]]*$/
-              yield $&, @cont = 'WIKI'
-              line = $`
-            end
-        end
-
-        while (l = line.length) > 0 && @rules.find { |name, expr|
-          if line =~ expr
-            yield $&, name if name != 'SPAC' || @space
-            l == $'.length ? break : line = $'
-          end
+      def tokenize_line(line)
+        while (length = line.length) > 0 && tokenize_rule(line) { |rest|
+          length == rest.length ? break : line = rest
         }
         end
-      rescue => err
-        raise TokenizeError.new(line, @filename, @linenum, err)
+
+        tokenize_open(line) unless line.empty?
+      end
+
+      def tokenize_rule(line, rules = @rules)
+        rules.find { |name, expr|
+          next unless line =~ expr
+          forward_token($&, name) if name != 'SPAC' || @space
+          yield $'
+        }
+      end
+
+      def tokenize_nest(line)
+        mdo = @nest_re.match(line)
+        mdc = @nests[@nest.last].last.match(line)
+
+        if mdo && (!mdc || mdo[0].length < mdc[0].length)
+          forward_token(mdo[:_], @nest.last) unless mdo[:_].empty?
+
+          nest = @nests.keys.find { |name| mdo[name] }
+          forward_nest(mdo[nest], mdo.post_match, nest)
+        elsif mdc
+          forward_token(mdc[0], @nest.pop)
+          tokenize(mdc.post_match)
+        else
+          forward_token(line, @nest.last)
+        end
+      end
+
+      def tokenize_open(line)
+        @nests.each { |nest, (open_re, _)|
+          next unless line =~ open_re
+          return forward_nest($&, $', nest)
+        }
+
+        tokenize_rule(line, OTHER) { |rest| line = rest }
+        tokenize(line)
+      end
+
+      def forward_nest(match, rest, nest)
+        forward_token(match, nest)
+        @nest << nest
+        tokenize(rest)
+      end
+
+      def forward_token(*args)
+        forward(Token.new(*args))
       end
 
     end

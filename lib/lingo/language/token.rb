@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2012 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2014 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -36,6 +36,15 @@ class Lingo
     # so wird dies dem Token angeheftet, z.B. Token.new('100', 'NUM') -> #100/NUM#
 
     class Token < WordForm
+
+      def self.clean(attr)
+        attr.sub(/:.*/, '')
+      end
+
+      def initialize(*)
+        super
+        @attr = self.class.clean(attr)
+      end
 
       def word?
         attr == TA_WORD

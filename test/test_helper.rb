@@ -15,8 +15,8 @@ class LingoTestCase <  Test::Unit::TestCase
     Dir[TEST_GLOB].each { |f| File.delete(f) }
   end
 
-  def split(t)
-    a, b, *c = t.split('|')
+  def split(t, r = '|')
+    a, b, *c = t.split(r)
     [a || '', b || '', *c]
   end
 
@@ -25,7 +25,7 @@ class LingoTestCase <  Test::Unit::TestCase
   end
 
   def tk(t)
-    Lingo::Language::Token.new(*split(t))
+    Lingo::Language::Token.new(*split(t, /\|(?=[A-Z])/))
   end
 
   def lx(t)
