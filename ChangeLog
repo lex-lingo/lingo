@@ -2,7 +2,7 @@
 
 = Revision history for Lingo
 
-== 1.8.5 [unreleased]
+== 1.8.5 [2014-10-02]
 
 * Dictionary values (projections) are no longer sorted; hence, order of
   definition affects processing.
