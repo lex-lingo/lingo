@@ -44,8 +44,7 @@ The main functions of Lingo are:
         'config/*.cfg',
         'dict/*/*.txt',
         'lang/*.lang',
-        'txt/*.txt',
-        'lingo.rb'
+        'txt/*.txt'
       ].to_a,
       required_ruby_version: '>= 1.9.3',
       dependencies: {
@@ -118,7 +117,7 @@ def test_ref(name, cfg = name)
   require 'diff/lcs'
   require 'diff/lcs/ldiff'
 
-  cmd = %W[lingo.rb -c #{cfg} txt/#{name}.txt]
+  cmd = %W[bin/lingo -c #{cfg} txt/#{name}.txt]
   diff, msg = 0, ["Command failed: #{cmd.join(' ')}"]
 
   Process.ruby(*cmd) { |_, _, o, e|
