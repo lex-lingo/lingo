@@ -5,7 +5,7 @@ require_optional 'sdbm', 'gdbm', 'depot', 'sqlite3', %w[cdb cdb-full], 'libcdb'
 
 module StoreBench
 
-  F = ENV['BENCH_FILE'] || File.join(Bench::DIR, '../de/lingo-dic.txt')
+  F = ENV['BENCH_FILE'] || File.join(Bench::DIR, '../dict/de/lingo-dic.txt')
 
   N = (ENV['BENCH_CREATE'] || 10   ).to_i
   M = (ENV['BENCH_READ']   || N * 2).to_i
