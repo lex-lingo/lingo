@@ -88,14 +88,14 @@ class Lingo
         ['SPAC', /^\s+/],
         ['WIKI', /^=+.+=+|^__[A-Z]+__/],
         ['NUMS', /^[+-]?(?:\d{4,}|\d{1,3}(?:\.\d{3,3})*)(?:\.|(?:,\d+)?%?)/],
-        ['URLS', /^(?:www\.|mailto:|#{PROTO}|\S+?[._]\S+?@\S+?\.)\S+/],
+        ['URLS', /^(?:www\.|mailto:|#{PROTO}|\S+?[._]\S+?@\S+?\.)[^\s<>]+/],
         ['ABRV', /^(?:(?:(?:#{CHAR})+\.)+)(?:#{CHAR})+/],
         ['WORD', /^(?:#{CHAR}|#{DIGIT}|-)+/],
         ['PUNC', /^[!,.:;?¡¿]+/]
       ]
 
       OTHER = [
-        ['OTHR', /^["$#%&'()*+\/<=>@\[\\\]^_{|}~¢£¤¥¦§¨©«¬®¯°±²³´¶·¸¹»¼½¾×÷]/],
+        ['OTHR', /^["$#%&'()*+\/<=>@\[\\\]^_{|}~¢£¤¥¦§¨©«¬®¯°±²³´¶·¸¹»¼½¾×÷„“–]/],
         ['HELP', /^\S+/]
       ]
 
@@ -162,6 +162,9 @@ class Lingo
         @tags  = get_key('tags',  false)
         @wiki  = get_key('wiki',  false)
 
+        @skip_tags = get_array('skip-tags', '', :downcase)
+        @tags = true unless @skip_tags.empty?
+
         skip = []
         skip << 'HTML' unless @tags
         skip << 'WIKI' unless @wiki
@@ -170,7 +173,7 @@ class Lingo
           hash.delete_if { |name, _| skip.include?(Token.clean(name)) }
         }
 
-        @nest, nest_re = [], []
+        @override, @nest, nest_re = [], [], []
 
         @nests.each { |name, re|
           re.map!.with_index { |r, i| r.is_a?(Regexp) ?
@@ -190,7 +193,7 @@ class Lingo
           when STR_CMD_FILE then @filename, @linenum = param, 1
           when STR_CMD_LIR  then @filename, @linenum = nil, nil
           when STR_CMD_EOL  then @linenum += 1 if @linenum
-          when STR_CMD_EOF  then @nest.clear
+          when STR_CMD_EOF  then @override.clear; @nest.clear
         end
       end
 
@@ -240,7 +243,12 @@ class Lingo
           nest = @nests.keys.find { |name| mdo[name] }
           forward_nest(mdo[nest], mdo.post_match, nest)
         elsif mdc
-          forward_token(mdc[0], @nest.pop)
+          forward_token(text = mdc[0], nest = @nest.pop)
+
+          if overriding?(nest)
+            @override.pop if text.downcase.end_with?("/#{@override.last}>")
+          end
+
           tokenize(mdc.post_match)
         else
           forward_token(line, @nest.last)
@@ -258,13 +266,22 @@ class Lingo
       end
 
       def forward_nest(match, rest, nest)
+        if overriding?(nest)
+          tag = rest[/^[^\s>]*/].downcase
+          @override << tag if @skip_tags.include?(tag)
+        end
+
         forward_token(match, nest)
         @nest << nest
         tokenize(rest)
       end
 
-      def forward_token(*args)
-        forward(Token.new(*args))
+      def forward_token(form, attr)
+        forward(Token.new(form, @override.empty? ? attr : 'SKIP'))
+      end
+
+      def overriding?(nest)
+        nest == 'HTML' && !@skip_tags.empty?
       end
 
     end

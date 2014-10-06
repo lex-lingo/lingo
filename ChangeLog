@@ -2,6 +2,11 @@
 
 = Revision history for Lingo
 
+== 1.8.6 [unreleased]
+
+* Lingo::Attendee::Tokenizer learned <tt>skip-tags</tt> option to skip over
+  specified tags' contents.
+
 == 1.8.5 [2014-10-02]
 
 * Dictionary values (projections) are no longer sorted; hence, order of

@@ -19,6 +19,13 @@ class TestAttendeeTokenizer < AttendeeTestCase
       '',
       '}}'
     ]
+
+    @html = [
+      'test <a>test</a> test',
+      '<b>test <a>test</a></b>',
+      'test <a test="test"><b>test</b></a>, test',
+      '<a>test</a><b test="test">test</b><a>test</a>'
+    ]
   end
 
   def test_basic
@@ -235,6 +242,104 @@ class TestAttendeeTokenizer < AttendeeTestCase
       tk('|WIKI'),
       tk('|WIKI'),
       tk('}}|WIKI')
+    ])
+  end
+
+  def test_html1
+    meet({ 'tags' => true }, @html, [
+      tk('test|WORD'),
+      tk('<|HTML'),
+      tk('a>|HTML'),
+      tk('test|WORD'),
+      tk('<|HTML'),
+      tk('/a>|HTML'),
+      tk('test|WORD'),
+      tk('<|HTML'),
+      tk('b>|HTML'),
+      tk('test|WORD'),
+      tk('<|HTML'),
+      tk('a>|HTML'),
+      tk('test|WORD'),
+      tk('<|HTML'),
+      tk('/a>|HTML'),
+      tk('<|HTML'),
+      tk('/b>|HTML'),
+      tk('test|WORD'),
+      tk('<|HTML'),
+      tk('a test="test">|HTML'),
+      tk('<|HTML'),
+      tk('b>|HTML'),
+      tk('test|WORD'),
+      tk('<|HTML'),
+      tk('/b>|HTML'),
+      tk('<|HTML'),
+      tk('/a>|HTML'),
+      tk(',|PUNC'),
+      tk('test|WORD'),
+      tk('<|HTML'),
+      tk('a>|HTML'),
+      tk('test|WORD'),
+      tk('<|HTML'),
+      tk('/a>|HTML'),
+      tk('<|HTML'),
+      tk('b test="test">|HTML'),
+      tk('test|WORD'),
+      tk('<|HTML'),
+      tk('/b>|HTML'),
+      tk('<|HTML'),
+      tk('a>|HTML'),
+      tk('test|WORD'),
+      tk('<|HTML'),
+      tk('/a>|HTML')
+    ])
+  end
+
+  def test_html2
+    meet({ 'skip-tags' => 'a' }, @html, [
+      tk('test|WORD'),
+      tk('<|SKIP'),
+      tk('a>|SKIP'),
+      tk('test|SKIP'),
+      tk('<|SKIP'),
+      tk('/a>|SKIP'),
+      tk('test|WORD'),
+      tk('<|HTML'),
+      tk('b>|HTML'),
+      tk('test|WORD'),
+      tk('<|SKIP'),
+      tk('a>|SKIP'),
+      tk('test|SKIP'),
+      tk('<|SKIP'),
+      tk('/a>|SKIP'),
+      tk('<|HTML'),
+      tk('/b>|HTML'),
+      tk('test|WORD'),
+      tk('<|SKIP'),
+      tk('a test="test">|SKIP'),
+      tk('<|SKIP'),
+      tk('b>|SKIP'),
+      tk('test|SKIP'),
+      tk('<|SKIP'),
+      tk('/b>|SKIP'),
+      tk('<|SKIP'),
+      tk('/a>|SKIP'),
+      tk(',|PUNC'),
+      tk('test|WORD'),
+      tk('<|SKIP'),
+      tk('a>|SKIP'),
+      tk('test|SKIP'),
+      tk('<|SKIP'),
+      tk('/a>|SKIP'),
+      tk('<|HTML'),
+      tk('b test="test">|HTML'),
+      tk('test|WORD'),
+      tk('<|HTML'),
+      tk('/b>|HTML'),
+      tk('<|SKIP'),
+      tk('a>|SKIP'),
+      tk('test|SKIP'),
+      tk('<|SKIP'),
+      tk('/a>|SKIP')
     ])
   end
 
