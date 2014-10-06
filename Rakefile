@@ -1,33 +1,23 @@
 # encoding: utf-8
 
-__DIR__ = File.expand_path('..', __FILE__)
-
 require 'rake/clean'
 require 'nuggets/ruby'
-require File.join(__DIR__, %w[lib lingo version])
 
-PACKAGE_NAME = 'lingo'
-PACKAGE_PATH = File.join(__DIR__, 'pkg', "#{PACKAGE_NAME}-#{Lingo::VERSION}")
-
-if RUBY_PLATFORM =~ /msdos|mswin|djgpp|mingw|windows/i
-  ZIP_COMMANDS = ['zip', '7z a']  # for hen's gem task
-end
-
-task default: :spec
-task package: [:checkdoc, 'test:all', :clean]
+require_relative 'lib/lingo/version'
 
 begin
   require 'hen'
 
   Hen.lay! {{
     gem: {
-      name:         PACKAGE_NAME,
+      name:         'lingo',
       version:      Lingo::VERSION,
       summary:      'The full-featured automatic indexing system',
       authors:      ['John Vorhauer', 'Jens Wille'],
       email:        ['lingo@vorhauer.de', 'jens.wille@gmail.com'],
       license:      'AGPL-3.0',
       homepage:     'http://lex-lingo.de',
+
       description:  <<-EOT,
 Lingo is an open source indexing system for research and teachings.
 The main functions of Lingo are:
@@ -39,6 +29,7 @@ The main functions of Lingo are:
 * generic identification of phrases/word sequences based on patterns
   of word classes
       EOT
+
       extra_files:  FileList[
         'lib/lingo/{srv,web}/**/{,.}*',
         'config/*.cfg',
@@ -46,7 +37,7 @@ The main functions of Lingo are:
         'lang/*.lang',
         'txt/*.txt'
       ].to_a,
-      required_ruby_version: '>= 1.9.3',
+
       dependencies: {
         'cyclops'       => ['~> 0.0', '>= 0.0.4'],
         'nuggets'       => '~> 1.0',
@@ -54,10 +45,13 @@ The main functions of Lingo are:
         'sinatra-bells' => '~> 0.0',
         'unicode'       => '~> 0.4'
       },
+
       development_dependencies: {
         'diff-lcs' => '~> 1.2',
         'open4'    => '~> 1.3'
-      }
+      },
+
+      required_ruby_version: '>= 1.9.3'
     }
   }}
 rescue LoadError => err
@@ -73,40 +67,26 @@ CLEAN.include(
 
 CLOBBER.include('store')
 
-task :checkdoc do
-  docfile = File.join(__DIR__, 'doc', 'index.html')
-  abort "Please run `rake doc' first." unless File.exists?(docfile)
-end
-
 desc 'Run ALL tests'
-task 'test:all' => [:test, 'test:txt', 'test:lir']
+task 'test:all' => %w[test test:txt test:lir]
 
-Rake::TestTask.new(:test) do |t|
+Rake::TestTask.new(:test) { |t|
   t.test_files = FileList.new('test/ts_*.rb', 'test/attendee/ts_*.rb')
-end
+}
 
 desc 'Test against reference file (TXT)'
-task 'test:txt' do
-  test_ref('artikel', 'lingo')
-end
+task('test:txt') { test_ref('artikel', 'lingo') }
 
 desc 'Test against reference file (LIR)'
-task 'test:lir' do
-  test_ref('lir')
-end
+task('test:lir') { test_ref('lir') }
 
-desc 'Run all tests on packaged distribution'
-task 'test:remote' => [:package] do
-  chdir(PACKAGE_PATH) { system('rake test:all') } || abort
-end
-
-unless (benchmarks = Dir[File.join(__DIR__, 'bench', '*_bench.rb')]).empty?
+unless (benchmarks = Dir[File.expand_path('../bench/*_bench.rb', __FILE__)]).empty?
   desc 'Run all benchmarks'
   task :bench
 
   benchmarks.each { |benchmark|
     bench = File.basename(benchmark, '_bench.rb')
-    task :bench => benchtask = "bench:#{bench}"
+    task bench: benchtask = "bench:#{bench}"
 
     desc "Run #{bench} benchmark"
     task(benchtask) { system(File.ruby, benchmark) }
