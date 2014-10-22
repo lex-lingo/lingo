@@ -55,7 +55,7 @@ class Lingo
           ARGV.unshift(*lingo_options) if lingo_options.is_a?(Array)
         end
 
-        OptionParser.new(banner, 16) { |o|
+        OptionParser.new(banner, 12) { |o|
           o.on('-p port',   'set the port (default is 4567)')                { |v| set :port, Integer(v) }
           o.on('-o addr',   'set the host (default is 0.0.0.0)')             { |v| set :bind, v }
           o.on('-e env',    'set the environment (default is development)')  { |v| set :environment, v.to_sym }
@@ -63,7 +63,9 @@ class Lingo
           o.on('-x',        'turn on the mutex lock (default is off)')       {     set :lock, true }
         }.parse!(argv)
 
-        abort banner unless argv.empty?
+        argv.pop if File.basename($0) == 'rackup'  # rackup config
+
+        abort "Unrecognized arguments: #{argv}\n#{banner}" unless argv.empty?
 
         ARGV.unshift(*yield) if block_given?
       rescue OptionParser::ParseError => err
