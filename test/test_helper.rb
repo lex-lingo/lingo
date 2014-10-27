@@ -25,7 +25,8 @@ class LingoTestCase <  Test::Unit::TestCase
   end
 
   def tk(t)
-    Lingo::Language::Token.new(*split(t, /\|(?=[A-Z])/))
+    a, b, *c = split(t, /\|(?=[A-Z\d])/)
+    Lingo::Language::Token.new(a, b, *c.map(&:to_i))
   end
 
   def lx(t)

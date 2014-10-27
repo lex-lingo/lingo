@@ -41,13 +41,19 @@ class Lingo
         attr.sub(/:.*/, '')
       end
 
-      def initialize(*)
-        super
-        @attr = self.class.clean(attr)
+      def initialize(form, attr, position = nil, offset = nil)
+        @position, @offset = position, offset
+        super(form, self.class.clean(attr))
       end
+
+      attr_reader :position, :offset
 
       def word?
         attr == TA_WORD
+      end
+
+      def to_a
+        [form, attr, position, offset]
       end
 
       def to_s

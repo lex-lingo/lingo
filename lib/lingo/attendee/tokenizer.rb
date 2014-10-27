@@ -185,13 +185,13 @@ class Lingo
 
         @nest_re = /^(?<_>.*?)(?:#{nest_re.join('|')})/
 
-        @filename = @linenum = nil
+        reset
       end
 
       def control(cmd, param)
         case cmd
-          when STR_CMD_FILE then @filename, @linenum = param, 1
-          when STR_CMD_LIR  then @filename, @linenum = nil, nil
+          when STR_CMD_FILE then reset(param)
+          when STR_CMD_LIR  then reset(nil, nil)
           when STR_CMD_EOL  then @linenum += 1 if @linenum
           when STR_CMD_EOF  then @override.clear; @nest.clear
         end
@@ -207,6 +207,10 @@ class Lingo
       end
 
       private
+
+      def reset(filename = nil, linenum = 1)
+        @filename, @linenum, @position = filename, linenum, -1
+      end
 
       # tokenize("Eine Zeile.")  ->  [:Eine/WORD:, :Zeile/WORD:, :./PUNC:]
       def tokenize(line)
@@ -277,7 +281,7 @@ class Lingo
       end
 
       def forward_token(form, attr)
-        forward(Token.new(form, @override.empty? ? attr : 'SKIP'))
+        forward(Token.new(form, @override.empty? ? attr : 'SKIP', @position += 1))
       end
 
       def overriding?(nest)

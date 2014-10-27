@@ -4,6 +4,7 @@
 
 == 1.8.6 [unreleased]
 
+* Lingo::Attendee::Tokenizer records token's sequence position.
 * Lingo::Attendee::Tokenizer learned <tt>skip-tags</tt> option to skip over
   specified tags' contents.
 
