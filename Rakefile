@@ -52,6 +52,9 @@ The main functions of Lingo are:
       },
 
       required_ruby_version: '>= 1.9.3'
+    },
+    test: {
+      pattern: %w[test/ts_*.rb test/attendee/ts_*.rb]
     }
   }}
 rescue LoadError => err
@@ -69,10 +72,6 @@ CLOBBER.include('store')
 
 desc 'Run ALL tests'
 task 'test:all' => %w[test test:txt test:lir]
-
-Rake::TestTask.new(:test) { |t|
-  t.test_files = FileList.new('test/ts_*.rb', 'test/attendee/ts_*.rb')
-}
 
 desc 'Test against reference file (TXT)'
 task('test:txt') { test_ref('artikel', 'lingo') }
