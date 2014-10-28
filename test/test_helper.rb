@@ -3,7 +3,7 @@
 require 'test/unit'
 require 'lingo'
 
-class LingoTestCase <  Test::Unit::TestCase
+class LingoTestCase < Test::Unit::TestCase
 
   unless const_defined?(:TEST_FILE)
     TEST_FILE = 'test/de/test.txt'
@@ -18,6 +18,10 @@ class LingoTestCase <  Test::Unit::TestCase
   def split(t, r = '|')
     a, b, *c = t.split(r)
     [a || '', b || '', *c]
+  end
+
+  def li(t)
+    "#{t}\r\n"
   end
 
   def ai(t)

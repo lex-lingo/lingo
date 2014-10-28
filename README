@@ -187,7 +187,7 @@ of context to external files.
 _Example_:
 
   # keep line endings
-  - text_reader:     { files: $(files), chomp: false }
+  - text_reader:     { files: $(files) }
   # keep whitespace
   - tokenizer:       { space: true }
   # do processing...

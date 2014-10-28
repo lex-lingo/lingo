@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2013 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2014 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -111,7 +111,6 @@ class Lingo
       def init
         get_files
 
-        @chomp    = get_key('chomp', true)
         @filter   = get_key('filter', false)
         @progress = get_key('progress', false)
 
@@ -142,7 +141,6 @@ class Lingo
           filter(io, path, progress) { |line, pos|
             progress << pos
 
-            line.chomp! if @chomp
             next if line =~ @skip
 
             if line =~ @lir
