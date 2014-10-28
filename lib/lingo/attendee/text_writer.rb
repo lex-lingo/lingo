@@ -90,11 +90,11 @@ class Lingo
         @no_sep, @no_puts = true, false
       end
 
-      def control(cmd, param)
+      def control(cmd, param = nil, *)
         case cmd
-          when STR_CMD_LIR
+          when :LIR
             @lir = true unless @lir.nil?
-          when STR_CMD_FILE
+          when :FILE
             @no_sep = true
 
             if stdout?(@ext)
@@ -104,20 +104,20 @@ class Lingo
             end
 
             @lir_rec_no, @lir_rec_buf = '', []
-          when STR_CMD_RECORD
+          when :RECORD
             if @lir
               @no_sep = true
 
               flush_lir_buffer
               @lir_rec_no = param
             end
-          when STR_CMD_EOL
+          when :EOL
             @no_sep = true
 
             unless @lir
               @file.puts unless @no_puts
             end
-          when STR_CMD_EOF
+          when :EOF
             flush_lir_buffer if @lir
 
             unless stdout?(@filename)

@@ -114,8 +114,8 @@ class Lingo
         raise MissingConfigError.new(:sequences) if @seq.empty?
       end
 
-      def control(cmd, param)
-        process_buffer if [STR_CMD_RECORD, STR_CMD_EOF].include?(cmd)
+      def control(cmd, *)
+        process_buffer if [:RECORD, :EOF].include?(cmd)
       end
 
       def process_buffer?

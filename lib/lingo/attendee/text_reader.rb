@@ -121,9 +121,9 @@ class Lingo
         @skip = get_re('skip', nil)
       end
 
-      def control(cmd, param)
-        if cmd == STR_CMD_TALK
-          forward(STR_CMD_LIR, '') if @lir
+      def control(cmd, *)
+        if cmd == :TALK
+          command(:LIR) if @lir
           @files.each { |i| spool(i) }
         end
       end
@@ -132,7 +132,7 @@ class Lingo
 
       # Gibt eine Datei zeilenweise in den Ausgabekanal
       def spool(path)
-        forward(STR_CMD_FILE, path)
+        command(:FILE, path)
 
         io = !stdin?(path) ? open_file(name = path) : begin
           stdin = lingo.config.stdin.set_encoding(ENC)
@@ -146,14 +146,14 @@ class Lingo
             progress << (pos || io.pos)
 
             line =~ @skip ? nil : line =~ @lir ?
-              forward(STR_CMD_RECORD, $1 || $&) : begin
+              command(:RECORD, $1 || $&) : begin
                 line.sub!(@cut, '') if @cut
                 forward(line) unless line.empty?
               end
           }
         }
 
-        forward(STR_CMD_EOF, path)
+        command(:EOF, path)
       end
 
       def filter(io, path, progress)

@@ -68,13 +68,6 @@ class Lingo
 
     include Language
 
-    STR_CMD_TALK   = 'TALK'
-    STR_CMD_LIR    = 'LIR-FORMAT'
-    STR_CMD_FILE   = 'FILE'
-    STR_CMD_EOL    = 'EOL'
-    STR_CMD_RECORD = 'RECORD'
-    STR_CMD_EOF    = 'EOF'
-
     DEFAULT_SKIP = [TA_PUNCTUATION, TA_OTHER].join(',')
 
     def initialize(config, lingo)
@@ -99,18 +92,13 @@ class Lingo
       @subscriber.concat(subscriber)
     end
 
-    def listen(obj)
-      if obj.is_a?(AgendaItem)
-        args = obj.to_a
-        control(*args) if @can_control
-        forward(*args) unless obj.cmd == STR_CMD_TALK || skip_command!
-      else
-        @can_process ? process(obj) : forward(obj)
-      end
+    def listen(cmd, *args)
+      control(cmd, *args) if @can_control
+      command(cmd, *args) if cmd != :TALK && !skip_command!
     end
 
-    def talk(obj)
-      @subscriber.each { |attendee| attendee.listen(obj) }
+    def accept(*args)
+      @can_process ? process(*args) : forward(*args)
     end
 
     private
@@ -128,8 +116,12 @@ class Lingo
       @skip_command.tap { @skip_command &&= false }
     end
 
-    def forward(obj, param = nil)
-      talk(param ? AgendaItem.new(obj, param) : obj)
+    def forward(*args)
+      @subscriber.each { |attendee| attendee.accept(*args) }
+    end
+
+    def command(*args)
+      @subscriber.each { |attendee| attendee.listen(*args) }
     end
 
     def flush(buffer)

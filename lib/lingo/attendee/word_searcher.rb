@@ -71,7 +71,7 @@ class Lingo
         set_dic
       end
 
-      def control(cmd, param)
+      def control(*)
         # can control
       end
 

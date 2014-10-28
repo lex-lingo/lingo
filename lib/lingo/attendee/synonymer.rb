@@ -78,7 +78,7 @@ class Lingo
         @skip = get_array('skip', WA_UNKNOWN, :upcase)
       end
 
-      def control(cmd, param)
+      def control(*)
         # can control
       end
 

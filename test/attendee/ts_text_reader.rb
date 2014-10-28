@@ -6,7 +6,7 @@ class TestAttendeeTextReader < AttendeeTestCase
 
   def test_lir_file
     meet({ 'files' => 'test/lir.txt', 'records' => true, 'fields' => false }, nil, [
-      ai('LIR-FORMAT|'), ai("FILE|#{path = File.expand_path('test/lir.txt')}"),
+      ai('LIR|'), ai("FILE|#{path = File.expand_path('test/lir.txt')}"),
       ai('RECORD|00237'),
       li('020: GERHARD.'),
       li('025: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.'),
@@ -25,7 +25,7 @@ class TestAttendeeTextReader < AttendeeTestCase
 
   def test_lir_file_another_pattern
     meet({ 'files' => 'test/lir2.txt', 'records' => '^\021(\d+)\022', 'fields' => false }, nil, [
-      ai('LIR-FORMAT|'), ai("FILE|#{path = File.expand_path('test/lir2.txt')}"),
+      ai('LIR|'), ai("FILE|#{path = File.expand_path('test/lir2.txt')}"),
       ai('RECORD|00237'),
       li('020: GERHARD.'),
       li('025: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.'),
@@ -44,7 +44,7 @@ class TestAttendeeTextReader < AttendeeTestCase
 
   def test_lir_file_no_capture
     meet({ 'files' => 'test/lir.txt', 'records' => '^\[\d+\.\]', 'fields' => false }, nil, [
-      ai('LIR-FORMAT|'), ai("FILE|#{path = File.expand_path('test/lir.txt')}"),
+      ai('LIR|'), ai("FILE|#{path = File.expand_path('test/lir.txt')}"),
       ai('RECORD|[00237.]'),
       li('020: GERHARD.'),
       li('025: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.'),
@@ -63,7 +63,7 @@ class TestAttendeeTextReader < AttendeeTestCase
 
   def test_lir_file_fields
     meet({ 'files' => 'test/lir.txt', 'records' => true }, nil, [
-      ai('LIR-FORMAT|'), ai("FILE|#{path = File.expand_path('test/lir.txt')}"),
+      ai('LIR|'), ai("FILE|#{path = File.expand_path('test/lir.txt')}"),
       ai('RECORD|00237'),
       li('GERHARD.'),
       li('Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.'),
@@ -82,7 +82,7 @@ class TestAttendeeTextReader < AttendeeTestCase
 
   def test_lir_file_fields_another_pattern
     meet({ 'files' => 'test/lir.txt', 'records' => true, 'fields' => '^\d+:' }, nil, [
-      ai('LIR-FORMAT|'), ai("FILE|#{path = File.expand_path('test/lir.txt')}"),
+      ai('LIR|'), ai("FILE|#{path = File.expand_path('test/lir.txt')}"),
       ai('RECORD|00237'),
       li(' GERHARD.'),
       li(' Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.'),
@@ -101,7 +101,7 @@ class TestAttendeeTextReader < AttendeeTestCase
 
   def test_lir_file_fields_no_capture
     meet({ 'files' => 'test/lir.txt', 'records' => '^\[\d+\.\]' }, nil, [
-      ai('LIR-FORMAT|'), ai("FILE|#{path = File.expand_path('test/lir.txt')}"),
+      ai('LIR|'), ai("FILE|#{path = File.expand_path('test/lir.txt')}"),
       ai('RECORD|[00237.]'),
       li('GERHARD.'),
       li('Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.'),

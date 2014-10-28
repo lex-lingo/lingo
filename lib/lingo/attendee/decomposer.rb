@@ -79,7 +79,7 @@ class Lingo
         set_gra
       end
 
-      def control(cmd, param)
+      def control(*)
         # can control
       end
 

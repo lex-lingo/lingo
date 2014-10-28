@@ -70,7 +70,7 @@ class Lingo
     end
 
     def control_multi(cmd)
-      if [STR_CMD_RECORD, STR_CMD_EOF].include?(cmd)
+      if [:RECORD, :EOF].include?(cmd)
         @eof_handling = true
 
         while valid_tokens_in_buffer > 1

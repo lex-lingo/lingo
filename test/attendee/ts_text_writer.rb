@@ -50,7 +50,7 @@ class TestAttendeeTextWriter < AttendeeTestCase
 
   def test_lir_file
     meet({ 'ext' => 'vec', 'lir-format' => false }, [
-      ai('LIR-FORMAT|'), ai('FILE|test/lir.txt'),
+      ai('LIR|'), ai('FILE|test/lir.txt'),
       ai('RECORD|00237'),
       '020: GERHARD.',
       '025: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.',

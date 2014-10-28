@@ -78,16 +78,12 @@ class Lingo
         @nonewords = []
       end
 
-      def control(cmd, param)
+      def control(cmd, *)
         case cmd
-          when STR_CMD_FILE
-            @nonewords.clear
-          when STR_CMD_EOL
-            skip_command
-          when STR_CMD_RECORD
-            send_nonewords unless @dict
-          when STR_CMD_EOF
-            send_nonewords
+          when :FILE   then @nonewords.clear
+          when :EOL    then skip_command
+          when :RECORD then send_nonewords unless @dict
+          when :EOF    then send_nonewords
         end
       end
 

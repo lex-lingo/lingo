@@ -295,7 +295,7 @@ class Lingo
   end
 
   def start
-    @attendees.first.listen(AgendaItem.new(Attendee::STR_CMD_TALK))
+    @attendees.first.listen(:TALK)
   end
 
   def reset(close = true)
@@ -318,7 +318,6 @@ require_relative 'lingo/call'
 require_relative 'lingo/error'
 require_relative 'lingo/debug'
 require_relative 'lingo/config'
-require_relative 'lingo/agenda_item'
 require_relative 'lingo/progress'
 require_relative 'lingo/database'
 require_relative 'lingo/language'

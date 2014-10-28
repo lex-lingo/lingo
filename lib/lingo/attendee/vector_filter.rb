@@ -106,12 +106,10 @@ class Lingo
         @vectors, @word_count = [], 0
       end
 
-      def control(cmd, param)
+      def control(cmd, *)
         case cmd
-          when STR_CMD_EOL
-            skip_command
-          when STR_CMD_FILE, STR_CMD_RECORD, STR_CMD_EOF
-            send_vectors unless @vectors.empty?
+          when :EOL                 then skip_command
+          when :FILE, :RECORD, :EOF then send_vectors unless @vectors.empty?
         end
       end
 

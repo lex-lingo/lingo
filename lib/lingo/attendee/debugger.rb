@@ -95,19 +95,19 @@ class Lingo
         @prompt   = get_key('prompt', 'lex:) ')
       end
 
-      def control(cmd, param)
-        debug(AgendaItem.new(cmd, param), @cmd_eval)
+      def control(cmd, param = nil, *)
+        debug(@cmd_eval) { "*#{cmd}('#{param}')" }
       end
 
       def process(obj)
-        debug(obj, @obj_eval)
+        debug(@obj_eval) { obj.inspect }
         forward(obj)
       end
 
       private
 
-      def debug(obj, cond)
-        warn "#{@prompt} #{obj.inspect}" if eval(cond)
+      def debug(cond)
+        warn "#{@prompt} #{yield}" if eval(cond)
       end
 
     end

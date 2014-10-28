@@ -112,7 +112,7 @@ class Lingo
         @expected_tokens_in_buffer, @eof_handling = 3, false
       end
 
-      def control(cmd, param)
+      def control(cmd, *)
         control_multi(cmd)
       end
 

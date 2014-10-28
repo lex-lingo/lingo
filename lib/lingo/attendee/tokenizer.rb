@@ -188,22 +188,18 @@ class Lingo
         reset
       end
 
-      def control(cmd, param)
+      def control(cmd, filename = nil, *)
         case cmd
-          when STR_CMD_FILE then reset(param)
-          when STR_CMD_LIR  then reset(nil, nil)
-          when STR_CMD_EOL  then @linenum += 1 if @linenum
-          when STR_CMD_EOF  then @override.clear; @nest.clear
+          when :FILE then reset(filename)
+          when :LIR  then reset(nil, nil)
+          when :EOL  then @linenum += 1 if @linenum
+          when :EOF  then @override.clear; @nest.clear
         end
       end
 
-      def process(obj)
-        if obj.is_a?(String)
-          tokenize(obj)
-          forward(STR_CMD_EOL, @filename) if @filename
-        else
-          forward(obj)
-        end
+      def process(line)
+        tokenize(line)
+        command(:EOL, @filename) if @filename
       end
 
       private

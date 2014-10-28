@@ -25,7 +25,8 @@ class LingoTestCase < Test::Unit::TestCase
   end
 
   def ai(t)
-    Lingo::AgendaItem.new(*split(t))
+    i = t.split('|')
+    i.unshift(i.shift.to_sym)
   end
 
   def tk(t)
@@ -85,8 +86,10 @@ class Lingo
         @input = get_key('input')
       end
 
-      def control(cmd, param)
-        @input.each { |i| forward(i) } if cmd == STR_CMD_TALK
+      def control(cmd)
+        if cmd == :TALK
+          @input.each { |i| i.is_a?(Array) ? command(*i) : forward(i) }
+        end
       end
 
     end
@@ -99,12 +102,12 @@ class Lingo
         @output = get_key('output')
       end
 
-      def control(cmd, param)
-        @output << AgendaItem.new(cmd, param)
+      def control(*args)
+        @output.push(args)
       end
 
-      def process(obj)
-        @output << obj
+      def process(obj, *rest)
+        @output.push(rest.empty? ? obj : rest.unshift(obj))
       end
 
     end
@@ -120,4 +123,5 @@ class Lingo
     end
 
   end
+
 end
