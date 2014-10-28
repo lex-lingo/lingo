@@ -20,8 +20,8 @@ class LingoTestCase < Test::Unit::TestCase
     [a || '', b || '', *c]
   end
 
-  def li(t)
-    "#{t}\r\n"
+  def li(t, o)
+    ["#{t}\r\n", o]
   end
 
   def ai(t)
@@ -61,8 +61,15 @@ class AttendeeTestCase < LingoTestCase
     @lingo.reset
 
     list = [{ @attendee => cfg }]
-    list.unshift 'TestSpooler' => { 'out' => 'input',  'input'  => input       } if input
-    list.push    'TestDumper'  => { 'in'  => 'output', 'output' => output = [] } if expect
+
+    list.unshift('TestSpooler' => {
+      'out'    => 'input',
+      'input'  => input,
+      'pos'    => @attendee == 'Tokenizer' }) if input
+
+    list.push('TestDumper' => {
+      'in'     => 'output',
+      'output' => output = [] }) if expect
 
     @lingo.invite(list)
     @lingo.start
@@ -83,12 +90,13 @@ class Lingo
       protected
 
       def init
-        @input = get_key('input')
+        @input, @pos = get_key('input'), get_key('pos', nil) && 0
       end
 
       def control(cmd)
         if cmd == :TALK
-          @input.each { |i| i.is_a?(Array) ? command(*i) : forward(i) }
+          @input.each { |i| i.is_a?(Array) ? command(*i) :
+            @pos ? forward(i, @pos += i.bytesize) : forward(i) }
         end
       end
 

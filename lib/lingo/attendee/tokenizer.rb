@@ -197,7 +197,8 @@ class Lingo
         end
       end
 
-      def process(line)
+      def process(line, offset)
+        @offset = offset
         tokenize(line)
         command(:EOL, @filename) if @filename
       end
@@ -205,7 +206,7 @@ class Lingo
       private
 
       def reset(filename = nil, linenum = 1)
-        @filename, @linenum, @position = filename, linenum, -1
+        @filename, @linenum, @position, @offset = filename, linenum, -1, 0
       end
 
       # tokenize("Eine Zeile.")  ->  [:Eine/WORD:, :Zeile/WORD:, :./PUNC:]
@@ -228,8 +229,11 @@ class Lingo
       def tokenize_rule(line, rules = @rules)
         rules.find { |name, expr|
           next unless line =~ expr
-          forward_token($&, name) if name != 'SPAC' || @space
-          yield $'
+
+          rest = $'
+          forward_token($&, name, rest) if name != 'SPAC' || @space
+
+          yield rest
         }
       end
 
@@ -238,18 +242,26 @@ class Lingo
         mdc = @nests[@nest.last].last.match(line)
 
         if mdo && (!mdc || mdo[0].length < mdc[0].length)
-          forward_token(mdo[:_], @nest.last) unless mdo[:_].empty?
-
+          rest = mdo.post_match
           nest = @nests.keys.find { |name| mdo[name] }
-          forward_nest(mdo[nest], mdo.post_match, nest)
+          text = mdo[nest]
+          lead = mdo[:_]
+
+          forward_token(lead, @nest.last, text + rest) unless lead.empty?
+
+          forward_nest(text, nest, rest)
         elsif mdc
-          forward_token(text = mdc[0], nest = @nest.pop)
+          rest = mdc.post_match
+          nest = @nest.pop
+          text = mdc[0]
+
+          forward_token(text, nest, rest)
 
           if overriding?(nest)
             @override.pop if text.downcase.end_with?("/#{@override.last}>")
           end
 
-          tokenize(mdc.post_match)
+          tokenize(rest)
         else
           forward_token(line, @nest.last)
         end
@@ -258,26 +270,28 @@ class Lingo
       def tokenize_open(line)
         @nests.each { |nest, (open_re, _)|
           next unless line =~ open_re
-          return forward_nest($&, $', nest)
+          return forward_nest($&, nest, $')
         }
 
         tokenize_rule(line, OTHER) { |rest| line = rest }
         tokenize(line)
       end
 
-      def forward_nest(match, rest, nest)
+      def forward_nest(match, nest, rest)
         if overriding?(nest)
           tag = rest[/^[^\s>]*/].downcase
           @override << tag if @skip_tags.include?(tag)
         end
 
-        forward_token(match, nest)
+        forward_token(match, nest, rest)
+
         @nest << nest
         tokenize(rest)
       end
 
-      def forward_token(form, attr)
-        forward(Token.new(form, @override.empty? ? attr : 'SKIP', @position += 1))
+      def forward_token(form, attr, rest = '')
+        forward(Token.new(form, @override.empty? ? attr : 'SKIP',
+          @position += 1, @offset - form.bytesize - rest.bytesize))
       end
 
       def overriding?(nest)

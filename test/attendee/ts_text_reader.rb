@@ -8,17 +8,17 @@ class TestAttendeeTextReader < AttendeeTestCase
     meet({ 'files' => 'test/lir.txt', 'records' => true, 'fields' => false }, nil, [
       ai('LIR|'), ai("FILE|#{path = File.expand_path('test/lir.txt')}"),
       ai('RECORD|00237'),
-      li('020: GERHARD.'),
-      li('025: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.'),
-      li('056: Die intellektuelle Erschließung des Internet befindet sich in einer Krise. GERHARD ist derzeit weltweit der einzige.'),
-      li(''),
+      li('020: GERHARD.', 25),
+      li('025: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.', 140),
+      li('056: Die intellektuelle Erschließung des Internet befindet sich in einer Krise. GERHARD ist derzeit weltweit der einzige.', 264),
+      li('', 266),
       ai('RECORD|00238'),
-      li('020: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.'),
-      li('025: das DFG-Projekt GERHARD.'),
-      li(''),
+      li('020: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.', 391),
+      li('025: das DFG-Projekt GERHARD.', 422),
+      li('', 424),
       ai('RECORD|00239'),
-      li('020: Information Retrieval und Dokumentmanagement im Multimedia-Zeitalter.'),
-      li('056: "Das Buch ist ein praxisbezogenes VADEMECUM für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.'),
+      li('020: Information Retrieval und Dokumentmanagement im Multimedia-Zeitalter.', 510),
+      li('056: "Das Buch ist ein praxisbezogenes VADEMECUM für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.', 634),
       ai("EOF|#{path}")
     ])
   end
@@ -27,17 +27,17 @@ class TestAttendeeTextReader < AttendeeTestCase
     meet({ 'files' => 'test/lir2.txt', 'records' => '^\021(\d+)\022', 'fields' => false }, nil, [
       ai('LIR|'), ai("FILE|#{path = File.expand_path('test/lir2.txt')}"),
       ai('RECORD|00237'),
-      li('020: GERHARD.'),
-      li('025: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.'),
-      li('056: Die intellektuelle Erschließung des Internet befindet sich in einer Krise. GERHARD ist derzeit weltweit der einzige.'),
-      li(''),
+      li('020: GERHARD.', 24),
+      li('025: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.', 139),
+      li('056: Die intellektuelle Erschließung des Internet befindet sich in einer Krise. GERHARD ist derzeit weltweit der einzige.', 263),
+      li('', 265),
       ai('RECORD|00238'),
-      li('020: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.'),
-      li('025: das DFG-Projekt GERHARD.'),
-      li(''),
+      li('020: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.', 389),
+      li('025: das DFG-Projekt GERHARD.', 420),
+      li('', 422),
       ai('RECORD|00239'),
-      li('020: Information Retrieval und Dokumentmanagement im Multimedia-Zeitalter.'),
-      li('056: "Das Buch ist ein praxisbezogenes VADEMECUM für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.'),
+      li('020: Information Retrieval und Dokumentmanagement im Multimedia-Zeitalter.', 507),
+      li('056: "Das Buch ist ein praxisbezogenes VADEMECUM für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.', 631),
       ai("EOF|#{path}")
     ])
   end
@@ -46,17 +46,17 @@ class TestAttendeeTextReader < AttendeeTestCase
     meet({ 'files' => 'test/lir.txt', 'records' => '^\[\d+\.\]', 'fields' => false }, nil, [
       ai('LIR|'), ai("FILE|#{path = File.expand_path('test/lir.txt')}"),
       ai('RECORD|[00237.]'),
-      li('020: GERHARD.'),
-      li('025: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.'),
-      li('056: Die intellektuelle Erschließung des Internet befindet sich in einer Krise. GERHARD ist derzeit weltweit der einzige.'),
-      li(''),
+      li('020: GERHARD.', 25),
+      li('025: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.', 140),
+      li('056: Die intellektuelle Erschließung des Internet befindet sich in einer Krise. GERHARD ist derzeit weltweit der einzige.', 264),
+      li('', 266),
       ai('RECORD|[00238.]'),
-      li('020: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.'),
-      li('025: das DFG-Projekt GERHARD.'),
-      li(''),
+      li('020: Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.', 391),
+      li('025: das DFG-Projekt GERHARD.', 422),
+      li('', 424),
       ai('RECORD|[00239.]'),
-      li('020: Information Retrieval und Dokumentmanagement im Multimedia-Zeitalter.'),
-      li('056: "Das Buch ist ein praxisbezogenes VADEMECUM für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.'),
+      li('020: Information Retrieval und Dokumentmanagement im Multimedia-Zeitalter.', 510),
+      li('056: "Das Buch ist ein praxisbezogenes VADEMECUM für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.', 634),
       ai("EOF|#{path}")
     ])
   end
@@ -65,17 +65,17 @@ class TestAttendeeTextReader < AttendeeTestCase
     meet({ 'files' => 'test/lir.txt', 'records' => true }, nil, [
       ai('LIR|'), ai("FILE|#{path = File.expand_path('test/lir.txt')}"),
       ai('RECORD|00237'),
-      li('GERHARD.'),
-      li('Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.'),
-      li('Die intellektuelle Erschließung des Internet befindet sich in einer Krise. GERHARD ist derzeit weltweit der einzige.'),
-      li(''),
+      li('GERHARD.', 25),
+      li('Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.', 140),
+      li('Die intellektuelle Erschließung des Internet befindet sich in einer Krise. GERHARD ist derzeit weltweit der einzige.', 264),
+      li('', 266),
       ai('RECORD|00238'),
-      li('Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.'),
-      li('das DFG-Projekt GERHARD.'),
-      li(''),
+      li('Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.', 391),
+      li('das DFG-Projekt GERHARD.', 422),
+      li('', 424),
       ai('RECORD|00239'),
-      li('Information Retrieval und Dokumentmanagement im Multimedia-Zeitalter.'),
-      li('"Das Buch ist ein praxisbezogenes VADEMECUM für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.'),
+      li('Information Retrieval und Dokumentmanagement im Multimedia-Zeitalter.', 510),
+      li('"Das Buch ist ein praxisbezogenes VADEMECUM für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.', 634),
       ai("EOF|#{path}")
     ])
   end
@@ -84,17 +84,17 @@ class TestAttendeeTextReader < AttendeeTestCase
     meet({ 'files' => 'test/lir.txt', 'records' => true, 'fields' => '^\d+:' }, nil, [
       ai('LIR|'), ai("FILE|#{path = File.expand_path('test/lir.txt')}"),
       ai('RECORD|00237'),
-      li(' GERHARD.'),
-      li(' Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.'),
-      li(' Die intellektuelle Erschließung des Internet befindet sich in einer Krise. GERHARD ist derzeit weltweit der einzige.'),
-      li(''),
+      li(' GERHARD.', 25),
+      li(' Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.', 140),
+      li(' Die intellektuelle Erschließung des Internet befindet sich in einer Krise. GERHARD ist derzeit weltweit der einzige.', 264),
+      li('', 266),
       ai('RECORD|00238'),
-      li(' Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.'),
-      li(' das DFG-Projekt GERHARD.'),
-      li(''),
+      li(' Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.', 391),
+      li(' das DFG-Projekt GERHARD.', 422),
+      li('', 424),
       ai('RECORD|00239'),
-      li(' Information Retrieval und Dokumentmanagement im Multimedia-Zeitalter.'),
-      li(' "Das Buch ist ein praxisbezogenes VADEMECUM für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.'),
+      li(' Information Retrieval und Dokumentmanagement im Multimedia-Zeitalter.', 510),
+      li(' "Das Buch ist ein praxisbezogenes VADEMECUM für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.', 634),
       ai("EOF|#{path}")
     ])
   end
@@ -103,17 +103,17 @@ class TestAttendeeTextReader < AttendeeTestCase
     meet({ 'files' => 'test/lir.txt', 'records' => '^\[\d+\.\]' }, nil, [
       ai('LIR|'), ai("FILE|#{path = File.expand_path('test/lir.txt')}"),
       ai('RECORD|[00237.]'),
-      li('GERHARD.'),
-      li('Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.'),
-      li('Die intellektuelle Erschließung des Internet befindet sich in einer Krise. GERHARD ist derzeit weltweit der einzige.'),
-      li(''),
+      li('GERHARD.', 25),
+      li('Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.', 140),
+      li('Die intellektuelle Erschließung des Internet befindet sich in einer Krise. GERHARD ist derzeit weltweit der einzige.', 264),
+      li('', 266),
       ai('RECORD|[00238.]'),
-      li('Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.'),
-      li('das DFG-Projekt GERHARD.'),
-      li(''),
+      li('Automatisches Sammeln, Klassifizieren und Indexieren von wissenschaftlich relevanten Informationsressourcen.', 391),
+      li('das DFG-Projekt GERHARD.', 422),
+      li('', 424),
       ai('RECORD|[00239.]'),
-      li('Information Retrieval und Dokumentmanagement im Multimedia-Zeitalter.'),
-      li('"Das Buch ist ein praxisbezogenes VADEMECUM für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.'),
+      li('Information Retrieval und Dokumentmanagement im Multimedia-Zeitalter.', 510),
+      li('"Das Buch ist ein praxisbezogenes VADEMECUM für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.', 634),
       ai("EOF|#{path}")
     ])
   end
@@ -121,7 +121,7 @@ class TestAttendeeTextReader < AttendeeTestCase
   def test_normal_file
     meet({ 'files' => 'test/mul.txt' }, nil, [
       ai("FILE|#{path = File.expand_path('test/mul.txt')}"),
-      'Die abstrakte Kunst ist schön.',
+      ['Die abstrakte Kunst ist schön.', 31],
       ai("EOF|#{path}")
     ])
   end

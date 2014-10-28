@@ -6,6 +6,8 @@
 
 * Lingo::Attendee::TextReader no longer removes line endings; option +chomp+
   is obsolete.
+* Lingo::Attendee::TextReader passes byte offset to the following attendee.
+* Lingo::Attendee::Tokenizer records token's byte offset.
 * Lingo::Attendee::Tokenizer records token's sequence position.
 * Lingo::Attendee::Tokenizer learned <tt>skip-tags</tt> option to skip over
   specified tags' contents.

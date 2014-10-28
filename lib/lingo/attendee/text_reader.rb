@@ -143,12 +143,12 @@ class Lingo
           pos = 0 unless pos?(io = filter(io, path, progress))
 
           io.each { |line|
-            progress << (pos || io.pos)
+            progress << offset = pos ? pos += line.bytesize : io.pos
 
             line =~ @skip ? nil : line =~ @lir ?
               command(:RECORD, $1 || $&) : begin
                 line.sub!(@cut, '') if @cut
-                forward(line) unless line.empty?
+                forward(line, offset) unless line.empty?
               end
           }
         }
