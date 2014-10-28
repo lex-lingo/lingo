@@ -134,21 +134,22 @@ class Lingo
       def spool(path)
         forward(STR_CMD_FILE, path)
 
-        io = !stdin?(path) ? open_file(name = path) :
-          string_or_io(lingo.config.stdin.set_encoding(ENC))
+        io = !stdin?(path) ? open_file(name = path) : begin
+          stdin = lingo.config.stdin.set_encoding(ENC)
+          @progress ? StringIO.new(stdin.read) : stdin
+        end
 
         Progress.new(self, @progress && io.size, name) { |progress|
-          filter(io, path, progress) { |line, pos|
-            progress << pos
+          pos = 0 unless pos?(io = filter(io, path, progress))
 
-            next if line =~ @skip
+          io.each { |line|
+            progress << (pos || io.pos)
 
-            if line =~ @lir
-              forward(STR_CMD_RECORD, $1 || $&)
-            else
-              line.sub!(@cut, '') if @cut
-              forward(line) unless line.empty?
-            end
+            line =~ @skip ? nil : line =~ @lir ?
+              forward(STR_CMD_RECORD, $1 || $&) : begin
+                line.sub!(@cut, '') if @cut
+                forward(line) unless line.empty?
+              end
           }
         }
 
@@ -156,19 +157,13 @@ class Lingo
       end
 
       def filter(io, path, progress)
-        block = @progress ?
-          lambda { |line| yield line, io.pos } :
-          lambda { |line| yield line, 0 }
-
-        io = case @filter == true ? file_type(io, path) : @filter.to_s
+        case @filter == true ? file_type(io, path) : @filter.to_s
           when 'pdftotext' then filter_pdftotext(io, path, progress)
           when /html/i     then filter_html(io)
           when /xml/i      then filter_html(io, true)
-          when /pdf/i      then filter_pdf(io, &block); return
+          when /pdf/i      then filter_pdf(io)
           else io
         end
-
-        io.each_line(&block)
       end
 
       def filter_pdftotext(io, path, progress)
@@ -187,7 +182,7 @@ class Lingo
 
       def filter_pdf(io)
         if Object.const_defined?(:PDF) && PDF.const_defined?(:Reader)
-          PDF::Reader.new(io).pages.each { |page| yield page.text }
+          text_enum(PDF::Reader.new(io).pages)
         else
           cancel_filter(:PDF, 'pdf-reader')
         end
@@ -197,8 +192,7 @@ class Lingo
         type = xml ? :XML : :HTML
 
         if Object.const_defined?(:Nokogiri)
-          doc = Nokogiri.send(type, io, nil, ENC)
-          string_or_io(doc.children.map { |x| x.inner_text }.join)
+          text_enum(Nokogiri.send(type, io, nil, ENC).children)
         else
           cancel_filter(type, :nokogiri)
         end
@@ -206,7 +200,7 @@ class Lingo
 
       def file_type(io, path)
         if Object.const_defined?(:FileMagic) && io.respond_to?(:rewind)
-          type = FileMagic.fm(:mime, simplified: true).buffer(io.read(256))
+          type = FileMagic.fm(:mime, simplified: true).io(io, 256)
           io.rewind
           type
         elsif Object.const_defined?(:MIME) && MIME.const_defined?(:Types)
@@ -232,8 +226,9 @@ class Lingo
         %w[STDIN -].include?(path)
       end
 
-      def string_or_io(io)
-        @progress ? StringIO.new(io.is_a?(String) ? io : io.read) : io
+      def pos?(io)
+        io.pos if io.respond_to?(:pos)
+      rescue Errno::ESPIPE
       end
 
       def open_file(path)
@@ -253,6 +248,10 @@ class Lingo
         }
       ensure
         tempfiles.each(&:unlink)
+      end
+
+      def text_enum(collection)
+        Enumerator.new { |y| collection.each { |x| y << x.text } }
       end
 
       def get_files
