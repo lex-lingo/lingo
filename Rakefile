@@ -99,13 +99,18 @@ def test_ref(name, cfg = name)
   cmd = %W[bin/lingo -c #{cfg} txt/#{name}.txt]
   diff, msg = 0, ["Command failed: #{cmd.join(' ')}"]
 
-  Process.ruby(*cmd) { |_, _, o, e|
+  Process.ruby(*cmd, I: :lib) { |_, _, o, e|
     IO.interact({}, { o => msg, e => msg })
   }.success? or abort msg.join("\n\n")
 
-  Dir["test/ref/#{name}.*"].each { |ref|
-    puts "## #{org = ref.sub(/test\/ref/, 'txt')}"
-    diff += Diff::LCS::Ldiff.run(ARGV.clear << '-a' << org << ref)
+  Dir["test/ref/#{name}.*"].sort.each { |ref|
+    diff += if File.exist?(org = ref.sub(/test\/ref/, 'txt'))
+      puts "## #{org}"
+      Diff::LCS::Ldiff.run(ARGV.clear << '-a' << org << ref)
+    else
+      puts "?? #{org}"
+      1
+    end
   }
 
   exit diff + 1 unless diff.zero?
