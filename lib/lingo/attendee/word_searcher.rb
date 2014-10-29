@@ -76,7 +76,8 @@ class Lingo
       end
 
       def process(obj)
-        forward(obj.is_a?(Token) && obj.word? ? @dic.find_word(obj.form) : obj)
+        forward(obj.is_a?(Token) && obj.word? ?
+          @dic.find_word(obj.form, obj) : obj)
       end
 
     end

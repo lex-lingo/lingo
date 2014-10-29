@@ -4,6 +4,8 @@
 
 == 1.8.6 [unreleased]
 
+* Lingo::Attendee::VectorFilter learned +pos+ option to print position and
+  byte offset with each word.
 * Lingo::Attendee::TextReader no longer removes line endings; option +chomp+
   is obsolete.
 * Lingo::Attendee::TextReader passes byte offset to the following attendee.

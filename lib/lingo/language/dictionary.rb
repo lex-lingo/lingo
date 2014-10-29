@@ -67,9 +67,8 @@ class Lingo
       # _dic_.find_word( _aString_ ) -> _aNewWord_
       #
       # Erstellt aus dem String ein Wort und sucht nach diesem im Wörterbuch.
-      def find_word(str)
-        (@_word ||= {})[str] ||=
-          Word.new(str, WA_UNKNOWN).identify(select_with_suffix(str))
+      def find_word(str, token = nil)
+        Word.new(str, WA_UNKNOWN, token).identify(select_with_suffix(str))
       end
 
       def find_synonyms(obj, syn = [], com = true)

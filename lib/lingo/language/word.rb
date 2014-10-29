@@ -33,6 +33,8 @@ class Lingo
 
     class Word < WordForm
 
+      POSITION_SEP = ':'
+
       class << self
 
         def new_lexicals(form, attr, lex)
@@ -72,10 +74,12 @@ class Lingo
       # <b>Achtung: Lemma wird nicht durch die Word-Klasse bestückt, sondern extern
       # durch die Klasse Dictionary</b>
 
-      def initialize(form, attr = WA_UNSET)
+      def initialize(form, attr = WA_UNSET, token = nil)
+        @token, @lexicals = token, []
         super
-        @lexicals = []
       end
+
+      attr_reader :token
 
       attr_writer :lexicals
 
@@ -136,6 +140,10 @@ class Lingo
 
       def multiword_size(wc_re = LA_MULTIWORD)
         lex = get_class(wc_re).first and lex.form.count(' ') + 1
+      end
+
+      def position
+        "#{token.position}#{POSITION_SEP}#{token.offset}" if token
       end
 
       def <<(*lex)
