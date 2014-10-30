@@ -271,7 +271,7 @@ class Lingo
     last_link, auto_link = '', 0
 
     list.each { |hash|
-      name = hash.keys.first.camelcase
+      name = (name_key = hash.keys.first).camelcase
 
       cfg = (config["language/attendees/#{name.downcase}"] || {})
         .merge(hash.values.first).update('name' => name)
@@ -283,6 +283,10 @@ class Lingo
       last_link  = cfg['out']
 
       @attendees << attendee = Attendee.const_get(name).new(cfg, self)
+
+      unless name == (real = attendee.class.name.split('::').last)
+        config.deprecate(name_key, real.underscore, attendee, :name)
+      end
 
       { 'in' => subscriber, 'out' => supplier }.each { |key, target|
         cfg[key].split(SEP_RE).each { |ch| target[ch] << attendee }

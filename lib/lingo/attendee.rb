@@ -85,9 +85,10 @@ class Lingo
       init if self.class.method_defined?(:init)
 
       unless (invalid_keys = config.keys - @valid_keys).empty?
-        warn self.class.name.sub(/\ALingo::/, '') <<
-          ': Invalid or obsolete options: ' <<
-          invalid_keys.sort.join(', ')
+        warn(
+          "CONFIGURATION NOTICE: #{self.class.name.sub(/\ALingo::/, '')}" <<
+          " options invalid or obsolete: #{invalid_keys.sort.join(', ')}"
+        )
       end
 
       @can_control = self.class.method_defined?(:control)

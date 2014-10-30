@@ -108,10 +108,10 @@ class Lingo
       @cli.send(:quit, *args)
     end
 
-    def deprecate(old, new, obj = self)
+    def deprecate(old, new, obj = self, what = :option)
       unless @deprecated[[source = obj.class.name.sub(/\ALingo::/, ''), old]]
         warn(
-          "DEPRECATION WARNING: #{source} option `#{old}' is deprecated " <<
+          "DEPRECATION WARNING: #{source} #{what} `#{old}' is deprecated " <<
           "and will be removed in Lingo 1.9. Please use `#{new}' instead."
         )
       end
