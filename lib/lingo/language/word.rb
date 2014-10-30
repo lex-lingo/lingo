@@ -33,8 +33,6 @@ class Lingo
 
     class Word < WordForm
 
-      POSITION_SEP = ':'
-
       class << self
 
         def new_lexicals(form, attr, lex)
@@ -142,8 +140,8 @@ class Lingo
         lex = get_class(wc_re).first and lex.form.count(' ') + 1
       end
 
-      def position
-        "#{token.position}#{POSITION_SEP}#{token.offset}" if token
+      def position_and_offset
+        token.position_and_offset if token
       end
 
       def <<(*lex)

@@ -79,8 +79,12 @@ class Lingo
 
     class VectorFilter < self
 
-      DEFAULT_SRC_SEP = '|'
-      DEFAULT_POS_SEP = '@'
+      DEFAULT_SRC_SEPARATOR = '|'
+      DEFAULT_POS_SEPARATOR = '@'
+
+      DEFAULT_DICT_SEPARATOR = Database::Source::WordClass::DEFAULT_SEPARATOR
+
+      DEFAULT_GENDER_SEPARATOR = Database::Source::WordClass::GENDER_SEPARATOR
 
       protected
 
@@ -92,15 +96,19 @@ class Lingo
           @lex  = get_re('lexicals', '[sy]')
           @skip = get_array('skip', DEFAULT_SKIP, :upcase)
 
-          @dict = get_key('dict', false)
-          @norm = get_key('norm', false) if @dict
-          @dict = Database::Source::WordClass::DEFAULT_SEPARATOR if @dict == true
+          if @dict = get_key('dict', false)
+            @norm = get_key('norm', false)
+            @dict = DEFAULT_DICT_SEPARATOR if @dict == true
+          else
+            @src = get_key('src', false)
+            @src = DEFAULT_SRC_SEPARATOR if @src == true
 
-          @src = get_key('src', false)
-          @src = DEFAULT_SRC_SEP if @src == true
+            @pos = get_key('pos', false)
+            @pos = DEFAULT_POS_SEPARATOR if @pos == true
 
-          @pos = get_key('pos', false)
-          @pos = DEFAULT_POS_SEP if @pos == true
+            @tokens = get_array('tokens', '', :upcase)
+            @tokens.concat(Tokenizer.rules) if @tokens.delete('ALL')
+          end
 
           if sort = get_key('sort', ENV['LINGO_NO_SORT'] ? false : 'normal')
             @sort_format, @sort_method = sort.downcase.split('_', 2)
@@ -112,8 +120,11 @@ class Lingo
 
       def control(cmd, *)
         case cmd
-          when :EOL                 then skip_command
-          when :FILE, :RECORD, :EOF then send_vectors unless @vectors.empty?
+          when :EOL
+            skip_command
+          when :FILE, :RECORD, :EOF
+            send_vectors unless @vectors.empty?
+            @word_count = 0
         end
       end
 
@@ -121,36 +132,50 @@ class Lingo
         if @debug
           forward((@preamble = nil; @lingo.config.to_h.to_yaml)) if @preamble
           forward("#{@prompt} #{obj.inspect}") if eval(@debug)
-        elsif obj.is_a?(Word) && !@skip.include?(obj.attr)
-          @word_count += 1
+          return
+        end
 
-          if @dict
-            vec, sep = [], Database::Source::WordClass::GENDER_SEPARATOR
+        if obj.is_a?(Token)
+          return unless @tokens && @tokens.include?(obj.attr)
+        elsif obj.is_a?(Word)
+          return if @skip.include?(obj.attr)
+        else
+          return
+        end
 
-            obj.get_class(@lex).each { |lex|
-              str = "#{lex.form} ##{lex.attr}"
-              str << sep << lex.gender if lex.gender
-              vec << str
-            }
+        @word_count += 1
 
-            unless vec.empty?
-              wrd = @norm ? obj.lexicals.first.form : obj.form
-              vec = Unicode.downcase("#{wrd}#{@dict}#{vec.join(' ')}")
-              @sort_format ? @vectors[vec] : forward(vec)
-            end
-          else
-            pos = obj.position if @pos
+        @dict ? forward_dict(obj) : begin
+          pos = obj.position_and_offset if @pos
 
-            obj.get_class(@lex).each { |lex|
-              vec = Unicode.downcase(lex.form)
-              vec << @src << lex.src if @src && lex.src
-              @sort_format ? @vectors[vec] << pos : forward(vec_pos(vec, [pos]))
-            }
-          end
+          obj.is_a?(Token) ? forward_vector(obj, pos) :
+            obj.get_class(@lex).each { |lex| forward_vector(lex, pos, lex.src) }
         end
       end
 
       private
+
+      def forward_dict(obj, sep = DEFAULT_GENDER_SEPARATOR)
+        vectors = obj.get_class(@lex).map { |lex|
+          "#{lex.form} ##{lex.attr}".tap { |str|
+            str << sep << lex.gender if lex.gender
+          }
+        }
+
+        unless vectors.empty?
+          vec = @norm ? obj.lexicals.first.form : obj.form
+          forward_vector("#{vec}#{@dict}#{vectors.join(' ')}")
+        end
+      end
+
+      def forward_vector(vec, pos = nil, src = nil)
+        vec = vec.form if vec.is_a?(WordForm)
+
+        vec = Unicode.downcase(vec)
+        vec << @src << src if @src && src
+
+        @sort_format ? @vectors[vec] << pos : forward(vec_pos(vec, [pos]))
+      end
 
       def send_vectors
         if @sort_format == 'normal'
@@ -160,25 +185,22 @@ class Lingo
 
           flush(vectors.sort!)
         else
-          fmt, vectors = '%d', @vectors.sort_by { |vec, pos| [-pos.size, vec] }
+          vectors = @vectors.sort_by { |vec, pos| [-pos.size, vec] }
 
           @vectors.clear
 
-          !@pos ? vectors.map! { |vec, pos| [vec, pos.size] } : vectors
-            .map! { |vec, pos| size = pos.size; [vec_pos(vec, pos), size] }
+          !@pos ? vectors.map! { |vec, pos| [pos.size, vec] } :
+            vectors.map! { |vec, pos| [pos.size, vec_pos(vec, pos)] }
 
-          if @sort_method == 'rel'
+          @sort_method != 'rel' ? fmt = '%d' : begin
             fmt, wc = '%6.5f', @word_count.to_f
-            vectors.each { |v| v[1] /= wc }
+            vectors.each { |v| v[0] /= wc }
           end
 
-          if @sort_format == 'sto'
-            fmt, @word_count = "%s {#{fmt}}", 0
-          else
-            fmt.insert(1, '2$') << ' %1$s'
-          end
+          @sort_format != 'sto' ? fmt << ' %s' :
+            fmt = "%2$s {#{fmt.insert(1, '1$')}}"
 
-          vectors.each { |v| forward(fmt % v) }
+          vectors.each { |vec| forward(fmt % vec) }
         end
       end
 

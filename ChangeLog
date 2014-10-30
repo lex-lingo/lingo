@@ -6,6 +6,8 @@
 
 * Lingo::Attendee::VectorFilter learned +pos+ option to print position and
   byte offset with each word.
+* Lingo::Attendee::VectorFilter learned +tokens+ option to filter on
+  Lingo::Language::Token in addition to Lingo::Language::Word.
 * Lingo::Attendee::TextReader no longer removes line endings; option +chomp+
   is obsolete.
 * Lingo::Attendee::TextReader passes byte offset to the following attendee.

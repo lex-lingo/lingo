@@ -37,6 +37,8 @@ class Lingo
 
     class Token < WordForm
 
+      POSITION_SEP = ':'
+
       def self.clean(attr)
         attr.sub(/:.*/, '')
       end
@@ -50,6 +52,10 @@ class Lingo
 
       def word?
         attr == TA_WORD
+      end
+
+      def position_and_offset
+        "#{position}#{POSITION_SEP}#{offset}"
       end
 
       def to_a

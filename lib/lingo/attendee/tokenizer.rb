@@ -113,8 +113,8 @@ class Lingo
           RULES.assoc(name)
         end
 
-        def rules(name)
-          RULES.select { |rule,| rule == name }
+        def rules(name = nil)
+          name ? RULES.select { |rule,| rule == name } : RULES.map(&:first)
         end
 
         def delete(*names)
