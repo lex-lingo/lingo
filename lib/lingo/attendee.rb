@@ -78,7 +78,15 @@ class Lingo
 
       @dic = @gra = nil
 
+      @valid_keys = %w[name in out]
+
       init if self.class.method_defined?(:init)
+
+      unless (invalid_keys = config.keys - @valid_keys).empty?
+        warn self.class.name.sub(/\ALingo::/, '') <<
+          ': Invalid or obsolete options: ' <<
+          invalid_keys.sort.join(', ')
+      end
 
       @can_control = self.class.method_defined?(:control)
       @can_process = self.class.method_defined?(:process)
@@ -129,10 +137,11 @@ class Lingo
     end
 
     def has_key?(key)
-      @config && @config.key?(key)
+      @config.key?(key)
     end
 
     def get_key(key, default = nodefault = true)
+      @valid_keys << key
       raise MissingConfigError.new(key) if nodefault && !has_key?(key)
       @config.fetch(key, default)
     end

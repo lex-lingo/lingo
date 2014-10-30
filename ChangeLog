@@ -13,6 +13,7 @@
 * Lingo::Attendee::Tokenizer records token's sequence position.
 * Lingo::Attendee::Tokenizer learned <tt>skip-tags</tt> option to skip over
   specified tags' contents.
+* Lingo::Attendee subclasses warn when invalid or obsolete options are used.
 
 == 1.8.5 [2014-10-02]
 

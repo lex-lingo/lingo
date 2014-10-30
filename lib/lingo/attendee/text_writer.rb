@@ -83,7 +83,7 @@ class Lingo
         @ext = get_key('ext', 'txt2')
         @lir = get_key('lir-format', false)
 
-        @sep   = @config['sep'] unless @lir
+        @sep = get_key('sep', nil) unless @lir
         @sep &&= @sep.evaluate
         @sep ||= ' '
 
