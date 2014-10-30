@@ -89,30 +89,25 @@ class Lingo
       protected
 
       def init
-        if @debug = get_key('debug', false)
-          @prompt = get_key('prompt', 'lex:) ')
-          @preamble = get_key('preamble', true)
+        @lex  = get_re('lexicals', '[sy]')
+        @skip = get_array('skip', DEFAULT_SKIP, :upcase)
+
+        if @dict = get_key('dict', false)
+          @norm = get_key('norm', false)
+          @dict = DEFAULT_DICT_SEPARATOR if @dict == true
         else
-          @lex  = get_re('lexicals', '[sy]')
-          @skip = get_array('skip', DEFAULT_SKIP, :upcase)
+          @src = get_key('src', false)
+          @src = DEFAULT_SRC_SEPARATOR if @src == true
 
-          if @dict = get_key('dict', false)
-            @norm = get_key('norm', false)
-            @dict = DEFAULT_DICT_SEPARATOR if @dict == true
-          else
-            @src = get_key('src', false)
-            @src = DEFAULT_SRC_SEPARATOR if @src == true
+          @pos = get_key('pos', false)
+          @pos = DEFAULT_POS_SEPARATOR if @pos == true
 
-            @pos = get_key('pos', false)
-            @pos = DEFAULT_POS_SEPARATOR if @pos == true
+          @tokens = get_array('tokens', '', :upcase)
+          @tokens.concat(Tokenizer.rules) if @tokens.delete('ALL')
+        end
 
-            @tokens = get_array('tokens', '', :upcase)
-            @tokens.concat(Tokenizer.rules) if @tokens.delete('ALL')
-          end
-
-          if sort = get_key('sort', ENV['LINGO_NO_SORT'] ? false : 'normal')
-            @sort_format, @sort_method = sort.downcase.split('_', 2)
-          end
+        if sort = get_key('sort', ENV['LINGO_NO_SORT'] ? false : 'normal')
+          @sort_format, @sort_method = sort.downcase.split('_', 2)
         end
 
         @vectors, @word_count = Hash.new { |h, k| h[k] = [] }, 0
@@ -129,12 +124,6 @@ class Lingo
       end
 
       def process(obj)
-        if @debug
-          forward((@preamble = nil; @lingo.config.to_h.to_yaml)) if @preamble
-          forward("#{@prompt} #{obj.inspect}") if eval(@debug)
-          return
-        end
-
         if obj.is_a?(Token)
           return unless @tokens && @tokens.include?(obj.attr)
         elsif obj.is_a?(Word)

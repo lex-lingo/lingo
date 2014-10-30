@@ -24,6 +24,8 @@
 ###############################################################################
 #++
 
+require 'yaml'
+
 class Lingo
 
   class Attendee
@@ -89,25 +91,50 @@ class Lingo
 
       protected
 
-      def init
-        @obj_eval = get_key('eval',   'true')
-        @cmd_eval = get_key('ceval',  'true')
-        @prompt   = get_key('prompt', 'lex:) ')
+      def init(default_prompt = 'lex:) ')
+        @prompt = get_key('prompt', default_prompt)
+
+        unless @filter ||= get_key('filter', false)
+          @cmd_eval = get_key('ceval', 'true')
+        end
+
+        @obj_eval = get_key('eval', 'true')
+        @preamble = get_key('preamble', true)
       end
 
       def control(cmd, param = nil, *)
-        debug(@cmd_eval) { "*#{cmd}('#{param}')" }
+        if @cmd_eval
+          debug(@cmd_eval) { "*#{cmd}('#{param}')" }
+        elsif cmd == :EOL
+          skip_command
+        end
       end
 
       def process(obj)
         debug(@obj_eval) { obj.inspect }
-        forward(obj)
+        forward(obj) unless @filter
       end
 
       private
 
-      def debug(cond)
-        warn "#{@prompt} #{yield}" if eval(cond)
+      def debug(condition)
+        send_msg((@preamble = nil; @lingo.config.to_h.to_yaml)) if @preamble
+        send_msg(@prompt + yield) if eval(condition)
+      end
+
+      def send_msg(msg)
+        @filter ? forward(msg) : warn(msg)
+      end
+
+    end
+
+    class DebugFilter < Debugger
+
+      protected
+
+      def init
+        @filter = true
+        super('')
       end
 
     end

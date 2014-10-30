@@ -58,7 +58,7 @@ is a minimal configuration example to analyse this README file:
   meeting:
     attendees:
       - text_reader: { files: 'README' }
-      - debugger:    { eval: 'true', ceval: 'cmd!="EOL"', prompt: '<debug>: ' }
+      - debugger:    { eval: 'true', ceval: 'cmd!="EOL"', prompt: '<debug>:  ' }
 
 Lingo is told to invite two attendees and wants them to talk to each other,
 hence the name Lingo (= the technical language).

@@ -8,6 +8,8 @@
   byte offset with each word.
 * Lingo::Attendee::VectorFilter learned +tokens+ option to filter on
   Lingo::Language::Token in addition to Lingo::Language::Word.
+* Lingo::Attendee::VectorFilter no longer supports +debug+ (as well as
+  +prompt+ and +preamble+); use Lingo::Attendee::DebugFilter instead.
 * Lingo::Attendee::TextReader no longer removes line endings; option +chomp+
   is obsolete.
 * Lingo::Attendee::TextReader passes byte offset to the following attendee.
