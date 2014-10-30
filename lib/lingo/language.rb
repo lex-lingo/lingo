@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2012 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2014 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -37,26 +37,18 @@ class Lingo
 
   module Language
 
-    # String-Konstanten im Datenstrom
     CHAR_PUNCT = '.'
 
     TA_WORD        = 'WORD'
     TA_PUNCTUATION = 'PUNC'
     TA_OTHER       = 'OTHR'
 
-    # Standardattribut bei der Initialisierung eines Word-Objektes
     WA_UNSET      = '-'
-    # Status, nachdem das Word im Wörterbuch gefunden wurde
     WA_IDENTIFIED = 'IDF'
-    # Status, wenn das Word nicht gefunden werden konnte
     WA_UNKNOWN    = '?'
-    # Wort ist als Kompositum erkannt worden
     WA_COMPOUND   = 'KOM'
-    # Wort ist eine Mehrwortgruppe
     WA_MULTIWORD  = 'MUL'
-    # Wort ist eine Mehrwortgruppe
     WA_SEQUENCE   = 'SEQ'
-    # Word ist unbekannt, jedoch Teil einer Mehrwortgruppe
     WA_UNKMULPART = 'MU?'
 
     LA_SORTORDER = [

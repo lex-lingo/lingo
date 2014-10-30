@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2013 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2014 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -28,8 +28,10 @@ class Lingo
 
   module Language
 
+    #--
     # Die Klasse Word bündelt spezifische Eigenschaften eines Wortes mit den
     # dazu notwendigen Methoden.
+    #++
 
     class Word < WordForm
 
@@ -59,6 +61,7 @@ class Lingo
 
       end
 
+      #--
       # Exakte Representation der originären Zeichenkette, so wie sie im Satz
       # gefunden wurde, z.B. <tt>form = "RubyLing"</tt>
       #
@@ -71,6 +74,7 @@ class Lingo
       #
       # <b>Achtung: Lemma wird nicht durch die Word-Klasse bestückt, sondern extern
       # durch die Klasse Dictionary</b>
+      #++
 
       def initialize(form, attr = WA_UNSET, token = nil)
         @token, @lexicals = token, []
@@ -115,8 +119,6 @@ class Lingo
         self
       end
 
-      # Gibt genau die Grundform der Wortklasse zurück, die der RegExp des Übergabe-Parameters
-      # entspricht, z.B. <tt>word.get_wc(/a/) = ['abgeschoben', '#a']</tt>
       def get_class(wc_re)
         wc_re = Regexp.new(wc_re) unless wc_re.is_a?(Regexp)
 

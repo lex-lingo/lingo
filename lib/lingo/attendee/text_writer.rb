@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2012 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2014 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -28,6 +28,7 @@ class Lingo
 
   class Attendee
 
+    #--
     # Der TextWriter ermöglicht die Umleitung des Datenstroms in eine Textdatei. Dabei werden
     # Objekte, die nicht vom Typ String sind in eine sinnvolle Textrepresentation gewandelt.
     # Der Name der Ausgabedatei wird durch den Namen der Eingabedatei (des Textreaders) bestimmt.
@@ -74,6 +75,7 @@ class Lingo
     #   0.01923 textdatei
     #   0.01923 typ
     #   0.01923 umleitung
+    #++
 
     class TextWriter < self
 

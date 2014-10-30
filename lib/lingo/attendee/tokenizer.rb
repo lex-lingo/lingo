@@ -28,6 +28,7 @@ class Lingo
 
   class Attendee
 
+    #--
     # Der Tokenizer zerlegt eine Textzeile in einzelne Token. Dies ist notwendig,
     # damit nachfolgende Attendees die Textdatei häppchenweise verarbeiten können.
     #
@@ -77,6 +78,7 @@ class Lingo
     #   out> :./PUNC:
     #   out> *EOL('test.txt')
     #   out> *EOF('test.txt')
+    #++
 
     class Tokenizer < self
 
@@ -209,7 +211,6 @@ class Lingo
         @filename, @linenum, @position, @offset = filename, linenum, -1, 0
       end
 
-      # tokenize("Eine Zeile.")  ->  [:Eine/WORD:, :Zeile/WORD:, :./PUNC:]
       def tokenize(line)
         @nest.empty? ? tokenize_line(line) : tokenize_nest(line)
       rescue => err

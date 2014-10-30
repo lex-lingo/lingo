@@ -28,6 +28,7 @@ class Lingo
 
   class Attendee
 
+    #--
     # Mit der bisher beschriebenen Vorgehensweise werden die durch den Tokenizer erkannten
     # Token aufgelöst und in Words verwandelt und über den Abbreviator und Decomposer auch
     # Spezialfälle behandelt, die einzelne Wörter betreffen.
@@ -72,6 +73,7 @@ class Lingo
     #   out> :./PUNC:
     #   out> *EOL('test.txt')
     #   out> *EOF('test.txt')
+    #++
 
     class MultiWorder < BufferedAttendee
 
@@ -172,7 +174,6 @@ class Lingo
           WA_MULTIWORD, lex.select { |l| l.is_a?(Lexical) }))
       end
 
-      # Prüft einen definiert langen Schlüssel ab Position 0 im Buffer
       def check_multiword_key(len)
         return [] if valid_tokens_in_buffer < len
 

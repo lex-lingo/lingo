@@ -30,12 +30,14 @@ require_relative 'database/source'
 
 class Lingo
 
+  #--
   # Die Klasse Database stellt eine einheitliche Schnittstelle auf Lingo-Datenbanken bereit.
   # Die Identifizierung der Datenbank erfolgt über die ID der Datenbank, so wie sie in der
   # Sprachkonfigurationsdatei <tt>de.lang</tt> unter <tt>language/dictionary/databases</tt>
   # hinterlegt ist.
   #
   # Das Lesen und Schreiben der Datenbank erfolgt über die Funktionen []() und []=().
+  #++
 
   class Database
 

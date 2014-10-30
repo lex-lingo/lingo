@@ -28,6 +28,7 @@ class Lingo
 
   class Attendee
 
+    #--
     # Der WordSearcher ist das Herzstück von Lingo. Er macht die Hauptarbeit und versucht
     # alle Token die nach einem sinnvollen Wort aussehen, in den ihm angegebenen
     # Wörterbüchern zu finden und aufzulösen. Dabei werden die im Wörterbuch gefundenen
@@ -64,6 +65,7 @@ class Lingo
     #   out> :./PUNC:
     #   out> *EOL('test.txt')
     #   out> *EOF('test.txt')
+    #++
 
     class WordSearcher < self
 

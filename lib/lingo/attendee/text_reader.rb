@@ -37,6 +37,7 @@ class Lingo
 
   class Attendee
 
+    #--
     # Der TextReader ist eine klassische Datenquelle. Er liest eine oder mehrere Dateien
     # und gibt sie Zeilenweise in den Ausgabekanal. Der Start bzw. Wechsel einer Datei
     # wird dabei über den Kommandokanal angekündigt, ebenso wie das Ende.
@@ -102,12 +103,13 @@ class Lingo
     #   out> *RECORD('00002')
     #   out> "020: Nicht-konventionelle Thesaurusrelationen als Orientierungshilfen."
     #   out> *EOF('lir.txt')
+    #++
 
     class TextReader < self
 
       protected
 
-      # TODO: FILE und LIR-FILE (?)
+      # TODO: FILE/LIR-FILE (?)
       def init
         get_files
 
@@ -132,7 +134,6 @@ class Lingo
 
       private
 
-      # Gibt eine Datei zeilenweise in den Ausgabekanal
       def spool(path)
         command(:FILE, path)
 

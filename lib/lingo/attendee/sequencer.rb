@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2012 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2014 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -28,6 +28,7 @@ class Lingo
 
   class Attendee
 
+    #--
     # Der Sequencer ist von seiner Funktion her ähnlich dem Multiworder. Der Multiworder
     # nutzt zur Erkennung von Mehrwortgruppen spezielle Wörterbücher, der Sequencer hingegen
     # definierte Folgen von Wortklassen. Mit dem Sequencer können Indexterme generiert werden,
@@ -90,6 +91,7 @@ class Lingo
     #   out> :./PUNC:
     #   out> *EOL('test.txt')
     #   out> *EOF('test.txt')
+    #++
 
     class Sequencer < BufferedAttendee
 

@@ -7,51 +7,37 @@ class TestAttendeeMultiWorder < AttendeeTestCase
   def test_basic
     meet({ 'source' => 'tst-mul' }, [
       ai('FILE|mul.txt'),
-      # John_F_._Kennedy
       wd('John|IDF', 'john|e'), wd('F|?'), tk('.|PUNC'), wd('Kennedy|IDF', 'kennedy|e'),
-      # John_F_Kennedy
       wd('John|IDF', 'john|e'), wd('F|?'), wd('Kennedy|IDF', 'kennedy|e'),
-      # John_F_Kennedy_.
       wd('John|IDF', 'john|e'), wd('F|?'), wd('Kennedy|IDF', 'kennedy|e'), tk('.|PUNC'),
-      # a_priori
       wd('a|?'), wd('priori|IDF', 'priori|w'),
-      # Ableitung_nicht_ganzzahliger_Ordnung
       wd('Ableitung|IDF', 'ableitung|s'),
       wd('nicht|IDF', 'nicht|w'),
       wd('ganzzahliger|IDF', 'ganzzahlig|a'),
       wd('Ordnung|IDF', 'ordnung|s'),
-      # Academic_learning_time_in_physical_education
       wd('academic|?'), wd('learning|?'), wd('time|IDF', 'timen|v'),
       wd('in|IDF', 'in|t'), wd('physical|?'), wd('education|?'),
-      # Satzende
       tk('.|PUNC'),
       ai('EOF|mul.txt')
     ], [
       ai('FILE|mul.txt'),
-      # John_F_._Kennedy
       wd('John F. Kennedy|MUL', 'john f. kennedy|m'),
       wd('John|IDF', 'john|e'), wd('F|MU?'), wd('Kennedy|IDF', 'kennedy|e'),
-      # John_F_Kennedy
       wd('John F Kennedy|MUL', 'john f. kennedy|m'),
       wd('John|IDF', 'john|e'), wd('F|MU?'), wd('Kennedy|IDF', 'kennedy|e'),
-      # John_F_Kennedy_.
       wd('John F Kennedy|MUL', 'john f. kennedy|m'),
       wd('John|IDF', 'john|e'), wd('F|MU?'), wd('Kennedy|IDF', 'kennedy|e'),
       tk('.|PUNC'),
-      # a_priori
       wd('a priori|MUL', 'a priori|m'),
       wd('a|MU?'), wd('priori|IDF', 'priori|w'),
-      # Ableitung_nicht_ganzzahliger_Ordnung
       wd('Ableitung nicht ganzzahliger Ordnung|MUL', 'ableitung nicht ganzzahliger ordnung|m'),
       wd('Ableitung|IDF', 'ableitung|s'),
       wd('nicht|IDF', 'nicht|w'),
       wd('ganzzahliger|IDF', 'ganzzahlig|a'),
       wd('Ordnung|IDF', 'ordnung|s'),
-      # Academic_learning_time_in_physical_education
       wd('academic learning time in physical education|MUL', 'academic learning time in physical education|m'),
       wd('academic|MU?'), wd('learning|MU?'), wd('time|IDF', 'timen|v'),
       wd('in|IDF', 'in|t'), wd('physical|MU?'), wd('education|MU?'),
-      # Satzende
       tk('.|PUNC'),
       ai('EOF|mul.txt')
     ])
@@ -192,14 +178,12 @@ class TestAttendeeMultiWorder < AttendeeTestCase
   end
 
   def test_two_sources_mode_first
-    # in keinen WB enthalten
     meet({ 'source' => 'tst-mul,tst-mu2', 'mode' => 'first' }, [
       wd('intelligente|IDF', 'intelligent|a'), wd('Indexierung|IDF', 'indexierung|s'), ai('EOF|mul.txt')
     ], [
       wd('intelligente|IDF', 'intelligent|a'), wd('Indexierung|IDF', 'indexierung|s'), ai('EOF|mul.txt')
     ])
 
-    # im ersten WB enthalten
     meet({ 'source' => 'tst-mul,tst-mu2', 'mode' => 'first' }, [
       wd('abstrakten|IDF', 'abstrakt|a'), wd('Kunst|IDF', 'kunst|s'), ai('EOF|mul.txt')
     ], [
@@ -207,7 +191,6 @@ class TestAttendeeMultiWorder < AttendeeTestCase
       wd('abstrakten|IDF', 'abstrakt|a'), wd('Kunst|IDF', 'kunst|s'), ai('EOF|mul.txt')
     ])
 
-    # im zweiten WB enthalten
     meet({ 'source' => 'tst-mul,tst-mu2', 'mode' => 'first' }, [
       wd('traumatischer|IDF', 'traumatisch|a'), wd('Angelegenheit|IDF', 'angelegenheit|s'), ai('EOF|mul.txt')
     ], [
@@ -215,7 +198,6 @@ class TestAttendeeMultiWorder < AttendeeTestCase
       wd('traumatischer|IDF', 'traumatisch|a'), wd('Angelegenheit|IDF', 'angelegenheit|s'), ai('EOF|mul.txt')
     ])
 
-    # in beiden WB enthalten
     meet({ 'source' => 'tst-mul,tst-mu2', 'mode' => 'first' }, [
       wd('azyklischen|IDF', 'azyklisch|a'), wd('Bewegungen|IDF', 'bewegung|s'), ai('EOF|mul.txt')
     ], [
@@ -225,14 +207,12 @@ class TestAttendeeMultiWorder < AttendeeTestCase
   end
 
   def test_two_sources_mode_first_flipped
-    # in keinen WB enthalten
     meet({ 'source' => 'tst-mu2,tst-mul', 'mode' => 'first' }, [
       wd('intelligente|IDF', 'intelligent|a'), wd('Indexierung|IDF', 'indexierung|s'), ai('EOF|mul.txt')
     ], [
       wd('intelligente|IDF', 'intelligent|a'), wd('Indexierung|IDF', 'indexierung|s'), ai('EOF|mul.txt')
     ])
 
-    # im ersten WB enthalten
     meet({ 'source' => 'tst-mu2,tst-mul', 'mode' => 'first' }, [
       wd('abstrakten|IDF', 'abstrakt|a'), wd('Kunst|IDF', 'kunst|s'), ai('EOF|mul.txt')
     ], [
@@ -240,7 +220,6 @@ class TestAttendeeMultiWorder < AttendeeTestCase
       wd('abstrakten|IDF', 'abstrakt|a'), wd('Kunst|IDF', 'kunst|s'), ai('EOF|mul.txt')
     ])
 
-    # im zweiten WB enthalten
     meet({ 'source' => 'tst-mu2,tst-mul', 'mode' => 'first' }, [
       wd('traumatischer|IDF', 'traumatisch|a'), wd('Angelegenheit|IDF', 'angelegenheit|s'), ai('EOF|mul.txt')
     ], [
@@ -248,7 +227,6 @@ class TestAttendeeMultiWorder < AttendeeTestCase
       wd('traumatischer|IDF', 'traumatisch|a'), wd('Angelegenheit|IDF', 'angelegenheit|s'), ai('EOF|mul.txt')
     ])
 
-    # in beiden WB enthalten
     meet({ 'source' => 'tst-mu2,tst-mul', 'mode' => 'first' }, [
       wd('azyklischen|IDF', 'azyklisch|a'), wd('Bewegungen|IDF', 'bewegung|s'), ai('EOF|mul.txt')
     ], [
@@ -258,14 +236,12 @@ class TestAttendeeMultiWorder < AttendeeTestCase
   end
 
   def test_select_two_sources_mode_all
-    # in keinen WB enthalten
     meet({ 'source' => 'tst-mu2,tst-mul', 'mode' => 'all' }, [
       wd('intelligente|IDF', 'intelligent|a'), wd('Indexierung|IDF', 'indexierung|s'), ai('EOF|mul.txt')
     ], [
       wd('intelligente|IDF', 'intelligent|a'), wd('Indexierung|IDF', 'indexierung|s'), ai('EOF|mul.txt')
     ])
 
-    # im ersten WB enthalten
     meet({ 'source' => 'tst-mu2,tst-mul', 'mode' => 'all' }, [
       wd('abstrakten|IDF', 'abstrakt|a'), wd('Kunst|IDF', 'kunst|s'), ai('EOF|mul.txt')
     ], [
@@ -273,7 +249,6 @@ class TestAttendeeMultiWorder < AttendeeTestCase
       wd('abstrakten|IDF', 'abstrakt|a'), wd('Kunst|IDF', 'kunst|s'), ai('EOF|mul.txt')
     ])
 
-    # im zweiten WB enthalten
     meet({ 'source' => 'tst-mu2,tst-mul', 'mode' => 'all' }, [
       wd('traumatischer|IDF', 'traumatisch|a'), wd('Angelegenheit|IDF', 'angelegenheit|s'), ai('EOF|mul.txt')
     ], [
@@ -281,7 +256,6 @@ class TestAttendeeMultiWorder < AttendeeTestCase
       wd('traumatischer|IDF', 'traumatisch|a'), wd('Angelegenheit|IDF', 'angelegenheit|s'), ai('EOF|mul.txt')
     ])
 
-    # in beiden WB enthalten
     meet({ 'source' => 'tst-mu2,tst-mul', 'mode' => 'all' }, [
       wd('azyklischen|IDF', 'azyklisch|a'), wd('Bewegungen|IDF', 'bewegung|s'), ai('EOF|mul.txt')
     ], [
@@ -291,14 +265,12 @@ class TestAttendeeMultiWorder < AttendeeTestCase
   end
 
   def test_select_two_sources_mode_def
-    # in keinen WB enthalten
     meet({ 'source' => 'tst-mu2,tst-mul' }, [
       wd('intelligente|IDF', 'intelligent|a'), wd('Indexierung|IDF', 'indexierung|s'), ai('EOF|mul.txt')
     ], [
       wd('intelligente|IDF', 'intelligent|a'), wd('Indexierung|IDF', 'indexierung|s'), ai('EOF|mul.txt')
     ])
 
-    # im ersten WB enthalten
     meet({ 'source' => 'tst-mu2,tst-mul' }, [
       wd('abstrakten|IDF', 'abstrakt|a'), wd('Kunst|IDF', 'kunst|s'), ai('EOF|mul.txt')
     ], [
@@ -306,7 +278,6 @@ class TestAttendeeMultiWorder < AttendeeTestCase
       wd('abstrakten|IDF', 'abstrakt|a'), wd('Kunst|IDF', 'kunst|s'), ai('EOF|mul.txt')
     ])
 
-    # im zweiten WB enthalten
     meet({ 'source' => 'tst-mu2,tst-mul' }, [
       wd('traumatischer|IDF', 'traumatisch|a'), wd('Angelegenheit|IDF', 'angelegenheit|s'), ai('EOF|mul.txt')
     ], [
@@ -314,7 +285,6 @@ class TestAttendeeMultiWorder < AttendeeTestCase
       wd('traumatischer|IDF', 'traumatisch|a'), wd('Angelegenheit|IDF', 'angelegenheit|s'), ai('EOF|mul.txt')
     ])
 
-    # in beiden WB enthalten
     meet({ 'source' => 'tst-mu2,tst-mul' }, [
       wd('azyklischen|IDF', 'azyklisch|a'), wd('Bewegungen|IDF', 'bewegung|s'), ai('EOF|mul.txt')
     ], [

@@ -28,9 +28,11 @@ class Lingo
 
   module Language
 
+    #--
     # Die Klasse LexicalHash ermöglicht den Zugriff auf die Lingodatenbanken. Im Gegensatz zur
     # Klasse Database, welche nur Strings als Ergebnis zurück gibt, wird hier als Ergebnis ein
     # Array von Lexical-Objekten zurück gegeben.
+    #++
 
     class LexicalHash
 

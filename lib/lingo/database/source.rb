@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2012 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2014 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -34,6 +34,7 @@ class Lingo
 
   class Database
 
+    #--
     # Die Klasse Source stellt eine einheitliche Schnittstelle auf die unterschiedlichen Formate
     # von Wörterbuch-Quelldateien bereit. Die Identifizierung der Quelldatei erfolgt über die ID
     # der Datei, so wie sie in der Sprachkonfigurationsdatei <tt>de.lang</tt> unter
@@ -44,6 +45,7 @@ class Lingo
     #
     # Nicht korrekt erkannte Zeilen werden abgewiesen und in eine Revoke-Datei gespeichert, die
     # an der Dateiendung <tt>.rev</tt> zu erkennen ist.
+    #++
 
     class Source
 

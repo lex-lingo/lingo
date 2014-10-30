@@ -28,9 +28,11 @@ class Lingo
 
   module Language
 
+    #--
     # Die Klasse WordForm ist die Basisklasse für weitere Klassen, die im Rahmen der
     # Objektstruktur eines Wortes benötigt werden. Die Klasse stellt eine Zeichenkette bereit,
     # die mit einem Attribut versehen werden kann.
+    #++
 
     class WordForm
 

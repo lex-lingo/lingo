@@ -28,11 +28,13 @@ class Lingo
 
   module Language
 
+    #--
     # Die Klasse Lexical, abgeleitet von der Klasse WordForm, stellt den Container
     # für eine Grundform eines Wortes bereit, welches mit der Wortklasse versehen ist.
     #
     # Wird z.B. aus dem Wörterbuch eine Grundform gelesen, so wird dies in Form eines
     # Lexical-Objektes zurückgegeben, z.B. Lexical.new('Rennen', 'S') -> (rennen/s)
+    #++
 
     class Lexical < WordForm
 

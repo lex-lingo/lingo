@@ -28,6 +28,7 @@ class Lingo
 
   class Attendee
 
+    #--
     # Komposita, also zusammengesetzte Wörter, sind eine Spezialität der deutschen Sprache
     # (z.B. Indexierungssystem oder Kompositumerkennung).
     # Könnte man alle Kombinationen in den Wörterbüchern hinterlegen, dann würde der
@@ -70,6 +71,7 @@ class Lingo
     #   out> :./PUNC:
     #   out> *EOL('test.txt')
     #   out> *EOF('test.txt')
+    #++
 
     class Decomposer < self
 

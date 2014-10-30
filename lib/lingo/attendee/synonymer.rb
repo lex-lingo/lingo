@@ -28,6 +28,7 @@ class Lingo
 
   class Attendee
 
+    #--
     # Der Synonymer untersucht die von anderen Attendees ermittelten Grundformen eines Wortes
     # und sucht in den angegebenen Wörterbüchern nach Relationen zu anderen Grundformen.
     # Gefundene Relationen erweitern die Liste des Word-Objektes und werden zur späteren
@@ -67,6 +68,7 @@ class Lingo
     #   out> :./PUNC:
     #   out> *EOL('test.txt')
     #   out> *EOF('test.txt')
+    #++
 
     class Synonymer < self
 

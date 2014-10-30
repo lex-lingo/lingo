@@ -28,6 +28,7 @@ require 'nuggets/string/evaluate'
 
 class Lingo
 
+  #--
   # Lingo ist als universelles Indexierungssystem entworfen worden. Seine Stärke liegt in der einfachen Konfigurierbarkeit für
   # spezifische Aufgaben und in der schnelle Entwicklung weiterer Funktionen durch systematischen Kapselung der Komplexität auf
   # kleine Verarbeitungseinheiten. Die kleinste Verarbeitungseinheit wird Attendee genannt. Um ein gewünschtes Verarbeitungsergebnis
@@ -63,6 +64,7 @@ class Lingo
   # - verarbeitet und/oder transformiert datenobjekte
   # - wird gesteuert durch kommandos
   # - schreibt verarbeitungsstatistiken
+  #++
 
   class Attendee
 

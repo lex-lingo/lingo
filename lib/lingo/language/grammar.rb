@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2013 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2014 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -28,10 +28,12 @@ class Lingo
 
   module Language
 
+    #--
     # Die Klasse Grammar beinhaltet grammatikalische Spezialitäten einer Sprache. Derzeit findet die
     # Kompositumerkennung hier ihren Platz, die mit der Methode find_compound aufgerufen werden kann.
     # Die Klasse Grammar wird genau wie ein Dictionary initialisiert. Das bei der Initialisierung angegebene Wörterbuch ist Grundlage
     # für die Erkennung der Kompositumteile.
+    #++
 
     class Grammar
 
@@ -59,15 +61,19 @@ class Lingo
           instance_variable_set("@#{k}", cfg.fetch(k.to_s.tr('_', '-'), v).to_i)
         }
 
+        #--
         # Die Wortklasse eines Kompositum-Wortteils kann separat gekennzeichnet
         # werden, um sie von Wortklassen normaler Wörter unterscheiden zu
         # können z.B. Hausmeister => ['haus/s', 'meister/s'] oder Hausmeister
         # => ['haus/s+', 'meister/s+'] mit append-wordclass = '+'
+        #++
         @append_wc = cfg.fetch('append-wordclass', '')
 
+        #--
         # Bestimmte Sequenzen können als ungültige Komposita erkannt werden,
         # z.B. ist ein Kompositum aus zwei Adjetiven kein Kompositum, also
         # skip-sequence = 'aa'
+        #++
         @sequences = cfg.fetch('skip-sequences', []).map! { |i| i.downcase }
       end
 
@@ -75,11 +81,6 @@ class Lingo
         @dic.close
       end
 
-      # find_compound(str) -> word wenn level=1
-      # find_compound(str) -> [lex, sta] wenn level!=1
-      #
-      # find_compound arbeitet in verschiedenen Leveln, da die Methode auch rekursiv aufgerufen wird. Ein Level größer 1
-      # entspricht daher einem rekursiven Aufruf
       def find_compound(str, level = 1, tail = false)
         level == 1 ? (@_compound ||= {})[str] ||=
           permute_compound(Word.new(str, WA_UNKNOWN), str, level, tail) :
@@ -122,9 +123,6 @@ class Lingo
         ret
       end
 
-      # test_compound() ->  [lex, sta, seq]
-      #
-      # Testet einen definiert zerlegten String auf Kompositum
       def test_compound(fstr, infix, bstr, level = 1, tail = false)
         sta, seq, empty = [fstr.length, bstr.length], %w[? ?], [[], [], '']
 

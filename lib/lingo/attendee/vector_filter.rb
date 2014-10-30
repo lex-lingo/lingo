@@ -28,6 +28,7 @@ class Lingo
 
   class Attendee
 
+    #--
     # Die Hauptaufgabe des VectorFilter ist die Erstellung eines Dokumenten-Index-Vektor.
     # Dabei werden die durch die anderen Attendees ermittelten Grundformen eines Wortes
     # gespeichert und bei einem Datei- oder Record-Wechsel weitergeleitet. Der VectorFilter
@@ -76,6 +77,7 @@ class Lingo
     #   out> *FILE('test.txt')
     #   out> "0.28571 indexierung"
     #   out> *EOF('test.txt')
+    #++
 
     class VectorFilter < self
 

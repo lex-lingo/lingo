@@ -28,6 +28,7 @@ class Lingo
 
   class Attendee
 
+    #--
     # Der Variator ermöglicht bei nicht erkannten Wörtern den listenbasierten
     # Austausch einzelner Wortteile einchließlich erneuter Wörterbuchsuche zur
     # Verbesserung der Worterkennungsquote.
@@ -69,6 +70,7 @@ class Lingo
     #   out> :./PUNC:
     #   out> *EOL('test.txt')
     #   out> *EOF('test.txt')
+    #++
 
     class Variator < self
 
@@ -118,9 +120,6 @@ class Lingo
 
       private
 
-      # Variiere die Bestandteile eines Arrays gemäß den Austauschvorgaben.
-      #
-      # variate( 'Tiieh', 'ieh', 'sch' ) => ['Tiieh', 'Tisch']
       def variate(variations, from, to)
         add, change, re = [], [from, to], Regexp.new(from)
 

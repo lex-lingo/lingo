@@ -23,8 +23,6 @@ class TestLexicalHash < LingoTestCase
     $stderr = old_stderr
   end
 
-  # TODO: Crypt testen...
-
   def test_cache
     lh('sys-dic') { |ds|
       assert_equal([lx('regen|s|m'), lx('regen|s|n'), lx('regen|v'), lx('rege|a')], ds['regen'])
@@ -38,11 +36,9 @@ class TestLexicalHash < LingoTestCase
 
     lh(id) { |ds| assert_equal([lx('substantiv|s')], ds['substantiv']) }
 
-    # Keine Store-Datei vorhanden, nur Text vorhanden
     File.delete(*Dir["#{Lingo.find(:store, txt_file)}.*"])
     lh(id) { |ds| assert_equal([lx('substantiv|s')], ds['substantiv']) }
 
-    # Store vorhanden, aber Text ist neuer
     lh(id) { |ds| assert_equal([lx('substantiv|s')], ds['substantiv']) }
   end
 
@@ -113,12 +109,6 @@ class TestDictionary < LingoTestCase
   end
 
   def test_params
-    # Keine Sprach-Konfiguration angegeben
-    #assert_raise(RuntimeError) {
-    #  Lingo::Language::Dictionary.new({ 'source' => %w[sys-dic] }, @lingo)
-    #}
-
-    # Falsche Parameter angegeben (Pflichtparameter ohne Defaultwert)
     assert_raise(ArgumentError) {
       Lingo::Language::Dictionary.new({ 'course' => %w[sys-dic] }, @lingo)
     }
@@ -142,39 +132,27 @@ class TestDictionary < LingoTestCase
 
   def test_select_two_sources_mode_first
     ld('source' => %w[sys-dic tst-dic], 'mode' => 'first') { |dic|
-      # in keiner Quelle vorhanden
       assert_equal([], dic.select('hasennasen'))
-      # nur in erster Quelle vorhanden
       assert_equal([lx('knaller|s')], dic.select('knaller'))
-      # nur in zweiter Quelle vorhanden
       assert_equal([lx('super indexierungssystem|m')], dic.select('lex-lingo'))
-      # in beiden Quellen vorhanden
       assert_equal([lx('a-dur|s|m'), lx('a-dur|s|n')], dic.select('a-dur'))
     }
   end
 
   def test_select_two_sources_mode_first_flipped
     ld('source' => %w[tst-dic sys-dic], 'mode' => 'first') { |dic|
-      # in keiner Quelle vorhanden
       assert_equal([], dic.select('hasennasen'))
-      # nur in erster Quelle vorhanden
       assert_equal([lx('knaller|s')], dic.select('knaller'))
-      # nur in zweiter Quelle vorhanden
       assert_equal([lx('super indexierungssystem|m')], dic.select('lex-lingo'))
-      # in beiden Quellen vorhanden
       assert_equal([lx('b-dur|s')], dic.select('a-dur'))
     }
   end
 
   def test_select_two_sources_mode_all
     ld('source' => %w[sys-dic tst-dic], 'mode' => 'all') { |dic|
-      # in keiner Quelle vorhanden
       assert_equal([], dic.select('hasennasen'))
-      # nur in erster Quelle vorhanden
       assert_equal([lx('knaller|s')], dic.select('knaller'))
-      # nur in zweiter Quelle vorhanden
       assert_equal([lx('super indexierungssystem|m')], dic.select('lex-lingo'))
-      # in beiden Quellen vorhanden
       assert_equal([lx('a-dur|s|m'), lx('a-dur|s|n'), lx('b-dur|s')], dic.select('a-dur'))
       assert_equal([lx('aas|s|n'), lx('aas|s')], dic.select('aas'))
     }
@@ -182,15 +160,11 @@ class TestDictionary < LingoTestCase
 
   def test_select_two_sources_mode_default
     ld('source' => %w[sys-dic tst-dic]) { |dic|
-      # in keiner Quelle vorhanden
       assert_equal([], dic.select('hasennasen'))
-      # nur in erster Quelle vorhanden
       assert_equal([lx('knaller|s')], dic.select('knaller'))
-      # nur in zweiter Quelle vorhanden
       assert_equal([lx('super indexierungssystem|m')], dic.select('lex-lingo'))
       assert_equal([lx('wirkungsort|s'), lx('wirkung|s+'), lx('ort|s+')], dic.select('wirkungsort'))
       assert_equal([lx('zettelkatalog|k'), lx('zettel|s+'), lx('katalog|s+')], dic.select('zettelkatalog'))
-      # in beiden Quellen vorhanden
       assert_equal([lx('a-dur|s|m'), lx('a-dur|s|n'), lx('b-dur|s')], dic.select('a-dur'))
       assert_equal([lx('aas|s|n'), lx('aas|s')], dic.select('aas'))
     }
@@ -248,10 +222,6 @@ class TestGrammar < LingoTestCase
 
   def setup
     @lingo = Lingo.new
-  end
-
-  def test_params
-    # Die gleichen Fälle wie bei Dictionary, daher nicht notwendig
   end
 
   def test_cache
@@ -318,62 +288,51 @@ class TestGrammar < LingoTestCase
         gra.find_compound('titelbestandsbestände')
       )
 
-      # hinterer Teil ist ein Wort mit Suffix
       assert_equal(
         wd('hasenbraten|KOM', 'hasenbraten|k', 'hase|s+', 'braten|v+'),
         gra.find_compound('hasenbraten')
       )
 
-      # hinterer Teil ist ein Wort mit Infix ohne Schwanz
       assert_equal(
         wd('nasenlaufen|KOM', 'nasenlaufen|k', 'nase|s+', 'laufen|v+'),
         gra.find_compound('nasenlaufen')
       )
 
-      # hinterer Teil ist ein Wort mit Infix mit Schwanz
       assert_equal(
         wd('nasenlaufens|KOM', 'nasenlaufen|k', 'nase|s+', 'laufen|v+'),
         gra.find_compound('nasenlaufens')
       )
 
-      # hinterer Teil ist ein Kompositum nach Bindestrich
       assert_equal(
         wd('arrafat-nachfolgebedarf|KOM', 'arrafat-nachfolgebedarf|k', 'arrafat|x+', 'nachfolge|s+', 'bedarf|s+'),
         gra.find_compound('arrafat-nachfolgebedarf')
       )
 
-      # hinterer Teil ist ein TakeItAsIs nach Bindestrich
       assert_equal(
         wd('nachfolge-arrafat|KOM', 'nachfolge-arrafat|k', 'nachfolge|s+', 'arrafat|x+'),
         gra.find_compound('nachfolge-arrafat')
       )
 
-      # vorderer Teil ist ein Wort mit Suffix => siehe Hasenbraten
-      # vorderer Teil ist ein Kompositum
       assert_equal(
         wd('morgenonkelmantel|KOM', 'morgenonkelmantel|k', 'morgen|w+', 'morgen|s+', 'onkel|s+', 'mantel|s+'),
         gra.find_compound('morgenonkelmantel')
       )
 
-      # vorderer Teil ist ein TakeItAsIs vor Bindestrich / bindestrichversion
       assert_equal(
         wd('arrafat-nachfolger|KOM', 'arrafat-nachfolger|k', 'arrafat|x+', 'nachfolger|s+'),
         gra.find_compound('arrafat-nachfolger')
       )
 
-      # bindestrichversion zwei-teilig
       assert_equal(
         wd('cd-rom-technologie|KOM', 'cd-rom-technologie|k', 'cd-rom|s+|f', 'cd-rom|s+|m', 'technologie|s+|f'),
         gra.find_compound('cd-rom-technologie')
       )
 
-      # bindestrichversion drei-teilig
       assert_equal(
         wd('albert-ludwigs-universität|KOM', 'albert-ludwigs-universität|k', 'albert|e+', 'ludwig|e+', 'universität|s+'),
         gra.find_compound('albert-ludwigs-universität')
       )
 
-      # normal mit suggestion
       assert_equal(
         wd('benutzerforschung|KOM', 'benutzerforschung|k', 'benutzen|v+', 'erforschung|s+'),
         gra.find_compound('benutzerforschung')

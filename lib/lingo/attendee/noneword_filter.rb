@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2012 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2014 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -28,6 +28,7 @@ class Lingo
 
   class Attendee
 
+    #--
     # Der NonewordFilter ermöglicht es, alle nicht erkannten Wörter aus dem Datenstrom zu
     # selektieren und weiterzuleiten. Im Prinzip werden alle erkannten Wörter gefiltert.
     # Bei einem Indexierungslauf können so alle nicht durch den Wordsearcher erkannten Wörter,
@@ -65,6 +66,7 @@ class Lingo
     #   out> *FILE('test.txt')
     #   out> "lingo"
     #   out> *EOF('test.txt')
+    #++
 
     class NonewordFilter < self
 

@@ -64,9 +64,6 @@ class Lingo
         @src.each { |i| i.close }
       end
 
-      # _dic_.find_word( _aString_ ) -> _aNewWord_
-      #
-      # Erstellt aus dem String ein Wort und sucht nach diesem im Wörterbuch.
       def find_word(str, token = nil)
         Word.new(str, WA_UNKNOWN, token).identify(select_with_suffix(str))
       end
@@ -85,9 +82,6 @@ class Lingo
         syn
       end
 
-      # _dic_.select( _aString_ ) -> _ArrayOfLexicals_
-      #
-      # Sucht alle Wörterbücher durch und gibt den ersten Treffer zurück (+mode = first+), oder alle Treffer (+mode = all+)
       def select(str, lex = [])
         @src.each { |src|
           lex.concat(src[str] || next)
@@ -98,10 +92,6 @@ class Lingo
         lex
       end
 
-      # _dic_.select_with_suffix( _aString_ ) -> _ArrayOfLexicals_
-      #
-      # Sucht alle Wörterbücher durch und gibt den ersten Treffer zurück (+mode = first+), oder alle Treffer (+mode = all+).
-      # Sucht dabei auch Wörter, die um wortklassenspezifische Suffixe bereinigt wurden.
       def select_with_suffix(str)
         select(str) { |lex|
           each_affix(str) { |form, attr|
@@ -116,10 +106,6 @@ class Lingo
         }
       end
 
-      # _dic_.select_with_infix( _aString_ ) -> _ArrayOfLexicals_
-      #
-      # Sucht alle Wörterbücher durch und gibt den ersten Treffer zurück (+mode = first+), oder alle Treffer (+mode = all+).
-      # Sucht dabei auch Wörter, die eine Fugung am Ende haben.
       def select_with_infix(str)
         select(str) { |lex|
           each_affix(str, :infix) { |form, _| select(form, lex) }
