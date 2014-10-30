@@ -308,10 +308,6 @@ class Lingo
     config.warn(*msg)
   end
 
-  def deprecate(old, new, obj = self)
-    config.deprecate(old, new, obj)
-  end
-
 end
 
 require_relative 'lingo/call'

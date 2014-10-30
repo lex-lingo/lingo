@@ -42,7 +42,9 @@ class Lingo
       load_config('language', :lang)
       load_config('config')
 
-      deprecate(:textreader, :text_reader) if Array(self['meeting/attendees']).map(&:keys).flatten.include?('textreader')
+      if Array(self['meeting/attendees']).flat_map(&:keys).include?('textreader')
+        deprecate(:textreader, :text_reader)
+      end
 
       if r = get('meeting/attendees', 'text_reader') ||
              get('meeting/attendees', 'textreader')  # DEPRECATE textreader
