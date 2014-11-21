@@ -62,10 +62,10 @@ class Lingo
         base += "-#{mode}" if mode && !mode.empty?
 
         {
-          :txt   => :FlatPrinter,
-          :lines => :FlatPrinterWithLineNumbers,
-          :html  => :GraphHtmlPrinter,
-          :stack => :CallStackPrinter
+          txt:   :FlatPrinter,
+          lines: :FlatPrinterWithLineNumbers,
+          html:  :GraphHtmlPrinter,
+          stack: :CallStackPrinter
         }.each { |ext, name|
           File.open("#{base}.#{ext}", 'a+', encoding: ENC) { |f|
             RubyProf.const_get(name).new(result).print(f)
