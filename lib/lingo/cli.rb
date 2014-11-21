@@ -50,6 +50,10 @@ class Lingo
 
     private
 
+    def config_present?(config)
+      Lingo.find(:config, config) {}
+    end
+
     def load_config(*)
       @config = {}
     end
