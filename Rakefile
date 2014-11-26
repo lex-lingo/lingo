@@ -40,7 +40,7 @@ The main functions of Lingo are:
 
       dependencies: {
         'cyclops'       => ['~> 0.0', '>= 0.0.5'],
-        'nuggets'       => '~> 1.0',
+        'nuggets'       => '~> 1.1',
         'rubyzip'       => '~> 1.1',
         'sinatra-bells' => '~> 0.0',
         'unicode'       => '~> 0.4'
@@ -97,11 +97,12 @@ def test_ref(name, cfg = name)
   require 'diff/lcs/ldiff'
 
   cmd = %W[bin/lingo -c #{cfg} txt/#{name}.txt]
-  diff, msg = 0, ["Command failed: #{cmd.join(' ')}"]
+  buf, diff = ["Command failed: #{cmd.join(' ')}"], 0
 
-  Process.ruby(*cmd, I: :lib) { |_, _, o, e|
-    IO.interact({}, { o => msg, e => msg })
-  }.success? or abort msg.join("\n\n")
+  Process.ruby(*cmd, I: :lib, &RUBY_PLATFORM == 'java' ?
+    lambda { |_, _, o, e| buf << e.read; buf << o.read } :
+    lambda { |_, _, o, e| IO.interact({}, { o => buf, e => buf }) }
+  ).success? or abort buf.join("\n\n")
 
   Dir["test/ref/#{name}.*"].sort.each { |ref|
     diff += if File.exist?(org = ref.sub(/test\/ref/, 'txt'))
