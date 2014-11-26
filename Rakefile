@@ -39,7 +39,7 @@ The main functions of Lingo are:
       ].to_a,
 
       dependencies: {
-        'cyclops'       => ['~> 0.0', '>= 0.0.5'],
+        'cyclops'       => '~> 0.1',
         'nuggets'       => '~> 1.1',
         'rubyzip'       => '~> 1.1',
         'sinatra-bells' => '~> 0.0',
