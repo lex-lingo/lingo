@@ -106,14 +106,14 @@ class Lingo
 
       def control(cmd, param = nil, *)
         if @cmd_eval
-          debug(@cmd_eval) { "*#{cmd}('#{param}')" }
+          debug(eval(@cmd_eval)) { "*#{cmd}('#{param}')" }
         elsif cmd == :EOL
           skip_command
         end
       end
 
       def process(obj)
-        debug(@obj_eval) { obj.inspect }
+        debug(eval(@obj_eval)) { obj.inspect }
         forward(obj) unless @filter
       end
 
@@ -121,7 +121,7 @@ class Lingo
 
       def debug(condition)
         send_msg((@preamble = nil; @lingo.config.to_h.to_yaml)) if @preamble
-        send_msg(@prompt + yield) if eval(condition)
+        send_msg(@prompt + yield) if condition
       end
 
       def send_msg(msg)
