@@ -78,6 +78,9 @@ class Lingo
         @obj_eval = get_key('objects', 'true')
       end
 
+      def control(*)
+      end
+
       def process(obj)
         forward(obj) if eval(@obj_eval)
       end

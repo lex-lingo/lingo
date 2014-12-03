@@ -39,6 +39,9 @@ class Lingo
         @all = get_key('mode', '').downcase == 'all'
       end
 
+      def control(*)
+      end
+
       def process(obj)
         if obj.is_a?(Word) && obj.unknown?
           stem = stem(Unicode.downcase(obj.form), @all)

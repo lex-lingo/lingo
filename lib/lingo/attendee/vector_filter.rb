@@ -118,7 +118,7 @@ class Lingo
       def control(cmd, *)
         case cmd
           when :EOL
-            skip_command
+            :skip_command
           when :FILE, :RECORD, :EOF
             send_vectors unless @vectors.empty?
             @word_count = 0

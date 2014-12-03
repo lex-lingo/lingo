@@ -108,7 +108,7 @@ class Lingo
         if @cmd_eval
           debug(eval(@cmd_eval)) { "*#{cmd}('#{param}')" }
         elsif cmd == :EOL
-          skip_command
+          :skip_command
         end
       end
 

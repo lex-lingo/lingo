@@ -78,11 +78,9 @@ class Lingo
       # Make sure config exists
       lingo.dictionary_config
 
-      @dic = @gra = nil
+      @dic, @gra, @valid_keys = nil, nil, %w[name in out]
 
-      @valid_keys = %w[name in out]
-
-      init if self.class.method_defined?(:init)
+      init
 
       unless (invalid_keys = config.keys - @valid_keys).empty?
         warn(
@@ -90,11 +88,6 @@ class Lingo
           " options invalid or obsolete: #{invalid_keys.sort.join(', ')}"
         )
       end
-
-      @can_control = self.class.method_defined?(:control)
-      @can_process = self.class.method_defined?(:process)
-
-      @skip_command = false
     end
 
     attr_reader :lingo
@@ -104,12 +97,12 @@ class Lingo
     end
 
     def listen(cmd, *args)
-      control(cmd, *args) if @can_control
-      command(cmd, *args) if cmd != :TALK && !skip_command!
+      continue = control(cmd, *args)
+      command(cmd, *args) unless cmd == :TALK || continue == :skip_command
     end
 
     def accept(*args)
-      @can_process ? process(*args) : forward(*args)
+      process(*args)
     end
 
     private
@@ -117,14 +110,6 @@ class Lingo
     def find_word(f, d = @dic, g = @gra)
       w = d.find_word(f)
       g && (block_given? ? !yield(w) : w.unknown?) ? g.find_compound(f) : w
-    end
-
-    def skip_command
-      @skip_command = true
-    end
-
-    def skip_command!
-      @skip_command.tap { @skip_command &&= false }
     end
 
     def forward(*args)

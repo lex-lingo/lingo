@@ -83,7 +83,7 @@ class Lingo
       def control(cmd, *)
         case cmd
           when :FILE   then @nonewords.clear
-          when :EOL    then skip_command
+          when :EOL    then :skip_command
           when :RECORD then send_nonewords unless @dict
           when :EOF    then send_nonewords
         end
