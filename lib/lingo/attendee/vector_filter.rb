@@ -94,6 +94,9 @@ class Lingo
         @lex  = get_re('lexicals', '[sy]')
         @skip = get_array('skip', DEFAULT_SKIP, :upcase)
 
+        @src, @pos, @tokens, @sort_format, @sort_method =
+          nil, nil, [], nil, nil
+
         if @dict = get_key('dict', false)
           @norm = get_key('norm', false)
           @dict = DEFAULT_DICT_SEPARATOR if @dict == true
@@ -127,7 +130,7 @@ class Lingo
 
       def process(obj)
         if obj.is_a?(Token)
-          return unless @tokens && @tokens.include?(obj.attr)
+          return unless @tokens.include?(obj.attr)
         elsif obj.is_a?(Word)
           return if @skip.include?(obj.attr)
         else

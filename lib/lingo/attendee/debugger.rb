@@ -98,6 +98,8 @@ class Lingo
 
         unless @filter ||= get_key('filter', false)
           @cmd_eval = get_key('ceval', 'true')
+        else
+          @cmd_eval = nil
         end
 
         @obj_eval = get_key('eval', 'true')
