@@ -96,13 +96,15 @@ class Lingo
       @subscriber.concat(subscriber)
     end
 
-    def listen(cmd, *args)
-      continue = control(cmd, *args)
-      command(cmd, *args) unless cmd == :TALK || continue == :skip_command
+    def forward(*args)
+      @subscriber.each { |attendee| attendee.process(*args) }
     end
 
-    def accept(*args)
-      process(*args)
+    def command(cmd, *args)
+      @subscriber.each { |attendee|
+        continue = attendee.control(cmd, *args)
+        attendee.command(cmd, *args) unless cmd == :TALK || continue == :skip_command
+      }
     end
 
     private
@@ -110,14 +112,6 @@ class Lingo
     def find_word(f, d = @dic, g = @gra)
       w = d.find_word(f)
       g && (block_given? ? !yield(w) : w.unknown?) ? g.find_compound(f) : w
-    end
-
-    def forward(*args)
-      @subscriber.each { |attendee| attendee.accept(*args) }
-    end
-
-    def command(*args)
-      @subscriber.each { |attendee| attendee.listen(*args) }
     end
 
     def flush(buffer)

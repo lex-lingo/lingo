@@ -299,7 +299,7 @@ class Lingo
   end
 
   def start
-    @attendees.first.listen(:TALK)
+    @attendees.first.control(:TALK)
   end
 
   def reset(close = true)
