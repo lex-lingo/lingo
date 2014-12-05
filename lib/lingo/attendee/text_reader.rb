@@ -107,8 +107,6 @@ class Lingo
 
     class TextReader < self
 
-      protected
-
       # TODO: FILE/LIR-FILE (?)
       def init
         get_files

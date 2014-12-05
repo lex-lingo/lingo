@@ -70,8 +70,6 @@ class Lingo
 
     class NonewordFilter < self
 
-      protected
-
       def init
         @sort = get_key('sort', !ENV['LINGO_NO_SORT'])
         @dict = get_key('dict', false)

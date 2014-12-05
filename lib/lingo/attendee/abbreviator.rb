@@ -72,8 +72,6 @@ class Lingo
 
     class Abbreviator < self
 
-      protected
-
       def init
         set_dic
         @abbr = nil

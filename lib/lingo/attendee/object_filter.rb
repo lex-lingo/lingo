@@ -72,8 +72,6 @@ class Lingo
 
     class ObjectFilter < self
 
-      protected
-
       def init
         @obj_eval = get_key('objects', 'true')
       end

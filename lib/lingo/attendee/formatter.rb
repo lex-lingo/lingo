@@ -30,8 +30,6 @@ class Lingo
 
     class Formatter < TextWriter
 
-      protected
-
       def init
         super
 

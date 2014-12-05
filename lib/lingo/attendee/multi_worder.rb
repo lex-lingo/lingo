@@ -77,8 +77,6 @@ class Lingo
 
     class MultiWorder < BufferedAttendee
 
-      protected
-
       def init
         # combine lexical variants?
         #

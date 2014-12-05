@@ -30,8 +30,6 @@ class Lingo
 
     class Stemmer < self
 
-      protected
-
       def init
         extend(Lingo.get_const(get_key('type', 'porter'), self.class))
 

@@ -70,8 +70,6 @@ class Lingo
 
     class Dehyphenizer < BufferedAttendee
 
-      protected
-
       def init
         set_dic
         set_gra

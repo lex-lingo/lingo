@@ -95,8 +95,6 @@ class Lingo
 
     class Sequencer < BufferedAttendee
 
-      protected
-
       def init
         @stopper = get_array('stopper', DEFAULT_SKIP)
                      .push(WA_UNKNOWN, WA_UNKMULPART)

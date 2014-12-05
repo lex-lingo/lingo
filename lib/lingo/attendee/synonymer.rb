@@ -72,8 +72,6 @@ class Lingo
 
     class Synonymer < self
 
-      protected
-
       def init
         set_dic
         @com = !get_key('compound-parts', false)

@@ -74,8 +74,6 @@ class Lingo
 
     class Variator < self
 
-      protected
-
       def init
         @marker = get_key('marker', '*')
         @max    = get_key('max-var', max = 10000).to_i

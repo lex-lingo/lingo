@@ -75,8 +75,6 @@ class Lingo
 
     class Decomposer < self
 
-      protected
-
       def init
         set_gra
       end

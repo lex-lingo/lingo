@@ -157,8 +157,6 @@ class Lingo
 
       end
 
-      protected
-
       def init
         @space = get_key('space', false)
         @tags  = get_key('tags',  false)

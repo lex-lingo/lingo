@@ -88,8 +88,6 @@ class Lingo
 
       DEFAULT_GENDER_SEPARATOR = Database::Source::WordClass::GENDER_SEPARATOR
 
-      protected
-
       def init
         @lex  = get_re('lexicals', '[sy]')
         @skip = get_array('skip', DEFAULT_SKIP, :upcase)

@@ -87,8 +87,6 @@ class Lingo
 
     class TestSpooler < self
 
-      protected
-
       def init
         @input, @pos = get_key('input'), get_key('pos', nil) && 0
       end
@@ -103,8 +101,6 @@ class Lingo
     end
 
     class TestDumper < self
-
-      protected
 
       def init
         @output = get_key('output')

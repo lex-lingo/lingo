@@ -79,8 +79,6 @@ class Lingo
 
     class TextWriter < self
 
-      protected
-
       def init
         @ext = get_key('ext', 'txt2')
         @lir = get_key('lir-format', false)

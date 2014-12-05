@@ -91,8 +91,6 @@ class Lingo
 
     class Debugger < self
 
-      protected
-
       def init(default_prompt = 'lex:) ')
         @prompt = get_key('prompt', default_prompt)
 
@@ -133,8 +131,6 @@ class Lingo
     end
 
     class DebugFilter < Debugger
-
-      protected
 
       def init
         @filter = true

@@ -33,8 +33,6 @@ class Lingo
       super
     end
 
-    protected
-
     def process(obj)
       @buffer << obj
       process_buffer if process_buffer?
