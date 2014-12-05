@@ -73,7 +73,7 @@ class Lingo
     DEFAULT_SKIP = [TA_PUNCTUATION, TA_OTHER].join(',')
 
     def initialize(config, lingo)
-      @lingo, @config, @subscriber = lingo, config, []
+      @lingo, @config, @subscribers = lingo, config, []
 
       # Make sure config exists
       lingo.dictionary_config
@@ -90,20 +90,16 @@ class Lingo
       end
     end
 
-    attr_reader :lingo
-
-    def add_subscriber(subscriber)
-      @subscriber.concat(subscriber)
-    end
+    attr_reader :lingo, :subscribers
 
     def forward(*args)
-      @subscriber.each { |attendee| attendee.process(*args) }
+      subscribers.each { |sub| sub.process(*args) }
     end
 
     def command(cmd, *args)
-      @subscriber.each { |attendee|
-        continue = attendee.control(cmd, *args)
-        attendee.command(cmd, *args) unless cmd == :TALK || continue == :skip_command
+      subscribers.each { |sub|
+        continue = sub.control(cmd, *args)
+        sub.command(cmd, *args) unless cmd == :TALK || continue == :skip_command
       }
     end
 

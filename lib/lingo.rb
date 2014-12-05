@@ -294,7 +294,7 @@ class Lingo
     }
 
     supplier.each { |ch, attendees| attendees.each { |att|
-      att.add_subscriber(subscriber[ch])
+      att.subscribers.concat(subscriber[ch])
     } }
   end
 
