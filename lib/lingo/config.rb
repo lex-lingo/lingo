@@ -32,7 +32,7 @@ class Lingo
   class Config
 
     def initialize(*args)
-      @deprecated = Hash.new { |h, k| h[k] = true; false }
+      @deprecated = Hash.seen
 
       @cli, @opts = CLI.new, {}
 

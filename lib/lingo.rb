@@ -29,6 +29,7 @@ require 'stringio'
 require 'pathname'
 require 'fileutils'
 require 'nuggets/file/ext'
+require 'nuggets/hash/seen'
 require 'nuggets/env/user_home'
 require 'nuggets/string/camelscore'
 
@@ -200,11 +201,9 @@ class Lingo
     end
 
     def walk(path, options, legacy = true)
-      dirs = [options[:dir].to_s]
+      dirs, seen = [options[:dir].to_s], Hash.seen
       dirs << '' if legacy
       dirs.uniq!
-
-      seen = Hash.new { |h, k| h[k] = true; false }
 
       path.each { |d|
         next if seen[d = File.expand_path(d)]

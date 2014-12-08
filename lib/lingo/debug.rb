@@ -35,7 +35,7 @@ class Lingo
 
     PS_RE = File.executable?(PS_COMMAND) ? %r{\A#{ENV['LINGO_DEBUG_PS']}\z} : nil
 
-    PS_NO_HEADING = Hash.new { |h, k| h[k] = true; false }
+    PS_NO_HEADING = Hash.seen
 
     def ps(name)
       system(PS_COMMAND,
