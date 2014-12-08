@@ -48,7 +48,7 @@ class Lingo
       use(Rack::Auth::Basic) { |*b| b == c } unless c.empty?
     end
 
-    LINGO = Hash.new { |h, k| h[k] = Lingo.call(cfg, ['-l', k]) }
+    LINGO = Hash.nest { |k| Lingo.call(cfg, ['-l', k]) }
 
     CFG, s, h = '', StringScanner.new(''), ERB::Util.method(:h)
     c = lambda { |n| %Q{<span style="color:#{n}">#{h[s.matched]}</span>} }

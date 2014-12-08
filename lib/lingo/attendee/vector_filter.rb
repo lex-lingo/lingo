@@ -113,7 +113,7 @@ class Lingo
           @sort_format, @sort_method = sort.downcase.split('_', 2)
         end
 
-        @vectors, @word_count = Hash.new { |h, k| h[k] = [] }, 0
+        @vectors, @word_count = Hash.nest { [] }, 0
       end
 
       def control(cmd, *)

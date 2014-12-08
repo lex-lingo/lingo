@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2012 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2014 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -29,6 +29,7 @@ require 'stringio'
 require 'pathname'
 require 'fileutils'
 require 'nuggets/file/ext'
+require 'nuggets/hash/nest'
 require 'nuggets/hash/seen'
 require 'nuggets/env/user_home'
 require 'nuggets/string/camelscore'
@@ -264,8 +265,8 @@ class Lingo
   end
 
   def invite(list = config['meeting/attendees'])
-    supplier   = Hash.new { |h, k| h[k] = [] }
-    subscriber = Hash.new { |h, k| h[k] = [] }
+    supplier   = Hash.nest { [] }
+    subscriber = Hash.nest { [] }
 
     last_link, auto_link = '', 0
 
@@ -304,7 +305,7 @@ class Lingo
   def reset(close = true)
     dictionaries.each { |i| i.close } if close
     @dictionaries, @attendees = [], []
-    @lexical_hash = Hash.new { |h, k| h[k] = Language::LexicalHash.new(k, self) }
+    @lexical_hash = Hash.nest { |k| Language::LexicalHash.new(k, self) }
   end
 
   def warn(*msg)

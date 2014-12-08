@@ -70,7 +70,7 @@ class Lingo
       @srcfile = Lingo.find(:dict, config['name'], relax: true)
       @crypter = config.key?('crypt') && Crypter.new
 
-      @val = Hash.new { |h, k| h[k] = [] }
+      @val = Hash.nest { [] }
 
       begin
         @stofile = Lingo.find(:store, @srcfile)

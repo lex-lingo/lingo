@@ -38,8 +38,8 @@ class Lingo
     PROG, VERSION, OPTWIDTH = $0, '0.0.2', 18
     PROGNAME, OPTIONS = File.basename(PROG), {}
 
-    COMMANDS, ALIASES = {}, Hash.new { |h, k|
-      h[k] = COMMANDS.key?(k) ? k : 'usage'
+    COMMANDS, ALIASES = {}, Hash.nest { |k|
+      COMMANDS.key?(k) ? k : 'usage'
     }
 
     USAGE = <<-EOT
@@ -187,7 +187,7 @@ Usage: #{PROG} <command> [arguments] [options]
 
       msg = opts ? [opts, 'Commands:'] : []
 
-      aliases = Hash.new { |h, k| h[k] = [] }
+      aliases = Hash.nest { [] }
       ALIASES.each { |k, v| aliases[v] << k }
 
       COMMANDS.each { |c, (d, *e)|

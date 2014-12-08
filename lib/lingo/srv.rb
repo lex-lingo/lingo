@@ -58,7 +58,7 @@ class Lingo
       r = LINGO.talk(q) unless q.empty?
       return r unless r && SRC_SEP
 
-      s = Hash.new { |h, k| h[k] = [] }
+      s = Hash.nest { [] }
 
       r.each { |t|
         a, b = t.split(SRC_SEP, 2)
