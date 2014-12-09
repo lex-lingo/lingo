@@ -96,10 +96,9 @@ class Lingo
       subscribers.each { |sub| sub.process(*args) }
     end
 
-    def command(cmd, *args)
+    def command(*args)
       subscribers.each { |sub|
-        continue = sub.control(cmd, *args)
-        sub.command(cmd, *args) unless cmd == :TALK || continue == :skip_command
+        sub.command(*args) unless sub.control(*args) == :skip_command
       }
     end
 

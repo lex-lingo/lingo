@@ -127,6 +127,8 @@ class Lingo
         if cmd == :TALK
           command(:LIR) if @lir
           @files.each { |i| spool(i) }
+
+          :skip_command
         end
       end
 
