@@ -128,6 +128,7 @@ class Lingo
           command(:LIR) if @lir
           @files.each { |i| spool(i) }
 
+          command(:EOT)
           :skip_command
         end
       end

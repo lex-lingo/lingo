@@ -6,9 +6,9 @@ class TestAttendeeNonewordFilter < AttendeeTestCase
 
   def test_basic
     meet({}, [
-      wd('Eins|IDF'), wd('Zwei|?'), wd('Drei|IDF'), wd('Vier|?'), ai('EOF|')
+      wd('Eins|IDF'), wd('Zwei|?'), wd('Drei|IDF'), wd('Vier|?'), ai('EOF|'), ai('EOT|')
     ], [
-      'vier', 'zwei', ai('EOF|')
+      'vier', 'zwei', ai('EOF|'), ai('EOT|')
     ])
   end
 

@@ -13,12 +13,14 @@ class TestAttendeeStemmer < AttendeeTestCase
       wd('bla|IDF'),
       wd('blub|?'),
       wd('blubs|?'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ], [
       wd('bla|IDF'),
       wd('blub|?'),
       wd('blubs|?', 'blub|z'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ])
   end
 
@@ -27,12 +29,14 @@ class TestAttendeeStemmer < AttendeeTestCase
       wd('bla|IDF'),
       wd('blub|?'),
       wd('blubs|?'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ], [
       wd('bla|IDF'),
       wd('blub|?'),
       wd('blubs|?', 'blub|w'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ])
   end
 
@@ -42,13 +46,15 @@ class TestAttendeeStemmer < AttendeeTestCase
       wd('a|?'),
       wd('yet|?'),
       wd('blubs|?'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ], [
       wd('bla|IDF'),
       wd('a|?'),
       wd('yet|?'),
       wd('blubs|?', 'blub|z'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ])
 
     meet({ 'mode' => 'all' }, [
@@ -56,13 +62,15 @@ class TestAttendeeStemmer < AttendeeTestCase
       wd('a|?'),
       wd('yet|?'),
       wd('blubs|?'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ], [
       wd('bla|IDF'),
       wd('a|?',     'a|z'),
       wd('yet|?',   'yet|z'),
       wd('blubs|?', 'blub|z'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ])
   end
 
@@ -74,7 +82,8 @@ class TestAttendeeStemmer < AttendeeTestCase
       wd('ties|?'),
       wd('caress|?'),
       wd('cats|?'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ], [
       wd('S100|IDF'),
       wd('caresses|?', 'caress|z'),
@@ -82,7 +91,8 @@ class TestAttendeeStemmer < AttendeeTestCase
       wd('ties|?',     'ti|z'),      # snowball: tie
       wd('caress|?',   'caress|z'),
       wd('cats|?',     'cat|z'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ])
   end
 
@@ -95,7 +105,8 @@ class TestAttendeeStemmer < AttendeeTestCase
       wd('bled|?'),
       wd('motoring|?'),
       wd('sing|?'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ], [
       wd('S110|IDF'),
       wd('agreed|?',    'agre|z'),
@@ -104,7 +115,8 @@ class TestAttendeeStemmer < AttendeeTestCase
       wd('bled|?',      'bled|z'),
       wd('motoring|?',  'motor|z'),
       wd('sing|?',      'sing|z'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ])
   end
 
@@ -121,7 +133,8 @@ class TestAttendeeStemmer < AttendeeTestCase
       wd('fizzed|?'),
       wd('failing|?'),
       wd('filing|?'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ], [
       wd('S111|IDF'),
       wd('conflated|?', 'conflat|z'),
@@ -134,7 +147,8 @@ class TestAttendeeStemmer < AttendeeTestCase
       wd('fizzed|?',    'fizz|z'),
       wd('failing|?',   'fail|z'),
       wd('filing|?',    'file|z'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ])
   end
 
@@ -143,12 +157,14 @@ class TestAttendeeStemmer < AttendeeTestCase
       wd('S120|IDF'),
       wd('happy|?'),
       wd('sky|?'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ], [
       wd('S120|IDF'),
       wd('happy|?', 'happi|z'),
       wd('sky|?',   'sky|z'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ])
   end
 
@@ -176,7 +192,8 @@ class TestAttendeeStemmer < AttendeeTestCase
       wd('formality|?'),
       wd('sensitivity|?'),
       wd('sensibility|?'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ], [
       wd('S200|IDF'),
       wd('relational|?',     'relat|z'),
@@ -200,7 +217,8 @@ class TestAttendeeStemmer < AttendeeTestCase
       wd('formality|?',      'formal|z'),
       wd('sensitivity|?',    'sensit|z'),
       wd('sensibility|?',    'sensibl|z'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ])
   end
 
@@ -214,7 +232,8 @@ class TestAttendeeStemmer < AttendeeTestCase
       wd('electrical|?'),
       wd('hopeful|?'),
       wd('goodness|?'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ], [
       wd('S300|IDF'),
       wd('triplicate|?',  'triplic|z'),
@@ -224,7 +243,8 @@ class TestAttendeeStemmer < AttendeeTestCase
       wd('electrical|?',  'electr|z'),
       wd('hopeful|?',     'hope|z'),
       wd('goodness|?',    'good|z'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ])
   end
 
@@ -250,7 +270,8 @@ class TestAttendeeStemmer < AttendeeTestCase
       wd('homologous|?'),
       wd('effective|?'),
       wd('bowdlerize|?'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ], [
       wd('S400|IDF'),
       wd('revival|?',     'reviv|z'),
@@ -272,7 +293,8 @@ class TestAttendeeStemmer < AttendeeTestCase
       wd('homologous|?',  'homolog|z'),
       wd('effective|?',   'effect|z'),
       wd('bowdlerize|?',  'bowdler|z'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ])
   end
 
@@ -282,13 +304,15 @@ class TestAttendeeStemmer < AttendeeTestCase
       wd('probate|?'),
       wd('rate|?'),
       wd('cease|?'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ], [
       wd('S500|IDF'),
       wd('probate|?', 'probat|z'),
       wd('rate|?',    'rate|z'),
       wd('cease|?',   'ceas|z'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ])
   end
 
@@ -297,12 +321,14 @@ class TestAttendeeStemmer < AttendeeTestCase
       wd('S510|IDF'),
       wd('controll|?'),
       wd('roll|?'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ], [
       wd('S510|IDF'),
       wd('controll|?', 'control|z'),
       wd('roll|?',     'roll|z'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ])
   end
 

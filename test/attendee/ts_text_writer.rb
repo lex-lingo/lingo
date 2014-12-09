@@ -20,7 +20,8 @@ class TestAttendeeTextWriter < AttendeeTestCase
       wd('Zeile|IDF'),
       tk('.|PUNC'),
       ai('EOL|test/test.txt'),
-      ai('EOF|test/test.txt')
+      ai('EOF|test/test.txt'),
+      ai('EOT|')
     ]
   end
 
@@ -61,7 +62,8 @@ class TestAttendeeTextWriter < AttendeeTestCase
       ai('RECORD|00239'),
       '020: Information Retrieval und Dokumentmanagement im Multimedia-Zeitalter.',
       "056: \"Das Buch ist ein praxisbezogenes VADEMECUM für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.",
-      ai('EOF|test/lir.txt')
+      ai('EOF|test/lir.txt'),
+      ai('EOT|')
     ])
 
     assert_equal([
@@ -76,7 +78,7 @@ FG-Projekt GERHARD.\n",
 
   def test_nonewords
     meet({ 'ext' => 'non', 'sep' => "\n" }, [
-      ai('FILE|test/text.txt'), 'Nonwörter', 'Nonsense', ai('EOF|test/text.txt')
+      ai('FILE|test/text.txt'), 'Nonwörter', 'Nonsense', ai('EOF|test/text.txt'), ai('EOT|')
     ])
 
     assert_equal([

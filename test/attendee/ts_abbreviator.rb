@@ -33,7 +33,8 @@ class TestAttendeeAbbreviator < AttendeeTestCase
       tk('Punkt|WORD'),
       tk('am|WORD'),
       tk('Ende|WORD'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ], [
       tk('Dieser|WORD'),
       tk('Satz|WORD'),
@@ -42,7 +43,8 @@ class TestAttendeeAbbreviator < AttendeeTestCase
       tk('Punkt|WORD'),
       tk('am|WORD'),
       tk('Ende|WORD'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ])
   end
 

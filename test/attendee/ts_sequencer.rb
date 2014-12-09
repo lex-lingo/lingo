@@ -15,7 +15,8 @@ class TestAttendeeSequencer < AttendeeTestCase
       wd('Der|IDF', 'der|w'),
       wd('schöne|IDF', 'schön|a'),
       wd('Sonnenuntergang|KOM', 'sonnenuntergang|k', 'sonne|s+', 'untergang|s+'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ], [
       # AS
       wd('Die|IDF', 'die|w'),
@@ -28,7 +29,8 @@ class TestAttendeeSequencer < AttendeeTestCase
       wd('schöne|IDF', 'schön|a'),
       wd('Sonnenuntergang|KOM', 'sonnenuntergang|k', 'sonne|s+', 'untergang|s+'),
       wd('sonnenuntergang, schön|SEQ', 'sonnenuntergang, schön|q'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ])
   end
 
@@ -50,7 +52,8 @@ class TestAttendeeSequencer < AttendeeTestCase
       wd('Der|IDF', 'der|w'),
       wd('Sonne|IDF', 'sonne|s'),
       wd('Untergang|IDF', 'untergang|s'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ], [
       # (AS)
       wd('Die|IDF', 'die|w'),
@@ -72,7 +75,8 @@ class TestAttendeeSequencer < AttendeeTestCase
       wd('Sonne|IDF', 'sonne|s'),
       wd('Untergang|IDF', 'untergang|s'),
       wd('sonne untergang|SEQ', 'sonne untergang|q'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ])
   end
 
@@ -85,7 +89,8 @@ class TestAttendeeSequencer < AttendeeTestCase
       wd('Gottes|IDF', 'gott|s'),
       wd('Turm|IDF', 'turm|s'),
       tk('.|PUNC'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ], [
       # MS
       wd('Der|IDF', 'der|w'),
@@ -95,7 +100,8 @@ class TestAttendeeSequencer < AttendeeTestCase
       wd('Turm|IDF', 'turm|s'),
       tk('.|PUNC'),
       wd('abbild gottes turm|SEQ', 'abbild gottes turm|q'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ])
     meet({ 'sequences' => [['MS', '1 2'], ['SS', '1 2'], ['SSS', '1 2 3']] }, [
       # MS + SS + SS + SSS
@@ -109,7 +115,8 @@ class TestAttendeeSequencer < AttendeeTestCase
       wd('Abbild Gottes|MUL', 'abbild gottes|m'),
       wd('Abbild|IDF', 'abbild|s'),
       wd('Gottes|IDF', 'gott|s'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ], [
       # MS + SS + SS + SSS
       wd('Der|IDF', 'der|w'),
@@ -127,7 +134,8 @@ class TestAttendeeSequencer < AttendeeTestCase
       wd('Abbild|IDF', 'abbild|s'),
       wd('Gottes|IDF', 'gott|s'),
       wd('abbild gott|SEQ', 'abbild gott|q'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ])
   end
 
@@ -144,7 +152,8 @@ class TestAttendeeSequencer < AttendeeTestCase
       wd('Abbild Gottes|MUL', 'abbild gottes|m'),
       wd('Abbild|IDF', 'abbild|s'),
       wd('Gottes|IDF', 'gott|s'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ], [
       # MS + SS + SS
       wd('Der|IDF', 'der|w'),
@@ -161,7 +170,8 @@ class TestAttendeeSequencer < AttendeeTestCase
       wd('Abbild|IDF', 'abbild|s'),
       wd('Gottes|IDF', 'gott|s'),
       wd('abbild gott|SEQ', 'abbild gott|q'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ])
   end
 
@@ -177,7 +187,8 @@ class TestAttendeeSequencer < AttendeeTestCase
       wd('Abbild Gottes|MUL', 'abbild gottes|m'),
       wd('Abbild|IDF', 'abbild|s'),
       wd('Gottes|IDF', 'gott|s'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ], [
       # (MS + SS + SS)
       wd('Der|IDF', 'der|w'),
@@ -189,7 +200,8 @@ class TestAttendeeSequencer < AttendeeTestCase
       wd('Abbild Gottes|MUL', 'abbild gottes|m'),
       wd('Abbild|IDF', 'abbild|s'),
       wd('Gottes|IDF', 'gott|s'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ])
   end
 
@@ -206,7 +218,8 @@ class TestAttendeeSequencer < AttendeeTestCase
       wd('Abbild Gottes|MUL', 'abbild gottes|m'),
       wd('Abbild|IDF', 'abbild|s'),
       wd('Gottes|IDF', 'gott|s'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ], [
       # MS + SS + SS
       wd('Der|IDF', 'der|w'),
@@ -223,7 +236,8 @@ class TestAttendeeSequencer < AttendeeTestCase
       wd('Abbild|IDF', 'abbild|s'),
       wd('Gottes|IDF', 'gott|s'),
       wd('abbild gott|SEQ', 'abbild gott|q'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ])
   end
 
@@ -236,7 +250,8 @@ class TestAttendeeSequencer < AttendeeTestCase
       wd('Gottes|IDF', 'gott|s'),
       wd('Turm|IDF', 'turm|s'),
       tk('.|PUNC'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ], [
       # MS + SSS + (SS) + SS
       wd('Der|IDF', 'der|w'),
@@ -249,7 +264,8 @@ class TestAttendeeSequencer < AttendeeTestCase
       wd('abbild gott turm|SEQ', 'abbild gott turm|q'),
       #wd('abbild gott|SEQ', 'abbild gott|q'),  # FIXME
       wd('gott turm|SEQ', 'gott turm|q'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ])
   end
 
@@ -262,7 +278,8 @@ class TestAttendeeSequencer < AttendeeTestCase
       wd('Gottes|IDF', 'gott|s'),
       wd('Turm|IDF', 'turm|s'),
       tk('.|PUNC'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ], [
       # MS + SSS + (SS) + SS
       wd('Der|IDF', 'der|w'),
@@ -275,7 +292,8 @@ class TestAttendeeSequencer < AttendeeTestCase
       wd('sss:abbild^gott^turm|SEQ', 'sss:abbild^gott^turm|q'),
       #wd('ss:abbild^gott|SEQ', 'ss:abbild^gott|q'),  # FIXME
       wd('ss:gott^turm|SEQ', 'ss:gott^turm|q'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ])
   end
 
@@ -290,7 +308,8 @@ class TestAttendeeSequencer < AttendeeTestCase
       wd('Der|IDF', 'der|w'),
       wd('schöne|IDF', 'schön|a'),
       wd('Sonnenuntergang|KOM', 'sonnenuntergang|k', 'sonne|s+', 'untergang|s+'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ], [
       # WA + AS
       wd('Die|IDF', 'die|w'),
@@ -305,7 +324,8 @@ class TestAttendeeSequencer < AttendeeTestCase
       wd('Sonnenuntergang|KOM', 'sonnenuntergang|k', 'sonne|s+', 'untergang|s+'),
       wd('der schön (wa)|SEQ', 'der schön (wa)|q'),
       wd('ak: sonnenuntergang, schön|SEQ', 'ak: sonnenuntergang, schön|q'),
-      ai('EOF|')
+      ai('EOF|'),
+      ai('EOT|')
     ])
   end
 

@@ -19,7 +19,8 @@ class TestAttendeeTextReader < AttendeeTestCase
       ai('RECORD|00239'),
       li('020: Information Retrieval und Dokumentmanagement im Multimedia-Zeitalter.', 510),
       li('056: "Das Buch ist ein praxisbezogenes VADEMECUM für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.', 634),
-      ai("EOF|#{path}")
+      ai("EOF|#{path}"),
+      ai('EOT|')
     ])
   end
 
@@ -38,7 +39,8 @@ class TestAttendeeTextReader < AttendeeTestCase
       ai('RECORD|00239'),
       li('020: Information Retrieval und Dokumentmanagement im Multimedia-Zeitalter.', 507),
       li('056: "Das Buch ist ein praxisbezogenes VADEMECUM für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.', 631),
-      ai("EOF|#{path}")
+      ai("EOF|#{path}"),
+      ai('EOT|')
     ])
   end
 
@@ -57,7 +59,8 @@ class TestAttendeeTextReader < AttendeeTestCase
       ai('RECORD|[00239.]'),
       li('020: Information Retrieval und Dokumentmanagement im Multimedia-Zeitalter.', 510),
       li('056: "Das Buch ist ein praxisbezogenes VADEMECUM für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.', 634),
-      ai("EOF|#{path}")
+      ai("EOF|#{path}"),
+      ai('EOT|')
     ])
   end
 
@@ -76,7 +79,8 @@ class TestAttendeeTextReader < AttendeeTestCase
       ai('RECORD|00239'),
       li('Information Retrieval und Dokumentmanagement im Multimedia-Zeitalter.', 510),
       li('"Das Buch ist ein praxisbezogenes VADEMECUM für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.', 634),
-      ai("EOF|#{path}")
+      ai("EOF|#{path}"),
+      ai('EOT|')
     ])
   end
 
@@ -95,7 +99,8 @@ class TestAttendeeTextReader < AttendeeTestCase
       ai('RECORD|00239'),
       li(' Information Retrieval und Dokumentmanagement im Multimedia-Zeitalter.', 510),
       li(' "Das Buch ist ein praxisbezogenes VADEMECUM für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.', 634),
-      ai("EOF|#{path}")
+      ai("EOF|#{path}"),
+      ai('EOT|')
     ])
   end
 
@@ -114,7 +119,8 @@ class TestAttendeeTextReader < AttendeeTestCase
       ai('RECORD|[00239.]'),
       li('Information Retrieval und Dokumentmanagement im Multimedia-Zeitalter.', 510),
       li('"Das Buch ist ein praxisbezogenes VADEMECUM für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.', 634),
-      ai("EOF|#{path}")
+      ai("EOF|#{path}"),
+      ai('EOT|')
     ])
   end
 
@@ -122,7 +128,8 @@ class TestAttendeeTextReader < AttendeeTestCase
     meet({ 'files' => 'test/mul.txt' }, nil, [
       ai("FILE|#{path = File.expand_path('test/mul.txt')}"),
       ['Die abstrakte Kunst ist schön.', 31],
-      ai("EOF|#{path}")
+      ai("EOF|#{path}"),
+      ai('EOT|')
     ])
   end
 
