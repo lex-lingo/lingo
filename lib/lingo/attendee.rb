@@ -166,6 +166,7 @@ class Lingo
 end
 
 require_relative 'buffered_attendee'
+require_relative 'deferred_attendee'
 
 require_relative 'attendee/abbreviator'
 require_relative 'attendee/debugger'
