@@ -24,6 +24,8 @@
 ###############################################################################
 #++
 
+require 'csv'
+
 class Lingo
 
   class Attendee
@@ -88,12 +90,15 @@ class Lingo
 
       DEFAULT_GENDER_SEPARATOR = Database::Source::WordClass::GENDER_SEPARATOR
 
+      TERMINALS = [:FILE, :RECORD, :EOF]
+
       def init
         @lex  = get_re('lexicals', '[sy]')
         @skip = get_array('skip', DEFAULT_SKIP, :upcase)
 
-        @src, @pos, @tokens, @sort_format, @sort_method =
-          nil, nil, [], nil, nil
+        @src = @pos = @sort_fmt = @sort_rel = @docnum = nil
+
+        @tokens, @vectors, @word_count = [], Hash.nest(1) { [] }, Hash.new(0)
 
         if @dict = get_key('dict', false)
           @norm = get_key('norm', false)
@@ -110,20 +115,31 @@ class Lingo
         end
 
         if sort = get_key('sort', ENV['LINGO_NO_SORT'] ? false : 'normal')
-          @sort_format, @sort_method = sort.downcase.split('_', 2)
-        end
+          @sort_fmt, sort_method = sort.downcase.split('_', 2)
 
-        @vectors, @word_count = Hash.nest { [] }, 0
+          @sort_rel = rel = sort_method == 'rel'
+
+          unless @sort_fmt == 'normal'
+            if @tfidf = get_key('tfidf', false)
+              DeferredAttendee.enhance(self)
+              @docnum, rel = 0, true
+            end
+
+            _sort_fmt = @sort_fmt == 'sto' ? '%2$s {%1$X}' : '%X %s'
+            @sort_fmt = _sort_fmt.sub('X', rel ? '.5f' : 'd')
+          end
+        end
       end
 
       def control(cmd, *)
         case cmd
-          when :EOL
-            :skip_command
-          when :FILE, :RECORD, :EOF
-            send_vectors unless @vectors.empty?
-            @word_count = 0
+          when :EOL       then :skip_command
+          when *TERMINALS then send_vectors unless @docnum
         end
+      end
+
+      def control_deferred(cmd, *)
+        @docnum += 1 if TERMINALS.include?(cmd)
       end
 
       def process(obj)
@@ -135,7 +151,7 @@ class Lingo
           return
         end
 
-        @word_count += 1
+        @word_count[@docnum] += 1
 
         @dict ? forward_dict(obj) : begin
           pos = obj.position_and_offset if @pos
@@ -146,6 +162,14 @@ class Lingo
       end
 
       private
+
+      def vectors(docnum = nil)
+        @vectors[docnum || @docnum]
+      end
+
+      def word_count(docnum = nil)
+        @word_count[docnum || @docnum]
+      end
 
       def forward_dict(obj, sep = DEFAULT_GENDER_SEPARATOR)
         vectors = obj.get_class(@lex).map { |lex|
@@ -166,37 +190,51 @@ class Lingo
         vec = Unicode.downcase(vec)
         vec << @src << src if @src && src
 
-        @sort_format ? @vectors[vec] << pos : forward(vec_pos(vec, [pos]))
+        @sort_fmt ? vectors[vec] << pos : forward(vec_pos(vec, [pos]))
       end
 
       def send_vectors
-        if @sort_format == 'normal'
-          vectors = !@pos ? @vectors.keys : @vectors.map { |i| vec_pos(*i) }
+        if @docnum
+          df, abs = Hash.new(0), @sort_rel ? nil : 1
 
-          @vectors.clear
+          @vectors.each_value { |w| w.each_key { |v| df[v] += 1 } }
 
-          flush(vectors.sort!)
-        else
-          vectors = @vectors.sort_by { |vec, pos| [-pos.size, vec] }
-
-          @vectors.clear
-
-          !@pos ? vectors.map! { |vec, pos| [pos.size, vec] } :
-            vectors.map! { |vec, pos| [pos.size, vec_pos(vec, pos)] }
-
-          @sort_method != 'rel' ? fmt = '%d' : begin
-            fmt, wc = '%6.5f', @word_count.to_f
-            vectors.each { |v| v[0] /= wc }
+          if @tfidf.is_a?(String)
+            CSV.open(@tfidf, 'wb') { |c| df.sort.each { |v| c << v } }
           end
 
-          @sort_format != 'sto' ? fmt << ' %s' :
-            fmt = "%2$s {#{fmt.insert(1, '1$')}}"
-
-          vectors.each { |vec| forward(fmt % vec) }
+          yield lambda { |docnum|
+            wc = abs || word_count(docnum)
+            flush_vectors(wc, docnum) { |c, v, vp| [c / df[v], vp] }
+          }
+        elsif @sort_fmt == 'normal'
+          flush(map_vectors { |_, _, vp| vp }.sort!)
+        else
+          flush_vectors(@sort_rel ? word_count : 1) { |c, _, vp| [c, vp] }
         end
+
+        @word_count.clear
+        @vectors.clear
+      end
+
+      alias_method :flush_deferred, :send_vectors
+
+      def map_vectors(wc = 1, docnum = nil)
+        v = vectors(docnum)
+        v.map { |vec, pos| yield pos.size / wc.to_f, vec, vec_pos(vec, pos) }
+      ensure
+        v.clear if v
+      end
+
+      def flush_vectors(*args, &block)
+        map_vectors(*args, &block)
+          .sort_by { |w, v| [-w, v] }
+          .each { |vec| forward(@sort_fmt % vec) }
       end
 
       def vec_pos(vec, pos)
+        pos.clear unless @pos
+
         pos.compact!
         pos.uniq!
         pos.empty? ? vec : "#{vec}#{@pos}#{pos.join(',')}"

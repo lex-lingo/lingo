@@ -28,6 +28,10 @@ class TestAttendeeVectorFilter < AttendeeTestCase
       ai('EOF|test'),
       ai('EOT|')
     ]
+
+    @tfidf_input = @input[0...-1] + @input
+
+    @tfidf_pos_input = @pos_input[0...-1] + @pos_input
   end
 
   def test_basic
@@ -165,6 +169,126 @@ class TestAttendeeVectorFilter < AttendeeTestCase
       'substantiv@2:15',
       'no',
       'token',
+      ai('EOF|test'),
+      ai('EOT|')
+    ])
+  end
+
+  def test_tfidf_sort_term_abs
+    meet({ 'lexicals' => '[save]', 'tfidf' => true, 'sort' => 'term_abs' }, @tfidf_input, [
+      ai('FILE|test'), '0.50000 adjektiv', '0.50000 eigenname', '0.50000 substantiv', '0.50000 verb', ai('EOF|test'),
+      ai('FILE|test'), '0.50000 adjektiv', '0.50000 eigenname', '0.50000 substantiv', '0.50000 verb', ai('EOF|test'),
+      ai('EOT|')
+    ])
+  end
+
+  def test_tfidf_sort_term_rel
+    meet({ 'lexicals' => '[save]', 'tfidf' => true, 'sort' => 'term_rel' }, @tfidf_input, [
+      ai('FILE|test'), '0.25000 adjektiv', '0.25000 eigenname', '0.25000 substantiv', '0.25000 verb', ai('EOF|test'),
+      ai('FILE|test'), '0.25000 adjektiv', '0.25000 eigenname', '0.25000 substantiv', '0.25000 verb', ai('EOF|test'),
+      ai('EOT|')
+    ])
+  end
+
+  def test_tfidf_sort_sto_abs
+    meet({ 'lexicals' => '[save]', 'tfidf' => true, 'sort' => 'sto_abs' }, @tfidf_input, [
+      ai('FILE|test'), 'adjektiv {0.50000}', 'eigenname {0.50000}', 'substantiv {0.50000}', 'verb {0.50000}', ai('EOF|test'),
+      ai('FILE|test'), 'adjektiv {0.50000}', 'eigenname {0.50000}', 'substantiv {0.50000}', 'verb {0.50000}', ai('EOF|test'),
+      ai('EOT|')
+    ])
+  end
+
+  def test_tfidf_sort_sto_rel
+    meet({ 'lexicals' => '[save]', 'tfidf' => true, 'sort' => 'sto_rel' }, @tfidf_input, [
+      ai('FILE|test'), 'adjektiv {0.25000}', 'eigenname {0.25000}', 'substantiv {0.25000}', 'verb {0.25000}', ai('EOF|test'),
+      ai('FILE|test'), 'adjektiv {0.25000}', 'eigenname {0.25000}', 'substantiv {0.25000}', 'verb {0.25000}', ai('EOF|test'),
+      ai('EOT|')
+    ])
+  end
+
+  def test_tfidf_pos_sort_term_abs
+    meet({ 'lexicals' => '[save]', 'tfidf' => true, 'pos' => true, 'sort' => 'term_abs' }, @tfidf_pos_input, [
+      ai('FILE|test'),
+      '1.00000 adjektiv@0:0,2:15',
+      '1.00000 substantiv@0:0,2:15',
+      '0.50000 eigenname@0:0',
+      '0.50000 no',
+      '0.50000 token',
+      '0.50000 verb@0:0',
+      ai('EOF|test'),
+      ai('FILE|test'),
+      '1.00000 adjektiv@0:0,2:15',
+      '1.00000 substantiv@0:0,2:15',
+      '0.50000 eigenname@0:0',
+      '0.50000 no',
+      '0.50000 token',
+      '0.50000 verb@0:0',
+      ai('EOF|test'),
+      ai('EOT|')
+    ])
+  end
+
+  def test_tfidf_pos_sort_term_rel
+    meet({ 'lexicals' => '[save]', 'tfidf' => true, 'pos' => true, 'sort' => 'term_rel' }, @tfidf_pos_input, [
+      ai('FILE|test'),
+      '0.25000 adjektiv@0:0,2:15',
+      '0.25000 substantiv@0:0,2:15',
+      '0.12500 eigenname@0:0',
+      '0.12500 no',
+      '0.12500 token',
+      '0.12500 verb@0:0',
+      ai('EOF|test'),
+      ai('FILE|test'),
+      '0.25000 adjektiv@0:0,2:15',
+      '0.25000 substantiv@0:0,2:15',
+      '0.12500 eigenname@0:0',
+      '0.12500 no',
+      '0.12500 token',
+      '0.12500 verb@0:0',
+      ai('EOF|test'),
+      ai('EOT|')
+    ])
+  end
+
+  def test_tfidf_pos_sort_sto_abs
+    meet({ 'lexicals' => '[save]', 'tfidf' => true, 'pos' => true, 'sort' => 'sto_abs' }, @tfidf_pos_input, [
+      ai('FILE|test'),
+      'adjektiv@0:0,2:15 {1.00000}',
+      'substantiv@0:0,2:15 {1.00000}',
+      'eigenname@0:0 {0.50000}',
+      'no {0.50000}',
+      'token {0.50000}',
+      'verb@0:0 {0.50000}',
+      ai('EOF|test'),
+      ai('FILE|test'),
+      'adjektiv@0:0,2:15 {1.00000}',
+      'substantiv@0:0,2:15 {1.00000}',
+      'eigenname@0:0 {0.50000}',
+      'no {0.50000}',
+      'token {0.50000}',
+      'verb@0:0 {0.50000}',
+      ai('EOF|test'),
+      ai('EOT|')
+    ])
+  end
+
+  def test_tfidf_pos_sort_sto_rel
+    meet({ 'lexicals' => '[save]', 'tfidf' => true, 'pos' => true, 'sort' => 'sto_rel' }, @tfidf_pos_input, [
+      ai('FILE|test'),
+      'adjektiv@0:0,2:15 {0.25000}',
+      'substantiv@0:0,2:15 {0.25000}',
+      'eigenname@0:0 {0.12500}',
+      'no {0.12500}',
+      'token {0.12500}',
+      'verb@0:0 {0.12500}',
+      ai('EOF|test'),
+      ai('FILE|test'),
+      'adjektiv@0:0,2:15 {0.25000}',
+      'substantiv@0:0,2:15 {0.25000}',
+      'eigenname@0:0 {0.12500}',
+      'no {0.12500}',
+      'token {0.12500}',
+      'verb@0:0 {0.12500}',
       ai('EOF|test'),
       ai('EOT|')
     ])
