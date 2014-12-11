@@ -19,6 +19,7 @@
   specified tags' contents.
 * Lingo::Attendee subclasses warn when invalid or obsolete options or names
   are used.
+* Internal refactoring and API changes.
 
 == 1.8.5 [2014-10-02]
 
