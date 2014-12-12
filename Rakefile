@@ -96,10 +96,13 @@ def test_ref(name, cfg = name)
   require 'diff/lcs'
   require 'diff/lcs/hunk'
 
+  jruby = RUBY_ENGINE == 'jruby'
+  jruby_lir = jruby && name == 'lir'
+
   cmd = %W[bin/lingo -c #{cfg} txt/#{name}.txt]
   buf, diff = ["Command failed: #{cmd.join(' ')}"], 0
 
-  Process.ruby(*cmd, I: :lib, &RUBY_ENGINE == 'jruby' ?
+  Process.ruby(*cmd, I: :lib, &jruby ?
     lambda { |_, _, o, e| buf << e.read; buf << o.read } :
     lambda { |_, _, o, e| IO.interact({}, { o => buf, e => buf }) }
   ).success? or abort buf.join("\n\n")
@@ -111,7 +114,10 @@ def test_ref(name, cfg = name)
       puts "## #{txt}"
 
       data = [ref, txt].map { |file|
-        File.readlines(file).each(&:chomp!)
+        File.readlines(file).each { |line|
+          line.chomp!
+          line.gsub!(/(\d+\.\d+)\d/, '\1') if jruby_lir
+        }
       }
 
       diffs, fld = Diff::LCS.diff(*data), 0
