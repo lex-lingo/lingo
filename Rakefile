@@ -94,7 +94,7 @@ end
 
 def test_ref(name, cfg = name)
   require 'diff/lcs'
-  require 'diff/lcs/ldiff'
+  require 'diff/lcs/hunk'
 
   cmd = %W[bin/lingo -c #{cfg} txt/#{name}.txt]
   buf, diff = ["Command failed: #{cmd.join(' ')}"], 0
@@ -105,13 +105,25 @@ def test_ref(name, cfg = name)
   ).success? or abort buf.join("\n\n")
 
   Dir["test/ref/#{name}.*"].sort.each { |ref|
-    diff += if File.exist?(org = ref.sub(/test\/ref/, 'txt'))
-      puts "## #{org}"
-      Diff::LCS::Ldiff.run(ARGV.clear << '-a' << org << ref)
+    unless File.exist?(txt = ref.sub(/test\/ref/, 'txt'))
+      puts "?? #{txt}"
     else
-      puts "?? #{org}"
-      1
+      puts "## #{txt}"
+
+      data = [ref, txt].map { |file|
+        File.readlines(file).each(&:chomp!)
+      }
+
+      diffs, fld = Diff::LCS.diff(*data), 0
+
+      diffs.empty? ? next : diffs.each { |piece|
+        dlh = Diff::LCS::Hunk.new(*data, piece, 0, fld)
+        fld = dlh.file_length_difference
+        puts dlh.diff(:old)
+      }
     end
+
+    diff += 1
   }
 
   exit diff + 1 unless diff.zero?
