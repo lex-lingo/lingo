@@ -1,8 +1,5 @@
 # encoding: utf-8
 
-require 'rake/clean'
-require 'nuggets/ruby'
-
 require_relative 'lib/lingo/version'
 
 begin
@@ -95,6 +92,7 @@ end
 def test_ref(name, cfg = name)
   require 'diff/lcs'
   require 'diff/lcs/hunk'
+  require 'nuggets/ruby'
 
   jruby = RUBY_ENGINE == 'jruby'
   jruby_lir = jruby && name == 'lir'
