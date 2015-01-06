@@ -545,7 +545,7 @@ Travis CI::     https://travis-ci.org/lex-lingo/lingo
 === Background and Theory
 
 * Gödert, W.; Lepsky, K.; Nagelschmidt, M.: <em>{Informationserschließung und Automatisches Indexieren: ein Lehr- und Arbeitsbuch}[http://dx.doi.org/10.1007/978-3-642-23513-9]</em>. (German) Berlin etc.: Springer, 2012.
-* Lepsky, K.; Vorhauer, J.: <em>{Lingo: ein open source System für die automatische Indexierung deutschsprachiger Dokumente}[http://dx.doi.org/10.1515/ABITECH.2006.26.1.18]</em>. (German) In: ABI Technik 26 (1), 2006. pp 18-29.
+* Lepsky, K.; Vorhauer, J.: <em>{Lingo – ein open source System für die automatische Indexierung deutschsprachiger Dokumente}[http://dx.doi.org/10.1515/ABITECH.2006.26.1.18]</em>. (German) In: ABI Technik 26 (1), 2006. pp 18-29.
 * Nohr, H.: <em>{Grundlagen der automatischen Indexierung: ein Lehrbuch}[http://logos-verlag.de/cgi-bin/buch/isbn/0121]</em>. (German) Berlin: Logos, 2005.
 * Hausser, R.: <em>{Grundlagen der Computerlinguistik. Mensch-Maschine-Kommunikation in natürlicher Sprache}[http://zbmath.org/?q=an:0956.68141]</em>. (German) Berlin etc.: Springer, 2000.
 * Allen, J.: <em>{Natural language understanding}[http://zbmath.org/?q=an:0851.68106]</em>. (English) Redwood City, CA: Benjamin/Cummings, 1995.
@@ -559,6 +559,8 @@ Travis CI::     https://travis-ci.org/lex-lingo/lingo
 * Bredack, J.: <em>{Terminologieextraktion von Mehrwortgruppen in kunsthistorischen Fachtexten}[http://ixtrieve.fh-koeln.de/lehre/bredack-2013.pdf]</em>. (German) Köln: Fachhochschule Köln, 2013.
 * Maylein, L.; Langenstein, A.: <em>{Neues vom Relevanz-Ranking im HEIDI-Katalog der Universitätsbibliothek Heidelberg}[http://b-i-t-online.de/heft/2013-03-fachbeitrag-maylein.pdf]</em>. (German) In: b.i.t.online 16 (3), 2013. pp 190-200.
 * Gödert, W.: <em>{Detecting multiword phrases in mathematical text corpora}[http://arxiv.org/abs/1210.0852]</em>. (English) arXiv:1210.0852 [cs.CL], 2012.
+* Jersek, T.: <em>{Automatische DDC-Klassifizierung mit Lingo: Vorgehensweise und Ergebnisse}[http://www.citeulike.org/user/klaus-lepsky/article/12476139]</em>. (German) Köln: Fachhochschule Köln, 2012.
+* Glaesener, L.: <em>{Automatisches Indexieren einer informationswissenschaftlichen Datenbank mit Mehrwortgruppen}[http://www.citeulike.org/user/klaus-lepsky/article/12476133]</em>. (German) Köln: Fachhochschule Köln, 2012.
 * Schiffer, R.: <em>{Automatisches Indexieren technischer Kongressschriften}[http://ixtrieve.fh-koeln.de/lehre/schiffer-2007.pdf]</em>. (German) Köln: Fachhochschule Köln, 2007.
 
 
