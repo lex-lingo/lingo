@@ -79,7 +79,7 @@ language:
       - [a, 'este ste ster sten stes ester estes esten e em en er ere eren erer eres es erem']
       - [v, 'e/en en/en est/en et/en st/en t/en te/en ten/en eten/en ete/en etest/en s']
       - [e, 's']
-      - [f, 's n e en es er ch/che /en']
+      - [f, 's n e en es er ch/che ch/chen']
 
     inflect:
       a:  # adjectives

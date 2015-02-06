@@ -23,6 +23,8 @@
   specified tags' contents.
 * Lingo::Attendee subclasses warn when invalid or obsolete options or names
   are used.
+* Changed German infix substitution +/en+ to +ch/chen+ in order to prevent
+  overly aggressive identifications.
 * Internal refactoring and API changes.
 
 == 1.8.5 [2014-10-02]
