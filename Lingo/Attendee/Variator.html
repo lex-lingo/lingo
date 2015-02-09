@@ -4,21 +4,18 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::Attendee::Variator - lingo Application documentation (v1.8.5)</title>
-
-<link href="../../fonts.css" rel="stylesheet">
-<link href="../../rdoc.css" rel="stylesheet">
+<title>class Lingo::Attendee::Variator - lingo Application documentation (v1.8.6)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
 </script>
 
 <script src="../../js/jquery.js"></script>
-<script src="../../js/navigation.js"></script>
-<script src="../../js/search_index.js"></script>
-<script src="../../js/search.js"></script>
-<script src="../../js/searcher.js"></script>
 <script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 <body id="top" role="document" class="class">
@@ -54,16 +51,6 @@
   </div>
 
   
-<div class="nav-section">
-  <h3>Table of Contents</h3>
-
-  <ul class="link-list" role="directory">
-    <li><a href="#class-Lingo::Attendee::Variator-label-M%C3%B6gliche+Verlinkung">Mögliche Verlinkung</a>
-    <li><a href="#class-Lingo::Attendee::Variator-label-Parameter">Parameter</a>
-    <li><a href="#class-Lingo::Attendee::Variator-label-Beispiele">Beispiele</a>
-  </ul>
-</div>
-
 
   <div id="class-metadata">
     
@@ -104,82 +91,6 @@
 
   <section class="description">
     
-<p>Der <a href="Variator.html">Variator</a> ermöglicht bei nicht erkannten
-Wörtern den listenbasierten Austausch einzelner Wortteile einchließlich
-erneuter Wörterbuchsuche zur Verbesserung der Worterkennungsquote.</p>
-
-<p>Ursprünglich wurde der <a href="Variator.html">Variator</a> entwickelt, um
-die mangelnde Qualität bei der OCR-Erkennung altdeutscher
-&#39;s&#39;-Konsonanten zu optimieren. Er kann ebenso bei alternativen
-Umlautschreibweisen z.B. zur Wandlung von &#39;Koeln&#39; in &#39;Köln&#39;
-dienen.</p>
-
-<h3 id="class-Lingo::Attendee::Variator-label-M%C3%B6gliche+Verlinkung">Mögliche Verlinkung<span><a href="#class-Lingo::Attendee::Variator-label-M%C3%B6gliche+Verlinkung">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt>Erwartet
-<dd>
-<p>Daten vom Typ <strong>Word</strong> (andere werden einfach durchgereicht)
-z.B. von Wordsearcher</p>
-</dd><dt>Erzeugt
-<dd>
-<p>Daten vom Typ <strong>Word</strong> zur Weiterleitung z.B. an <a
-href="Synonymer.html">Synonymer</a>, <a
-href="Decomposer.html">Decomposer</a>, Multiworder, <a
-href="Sequencer.html">Sequencer</a>, Noneword_filter oder Vector_filter</p>
-</dd></dl>
-
-<h3 id="class-Lingo::Attendee::Variator-label-Parameter">Parameter<span><a href="#class-Lingo::Attendee::Variator-label-Parameter">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
-
-<p>Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der
-Voreinstellung). Alle anderen Parameter müssen zwingend angegeben werden.</p>
-<dl class="rdoc-list note-list"><dt><strong>in</strong>
-<dd>
-<p>siehe allgemeine Beschreibung des <a href="../Attendee.html">Attendee</a></p>
-</dd><dt><strong>out</strong>
-<dd>
-<p>siehe allgemeine Beschreibung des <a href="../Attendee.html">Attendee</a></p>
-</dd><dt><strong>source</strong>
-<dd>
-<p>siehe allgemeine Beschreibung des Dictionary</p>
-</dd><dt><strong><em>mode</em></strong>
-<dd>
-<p>(Standard: all) siehe allgemeine Beschreibung des Dictionary</p>
-</dd><dt><strong><em>^check</em></strong>
-<dd>
-<p>(Standard: WA_UNKNOWN) Gebrenzt die zu variierenden Worttypen</p>
-</dd><dt><strong><em>marker</em></strong>
-<dd>
-<p>(Standard: &#39;*&#39;) Kennzeichnung durch Variation erkannter Wörter</p>
-</dd><dt><strong><em>max-var</em></strong>
-<dd>
-<p>(Standard: &#39;10000&#39;) Begrenzung der maximal zu prüfenden
-Permutationen bei der vollständigen Kombination aller auf ein Wort
-anzuwendenen aufgelisteten Wortteile.</p>
-</dd></dl>
-
-<h3 id="class-Lingo::Attendee::Variator-label-Beispiele">Beispiele<span><a href="#class-Lingo::Attendee::Variator-label-Beispiele">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
-
-<p>Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration
-<code>t1.cfg</code></p>
-
-<pre>meeting:
-  attendees:
-    - text_reader:   { out: lines, files: &#39;$(files)&#39; }
-    - tokenizer:     { in: lines, out: token }
-    - word_searcher: { in: abbrev, out: words, source: &#39;sys-dic&#39; }
-    - variator:      { in: words, out: varios, source: &#39;sys-dic&#39; }
-    - debugger:      { in: varios, prompt: &#39;out&gt;&#39; }</pre>
-
-<p>ergibt die Ausgabe über den Debugger: <code>lingo -c t1 test.txt</code></p>
-
-<pre>out&gt; *FILE(&#39;test.txt&#39;)
-out&gt; &lt;*Dies = [(dies/w)]&gt;
-out&gt; &lt;*ist = [(ist/t)]&gt;
-out&gt; &lt;ein = [(ein/t)]&gt;
-out&gt; &lt;*Tisch = [(tisch/s)]&gt;
-out&gt; :./PUNC:
-out&gt; *EOL(&#39;test.txt&#39;)
-out&gt; *EOF(&#39;test.txt&#39;)</pre>
-
   </section>
 
   
@@ -195,9 +106,9 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
     
 
     
-     <section id="protected-instance-5Buntitled-5D-method-details" class="method-section">
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
-         <h3>Protected Instance Methods</h3>
+         <h3>Public Instance Methods</h3>
        </header>
 
     
@@ -205,7 +116,7 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
         
         <div class="method-heading">
           <span class="method-name">control</span><span
-            class="method-args">(cmd, param)</span>
+            class="method-args">(*)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -221,8 +132,7 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
           
           <div class="method-source-code" id="control-source">
             <pre><span class="ruby-comment"># File lib/lingo/attendee/variator.rb, line 91</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">param</span>)
-  <span class="ruby-comment"># can control</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">control</span>(<span class="ruby-operator">*</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -297,7 +207,7 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
 
           
           <div class="method-source-code" id="process-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/variator.rb, line 95</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/variator.rb, line 94</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">process</span>(<span class="ruby-identifier">obj</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Word</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@check</span>[<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">attr</span>]
     <span class="ruby-identifier">vars</span>, <span class="ruby-identifier">max</span> = [<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">form</span>], <span class="ruby-ivar">@max</span>
@@ -351,16 +261,13 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
 
         <div class="method-description">
           
-          <p>Variiere die Bestandteile eines Arrays gemäß den Austauschvorgaben.</p>
-
-<p>variate( &#39;Tiieh&#39;, &#39;ieh&#39;, &#39;sch&#39; ) =&gt;
-[&#39;Tiieh&#39;, &#39;Tisch&#39;]</p>
+          
           
           
 
           
           <div class="method-source-code" id="variate-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/variator.rb, line 123</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/variator.rb, line 119</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">variate</span>(<span class="ruby-identifier">variations</span>, <span class="ruby-identifier">from</span>, <span class="ruby-identifier">to</span>)
   <span class="ruby-identifier">add</span>, <span class="ruby-identifier">change</span>, <span class="ruby-identifier">re</span> = [], [<span class="ruby-identifier">from</span>, <span class="ruby-identifier">to</span>], <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">from</span>)
 
@@ -394,7 +301,7 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.2.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

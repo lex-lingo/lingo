@@ -4,21 +4,18 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::Attendee - lingo Application documentation (v1.8.5)</title>
-
-<link href="../fonts.css" rel="stylesheet">
-<link href="../rdoc.css" rel="stylesheet">
+<title>class Lingo::Attendee - lingo Application documentation (v1.8.6)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
 </script>
 
 <script src="../js/jquery.js"></script>
-<script src="../js/navigation.js"></script>
-<script src="../js/search_index.js"></script>
-<script src="../js/search.js"></script>
-<script src="../js/searcher.js"></script>
 <script src="../js/darkfish.js"></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
 
 
 <body id="top" role="document" class="class">
@@ -86,7 +83,7 @@
     
     <li ><a href="#method-c-new">::new</a>
     
-    <li ><a href="#method-i-add_subscriber">#add_subscriber</a>
+    <li ><a href="#method-i-command">#command</a>
     
     <li ><a href="#method-i-dictionary">#dictionary</a>
     
@@ -106,19 +103,11 @@
     
     <li ><a href="#method-i-has_key-3F">#has_key?</a>
     
-    <li ><a href="#method-i-listen">#listen</a>
-    
     <li ><a href="#method-i-require_lib">#require_lib</a>
     
     <li ><a href="#method-i-set_dic">#set_dic</a>
     
     <li ><a href="#method-i-set_gra">#set_gra</a>
-    
-    <li ><a href="#method-i-skip_command">#skip_command</a>
-    
-    <li ><a href="#method-i-skip_command-21">#skip_command!</a>
-    
-    <li ><a href="#method-i-talk">#talk</a>
     
     <li ><a href="#method-i-warn">#warn</a>
     
@@ -135,76 +124,6 @@
 
   <section class="description">
     
-<p>Lingo ist als universelles Indexierungssystem entworfen worden. Seine
-Stärke liegt in der einfachen Konfigurierbarkeit für spezifische Aufgaben
-und in der schnelle Entwicklung weiterer Funktionen durch systematischen
-Kapselung der Komplexität auf kleine Verarbeitungseinheiten. Die kleinste
-Verarbeitungseinheit wird <a href="Attendee.html">Attendee</a> genannt. Um
-ein gewünschtes Verarbeitungsergebnis zu bekommen, werden die benötigten
-Attendees einfach in einer Reihe hinter einander geschaltet. Ein einfaches
-Beispiel hierfür ist eine direkte Verbindung zwischen einem <a
-href="Attendee.html#Textreader">Textreader</a>, einem <a
-href="Attendee/Tokenizer.html">Tokenizer</a> und einem <a
-href="Attendee.html#Textwriter">Textwriter</a>. Alle drei Klassen sind von
-der Klasse <a href="Attendee.html">Attendee</a> abgeleitet.</p>
-
-<p>Der <a href="Attendee.html#Textreader">Textreader</a> liest beispielsweise
-Zeilen aus einer Textdatei und leitet sie weiter an den <a
-href="Attendee/Tokenizer.html">Tokenizer</a>. Der <a
-href="Attendee/Tokenizer.html">Tokenizer</a> zerlegt eine Textzeile in
-einzelne Wörter und gibt diese weiter an den <a
-href="Attendee.html#Textwriter">Textwriter</a>, der diese in eine (andere)
-Datei schreibt. Über vielfältige Konfigurationsmöglichkeiten kann das
-Verhalten der Attendees an die eigenen Bedürfnisse angepasst werden.</p>
-
-<p>Die Verkettung einzelner Attendees findet über die Schnittstellen
-<code>listen</code> und <code>talk</code> statt. An <code>listen</code>
-können beliebige Objekte zur Ver- und Bearbeitung übergeben werden. Nach
-der Verarbeitung werden sie mittels <code>talk</code> an die verketteten
-Attendees weiter gegeben. Objekte der Klasse <a
-href="AgendaItem.html">AgendaItem</a> dienen dabei der Steuerung der
-Verarbeitung und sind nicht Bestandteil der normalen Verarbeitung.
-Beispiele für AgendaItems sind die Kommandos TALK (Aufforderung zum Start
-der Verarbeitung), WARN (zur Ausgabe von Warnungen eines Attendees) und EOL
-(End of Line, Ende einer Textzeile nach Zerlegung in einzelne Wörter). Eine
-vollständige Übersicht benutzer AgendaItems (oder auf Stream Commands)
-steht in lib/const.rb mit dem Prefix STR_CMD_.</p>
-
-<p>Um die Entwicklung von neuen Attendees zu beschleunigen, wird durch die
-Vererbung sind bei wird die gesammte sind in der Regel nur drei abstrakte
-Methoden zu implementieren: <code>init</code>, <code>control</code> und
-<code>process</code>. Die Methode <code>init</code> wird bei der
-Instanziierung eines Objektes einmalig aufgerufen. Sie dient der
-Vorbereitung der Verarbeitung, z.B. durch das Öffnen und Bereitstellen von
-Wörterbüchern zur linguistischen Analyse. An die Methode
-<code>control</code> werden alle eingehenden AgendaItems weitergeleitet.
-Dort erfolgt die Verarbeitungssteuerung, also z.B. bei <a
-href="Attendee.html#STR_CMD_FILE">STR_CMD_FILE</a> das Öffnen einer Datei
-und bei <a href="Attendee.html#STR_CMD_EOF">STR_CMD_EOF</a> respektive das
-Schließen. Die echte Verarbeitung von Daten findet daher durch die Methode
-<code>process</code> statt.</p>
-
-<p>was macht attendee</p>
-<ul><li>
-<p>verkettung der attendees anhand von konfigurationsinformationen</p>
-</li><li>
-<p>bereitstellung von globalen und spezifischen konfigurationsinformationen</p>
-</li><li>
-<p>behandlung von bestimmten übergreifenden Kommandos, z.B. <a
-href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
-</li><li>
-<p>separierung und routing von kommando bzw. datenobjekten</p>
-</li></ul>
-
-<p>was macht die abgeleitet klasse</p>
-<ul><li>
-<p>verarbeitet und/oder transformiert datenobjekte</p>
-</li><li>
-<p>wird gesteuert durch kommandos</p>
-</li><li>
-<p>schreibt verarbeitungsstatistiken</p>
-</li></ul>
-
   </section>
 
   
@@ -255,36 +174,6 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
         <dt id="Objectfilter">Objectfilter
         
         <dd><p>For backwards compatibility.</p>
-        
-      
-        <dt id="STR_CMD_EOF">STR_CMD_EOF
-        
-        <dd>
-        
-      
-        <dt id="STR_CMD_EOL">STR_CMD_EOL
-        
-        <dd>
-        
-      
-        <dt id="STR_CMD_FILE">STR_CMD_FILE
-        
-        <dd>
-        
-      
-        <dt id="STR_CMD_LIR">STR_CMD_LIR
-        
-        <dd>
-        
-      
-        <dt id="STR_CMD_RECORD">STR_CMD_RECORD
-        
-        <dd>
-        
-      
-        <dt id="STR_CMD_TALK">STR_CMD_TALK
-        
-        <dd>
         
       
         <dt id="Text_reader">Text_reader
@@ -351,6 +240,19 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
         </div>
       </div>
       
+      <div id="attribute-i-subscribers" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">subscribers</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
     </section>
     
 
@@ -380,21 +282,24 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 79</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 74</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">config</span>, <span class="ruby-identifier">lingo</span>)
-  <span class="ruby-ivar">@lingo</span>, <span class="ruby-ivar">@config</span>, <span class="ruby-ivar">@subscriber</span> = <span class="ruby-identifier">lingo</span>, <span class="ruby-identifier">config</span>, []
+  <span class="ruby-ivar">@lingo</span>, <span class="ruby-ivar">@config</span>, <span class="ruby-ivar">@subscribers</span> = <span class="ruby-identifier">lingo</span>, <span class="ruby-identifier">config</span>, []
 
   <span class="ruby-comment"># Make sure config exists</span>
   <span class="ruby-identifier">lingo</span>.<span class="ruby-identifier">dictionary_config</span>
 
-  <span class="ruby-ivar">@dic</span> = <span class="ruby-ivar">@gra</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@dic</span>, <span class="ruby-ivar">@gra</span>, <span class="ruby-ivar">@valid_keys</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-node">%w[name in out]</span>
 
-  <span class="ruby-identifier">init</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">method_defined?</span>(<span class="ruby-value">:init</span>)
+  <span class="ruby-identifier">init</span>
 
-  <span class="ruby-ivar">@can_control</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">method_defined?</span>(<span class="ruby-value">:control</span>)
-  <span class="ruby-ivar">@can_process</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">method_defined?</span>(<span class="ruby-value">:process</span>)
-
-  <span class="ruby-ivar">@skip_command</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">unless</span> (<span class="ruby-identifier">invalid_keys</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">keys</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@valid_keys</span>).<span class="ruby-identifier">empty?</span>
+    <span class="ruby-identifier">warn</span>(
+      <span class="ruby-node">&quot;CONFIGURATION NOTICE: #{self.class.name.sub(/\ALingo::/, &#39;&#39;)}&quot;</span> <span class="ruby-operator">&lt;&lt;</span>
+      <span class="ruby-node">&quot; options invalid or obsolete: #{invalid_keys.sort.join(&#39;, &#39;)}&quot;</span> <span class="ruby-operator">&lt;&lt;</span>
+      <span class="ruby-node">&quot; (in #{lingo.config.config_file})&quot;</span>
+    )
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -414,11 +319,11 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
        </header>
 
     
-      <div id="method-i-add_subscriber" class="method-detail ">
+      <div id="method-i-command" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">add_subscriber</span><span
-            class="method-args">(subscriber)</span>
+          <span class="method-name">command</span><span
+            class="method-args">(*args)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -432,10 +337,12 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
           
 
           
-          <div class="method-source-code" id="add_subscriber-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 97</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_subscriber</span>(<span class="ruby-identifier">subscriber</span>)
-  <span class="ruby-ivar">@subscriber</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">subscriber</span>)
+          <div class="method-source-code" id="command-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 99</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">command</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">subscribers</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">sub</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">command</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">control</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>) <span class="ruby-operator">==</span> <span class="ruby-value">:skip_command</span>
+  }
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -447,11 +354,11 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
       </div>
 
     
-      <div id="method-i-listen" class="method-detail ">
+      <div id="method-i-forward" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">listen</span><span
-            class="method-args">(obj)</span>
+          <span class="method-name">forward</span><span
+            class="method-args">(*args)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -465,49 +372,10 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
           
 
           
-          <div class="method-source-code" id="listen-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 101</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">listen</span>(<span class="ruby-identifier">obj</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">AgendaItem</span>)
-    <span class="ruby-identifier">args</span> = <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">to_a</span>
-    <span class="ruby-identifier">control</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@can_control</span>
-    <span class="ruby-identifier">forward</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">cmd</span> <span class="ruby-operator">==</span> <span class="ruby-constant">STR_CMD_TALK</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">skip_command!</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@can_process</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">process</span>(<span class="ruby-identifier">obj</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">obj</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-talk" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">talk</span><span
-            class="method-args">(obj)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="talk-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 111</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">talk</span>(<span class="ruby-identifier">obj</span>)
-  <span class="ruby-ivar">@subscriber</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">attendee</span><span class="ruby-operator">|</span> <span class="ruby-identifier">attendee</span>.<span class="ruby-identifier">listen</span>(<span class="ruby-identifier">obj</span>) }
+          <div class="method-source-code" id="forward-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 95</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">forward</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">subscribers</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">sub</span><span class="ruby-operator">|</span> <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">process</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>) }
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -546,7 +414,7 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
 
           
           <div class="method-source-code" id="dictionary-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 159</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 138</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">dictionary</span>(<span class="ruby-identifier">src</span>, <span class="ruby-identifier">mod</span>)
   <span class="ruby-constant">Language</span><span class="ruby-operator">::</span><span class="ruby-constant">Dictionary</span>.<span class="ruby-identifier">new</span>({ <span class="ruby-string">&#39;source&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">src</span>, <span class="ruby-string">&#39;mode&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">mod</span> }, <span class="ruby-identifier">lingo</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -579,7 +447,7 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
 
           
           <div class="method-source-code" id="find_word-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 117</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 107</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find_word</span>(<span class="ruby-identifier">f</span>, <span class="ruby-identifier">d</span> = <span class="ruby-ivar">@dic</span>, <span class="ruby-identifier">g</span> = <span class="ruby-ivar">@gra</span>)
   <span class="ruby-identifier">w</span> = <span class="ruby-identifier">d</span>.<span class="ruby-identifier">find_word</span>(<span class="ruby-identifier">f</span>)
   <span class="ruby-identifier">g</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">block_given?</span> <span class="ruby-operator">?</span> <span class="ruby-operator">!</span><span class="ruby-keyword">yield</span>(<span class="ruby-identifier">w</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">w</span>.<span class="ruby-identifier">unknown?</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">g</span>.<span class="ruby-identifier">find_compound</span>(<span class="ruby-identifier">f</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">w</span>
@@ -613,42 +481,9 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
 
           
           <div class="method-source-code" id="flush-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 134</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 112</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">flush</span>(<span class="ruby-identifier">buffer</span>)
   <span class="ruby-identifier">buffer</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">i</span>) }.<span class="ruby-identifier">clear</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-forward" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">forward</span><span
-            class="method-args">(obj, param = nil)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="forward-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 130</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">obj</span>, <span class="ruby-identifier">param</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">talk</span>(<span class="ruby-identifier">param</span> <span class="ruby-operator">?</span> <span class="ruby-constant">AgendaItem</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">obj</span>, <span class="ruby-identifier">param</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">obj</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -679,7 +514,7 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
 
           
           <div class="method-source-code" id="get_array-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 147</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 126</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_array</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">method</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">ary</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span>).<span class="ruby-identifier">split</span>(<span class="ruby-constant">SEP_RE</span>)
   <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">map!</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">method</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">method</span>
@@ -714,8 +549,9 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
 
           
           <div class="method-source-code" id="get_key-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 142</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 120</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_key</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span> = <span class="ruby-identifier">nodefault</span> = <span class="ruby-keyword">true</span>)
+  <span class="ruby-ivar">@valid_keys</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">key</span>
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">MissingConfigError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">key</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">nodefault</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">key</span>)
   <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -748,7 +584,7 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
 
           
           <div class="method-source-code" id="get_re-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 153</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 132</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_re</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">standard</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span>)
     <span class="ruby-identifier">value</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">standard</span> <span class="ruby-operator">:</span> <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">value</span>)
@@ -783,7 +619,7 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
 
           
           <div class="method-source-code" id="grammar-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 163</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 142</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">grammar</span>(<span class="ruby-identifier">src</span>, <span class="ruby-identifier">mod</span>)
   <span class="ruby-constant">Language</span><span class="ruby-operator">::</span><span class="ruby-constant">Grammar</span>.<span class="ruby-identifier">new</span>({ <span class="ruby-string">&#39;source&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">src</span>, <span class="ruby-string">&#39;mode&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">mod</span> }, <span class="ruby-identifier">lingo</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -816,9 +652,9 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
 
           
           <div class="method-source-code" id="has_key-3F-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 138</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 116</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">key</span>)
-  <span class="ruby-ivar">@config</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">key</span>)
+  <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">key</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -849,7 +685,7 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
 
           
           <div class="method-source-code" id="require_lib-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 179</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 158</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">require_lib</span>(<span class="ruby-identifier">lib</span>)
   <span class="ruby-identifier">require</span> <span class="ruby-identifier">lib</span>
 <span class="ruby-keyword">rescue</span> <span class="ruby-constant">LoadError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">err</span>
@@ -884,7 +720,7 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
 
           
           <div class="method-source-code" id="set_dic-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 167</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 146</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">set_dic</span>
   <span class="ruby-ivar">@dic</span> = <span class="ruby-identifier">dictionary</span>(<span class="ruby-identifier">get_array</span>(<span class="ruby-string">&#39;source&#39;</span>), <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;mode&#39;</span>, <span class="ruby-string">&#39;all&#39;</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -917,75 +753,9 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
 
           
           <div class="method-source-code" id="set_gra-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 171</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 150</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">set_gra</span>
   <span class="ruby-ivar">@gra</span> = <span class="ruby-identifier">grammar</span>(<span class="ruby-identifier">get_array</span>(<span class="ruby-string">&#39;source&#39;</span>), <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;mode&#39;</span>, <span class="ruby-string">&#39;all&#39;</span>))
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-skip_command" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">skip_command</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="skip_command-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 122</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">skip_command</span>
-  <span class="ruby-ivar">@skip_command</span> = <span class="ruby-keyword">true</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-skip_command-21" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">skip_command!</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="skip_command-21-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 126</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">skip_command!</span>
-  <span class="ruby-ivar">@skip_command</span>.<span class="ruby-identifier">tap</span> { <span class="ruby-ivar">@skip_command</span> <span class="ruby-operator">&amp;&amp;=</span> <span class="ruby-keyword">false</span> }
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -1016,7 +786,7 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
 
           
           <div class="method-source-code" id="warn-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 175</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 154</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">warn</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">msg</span>)
   <span class="ruby-identifier">lingo</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">msg</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -1038,7 +808,7 @@ href="Attendee.html#STR_CMD_TALK">STR_CMD_TALK</a></p>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.2.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

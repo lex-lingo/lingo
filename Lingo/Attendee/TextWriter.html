@@ -4,21 +4,18 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::Attendee::TextWriter - lingo Application documentation (v1.8.5)</title>
-
-<link href="../../fonts.css" rel="stylesheet">
-<link href="../../rdoc.css" rel="stylesheet">
+<title>class Lingo::Attendee::TextWriter - lingo Application documentation (v1.8.6)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
 </script>
 
 <script src="../../js/jquery.js"></script>
-<script src="../../js/navigation.js"></script>
-<script src="../../js/search_index.js"></script>
-<script src="../../js/search.js"></script>
-<script src="../../js/searcher.js"></script>
 <script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 <body id="top" role="document" class="class">
@@ -54,16 +51,6 @@
   </div>
 
   
-<div class="nav-section">
-  <h3>Table of Contents</h3>
-
-  <ul class="link-list" role="directory">
-    <li><a href="#class-Lingo::Attendee::TextWriter-label-M%C3%B6gliche+Verlinkung">Mögliche Verlinkung</a>
-    <li><a href="#class-Lingo::Attendee::TextWriter-label-Parameter">Parameter</a>
-    <li><a href="#class-Lingo::Attendee::TextWriter-label-Beispiele">Beispiele</a>
-  </ul>
-</div>
-
 
   <div id="class-metadata">
     
@@ -106,76 +93,6 @@
 
   <section class="description">
     
-<p>Der <a href="TextWriter.html">TextWriter</a> ermöglicht die Umleitung des
-Datenstroms in eine Textdatei. Dabei werden Objekte, die nicht vom Typ
-String sind in eine sinnvolle Textrepresentation gewandelt. Der Name der
-Ausgabedatei wird durch den Namen der Eingabedatei (des Textreaders)
-bestimmt. Es kann lediglich die Extension verändert werden. Der <a
-href="TextWriter.html">TextWriter</a> kann auch das LIR-Format erzeugen.</p>
-
-<h3 id="class-Lingo::Attendee::TextWriter-label-M%C3%B6gliche+Verlinkung">Mögliche Verlinkung<span><a href="#class-Lingo::Attendee::TextWriter-label-M%C3%B6gliche+Verlinkung">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt>Erwartet
-<dd>
-<p>Daten verschiedenen Typs</p>
-</dd></dl>
-
-<h3 id="class-Lingo::Attendee::TextWriter-label-Parameter">Parameter<span><a href="#class-Lingo::Attendee::TextWriter-label-Parameter">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
-
-<p>Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der
-Voreinstellung). Alle anderen Parameter müssen zwingend angegeben werden.</p>
-<dl class="rdoc-list note-list"><dt><strong>in</strong>
-<dd>
-<p>siehe allgemeine Beschreibung des <a href="../Attendee.html">Attendee</a></p>
-</dd><dt><strong>out</strong>
-<dd>
-<p>siehe allgemeine Beschreibung des <a href="../Attendee.html">Attendee</a></p>
-</dd><dt><strong><em>ext</em></strong>
-<dd>
-<p>(Standard: txt2) Gibt die Dateinamen-Erweiertung für die Ausgabedatei an.
-Wird z.B. dem <a href="TextReader.html">TextReader</a> die Datei
-<code>Dokument.txt</code> angegeben und über die Lingo-Konfiguration alle
-Indexwörter herausgefiltert, kann mit <code>ext: &#39;idx&#39;</code> der
-<a href="TextWriter.html">TextWriter</a> veranlasst werden, die Indexwörter
-in die Datei <code>Dokument.idx</code> zu schreiben.</p>
-</dd><dt><strong><em>sep</em></strong>
-<dd>
-<p>(Standard: &#39; &#39;) Gibt an, mit welchem Trennzeichen zwei
-aufeinanderfolgende Objekte in der Ausgabedatei getrennt werden sollen.
-Gängige Werte sind auch noch &#39;n&#39;, welches die Ausgabe jedes
-Objektes in eine Zeile ermöglicht.</p>
-</dd><dt><strong><em>lir-format</em></strong>
-<dd>
-<p>(Standard: false) Dieser Parameter hat keinen Wert. Wird er angegeben, dann
-wird er als true ausgewertet. Damit ist es möglich, die Ausgabedatei im für
-LIR lesbarem Format zu erstellen.</p>
-</dd></dl>
-
-<h3 id="class-Lingo::Attendee::TextWriter-label-Beispiele">Beispiele<span><a href="#class-Lingo::Attendee::TextWriter-label-Beispiele">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
-
-<p>Bei der Verarbeitung der oben angegebenen Funktionsbeschreibung des
-Textwriters mit der Ablaufkonfiguration <code>t1.cfg</code></p>
-
-<pre>meeting:
-  attendees:
-    - text_reader:    { out: lines, files: &#39;$(files)&#39; }
-    - tokenizer:      { in: lines, out: token }
-    - word_searcher:  { in: token, out: words, source: &#39;sys-dic&#39; }
-    - vector_filter:  { in: words, out: filtr, sort: &#39;term_rel&#39; }
-    - text_writer:    { in: filtr, ext: &#39;vec&#39;, sep: &#39;\n&#39; }</pre>
-
-<p>ergibt die Ausgabe in der Datei <code>test.vec</code></p>
-
-<pre>0.03846 name
-0.01923 ausgabedatei
-0.01923 datenstrom
-0.01923 extension
-0.01923 format
-0.01923 objekt
-0.01923 string
-0.01923 textdatei
-0.01923 typ
-0.01923 umleitung</pre>
-
   </section>
 
   
@@ -191,9 +108,9 @@ Textwriters mit der Ablaufkonfiguration <code>t1.cfg</code></p>
     
 
     
-     <section id="protected-instance-5Buntitled-5D-method-details" class="method-section">
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
-         <h3>Protected Instance Methods</h3>
+         <h3>Public Instance Methods</h3>
        </header>
 
     
@@ -201,7 +118,7 @@ Textwriters mit der Ablaufkonfiguration <code>t1.cfg</code></p>
         
         <div class="method-heading">
           <span class="method-name">control</span><span
-            class="method-args">(cmd, param)</span>
+            class="method-args">(cmd, param = nil, *)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -217,11 +134,11 @@ Textwriters mit der Ablaufkonfiguration <code>t1.cfg</code></p>
           
           <div class="method-source-code" id="control-source">
             <pre><span class="ruby-comment"># File lib/lingo/attendee/text_writer.rb, line 92</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">param</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">param</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">*</span>)
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">cmd</span>
-    <span class="ruby-keyword">when</span> <span class="ruby-constant">STR_CMD_LIR</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:LIR</span>
       <span class="ruby-ivar">@lir</span> = <span class="ruby-keyword">true</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@lir</span>.<span class="ruby-identifier">nil?</span>
-    <span class="ruby-keyword">when</span> <span class="ruby-constant">STR_CMD_FILE</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:FILE</span>
       <span class="ruby-ivar">@no_sep</span> = <span class="ruby-keyword">true</span>
 
       <span class="ruby-keyword">if</span> <span class="ruby-identifier">stdout?</span>(<span class="ruby-ivar">@ext</span>)
@@ -231,20 +148,20 @@ Textwriters mit der Ablaufkonfiguration <code>t1.cfg</code></p>
       <span class="ruby-keyword">end</span>
 
       <span class="ruby-ivar">@lir_rec_no</span>, <span class="ruby-ivar">@lir_rec_buf</span> = <span class="ruby-string">&#39;&#39;</span>, []
-    <span class="ruby-keyword">when</span> <span class="ruby-constant">STR_CMD_RECORD</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:RECORD</span>
       <span class="ruby-keyword">if</span> <span class="ruby-ivar">@lir</span>
         <span class="ruby-ivar">@no_sep</span> = <span class="ruby-keyword">true</span>
 
         <span class="ruby-identifier">flush_lir_buffer</span>
         <span class="ruby-ivar">@lir_rec_no</span> = <span class="ruby-identifier">param</span>
       <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">when</span> <span class="ruby-constant">STR_CMD_EOL</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:EOL</span>
       <span class="ruby-ivar">@no_sep</span> = <span class="ruby-keyword">true</span>
 
       <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@lir</span>
         <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">puts</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@no_puts</span>
       <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">when</span> <span class="ruby-constant">STR_CMD_EOF</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:EOF</span>
       <span class="ruby-identifier">flush_lir_buffer</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@lir</span>
 
       <span class="ruby-keyword">unless</span> <span class="ruby-identifier">stdout?</span>(<span class="ruby-ivar">@filename</span>)
@@ -286,7 +203,7 @@ Textwriters mit der Ablaufkonfiguration <code>t1.cfg</code></p>
   <span class="ruby-ivar">@ext</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;ext&#39;</span>, <span class="ruby-string">&#39;txt2&#39;</span>)
   <span class="ruby-ivar">@lir</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;lir-format&#39;</span>, <span class="ruby-keyword">false</span>)
 
-  <span class="ruby-ivar">@sep</span>   = <span class="ruby-ivar">@config</span>[<span class="ruby-string">&#39;sep&#39;</span>] <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@lir</span>
+  <span class="ruby-ivar">@sep</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;sep&#39;</span>, <span class="ruby-keyword">nil</span>) <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@lir</span>
   <span class="ruby-ivar">@sep</span> <span class="ruby-operator">&amp;&amp;=</span> <span class="ruby-ivar">@sep</span>.<span class="ruby-identifier">evaluate</span>
   <span class="ruby-ivar">@sep</span> <span class="ruby-operator">||=</span> <span class="ruby-string">&#39; &#39;</span>
 
@@ -429,7 +346,7 @@ Textwriters mit der Ablaufkonfiguration <code>t1.cfg</code></p>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.2.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

@@ -4,21 +4,18 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::Language::Dictionary - lingo Application documentation (v1.8.5)</title>
-
-<link href="../../fonts.css" rel="stylesheet">
-<link href="../../rdoc.css" rel="stylesheet">
+<title>class Lingo::Language::Dictionary - lingo Application documentation (v1.8.6)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
 </script>
 
 <script src="../../js/jquery.js"></script>
-<script src="../../js/navigation.js"></script>
-<script src="../../js/search_index.js"></script>
-<script src="../../js/search.js"></script>
-<script src="../../js/searcher.js"></script>
 <script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 <body id="top" role="document" class="class">
@@ -273,7 +270,7 @@
 
           
           <div class="method-source-code" id="each_affix-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/dictionary.rb, line 129</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/dictionary.rb, line 114</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">each_affix</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">affix</span> = <span class="ruby-value">:suffix</span>)
   <span class="ruby-identifier">instance_variable_get</span>(<span class="ruby-node">&quot;@#{affix}es&quot;</span>).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">r</span>, <span class="ruby-identifier">e</span>, <span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">yield</span> <span class="ruby-node">&quot;#{$`}#{e == &#39;*&#39; ? &#39;&#39; : e}#{$&#39;}&quot;</span>, <span class="ruby-identifier">t</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">str</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">r</span>
@@ -308,7 +305,7 @@
 
           
           <div class="method-source-code" id="find_synonyms-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/dictionary.rb, line 74</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/dictionary.rb, line 70</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find_synonyms</span>(<span class="ruby-identifier">obj</span>, <span class="ruby-identifier">syn</span> = [], <span class="ruby-identifier">com</span> = <span class="ruby-keyword">true</span>)
   <span class="ruby-identifier">lex</span> = <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">lexicals</span>
   <span class="ruby-identifier">lex</span> = [<span class="ruby-identifier">obj</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">unknown?</span>
@@ -336,7 +333,7 @@
         
         <div class="method-heading">
           <span class="method-name">find_word</span><span
-            class="method-args">(str)</span>
+            class="method-args">(str, token = nil)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -345,18 +342,15 @@
 
         <div class="method-description">
           
-          <p><em>dic</em>.find_word( <em>aString</em> ) -&gt; <em>aNewWord</em></p>
-
-<p>Erstellt aus dem String ein Wort und sucht nach diesem im Wörterbuch.</p>
+          
           
           
 
           
           <div class="method-source-code" id="find_word-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/dictionary.rb, line 69</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">find_word</span>(<span class="ruby-identifier">str</span>)
-  (<span class="ruby-ivar">@_word</span> <span class="ruby-operator">||=</span> {})[<span class="ruby-identifier">str</span>] <span class="ruby-operator">||=</span>
-    <span class="ruby-constant">Word</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>, <span class="ruby-constant">WA_UNKNOWN</span>).<span class="ruby-identifier">identify</span>(<span class="ruby-identifier">select_with_suffix</span>(<span class="ruby-identifier">str</span>))
+            <pre><span class="ruby-comment"># File lib/lingo/language/dictionary.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">find_word</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">token</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-constant">Word</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>, <span class="ruby-constant">WA_UNKNOWN</span>, <span class="ruby-identifier">token</span>).<span class="ruby-identifier">identify</span>(<span class="ruby-identifier">select_with_suffix</span>(<span class="ruby-identifier">str</span>))
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -381,16 +375,13 @@
 
         <div class="method-description">
           
-          <p><em>dic</em>.select( <em>aString</em> ) -&gt; <em>ArrayOfLexicals</em></p>
-
-<p>Sucht alle Wörterbücher durch und gibt den ersten Treffer zurück (+mode =
-first+), oder alle Treffer (+mode = all+)</p>
+          
           
           
 
           
           <div class="method-source-code" id="select-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/dictionary.rb, line 91</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/dictionary.rb, line 84</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">select</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">lex</span> = [])
   <span class="ruby-ivar">@src</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">src</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">src</span>[<span class="ruby-identifier">str</span>] <span class="ruby-operator">||</span> <span class="ruby-keyword">next</span>)
@@ -423,18 +414,13 @@ first+), oder alle Treffer (+mode = all+)</p>
 
         <div class="method-description">
           
-          <p><em>dic</em>.select_with_infix( <em>aString</em> ) -&gt;
-<em>ArrayOfLexicals</em></p>
-
-<p>Sucht alle Wörterbücher durch und gibt den ersten Treffer zurück (+mode =
-first+), oder alle Treffer (+mode = all+). Sucht dabei auch Wörter, die
-eine Fugung am Ende haben.</p>
+          
           
           
 
           
           <div class="method-source-code" id="select_with_infix-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/dictionary.rb, line 123</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/dictionary.rb, line 108</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">select_with_infix</span>(<span class="ruby-identifier">str</span>)
   <span class="ruby-identifier">select</span>(<span class="ruby-identifier">str</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">lex</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">each_affix</span>(<span class="ruby-identifier">str</span>, <span class="ruby-value">:infix</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">form</span>, <span class="ruby-identifier">_</span><span class="ruby-operator">|</span> <span class="ruby-identifier">select</span>(<span class="ruby-identifier">form</span>, <span class="ruby-identifier">lex</span>) }
@@ -463,18 +449,13 @@ eine Fugung am Ende haben.</p>
 
         <div class="method-description">
           
-          <p><em>dic</em>.select_with_suffix( <em>aString</em> ) -&gt;
-<em>ArrayOfLexicals</em></p>
-
-<p>Sucht alle Wörterbücher durch und gibt den ersten Treffer zurück (+mode =
-first+), oder alle Treffer (+mode = all+). Sucht dabei auch Wörter, die um
-wortklassenspezifische Suffixe bereinigt wurden.</p>
+          
           
           
 
           
           <div class="method-source-code" id="select_with_suffix-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/dictionary.rb, line 105</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/dictionary.rb, line 94</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">select_with_suffix</span>(<span class="ruby-identifier">str</span>)
   <span class="ruby-identifier">select</span>(<span class="ruby-identifier">str</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">lex</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">each_affix</span>(<span class="ruby-identifier">str</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">form</span>, <span class="ruby-identifier">attr</span><span class="ruby-operator">|</span>
@@ -506,7 +487,7 @@ wortklassenspezifische Suffixe bereinigt wurden.</p>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.2.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

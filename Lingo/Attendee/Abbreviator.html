@@ -4,21 +4,18 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::Attendee::Abbreviator - lingo Application documentation (v1.8.5)</title>
-
-<link href="../../fonts.css" rel="stylesheet">
-<link href="../../rdoc.css" rel="stylesheet">
+<title>class Lingo::Attendee::Abbreviator - lingo Application documentation (v1.8.6)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
 </script>
 
 <script src="../../js/jquery.js"></script>
-<script src="../../js/navigation.js"></script>
-<script src="../../js/search_index.js"></script>
-<script src="../../js/search.js"></script>
-<script src="../../js/searcher.js"></script>
 <script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 <body id="top" role="document" class="class">
@@ -54,16 +51,6 @@
   </div>
 
   
-<div class="nav-section">
-  <h3>Table of Contents</h3>
-
-  <ul class="link-list" role="directory">
-    <li><a href="#class-Lingo::Attendee::Abbreviator-label-M%C3%B6gliche+Verlinkung">Mögliche Verlinkung</a>
-    <li><a href="#class-Lingo::Attendee::Abbreviator-label-Parameter">Parameter</a>
-    <li><a href="#class-Lingo::Attendee::Abbreviator-label-Beispiele">Beispiele</a>
-  </ul>
-</div>
-
 
   <div id="class-metadata">
     
@@ -104,70 +91,6 @@
 
   <section class="description">
     
-<p>Die Erkennung von Abkürzungen kann auf vielfältige Weise erfolgen. In jedem
-Fall sollte eine sichere Unterscheidung von einem Satzende-Punkt möglich
-sein. Der in Lingo gewählte Ansatz befreit den <a
-href="Tokenizer.html">Tokenizer</a> von dieser Arbeit und konzentriert die
-Erkennung in diesem <a href="../Attendee.html">Attendee</a>. Sobald der <a
-href="Abbreviator.html">Abbreviator</a> im Datenstrom auf ein Punkt trifft
-(Token = <code>:./PUNC:</code>), prüft er das vorhergehende Token auf eine
-gültige Abkürzung im Abkürzungs-Wörterbuch. Wird es als Abkürzung erkannt,
-dann wird das Token in ein Word gewandelt und das Punkt-Token aus dem
-Zeichenstrom entfernt.</p>
-
-<h3 id="class-Lingo::Attendee::Abbreviator-label-M%C3%B6gliche+Verlinkung">Mögliche Verlinkung<span><a href="#class-Lingo::Attendee::Abbreviator-label-M%C3%B6gliche+Verlinkung">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt>Erwartet
-<dd>
-<p>Daten des Typs <strong>Token</strong> z.B. von <a
-href="Tokenizer.html">Tokenizer</a></p>
-</dd><dt>Erzeugt
-<dd>
-<p>Leitet Token weiter und wandelt erkannte Abkürzungen in den Typ
-<strong>Word</strong> z.B. für Wordsearcher</p>
-</dd></dl>
-
-<h3 id="class-Lingo::Attendee::Abbreviator-label-Parameter">Parameter<span><a href="#class-Lingo::Attendee::Abbreviator-label-Parameter">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
-
-<p>Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der
-Voreinstellung). Alle anderen Parameter müssen zwingend angegeben werden.</p>
-<dl class="rdoc-list note-list"><dt><strong>in</strong>
-<dd>
-<p>siehe allgemeine Beschreibung des <a href="../Attendee.html">Attendee</a></p>
-</dd><dt><strong>out</strong>
-<dd>
-<p>siehe allgemeine Beschreibung des <a href="../Attendee.html">Attendee</a></p>
-</dd><dt><strong>source</strong>
-<dd>
-<p>siehe allgemeine Beschreibung des Dictionary</p>
-</dd><dt><strong><em>mode</em></strong>
-<dd>
-<p>(Standard: all) siehe allgemeine Beschreibung des Dictionary</p>
-</dd></dl>
-
-<h3 id="class-Lingo::Attendee::Abbreviator-label-Beispiele">Beispiele<span><a href="#class-Lingo::Attendee::Abbreviator-label-Beispiele">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
-
-<p>Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration
-<code>t1.cfg</code></p>
-
-<pre>meeting:
-  attendees:
-    - text_reader:  { out: lines, files: &#39;$(files)&#39; }
-    - tokenizer:    { in: lines, out: token }
-    - abbreviator:  { in: token, out: abbrev, source: &#39;sys-abk&#39; }
-    - debugger:     { in: abbrev, prompt: &#39;out&gt;&#39; }</pre>
-
-<p>ergibt die Ausgabe über den Debugger: <code>lingo -c t1 test.txt</code></p>
-
-<pre>out&gt; *FILE(&#39;test.txt&#39;)
-out&gt; :Dies/WORD:
-out&gt; :ist/WORD:
-out&gt; &lt;ggf. = [(gegebenenfalls/w)]&gt;
-out&gt; :eine/WORD:
-out&gt; :Abk³rzung/WORD:
-out&gt; :./PUNC:
-out&gt; *EOL(&#39;test.txt&#39;)
-out&gt; *EOF(&#39;test.txt&#39;)</pre>
-
   </section>
 
   
@@ -183,9 +106,9 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
     
 
     
-     <section id="protected-instance-5Buntitled-5D-method-details" class="method-section">
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
-         <h3>Protected Instance Methods</h3>
+         <h3>Public Instance Methods</h3>
        </header>
 
     
@@ -193,7 +116,7 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
         
         <div class="method-heading">
           <span class="method-name">control</span><span
-            class="method-args">(cmd, param)</span>
+            class="method-args">(cmd, *)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -209,8 +132,8 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
           
           <div class="method-source-code" id="control-source">
             <pre><span class="ruby-comment"># File lib/lingo/attendee/abbreviator.rb, line 79</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">param</span>)
-  <span class="ruby-identifier">send_abbr</span>(<span class="ruby-ivar">@abbr</span>) <span class="ruby-keyword">if</span> [<span class="ruby-constant">STR_CMD_RECORD</span>, <span class="ruby-constant">STR_CMD_EOF</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">cmd</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-operator">*</span>)
+  <span class="ruby-identifier">send_abbr</span>(<span class="ruby-ivar">@abbr</span>) <span class="ruby-keyword">if</span> [<span class="ruby-value">:RECORD</span>, <span class="ruby-value">:EOF</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">cmd</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -353,7 +276,7 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.2.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

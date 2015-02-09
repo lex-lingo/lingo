@@ -4,21 +4,18 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::Database::Source - lingo Application documentation (v1.8.5)</title>
-
-<link href="../../fonts.css" rel="stylesheet">
-<link href="../../rdoc.css" rel="stylesheet">
+<title>class Lingo::Database::Source - lingo Application documentation (v1.8.6)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
 </script>
 
 <script src="../../js/jquery.js"></script>
-<script src="../../js/navigation.js"></script>
-<script src="../../js/search_index.js"></script>
-<script src="../../js/search.js"></script>
-<script src="../../js/searcher.js"></script>
 <script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 <body id="top" role="document" class="class">
@@ -98,19 +95,6 @@
 
   <section class="description">
     
-<p>Die Klasse <a href="Source.html">Source</a> stellt eine einheitliche
-Schnittstelle auf die unterschiedlichen Formate von Wörterbuch-Quelldateien
-bereit. Die Identifizierung der Quelldatei erfolgt über die ID der Datei,
-so wie sie in der Sprachkonfigurationsdatei <code>de.lang</code> unter
-<code>language/dictionary/databases</code> hinterlegt ist.</p>
-
-<p>Die Verarbeitung der Wörterbücher erfolgt mittels des Iterators
-<strong>each</strong>, der für jede Zeile der Quelldatei ein Array
-bereitstellt in der Form <code>[ key, [val1, val2, ...] ]</code>.</p>
-
-<p>Nicht korrekt erkannte Zeilen werden abgewiesen und in eine Revoke-Datei
-gespeichert, die an der Dateiendung <code>.rev</code> zu erkennen ist.</p>
-
   </section>
 
   
@@ -172,7 +156,7 @@ gespeichert, die an der Dateiendung <code>.rev</code> zu erkennen ist.</p>
 
           
           <div class="method-source-code" id="get-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 49</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 51</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">name</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
   <span class="ruby-constant">Lingo</span>.<span class="ruby-identifier">get_const</span>(<span class="ruby-identifier">name</span>, <span class="ruby-keyword">self</span>).<span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -205,7 +189,7 @@ gespeichert, die an der Dateiendung <code>.rev</code> zu erkennen ist.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 55</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 57</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">lingo</span>, <span class="ruby-identifier">def_wc_default</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">lingo</span>.<span class="ruby-identifier">database_config</span>(<span class="ruby-identifier">id</span>)
 
@@ -267,7 +251,7 @@ gespeichert, die an der Dateiendung <code>.rev</code> zu erkennen ist.</p>
 
           
           <div class="method-source-code" id="each-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 84</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 86</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">each</span>
   <span class="ruby-identifier">reject_file</span> = <span class="ruby-ivar">@rej</span>.<span class="ruby-identifier">open</span>(<span class="ruby-string">&#39;w&#39;</span>, <span class="ruby-identifier">encoding</span><span class="ruby-operator">:</span> <span class="ruby-constant">ENC</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@rej</span>
 
@@ -324,7 +308,7 @@ gespeichert, die an der Dateiendung <code>.rev</code> zu erkennen ist.</p>
 
           
           <div class="method-source-code" id="rejected-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 116</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 118</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">rejected</span>
   [<span class="ruby-ivar">@rej_cnt</span>, <span class="ruby-ivar">@rej</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -357,7 +341,7 @@ gespeichert, die an der Dateiendung <code>.rev</code> zu erkennen ist.</p>
 
           
           <div class="method-source-code" id="set-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 112</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 114</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">set</span>(<span class="ruby-identifier">db</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
   <span class="ruby-identifier">db</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">val</span>
 <span class="ruby-keyword">end</span></pre>
@@ -390,7 +374,7 @@ gespeichert, die an der Dateiendung <code>.rev</code> zu erkennen ist.</p>
 
           
           <div class="method-source-code" id="size-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 80</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 82</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">size</span>
   <span class="ruby-ivar">@src</span>.<span class="ruby-identifier">size</span>
 <span class="ruby-keyword">end</span></pre>
@@ -412,7 +396,7 @@ gespeichert, die an der Dateiendung <code>.rev</code> zu erkennen ist.</p>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.2.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

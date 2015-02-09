@@ -4,21 +4,18 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::Attendee::Debugger - lingo Application documentation (v1.8.5)</title>
-
-<link href="../../fonts.css" rel="stylesheet">
-<link href="../../rdoc.css" rel="stylesheet">
+<title>class Lingo::Attendee::Debugger - lingo Application documentation (v1.8.6)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
 </script>
 
 <script src="../../js/jquery.js"></script>
-<script src="../../js/navigation.js"></script>
-<script src="../../js/search_index.js"></script>
-<script src="../../js/search.js"></script>
-<script src="../../js/searcher.js"></script>
 <script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 <body id="top" role="document" class="class">
@@ -54,16 +51,6 @@
   </div>
 
   
-<div class="nav-section">
-  <h3>Table of Contents</h3>
-
-  <ul class="link-list" role="directory">
-    <li><a href="#class-Lingo::Attendee::Debugger-label-M%C3%B6gliche+Verlinkung">Mögliche Verlinkung</a>
-    <li><a href="#class-Lingo::Attendee::Debugger-label-Parameter">Parameter</a>
-    <li><a href="#class-Lingo::Attendee::Debugger-label-Beispiele">Beispiele</a>
-  </ul>
-</div>
-
 
   <div id="class-metadata">
     
@@ -91,6 +78,8 @@
     
     <li ><a href="#method-i-process">#process</a>
     
+    <li ><a href="#method-i-send_msg">#send_msg</a>
+    
   </ul>
 </div>
 
@@ -104,90 +93,6 @@
 
   <section class="description">
     
-<p>Die Attendees von Lingo übergeben Daten über ihre Kommunikationskanäle und
-entweder kommt bei einer komplexen Konfiguration hinten das gewünschte
-Ergebnis raus oder aber auch nicht. Für den letzeren Fall ist der <a
-href="Debugger.html">Debugger</a> primär gedacht. Er kann an beliebige
-Stelle in den Datenstrom eingeschleust werden, um Schritt für Schritt zu
-schauen, durch welchen <a href="../Attendee.html">Attendee</a> das Ergebnis
-verfälscht wird um so den Fehler einzugrenzen und schließlich zu lösen.</p>
-
-<p>Der <a href="Debugger.html">Debugger</a> wird jedoch auch gerne für die
-Verfolgung der Verarbeitung am Bildschirm verwendet.</p>
-
-<p>Achtung: Um Irritationen bei der Anwendung mehrerer <a
-href="Debugger.html">Debugger</a> zu vermeiden wird empfohlen, den <a
-href="Debugger.html">Debugger</a> in der Konfiguration immer unmittelbar
-nach dem <a href="../Attendee.html">Attendee</a> zu platzieren, dessen
-Ausgabe debugt werden soll. Ansonsten kann es zu scheinbar unerklärlichen
-Interferrenzen bei der Ausgabe kommen.</p>
-
-<h3 id="class-Lingo::Attendee::Debugger-label-M%C3%B6gliche+Verlinkung">Mögliche Verlinkung<span><a href="#class-Lingo::Attendee::Debugger-label-M%C3%B6gliche+Verlinkung">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt>Erwartet
-<dd>
-<p>Daten beliebigen Typs</p>
-</dd></dl>
-
-<h3 id="class-Lingo::Attendee::Debugger-label-Parameter">Parameter<span><a href="#class-Lingo::Attendee::Debugger-label-Parameter">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
-
-<p>Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der
-Voreinstellung). Alle anderen Parameter müssen zwingend angegeben werden.</p>
-<dl class="rdoc-list note-list"><dt><strong>in</strong>
-<dd>
-<p>siehe allgemeine Beschreibung des <a href="../Attendee.html">Attendee</a></p>
-</dd><dt><strong>out</strong>
-<dd>
-<p>siehe allgemeine Beschreibung des <a href="../Attendee.html">Attendee</a></p>
-</dd><dt><strong><em>eval</em></strong>
-<dd>
-<p>(Standard: true) Gibt eine Bedingung an, die erfüllt sein muss, damit ein
-Datenobjekt ausgegeben wird (siehe Beschreibung Objectfilter)</p>
-</dd><dt><strong><em>ceval</em></strong>
-<dd>
-<p>(Standard: true) Gibt eiune Bedingung an, die erfüllt sein muss, damit ein</p>
-</dd></dl>
-
-<pre>Kommandoobjekt ausgegeben wird.</pre>
-<dl class="rdoc-list note-list"><dt><strong><em>prompt</em></strong>
-<dd>
-<p>(Standard: &#39;lex:) &#39;) Gibt an, mit welchem Prefix die Ausgabe
-versehen werden soll. Insbesondere wenn mit mehreren Debuggern gearbeitet
-wird, sollte dies genutzt werden.</p>
-</dd></dl>
-
-<h3 id="class-Lingo::Attendee::Debugger-label-Beispiele">Beispiele<span><a href="#class-Lingo::Attendee::Debugger-label-Beispiele">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
-
-<p>Bei der Verarbeitung der oben angegebenen Funktionsbeschreibung des
-Textwriters mit der Ablaufkonfiguration <code>t1.cfg</code></p>
-
-<pre>meeting:
-  attendees:
-    - text_reader: { out: lines, files: &#39;$(files)&#39; }
-    - debugger:    { in: lines, prompt: &#39;LINES:) &#39; }
-    - tokenizer:   { in: lines, out: token }
-    - debugger:    { in: token, prompt: &#39;TOKEN:) &#39; }</pre>
-
-<p>ergibt die Ausgabe</p>
-
-<pre>LINES:)  *FILE(&#39;test.txt&#39;)
-TOKEN:)  *FILE(&#39;test.txt&#39;)
-LINES:)  &quot;Der Debugger kann was.&quot;
-TOKEN:)  :Der/WORD:
-TOKEN:)  :Debugger/WORD:
-TOKEN:)  :kann/WORD:
-TOKEN:)  :was/WORD:
-TOKEN:)  :./PUNC:
-TOKEN:)  *EOL(&#39;test.txt&#39;)
-LINES:)  &quot;Lingo auch :o)&quot;
-TOKEN:)  :Lingo/WORD:
-TOKEN:)  :auch/WORD:
-TOKEN:)  ::/PUNC:
-TOKEN:)  :o/WORD:
-TOKEN:)  :)/OTHR:
-TOKEN:)  *EOL(&#39;test.txt&#39;)
-LINES:)  *EOF(&#39;test.txt&#39;)
-TOKEN:)  *EOF(&#39;test.txt&#39;)</pre>
-
   </section>
 
   
@@ -203,9 +108,9 @@ TOKEN:)  *EOF(&#39;test.txt&#39;)</pre>
     
 
     
-     <section id="protected-instance-5Buntitled-5D-method-details" class="method-section">
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
-         <h3>Protected Instance Methods</h3>
+         <h3>Public Instance Methods</h3>
        </header>
 
     
@@ -213,7 +118,7 @@ TOKEN:)  *EOF(&#39;test.txt&#39;)</pre>
         
         <div class="method-heading">
           <span class="method-name">control</span><span
-            class="method-args">(cmd, param)</span>
+            class="method-args">(cmd, param = nil, *)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -228,9 +133,13 @@ TOKEN:)  *EOF(&#39;test.txt&#39;)</pre>
 
           
           <div class="method-source-code" id="control-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/debugger.rb, line 97</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">param</span>)
-  <span class="ruby-identifier">debug</span>(<span class="ruby-constant">AgendaItem</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">param</span>), <span class="ruby-ivar">@cmd_eval</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/debugger.rb, line 106</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">param</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">*</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@cmd_eval</span>
+    <span class="ruby-identifier">debug</span>(<span class="ruby-identifier">eval</span>(<span class="ruby-ivar">@cmd_eval</span>)) { <span class="ruby-node">&quot;*#{cmd}(&#39;#{param}&#39;)&quot;</span> }
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">cmd</span> <span class="ruby-operator">==</span> <span class="ruby-value">:EOL</span>
+    <span class="ruby-value">:skip_command</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -246,7 +155,7 @@ TOKEN:)  *EOF(&#39;test.txt&#39;)</pre>
         
         <div class="method-heading">
           <span class="method-name">init</span><span
-            class="method-args">()</span>
+            class="method-args">(default_prompt = 'lex:) ')</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -261,11 +170,18 @@ TOKEN:)  *EOF(&#39;test.txt&#39;)</pre>
 
           
           <div class="method-source-code" id="init-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/debugger.rb, line 91</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">init</span>
-  <span class="ruby-ivar">@obj_eval</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;eval&#39;</span>,   <span class="ruby-string">&#39;true&#39;</span>)
-  <span class="ruby-ivar">@cmd_eval</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;ceval&#39;</span>,  <span class="ruby-string">&#39;true&#39;</span>)
-  <span class="ruby-ivar">@prompt</span>   = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;prompt&#39;</span>, <span class="ruby-string">&#39;lex:) &#39;</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/debugger.rb, line 93</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">init</span>(<span class="ruby-identifier">default_prompt</span> = <span class="ruby-string">&#39;lex:) &#39;</span>)
+  <span class="ruby-ivar">@prompt</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;prompt&#39;</span>, <span class="ruby-identifier">default_prompt</span>)
+
+  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@filter</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;filter&#39;</span>, <span class="ruby-keyword">false</span>)
+    <span class="ruby-ivar">@cmd_eval</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;ceval&#39;</span>, <span class="ruby-string">&#39;true&#39;</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@cmd_eval</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@obj_eval</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;eval&#39;</span>, <span class="ruby-string">&#39;true&#39;</span>)
+  <span class="ruby-ivar">@preamble</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;preamble&#39;</span>, <span class="ruby-keyword">true</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -296,10 +212,10 @@ TOKEN:)  *EOF(&#39;test.txt&#39;)</pre>
 
           
           <div class="method-source-code" id="process-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/debugger.rb, line 101</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/debugger.rb, line 114</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">process</span>(<span class="ruby-identifier">obj</span>)
-  <span class="ruby-identifier">debug</span>(<span class="ruby-identifier">obj</span>, <span class="ruby-ivar">@obj_eval</span>)
-  <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">obj</span>)
+  <span class="ruby-identifier">debug</span>(<span class="ruby-identifier">eval</span>(<span class="ruby-ivar">@obj_eval</span>)) { <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">inspect</span> }
+  <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">obj</span>) <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@filter</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -323,7 +239,7 @@ TOKEN:)  *EOF(&#39;test.txt&#39;)</pre>
         
         <div class="method-heading">
           <span class="method-name">debug</span><span
-            class="method-args">(obj, cond)</span>
+            class="method-args">(condition) { || ... }</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -338,9 +254,43 @@ TOKEN:)  *EOF(&#39;test.txt&#39;)</pre>
 
           
           <div class="method-source-code" id="debug-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/debugger.rb, line 108</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">debug</span>(<span class="ruby-identifier">obj</span>, <span class="ruby-identifier">cond</span>)
-  <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;#{@prompt} #{obj.inspect}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">eval</span>(<span class="ruby-identifier">cond</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/debugger.rb, line 121</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">debug</span>(<span class="ruby-identifier">condition</span>)
+  <span class="ruby-identifier">send_msg</span>((<span class="ruby-ivar">@preamble</span> = <span class="ruby-keyword">nil</span>; <span class="ruby-ivar">@lingo</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">to_h</span>.<span class="ruby-identifier">to_yaml</span>)) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@preamble</span>
+  <span class="ruby-identifier">send_msg</span>(<span class="ruby-ivar">@prompt</span> <span class="ruby-operator">+</span> <span class="ruby-keyword">yield</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">condition</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-send_msg" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">send_msg</span><span
+            class="method-args">(msg)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="send_msg-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/debugger.rb, line 126</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">send_msg</span>(<span class="ruby-identifier">msg</span>)
+  <span class="ruby-ivar">@filter</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">msg</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">warn</span>(<span class="ruby-identifier">msg</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -360,7 +310,7 @@ TOKEN:)  *EOF(&#39;test.txt&#39;)</pre>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.2.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

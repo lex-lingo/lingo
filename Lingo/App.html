@@ -4,21 +4,18 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::App - lingo Application documentation (v1.8.5)</title>
-
-<link href="../fonts.css" rel="stylesheet">
-<link href="../rdoc.css" rel="stylesheet">
+<title>class Lingo::App - lingo Application documentation (v1.8.6)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
 </script>
 
 <script src="../js/jquery.js"></script>
-<script src="../js/navigation.js"></script>
-<script src="../js/search_index.js"></script>
-<script src="../js/search.js"></script>
-<script src="../js/searcher.js"></script>
 <script src="../js/darkfish.js"></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
 
 
 <body id="top" role="document" class="class">
@@ -73,11 +70,11 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-i-init_app">#init_app</a>
+    <li ><a href="#method-c-init_app">::init_app</a>
     
-    <li ><a href="#method-i-parse_options">#parse_options</a>
+    <li ><a href="#method-c-parse_options">::parse_options</a>
     
-    <li ><a href="#method-i-rackup">#rackup</a>
+    <li ><a href="#method-c-rackup">::rackup</a>
     
     <li ><a href="#method-i-to_json">#to_json</a>
     
@@ -109,13 +106,13 @@
     
 
     
-     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
        <header>
-         <h3>Public Instance Methods</h3>
+         <h3>Public Class Methods</h3>
        </header>
 
     
-      <div id="method-i-init_app" class="method-detail ">
+      <div id="method-c-init_app" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">init_app</span><span
@@ -151,7 +148,7 @@
       </div>
 
     
-      <div id="method-i-parse_options" class="method-detail ">
+      <div id="method-c-parse_options" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">parse_options</span><span
@@ -184,7 +181,7 @@
     <span class="ruby-constant">ARGV</span>.<span class="ruby-identifier">unshift</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">lingo_options</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">lingo_options</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>)
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-constant">OptionParser</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">banner</span>, <span class="ruby-value">16</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span>
+  <span class="ruby-constant">OptionParser</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">banner</span>, <span class="ruby-value">12</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&#39;-p port&#39;</span>,   <span class="ruby-string">&#39;set the port (default is 4567)&#39;</span>)                { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">set</span> <span class="ruby-value">:port</span>, <span class="ruby-constant">Integer</span>(<span class="ruby-identifier">v</span>) }
     <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&#39;-o addr&#39;</span>,   <span class="ruby-string">&#39;set the host (default is 0.0.0.0)&#39;</span>)             { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">set</span> <span class="ruby-value">:bind</span>, <span class="ruby-identifier">v</span> }
     <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&#39;-e env&#39;</span>,    <span class="ruby-string">&#39;set the environment (default is development)&#39;</span>)  { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">set</span> <span class="ruby-value">:environment</span>, <span class="ruby-identifier">v</span>.<span class="ruby-identifier">to_sym</span> }
@@ -192,7 +189,9 @@
     <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&#39;-x&#39;</span>,        <span class="ruby-string">&#39;turn on the mutex lock (default is off)&#39;</span>)       {     <span class="ruby-identifier">set</span> <span class="ruby-value">:lock</span>, <span class="ruby-keyword">true</span> }
   }.<span class="ruby-identifier">parse!</span>(<span class="ruby-identifier">argv</span>)
 
-  <span class="ruby-identifier">abort</span> <span class="ruby-identifier">banner</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">argv</span>.<span class="ruby-identifier">empty?</span>
+  <span class="ruby-identifier">argv</span>.<span class="ruby-identifier">pop</span> <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">$0</span>) <span class="ruby-operator">==</span> <span class="ruby-string">&#39;rackup&#39;</span>  <span class="ruby-comment"># rackup config</span>
+
+  <span class="ruby-identifier">abort</span> <span class="ruby-node">&quot;Unrecognized arguments: #{argv}\n#{banner}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">argv</span>.<span class="ruby-identifier">empty?</span>
 
   <span class="ruby-constant">ARGV</span>.<span class="ruby-identifier">unshift</span>(<span class="ruby-operator">*</span><span class="ruby-keyword">yield</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
 <span class="ruby-keyword">rescue</span> <span class="ruby-constant">OptionParser</span><span class="ruby-operator">::</span><span class="ruby-constant">ParseError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">err</span>
@@ -208,7 +207,7 @@
       </div>
 
     
-      <div id="method-i-rackup" class="method-detail ">
+      <div id="method-c-rackup" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">rackup</span><span
@@ -227,7 +226,7 @@
 
           
           <div class="method-source-code" id="rackup-source">
-            <pre><span class="ruby-comment"># File lib/lingo/app.rb, line 72</span>
+            <pre><span class="ruby-comment"># File lib/lingo/app.rb, line 74</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">rackup</span>(<span class="ruby-identifier">name</span>)
   <span class="ruby-identifier">file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-keyword">__FILE__</span>), <span class="ruby-identifier">name</span>, <span class="ruby-string">&#39;config.ru&#39;</span>)
   <span class="ruby-identifier">file</span> <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">readable?</span>(<span class="ruby-identifier">file</span>)
@@ -240,6 +239,14 @@
 
         
       </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
 
     
       <div id="method-i-to_json" class="method-detail ">
@@ -261,7 +268,7 @@
 
           
           <div class="method-source-code" id="to_json-source">
-            <pre><span class="ruby-comment"># File lib/lingo/app.rb, line 79</span>
+            <pre><span class="ruby-comment"># File lib/lingo/app.rb, line 81</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_json</span>(<span class="ruby-identifier">q</span>, <span class="ruby-identifier">r</span>)
   <span class="ruby-identifier">q</span>, <span class="ruby-identifier">r</span> = <span class="ruby-string">&#39;q&#39;</span>, <span class="ruby-string">&#39;Required parameter -- Input string&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">q</span>
 
@@ -286,7 +293,7 @@
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.2.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

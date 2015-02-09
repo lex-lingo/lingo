@@ -4,21 +4,18 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo - lingo Application documentation (v1.8.5)</title>
-
-<link href="./fonts.css" rel="stylesheet">
-<link href="./rdoc.css" rel="stylesheet">
+<title>class Lingo - lingo Application documentation (v1.8.6)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
 </script>
 
 <script src="./js/jquery.js"></script>
-<script src="./js/navigation.js"></script>
-<script src="./js/search_index.js"></script>
-<script src="./js/search.js"></script>
-<script src="./js/searcher.js"></script>
 <script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
 
 
 <body id="top" role="document" class="class">
@@ -73,59 +70,61 @@
 
   <ul class="link-list" role="directory">
     
+    <li ><a href="#method-c-append_path">::append_path</a>
+    
+    <li ><a href="#method-c-basename">::basename</a>
+    
+    <li ><a href="#method-c-basepath">::basepath</a>
+    
+    <li ><a href="#method-c-call">::call</a>
+    
+    <li ><a href="#method-c-ctl">::ctl</a>
+    
+    <li ><a href="#method-c-file_with_ext">::file_with_ext</a>
+    
+    <li ><a href="#method-c-find">::find</a>
+    
+    <li ><a href="#method-c-find_file">::find_file</a>
+    
+    <li ><a href="#method-c-find_store">::find_store</a>
+    
+    <li ><a href="#method-c-get_const">::get_const</a>
+    
+    <li ><a href="#method-c-include_path">::include_path</a>
+    
+    <li ><a href="#method-c-list">::list</a>
+    
     <li ><a href="#method-c-new">::new</a>
     
-    <li ><a href="#method-i-append_path">#append_path</a>
+    <li ><a href="#method-c-options_for">::options_for</a>
     
-    <li ><a href="#method-i-basename">#basename</a>
+    <li ><a href="#method-c-path_for">::path_for</a>
     
-    <li ><a href="#method-i-basepath">#basepath</a>
+    <li ><a href="#method-c-prepend_path">::prepend_path</a>
     
-    <li ><a href="#method-i-call">#call</a>
+    <li ><a href="#method-c-realpath_for">::realpath_for</a>
+    
+    <li ><a href="#method-c-require_optional">::require_optional</a>
+    
+    <li ><a href="#method-c-talk">::talk</a>
+    
+    <li ><a href="#method-c-walk">::walk</a>
     
     <li ><a href="#method-i-config">#config</a>
     
     <li ><a href="#method-i-database_config">#database_config</a>
     
-    <li ><a href="#method-i-deprecate">#deprecate</a>
-    
     <li ><a href="#method-i-dictionary_config">#dictionary_config</a>
-    
-    <li ><a href="#method-i-file_with_ext">#file_with_ext</a>
-    
-    <li ><a href="#method-i-find">#find</a>
-    
-    <li ><a href="#method-i-find_file">#find_file</a>
-    
-    <li ><a href="#method-i-find_store">#find_store</a>
-    
-    <li ><a href="#method-i-get_const">#get_const</a>
-    
-    <li ><a href="#method-i-include_path">#include_path</a>
     
     <li ><a href="#method-i-invite">#invite</a>
     
     <li ><a href="#method-i-lexical_hash">#lexical_hash</a>
-    
-    <li ><a href="#method-i-list">#list</a>
-    
-    <li ><a href="#method-i-options_for">#options_for</a>
-    
-    <li ><a href="#method-i-path_for">#path_for</a>
-    
-    <li ><a href="#method-i-prepend_path">#prepend_path</a>
-    
-    <li ><a href="#method-i-realpath_for">#realpath_for</a>
-    
-    <li ><a href="#method-i-require_optional">#require_optional</a>
     
     <li ><a href="#method-i-reset">#reset</a>
     
     <li ><a href="#method-i-start">#start</a>
     
     <li ><a href="#method-i-talk">#talk</a>
-    
-    <li ><a href="#method-i-walk">#walk</a>
     
     <li ><a href="#method-i-warn">#warn</a>
     
@@ -161,12 +160,14 @@
       
         <dt id="BASE">BASE
         
-        <dd><p>The system-wide Lingo directory (<code>LINGO_BASE</code>).</p>
+        <dd><p>The system-wide <a href="Lingo.html">Lingo</a> directory
+(<code>LINGO_BASE</code>).</p>
         
       
         <dt id="CURR">CURR
         
-        <dd><p>The local Lingo directory (<code>LINGO_CURR</code>).</p>
+        <dd><p>The local <a href="Lingo.html">Lingo</a> directory
+(<code>LINGO_CURR</code>).</p>
         
       
         <dt id="ENC">ENC
@@ -181,12 +182,14 @@
       
         <dt id="HOME">HOME
         
-        <dd><p>The user&#39;s personal Lingo directory (<code>LINGO_HOME</code>).</p>
+        <dd><p>The user&#39;s personal <a href="Lingo.html">Lingo</a> directory
+(<code>LINGO_HOME</code>).</p>
         
       
         <dt id="PATH">PATH
         
-        <dd><p>The search path for Lingo dictionary and configuration files.</p>
+        <dd><p>The search path for <a href="Lingo.html">Lingo</a> dictionary and
+configuration files.</p>
         
       
         <dt id="SEP_RE">SEP_RE
@@ -233,6 +236,299 @@
        </header>
 
     
+      <div id="method-c-append_path" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">append_path</span><span
+            class="method-args">(*path)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="append_path-source">
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 117</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">append_path</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">path</span>)
+  <span class="ruby-identifier">include_path</span>(<span class="ruby-identifier">path</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-basename" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">basename</span><span
+            class="method-args">(type, file)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="basename-source">
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 108</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">basename</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">file</span>)
+  <span class="ruby-identifier">dir</span>, <span class="ruby-identifier">name</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">split</span>(<span class="ruby-identifier">file</span>)
+  <span class="ruby-identifier">type</span> <span class="ruby-operator">!=</span> <span class="ruby-value">:dict</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">name</span> <span class="ruby-operator">:</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">dir</span>), <span class="ruby-identifier">name</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-basepath" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">basepath</span><span
+            class="method-args">(type, file)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="basepath-source">
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 113</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">basepath</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">file</span>)
+  <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">options_for</span>(<span class="ruby-identifier">type</span>)[<span class="ruby-value">:dir</span>], <span class="ruby-identifier">basename</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">file</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-call" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">call</span><span
+            class="method-args">(cfg = find(:config, 'lingo-call'), args = [], &block)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="call-source">
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 73</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">call</span>(<span class="ruby-identifier">cfg</span> = <span class="ruby-identifier">find</span>(<span class="ruby-value">:config</span>, <span class="ruby-string">&#39;lingo-call&#39;</span>), <span class="ruby-identifier">args</span> = [], <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-constant">Call</span>.<span class="ruby-identifier">new</span>([<span class="ruby-string">&#39;-c&#39;</span>, <span class="ruby-identifier">cfg</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>]).<span class="ruby-identifier">call</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-ctl" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">ctl</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="ctl-source">
+            <pre><span class="ruby-comment"># File lib/lingo/ctl.rb, line 295</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">ctl</span>
+  <span class="ruby-constant">Ctl</span>.<span class="ruby-identifier">ctl</span>
+<span class="ruby-keyword">rescue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">err</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">$VERBOSE</span>
+  <span class="ruby-identifier">abort</span> <span class="ruby-node">&quot;#{err.backtrace.first}: #{err} (#{err.class})&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-find" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">find</span><span
+            class="method-args">(type, file, options = {}) { |err| ... }</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="find-source">
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 93</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>)
+    <span class="ruby-identifier">path</span>    = <span class="ruby-identifier">options</span>
+    <span class="ruby-identifier">options</span> = <span class="ruby-identifier">options_for</span>(<span class="ruby-identifier">type</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">options</span> = <span class="ruby-identifier">options_for</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">options</span>)
+    <span class="ruby-identifier">path</span>    = <span class="ruby-identifier">path_for</span>(<span class="ruby-identifier">options</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">type</span> = <span class="ruby-value">:file</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">type</span> <span class="ruby-operator">!=</span> <span class="ruby-value">:store</span>
+  <span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;find_#{type}&quot;</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">RuntimeError</span>, <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ENOENT</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">err</span>
+  <span class="ruby-identifier">block_given?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">err</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">raise</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-get_const" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_const</span><span
+            class="method-args">(name, klass = self)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_const-source">
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 125</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_const</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">klass</span> = <span class="ruby-keyword">self</span>)
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">name</span>.<span class="ruby-identifier">camelcase</span>)
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">NameError</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">NameNotFoundError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">klass</span>, <span class="ruby-identifier">name</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-list" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">list</span><span
+            class="method-args">(type, options = {})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="list-source">
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 77</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">list</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">options</span> = <span class="ruby-identifier">options_for</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">options</span>)
+
+  <span class="ruby-identifier">glob</span>, <span class="ruby-identifier">list</span> = <span class="ruby-identifier">file_with_ext</span>(<span class="ruby-string">&#39;*&#39;</span>, <span class="ruby-identifier">options</span>), []
+  <span class="ruby-identifier">glob</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;??&#39;</span>, <span class="ruby-identifier">glob</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-value">:dict</span>
+
+  <span class="ruby-identifier">walk</span>(<span class="ruby-identifier">path</span> = <span class="ruby-identifier">path_for</span>(<span class="ruby-identifier">options</span>), <span class="ruby-identifier">options</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">dir</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">Dir</span>[<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-identifier">glob</span>)].<span class="ruby-identifier">sort!</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">pn</span> = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>)
+      <span class="ruby-identifier">list</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">realpath_for</span>(<span class="ruby-identifier">pn</span>, <span class="ruby-identifier">path</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">pn</span>.<span class="ruby-identifier">file?</span>
+    }
+  }
+
+  <span class="ruby-identifier">list</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-c-new" class="method-detail ">
         
         <div class="method-heading">
@@ -269,18 +565,10 @@
       </div>
 
     
-    </section>
-  
-     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
-       <header>
-         <h3>Public Instance Methods</h3>
-       </header>
-
-    
-      <div id="method-i-append_path" class="method-detail ">
+      <div id="method-c-prepend_path" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">append_path</span><span
+          <span class="method-name">prepend_path</span><span
             class="method-args">(*path)</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -295,10 +583,10 @@
           
 
           
-          <div class="method-source-code" id="append_path-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 115</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">append_path</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">path</span>)
-  <span class="ruby-identifier">include_path</span>(<span class="ruby-identifier">path</span>)
+          <div class="method-source-code" id="prepend_path-source">
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 121</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">prepend_path</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">path</span>)
+  <span class="ruby-identifier">include_path</span>(<span class="ruby-identifier">path</span>, <span class="ruby-keyword">true</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -310,11 +598,11 @@
       </div>
 
     
-      <div id="method-i-basename" class="method-detail ">
+      <div id="method-c-talk" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">basename</span><span
-            class="method-args">(type, file)</span>
+          <span class="method-name">talk</span><span
+            class="method-args">(*args)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -328,11 +616,10 @@
           
 
           
-          <div class="method-source-code" id="basename-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 106</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">basename</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">file</span>)
-  <span class="ruby-identifier">dir</span>, <span class="ruby-identifier">name</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">split</span>(<span class="ruby-identifier">file</span>)
-  <span class="ruby-identifier">type</span> <span class="ruby-operator">!=</span> <span class="ruby-value">:dict</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">name</span> <span class="ruby-operator">:</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">dir</span>), <span class="ruby-identifier">name</span>)
+          <div class="method-source-code" id="talk-source">
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 69</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">talk</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>).<span class="ruby-identifier">talk</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -344,11 +631,19 @@
       </div>
 
     
-      <div id="method-i-basepath" class="method-detail ">
+    </section>
+  
+     <section id="private-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Private Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-file_with_ext" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">basepath</span><span
-            class="method-args">(type, file)</span>
+          <span class="method-name">file_with_ext</span><span
+            class="method-args">(file, options)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -362,10 +657,11 @@
           
 
           
-          <div class="method-source-code" id="basepath-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 111</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">basepath</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">file</span>)
-  <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">options_for</span>(<span class="ruby-identifier">type</span>)[<span class="ruby-value">:dir</span>], <span class="ruby-identifier">basename</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">file</span>))
+          <div class="method-source-code" id="file_with_ext-source">
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 198</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">file_with_ext</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">ext</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:ext</span>]
+  <span class="ruby-identifier">ext</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">extname</span>(<span class="ruby-identifier">file</span>).<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-node">&quot;#{file}.#{ext}&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">file</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -377,11 +673,11 @@
       </div>
 
     
-      <div id="method-i-call" class="method-detail ">
+      <div id="method-c-find_file" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">call</span><span
-            class="method-args">(cfg = find(:config, 'lingo-call'), args = [], &block)</span>
+          <span class="method-name">find_file</span><span
+            class="method-args">(file, path, options)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -395,10 +691,31 @@
           
 
           
-          <div class="method-source-code" id="call-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 71</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">call</span>(<span class="ruby-identifier">cfg</span> = <span class="ruby-identifier">find</span>(<span class="ruby-value">:config</span>, <span class="ruby-string">&#39;lingo-call&#39;</span>), <span class="ruby-identifier">args</span> = [], <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-  <span class="ruby-constant">Call</span>.<span class="ruby-identifier">new</span>([<span class="ruby-string">&#39;-c&#39;</span>, <span class="ruby-identifier">cfg</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>]).<span class="ruby-identifier">call</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+          <div class="method-source-code" id="find_file-source">
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 137</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">find_file</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">glob</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:glob</span>]
+    <span class="ruby-identifier">file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">chomp_ext</span>(<span class="ruby-identifier">file</span>)
+    <span class="ruby-identifier">options</span>[<span class="ruby-value">:ext</span>] <span class="ruby-operator">||=</span> <span class="ruby-string">&#39;*&#39;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">file</span> = <span class="ruby-identifier">file_with_ext</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">pn</span>   = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>).<span class="ruby-identifier">cleanpath</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">pn</span>.<span class="ruby-identifier">relative?</span>
+    <span class="ruby-identifier">walk</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">dir</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">pn2</span> = <span class="ruby-identifier">pn</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">dir</span>)
+      <span class="ruby-identifier">ex</span>  = <span class="ruby-identifier">pn2</span>.<span class="ruby-identifier">exist?</span>
+
+      <span class="ruby-identifier">pn2</span> = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">glob</span>(<span class="ruby-identifier">pn2</span>).<span class="ruby-identifier">first</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">glob</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">ex</span>
+      <span class="ruby-identifier">pn</span>  = <span class="ruby-identifier">pn2</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">glob</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">pn2</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">ex</span>
+    }
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">realpath_for</span>(<span class="ruby-identifier">pn</span>, <span class="ruby-identifier">path</span>)
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ENOENT</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">relax</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:relax</span>]
+  <span class="ruby-identifier">relax</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:[]</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">relax</span>[<span class="ruby-identifier">file</span>] <span class="ruby-operator">:</span> <span class="ruby-identifier">file</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -408,6 +725,277 @@
 
         
       </div>
+
+    
+      <div id="method-c-find_store" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">find_store</span><span
+            class="method-args">(file, path, options)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="find_store-source">
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 162</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">find_store</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">base</span> = <span class="ruby-identifier">basename</span>(<span class="ruby-value">:dict</span>, <span class="ruby-identifier">find</span>(<span class="ruby-value">:dict</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>) {
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">SourceFileNotFoundError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">find_file</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>,
+      <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">glob</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">relax</span><span class="ruby-operator">:</span> <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">_file</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">SourceFileNotFoundError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">_file</span>)
+      })
+    ))
+  })
+
+  <span class="ruby-identifier">walk</span>(<span class="ruby-identifier">path</span>.<span class="ruby-identifier">reverse</span>, <span class="ruby-identifier">options</span>, <span class="ruby-keyword">false</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">dir</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">dir</span>).<span class="ruby-identifier">ascend</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">begin</span>
+        <span class="ruby-identifier">stat</span> = <span class="ruby-identifier">i</span>.<span class="ruby-identifier">stat</span>
+
+        <span class="ruby-keyword">break</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">stat</span>.<span class="ruby-identifier">file?</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">stat</span>.<span class="ruby-identifier">writable?</span>
+        <span class="ruby-keyword">return</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">chomp_ext</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-identifier">base</span>))
+      <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ENOENT</span>
+      <span class="ruby-keyword">end</span>
+    }
+  }
+
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">NoWritableStoreError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-include_path" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">include_path</span><span
+            class="method-args">(path, pre = false)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="include_path-source">
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 133</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">include_path</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">pre</span> = <span class="ruby-keyword">false</span>)
+  <span class="ruby-constant">PATH</span>.<span class="ruby-identifier">insert</span>(<span class="ruby-identifier">pre</span> <span class="ruby-operator">?</span> <span class="ruby-value">0</span> <span class="ruby-operator">:</span> <span class="ruby-value">-1</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">path</span>.<span class="ruby-identifier">map!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">to_s</span> })
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-options_for" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">options_for</span><span
+            class="method-args">(type, options = {})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="options_for-source">
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 186</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">options_for</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">find_options</span> = <span class="ruby-constant">FIND_OPTIONS</span>[<span class="ruby-identifier">type</span>]
+    <span class="ruby-identifier">options</span> = <span class="ruby-identifier">find_options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;Invalid type `#{type.inspect}&#39;&quot;</span>, <span class="ruby-identifier">caller</span>(<span class="ruby-value">1</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-path_for" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">path_for</span><span
+            class="method-args">(options)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="path_for-source">
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 194</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">path_for</span>(<span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:path</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">PATH</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-realpath_for" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">realpath_for</span><span
+            class="method-args">(pn, path)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="realpath_for-source">
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 214</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">realpath_for</span>(<span class="ruby-identifier">pn</span>, <span class="ruby-identifier">path</span>)
+  <span class="ruby-identifier">pn</span>.<span class="ruby-identifier">realpath</span>(<span class="ruby-identifier">path</span>.<span class="ruby-identifier">first</span>).<span class="ruby-identifier">to_s</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-require_optional" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">require_optional</span><span
+            class="method-args">(lib)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="require_optional-source">
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 218</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">require_optional</span>(<span class="ruby-identifier">lib</span>)
+  <span class="ruby-identifier">require</span> <span class="ruby-identifier">lib</span> <span class="ruby-keyword">unless</span> <span class="ruby-constant">ENV</span>[<span class="ruby-node">&quot;LINGO_NO_#{lib.upcase}&quot;</span>]
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">LoadError</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-walk" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">walk</span><span
+            class="method-args">(path, options, legacy = true) { |join| ... }</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="walk-source">
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 203</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">walk</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span>, <span class="ruby-identifier">legacy</span> = <span class="ruby-keyword">true</span>)
+  <span class="ruby-identifier">dirs</span>, <span class="ruby-identifier">seen</span> = [<span class="ruby-identifier">options</span>[<span class="ruby-value">:dir</span>].<span class="ruby-identifier">to_s</span>], <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">seen</span>
+  <span class="ruby-identifier">dirs</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">legacy</span>
+  <span class="ruby-identifier">dirs</span>.<span class="ruby-identifier">uniq!</span>
+
+  <span class="ruby-identifier">path</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">d</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">seen</span>[<span class="ruby-identifier">d</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">d</span>)]
+    <span class="ruby-identifier">dirs</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">d</span>, <span class="ruby-identifier">i</span>) } <span class="ruby-keyword">or</span> <span class="ruby-keyword">break</span>
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
 
     
       <div id="method-i-config" class="method-detail ">
@@ -481,39 +1069,6 @@
       </div>
 
     
-      <div id="method-i-deprecate" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">deprecate</span><span
-            class="method-args">(old, new, obj = self)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="deprecate-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 310</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">deprecate</span>(<span class="ruby-identifier">old</span>, <span class="ruby-identifier">new</span>, <span class="ruby-identifier">obj</span> = <span class="ruby-keyword">self</span>)
-  <span class="ruby-identifier">config</span>.<span class="ruby-identifier">deprecate</span>(<span class="ruby-identifier">old</span>, <span class="ruby-identifier">new</span>, <span class="ruby-identifier">obj</span>)
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
       <div id="method-i-dictionary_config" class="method-detail ">
         
         <div class="method-heading">
@@ -547,85 +1102,6 @@
       </div>
 
     
-      <div id="method-i-find" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">find</span><span
-            class="method-args">(type, file, options = {}) { |err| ... }</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="find-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 91</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">options</span> = {})
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>)
-    <span class="ruby-identifier">path</span>    = <span class="ruby-identifier">options</span>
-    <span class="ruby-identifier">options</span> = <span class="ruby-identifier">options_for</span>(<span class="ruby-identifier">type</span>)
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">options</span> = <span class="ruby-identifier">options_for</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">options</span>)
-    <span class="ruby-identifier">path</span>    = <span class="ruby-identifier">path_for</span>(<span class="ruby-identifier">options</span>)
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-identifier">type</span> = <span class="ruby-value">:file</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">type</span> <span class="ruby-operator">!=</span> <span class="ruby-value">:store</span>
-  <span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;find_#{type}&quot;</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span>)
-<span class="ruby-keyword">rescue</span> <span class="ruby-constant">RuntimeError</span>, <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ENOENT</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">err</span>
-  <span class="ruby-identifier">block_given?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">err</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">raise</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-get_const" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">get_const</span><span
-            class="method-args">(name, klass = self)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="get_const-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 123</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_const</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">klass</span> = <span class="ruby-keyword">self</span>)
-  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">name</span>.<span class="ruby-identifier">camelcase</span>)
-<span class="ruby-keyword">rescue</span> <span class="ruby-constant">NameError</span>
-  <span class="ruby-identifier">raise</span> <span class="ruby-constant">NameNotFoundError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">klass</span>, <span class="ruby-identifier">name</span>)
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
       <div id="method-i-invite" class="method-detail ">
         
         <div class="method-heading">
@@ -647,13 +1123,13 @@
           <div class="method-source-code" id="invite-source">
             <pre><span class="ruby-comment"># File lib/lingo.rb, line 266</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">invite</span>(<span class="ruby-identifier">list</span> = <span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;meeting/attendees&#39;</span>])
-  <span class="ruby-identifier">supplier</span>   = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span>, <span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>[<span class="ruby-identifier">k</span>] = [] }
-  <span class="ruby-identifier">subscriber</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span>, <span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>[<span class="ruby-identifier">k</span>] = [] }
+  <span class="ruby-identifier">supplier</span>   = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">nest</span> { [] }
+  <span class="ruby-identifier">subscriber</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">nest</span> { [] }
 
   <span class="ruby-identifier">last_link</span>, <span class="ruby-identifier">auto_link</span> = <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-value">0</span>
 
   <span class="ruby-identifier">list</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">hash</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">name</span> = <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">camelcase</span>
+    <span class="ruby-identifier">name</span> = (<span class="ruby-identifier">name_key</span> = <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">first</span>).<span class="ruby-identifier">camelcase</span>
 
     <span class="ruby-identifier">cfg</span> = (<span class="ruby-identifier">config</span>[<span class="ruby-node">&quot;language/attendees/#{name.downcase}&quot;</span>] <span class="ruby-operator">||</span> {})
       .<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">hash</span>.<span class="ruby-identifier">values</span>.<span class="ruby-identifier">first</span>).<span class="ruby-identifier">update</span>(<span class="ruby-string">&#39;name&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">name</span>)
@@ -666,13 +1142,17 @@
 
     <span class="ruby-ivar">@attendees</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">attendee</span> = <span class="ruby-constant">Attendee</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">name</span>).<span class="ruby-identifier">new</span>(<span class="ruby-identifier">cfg</span>, <span class="ruby-keyword">self</span>)
 
+    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> (<span class="ruby-identifier">real</span> = <span class="ruby-identifier">attendee</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;::&#39;</span>).<span class="ruby-identifier">last</span>)
+      <span class="ruby-identifier">config</span>.<span class="ruby-identifier">deprecate</span>(<span class="ruby-identifier">name_key</span>, <span class="ruby-identifier">real</span>.<span class="ruby-identifier">underscore</span>, <span class="ruby-identifier">attendee</span>, <span class="ruby-value">:name</span>)
+    <span class="ruby-keyword">end</span>
+
     { <span class="ruby-string">&#39;in&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">subscriber</span>, <span class="ruby-string">&#39;out&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">supplier</span> }.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">target</span><span class="ruby-operator">|</span>
       <span class="ruby-identifier">cfg</span>[<span class="ruby-identifier">key</span>].<span class="ruby-identifier">split</span>(<span class="ruby-constant">SEP_RE</span>).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">ch</span><span class="ruby-operator">|</span> <span class="ruby-identifier">target</span>[<span class="ruby-identifier">ch</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">attendee</span> }
     }
   }
 
   <span class="ruby-identifier">supplier</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">ch</span>, <span class="ruby-identifier">attendees</span><span class="ruby-operator">|</span> <span class="ruby-identifier">attendees</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">att</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">att</span>.<span class="ruby-identifier">add_subscriber</span>(<span class="ruby-identifier">subscriber</span>[<span class="ruby-identifier">ch</span>])
+    <span class="ruby-identifier">att</span>.<span class="ruby-identifier">subscribers</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">subscriber</span>[<span class="ruby-identifier">ch</span>])
   } }
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -718,84 +1198,6 @@
       </div>
 
     
-      <div id="method-i-list" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">list</span><span
-            class="method-args">(type, options = {})</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="list-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 75</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">list</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">options</span> = {})
-  <span class="ruby-identifier">options</span> = <span class="ruby-identifier">options_for</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">options</span>)
-
-  <span class="ruby-identifier">glob</span>, <span class="ruby-identifier">list</span> = <span class="ruby-identifier">file_with_ext</span>(<span class="ruby-string">&#39;*&#39;</span>, <span class="ruby-identifier">options</span>), []
-  <span class="ruby-identifier">glob</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;??&#39;</span>, <span class="ruby-identifier">glob</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-value">:dict</span>
-
-  <span class="ruby-identifier">walk</span>(<span class="ruby-identifier">path</span> = <span class="ruby-identifier">path_for</span>(<span class="ruby-identifier">options</span>), <span class="ruby-identifier">options</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">dir</span><span class="ruby-operator">|</span>
-    <span class="ruby-constant">Dir</span>[<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-identifier">glob</span>)].<span class="ruby-identifier">sort!</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">pn</span> = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>)
-      <span class="ruby-identifier">list</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">realpath_for</span>(<span class="ruby-identifier">pn</span>, <span class="ruby-identifier">path</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">pn</span>.<span class="ruby-identifier">file?</span>
-    }
-  }
-
-  <span class="ruby-identifier">list</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-prepend_path" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">prepend_path</span><span
-            class="method-args">(*path)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="prepend_path-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 119</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">prepend_path</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">path</span>)
-  <span class="ruby-identifier">include_path</span>(<span class="ruby-identifier">path</span>, <span class="ruby-keyword">true</span>)
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
       <div id="method-i-reset" class="method-detail ">
         
         <div class="method-heading">
@@ -815,11 +1217,11 @@
 
           
           <div class="method-source-code" id="reset-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 300</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 304</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reset</span>(<span class="ruby-identifier">close</span> = <span class="ruby-keyword">true</span>)
   <span class="ruby-identifier">dictionaries</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">close</span> } <span class="ruby-keyword">if</span> <span class="ruby-identifier">close</span>
   <span class="ruby-ivar">@dictionaries</span>, <span class="ruby-ivar">@attendees</span> = [], []
-  <span class="ruby-ivar">@lexical_hash</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span>, <span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-constant">Language</span><span class="ruby-operator">::</span><span class="ruby-constant">LexicalHash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">k</span>, <span class="ruby-keyword">self</span>) }
+  <span class="ruby-ivar">@lexical_hash</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">nest</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-constant">Language</span><span class="ruby-operator">::</span><span class="ruby-constant">LexicalHash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">k</span>, <span class="ruby-keyword">self</span>) }
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -850,9 +1252,9 @@
 
           
           <div class="method-source-code" id="start-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 296</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 300</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">start</span>
-  <span class="ruby-ivar">@attendees</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">listen</span>(<span class="ruby-constant">AgendaItem</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Attendee</span><span class="ruby-operator">::</span><span class="ruby-constant">STR_CMD_TALK</span>))
+  <span class="ruby-ivar">@attendees</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">control</span>(<span class="ruby-value">:TALK</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -868,7 +1270,7 @@
         
         <div class="method-heading">
           <span class="method-name">talk</span><span
-            class="method-args">(*args)</span>
+            class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -883,9 +1285,16 @@
 
           
           <div class="method-source-code" id="talk-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 67</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">talk</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
-  <span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>).<span class="ruby-identifier">talk</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 255</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">talk</span>
+  <span class="ruby-constant">Debug</span>.<span class="ruby-identifier">profile</span>(<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;profile&#39;</span>]) {
+    <span class="ruby-identifier">invite</span>
+    <span class="ruby-identifier">start</span>
+  }
+
+  <span class="ruby-constant">Debug</span>.<span class="ruby-identifier">ps</span>(<span class="ruby-value">:lingo_talk</span>)
+<span class="ruby-keyword">ensure</span>
+  <span class="ruby-identifier">reset</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -916,370 +1325,9 @@
 
           
           <div class="method-source-code" id="warn-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 306</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 310</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">warn</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">msg</span>)
   <span class="ruby-identifier">config</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">msg</span>)
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-    </section>
-  
-     <section id="private-instance-5Buntitled-5D-method-details" class="method-section">
-       <header>
-         <h3>Private Instance Methods</h3>
-       </header>
-
-    
-      <div id="method-i-file_with_ext" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">file_with_ext</span><span
-            class="method-args">(file, options)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="file_with_ext-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 196</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">file_with_ext</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">options</span>)
-  <span class="ruby-identifier">ext</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:ext</span>]
-  <span class="ruby-identifier">ext</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">extname</span>(<span class="ruby-identifier">file</span>).<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-node">&quot;#{file}.#{ext}&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">file</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-find_file" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">find_file</span><span
-            class="method-args">(file, path, options)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="find_file-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 135</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">find_file</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">glob</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:glob</span>]
-    <span class="ruby-identifier">file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">chomp_ext</span>(<span class="ruby-identifier">file</span>)
-    <span class="ruby-identifier">options</span>[<span class="ruby-value">:ext</span>] <span class="ruby-operator">||=</span> <span class="ruby-string">&#39;*&#39;</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-identifier">file</span> = <span class="ruby-identifier">file_with_ext</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">options</span>)
-  <span class="ruby-identifier">pn</span>   = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>).<span class="ruby-identifier">cleanpath</span>
-
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">pn</span>.<span class="ruby-identifier">relative?</span>
-    <span class="ruby-identifier">walk</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">dir</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">pn2</span> = <span class="ruby-identifier">pn</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">dir</span>)
-      <span class="ruby-identifier">ex</span>  = <span class="ruby-identifier">pn2</span>.<span class="ruby-identifier">exist?</span>
-
-      <span class="ruby-identifier">pn2</span> = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">glob</span>(<span class="ruby-identifier">pn2</span>).<span class="ruby-identifier">first</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">glob</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">ex</span>
-      <span class="ruby-identifier">pn</span>  = <span class="ruby-identifier">pn2</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">glob</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">pn2</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">ex</span>
-    }
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-identifier">realpath_for</span>(<span class="ruby-identifier">pn</span>, <span class="ruby-identifier">path</span>)
-<span class="ruby-keyword">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ENOENT</span>
-  <span class="ruby-identifier">raise</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">relax</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:relax</span>]
-  <span class="ruby-identifier">relax</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:[]</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">relax</span>[<span class="ruby-identifier">file</span>] <span class="ruby-operator">:</span> <span class="ruby-identifier">file</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-find_store" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">find_store</span><span
-            class="method-args">(file, path, options)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="find_store-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 160</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">find_store</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span>)
-  <span class="ruby-identifier">base</span> = <span class="ruby-identifier">basename</span>(<span class="ruby-value">:dict</span>, <span class="ruby-identifier">find</span>(<span class="ruby-value">:dict</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>) {
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">SourceFileNotFoundError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">find_file</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>,
-      <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">glob</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">relax</span><span class="ruby-operator">:</span> <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">_file</span><span class="ruby-operator">|</span>
-        <span class="ruby-identifier">raise</span> <span class="ruby-constant">SourceFileNotFoundError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">_file</span>)
-      })
-    ))
-  })
-
-  <span class="ruby-identifier">walk</span>(<span class="ruby-identifier">path</span>.<span class="ruby-identifier">reverse</span>, <span class="ruby-identifier">options</span>, <span class="ruby-keyword">false</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">dir</span><span class="ruby-operator">|</span>
-    <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">dir</span>).<span class="ruby-identifier">ascend</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
-      <span class="ruby-keyword">begin</span>
-        <span class="ruby-identifier">stat</span> = <span class="ruby-identifier">i</span>.<span class="ruby-identifier">stat</span>
-
-        <span class="ruby-keyword">break</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">stat</span>.<span class="ruby-identifier">file?</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">stat</span>.<span class="ruby-identifier">writable?</span>
-        <span class="ruby-keyword">return</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">chomp_ext</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-identifier">base</span>))
-      <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ENOENT</span>
-      <span class="ruby-keyword">end</span>
-    }
-  }
-
-  <span class="ruby-identifier">raise</span> <span class="ruby-constant">NoWritableStoreError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>)
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-include_path" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">include_path</span><span
-            class="method-args">(path, pre = false)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="include_path-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 131</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">include_path</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">pre</span> = <span class="ruby-keyword">false</span>)
-  <span class="ruby-constant">PATH</span>.<span class="ruby-identifier">insert</span>(<span class="ruby-identifier">pre</span> <span class="ruby-operator">?</span> <span class="ruby-value">0</span> <span class="ruby-operator">:</span> <span class="ruby-value">-1</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">path</span>.<span class="ruby-identifier">map!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">to_s</span> })
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-options_for" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">options_for</span><span
-            class="method-args">(type, options = {})</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="options_for-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 184</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">options_for</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">options</span> = {})
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">find_options</span> = <span class="ruby-constant">FIND_OPTIONS</span>[<span class="ruby-identifier">type</span>]
-    <span class="ruby-identifier">options</span> = <span class="ruby-identifier">find_options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>)
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;Invalid type `#{type.inspect}&#39;&quot;</span>, <span class="ruby-identifier">caller</span>(<span class="ruby-value">1</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-path_for" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">path_for</span><span
-            class="method-args">(options)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="path_for-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 192</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">path_for</span>(<span class="ruby-identifier">options</span>)
-  <span class="ruby-identifier">options</span>[<span class="ruby-value">:path</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">PATH</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-realpath_for" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">realpath_for</span><span
-            class="method-args">(pn, path)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="realpath_for-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 214</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">realpath_for</span>(<span class="ruby-identifier">pn</span>, <span class="ruby-identifier">path</span>)
-  <span class="ruby-identifier">pn</span>.<span class="ruby-identifier">realpath</span>(<span class="ruby-identifier">path</span>.<span class="ruby-identifier">first</span>).<span class="ruby-identifier">to_s</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-require_optional" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">require_optional</span><span
-            class="method-args">(lib)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="require_optional-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 218</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">require_optional</span>(<span class="ruby-identifier">lib</span>)
-  <span class="ruby-identifier">require</span> <span class="ruby-identifier">lib</span> <span class="ruby-keyword">unless</span> <span class="ruby-constant">ENV</span>[<span class="ruby-node">&quot;LINGO_NO_#{lib.upcase}&quot;</span>]
-<span class="ruby-keyword">rescue</span> <span class="ruby-constant">LoadError</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-walk" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">walk</span><span
-            class="method-args">(path, options, legacy = true) { |join| ... }</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="walk-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 201</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">walk</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span>, <span class="ruby-identifier">legacy</span> = <span class="ruby-keyword">true</span>)
-  <span class="ruby-identifier">dirs</span> = [<span class="ruby-identifier">options</span>[<span class="ruby-value">:dir</span>].<span class="ruby-identifier">to_s</span>]
-  <span class="ruby-identifier">dirs</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">legacy</span>
-  <span class="ruby-identifier">dirs</span>.<span class="ruby-identifier">uniq!</span>
-
-  <span class="ruby-identifier">seen</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span>, <span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-keyword">true</span>; <span class="ruby-keyword">false</span> }
-
-  <span class="ruby-identifier">path</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">d</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">seen</span>[<span class="ruby-identifier">d</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">d</span>)]
-    <span class="ruby-identifier">dirs</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">d</span>, <span class="ruby-identifier">i</span>) } <span class="ruby-keyword">or</span> <span class="ruby-keyword">break</span>
-  }
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -1299,7 +1347,7 @@
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.2.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

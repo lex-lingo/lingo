@@ -4,21 +4,18 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::Attendee::NonewordFilter - lingo Application documentation (v1.8.5)</title>
-
-<link href="../../fonts.css" rel="stylesheet">
-<link href="../../rdoc.css" rel="stylesheet">
+<title>class Lingo::Attendee::NonewordFilter - lingo Application documentation (v1.8.6)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
 </script>
 
 <script src="../../js/jquery.js"></script>
-<script src="../../js/navigation.js"></script>
-<script src="../../js/search_index.js"></script>
-<script src="../../js/search.js"></script>
-<script src="../../js/searcher.js"></script>
 <script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 <body id="top" role="document" class="class">
@@ -54,16 +51,6 @@
   </div>
 
   
-<div class="nav-section">
-  <h3>Table of Contents</h3>
-
-  <ul class="link-list" role="directory">
-    <li><a href="#class-Lingo::Attendee::NonewordFilter-label-M%C3%B6gliche+Verlinkung">Mögliche Verlinkung</a>
-    <li><a href="#class-Lingo::Attendee::NonewordFilter-label-Parameter">Parameter</a>
-    <li><a href="#class-Lingo::Attendee::NonewordFilter-label-Beispiele">Beispiele</a>
-  </ul>
-</div>
-
 
   <div id="class-metadata">
     
@@ -104,71 +91,6 @@
 
   <section class="description">
     
-<p>Der <a href="NonewordFilter.html">NonewordFilter</a> ermöglicht es, alle
-nicht erkannten Wörter aus dem Datenstrom zu selektieren und
-weiterzuleiten. Im Prinzip werden alle erkannten Wörter gefiltert. Bei
-einem Indexierungslauf können so alle nicht durch den Wordsearcher
-erkannten Wörter, also die, die im Wörterbuch nicht enthalten sind, separat
-ausgegeben werden und als Grundlage für die Wörterbuchpflege dienen. Der <a
-href="NonewordFilter.html">NonewordFilter</a> ist in einer frühen
-Entwicklungsphase entstanden. Die gleiche Funktion kann auch mit dem
-universelleren Objectfilter mit dem Ausdruck &#39;obj.kind_of?(Word)
-&amp;&amp; obj.attr==WA_UNKNOWN&#39; durchgeführt werden, mit dem einzigen
-Unterschied, dass der <a href="NonewordFilter.html">NonewordFilter</a> nur
-die Wortform weiterleitet. Der <a
-href="NonewordFilter.html">NonewordFilter</a> verschluckt ebenfalls alle
-Kommandos, ausser dem Dateianfang (*FILE) und Ende (*EOF), sowie dem
-LIR-Format-Spezifikum (*RECORD).</p>
-
-<p><strong>Hinweis</strong> Dieser <a href="../Attendee.html">Attendee</a>
-sammelt die auszugebenden Daten so lange, bis ein Dateiwechsel oder
-Record-Wechsel angekündigt wird. Erst dann werden alle Daten auf einmal
-weitergeleitet.</p>
-
-<h3 id="class-Lingo::Attendee::NonewordFilter-label-M%C3%B6gliche+Verlinkung">Mögliche Verlinkung<span><a href="#class-Lingo::Attendee::NonewordFilter-label-M%C3%B6gliche+Verlinkung">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt>Erwartet
-<dd>
-<p>Daten vom Typ <strong>Word</strong>, z.B. von <a
-href="Abbreviator.html">Abbreviator</a>, Wordsearcher, <a
-href="Decomposer.html">Decomposer</a>, <a
-href="Synonymer.html">Synonymer</a>, Multiworder, <a
-href="Sequencer.html">Sequencer</a></p>
-</dd><dt>Erzeugt
-<dd>
-<p>Daten vom Typ <strong>String</strong>, z.B. für Textwriter</p>
-</dd></dl>
-
-<h3 id="class-Lingo::Attendee::NonewordFilter-label-Parameter">Parameter<span><a href="#class-Lingo::Attendee::NonewordFilter-label-Parameter">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
-
-<p>Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der
-Voreinstellung). Alle anderen Parameter müssen zwingend angegeben werden.</p>
-<dl class="rdoc-list note-list"><dt><strong>in</strong>
-<dd>
-<p>siehe allgemeine Beschreibung des <a href="../Attendee.html">Attendee</a></p>
-</dd><dt><strong>out</strong>
-<dd>
-<p>siehe allgemeine Beschreibung des <a href="../Attendee.html">Attendee</a></p>
-</dd></dl>
-
-<h3 id="class-Lingo::Attendee::NonewordFilter-label-Beispiele">Beispiele<span><a href="#class-Lingo::Attendee::NonewordFilter-label-Beispiele">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
-
-<p>Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration
-<code>t1.cfg</code></p>
-
-<pre>meeting:
-  attendees:
-    - text_reader:      { out: lines, files: &#39;$(files)&#39; }
-    - tokenizer:        { in: lines, out: token }
-    - word_searcher:    { in: token, out: words, source: &#39;sys-dic&#39; }
-    - noneword_filter:  { in: words, out: filtr }
-    - debugger:         { in: filtr, prompt: &#39;out&gt;&#39; }</pre>
-
-<p>ergibt die Ausgabe über den Debugger: <code>lingo -c t1 test.txt</code></p>
-
-<pre>out&gt; *FILE(&#39;test.txt&#39;)
-out&gt; &quot;lingo&quot;
-out&gt; *EOF(&#39;test.txt&#39;)</pre>
-
   </section>
 
   
@@ -184,9 +106,9 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
     
 
     
-     <section id="protected-instance-5Buntitled-5D-method-details" class="method-section">
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
-         <h3>Protected Instance Methods</h3>
+         <h3>Public Instance Methods</h3>
        </header>
 
     
@@ -194,7 +116,7 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
         
         <div class="method-heading">
           <span class="method-name">control</span><span
-            class="method-args">(cmd, param)</span>
+            class="method-args">(cmd, *)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -210,16 +132,12 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
           
           <div class="method-source-code" id="control-source">
             <pre><span class="ruby-comment"># File lib/lingo/attendee/noneword_filter.rb, line 80</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">param</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-operator">*</span>)
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">cmd</span>
-    <span class="ruby-keyword">when</span> <span class="ruby-constant">STR_CMD_FILE</span>
-      <span class="ruby-ivar">@nonewords</span>.<span class="ruby-identifier">clear</span>
-    <span class="ruby-keyword">when</span> <span class="ruby-constant">STR_CMD_EOL</span>
-      <span class="ruby-identifier">skip_command</span>
-    <span class="ruby-keyword">when</span> <span class="ruby-constant">STR_CMD_RECORD</span>
-      <span class="ruby-identifier">send_nonewords</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@dict</span>
-    <span class="ruby-keyword">when</span> <span class="ruby-constant">STR_CMD_EOF</span>
-      <span class="ruby-identifier">send_nonewords</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:FILE</span>   <span class="ruby-keyword">then</span> <span class="ruby-ivar">@nonewords</span>.<span class="ruby-identifier">clear</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:EOL</span>    <span class="ruby-keyword">then</span> <span class="ruby-value">:skip_command</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:RECORD</span> <span class="ruby-keyword">then</span> <span class="ruby-identifier">send_nonewords</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@dict</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:EOF</span>    <span class="ruby-keyword">then</span> <span class="ruby-identifier">send_nonewords</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -288,7 +206,7 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
 
           
           <div class="method-source-code" id="process-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/noneword_filter.rb, line 93</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/noneword_filter.rb, line 89</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">process</span>(<span class="ruby-identifier">obj</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Word</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">unknown?</span>
     <span class="ruby-identifier">non</span> = <span class="ruby-constant">Unicode</span>.<span class="ruby-identifier">downcase</span>(<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">form</span>)
@@ -333,7 +251,7 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
 
           
           <div class="method-source-code" id="send_nonewords-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/noneword_filter.rb, line 103</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/noneword_filter.rb, line 99</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">send_nonewords</span>
   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@nonewords</span>.<span class="ruby-identifier">empty?</span>
     <span class="ruby-ivar">@nonewords</span>.<span class="ruby-identifier">uniq!</span>
@@ -358,7 +276,7 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.2.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

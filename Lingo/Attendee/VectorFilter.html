@@ -4,21 +4,18 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::Attendee::VectorFilter - lingo Application documentation (v1.8.5)</title>
-
-<link href="../../fonts.css" rel="stylesheet">
-<link href="../../rdoc.css" rel="stylesheet">
+<title>class Lingo::Attendee::VectorFilter - lingo Application documentation (v1.8.6)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
 </script>
 
 <script src="../../js/jquery.js"></script>
-<script src="../../js/navigation.js"></script>
-<script src="../../js/search_index.js"></script>
-<script src="../../js/search.js"></script>
-<script src="../../js/searcher.js"></script>
 <script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 <body id="top" role="document" class="class">
@@ -54,16 +51,6 @@
   </div>
 
   
-<div class="nav-section">
-  <h3>Table of Contents</h3>
-
-  <ul class="link-list" role="directory">
-    <li><a href="#class-Lingo::Attendee::VectorFilter-label-M%C3%B6gliche+Verlinkung">Mögliche Verlinkung</a>
-    <li><a href="#class-Lingo::Attendee::VectorFilter-label-Parameter">Parameter</a>
-    <li><a href="#class-Lingo::Attendee::VectorFilter-label-Beispiele">Beispiele</a>
-  </ul>
-</div>
-
 
   <div id="class-metadata">
     
@@ -85,11 +72,29 @@
     
     <li ><a href="#method-i-control">#control</a>
     
+    <li ><a href="#method-i-control_deferred">#control_deferred</a>
+    
+    <li ><a href="#method-i-flush_deferred">#flush_deferred</a>
+    
+    <li ><a href="#method-i-flush_vectors">#flush_vectors</a>
+    
+    <li ><a href="#method-i-forward_dict">#forward_dict</a>
+    
+    <li ><a href="#method-i-forward_vector">#forward_vector</a>
+    
     <li ><a href="#method-i-init">#init</a>
+    
+    <li ><a href="#method-i-map_vectors">#map_vectors</a>
     
     <li ><a href="#method-i-process">#process</a>
     
     <li ><a href="#method-i-send_vectors">#send_vectors</a>
+    
+    <li ><a href="#method-i-vec_pos">#vec_pos</a>
+    
+    <li ><a href="#method-i-vectors">#vectors</a>
+    
+    <li ><a href="#method-i-word_count">#word_count</a>
     
   </ul>
 </div>
@@ -104,98 +109,6 @@
 
   <section class="description">
     
-<p>Die Hauptaufgabe des <a href="VectorFilter.html">VectorFilter</a> ist die
-Erstellung eines Dokumenten-Index-Vektor. Dabei werden die durch die
-anderen Attendees ermittelten Grundformen eines Wortes gespeichert und bei
-einem Datei- oder Record-Wechsel weitergeleitet. Der <a
-href="VectorFilter.html">VectorFilter</a> kann bestimmte Wortklassen
-filtern und die Ergebnisse in verschiedenen Arten aufbereiten. Dabei werden
-Funktionen wie das einfache Zählen der Häufigkeit innerhalb eines
-Dokuments, aber auch die Term-Frequenz und unterschiedliche Ausgabeformate
-unterstützt.</p>
-
-<h3 id="class-Lingo::Attendee::VectorFilter-label-M%C3%B6gliche+Verlinkung">Mögliche Verlinkung<span><a href="#class-Lingo::Attendee::VectorFilter-label-M%C3%B6gliche+Verlinkung">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
-<dl class="rdoc-list note-list"><dt>Erwartet
-<dd>
-<p>Daten vom Typ <strong>Word</strong>, z.B. von <a
-href="Abbreviator.html">Abbreviator</a>, Wordsearcher, <a
-href="Decomposer.html">Decomposer</a>, <a
-href="Synonymer.html">Synonymer</a>, Multiworder, <a
-href="Sequencer.html">Sequencer</a></p>
-</dd><dt>Erzeugt
-<dd>
-<p>Daten vom Typ <strong>String</strong>, z.B. für Textwriter</p>
-</dd></dl>
-
-<h3 id="class-Lingo::Attendee::VectorFilter-label-Parameter">Parameter<span><a href="#class-Lingo::Attendee::VectorFilter-label-Parameter">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
-
-<p>Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der
-Voreinstellung). Alle anderen Parameter müssen zwingend angegeben werden.</p>
-<dl class="rdoc-list note-list"><dt><strong>in</strong>
-<dd>
-<p>siehe allgemeine Beschreibung des <a href="../Attendee.html">Attendee</a></p>
-</dd><dt><strong>out</strong>
-<dd>
-<p>siehe allgemeine Beschreibung des <a href="../Attendee.html">Attendee</a></p>
-</dd><dt><strong><em>lexicals</em></strong>
-<dd>
-<p>(Standard: &#39;[sy]&#39; =&gt; die Wortklassen Substantiv und Synonyme
-werden gefiltert) Es können in eckige Klammern beliebige Wortklassen
-angegeben werden (siehe lib/strings.rb). Der Parameter wird als regulärer
-Ausdruck ausgewertet.</p>
-</dd><dt><strong><em>sort</em></strong>
-<dd>
-<p>(Standard: &#39;normal&#39;) Der Parameter <code>sort</code> beeinflußt
-Verarbeitung und Ausgabeformat des VectorFilters.</p>
-<dl class="rdoc-list note-list"><dt>normal
-<dd>
-<p>Jedes gefilterte Wort wird einmalig (keine Doppelnennungen!) in
-alphabetischer Reihenfolge in der Form “wort” ausgegeben.</p>
-</dd><dt>term_abs
-<dd>
-<p>Jedes gefilterte Wort wird einmalig in absteigender Häufigkeit mit Angabe
-der absoluten Häufigkeit im Dokument in der Form “12 wort” ausgegeben.</p>
-</dd><dt>term_rel
-<dd>
-<p>Jedes gefilterte Wort wird einmalig in absteigender Häufigkeit mit Angabe
-der relativen Häufigkeit im Dokument in der Form “0.1234 wort” ausgegeben.</p>
-</dd><dt>sto_abs
-<dd>
-<p>Jedes gefilterte Wort wird einmalig in absteigender Häufigkeit mit Angabe
-der absoluten Häufigkeit im Dokument in der Form “wort {12}” ausgegeben.</p>
-</dd><dt>sto_rel
-<dd>
-<p>Jedes gefilterte Wort wird einmalig in absteigender Häufigkeit mit Angabe
-der relativen Häufigkeit im Dokument in der Form “wort {0.1234}”
-ausgegeben.</p>
-</dd></dl>
-</dd><dt><strong><em>skip</em></strong>
-<dd>
-<p>(Standard: TA_PUNCTUATION und TA_OTHER) Hiermit wird angegeben, welche
-Objekte nicht verarbeitet werden sollen. Die <code>skip</code>-Angabe
-bezieht sich auf das Attribut <code>attr</code> von Token oder
-Word-Objekten.</p>
-</dd></dl>
-
-<h3 id="class-Lingo::Attendee::VectorFilter-label-Beispiele">Beispiele<span><a href="#class-Lingo::Attendee::VectorFilter-label-Beispiele">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
-
-<p>Bei der Verarbeitung einer normalen Textdatei mit der Ablaufkonfiguration
-<code>t1.cfg</code></p>
-
-<pre>meeting:
-  attendees:
-    - text_reader:   { out: lines, files: &#39;$(files)&#39; }
-    - tokenizer:     { in: lines, out: token }
-    - word_searcher: { in: token, out: words, source: &#39;sys-dic&#39; }
-    - vector_filter: { in: words, out: filtr, sort: &#39;term_rel&#39; }
-    - debugger:      { in: filtr, prompt: &#39;out&gt;&#39; }</pre>
-
-<p>ergibt die Ausgabe über den Debugger: <code>lingo -c t1 test.txt</code></p>
-
-<pre>out&gt; *FILE(&#39;test.txt&#39;)
-out&gt; &quot;0.28571 indexierung&quot;
-out&gt; *EOF(&#39;test.txt&#39;)</pre>
-
   </section>
 
   
@@ -213,7 +126,27 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
       </header>
       <dl>
       
-        <dt id="DEFAULT_SRC_SEP">DEFAULT_SRC_SEP
+        <dt id="DEFAULT_DICT_SEPARATOR">DEFAULT_DICT_SEPARATOR
+        
+        <dd>
+        
+      
+        <dt id="DEFAULT_GENDER_SEPARATOR">DEFAULT_GENDER_SEPARATOR
+        
+        <dd>
+        
+      
+        <dt id="DEFAULT_POS_SEPARATOR">DEFAULT_POS_SEPARATOR
+        
+        <dd>
+        
+      
+        <dt id="DEFAULT_SRC_SEPARATOR">DEFAULT_SRC_SEPARATOR
+        
+        <dd>
+        
+      
+        <dt id="TERMINALS">TERMINALS
         
         <dd>
         
@@ -225,9 +158,9 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
     
 
     
-     <section id="protected-instance-5Buntitled-5D-method-details" class="method-section">
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
-         <h3>Protected Instance Methods</h3>
+         <h3>Public Instance Methods</h3>
        </header>
 
     
@@ -235,7 +168,7 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
         
         <div class="method-heading">
           <span class="method-name">control</span><span
-            class="method-args">(cmd, param)</span>
+            class="method-args">(cmd, *)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -250,14 +183,45 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
 
           
           <div class="method-source-code" id="control-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 108</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">param</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 133</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-operator">*</span>)
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">cmd</span>
-    <span class="ruby-keyword">when</span> <span class="ruby-constant">STR_CMD_EOL</span>
-      <span class="ruby-identifier">skip_command</span>
-    <span class="ruby-keyword">when</span> <span class="ruby-constant">STR_CMD_FILE</span>, <span class="ruby-constant">STR_CMD_RECORD</span>, <span class="ruby-constant">STR_CMD_EOF</span>
-      <span class="ruby-identifier">send_vectors</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@vectors</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:EOL</span>       <span class="ruby-keyword">then</span> <span class="ruby-value">:skip_command</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-operator">*</span><span class="ruby-constant">TERMINALS</span> <span class="ruby-keyword">then</span> <span class="ruby-identifier">send_vectors</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@docnum</span>
   <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-control_deferred" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">control_deferred</span><span
+            class="method-args">(cmd, *)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="control_deferred-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 140</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">control_deferred</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-operator">*</span>)
+  <span class="ruby-ivar">@docnum</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">if</span> <span class="ruby-constant">TERMINALS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">cmd</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -288,28 +252,44 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
 
           
           <div class="method-source-code" id="init-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 85</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 94</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">init</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@debug</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;debug&#39;</span>, <span class="ruby-keyword">false</span>)
-    <span class="ruby-ivar">@prompt</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;prompt&#39;</span>, <span class="ruby-string">&#39;lex:) &#39;</span>)
-    <span class="ruby-ivar">@preamble</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;preamble&#39;</span>, <span class="ruby-keyword">true</span>)
+  <span class="ruby-ivar">@lex</span>  = <span class="ruby-identifier">get_re</span>(<span class="ruby-string">&#39;lexicals&#39;</span>, <span class="ruby-string">&#39;[sy]&#39;</span>)
+  <span class="ruby-ivar">@skip</span> = <span class="ruby-identifier">get_array</span>(<span class="ruby-string">&#39;skip&#39;</span>, <span class="ruby-constant">DEFAULT_SKIP</span>, <span class="ruby-value">:upcase</span>)
+
+  <span class="ruby-ivar">@src</span> = <span class="ruby-ivar">@pos</span> = <span class="ruby-ivar">@sort_fmt</span> = <span class="ruby-ivar">@sort_rel</span> = <span class="ruby-ivar">@docnum</span> = <span class="ruby-keyword">nil</span>
+
+  <span class="ruby-ivar">@tokens</span>, <span class="ruby-ivar">@vectors</span>, <span class="ruby-ivar">@word_count</span> = [], <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">nest</span>(<span class="ruby-value">1</span>) { [] }, <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@dict</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;dict&#39;</span>, <span class="ruby-keyword">false</span>)
+    <span class="ruby-ivar">@norm</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;norm&#39;</span>, <span class="ruby-keyword">false</span>)
+    <span class="ruby-ivar">@dict</span> = <span class="ruby-constant">DEFAULT_DICT_SEPARATOR</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@dict</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span>
   <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@lex</span>  = <span class="ruby-identifier">get_re</span>(<span class="ruby-string">&#39;lexicals&#39;</span>, <span class="ruby-string">&#39;[sy]&#39;</span>)
-    <span class="ruby-ivar">@skip</span> = <span class="ruby-identifier">get_array</span>(<span class="ruby-string">&#39;skip&#39;</span>, <span class="ruby-constant">DEFAULT_SKIP</span>, <span class="ruby-value">:upcase</span>)
-
-    <span class="ruby-ivar">@dict</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;dict&#39;</span>, <span class="ruby-keyword">false</span>)
-    <span class="ruby-ivar">@norm</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;norm&#39;</span>, <span class="ruby-keyword">false</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@dict</span>
-    <span class="ruby-ivar">@dict</span> = <span class="ruby-constant">Database</span><span class="ruby-operator">::</span><span class="ruby-constant">Source</span><span class="ruby-operator">::</span><span class="ruby-constant">WordClass</span><span class="ruby-operator">::</span><span class="ruby-constant">DEFAULT_SEPARATOR</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@dict</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span>
-
     <span class="ruby-ivar">@src</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;src&#39;</span>, <span class="ruby-keyword">false</span>)
-    <span class="ruby-ivar">@src</span> = <span class="ruby-constant">DEFAULT_SRC_SEP</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@src</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span>
+    <span class="ruby-ivar">@src</span> = <span class="ruby-constant">DEFAULT_SRC_SEPARATOR</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@src</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span>
 
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">sort</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;sort&#39;</span>, <span class="ruby-constant">ENV</span>[<span class="ruby-string">&#39;LINGO_NO_SORT&#39;</span>] <span class="ruby-operator">?</span> <span class="ruby-keyword">false</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;normal&#39;</span>)
-      <span class="ruby-ivar">@sort_format</span>, <span class="ruby-ivar">@sort_method</span> = <span class="ruby-identifier">sort</span>.<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;_&#39;</span>, <span class="ruby-value">2</span>)
-    <span class="ruby-keyword">end</span>
+    <span class="ruby-ivar">@pos</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;pos&#39;</span>, <span class="ruby-keyword">false</span>)
+    <span class="ruby-ivar">@pos</span> = <span class="ruby-constant">DEFAULT_POS_SEPARATOR</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@pos</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span>
+
+    <span class="ruby-ivar">@tokens</span> = <span class="ruby-identifier">get_array</span>(<span class="ruby-string">&#39;tokens&#39;</span>, <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-value">:upcase</span>)
+    <span class="ruby-ivar">@tokens</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-constant">Tokenizer</span>.<span class="ruby-identifier">rules</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@tokens</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-string">&#39;ALL&#39;</span>)
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-ivar">@vectors</span>, <span class="ruby-ivar">@word_count</span> = [], <span class="ruby-value">0</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">sort</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;sort&#39;</span>, <span class="ruby-constant">ENV</span>[<span class="ruby-string">&#39;LINGO_NO_SORT&#39;</span>] <span class="ruby-operator">?</span> <span class="ruby-keyword">false</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;normal&#39;</span>)
+    <span class="ruby-ivar">@sort_fmt</span>, <span class="ruby-identifier">sort_method</span> = <span class="ruby-identifier">sort</span>.<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;_&#39;</span>, <span class="ruby-value">2</span>)
+
+    <span class="ruby-ivar">@sort_rel</span> = <span class="ruby-identifier">rel</span> = <span class="ruby-identifier">sort_method</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;rel&#39;</span>
+
+    <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@sort_fmt</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;normal&#39;</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@tfidf</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;tfidf&#39;</span>, <span class="ruby-keyword">false</span>)
+        <span class="ruby-constant">DeferredAttendee</span>.<span class="ruby-identifier">enhance</span>(<span class="ruby-keyword">self</span>)
+        <span class="ruby-ivar">@docnum</span>, <span class="ruby-identifier">rel</span> = <span class="ruby-value">0</span>, <span class="ruby-keyword">true</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">_sort_fmt</span> = <span class="ruby-ivar">@sort_fmt</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;sto&#39;</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;%2$s {%1$X}&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;%X %s&#39;</span>
+      <span class="ruby-ivar">@sort_fmt</span> = <span class="ruby-identifier">_sort_fmt</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-string">&#39;X&#39;</span>, <span class="ruby-identifier">rel</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;.5f&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;d&#39;</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -340,35 +320,23 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
 
           
           <div class="method-source-code" id="process-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 117</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 144</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">process</span>(<span class="ruby-identifier">obj</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@debug</span>
-    <span class="ruby-identifier">forward</span>((<span class="ruby-ivar">@preamble</span> = <span class="ruby-keyword">nil</span>; <span class="ruby-ivar">@lingo</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">to_h</span>.<span class="ruby-identifier">to_yaml</span>)) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@preamble</span>
-    <span class="ruby-identifier">forward</span>(<span class="ruby-node">&quot;#{@prompt} #{obj.inspect}&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">eval</span>(<span class="ruby-ivar">@debug</span>)
-  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Word</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@skip</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">attr</span>)
-    <span class="ruby-ivar">@word_count</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Token</span>)
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@tokens</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">attr</span>)
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Word</span>)
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@skip</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">attr</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span>
+  <span class="ruby-keyword">end</span>
 
-    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@dict</span>
-      <span class="ruby-identifier">vec</span>, <span class="ruby-identifier">sep</span> = [], <span class="ruby-constant">Database</span><span class="ruby-operator">::</span><span class="ruby-constant">Source</span><span class="ruby-operator">::</span><span class="ruby-constant">WordClass</span><span class="ruby-operator">::</span><span class="ruby-constant">GENDER_SEPARATOR</span>
+  <span class="ruby-ivar">@word_count</span>[<span class="ruby-ivar">@docnum</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
 
-      <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">get_class</span>(<span class="ruby-ivar">@lex</span>).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">lex</span><span class="ruby-operator">|</span>
-        <span class="ruby-identifier">str</span> = <span class="ruby-node">&quot;#{lex.form} ##{lex.attr}&quot;</span>
-        <span class="ruby-identifier">str</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">sep</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">gender</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">gender</span>
-        <span class="ruby-identifier">vec</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">str</span>
-      }
+  <span class="ruby-ivar">@dict</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">forward_dict</span>(<span class="ruby-identifier">obj</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">pos</span> = <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">position_and_offset</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@pos</span>
 
-      <span class="ruby-keyword">unless</span> <span class="ruby-identifier">vec</span>.<span class="ruby-identifier">empty?</span>
-        <span class="ruby-identifier">wrd</span> = <span class="ruby-ivar">@norm</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">lexicals</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">form</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">form</span>
-        <span class="ruby-identifier">vec</span> = <span class="ruby-constant">Unicode</span>.<span class="ruby-identifier">downcase</span>(<span class="ruby-node">&quot;#{wrd}#{@dict}#{vec.join(&#39; &#39;)}&quot;</span>)
-        <span class="ruby-ivar">@sort_format</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@vectors</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">vec</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">vec</span>)
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">get_class</span>(<span class="ruby-ivar">@lex</span>).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">lex</span><span class="ruby-operator">|</span>
-        <span class="ruby-identifier">vec</span> = <span class="ruby-constant">Unicode</span>.<span class="ruby-identifier">downcase</span>(<span class="ruby-identifier">lex</span>.<span class="ruby-identifier">form</span>)
-        <span class="ruby-identifier">vec</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@src</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">src</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@src</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">src</span>
-        <span class="ruby-ivar">@sort_format</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@vectors</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">vec</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">vec</span>)
-      }
-    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Token</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">forward_vector</span>(<span class="ruby-identifier">obj</span>, <span class="ruby-identifier">pos</span>) <span class="ruby-operator">:</span>
+      <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">get_class</span>(<span class="ruby-ivar">@lex</span>).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">lex</span><span class="ruby-operator">|</span> <span class="ruby-identifier">forward_vector</span>(<span class="ruby-identifier">lex</span>, <span class="ruby-identifier">pos</span>, <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">src</span>) }
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -389,11 +357,190 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
        </header>
 
     
+      <div id="method-i-flush_deferred" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">flush_deferred</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="VectorFilter.html#method-i-send_vectors">send_vectors</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-flush_vectors" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">flush_vectors</span><span
+            class="method-args">(*args, &block)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="flush_vectors-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 228</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">flush_vectors</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">map_vectors</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+    .<span class="ruby-identifier">sort_by</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">w</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> [<span class="ruby-operator">-</span><span class="ruby-identifier">w</span>, <span class="ruby-identifier">v</span>] }
+    .<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">vec</span><span class="ruby-operator">|</span> <span class="ruby-identifier">forward</span>(<span class="ruby-ivar">@sort_fmt</span> <span class="ruby-operator">%</span> <span class="ruby-identifier">vec</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-forward_dict" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">forward_dict</span><span
+            class="method-args">(obj, sep = DEFAULT_GENDER_SEPARATOR)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="forward_dict-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 173</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">forward_dict</span>(<span class="ruby-identifier">obj</span>, <span class="ruby-identifier">sep</span> = <span class="ruby-constant">DEFAULT_GENDER_SEPARATOR</span>)
+  <span class="ruby-identifier">vectors</span> = <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">get_class</span>(<span class="ruby-ivar">@lex</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">lex</span><span class="ruby-operator">|</span>
+    <span class="ruby-node">&quot;#{lex.form} ##{lex.attr}&quot;</span>.<span class="ruby-identifier">tap</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">str</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">str</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">sep</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">gender</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">gender</span>
+    }
+  }
+
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">vectors</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-identifier">vec</span> = <span class="ruby-ivar">@norm</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">lexicals</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">form</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">form</span>
+    <span class="ruby-identifier">forward_vector</span>(<span class="ruby-node">&quot;#{vec}#{@dict}#{vectors.join(&#39; &#39;)}&quot;</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-forward_vector" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">forward_vector</span><span
+            class="method-args">(vec, pos = nil, src = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="forward_vector-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 186</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">forward_vector</span>(<span class="ruby-identifier">vec</span>, <span class="ruby-identifier">pos</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">src</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">vec</span> = <span class="ruby-identifier">vec</span>.<span class="ruby-identifier">form</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">vec</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">WordForm</span>)
+
+  <span class="ruby-identifier">vec</span> = <span class="ruby-constant">Unicode</span>.<span class="ruby-identifier">downcase</span>(<span class="ruby-identifier">vec</span>)
+  <span class="ruby-identifier">vec</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@src</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">src</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@src</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">src</span>
+
+  <span class="ruby-ivar">@sort_fmt</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">vectors</span>[<span class="ruby-identifier">vec</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">pos</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">vec_pos</span>(<span class="ruby-identifier">vec</span>, [<span class="ruby-identifier">pos</span>]))
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-map_vectors" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">map_vectors</span><span
+            class="method-args">(wc = 1, docnum = nil) { |size| ... }</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="map_vectors-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 221</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">map_vectors</span>(<span class="ruby-identifier">wc</span> = <span class="ruby-value">1</span>, <span class="ruby-identifier">docnum</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">v</span> = <span class="ruby-identifier">vectors</span>(<span class="ruby-identifier">docnum</span>)
+  <span class="ruby-identifier">v</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">vec</span>, <span class="ruby-identifier">pos</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span> <span class="ruby-identifier">pos</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">wc</span>.<span class="ruby-identifier">to_f</span>, <span class="ruby-identifier">vec</span>, <span class="ruby-identifier">vec_pos</span>(<span class="ruby-identifier">vec</span>, <span class="ruby-identifier">pos</span>) }
+<span class="ruby-keyword">ensure</span>
+  <span class="ruby-identifier">v</span>.<span class="ruby-identifier">clear</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">v</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-send_vectors" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">send_vectors</span><span
-            class="method-args">()</span>
+            class="method-args">() { |lambda| ... }</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -408,30 +555,136 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
 
           
           <div class="method-source-code" id="send_vectors-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 150</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 195</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">send_vectors</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@sort_format</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;normal&#39;</span>
-    <span class="ruby-ivar">@vectors</span>.<span class="ruby-identifier">uniq!</span>
-    <span class="ruby-identifier">flush</span>(<span class="ruby-ivar">@vectors</span>.<span class="ruby-identifier">sort!</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@docnum</span>
+    <span class="ruby-identifier">df</span>, <span class="ruby-identifier">abs</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>), <span class="ruby-ivar">@sort_rel</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-value">1</span>
+
+    <span class="ruby-ivar">@vectors</span>.<span class="ruby-identifier">each_value</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span> <span class="ruby-identifier">w</span>.<span class="ruby-identifier">each_key</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">df</span>[<span class="ruby-identifier">v</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> } }
+
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@tfidf</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>)
+      <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">open</span>(<span class="ruby-ivar">@tfidf</span>, <span class="ruby-string">&#39;wb&#39;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">df</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">v</span> } }
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">yield</span> <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">docnum</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">wc</span> = <span class="ruby-identifier">abs</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">word_count</span>(<span class="ruby-identifier">docnum</span>)
+      <span class="ruby-identifier">flush_vectors</span>(<span class="ruby-identifier">wc</span>, <span class="ruby-identifier">docnum</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span>, <span class="ruby-identifier">v</span>, <span class="ruby-identifier">vp</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">c</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">df</span>[<span class="ruby-identifier">v</span>], <span class="ruby-identifier">vp</span>] }
+    }
+  <span class="ruby-keyword">elsif</span> <span class="ruby-ivar">@sort_fmt</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;normal&#39;</span>
+    <span class="ruby-identifier">flush</span>(<span class="ruby-identifier">map_vectors</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">_</span>, <span class="ruby-identifier">_</span>, <span class="ruby-identifier">vp</span><span class="ruby-operator">|</span> <span class="ruby-identifier">vp</span> }.<span class="ruby-identifier">sort!</span>)
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">cnt</span>, <span class="ruby-identifier">fmt</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>), <span class="ruby-string">&#39;%d&#39;</span>
-
-    <span class="ruby-ivar">@vectors</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">cnt</span>[<span class="ruby-identifier">v</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> }.<span class="ruby-identifier">clear</span>
-    <span class="ruby-identifier">vec</span> = <span class="ruby-identifier">cnt</span>.<span class="ruby-identifier">sort_by</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span>, <span class="ruby-identifier">c</span><span class="ruby-operator">|</span> [<span class="ruby-operator">-</span><span class="ruby-identifier">c</span>, <span class="ruby-identifier">v</span>] }
-
-    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@sort_method</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;rel&#39;</span>
-      <span class="ruby-identifier">fmt</span>, <span class="ruby-identifier">wc</span> = <span class="ruby-string">&#39;%6.5f&#39;</span>, <span class="ruby-ivar">@word_count</span>.<span class="ruby-identifier">to_f</span>
-      <span class="ruby-identifier">vec</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">/=</span> <span class="ruby-identifier">wc</span> }
-    <span class="ruby-keyword">end</span>
-
-    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@sort_format</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;sto&#39;</span>
-      <span class="ruby-identifier">fmt</span>, <span class="ruby-ivar">@word_count</span> = <span class="ruby-node">&quot;%s {#{fmt}}&quot;</span>, <span class="ruby-value">0</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">fmt</span>.<span class="ruby-identifier">insert</span>(<span class="ruby-value">1</span>, <span class="ruby-string">&#39;2$&#39;</span>) <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39; %1$s&#39;</span>
-    <span class="ruby-keyword">end</span>
-
-    <span class="ruby-identifier">vec</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">fmt</span> <span class="ruby-operator">%</span> <span class="ruby-identifier">v</span>) }
+    <span class="ruby-identifier">flush_vectors</span>(<span class="ruby-ivar">@sort_rel</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">word_count</span> <span class="ruby-operator">:</span> <span class="ruby-value">1</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span>, <span class="ruby-identifier">_</span>, <span class="ruby-identifier">vp</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">c</span>, <span class="ruby-identifier">vp</span>] }
   <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@word_count</span>.<span class="ruby-identifier">clear</span>
+  <span class="ruby-ivar">@vectors</span>.<span class="ruby-identifier">clear</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="VectorFilter.html#method-i-flush_deferred">flush_deferred</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-vec_pos" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">vec_pos</span><span
+            class="method-args">(vec, pos)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="vec_pos-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 234</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">vec_pos</span>(<span class="ruby-identifier">vec</span>, <span class="ruby-identifier">pos</span>)
+  <span class="ruby-identifier">pos</span>.<span class="ruby-identifier">clear</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@pos</span>
+
+  <span class="ruby-identifier">pos</span>.<span class="ruby-identifier">compact!</span>
+  <span class="ruby-identifier">pos</span>.<span class="ruby-identifier">uniq!</span>
+  <span class="ruby-identifier">pos</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">vec</span> <span class="ruby-operator">:</span> <span class="ruby-node">&quot;#{vec}#{@pos}#{pos.join(&#39;,&#39;)}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-vectors" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">vectors</span><span
+            class="method-args">(docnum = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="vectors-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 165</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">vectors</span>(<span class="ruby-identifier">docnum</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-ivar">@vectors</span>[<span class="ruby-identifier">docnum</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@docnum</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-word_count" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">word_count</span><span
+            class="method-args">(docnum = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="word_count-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 169</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">word_count</span>(<span class="ruby-identifier">docnum</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-ivar">@word_count</span>[<span class="ruby-identifier">docnum</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@docnum</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -451,7 +704,7 @@ out&gt; *EOF(&#39;test.txt&#39;)</pre>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.2.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 
