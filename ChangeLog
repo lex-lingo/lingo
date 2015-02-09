@@ -2,7 +2,7 @@
 
 = Revision history for Lingo
 
-== 1.8.6 [unreleased]
+== 1.8.6 [2015-02-09]
 
 * Lingo::Attendee::VectorFilter learned +pos+ option to print position and
   byte offset with each word.
