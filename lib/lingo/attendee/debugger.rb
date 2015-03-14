@@ -112,7 +112,7 @@ class Lingo
         end
       end
 
-      def process(obj)
+      def process(obj, *)
         debug(eval(@obj_eval)) { obj.inspect }
         forward(obj) unless @filter
       end
