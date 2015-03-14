@@ -58,7 +58,7 @@ is a minimal configuration example to analyse this README file:
   meeting:
     attendees:
       - text_reader: { files: 'README' }
-      - debugger:    { eval: 'true', ceval: 'cmd!="EOL"', prompt: '<debug>:  ' }
+      - debugger:    { eval: 'true', ceval: 'cmd!=:EOL', prompt: '<debug>:  ' }
 
 Lingo is told to invite two attendees and wants them to talk to each other,
 hence the name Lingo (= the technical language).
@@ -186,14 +186,14 @@ of context to external files.
 
 _Example_:
 
-  # keep line endings
-  - text_reader:     { files: $(files) }
+  # read files
+  - text_reader:   { files: $(files) }
   # keep whitespace
-  - tokenizer:       { space: true }
+  - tokenizer:     { space: true }
   # do processing...
-  - word_searcher:   { source: sys-dic, mode: first }
-  # insert formatted results (e.g. "[[Name::lingo|Lingo]] got these [[Noun::word|words]].")
-  - formatter:       { ext: out, format: '[[%3$s::%2$s|%1$s]]', map: { e: Name, s: Noun } }
+  - word_searcher: { source: sys-dic, mode: first }
+  # insert formatted results (e.g. "[[Name::lingo|Lingo]] finds [[Noun::word|words]].")
+  - formatter:     { ext: out, format: '[[%3$s::%2$s|%1$s]]', map: { e: Name, s: Noun } }
 
 === Plugins
 
@@ -443,24 +443,24 @@ _Example_:
 
   # input is taken from the previous attendee,
   # output is sent to the named channel "syn"
-  - synonymer:       { skip: '?,t', source: sys-syn, out: syn }
+  - synonymer:     { skip: '?,t', source: sys-syn, out: syn }
   
   # input is taken from the named channel "syn",
   # output is sent to the next attendee
-  - vector_filter:   { in: syn, lexicals: y, sort: term_abs }
+  - vector_filter: { in: syn, lexicals: y, sort: term_abs }
   
   # input is taken from the previous attendee,
   # output is sent to the next attendee
-  - text_writer:     { ext: syn, sep: "\n" }
+  - text_writer:   { ext: syn, sep: "\n" }
   
   # input is taken from the named channel "syn"
   # (ignoring the output of the previous attendee),
   # output is sent to the next attendee
-  - vector_filter:   { in: syn, lexicals: m }
+  - vector_filter: { in: syn, lexicals: m }
   
   # input is taken from the previous attendee,
   # output is sent to the next attendee
-  - text_writer:     { ext: mul, sep: "\n" }
+  - text_writer:   { ext: mul, sep: "\n" }
 
 === Language definition
 
