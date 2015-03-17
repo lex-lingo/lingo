@@ -70,6 +70,8 @@ class Lingo
 
     include Language
 
+    TERMINALS = [:FILE, :RECORD, :EOF]
+
     DEFAULT_SKIP = [TA_PUNCTUATION, TA_OTHER].join(',')
 
     def initialize(config, lingo)

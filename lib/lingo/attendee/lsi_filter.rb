@@ -30,8 +30,6 @@ class Lingo
 
     class LsiFilter < DeferredAttendee
 
-      TERMINALS = [:FILE, :RECORD, :EOF]
-
       def init
         require_lib('lsi4r')
 
