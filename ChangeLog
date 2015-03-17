@@ -2,6 +2,11 @@
 
 = Revision history for Lingo
 
+== 1.8.7 [unreleased]
+
+* Fixed regression introduced in 1.8.6 where Lingo::Attendee::Debugger would
+  no longer work immediately behind Lingo::Attendee::TextReader.
+
 == 1.8.6 [2015-02-09]
 
 * Lingo::Attendee::VectorFilter learned +pos+ option to print position and
