@@ -4,6 +4,10 @@
 
 == 1.8.7 [unreleased]
 
+* Added Lingo::Attendee::LsiFilter to correlate semantically related terms
+  (LSI[https://en.wikipedia.org/wiki/Latent_semantic_indexing]); requires
+  lsi4r[https://blackwinter.github.com/lsi4r] which in turn requires
+  rb-gsl[https://blackwinter.github.com/rb-gsl].
 * Fixed regression introduced in 1.8.6 where Lingo::Attendee::Debugger would
   no longer work immediately behind Lingo::Attendee::TextReader.
 
@@ -189,9 +193,9 @@
   the word class for multiword entries (defaults to <tt>def-wc</tt>). Use
   <tt>def-mul-wc: 'm'</tt> in your <tt>.lang</tt> to restore the previous
   behaviour.
-* New Lingo::Attendee::Formatter for configurable output formatting as an
+* Added Lingo::Attendee::Formatter for configurable output formatting as an
   alternative to Lingo::Attendee::TextWriter.
-* New basic input filters to enable indexing of HTML/XML (and PDF) files.
+* Added basic input filters to enable indexing of HTML/XML (and PDF) files.
 * Updated the system dictionary.
 * Switched license to Affero GPL.
 
