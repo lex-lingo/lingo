@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2014 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2015 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -31,14 +31,16 @@ class Lingo
 
   class Database
 
-    class Crypter
+    module Crypter
 
-      def self.digest(key)
+      extend self
+
+      def digest(key)
         Digest::SHA1.hexdigest(key)
       end
 
       def encode(key, val)
-        [self.class.digest(key), crypt(:encrypt, key, val)]
+        [digest(key), crypt(:encrypt, key, val)]
       end
 
       def decode(key, val)
@@ -49,7 +51,7 @@ class Lingo
 
       def crypt(method, key, val)
         cipher = OpenSSL::Cipher.new('aes-128-cbc').send(method)
-        cipher.iv = cipher.key = self.class.digest(key)
+        cipher.iv = cipher.key = digest(key)
         cipher.update(val) + cipher.final
       end
 

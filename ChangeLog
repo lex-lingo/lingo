@@ -10,6 +10,7 @@
   rb-gsl[https://blackwinter.github.com/rb-gsl].
 * Fixed regression introduced in 1.8.6 where Lingo::Attendee::Debugger would
   no longer work immediately behind Lingo::Attendee::TextReader.
+* Refactored Lingo::Database::Crypter into a module.
 
 == 1.8.6 [2015-02-09]
 

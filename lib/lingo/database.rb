@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2014 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2015 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -67,10 +67,8 @@ class Lingo
     def initialize(id, lingo)
       @id, @lingo, @config, @db = id, lingo, lingo.database_config(id), nil
 
-      @srcfile = Lingo.find(:dict, config['name'], relax: true)
-      @crypter = config.key?('crypt') && Crypter.new
-
-      @val = Hash.nest { [] }
+      @val, @crypt, @srcfile = Hash.nest { [] }, config.key?('crypt'),
+        Lingo.find(:dict, config['name'], relax: true)
 
       begin
         @stofile = Lingo.find(:store, @srcfile)
@@ -131,7 +129,7 @@ class Lingo
       val.uniq!
 
       val = val.join(FLD_SEP)
-      @crypter ? _set(*@crypter.encode(key, val)) : _set(key, val)
+      @crypt ? _set(*Crypter.encode(key, val)) : _set(key, val)
     end
 
     def warn(*msg)
@@ -223,9 +221,9 @@ class Lingo
     end
 
     def _val(key)
-      if val = _get(@crypter ? Crypter.digest(key) : key)
+      if val = _get(@crypt ? Crypter.digest(key) : key)
         _encode!(val)
-        @crypter ? @crypter.decode(key, val) : val
+        @crypt ? Crypter.decode(key, val) : val
       end
     end
 
