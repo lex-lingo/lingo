@@ -39,6 +39,7 @@ wort mist
 alt bibliothekskatalog
 neu bibliothekskatalög
 neu alttitelkatalog
+episch dichtung der höfisch zeit
     EOT
 
     @keyvalue = <<-EOT
@@ -141,25 +142,27 @@ Wort2=
       ),
       'inflect'    => true
     }, @singleword_inflect, {
-      'wort1'                           => 'wort1#s',
-      'wort2'                           => 'wort2#s',
-      'juristisch person'               => 'juristische person#s',
-      'natürlich person'                => 'natürliche personen#s',
-      'natürlich quatsch'               => 'natürlichen quatsches#s',
-      'lang essay'                      => 'langer essay#s',
-      'groß kiefer'                     => 'große kiefer#s',
-      'klug abel'                       => 'kluger abel#s',
-      'warm abendluft'                  => 'warme abendluft#s',
-      'klar abendluft'                  => 'klare abendluft#s',
-      'gut abitur'                      => 'gutes abitur#s',
-      'gut abitur schaff'               => 'gutes abitur schaffen#s',
-      'ein gut abitur'                  => 'ein gut abitur#s',
-      'schmal rund zylinder'            => 'schmaler runder zylinder#s',
-      'der schmal zylinder'             => 'der schmal zylinder#s',
-      'wort mist'                       => 'wort mist#s',
-      'alt bibliothekskatalog'          => 'alter bibliothekskatalog#s',
-      'neu bibliothekskatalög'          => 'neu bibliothekskatalög#s',
-      'neu alttitelkatalog'             => 'neuer alttitelkatalog#s'
+      'wort1'                            => 'wort1#s',
+      'wort2'                            => 'wort2#s',
+      'juristisch person'                => 'juristische person#s',
+      'natürlich person'                 => 'natürliche personen#s',
+      'natürlich quatsch'                => 'natürlichen quatsches#s',
+      'lang essay'                       => 'langer essay#s',
+      'groß kiefer'                      => 'große kiefer#s',
+      'klug abel'                        => 'kluger abel#s',
+      'warm abendluft'                   => 'warme abendluft#s',
+      'klar abendluft'                   => 'klare abendluft#s',
+      'gut abitur'                       => 'gutes abitur#s',
+      'gut abitur schaff'                => 'gutes abitur schaffen#s',
+      'ein gut abitur'                   => 'ein gut abitur#s',
+      'schmal rund zylinder'             => 'schmaler runder zylinder#s',
+      'der schmal zylinder'              => 'der schmal zylinder#s',
+      'wort mist'                        => 'wort mist#s',
+      'alt bibliothekskatalog'           => 'alter bibliothekskatalog#s',
+      'neu bibliothekskatalög'           => 'neu bibliothekskatalög#s',
+      'neu alttitelkatalog'              => 'neuer alttitelkatalog#s',
+      'episch dichtung der'              => '*5',
+      'episch dichtung der höfisch zeit' => 'epische dichtung der höfisch zeit#s'
     })
   end
 
@@ -173,25 +176,27 @@ Wort2=
       ),
       'inflect'    => 's'
     }, @singleword_inflect, {
-      'wort1'                           => 'wort1#s',
-      'wort2'                           => 'wort2#s',
-      'juristisch person'               => 'juristische person#s',
-      'natürlich person'                => 'natürliche personen#s',
-      'natürlich quatsch'               => 'natürlichen quatsches#s',
-      'lang essay'                      => 'langer essay#s',
-      'groß kiefer'                     => 'große kiefer#s',
-      'klug abel'                       => 'klug abel#s',
-      'warm abendluft'                  => 'warme abendluft#s',
-      'klar abendluft'                  => 'klare abendluft#s',
-      'gut abitur'                      => 'gutes abitur#s',
-      'gut abitur schaff'               => 'gutes abitur schaffen#s',
-      'ein gut abitur'                  => 'ein gut abitur#s',
-      'schmal rund zylinder'            => 'schmaler runder zylinder#s',
-      'der schmal zylinder'             => 'der schmal zylinder#s',
-      'wort mist'                       => 'wort mist#s',
-      'alt bibliothekskatalog'          => 'alter bibliothekskatalog#s',
-      'neu bibliothekskatalög'          => 'neu bibliothekskatalög#s',
-      'neu alttitelkatalog'             => 'neuer alttitelkatalog#s'
+      'wort1'                            => 'wort1#s',
+      'wort2'                            => 'wort2#s',
+      'juristisch person'                => 'juristische person#s',
+      'natürlich person'                 => 'natürliche personen#s',
+      'natürlich quatsch'                => 'natürlichen quatsches#s',
+      'lang essay'                       => 'langer essay#s',
+      'groß kiefer'                      => 'große kiefer#s',
+      'klug abel'                        => 'klug abel#s',
+      'warm abendluft'                   => 'warme abendluft#s',
+      'klar abendluft'                   => 'klare abendluft#s',
+      'gut abitur'                       => 'gutes abitur#s',
+      'gut abitur schaff'                => 'gutes abitur schaffen#s',
+      'ein gut abitur'                   => 'ein gut abitur#s',
+      'schmal rund zylinder'             => 'schmaler runder zylinder#s',
+      'der schmal zylinder'              => 'der schmal zylinder#s',
+      'wort mist'                        => 'wort mist#s',
+      'alt bibliothekskatalog'           => 'alter bibliothekskatalog#s',
+      'neu bibliothekskatalög'           => 'neu bibliothekskatalög#s',
+      'neu alttitelkatalog'              => 'neuer alttitelkatalog#s',
+      'episch dichtung der'              => '*5',
+      'episch dichtung der höfisch zeit' => 'epische dichtung der höfisch zeit#s'
     })
   end
 
@@ -205,25 +210,27 @@ Wort2=
       ),
       'inflect'    => 'e'
     }, @singleword_inflect, {
-      'wort1'                           => 'wort1#s',
-      'wort2'                           => 'wort2#s',
-      'juristisch person'               => 'juristisch person#s',
-      'natürlich person'                => 'natürliche personen#s',
-      'natürlich quatsch'               => 'natürlichen quatsches#s',
-      'lang essay'                      => 'lang essay#s',
-      'klug abel'                       => 'kluger abel#s',
-      'groß kiefer'                     => 'große kiefer#s',
-      'warm abendluft'                  => 'warm abendluft#s',
-      'klar abendluft'                  => 'klar abendluft#s',
-      'gut abitur'                      => 'gut abitur#s',
-      'gut abitur schaff'               => 'gut abitur schaffen#s',
-      'ein gut abitur'                  => 'ein gut abitur#s',
-      'schmal rund zylinder'            => 'schmal rund zylinder#s',
-      'der schmal zylinder'             => 'der schmal zylinder#s',
-      'wort mist'                       => 'wort mist#s',
-      'alt bibliothekskatalog'          => 'alt bibliothekskatalog#s',
-      'neu bibliothekskatalög'          => 'neu bibliothekskatalög#s',
-      'neu alttitelkatalog'             => 'neu alttitelkatalog#s'
+      'wort1'                            => 'wort1#s',
+      'wort2'                            => 'wort2#s',
+      'juristisch person'                => 'juristisch person#s',
+      'natürlich person'                 => 'natürliche personen#s',
+      'natürlich quatsch'                => 'natürlichen quatsches#s',
+      'lang essay'                       => 'lang essay#s',
+      'klug abel'                        => 'kluger abel#s',
+      'groß kiefer'                      => 'große kiefer#s',
+      'warm abendluft'                   => 'warm abendluft#s',
+      'klar abendluft'                   => 'klar abendluft#s',
+      'gut abitur'                       => 'gut abitur#s',
+      'gut abitur schaff'                => 'gut abitur schaffen#s',
+      'ein gut abitur'                   => 'ein gut abitur#s',
+      'schmal rund zylinder'             => 'schmal rund zylinder#s',
+      'der schmal zylinder'              => 'der schmal zylinder#s',
+      'wort mist'                        => 'wort mist#s',
+      'alt bibliothekskatalog'           => 'alt bibliothekskatalog#s',
+      'neu bibliothekskatalög'           => 'neu bibliothekskatalög#s',
+      'neu alttitelkatalog'              => 'neu alttitelkatalog#s',
+      'episch dichtung der'              => '*5',
+      'episch dichtung der höfisch zeit' => 'episch dichtung der höfisch zeit#s'
     })
   end
 
