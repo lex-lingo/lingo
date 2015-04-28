@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2014 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2015 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -89,26 +89,35 @@ class Lingo
       PROTO = '(?:news|https?|ftps?)://'
 
       RULES = [
-        ['SPAC', /^\s+/],
-        ['WIKI', /^=+.+=+|^__[A-Z]+__/],
-        ['NUMS', /^[+-]?(?:\d{4,}|\d{1,3}(?:\.\d{3,3})*)(?:\.|(?:,\d+)?%?)/],
-        ['URLS', /^(?:www\.|mailto:|#{PROTO}|\S+?[._]\S+?@\S+?\.)[^\s<>]+/],
-        ['ABRV', /^(?:(?:(?:#{CHAR})+\.)+)(?:#{CHAR})+/],
-        ['WORD', /^#{ALNUM}(?:-*#{ALNUM})*/],
-        ['PUNC', /^[!,.:;?¡¿]+/]
+        [TA_SPACE,
+          /^\s+/],
+        [TA_WIKI,
+          /^=+.+=+|^__[A-Z]+__/],
+        [TA_NUMBER,
+          /^[+-]?(?:\d{4,}|\d{1,3}(?:\.\d{3,3})*)(?:\.|(?:,\d+)?%?)/],
+        [TA_URL,
+          /^(?:www\.|mailto:|#{PROTO}|\S+?[._]\S+?@\S+?\.)[^\s<>]+/],
+        [TA_ABBREVIATION,
+          /^(?:(?:(?:#{CHAR})+\.)+)(?:#{CHAR})+/],
+        [TA_WORD,
+          /^#{ALNUM}(?:-*#{ALNUM})*/],
+        [TA_PUNCTUATION,
+          /^[!,.:;?¡¿]+/]
       ]
 
       OTHER = [
-        ['OTHR', /^[-"$#%&'()*+\/<=>@\[\\\]^_{|}~¢£¤¥¦§¨©«¬®¯°±²³´¶·¸¹»¼½¾×÷„“–]/],
-        ['HELP', /^\S+/]
+        [TA_OTHER,
+          /^[-"$#%&'()*+\/<=>@\[\\\]^_{|}~¢£¤¥¦§¨©«¬®¯°±²³´¶·¸¹»¼½¾×÷„“–]/],
+        [TA_HELP,
+          /^\S+/]
       ]
 
       NESTS = {
-        'HTML'          => ['<',   '>'],
-        'WIKI:VARIABLE' => ['{{{', '}}}'],
-        'WIKI:TEMPLATE' => ['{{',  '}}'],
-        'WIKI:LINK_INT' => ['[[',  ']]'],
-        'WIKI:LINK_EXT' => [/^\[\s*#{PROTO}/, ']']
+        TA_HTML               => ['<',   '>'],
+        TA_WIKI + ':VARIABLE' => ['{{{', '}}}'],
+        TA_WIKI + ':TEMPLATE' => ['{{',  '}}'],
+        TA_WIKI + ':LINK_INT' => ['[[',  ']]'],
+        TA_WIKI + ':LINK_EXT' => [/^\[\s*#{PROTO}/, ']']
       }
 
       class << self
@@ -168,8 +177,8 @@ class Lingo
         @tags = true unless @skip_tags.empty?
 
         skip = []
-        skip << 'HTML' unless @tags
-        skip << 'WIKI' unless @wiki
+        skip << TA_HTML unless @tags
+        skip << TA_WIKI unless @wiki
 
         [@rules = RULES.dup, @nests = NESTS.dup].each { |hash|
           hash.delete_if { |name, _| skip.include?(Token.clean(name)) }
@@ -232,7 +241,7 @@ class Lingo
           next unless line =~ expr
 
           rest = $'
-          forward_token($&, name, rest) if name != 'SPAC' || @space
+          forward_token($&, name, rest) if name != TA_SPACE || @space
 
           yield rest
         }
@@ -291,12 +300,12 @@ class Lingo
       end
 
       def forward_token(form, attr, rest = '')
-        forward(Token.new(form, @override.empty? ? attr : 'SKIP',
+        forward(Token.new(form, @override.empty? ? attr : TA_SKIP,
           @position += 1, @offset - form.bytesize - rest.bytesize))
       end
 
       def overriding?(nest)
-        nest == 'HTML' && !@skip_tags.empty?
+        nest == TA_HTML && !@skip_tags.empty?
       end
 
     end

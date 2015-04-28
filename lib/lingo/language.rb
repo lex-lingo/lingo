@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2014 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2015 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -39,9 +39,17 @@ class Lingo
 
     CHAR_PUNCT = '.'
 
-    TA_WORD        = 'WORD'
-    TA_PUNCTUATION = 'PUNC'
-    TA_OTHER       = 'OTHR'
+    TA_ABBREVIATION = 'ABRV'
+    TA_HELP         = 'HELP'
+    TA_HTML         = 'HTML'
+    TA_NUMBER       = 'NUMS'
+    TA_OTHER        = 'OTHR'
+    TA_PUNCTUATION  = 'PUNC'
+    TA_SKIP         = 'SKIP'
+    TA_SPACE        = 'SPAC'
+    TA_URL          = 'URLS'
+    TA_WIKI         = 'WIKI'
+    TA_WORD         = 'WORD'
 
     WA_UNSET      = '-'
     WA_IDENTIFIED = 'IDF'
