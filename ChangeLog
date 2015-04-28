@@ -11,6 +11,8 @@
 * Lingo::Attendee::Tokenizer no longer considers hyphens at word edges as part
   of the word. As a consequence, Lingo::Attendee::Dehyphenizer has been
   dropped.
+* Lingo::Attendee::Sequencer learned to recognize +0+ in the pattern to match
+  number tokens.
 * Fixed regression introduced in 1.8.6 where Lingo::Attendee::Debugger would
   no longer work immediately behind Lingo::Attendee::TextReader.
 * Refactored Lingo::Database::Crypter into a module.

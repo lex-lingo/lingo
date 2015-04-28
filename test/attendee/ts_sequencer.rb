@@ -329,4 +329,28 @@ class TestAttendeeSequencer < AttendeeTestCase
     ])
   end
 
+  def test_nums
+    meet({ 'sequences' => [['0SS', '1 2 3'], ['S0', '1 2']] }, [
+      tk('3|NUMS'),
+      wd('body|IDF', 'body|s'),
+      wd('problem|IDF', 'problem|s'),
+      tk('.|PUNC'),
+      wd('area|IDF', 'area|s'),
+      tk('51|NUMS'),
+      ai('EOF|'),
+      ai('EOT|')
+    ], [
+      tk('3|NUMS'),
+      wd('body|IDF', 'body|s'),
+      wd('problem|IDF', 'problem|s'),
+      tk('.|PUNC'),
+      wd('3 body problem|SEQ', '3 body problem|q'),
+      wd('area|IDF', 'area|s'),
+      tk('51|NUMS'),
+      wd('area 51|SEQ', 'area 51|q'),
+      ai('EOF|'),
+      ai('EOT|')
+    ])
+  end
+
 end

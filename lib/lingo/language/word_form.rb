@@ -53,6 +53,10 @@ class Lingo
         attr == WA_IDENTIFIED
       end
 
+      def get_form(wc)
+        form
+      end
+
       def <=>(other)
         other.nil? ? 1 : to_a <=> other.to_a
       end

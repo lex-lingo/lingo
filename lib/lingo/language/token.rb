@@ -56,6 +56,10 @@ class Lingo
         attr == TA_WORD
       end
 
+      def number?
+        attr == TA_NUMBER
+      end
+
       def position_and_offset
         "#{position}#{POSITION_SEP}#{offset}"
       end

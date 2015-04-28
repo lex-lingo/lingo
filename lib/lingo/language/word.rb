@@ -126,6 +126,10 @@ class Lingo
           lexicals.select { |lex| lex.attr =~ wc_re }
       end
 
+      def get_form(wc)
+        lexicals.find { |lex| return lex.form if lex.attr == wc }
+      end
+
       def norm
         identified? ? lexicals.first.form : form
       end

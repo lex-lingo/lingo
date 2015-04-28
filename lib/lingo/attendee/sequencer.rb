@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2014 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2015 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -43,7 +43,9 @@ class Lingo
     #
     # === Mögliche Verlinkung
     # Erwartet:: Daten vom Typ *Word* z.B. von Wordsearcher, Decomposer, Ocr_variator, Multiworder
-    # Erzeugt:: Daten vom Typ *Word* (mit Attribut WA_SEQUENCE). Je erkannter Mehrwortgruppe wird ein zusätzliches Word-Objekt in den Datenstrom eingefügt. Z.B. für Ocr_variator, Sequencer, Noneword_filter, Vector_filter
+    # Erzeugt:: Daten vom Typ *Word* (mit Attribut WA_SEQUENCE). Je erkannter Mehrwortgruppe wird
+    # ein zusätzliches Word-Objekt in den Datenstrom eingefügt. Z.B. für Ocr_variator, Sequencer,
+    # Noneword_filter, Vector_filter
     #
     # === Parameter
     # Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der Voreinstellung).
@@ -95,6 +97,11 @@ class Lingo
 
     class Sequencer < BufferedAttendee
 
+      UNK = %w[#]
+      NUM = %w[0]
+
+      CLS = /[[:alpha:]#{NUM.join}]/o
+
       def init
         @stopper = get_array('stopper', DEFAULT_SKIP)
                      .push(WA_UNKNOWN, WA_UNKMULPART)
@@ -103,7 +110,7 @@ class Lingo
         @cls = []
 
         @seq = get_key('sequences').map { |str, fmt|
-          @cls.concat(cls = (str = str.downcase).scan(/[[:alpha:]]/))
+          @cls.concat(cls = (str = str.downcase).scan(CLS))
 
           (str =~ /\W/ ? [Regexp.new(str), nil] : [str, cls]).push(
             fmt == true ? '|' : fmt ? fmt.gsub(/\d+/, '%\&$s') : nil)
@@ -124,7 +131,7 @@ class Lingo
 
       def process_buffer
         flush(@buffer.size < 2 ? @buffer : begin
-          arg, cls, mwc, unk = [[], buf = [], map = [], @seq], @cls, @mwc, %w[#]
+          arg = [[], buf = [], map = [], @seq]
 
           iter, skip, rewind = @buffer.each_with_index, 0, lambda {
             iter.rewind; skip.times { iter.next }; skip = 0
@@ -142,13 +149,14 @@ class Lingo
               rewind.call
             end
 
-            att = obj.is_a?(Word) && !obj.unknown? ? obj.attrs(false) : unk
+            att = (tok = obj.is_a?(Token)) ? obj.number? ? NUM : UNK :
+              obj.is_a?(Word) && !obj.unknown? ? obj.attrs(false) : UNK
 
-            if (att &= cls).empty?
+            if (att &= @cls).empty?
               find_seq(*arg)
               rewind.call if skip > 0
             else
-              if n = obj.multiword_size(mwc)
+              if !tok && n = obj.multiword_size(@mwc)
                 n.times { iter.next }
                 skip = idx + 1
               end
@@ -180,11 +188,8 @@ class Lingo
 
               args.clear
 
-              _cls.each_with_index { |wc, i|
-                buf[pos + i].lexicals.find { |l|
-                  args[i] = l.form if l.attr == wc
-                } or break
-              } or next
+              _cls.each_with_index { |wc, i| args[i] =
+                buf[pos + i].get_form(wc) or break } or next
 
               forms << (
                 fmt =~ /\d/ ? fmt.gsub('%0$s', _str) % args :
