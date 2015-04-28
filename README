@@ -131,8 +131,6 @@ information see each attendee's documentation):
                     Lingo::Attendee::Debugger)
 +variator+::        Tries to correct spelling errors and the like. (see
                     Lingo::Attendee::Variator)
-+dehyphenizer+::    Tries to undo hyphenation. (see
-                    Lingo::Attendee::Dehyphenizer)
 +multi_worder+::    Identifies phrases (word sequences) based on a multiword
                     dictionary. (see Lingo::Attendee::MultiWorder)
 +sequencer+::       Identifies phrases (word sequences) based on patterns of
