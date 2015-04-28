@@ -84,7 +84,7 @@
 00305*1 benutzer|1 bezugsquelle|1 unternehmen / abteilung
 00308*4 verfasser|1 anwendung / bereich|1 anwendungsgebiet
 00309*1 analytik
-00310*3 verfasser|2 aufgabenstellung|2 aufgabentyp|1 aussicht|1 erwerbsarbeit|1 verlauf
+00310*3 aufgabenstellung|3 aufgabentyp|3 verfasser|1 aussicht|1 erwerbsarbeit|1 verlauf
 00312*1 aufgabenstellung|1 aufgabentyp|1 gehörlosensprache|1 taubstummensprache
 00320*1 analytik|1 arbeit / aufwand
 00323*1 analytik

@@ -66,6 +66,7 @@
 00094*1 grundlage, theoretisch
 00095*1 akquisition, automatisch|1 indexierung, automatisch|1 vorwissen, benötigt
 00096*1 bibliothek, wissenschaftlich|1 sacherschließung, verbal
+00097*1 indexierung, automatisch
 00098*1 dokument, relevant|1 dokument, zusätzlich relevant|1 ergänzung, erfolgreich|1 ergänzung, wohl erfolgreich|1 experiment, neu|1 information, juristisch|1 information, wissenschaftlich|1 informationssystem, juristisch|1 methode, neu|1 rechtsgebiet, alle
 00102*1 bibliothek, deutsch|1 form, vereinfacht|1 indexierungsverfahren, syntaktisch
 00103*1 bibliothek, öffentlich|1 systematik, allgemein
@@ -86,7 +87,7 @@
 00125*1 datenanbieter, alle|1 durchblick, total|1 einführung, kurz|1 index, dazugehörig|1 übersetzung, deutsch|1 übersicht, alphabetisch|1 übersicht, komplett
 00126*1 informationssystem, biographisch|1 informationssystem, international biographisch
 00127*1 ausführung, folgend|1 software, betrachtet
-00128*1 begriffssystem, verwendet|1 fachgebiet, dominierend|1 genauigkeitsrate, hoch|1 indexierung, maschinell|1 nummerierung, fortlaufend|1 variante, verschieden
+00128*1 begriffssystem, verwendet|1 fachgebiet, dominierend|1 genauigkeitsrate, hoch|1 indexierung, maschinell|1 nummerierung, fortlaufend|1 variante, verschieden|1 vollständigkeit, hoch
 00129*1 anregung, interessant|1 begriff, ordnend|1 beziehung, syntaktisch|1 fachinformationssystem, modern|1 indexierung, syntaktisch|1 kennzeichnung, eindeutig|1 methode, entwickelt|1 ordnungselement, alphabetisch|1 verknüpfungsmittel, syntaktisch
 00132*1 erfordernis, berufsbedingt
 00133*1 debatte, international|1 horizont, national|1 sacherschließung, verbal|1 verbreitung, zunehmend|1 übersetzung, gekürzt|1 übersetzung, leicht gekürzt
@@ -118,6 +119,7 @@
 00164*1 dokument, relevant|1 informationsmenge, riesig|1 internet, chaotisch organisiert|1 internet, organisiert|1 monat, vergangen|1 nutzung, effektiv|1 online-medium, populär|1 problem, schwerwiegend|1 suchwerkzeug, genannt
 00165*1 analyse, statistisch|1 analyse, umfangreich|1 anwendung, sinnvoll|1 faszination, stark|1 forschungsgeld, fließend|1 forschungsgeld, knapp fließend|1 gutachter-system, überfordert|1 interpretation, sorgfältig|1 selektionskriterium, geeignet|1 spezialist, wenig
 00166*1 aussage, wichtig|1 begriff, gesucht|1 begriff, syntaktisch verknüpft|1 begriff, verknüpft|1 begriff, zusammengehörend|1 indexsprache, kategorisiert|1 mangel, bedingt|1 ordnung, hoch|1 regel, einfach|1 satz, letzte|1 struktur, linear|1 überblick, besseren
+00167*1 erschließung, modern
 00170*1 informationsvermittlung, sinnvoll
 00171*1 begriff, neu|1 marketingstratege, kreativ|1 marketingstratege, unermüdlich kreativ
 00173*1 bildschirmschoner, global|1 toilette, öffentlich
@@ -131,14 +133,14 @@
 00185*1 begriff, weit|1 indexierung, automatisch|1 indexierung, intellektuell|1 indexierungsverfahren, automatisch|1 klassifikation, automatisch|1 klärung, terminologisch|1 kooperation, eng
 00186*2 indexierung, automatisch|2 klassifikation, automatisch|1 dokument, klassifiziert|1 dokumentklassifikation, automatisch|1 einführung, kurz|1 relation, statistisch|1 thema, folgend
 00187*1 arbeitsgruppe, bibliothekarisch
-00191*1 erschließung, automatisch|1 klassifikation, hierarchisch|1 klassifikation, thematisch hierarchisch|1 ordnungsstruktur, gewonnen|1 text, wiedergewonnen|1 textklassifikation, automatisch thematisch|1 textklassifikation, thematisch|1 wichtigkeitsstufe, entstanden
-00192*2 indexierung, automatisch|1 datenbank, groß|1 facettenklassifikation, universal|1 fachwort, wichtig|1 indexierung, unter automatisch|1 klassifikationssystem, vorgegeben|1 sprache, deutsch|1 titel, beliebig|1 veröffentlichung, wissenschaftlich
+00191*1 begriff, erzeugt|1 erschließung, automatisch|1 klassifikation, hierarchisch|1 klassifikation, thematisch hierarchisch|1 ordnungsstruktur, gewonnen|1 text, wiedergewonnen|1 textklassifikation, automatisch thematisch|1 textklassifikation, thematisch|1 wichtigkeitsstufe, entstanden
+00192*2 indexierung, automatisch|1 datenbank, groß|1 facettenklassifikation, universal|1 fachwort, wichtig|1 indexierung, unter automatisch|1 klassifikationssystem, vorgegeben|1 sprache, deutsch|1 stich, beliebig|1 titel, beliebig|1 veröffentlichung, wissenschaftlich
 00193*1 indexierung, numerisch|1 zugang, schnell
 00194*1 berücksichtigung, besonders|1 berücksichtigung, unter besonders|1 indexierung, intellektuell|1 methode, neu|1 system, britisch
 00195*1 berücksichtigung, besonders|1 berücksichtigung, unter besonders|1 indexierung, intellektuell|1 methode, neu|1 system, britisch
 00197*1 arbeit, beruflich|1 beziehung, bestimmt|1 einheit, thematisch|1 inhalt, kommuniziert|1 kern, eigen|1 kerngebiet, komplex|1 potential, technisch|1 veränderung, technisch
 00198*1 inhaltserschließung, automatisch
-00199*1 anwendung, unter|1 moderne, befindlich|1 standardsystem, herkömmlich
+00199*1 anwendung, unter|1 indexierung, befindlich modern|1 indexierung, intelligent|1 indexierung, modern|1 moderne, befindlich|1 standardsystem, herkömmlich
 00200*1 sacherschließung, intellektuell
 00201*1 bibliothek, wissenschaftlich|1 bibliothekskongress, deutsch
 00204*1 konferenz, international
@@ -148,7 +150,7 @@
 00208*1 anpassung, strukturell|1 bereich, folgend|1 katalog, elektronisch|1 problem, allgemein|1 umfang, erreicht|1 vokabular, universal|1 überarbeitung, grundsätzlich
 00209*2 umfeldsuche, semantisch|1 ergebnis, unbefriedigend|1 indexierung, maschinell|1 katalog, konventionell|1 online-katalog, bibliothekarisch|1 suche, sachlich|1 umfeld, semantisch|1 vokabular, strukturiert
 00210*1 bild, entsprechend|1 möglichkeit, technisch|1 speicher, effektiv|1 suchanfragen, formuliert|1 system, verschieden|1 voraussetzung, alle
-00211*1 fachinformation, sozialwissenschaftlich
+00211*1 fachinformation, sozialwissenschaftlich|1 indexierung, intelligent
 00212*2 informationssuche, effizient|1 kostenfaktor, verschieden|1 multimedia-dokumentkollektion, verteilt|1 multimedial, verteilt|1 rangliste, final|1 rangliste, individuell|1 typ, beliebig
 00213*1 beitrag, vorliegend|1 beziehung, derartig|1 indexierung, automatisch|1 indexierungssystem, automatisch|1 interesse, groß|1 relation, erfasst
 00214*1 indexierung, automatisch
@@ -221,7 +223,7 @@
 00295*1 einstieg, optimal|1 erhebung, ausgearbeitet empirisch|1 erhebung, empirisch|1 indexierung, automatisch|1 informationswissenschaftlich, seriös|1 speerspitze, technologisch|1 suchsystem, unterschiedlich|1 vokabular, geordnet kontrolliert|1 vokabular, kontrolliert|1 zugriff, zielgenau
 00296*1 befehlsorientiert, ausschließlich|1 befehlsorientiert, elaboriert|1 benutzerschnittstelle, ergonomisch|1 checkliste, unser|1 datensätzen, singulär|1 indexierung, automatisch|1 informationsproduzent, isoliert|1 leistungsindikator, weit|1 methode, automatisch|1 methode, suboptimal|1 online-archiv, kommerziell|1 realisierungsmöglichkeit, technisch|1 retrievalsystem, gut|1 suche, gut|1 system, irgendwelch|1 umgebung, experimentell|1 wirdjedoch, vorausgesetzt
 00297*2 problem, methodisch|2 wissenschaftsforschung, empirisch|1 arbeit, vorliegend|1 basis, problematisch|1 bereich, semantisch|1 bereich, syntaktisch|1 charakter, dynamisch|1 faktor, beachtenswert|1 informationstheorie, semantisch|1 leistung, wissenschaftlich|1 problem, alle methodisch|1 problem, auftretend methodisch|1 problem, grundlegend|1 problem, offen|1 problem, spezifisch|1 publikation, elektronisch|1 publikation, zitiert|1 wirkung, wissenschaftlich
-00298*3 text, elektronisch|2 erschließung, inhaltlich|1 aspekt-klassifikation, universal|1 erschließung, automatisch inhaltlich|1 erschließung, syntaktisch inhaltlich|1 klassifikationselement, bezogen|1 klassifikationselement, inhaltlich bezogen|1 recherche, zahlreich|1 retrieval, syntaktisch|1 suchalgorithmen, bekannt|1 suchgegenstand, jeweilig|1 textdokument, unbekannt
+00298*3 text, elektronisch|2 erschließung, inhaltlich|1 aspekt-klassifikation, universal|1 erschließung, automatisch inhaltlich|1 erschließung, syntaktisch inhaltlich|1 fachgebiet, automatisch|1 klassifikationselement, bezogen|1 klassifikationselement, inhaltlich bezogen|1 recherche, zahlreich|1 retrieval, syntaktisch|1 suchalgorithmen, bekannt|1 suchgegenstand, jeweilig|1 textdokument, unbekannt
 00299*1 angebot, nutzend|1 veröffentlichung, alle|1 übersetzungssystem, automatisch
 00300*1 anwendung, experimentell|1 anwendungsfall, fruchtbar|1 erschließung, inhaltlich|1 interesse, besonders|1 migration, sozialwissenschaftlich|1 relation, komplex|1 suche, semantisch
 00301*4 daten, inhaltlich|1 daten, formatiert|1 datenarten, inhaltlich|1 form, strukturiert|1 management, integriert|1 text, vorwiegend
@@ -232,7 +234,7 @@
 00306*5 indexierung, automatisch|1 ansatz, behandelt|1 ansatz, grundsätzlich|1 ansatz, verschieden|1 bedeutung, groß|1 berg, ständig wachsend|1 berg, wachsend|1 buch, vorliegend|1 charakter, beispielhaft|1 darstellung, einführend|1 information, unstrukturiert|1 informationsbedarf, grundsätzlich|1 informationswirtschaft, betrieblich|1 lehrveranstaltung, entsprechend|1 mittel, manuell|1 praktiker, konfrontiert|1 seite, technisch|1 sprache, verständlich|1 tag, heutig|1 tiefendarstellung, detailliert|1 verarbeitung, schnell|1 verwaltung, öffentlich|1 voraussetzung, jeweilig|1 wirtschaft, abhängig
 00308*2 zeitschrift, wissenschaftlich|1 anwendungsbereich, fokussiert|1 autor, wissenschaftlich|1 hilfsmittel, notwendig|1 jahrgang, aktuell|1 kriterium, objektiv|1 verbesserungsvorschlag, einig|1 zeitschrift, weich|1 zeitschriftenkommunikation, wissenschaftlich
 00309*1 datenbank, relational|1 forschungsgemeinschaft, deutsch|1 projekt, gefördert
-00310*1 aktionsmuster, gewonnen sequentiell|1 aktionsmuster, sequentiell|1 angabe, betreffend|1 aufgabe, allgemein|1 auswertung, rechnerisch|1 forschungsfragen, allgemein|1 informationsraum, inhaltlich komplex|1 informationsraum, komplex|1 interpretation, zusammenfassend|1 phasenmodell, dynamisch|1 schritt, folgend|1 suchmaschinennutzer, unerfahren|1 thema, anschließend|1 untergruppe, unerfahren|1 web-rechercheaufgabe, offen|1 wissensarten, unterschiedlich
+00310*1 aktionsmuster, gewonnen sequentiell|1 aktionsmuster, sequentiell|1 angabe, betreffend|1 aufgabe, allgemein|1 aufgabe, bewertet|1 auswertung, rechnerisch|1 forschungsfragen, allgemein|1 informationsraum, inhaltlich komplex|1 informationsraum, komplex|1 interpretation, zusammenfassend|1 phasenmodell, dynamisch|1 schritt, folgend|1 suchmaschinennutzer, unerfahren|1 thema, anschließend|1 untergruppe, unerfahren|1 web-rechercheaufgabe, offen|1 wissensarten, unterschiedlich
 00312*4 sacherschließung, verbal|1 abschluss, relativ|1 aufgabe, weit|1 datenstruktur, flach|1 einstieg, verbal|1 gebrauch, reichlich|1 hilfetext, englisch|1 jahr, einig|1 literatur, erschienen theologisch|1 literatur, theologisch|1 projekt, durchgeführt klein|1 projekt, klein|1 regelwerk, legend|1 sacherschließung, doppelt verbal|1 sacherschließung, zusätzlich verbal|1 sacherschlossen, verbal|1 sprache, englisch|1 teil, groß
 00313*2 schaden, aufgeführt|1 anteil, unerheblich|1 ausnahme, gewiss|1 diskussion, bibliothekarisch|1 feld, verknüpft|1 fernleihen, vermeidbar|1 forschungsprojekt, betreffend|1 indexierung, automatisch|1 kostenverursachend, mittelbar|1 kostenverursachend, unmittelbar|1 neubeschaffung, vermeidbar|1 schaden, entstehend|1 schadensweise, banal|1 schreibweise, korrekt|1 schreibweise, zutreffend|1 sinn, volkswirtschaftlich|1 titelaufnahme, defizitär|1 titelaufnahme, gesucht|1 weg, vermeidbar
 00314*1 grundlagenartikel, erklärt unser|1 grundlagenartikel, unser|1 information, wichtig|1 information, wirklich wichtig|1 mache, greifbar

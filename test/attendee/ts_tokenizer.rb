@@ -57,6 +57,26 @@ class TestAttendeeTokenizer < AttendeeTestCase
     ])
   end
 
+  def test_hyphen
+    meet({}, [
+      'Di-es i-s-t -ein- -Test - mit- Binde--strich-.'
+    ], [
+      tk('Di-es|WORD|0|0'),
+      tk('i-s-t|WORD|1|6'),
+      tk('-|OTHR|2|12'),
+      tk('ein|WORD|3|13'),
+      tk('-|OTHR|4|16'),
+      tk('-|OTHR|5|18'),
+      tk('Test|WORD|6|19'),
+      tk('-|OTHR|7|24'),
+      tk('mit|WORD|8|26'),
+      tk('-|OTHR|9|29'),
+      tk('Binde--strich|WORD|10|31'),
+      tk('-|OTHR|11|44'),
+      tk('.|PUNC|12|45')
+    ])
+  end
+
   def test_wiki1
     meet({}, @wiki, [
       tk('Test|WORD|0|0'),
