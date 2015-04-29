@@ -118,7 +118,7 @@ class Lingo
 
           level > 1 ? ret = res : ret.identify(lex.each { |l|
             l.attr += @append_wc unless l.attr == LA_COMPOUND
-          }, WA_COMPOUND) if !lex.empty? &&
+          }, WA_COMPOUND, seq) if !lex.empty? &&
             sta.size              <= @max_parts         &&
             sta.min               >= @min_part_size     &&
             str.length / sta.size >= @min_avg_part_size &&

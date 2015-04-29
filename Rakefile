@@ -59,7 +59,7 @@ rescue LoadError => err
 end
 
 CLEAN.include(
-  'txt/*.{log,lsi,mul,non,seq,ste,syn,ve?}',
+  'txt/*.{als,log,lsi,mul,non,seq,ste,syn,ve?}',
   'test/{test.*,text.non}',
   'store/*/*.rev',
   'bench/tmp.*'

@@ -34,7 +34,7 @@ class Lingo
     end
 
     def process(obj)
-      @buffer << obj
+      obj.word_token? ? forward(obj) : @buffer << obj
       process_buffer if process_buffer?
     end
 

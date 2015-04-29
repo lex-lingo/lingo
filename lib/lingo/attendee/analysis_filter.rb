@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2014 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2015 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -24,68 +24,55 @@
 ###############################################################################
 #++
 
+require 'csv'
+
 class Lingo
 
-  module Language
+  class Attendee
 
-    #--
-    # Die Klasse WordForm ist die Basisklasse für weitere Klassen, die im Rahmen der
-    # Objektstruktur eines Wortes benötigt werden. Die Klasse stellt eine Zeichenkette bereit,
-    # die mit einem Attribut versehen werden kann.
-    #++
+    class AnalysisFilter < self
 
-    class WordForm
+      FIELDS = {
+        string:   :form,
+        token:    :attr,
+        position: :position,
+        offset:   :offset,
+        word:     :attr,
+        pattern:  :pattern
+      }
 
-      include Comparable
-
-      def initialize(form, attr = WA_UNSET, src = nil)
-        attr, @gender = attr
-        @form, @attr, @src = form || '', attr || '', src
+      def init
+        @csv, @header = CSV.new('', row_sep: ''), FIELDS.keys
       end
 
-      attr_accessor :form, :attr, :gender, :src, :token, :head
-
-      def unknown?
-        [WA_UNKNOWN, WA_UNKMULPART].include?(attr)
+      def control(cmd, *)
+        :skip_command if cmd == :EOL
       end
 
-      def identified?
-        attr == WA_IDENTIFIED
+      def process(obj, *)
+        forward_row(@header.tap { @header = nil }) if @header
+
+        obj.is_a?(Token) ?
+          forward_obj(obj, obj, obj, obj) : begin
+        tok = obj.token
+          forward_obj(obj, nil, tok, tok, obj, obj)
+        obj.lexicals.each { |lex|
+          forward_obj(lex, nil, tok, tok, lex, obj) }
+        end
       end
 
-      def word_token?
-        false
+      private
+
+      def forward_obj(*args)
+        forward_row(FIELDS.map.with_index { |(_, method), index|
+          arg = args[index] and arg.send(method) })
       end
 
-      def get_form(wc)
-        form
+      def forward_row(row)
+        forward(@csv.add_row(row).string.dup)
+        @csv.string.clear
+        @csv.rewind
       end
-
-      def <=>(other)
-        other.nil? ? 1 : to_a <=> other.to_a
-      end
-
-      def to_a
-        [form, attr, gender]
-      end
-
-      def to_s
-        to_a.compact.join('/')
-      end
-
-      def inspect
-        to_s
-      end
-
-      def hash
-        to_a.hash
-      end
-
-      def eql?(other)
-        self.class.equal?(other.class) && (self <=> other) == 0
-      end
-
-      alias_method :==, :eql?
 
     end
 

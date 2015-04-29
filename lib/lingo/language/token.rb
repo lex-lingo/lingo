@@ -56,6 +56,8 @@ class Lingo
         attr == TA_WORD
       end
 
+      alias_method :word_token?, :word?
+
       def number?
         attr == TA_NUMBER
       end

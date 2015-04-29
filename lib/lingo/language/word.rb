@@ -81,9 +81,7 @@ class Lingo
         super
       end
 
-      attr_reader :token
-
-      attr_accessor :lexicals
+      attr_accessor :lexicals, :pattern
 
       def add_lexicals(lex)
         lexicals.concat(lex - lexicals)
@@ -105,10 +103,10 @@ class Lingo
         lexicals.map(&:gender)
       end
 
-      def identify(lex, wc = nil)
+      def identify(lex, wc = nil, seq = nil)
         return self if lex.empty?
 
-        self.lexicals = lex
+        self.lexicals, self.pattern = lex, seq
         self.attr = wc ||= attr?(LA_COMPOUND) ? WA_COMPOUND : WA_IDENTIFIED
         self.head = self.class.new_compound_head(lex) if wc == WA_COMPOUND
 

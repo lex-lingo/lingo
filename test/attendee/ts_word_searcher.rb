@@ -6,11 +6,20 @@ class TestAttendeeWordSearcher < AttendeeTestCase
 
   def test_basic
     meet({ 'source' => 'sys-dic,sys-syn,sys-mul' }, [
-      tk('Dies|WORD'), tk('ist|WORD'), tk('ein|WORD'), tk('Test|WORD'), tk('.|PUNC'), ai('EOL|')
+      tk('Dies|WORD'),
+      tk('ist|WORD'),
+      tk('ein|WORD'),
+      tk('Test|WORD'),
+      tk('.|PUNC'),
+      ai('EOL|')
     ], [
+      tk('Dies|WORD'),
       wd('Dies|IDF', 'dies|w'),
+      tk('ist|WORD'),
       wd('ist|IDF', 'sein|v'),
+      tk('ein|WORD'),
       wd('ein|IDF', 'ein|w', 'einen|v'),
+      tk('Test|WORD'),
       wd('Test|IDF', 'test|s', 'testen|v'),
       tk('.|PUNC'),
       ai('EOL|')
@@ -19,11 +28,20 @@ class TestAttendeeWordSearcher < AttendeeTestCase
 
   def test_mode
     meet({ 'source' => 'sys-syn,sys-dic', 'mode' => 'first' }, [
-      tk('Dies|WORD'), tk('ist|WORD'), tk('ein|WORD'), tk('Test|WORD'), tk('.|PUNC'), ai('EOL|')
+      tk('Dies|WORD'),
+      tk('ist|WORD'),
+      tk('ein|WORD'),
+      tk('Test|WORD'),
+      tk('.|PUNC'),
+      ai('EOL|')
     ], [
+      tk('Dies|WORD'),
       wd('Dies|IDF', 'dies|w'),
+      tk('ist|WORD'),
       wd('ist|IDF', 'sein|v'),
+      tk('ein|WORD'),
       wd('ein|IDF', 'ein|w', 'einen|v'),
+      tk('Test|WORD'),
       wd('Test|IDF', 'test|s', 'testen|v'),
       tk('.|PUNC'),
       ai('EOL|')
@@ -38,9 +56,13 @@ class TestAttendeeWordSearcher < AttendeeTestCase
       tk('A-Dur|WORD'),
       ai('EOL|')
     ], [
+      tk('Hasennasen|WORD'),
       wd('Hasennasen|?'),
+      tk('Knaller|WORD'),
       wd('Knaller|IDF', 'knaller|s'),
+      tk('Lex-Lingo|WORD'),
       wd('Lex-Lingo|IDF', 'super indexierungssystem|m'),
+      tk('A-Dur|WORD'),
       wd('A-Dur|IDF', 'a-dur|s|m', 'a-dur|s|n'),
       ai('EOL|')
     ])
@@ -54,9 +76,13 @@ class TestAttendeeWordSearcher < AttendeeTestCase
       tk('A-Dur|WORD'),
       ai('EOL|')
     ], [
+      tk('Hasennasen|WORD'),
       wd('Hasennasen|?'),
+      tk('Knaller|WORD'),
       wd('Knaller|IDF', 'knaller|s'),
+      tk('Lex-Lingo|WORD'),
       wd('Lex-Lingo|IDF', 'super indexierungssystem|m'),
+      tk('A-Dur|WORD'),
       wd('A-Dur|IDF', 'b-dur|s'),
       ai('EOL|')
     ])
@@ -70,9 +96,13 @@ class TestAttendeeWordSearcher < AttendeeTestCase
       tk('A-Dur|WORD'),
       ai('EOL|')
     ], [
+      tk('Hasennasen|WORD'),
       wd('Hasennasen|?'),
+      tk('Knaller|WORD'),
       wd('Knaller|IDF', 'knaller|s'),
+      tk('Lex-Lingo|WORD'),
       wd('Lex-Lingo|IDF', 'super indexierungssystem|m'),
+      tk('A-Dur|WORD'),
       wd('A-Dur|IDF', 'a-dur|s|m', 'a-dur|s|n', 'b-dur|s'),
       ai('EOL|')
     ])
@@ -88,11 +118,17 @@ class TestAttendeeWordSearcher < AttendeeTestCase
       tk('Zettelkatalog|WORD'),
       ai('EOL|')
     ], [
+      tk('Hasennasen|WORD'),
       wd('Hasennasen|?'),
+      tk('Knaller|WORD'),
       wd('Knaller|IDF', 'knaller|s'),
+      tk('Lex-Lingo|WORD'),
       wd('Lex-Lingo|IDF', 'super indexierungssystem|m'),
+      tk('A-Dur|WORD'),
       wd('A-Dur|IDF', 'a-dur|s|m', 'a-dur|s|n', 'b-dur|s'),
+      tk('Wirkungsort|WORD'),
       wd('Wirkungsort|IDF', 'wirkungsort|s', 'wirkung|s+', 'ort|s+'),
+      tk('Zettelkatalog|WORD'),
       wd('Zettelkatalog|COM', 'zettelkatalog|k', 'zettel|s+', 'katalog|s+'),
       ai('EOL|')
     ])

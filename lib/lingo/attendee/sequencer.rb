@@ -186,15 +186,14 @@ class Lingo
             while pos = q.index(str, pos || 0)
               _str, _cls = [$&, $&.chars] unless cls
 
-              args.clear
+              _tok = nil; args.clear
 
-              _cls.each_with_index { |wc, i| args[i] =
-                buf[pos + i].get_form(wc) or break } or next
+              _cls.each_with_index { |wc, i| _tok ||= buf[pos + i].token
+                args[i] = buf[pos + i].get_form(wc) or break } or next
 
-              forms << (
+              forms << [_str, _tok,
                 fmt =~ /\d/ ? fmt.gsub('%0$s', _str) % args :
-                fmt ? "#{_str}:#{args.join(fmt)}" : args.join(' ')
-              )
+                fmt ? "#{_str}:#{args.join(fmt)}" : args.join(' ')]
 
               pos += 1
             end
@@ -202,7 +201,12 @@ class Lingo
         }.clear
 
         forms.uniq!
-        forms.each { |f| mat << Word.new_lexical(f, WA_SEQUENCE, LA_SEQUENCE) }
+
+        forms.each { |s, t, f|
+          wrd = Word.new_lexical(f, WA_SEQUENCE, LA_SEQUENCE)
+          wrd.pattern, wrd.token = s, t
+          mat << wrd
+        }
 
         buf.clear
         mat

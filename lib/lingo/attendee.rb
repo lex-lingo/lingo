@@ -172,6 +172,7 @@ require_relative 'buffered_attendee'
 require_relative 'deferred_attendee'
 
 require_relative 'attendee/abbreviator'
+require_relative 'attendee/analysis_filter'
 require_relative 'attendee/debugger'
 require_relative 'attendee/debug_filter'  # < Debugger
 require_relative 'attendee/decomposer'

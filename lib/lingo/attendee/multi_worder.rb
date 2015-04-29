@@ -202,8 +202,11 @@ class Lingo
           end
         end while pos < len
 
-        forward(Word.new_lexicals(parts.join(' '),
-          WA_MULTIWORD, lex.select { |l| l.is_a?(Lexical) }))
+        wrd = Word.new_lexicals(parts.join(' '),
+          WA_MULTIWORD, lex.select { |l| l.is_a?(Lexical) })
+        wrd.token = @buffer[pos - 1].token
+
+        forward(wrd)
       end
 
       def check_multiword_key(len)
