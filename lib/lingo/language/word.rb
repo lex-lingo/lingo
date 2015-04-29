@@ -130,8 +130,9 @@ class Lingo
         identified? ? lexicals.first.form : form
       end
 
-      def compo_form
-        get_class(LA_COMPOUND).first if attr == WA_COMPOUND
+      def compo_norm
+        lex = get_class(LA_COMPOUND).first if attr == WA_COMPOUND
+        lex ? lex.form : norm
       end
 
       def full_compound?

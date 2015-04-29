@@ -87,6 +87,11 @@ class Lingo
           permute_compound([[], [], ''],              str, level, tail)
       end
 
+      def find_compound_head(str)
+        compound = find_compound(str)
+        compound.head || compound if compound && !compound.unknown?
+      end
+
       private
 
       def permute_compound(ret, str, level, tail)

@@ -286,42 +286,28 @@ class Lingo
 
       [' ', lambda { |form|
         word = dic.find_word(form)
-
-        if word.unknown?
-          compo = gra.find_compound(form)
-
-          if compo_form = compo.compo_form
-            compo_form.form
-          else
-            compo.norm
-          end
-        else
-          word.norm
-        end
+        word.unknown? ? gra.find_compound(form).compo_norm : word.norm
       }, inflect && lambda { |forms|
         inflectables = []
 
         forms.each { |form|
           word = dic.find_word(word_form = form[re])
 
-          if word.identified? and lexical = word.get_class(wc).first
+          if word.identified? && lexical = word.get_class(wc).first
             inflectables << form if form == lexical.form
           else
             unless inflectables.empty?
-              comp = gra.find_compound(word_form) if word.unknown?
-              word = comp.head || comp if comp && !comp.unknown?
+              word = gra.find_compound_head(word_form) || word if word.unknown?
 
-              if word.attr?(*inflect)
-                suffix = suffixes[word.genders.compact.first]
-                inflectables.each { |lex_form| lex_form << suffix } if suffix
+              if word.attr?(*inflect) && suffix =
+                suffixes[word.genders.compact.first]
+                inflectables.each { |lex_form| lex_form << suffix }
               end
             end
 
-            break
+            break forms
           end
         }
-
-        forms
       }]
     end
 
