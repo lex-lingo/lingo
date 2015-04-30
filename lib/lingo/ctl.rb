@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2014 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2015 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -26,6 +26,7 @@
 
 require 'optparse'
 require 'zip'
+require 'csv'
 
 Zip.unicode_names = true
 
@@ -35,7 +36,7 @@ class Lingo
 
     extend self
 
-    PROG, VERSION, OPTWIDTH = $0, '0.0.2', 18
+    PROG, VERSION, OPTWIDTH = $0, '0.0.3', 21
     PROGNAME, OPTIONS = File.basename(PROG), {}
 
     COMMANDS, ALIASES = {}, Hash.nest { |k|
@@ -80,6 +81,11 @@ Usage: #{PROG} <command> [arguments] [options]
       cmd([:copy,  :c, n], s, "Copy #{q} to local Lingo directory",  'name') if !t
       cmd([:clear, :c, n], s, 'Remove store files to force rebuild', 'name') if  t
     }
+
+    { stats: [:s, 'Extract statistics from analysis file', 'path'],
+      trans: [:t, 'Transpose columns and rows of analysis file', 'path'],
+      diff:  [:d, 'Show differences between two analysis files', 'path1 path2']
+    }.each { |n, (s, *a)| cmd("analysis#{n}", "a#{s}", *a) }
 
     { demo:    [:d, 'Initialize demo directory', '[path]', 'current directory'],
       archive: [:a, 'Create archive of directory', '[path]', 'current directory'],
@@ -148,6 +154,83 @@ Usage: #{PROG} <command> [arguments] [options]
     def do_clearstore
       store = Dir["#{find(:store, false)}.*"]
       FileUtils.rm(store, verbose: true) unless store.empty?
+    end
+
+    def do_analysisstats
+      path = ARGV.shift or missing_arg(:path)
+      no_args
+
+      abort "No such file: #{path}" unless File.exist?(path)
+
+      require 'nuggets/array/histogram'
+
+      name, stats, patterns = path.chomp(File.extname(path)),
+        Hash.nest { [] }, Hash.nest { [] }
+
+      CSV.foreach(path, headers: true) { |row|
+        if token = row['token']
+          stats[:tokens] << token
+        elsif word = row['word']
+          stats[:words] << word
+          pattern = row['pattern'] and patterns[word] << pattern
+        end
+      }
+
+      write = lambda { |key, &block|
+        overwrite?(file = "#{name}.#{key}.csv") &&
+          puts("#{file}: #{CSV.open(file, 'wb', &block)}") }
+
+      stats.each { |key, value| write.(key) { |csv| value.histogram.sort
+        .tap { |h| csv << h.map(&:shift) << h.flatten! }; value.size } }
+
+      write.(:patterns) { |csv|
+        patterns = patterns.sort.map { |key, value| [key, value.histogram] }
+
+        csv << headers = patterns.map(&:last)
+          .flat_map(&:keys).uniq.sort.unshift(word = 'word')
+
+        patterns.each { |key, value| value.default = nil
+          csv << value.update(word => key).values_at(*headers) }
+
+        headers.size - 1
+      }
+    end
+
+    def do_analysistrans
+      path = ARGV.shift or missing_arg(:path)
+      no_args
+
+      abort "No such file: #{path}" unless File.exist?(path)
+
+      return unless overwrite?(file =
+        "#{path.chomp(File.extname(path))}.transposed.csv")
+
+      rows = Hash.nest { [] }
+
+      CSV.foreach(path, headers: true) { |row|
+        rows[row['token'] || row['word']] << row['string'] }
+
+      rows = rows.sort; iter = rows.each_index
+
+      size = CSV.open(file, 'wb') { |csv|
+        csv << rows.map(&:shift)
+
+        rows.flatten!(1).map(&:size).max.times { |j|
+          csv << iter.map { |i| rows[i][j] } }
+      }
+
+      puts "#{file}: #{size}"
+    end
+
+    def do_analysisdiff
+      path1 = ARGV.shift or missing_arg(:path1)
+      path2 = ARGV.shift or missing_arg(:path2)
+      no_args
+
+      abort "No such file: #{path1}" unless File.exist?(path1)
+      abort "No such file: #{path2}" unless File.exist?(path2)
+
+      abort 'Not implemented yet.'
     end
 
     def do_demo
@@ -280,7 +363,7 @@ Usage: #{PROG} <command> [arguments] [options]
     end
 
     def agree?(msg)
-      print "#{msg} (y/n) [n] "
+      print "#{msg} (y/n) [n]: "
 
       case answer = $stdin.gets.chomp
         when /\Ano?\z/i, ''  then nil
