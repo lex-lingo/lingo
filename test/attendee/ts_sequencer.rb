@@ -14,7 +14,7 @@ class TestAttendeeSequencer < AttendeeTestCase
       # AK
       wd('Der|IDF', 'der|w'),
       wd('schöne|IDF', 'schön|a'),
-      wd('Sonnenuntergang|KOM', 'sonnenuntergang|k', 'sonne|s+', 'untergang|s+'),
+      wd('Sonnenuntergang|COM', 'sonnenuntergang|k', 'sonne|s+', 'untergang|s+'),
       ai('EOF|'),
       ai('EOT|')
     ], [
@@ -27,7 +27,7 @@ class TestAttendeeSequencer < AttendeeTestCase
       # AK
       wd('Der|IDF', 'der|w'),
       wd('schöne|IDF', 'schön|a'),
-      wd('Sonnenuntergang|KOM', 'sonnenuntergang|k', 'sonne|s+', 'untergang|s+'),
+      wd('Sonnenuntergang|COM', 'sonnenuntergang|k', 'sonne|s+', 'untergang|s+'),
       wd('sonnenuntergang, schön|SEQ', 'sonnenuntergang, schön|q'),
       ai('EOF|'),
       ai('EOT|')
@@ -307,7 +307,7 @@ class TestAttendeeSequencer < AttendeeTestCase
       # WA + AK
       wd('Der|IDF', 'der|w'),
       wd('schöne|IDF', 'schön|a'),
-      wd('Sonnenuntergang|KOM', 'sonnenuntergang|k', 'sonne|s+', 'untergang|s+'),
+      wd('Sonnenuntergang|COM', 'sonnenuntergang|k', 'sonne|s+', 'untergang|s+'),
       ai('EOF|'),
       ai('EOT|')
     ], [
@@ -321,7 +321,7 @@ class TestAttendeeSequencer < AttendeeTestCase
       # WA + AK
       wd('Der|IDF', 'der|w'),
       wd('schöne|IDF', 'schön|a'),
-      wd('Sonnenuntergang|KOM', 'sonnenuntergang|k', 'sonne|s+', 'untergang|s+'),
+      wd('Sonnenuntergang|COM', 'sonnenuntergang|k', 'sonne|s+', 'untergang|s+'),
       wd('der schön (wa)|SEQ', 'der schön (wa)|q'),
       wd('ak: sonnenuntergang, schön|SEQ', 'ak: sonnenuntergang, schön|q'),
       ai('EOF|'),

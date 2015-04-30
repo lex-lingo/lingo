@@ -93,7 +93,7 @@ class TestAttendeeWordSearcher < AttendeeTestCase
       wd('Lex-Lingo|IDF', 'super indexierungssystem|m'),
       wd('A-Dur|IDF', 'a-dur|s|m', 'a-dur|s|n', 'b-dur|s'),
       wd('Wirkungsort|IDF', 'wirkungsort|s', 'wirkung|s+', 'ort|s+'),
-      wd('Zettelkatalog|KOM', 'zettelkatalog|k', 'zettel|s+', 'katalog|s+'),
+      wd('Zettelkatalog|COM', 'zettelkatalog|k', 'zettel|s+', 'katalog|s+'),
       ai('EOL|')
     ])
   end

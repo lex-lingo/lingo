@@ -227,15 +227,15 @@ class TestGrammar < LingoTestCase
   def test_cache
     lg { |gra|
       assert_equal(
-        wd('informationswissenschaften|KOM', 'informationswissenschaft|k', 'information|s+', 'wissenschaft|s+'),
+        wd('informationswissenschaften|COM', 'informationswissenschaft|k', 'information|s+', 'wissenschaft|s+'),
         gra.find_compound('informationswissenschaften')
       )
       assert_equal(
-        wd('informationswissenschaften|KOM', 'informationswissenschaft|k', 'information|s+', 'wissenschaft|s+'),
+        wd('informationswissenschaften|COM', 'informationswissenschaft|k', 'information|s+', 'wissenschaft|s+'),
         gra.find_compound('informationswissenschaften')
       )
       assert_equal(
-        wd('informationswissenschaften|KOM', 'informationswissenschaft|k', 'information|s+', 'wissenschaft|s+'),
+        wd('informationswissenschaften|COM', 'informationswissenschaft|k', 'information|s+', 'wissenschaft|s+'),
         gra.find_compound('informationswissenschaften')
       )
     }
@@ -244,97 +244,97 @@ class TestGrammar < LingoTestCase
   def test_find_compound
     lg { |gra|
       assert_equal(
-        wd('informationswissenschaften|KOM', 'informationswissenschaft|k', 'information|s+', 'wissenschaft|s+'),
+        wd('informationswissenschaften|COM', 'informationswissenschaft|k', 'information|s+', 'wissenschaft|s+'),
         gra.find_compound('informationswissenschaften')
       )
 
       assert_equal(
-        wd('cd-rom-technologie|KOM', 'cd-rom-technologie|k', 'cd-rom|s+|f', 'cd-rom|s+|m', 'technologie|s+|f'),
+        wd('cd-rom-technologie|COM', 'cd-rom-technologie|k', 'cd-rom|s+|f', 'cd-rom|s+|m', 'technologie|s+|f'),
         gra.find_compound('cd-rom-technologie')
       )
 
       assert_equal(
-        wd('albert-ludwigs-universität|KOM', 'albert-ludwigs-universität|k', 'albert|e+', 'ludwig|e+', 'universität|s+'),
+        wd('albert-ludwigs-universität|COM', 'albert-ludwigs-universität|k', 'albert|e+', 'ludwig|e+', 'universität|s+'),
         gra.find_compound('albert-ludwigs-universität')
       )
 
       assert_equal(
-        wd('client-server-system|KOM', 'client-server-system|k', 'client|s+', 'server|s+', 'system|s+'),
+        wd('client-server-system|COM', 'client-server-system|k', 'client|s+', 'server|s+', 'system|s+'),
         gra.find_compound('client-server-system')
       )
 
       assert_equal(
-        wd('benutzerforschung|KOM', 'benutzerforschung|k', 'benutzer|s+', 'forschung|s+'),
+        wd('benutzerforschung|COM', 'benutzerforschung|k', 'benutzer|s+', 'forschung|s+'),
         gra.find_compound('benutzerforschung')
       )
 
       assert_equal(
-        wd('clustersuche|KOM', 'clustersuche|k', 'cluster|s+', 'suche|s+', 'suchen|v+'),
+        wd('clustersuche|COM', 'clustersuche|k', 'cluster|s+', 'suche|s+', 'suchen|v+'),
         gra.find_compound('clustersuche')
       )
 
       assert_equal(
-        wd('titelkatalogstitel|KOM', 'titelkatalogstitel|k', 'titel|s+', 'katalog|s+', 'titel|s+'),
+        wd('titelkatalogstitel|COM', 'titelkatalogstitel|k', 'titel|s+', 'katalog|s+', 'titel|s+'),
         gra.find_compound('titelkatalogstitel')
       )
 
       assert_equal(
-        wd('titelkatalogstiteltitel|KOM', 'titelkatalogstiteltitel|k', 'titel|s+', 'katalog|s+', 'titel|s+', 'titel|s+'),
+        wd('titelkatalogstiteltitel|COM', 'titelkatalogstiteltitel|k', 'titel|s+', 'katalog|s+', 'titel|s+', 'titel|s+'),
         gra.find_compound('titelkatalogstiteltitel')
       )
 
       assert_equal(
-        wd('titelbestandsbestände|KOM', 'titelbestandsbestand|k', 'titel|s+', 'bestand|s+', 'bestand|s+', 'bestehen|v+'),
+        wd('titelbestandsbestände|COM', 'titelbestandsbestand|k', 'titel|s+', 'bestand|s+', 'bestand|s+', 'bestehen|v+'),
         gra.find_compound('titelbestandsbestände')
       )
 
       assert_equal(
-        wd('hasenbraten|KOM', 'hasenbraten|k', 'hase|s+', 'braten|v+'),
+        wd('hasenbraten|COM', 'hasenbraten|k', 'hase|s+', 'braten|v+'),
         gra.find_compound('hasenbraten')
       )
 
       assert_equal(
-        wd('nasenlaufen|KOM', 'nasenlaufen|k', 'nase|s+', 'laufen|v+'),
+        wd('nasenlaufen|COM', 'nasenlaufen|k', 'nase|s+', 'laufen|v+'),
         gra.find_compound('nasenlaufen')
       )
 
       assert_equal(
-        wd('nasenlaufens|KOM', 'nasenlaufen|k', 'nase|s+', 'laufen|v+'),
+        wd('nasenlaufens|COM', 'nasenlaufen|k', 'nase|s+', 'laufen|v+'),
         gra.find_compound('nasenlaufens')
       )
 
       assert_equal(
-        wd('arrafat-nachfolgebedarf|KOM', 'arrafat-nachfolgebedarf|k', 'arrafat|x+', 'nachfolge|s+', 'bedarf|s+'),
+        wd('arrafat-nachfolgebedarf|COM', 'arrafat-nachfolgebedarf|k', 'arrafat|x+', 'nachfolge|s+', 'bedarf|s+'),
         gra.find_compound('arrafat-nachfolgebedarf')
       )
 
       assert_equal(
-        wd('nachfolge-arrafat|KOM', 'nachfolge-arrafat|k', 'nachfolge|s+', 'arrafat|x+'),
+        wd('nachfolge-arrafat|COM', 'nachfolge-arrafat|k', 'nachfolge|s+', 'arrafat|x+'),
         gra.find_compound('nachfolge-arrafat')
       )
 
       assert_equal(
-        wd('morgenonkelmantel|KOM', 'morgenonkelmantel|k', 'morgen|w+', 'morgen|s+', 'onkel|s+', 'mantel|s+'),
+        wd('morgenonkelmantel|COM', 'morgenonkelmantel|k', 'morgen|w+', 'morgen|s+', 'onkel|s+', 'mantel|s+'),
         gra.find_compound('morgenonkelmantel')
       )
 
       assert_equal(
-        wd('arrafat-nachfolger|KOM', 'arrafat-nachfolger|k', 'arrafat|x+', 'nachfolger|s+'),
+        wd('arrafat-nachfolger|COM', 'arrafat-nachfolger|k', 'arrafat|x+', 'nachfolger|s+'),
         gra.find_compound('arrafat-nachfolger')
       )
 
       assert_equal(
-        wd('cd-rom-technologie|KOM', 'cd-rom-technologie|k', 'cd-rom|s+|f', 'cd-rom|s+|m', 'technologie|s+|f'),
+        wd('cd-rom-technologie|COM', 'cd-rom-technologie|k', 'cd-rom|s+|f', 'cd-rom|s+|m', 'technologie|s+|f'),
         gra.find_compound('cd-rom-technologie')
       )
 
       assert_equal(
-        wd('albert-ludwigs-universität|KOM', 'albert-ludwigs-universität|k', 'albert|e+', 'ludwig|e+', 'universität|s+'),
+        wd('albert-ludwigs-universität|COM', 'albert-ludwigs-universität|k', 'albert|e+', 'ludwig|e+', 'universität|s+'),
         gra.find_compound('albert-ludwigs-universität')
       )
 
       assert_equal(
-        wd('benutzerforschung|KOM', 'benutzerforschung|k', 'benutzer|s+', 'forschung|s+'),
+        wd('benutzerforschung|COM', 'benutzerforschung|k', 'benutzer|s+', 'forschung|s+'),
         gra.find_compound('benutzerforschung')
       )
     }
@@ -372,7 +372,7 @@ class TestGrammar < LingoTestCase
 
   def test_max_parts
     lg { |gra|
-      assert_equal(wd('baumsbaumsbaum|KOM', 'baumsbaumsbaum|k', 'baum|s+', 'baum|s+', 'baum|s+'), gra.find_compound('baumsbaumsbaum'))
+      assert_equal(wd('baumsbaumsbaum|COM', 'baumsbaumsbaum|k', 'baum|s+', 'baum|s+', 'baum|s+'), gra.find_compound('baumsbaumsbaum'))
       assert_equal(wd('baumsbaumsbaumsbaumsbaumsbaum|?'), gra.find_compound('baumsbaumsbaumsbaumsbaumsbaum'))
     }
   end

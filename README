@@ -265,7 +265,7 @@ truncated for clarity).
   <Lingo = [(lingo/s), (lingo/e)]>
   <-|?>
   <A|?>
-  <full-featured|KOM = [(full-featured/k), (full/s+), (full/a+), (full/v+), (featured/a+)]>
+  <full-featured|COM = [(full-featured/k), (full/s+), (full/a+), (full/v+), (featured/a+)]>
   <automatic = [(automatic/s), (automatic/a)]>
   <indexing = [(index/v)]>
   <system = [(system/s)]>

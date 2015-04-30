@@ -66,9 +66,9 @@ class Lingo
     #   out> <Lingo|?>
     #   out> :,/PUNC:
     #   out> <ein = [(ein/w)]>
-    #   out> <Indexierungssystem|KOM = [(indexierungssystem/k), (indexierung/s), (system/s)]>
+    #   out> <Indexierungssystem|COM = [(indexierungssystem/k), (indexierung/s), (system/s)]>
     #   out> <mit = [(mit/w)]>
-    #   out> <Kompositumerkennung|KOM = [(kompositumerkennung/k), (erkennung/s), (kompositum/s)]>
+    #   out> <Kompositumerkennung|COM = [(kompositumerkennung/k), (erkennung/s), (kompositum/s)]>
     #   out> :./PUNC:
     #   out> *EOL('test.txt')
     #   out> *EOF('test.txt')

@@ -54,7 +54,7 @@ class Lingo
     WA_UNSET      = '-'
     WA_IDENTIFIED = 'IDF'
     WA_UNKNOWN    = '?'
-    WA_COMPOUND   = 'KOM'
+    WA_COMPOUND   = 'COM'
     WA_MULTIWORD  = 'MUL'
     WA_SEQUENCE   = 'SEQ'
     WA_UNKMULPART = 'MU?'
