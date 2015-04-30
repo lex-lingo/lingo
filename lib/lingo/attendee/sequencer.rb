@@ -150,7 +150,7 @@ class Lingo
             end
 
             att = (tok = obj.is_a?(Token)) ? obj.number? ? NUM : UNK :
-              obj.is_a?(Word) && !obj.unknown? ? obj.attrs(false) : UNK
+              obj.is_a?(Word) && !obj.unknown? ? obj.compound_attrs : UNK
 
             if (att &= @cls).empty?
               find_seq(*arg)

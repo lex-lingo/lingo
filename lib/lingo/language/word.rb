@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2014 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2015 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -83,30 +83,26 @@ class Lingo
 
       attr_reader :token
 
-      attr_writer :lexicals
-
-      def lexicals(compound_parts = true)
-        if !compound_parts && attr == WA_COMPOUND
-          @lexicals.select { |lex| lex.attr == LA_COMPOUND }
-        else
-          @lexicals
-        end
-      end
+      attr_accessor :lexicals
 
       def add_lexicals(lex)
-        @lexicals.concat(lex - @lexicals)
+        lexicals.concat(lex - lexicals)
       end
 
       def attr?(*attr)
         !(attrs & attr).empty?
       end
 
-      def attrs(compound_parts = true)
-        lexicals(compound_parts).map { |i| i.attr }
+      def attrs
+        lexicals.map(&:attr)
       end
 
-      def genders(compound_parts = true)
-        lexicals(compound_parts).map { |i| i.gender }
+      def compound_attrs
+        attr == WA_COMPOUND ? attrs.grep(LA_COMPOUND) : attrs
+      end
+
+      def genders
+        lexicals.map(&:gender)
       end
 
       def identify(lex, wc = nil)
@@ -152,7 +148,7 @@ class Lingo
 
       def <<(*lex)
         lex.flatten!
-        @lexicals.concat(lex)
+        lexicals.concat(lex)
         self
       end
 
