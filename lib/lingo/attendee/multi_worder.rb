@@ -118,7 +118,7 @@ class Lingo
         if [:RECORD, :EOF].include?(cmd)
           @eof_handling = true
 
-          while valid_tokens_in_buffer > 1
+          while process_buffer?(2)
             process_buffer
           end
 
@@ -132,7 +132,7 @@ class Lingo
 
       def form_at(index)
         obj = @buffer[index]
-        obj.form if obj.is_a?(WordForm)
+        obj.form if obj.is_a?(WordForm) && obj.form != CHAR_PUNCT
       end
 
       def forward_number_of_token(len = default = @buffer.size, punct = !default)
@@ -144,61 +144,49 @@ class Lingo
         end while len > 0
       end
 
-      def valid_tokens_in_buffer
-        @buffer.count { |item| item.form != CHAR_PUNCT }
-      end
-
-      def process_buffer?
-        valid_tokens_in_buffer >= @expected_tokens_in_buffer
+      def process_buffer?(num = @expected_tokens_in_buffer)
+        @buffer.count { |item| item.form != CHAR_PUNCT } >= num
       end
 
       def process_buffer
-        unless form_at(0) == CHAR_PUNCT
-          unless (res = check_multiword_key(3)).empty?
-            len = res.map { |r| r.is_a?(Lexical) ? r.form.count(' ') + 1 : r }
-            len.sort!.reverse!
-
-            unless (max = len.first) > 3
+        if form_at(0)
+          if res = check_multiword(3, len = [])
+            if (max = len.first) <= 3
               create_and_forward_multiword(3, res)
               forward_number_of_token(3)
+            elsif !@eof_handling && @buffer.size < max
+              @expected_tokens_in_buffer = max
             else
-              unless @eof_handling || @buffer.size >= max
-                @expected_tokens_in_buffer = max
-              else
-                forward_number_of_token(len.find { |l|
-                  r = check_multiword_key(l)
-                  create_and_forward_multiword(l, r) unless r.empty?
-                } || 1)
+              forward_number_of_token(len.find { |l|
+                create_and_forward_multiword(l) } || 1)
 
-                @expected_tokens_in_buffer = 3
-                process_buffer if process_buffer?
-              end
+              @expected_tokens_in_buffer = 3
+              process_buffer if process_buffer?
             end
 
             return
           end
 
-          unless (res = check_multiword_key(2)).empty?
-            create_and_forward_multiword(2, res)
-            forward_number_of_token(1)
-          end
+          create_and_forward_multiword(2) && forward_number_of_token(1)
         end
 
         forward_number_of_token(1, false)
         @expected_tokens_in_buffer = 3
       end
 
-      def create_and_forward_multiword(len, lex)
+      def create_and_forward_multiword(len, lex = check_multiword(len))
+        return unless lex
+
         pos, parts = 0, []
 
         begin
-          if (form = form_at(pos)) == CHAR_PUNCT
-            @buffer.delete_at(pos)
-            parts[-1] += CHAR_PUNCT
-          else
+          if form = form_at(pos)
             @buffer[pos].attr = WA_UNKMULPART if @buffer[pos].unknown?
             parts << form
             pos += 1
+          else
+            @buffer.delete_at(pos)
+            parts[-1] += CHAR_PUNCT
           end
         end while pos < len
 
@@ -209,10 +197,10 @@ class Lingo
         forward(wrd)
       end
 
-      def check_multiword_key(len)
-        return [] if valid_tokens_in_buffer < len
+      def check_multiword(len, lst = nil)
+        return unless process_buffer?(len)
 
-        seq = []
+        seq, mul, sep = [], [], ' '
 
         @buffer.each { |obj|
           next seq << [obj] unless obj.is_a?(WordForm)
@@ -232,17 +220,18 @@ class Lingo
         }
 
         if @combine
-          mul = []
-
           seq.shift.product(*seq) { |key|
-            @mul_dic.select(key.join(' '), mul)
+            @mul_dic.select(key.join(sep), mul)
             break unless @all || mul.empty?
           } && mul.uniq!
-
-          mul
         else
-          @mul_dic.select(seq.map! { |i,| i }.join(' '))
+          @mul_dic.select(seq.map! { |i,| i }.join(sep), mul)
         end
+
+        lst.push(seq.size).concat(mul.map { |r| r.is_a?(Lexical) ?
+          r.form.count(sep) + 1 : r }).sort!.reverse!.uniq! if lst
+
+        mul unless mul.empty?
       end
 
     end

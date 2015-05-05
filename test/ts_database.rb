@@ -234,6 +234,103 @@ Wort2=
     })
   end
 
+  def test_singleword_hyphenate
+    compare({
+      'txt-format' => 'SingleWord',
+      'use-lex'    => set_config('lex',
+        'name'       => 'de/lingo-dic.txt',
+        'txt-format' => 'WordClass',
+        'separator'  => '='
+      ),
+      'hyphenate'  => true
+    }, @singleword, {
+      'wort1'                           => 'wort1#s',
+      'wort2'                           => 'wort2#s',
+      'ganz groß und blöd mist'         => 'ganz großer und blöder mist#s',
+      'ganz groß und blöd-mist'         => 'ganz großer und blöder mist#s',
+      'ganz groß und-blöd mist'         => 'ganz großer und blöder mist#s',
+      'ganz groß und-blöd-mist'         => 'ganz großer und blöder mist#s',
+      'ganz groß-und blöd mist'         => 'ganz großer und blöder mist#s',
+      'ganz groß-und blöd-mist'         => 'ganz großer und blöder mist#s',
+      'ganz groß-und-blöd mist'         => 'ganz großer und blöder mist#s',
+      'ganz groß-und-blöd-mist'         => 'ganz großer und blöder mist#s',
+      'ganz-groß und blöd mist'         => 'ganz großer und blöder mist#s',
+      'ganz-groß und blöd-mist'         => 'ganz großer und blöder mist#s',
+      'ganz-groß und-blöd mist'         => 'ganz großer und blöder mist#s',
+      'ganz-groß und-blöd-mist'         => 'ganz großer und blöder mist#s',
+      'ganz-groß-und blöd mist'         => 'ganz großer und blöder mist#s',
+      'ganz-groß-und blöd-mist'         => 'ganz großer und blöder mist#s',
+      'ganz-groß-und-blöd mist'         => 'ganz großer und blöder mist#s',
+      'juristisch person'               => 'juristische personen#s',
+      'hoch schnell weit'               => 'höher schneller weiter#s|*4',
+      'hoch schnell-weit'               => 'höher schneller weiter#s',
+      'hoch-schnell weit'               => 'höher schneller weiter#s',
+      'ganz groß und blöd quatsch'      => 'ganz großer und blöder quatsch#s',
+      'ganz groß und blöd-quatsch'      => 'ganz großer und blöder quatsch#s',
+      'ganz groß und-blöd quatsch'      => 'ganz großer und blöder quatsch#s',
+      'ganz groß und-blöd-quatsch'      => 'ganz großer und blöder quatsch#s',
+      'ganz groß-und blöd quatsch'      => 'ganz großer und blöder quatsch#s',
+      'ganz groß-und blöd-quatsch'      => 'ganz großer und blöder quatsch#s',
+      'ganz groß-und-blöd quatsch'      => 'ganz großer und blöder quatsch#s',
+      'ganz groß-und-blöd-quatsch'      => 'ganz großer und blöder quatsch#s',
+      'ganz-groß und blöd quatsch'      => 'ganz großer und blöder quatsch#s',
+      'ganz-groß und blöd-quatsch'      => 'ganz großer und blöder quatsch#s',
+      'ganz-groß und-blöd quatsch'      => 'ganz großer und blöder quatsch#s',
+      'ganz-groß und-blöd-quatsch'      => 'ganz großer und blöder quatsch#s',
+      'ganz-groß-und blöd quatsch'      => 'ganz großer und blöder quatsch#s',
+      'ganz-groß-und blöd-quatsch'      => 'ganz großer und blöder quatsch#s',
+      'ganz-groß-und-blöd quatsch'      => 'ganz großer und blöder quatsch#s',
+      'hoch schnell weit groß'          => 'höher schneller weiter größer#s',
+      'hoch schnell weit-groß'          => 'höher schneller weiter größer#s',
+      'hoch schnell-weit groß'          => 'höher schneller weiter größer#s',
+      'hoch schnell-weit-groß'          => 'höher schneller weiter größer#s',
+      'hoch-schnell weit groß'          => 'höher schneller weiter größer#s',
+      'hoch-schnell weit-groß'          => 'höher schneller weiter größer#s',
+      'hoch-schnell-weit groß'          => 'höher schneller weiter größer#s',
+      'ganz groß und blöd schwach sinn' => 'ganz großer und blöder schwach sinn#s',
+      'ganz groß und blöd schwach-sinn' => 'ganz großer und blöder schwach sinn#s',
+      'ganz groß und blöd-schwach sinn' => 'ganz großer und blöder schwach sinn#s',
+      'ganz groß und blöd-schwach-sinn' => 'ganz großer und blöder schwach sinn#s',
+      'ganz groß und-blöd schwach sinn' => 'ganz großer und blöder schwach sinn#s',
+      'ganz groß und-blöd schwach-sinn' => 'ganz großer und blöder schwach sinn#s',
+      'ganz groß und-blöd-schwach sinn' => 'ganz großer und blöder schwach sinn#s',
+      'ganz groß und-blöd-schwach-sinn' => 'ganz großer und blöder schwach sinn#s',
+      'ganz groß-und blöd schwach sinn' => 'ganz großer und blöder schwach sinn#s',
+      'ganz groß-und blöd schwach-sinn' => 'ganz großer und blöder schwach sinn#s',
+      'ganz groß-und blöd-schwach sinn' => 'ganz großer und blöder schwach sinn#s',
+      'ganz groß-und blöd-schwach-sinn' => 'ganz großer und blöder schwach sinn#s',
+      'ganz groß-und-blöd schwach sinn' => 'ganz großer und blöder schwach sinn#s',
+      'ganz groß-und-blöd schwach-sinn' => 'ganz großer und blöder schwach sinn#s',
+      'ganz groß-und-blöd-schwach sinn' => 'ganz großer und blöder schwach sinn#s',
+      'ganz groß-und-blöd-schwach-sinn' => 'ganz großer und blöder schwach sinn#s',
+      'ganz-groß und blöd schwach sinn' => 'ganz großer und blöder schwach sinn#s',
+      'ganz-groß und blöd schwach-sinn' => 'ganz großer und blöder schwach sinn#s',
+      'ganz-groß und blöd-schwach sinn' => 'ganz großer und blöder schwach sinn#s',
+      'ganz-groß und blöd-schwach-sinn' => 'ganz großer und blöder schwach sinn#s',
+      'ganz-groß und-blöd schwach sinn' => 'ganz großer und blöder schwach sinn#s',
+      'ganz-groß und-blöd schwach-sinn' => 'ganz großer und blöder schwach sinn#s',
+      'ganz-groß und-blöd-schwach sinn' => 'ganz großer und blöder schwach sinn#s',
+      'ganz-groß und-blöd-schwach-sinn' => 'ganz großer und blöder schwach sinn#s',
+      'ganz-groß-und blöd schwach sinn' => 'ganz großer und blöder schwach sinn#s',
+      'ganz-groß-und blöd schwach-sinn' => 'ganz großer und blöder schwach sinn#s',
+      'ganz-groß-und blöd-schwach sinn' => 'ganz großer und blöder schwach sinn#s',
+      'ganz-groß-und blöd-schwach-sinn' => 'ganz großer und blöder schwach sinn#s',
+      'ganz-groß-und-blöd schwach sinn' => 'ganz großer und blöder schwach sinn#s',
+      'ganz-groß-und-blöd schwach-sinn' => 'ganz großer und blöder schwach sinn#s',
+      'ganz-groß-und-blöd-schwach sinn' => 'ganz großer und blöder schwach sinn#s',
+      'ganz groß und'                   => '*4|*5|*6',
+      'ganz groß und-blöd'              => '*4|*5',
+      'ganz groß und-blöd-schwach'      => '*4',
+      'ganz groß-und blöd'              => '*4|*5',
+      'ganz groß-und blöd-schwach'      => '*4',
+      'ganz groß-und-blöd schwach'      => '*4',
+      'ganz-groß und blöd'              => '*4|*5',
+      'ganz-groß und blöd-schwach'      => '*4',
+      'ganz-groß und-blöd schwach'      => '*4',
+      'ganz-groß-und blöd schwach'      => '*4'
+    })
+  end
+
   def test_singleword_crypt
     compare({
       'txt-format' => 'SingleWord',
@@ -388,13 +485,13 @@ Wort2=
     FileUtils.mkdir_p(File.dirname(TEST_FILE))
     File.open(TEST_FILE, 'w', encoding: Lingo::ENC) { |f| f.write(input) }
 
-    Lingo::Database.open(set_config('tst', config.merge('name' => TEST_FILE)), @lingo) { |db|
-      if block_given?
-        yield db
-      else
-        assert_equal(output, db.to_h.tap { |store| store.delete(Lingo::Database::SYS_KEY) })
-      end
-    }
+    id, err = set_config('tst', config.merge('name' => TEST_FILE)), nil
+
+    Lingo::Database.open(id, @lingo) { |db| begin
+      block_given? ? yield(db) : assert_equal(output, db.to_h
+        .tap { |h| h.delete(Lingo::Database::SYS_KEY) }); rescue => err; end }
+
+    raise err if err
   ensure
     cleanup_store
   end

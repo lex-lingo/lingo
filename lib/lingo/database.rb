@@ -234,30 +234,39 @@ class Lingo
     def convert(verbose = lingo.config.stderr.tty?)
       src = Source.get(config.fetch('txt-format', 'key_value'), @id, lingo)
 
-      sep, key_map, val_map = prepare_lex
+      sep, hyphenate, key_map, val_map = prepare_lex
 
       Progress.new(self, src, verbose) { |progress| create {
         src.each { |key, val|
           progress << src.pos
 
-          if key
-            key.chomp!('.')
+          set_key(src, key, val, sep) { |keys, cnt|
+            key = keys.map!(&key_map).join(sep)
+            val = val.map { |v| val_map[v.split(sep)].join(sep) } if val_map
 
-            if sep && key.include?(sep)
-              key = key.split(sep).map!(&key_map).join(sep)
-              val = val.map { |v| val_map[v.split(sep)].join(sep) } if val_map
+            hyphenate.repeated_permutation(cnt - 1) { |h| set_key(src, keys.
+              zip(h).join, val, sep) unless h.uniq.size == 1 } if hyphenate
 
-              if (cnt = key.count(sep)) > 2
-                self[key.split(sep)[0, 3].join(sep)] = ["#{KEY_REF}#{cnt + 1}"]
-              end
-            end
-          end
-
-          src.set(self, key, val)
+            [key, val]
+          }
         }
 
         uptodate!
       } }
+    end
+
+    def set_key(src, key, val, sep, len = 3)
+      if key
+        key.chomp!('.')
+
+        if sep && key.include?(sep)
+          keys = key.split(sep); cnt = keys.size
+          key, val = yield keys, cnt if block_given?
+          self[keys[0, len].join(sep)] = ["#{KEY_REF}#{cnt}"] if cnt > len
+        end
+      end
+
+      src.set(self, key, val)
     end
 
     def prepare_lex
@@ -284,7 +293,7 @@ class Lingo
         end
       end
 
-      [' ', lambda { |form|
+      [sep = ' ', config['hyphenate'] && [sep, '-'], lambda { |form|
         word = dic.find_word(form)
         word.unknown? ? gra.find_compound(form).compo_norm : word.norm
       }, inflect && lambda { |forms|

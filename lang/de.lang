@@ -56,12 +56,13 @@ language:
       usr-dic: { name: de/user-dic.txt,  txt-format: WordClass, separator: '=' }
 
       # Test dictionaries
-      tst-dic: { name: de/test_dic.txt, txt-format: WordClass }              # TEST: Lesen von zwei Quellen
-      tst-syn: { name: de/test_syn.txt, txt-format: MultiValue, def-wc: y }  # TEST: Mehrere Datenquellen
-      tst-mul: { name: de/test_mul.txt, use-lex: sys-dic, def-wc: m }        # TEST: Mehrere Multiwörterbücher
-      tst-mu2: { name: de/test_mu2.txt, use-lex: sys-dic, def-wc: m }        # TEST: Mehrere Multiwörterbücher
-      tst-sgw: { name: de/test_sgw.txt, txt-format: SingleWord }             # TEST: SingleWord-Format
-      tst-gen: { name: de/test_gen.txt, txt-format: WordClass }              # TEST: Genus
+      tst-dic: { name: de/test_dic.txt, txt-format: WordClass }
+      tst-syn: { name: de/test_syn.txt, txt-format: MultiValue, def-wc: y }
+      tst-mul: { name: de/test_mul.txt, use-lex: sys-dic, def-wc: m }
+      tst-mu2: { name: de/test_mu2.txt, use-lex: sys-dic, def-wc: m }
+      tst-muh: { name: de/test_muh.txt, txt-format: SingleWord, use-lex: sys-dic, def-wc: m, hyphenate: true }
+      tst-sgw: { name: de/test_sgw.txt, txt-format: SingleWord }
+      tst-gen: { name: de/test_gen.txt, txt-format: WordClass }
 
     compound:
       min-word-size:     '7'
