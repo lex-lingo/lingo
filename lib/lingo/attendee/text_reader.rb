@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2014 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2015 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -111,6 +111,8 @@ class Lingo
       def init
         get_files
 
+        @encoding = get_enc
+
         @filter   = get_key('filter', false)
         @progress = get_key('progress', false)
 
@@ -139,7 +141,7 @@ class Lingo
         command(:FILE, path)
 
         io = !stdin?(path) ? open_file(name = path) : begin
-          stdin = lingo.config.stdin.set_encoding(ENC)
+          stdin = lingo.config.stdin.set_encoding(@encoding)
           @progress ? StringIO.new(stdin.read) : stdin
         end
 
@@ -196,7 +198,7 @@ class Lingo
         type = xml ? :XML : :HTML
 
         if Object.const_defined?(:Nokogiri)
-          text_enum(Nokogiri.send(type, io, nil, ENC).children)
+          text_enum(Nokogiri.send(type, io, nil, @encoding).children)
         else
           cancel_filter(type, :nokogiri)
         end
@@ -236,7 +238,7 @@ class Lingo
       end
 
       def open_file(path)
-        File.open(path, 'rb', encoding: ENC)
+        File.open(path, 'rb', encoding: @encoding)
       end
 
       def with_tempfile(name)

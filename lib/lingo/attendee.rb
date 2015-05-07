@@ -138,6 +138,12 @@ class Lingo
       end
     end
 
+    def get_enc(key = 'encoding', default = ENC)
+      Encoding.find(get_key(key, default))
+    rescue ArgumentError => err
+      raise ConfigLoadError.new(err)
+    end
+
     def dictionary(src, mod)
       Language::Dictionary.new({ 'source' => src, 'mode' => mod }, lingo)
     end
