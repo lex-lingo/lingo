@@ -117,16 +117,10 @@ class Lingo
             end
           when :EOL
             @no_sep = true
-
-            unless @lir
-              @file.puts unless @no_puts
-            end
+            @file.puts unless @lir || @no_puts
           when :EOF
             flush_lir_buffer if @lir
-
-            unless stdout?(@filename)
-              @file.close
-            end
+            @file.close unless stdout?(@filename)
         end
       end
 

@@ -126,41 +126,40 @@ class Lingo
       end
 
       def control(cmd, *)
-        if cmd == :TALK
-          command(:LIR) if @lir
-          @files.each { |i| spool(i) }
+        return unless cmd == :TALK
 
-          command(:EOT)
-          :skip_command
-        end
+        command(:LIR) if @lir
+
+        @files.each { |path|
+          command(:FILE, path)
+
+          io = !stdin?(path) ? open_file(name = path) : begin
+            stdin = lingo.config.stdin.set_encoding(@encoding)
+            @progress ? StringIO.new(stdin.read) : stdin
+          end
+
+          Progress.new(self, @progress && io.size, name) { |progress|
+            pos = 0 unless pos?(io = filter(io, path, progress))
+
+            io.each { |line|
+              progress << offset = pos ? pos += line.bytesize : io.pos
+
+              line =~ @skip ? nil : line =~ @lir ?
+                command(:RECORD, $1 || $&) : begin
+                  line.sub!(@cut, '') if @cut
+                  forward(line, offset) unless line.empty?
+                end
+            }
+          }
+
+          command(:EOF, path)
+        }
+
+        command(:EOT)
+        :skip_command
       end
 
       private
-
-      def spool(path)
-        command(:FILE, path)
-
-        io = !stdin?(path) ? open_file(name = path) : begin
-          stdin = lingo.config.stdin.set_encoding(@encoding)
-          @progress ? StringIO.new(stdin.read) : stdin
-        end
-
-        Progress.new(self, @progress && io.size, name) { |progress|
-          pos = 0 unless pos?(io = filter(io, path, progress))
-
-          io.each { |line|
-            progress << offset = pos ? pos += line.bytesize : io.pos
-
-            line =~ @skip ? nil : line =~ @lir ?
-              command(:RECORD, $1 || $&) : begin
-                line.sub!(@cut, '') if @cut
-                forward(line, offset) unless line.empty?
-              end
-          }
-        }
-
-        command(:EOF, path)
-      end
 
       def filter(io, path, progress)
         case @filter == true ? file_type(io, path) : @filter.to_s
@@ -172,56 +171,47 @@ class Lingo
         end
       end
 
-      def filter_pdftotext(io, path, progress)
-        if cmd = File.which(name = 'pdftotext')
-          with_tempfile(name) { |tempfile|
-            pdf_path = stdin?(path) ? tempfile[:pdf, io] : path
-            system(cmd, '-q', pdf_path, txt_path = tempfile[:txt])
+      def filter_pdftotext(io, path, progress, name = 'pdftotext')
+        cancel_filter(:PDF, name, :command) unless cmd = File.which(name)
 
-            progress.init(File.size(txt_path)) if @progress
-            open_file(txt_path)
-          }
-        else
-          cancel_filter(:PDF, name, :command)
-        end
+        with_tempfile(name) { |tempfile|
+          pdf_path = stdin?(path) ? tempfile[:pdf, io] : path
+          system(cmd, '-q', pdf_path, txt_path = tempfile[:txt])
+
+          progress.init(File.size(txt_path)) if @progress
+          open_file(txt_path)
+        }
       end
 
       def filter_pdf(io)
-        if Object.const_defined?(:PDF) && PDF.const_defined?(:Reader)
-          text_enum(PDF::Reader.new(io).pages)
-        else
-          cancel_filter(:PDF, 'pdf-reader')
-        end
+        Object.const_defined?(:PDF) && PDF.const_defined?(:Reader) ? text_enum(
+          PDF::Reader.new(io).pages) : cancel_filter(:PDF, 'pdf-reader')
       end
 
-      def filter_html(io, xml = false)
-        type = xml ? :XML : :HTML
-
-        if Object.const_defined?(:Nokogiri)
-          text_enum(Nokogiri.send(type, io, nil, @encoding).children)
-        else
-          cancel_filter(type, :nokogiri)
-        end
+      def filter_html(io, xml = false, type = xml ? :XML : :HTML)
+        Object.const_defined?(:Nokogiri) ? text_enum(Nokogiri.send(type,
+          io, nil, @encoding).children) : cancel_filter(type, :nokogiri)
       end
 
       def file_type(io, path)
-        if Object.const_defined?(:FileMagic) && io.respond_to?(:rewind)
-          type = FileMagic.fm(:mime, simplified: true).io(io, 256)
-          io.rewind
-          type
-        elsif Object.const_defined?(:MIME) && MIME.const_defined?(:Types)
-          if type = MIME::Types.of(path).first
-            type.content_type
-          else
-            cancel('Filters not available. File type could not be determined.')
-          end
-        else
-          cancel("Filters not available. Please install the `ruby-filemagic' or `mime-types' gem.")
-        end
+        Object.const_defined?(:FileMagic) && io.respond_to?(:rewind) ?
+          FileMagic.fm(:mime, simplified: true).io(io, 256).tap { io.rewind } :
+        Object.const_defined?(:MIME) && MIME.const_defined?(:Types) ?
+          (type = MIME::Types.of(path).first) ? type.content_type :
+          cancel_filters('File type could not be determined.') :
+          cancel_filters(please_install(:gem, 'ruby-filemagic', 'mime-types'))
+      end
+
+      def cancel_filters(msg)
+        cancel("Filters not available. #{msg}")
       end
 
       def cancel_filter(type, name, what = :gem)
-        cancel("#{type} filter not available. Please install the `#{name}' #{what}.")
+        cancel("#{type} filter not available. #{please_install(what, name)}")
+      end
+
+      def please_install(what, *names)
+        "Please install the `#{names.join("' or `")}' #{what}."
       end
 
       def cancel(msg)
@@ -265,31 +255,17 @@ class Lingo
 
         @files = []
 
-        Array(get_key('files', '-')).each { |path|
-          stdin?(path) ? @files << path :
-            add_files(File.expand_path(path), *args)
-        }
+        Array(get_key('files', '-')).each { |path| stdin?(path) ?
+          @files << path : add_files(File.expand_path(path), *args) }
       end
 
       def add_files(path, glob, recursive = false)
-        entries = Dir[path].sort!
-        raise FileNotFoundError.new(path) if entries.empty?
+        raise FileNotFoundError.new(path) if (entries = Dir[path]).sort!.empty?
 
         entries.each { |entry|
-          if File.directory?(entry)
-            if recursive
-              Find.find(entry) { |match|
-                if File.file?(match) && File.fnmatch?(glob, match)
-                  @files << match
-                end
-              }
-            else
-              add_files(File.join(entry, glob), glob)
-            end
-          else
-            @files << entry
-          end
-        }
+          !File.directory?(entry) ? @files << entry : !recursive ?
+            add_files(File.join(entry, glob), glob) : Find.find(entry) { |match|
+              @files << match if File.file?(match) && File.fnmatch?(glob, match) } }
       end
 
     end

@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2014 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2015 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -39,6 +39,10 @@ class Lingo
 
       HYPHEN_RE = %r{\A(.+)-([^-]+)\z}
 
+      DEFAULTS = {
+        min_word_size: 8, min_avg_part_size: 4, min_part_size: 1, max_parts: 4
+      }
+
       def self.open(*args)
         yield grammar = new(*args)
       ensure
@@ -55,11 +59,8 @@ class Lingo
         cfg = lingo.dictionary_config['compound'] ||
               lingo.dictionary_config['compositum']  # DEPRECATE compositum
 
-        {
-          min_word_size: 8, min_avg_part_size: 4, min_part_size: 1, max_parts: 4
-        }.each { |k, v|
-          instance_variable_set("@#{k}", cfg.fetch(k.to_s.tr('_', '-'), v).to_i)
-        }
+        DEFAULTS.each { |k, v| instance_variable_set(
+          "@#{k}", cfg.fetch(k.to_s.tr('_', '-'), v).to_i) }
 
         #--
         # Die Wortklasse eines Kompositum-Wortteils kann separat gekennzeichnet
