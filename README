@@ -15,7 +15,6 @@
 * {Example}[rdoc-label:label-EXAMPLE]
 * {Installation and Usage}[rdoc-label:label-INSTALLATION+AND+USAGE]
   * {Dictionary and configuration file lookup}[rdoc-label:label-Dictionary+and+configuration+file+lookup]
-  * {Legacy version}[rdoc-label:label-Legacy+version]
 * {File formats}[rdoc-label:label-FILE+FORMATS]
   * {Configuration}[rdoc-label:label-Configuration]
   * {Language definition}[rdoc-label:label-Language+definition]
@@ -348,21 +347,13 @@ for available options.
 
 Please note that Lingo requires Ruby version 1.9.3 or higher to run
 (2.1.3[http://ruby-lang.org/en/downloads/] is the currently recommended
-version). If you want to use Lingo on Ruby 1.8, please refer to the
-{legacy version}[rdoc-label:label-Legacy+version].
+version).
 
 Since Lingo depends on native extensions, you need to make sure that
 development files for your Ruby version are installed. On Debian-based
 Linux platforms they are included in the package <tt>ruby-dev</tt>;
 other distributions may have a similarly named package. On Windows those
 development files are currently not required.
-
-Prior to version 1.8.0, Lingo expected to be run from its installation
-directory. This is no longer necessary. But if you prefer that use case,
-you can either download and extract an
-{archive file}[http://github.com/lex-lingo/lingo/releases] or unpack the
-Gem archive (<tt>gem unpack lingo</tt>); or you can install the legacy
-version of Lingo (see below).
 
 === Dictionary and configuration file lookup
 
@@ -392,29 +383,6 @@ typically organized in the following directory structure:
 <tt>store/</tt>::  Compiled dictionaries, generated from source files.
 
 But for compatibility reasons these naming conventions are not enforced.
-
-=== Legacy version
-
-As Lingo 1.8 introduced some major disruptions and no longer runs on Ruby 1.8,
-there is a maintenance branch for Lingo 1.7.x that will remain compatible with
-both Ruby 1.8 and the previous line of Lingo prior to 1.8. This branch may
-receive occasional bug fixes and minor feature updates. However, the bulk of
-the development efforts will be directed towards Lingo 1.8+.
-
-To install the legacy version, download and extract the
-{ZIP archive}[http://ixtrieve.fh-koeln.de/buch/lingo-1.7.1.zip].
-No additional dependencies are required. This version of Lingo works
-with both Ruby 1.8 (1.8.5 or higher) and 1.9 (1.9.2 or higher).
-
-The executable is named +lingo.rb+. It's located at the root of the installation
-directory and may only be run from there. See <tt>ruby lingo.rb -h</tt> for
-usage instructions.
-
-Configuration and language definition files are also located at the root of the
-installation directory (<tt>*.cfg</tt> and <tt>*.lang</tt>, respectively).
-Dictionary source files are found in language-specific subdirectories (+de/+,
-+en/+, ...) and are named <tt>*.txt</tt>. The compiled dictionaries are found
-beneath these language subdirectories in a directory named <tt>store/</tt>.
 
 
 == FILE FORMATS
