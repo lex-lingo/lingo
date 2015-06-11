@@ -107,6 +107,8 @@ class Lingo
 
     class TextReader < self
 
+      include TextUtils
+
       # TODO: FILE/LIR-FILE (?)
       def init
         get_files
@@ -133,10 +135,7 @@ class Lingo
         @files.each { |path|
           command(:FILE, path)
 
-          io = !stdin?(path) ? open_file(name = path) : begin
-            stdin = lingo.config.stdin.set_encoding(@encoding)
-            @progress ? StringIO.new(stdin.read) : stdin
-          end
+          io = stdin?(path) ? open_stdin : open_path(name = path)
 
           Progress.new(self, @progress && io.size, name) { |progress|
             pos = 0 unless pos?(io = filter(io, path, progress))
@@ -151,6 +150,8 @@ class Lingo
                 end
             }
           }
+
+          io.close unless stdin?(path)
 
           command(:EOF, path)
         }
@@ -179,7 +180,7 @@ class Lingo
           system(cmd, '-q', pdf_path, txt_path = tempfile[:txt])
 
           progress.init(File.size(txt_path)) if @progress
-          open_file(txt_path)
+          open_path(txt_path)
         }
       end
 
@@ -218,17 +219,9 @@ class Lingo
         throw(:cancel, msg)
       end
 
-      def stdin?(path)
-        %w[STDIN -].include?(path)
-      end
-
       def pos?(io)
         io.pos if io.respond_to?(:pos)
       rescue Errno::ESPIPE
-      end
-
-      def open_file(path)
-        File.open(path, 'rb', encoding: @encoding)
       end
 
       def with_tempfile(name)

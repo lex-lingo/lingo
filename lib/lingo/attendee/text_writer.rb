@@ -79,6 +79,8 @@ class Lingo
 
     class TextWriter < self
 
+      include TextUtils
+
       def init
         @encoding = get_enc
 
@@ -99,13 +101,8 @@ class Lingo
           when :FILE
             @no_sep = true
 
-            if stdout?(@ext)
-              @filename = @ext
-              @file = lingo.config.stdout.set_encoding(@encoding)
-            else
-              @filename = File.set_ext(param, ".#{@ext}")
-              @file = File.open(@filename, 'w', encoding: @encoding)
-            end
+            @io = stdout?(@ext) ? (@path = @ext; open_stdout) :
+              open_path(@path = set_ext(param, @ext), 'w')
 
             @lir_rec_no, @lir_rec_buf = '', []
           when :RECORD
@@ -117,10 +114,10 @@ class Lingo
             end
           when :EOL
             @no_sep = true
-            @file.puts unless @lir || @no_puts
+            @io.puts unless @lir || @no_puts
           when :EOF
             flush_lir_buffer if @lir
-            @file.close unless stdout?(@filename)
+            @io.close unless stdout?(@path)
         end
       end
 
@@ -128,8 +125,8 @@ class Lingo
         obj = obj.form if obj.is_a?(WordForm)
 
         @lir ? @lir_rec_buf << obj : begin
-          @no_sep ? @no_sep = false : @file.print(@sep)
-          @file.print(obj)
+          @no_sep ? @no_sep = false : @io.print(@sep)
+          @io.print(obj)
         end
       end
 
@@ -139,15 +136,11 @@ class Lingo
         unless @lir_rec_no.empty? || @lir_rec_buf.empty?
           buf = [@lir_rec_no, @lir_rec_buf.join(@sep), "\n"]
           @sep =~ /\n/ ? buf.insert(1, "\n").unshift('*') : buf.insert(1, '*')
-          @file.print(*buf)
+          @io.print(*buf)
         end
 
         @lir_rec_no = ''
         @lir_rec_buf.clear
-      end
-
-      def stdout?(filename)
-        %w[STDOUT -].include?(filename)
       end
 
     end
