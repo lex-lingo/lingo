@@ -126,6 +126,10 @@ class Lingo
       @config.fetch(key, default)
     end
 
+    def get_flo(*args)
+      ((val = get_key(*args)) && val.respond_to?(:to_f)) ? val.to_f : val
+    end
+
     def get_array(key, default = nil, method = nil)
       ary = get_key(key, default).split(SEP_RE)
       ary.map!(&method) if method

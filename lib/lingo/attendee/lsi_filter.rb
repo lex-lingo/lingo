@@ -37,10 +37,11 @@ class Lingo
         @skip = get_array('skip', DEFAULT_SKIP, :upcase)
 
         @transform = get_key('transform', Lsi4R::DEFAULT_TRANSFORM)
+        @cutoff    = get_flo('cut',       Lsi4R::DEFAULT_CUTOFF)
 
-        @cut = get_key('cut', Lsi4R::DEFAULT_CUTOFF)
-        @min = get_key('min', false)
-        @nul = get_key('nul', false)
+        @min = get_flo('min', false)
+        @abs = get_flo('abs', false)
+        @nul = get_flo('nul', false)
         @new = get_key('new', true)
 
         @sort = get_key('sort', false)
@@ -70,8 +71,8 @@ class Lingo
       def send_lsi
         lsi = Lsi4R.new(@vectors); @vectors.clear
 
-        if lsi.build(transform: @transform, cutoff: @cut && @cut.to_f)
-          options, vec = { min: @min && @min.to_f, nul: @nul, new: @new }, []
+        if lsi.build(transform: @transform, cutoff: @cutoff)
+          options, vec = { min: @min, abs: @abs, nul: @nul, new: @new }, []
 
           fmt = @sort ? @sort == 'sto' ?
             '%s {%.5f}' : '%2$.5f %1$s' : '%s %.5f' unless @sort == 'normal'
