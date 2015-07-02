@@ -69,7 +69,7 @@ language:
       # Suffixklasse: s = Substantiv, a = Adjektiv, v = Verb, e = Eigenwort, f = Fugung
       # Suffixe je Klasse: "<suffix>['/'<ersetzung>][ <suffix>['/'<ersetzung>]]"
       - [s, 'es s ves/f ves/fe ies/y']
-      - [a, 'er est r st ier/y iest/y']
+      - [a, 'er est r st ier/y iest/y ly al ally']
       - [v, 'd ed en es ing s ing/e']
       - [e, 's']
       - [f, '']
