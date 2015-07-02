@@ -83,7 +83,7 @@ class Lingo
         raise MissingConfigError.new(:variations) if @var.empty?
 
         @check = Hash.new(false)
-        get_array('check', WA_UNKNOWN).each { |s| @check[s.upcase] = true }
+        get_ary('check', WA_UNKNOWN).each { |s| @check[s.upcase] = true }
 
         set_dic
         set_gra

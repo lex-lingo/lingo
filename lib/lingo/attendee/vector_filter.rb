@@ -92,7 +92,7 @@ class Lingo
 
       def init
         @lex  = get_re('lexicals', '[sy]')
-        @skip = get_array('skip', DEFAULT_SKIP, :upcase)
+        @skip = get_ary('skip', DEFAULT_SKIP, :upcase)
 
         @src = @pos = @sort_fmt = @sort_rel = @docnum = nil
 
@@ -108,7 +108,7 @@ class Lingo
           @pos = get_key('pos', false)
           @pos = DEFAULT_POS_SEPARATOR if @pos == true
 
-          @tokens = get_array('tokens', '', :upcase)
+          @tokens = get_ary('tokens', '', :upcase)
           @tokens.concat(Tokenizer.rules) if @tokens.delete('ALL')
         end
 

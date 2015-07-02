@@ -103,7 +103,7 @@ class Lingo
       CLS = /[[:alpha:]#{NUM.join}]/o
 
       def init
-        @stopper = get_array('stopper', DEFAULT_SKIP)
+        @stopper = get_ary('stopper', DEFAULT_SKIP)
                      .push(WA_UNKNOWN, WA_UNKMULPART)
 
         @mwc = get_key('multiword', LA_MULTIWORD)

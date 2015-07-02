@@ -75,7 +75,7 @@ class Lingo
       def init
         set_dic
         @com = !get_key('compound-parts', false)
-        @skip = get_array('skip', WA_UNKNOWN, :upcase)
+        @skip = get_ary('skip', WA_UNKNOWN, :upcase)
       end
 
       def control(*)

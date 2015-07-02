@@ -34,7 +34,7 @@ class Lingo
         require_lib('lsi4r')
 
         @lex  = get_re('lexicals', '[sy]')
-        @skip = get_array('skip', DEFAULT_SKIP, :upcase)
+        @skip = get_ary('skip', DEFAULT_SKIP, :upcase)
 
         @transform = get_key('transform', Lsi4R::DEFAULT_TRANSFORM)
         @cutoff    = get_flo('cut',       Lsi4R::DEFAULT_CUTOFF)

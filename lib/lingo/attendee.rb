@@ -130,7 +130,7 @@ class Lingo
       ((val = get_key(*args)) && val.respond_to?(:to_f)) ? val.to_f : val
     end
 
-    def get_array(key, default = nil, method = nil)
+    def get_ary(key, default = nil, method = nil)
       ary = get_key(key, default).split(SEP_RE)
       ary.map!(&method) if method
       ary
@@ -157,11 +157,11 @@ class Lingo
     end
 
     def set_dic
-      @dic = dictionary(get_array('source'), get_key('mode', 'all'))
+      @dic = dictionary(get_ary('source'), get_key('mode', 'all'))
     end
 
     def set_gra
-      @gra = grammar(get_array('source'), get_key('mode', 'all'))
+      @gra = grammar(get_ary('source'), get_key('mode', 'all'))
     end
 
     def warn(*msg)

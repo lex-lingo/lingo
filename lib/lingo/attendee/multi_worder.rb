@@ -90,7 +90,7 @@ class Lingo
 
         lex_src, lex_mod, d = nil, nil, lingo.dictionary_config['databases']
 
-        (mul_src = get_array('source')).each { |src|
+        (mul_src = get_ary('source')).each { |src|
           s, m = d[src].values_at('use-lex', 'lex-mode')
 
           if lex_src.nil? || lex_src == s
@@ -108,7 +108,7 @@ class Lingo
         @lex_gra = grammar(lex_src, lex_mod)
 
         @syn_dic = if @combine && has_key?('use-syn')
-          dictionary(get_array('use-syn'), get_key('syn-mode', 'all'))
+          dictionary(get_ary('use-syn'), get_key('syn-mode', 'all'))
         end
 
         @expected_tokens_in_buffer, @eof_handling = 3, false

@@ -173,7 +173,7 @@ class Lingo
         @tags  = get_key('tags',  false)
         @wiki  = get_key('wiki',  false)
 
-        @skip_tags = get_array('skip-tags', '', :downcase)
+        @skip_tags = get_ary('skip-tags', '', :downcase)
         @tags = true unless @skip_tags.empty?
 
         skip = []
