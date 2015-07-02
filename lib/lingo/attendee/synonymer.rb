@@ -36,7 +36,7 @@ class Lingo
     #
     # === Mögliche Verlinkung
     # Erwartet:: Daten vom Typ *Word* z.B. von Wordsearcher, Decomposer, Ocr_variator, Multiworder
-    # Erzeugt:: Daten vom Typ *Word* (ggf. um Relationen ergänzt) z.B. für Decomposer, Ocr_variator, Multiworder, Sequencer, Noneword_filter, Vector_filter
+    # Erzeugt:: Daten vom Typ *Word* (ggf. um Relationen ergänzt) z.B. für Decomposer, Ocr_variator, Multiworder, Sequencer, Vector_filter
     #
     # === Parameter
     # Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der Voreinstellung).

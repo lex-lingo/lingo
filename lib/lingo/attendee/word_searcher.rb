@@ -36,7 +36,7 @@ class Lingo
     #
     # === Mögliche Verlinkung
     # Erwartet:: Daten vom Typ *Token* (andere werden einfach durchgereicht) z.B. von Tokenizer, Abbreviator
-    # Erzeugt:: Daten vom Typ *Word* für erkannte Wörter z.B. für Synonymer, Decomposer, Ocr_variator, Multiworder, Sequencer, Noneword_filter, Vector_filter
+    # Erzeugt:: Daten vom Typ *Word* für erkannte Wörter z.B. für Synonymer, Decomposer, Ocr_variator, Multiworder, Sequencer, Vector_filter
     #
     # === Parameter
     # Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der Voreinstellung).

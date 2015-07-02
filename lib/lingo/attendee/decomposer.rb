@@ -41,7 +41,7 @@ class Lingo
     # === Mögliche Verlinkung
     # Erwartet:: Daten vom Typ *Word* (andere werden einfach durchgereicht) z.B. von Wordsearcher
     # Erzeugt:: Daten vom Typ *Word* (erkannte Komposita werden entsprechend erweitert) z.B. für
-    # Synonymer, Ocr_variator, Multiworder, Sequencer, Noneword_filter, Vector_filter
+    # Synonymer, Ocr_variator, Multiworder, Sequencer, Vector_filter
     #
     # === Parameter
     # Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der Voreinstellung).

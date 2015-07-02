@@ -45,7 +45,7 @@ class Lingo
     # Erwartet:: Daten vom Typ *Word* z.B. von Wordsearcher, Decomposer, Ocr_variator, Multiworder
     # Erzeugt:: Daten vom Typ *Word* (mit Attribut WA_SEQUENCE). Je erkannter Mehrwortgruppe wird
     # ein zusätzliches Word-Objekt in den Datenstrom eingefügt. Z.B. für Ocr_variator, Sequencer,
-    # Noneword_filter, Vector_filter
+    # Vector_filter
     #
     # === Parameter
     # Kursiv dargestellte Parameter sind optional (ggf. mit Angabe der Voreinstellung).

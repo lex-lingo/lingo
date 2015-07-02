@@ -11,6 +11,8 @@
 * Lingo::Attendee::Tokenizer no longer considers hyphens at word edges as part
   of the word. As a consequence, Lingo::Attendee::Dehyphenizer has been
   dropped.
+* Dropped Lingo::Attendee::NonewordFilter; use Lingo::Attendee::VectorFilter
+  with option <tt>lexicals: '\?'</tt> instead.
 * Lingo::Attendee::TextReader and Lingo::Attendee::TextWriter learned
   +encoding+ option to read/write text that is not UTF-8 encoded;
   configuration files and dictionaries still need to be UTF-8, though.

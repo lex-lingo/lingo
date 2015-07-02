@@ -186,7 +186,6 @@ require_relative 'attendee/debug_filter'  # < Debugger
 require_relative 'attendee/decomposer'
 require_relative 'attendee/lsi_filter'
 require_relative 'attendee/multi_worder'
-require_relative 'attendee/noneword_filter'
 require_relative 'attendee/object_filter'
 require_relative 'attendee/sequencer'
 require_relative 'attendee/stemmer'
