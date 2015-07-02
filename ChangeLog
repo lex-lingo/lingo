@@ -8,6 +8,7 @@
   (LSI[https://en.wikipedia.org/wiki/Latent_semantic_indexing]); requires
   lsi4r[https://blackwinter.github.com/lsi4r] which in turn requires
   rb-gsl[https://blackwinter.github.com/rb-gsl].
+* Added Lingo::Attendee::AnalysisFilter and associated +lingoctl+ tooling.
 * Lingo::Attendee::Tokenizer no longer considers hyphens at word edges as part
   of the word. As a consequence, Lingo::Attendee::Dehyphenizer has been
   dropped.
@@ -16,6 +17,8 @@
 * Lingo::Attendee::TextReader and Lingo::Attendee::TextWriter learned
   +encoding+ option to read/write text that is not UTF-8 encoded;
   configuration files and dictionaries still need to be UTF-8, though.
+* Lingo::Attendee::TextReader and Lingo::Attendee::TextWriter learned to
+  read/write Gzip-compressed files (file extension +.gz+ or +.gzip+).
 * Lingo::Attendee::Sequencer learned to recognize +0+ in the pattern to match
   number tokens.
 * Fixed regression introduced in 1.8.6 where Lingo::Attendee::Debugger would
