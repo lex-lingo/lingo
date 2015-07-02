@@ -61,7 +61,7 @@ class Lingo
     attr_reader :language_file, :config_file
 
     def to_h
-      @opts
+      { 'version' => VERSION }.merge(@opts)
     end
 
     def [](key)
