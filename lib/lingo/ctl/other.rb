@@ -35,7 +35,7 @@ class Lingo
       archive: [:a, 'Create archive of directory', '[path]', 'current directory'],
       rackup:  [:r, 'Print path to rackup file', 'name'],
       path:    [:p, 'Print search path for dictionaries and configurations'],
-      help:    [:h, 'Print help for available commands'],
+      help:    [:h, 'Print help for available commands', '[command...]'],
       version: [:v, 'Print Lingo version number']
     }.each { |n, (s, *a)| cmd(n.to_s, s.to_s, *a) }
 
@@ -98,15 +98,17 @@ class Lingo
     end
 
     def do_help(opts = nil)
-      no_args
-
       msg = opts ? [opts, 'Commands:'] : []
+
+      args = ARGV unless opts || ARGV.empty?
 
       aliases = Hash.nest { [] }
       ALIASES.each { |k, v| aliases[v] << k }
 
       COMMANDS.each { |c, (d, *e)|
         a = aliases[c]
+        next if args && ([c, *a] & args).empty?
+
         c = "#{c} (#{a.join(', ')})" unless a.empty?
 
         if opts
@@ -117,7 +119,7 @@ class Lingo
         end
       }
 
-      abort msg.join("\n")
+      msg.empty? ? abort : abort(msg.join("\n"))
     end
 
     def do_version(doit = true)
