@@ -102,7 +102,7 @@ class Lingo
 
       args = ARGV unless opts || ARGV.empty?
 
-      aliases = Hash.nest { [] }
+      aliases = Hash.array
       ALIASES.each { |k, v| aliases[v] << k }
 
       COMMANDS.each { |c, (d, *e)|

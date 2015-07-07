@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2012 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2015 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -35,7 +35,7 @@ class Lingo
 
         @ext    = get_key('ext', '-')
         @format = get_key('format', '%s')
-        @map    = get_key('map', Hash.nest { |k| k })
+        @map    = get_key('map', Hash.identity)
 
         @no_puts = true
       end

@@ -67,7 +67,7 @@ class Lingo
     def initialize(id, lingo)
       @id, @lingo, @config, @db = id, lingo, lingo.database_config(id), nil
 
-      @val, @crypt, @srcfile = Hash.nest { [] }, config.key?('crypt'),
+      @val, @crypt, @srcfile = Hash.array, config.key?('crypt'),
         Lingo.find(:dict, config['name'], relax: true)
 
       begin
