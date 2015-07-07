@@ -30,88 +30,105 @@ class Lingo
 
   module Ctl
 
-    { stats: [:s, 'Extract statistics from analysis file', 'path'],
-      trans: [:t, 'Transpose columns and rows of analysis file', 'path'],
-      diff:  [:d, 'Show differences between two analysis files', 'path1 path2']
+    { stats: [:s, 'Extract statistics from analysis file(s)', 'path...'],
+      trans: [:t, 'Transpose columns and rows of analysis file(s)', 'path...']
     }.each { |n, (s, *a)| cmd("analysis#{n}", "a#{s}", *a) }
 
     private
 
     def do_analysisstats
-      path = ARGV.shift or missing_arg(:path)
-      no_args
-
-      abort "No such file: #{path}" unless File.exist?(path)
-
       require 'nuggets/array/histogram'
 
-      name, stats, patterns = path.chomp(File.extname(path)),
-        Hash.nest { [] }, Hash.nest { [] }
+      paths, write = paths_write
+      stats, patts = Hash.array(1), Hash.array(1)
 
-      CSV.foreach(path, headers: true) { |row|
-        if token = row['token']
-          stats[:tokens] << token
-        elsif word = row['word']
-          stats[:words] << word
-          pattern = row['pattern'] and patterns[word] << pattern
-        end
+      csv_foreach(paths) { |path, _, token, word, pattern|
+        token ? stats[:tokens][path] << token : word ? begin
+          stats[:words][path] << word
+          patts[word][path] << pattern if pattern
+        end : nil
       }
 
-      write = lambda { |key, &block|
-        overwrite?(file = "#{name}.#{key}.csv") &&
-          puts("#{file}: #{CSV.open(file, 'wb', &block)}") }
-
-      stats.each { |key, value| write.(key) { |csv| value.histogram.sort
-        .tap { |h| csv << h.map(&:shift) << h.flatten! }; value.size } }
+      stats.each { |k, h| write.(k) { |csv|
+        csv << ['file', *c = columns(g = histograms(h))]
+        histograms_to_csv(csv, c, g)
+        h.values.map(&:size)
+      } }
 
       write.(:patterns) { |csv|
-        patterns = patterns.sort.map { |key, value| [key, value.histogram] }
-
-        csv << headers = patterns.map(&:last)
-          .flat_map(&:keys).uniq.sort.unshift(word = 'word')
-
-        patterns.each { |key, value| value.default = nil
-          csv << value.update(word => key).values_at(*headers) }
-
-        headers.size - 1
+        csv << ['file', 'word', *c = columns(patts, :values)]
+        patts.sort.each { |k, h| histograms_to_csv(csv, c, histograms(h), k) }
+        c.size - 1
       }
     end
 
     def do_analysistrans
-      path = ARGV.shift or missing_arg(:path)
-      no_args
+      paths, write = paths_write
 
-      abort "No such file: #{path}" unless File.exist?(path)
+      rows, comm, more, less = Hash.array(1), {}, Hash.array(1), Hash.array(1)
 
-      return unless overwrite?(file =
-        "#{path.chomp(File.extname(path))}.transposed.csv")
+      csv_foreach(paths) { |path, string, token, word, _|
+        rows[token || word][path] << string }
 
-      rows = Hash.nest { [] }
+      c = rows.keys.sort.each { |k|
+        a = (h = rows[k]).first.last
 
-      CSV.foreach(path, headers: true) { |row|
-        rows[row['token'] || row['word']] << row['string'] }
-
-      rows = rows.sort; iter = rows.each_index
-
-      size = CSV.open(file, 'wb') { |csv|
-        csv << rows.map(&:shift)
-
-        rows.flatten!(1).map(&:size).max.times { |j|
-          csv << iter.map { |i| rows[i][j] } }
+        paths.size == 1 ? comm[k] = a : begin
+          comm[k] = a & (o = h.drop(1)).flat_map(&:last)
+          o.each { |path, b| more[path][k] = b - a; less[path][k] = a - b }
+        end
       }
 
-      puts "#{file}: #{size}"
+      rows.clear
+
+      write.(:transpose) { |csv| transpose_csv(csv, c, comm) }
+
+      { transmore: more, transless: less }.each { |k, v| v.each { |path, h|
+        csv_writer(path, *paths).(k) { |csv| transpose_csv(csv, c, h) } } }
     end
 
-    def do_analysisdiff
-      path1 = ARGV.shift or missing_arg(:path1)
-      path2 = ARGV.shift or missing_arg(:path2)
-      no_args
+    def paths_write
+      ARGV.empty? ? missing_arg(:path) : [a = ARGV.each { |x|
+        abort "No such file: #{x}" unless File.exist?(x) }, csv_writer(*a)]
+    end
 
-      abort "No such file: #{path1}" unless File.exist?(path1)
-      abort "No such file: #{path2}" unless File.exist?(path2)
+    def csv_writer(*paths)
+      name = File.join(File.dirname(paths.first), paths.map { |path|
+        File.basename(path.chomp(File.extname(path))) }.uniq.join('-'))
 
-      abort 'Not implemented yet.'
+      lambda { |key, &block| overwrite?(file = "#{name}.#{key}.csv") &&
+        puts("#{file}: #{Array(CSV.open(file, 'wb', &block)).join(' / ')}") }
+    end
+
+    def csv_foreach(paths)
+      paths.each { |path| CSV.foreach(path, headers: true) { |row|
+        yield path, *row.values_at(*%w[string token word pattern]) } }
+    end
+
+    def columns(hash, map = :keys)
+      hash.values.map(&map).flatten.uniq.sort
+    end
+
+    def histograms(hash)
+      hash.each_with_object({}) { |(k, v), h|
+        h[k] = v.histogram.tap { |x| x.default = nil } }
+    end
+
+    def histograms_to_csv(csv, columns, histograms, *args)
+      histograms.each { |key, histogram|
+        others = histograms.values_at(*histograms.keys - [key])
+        others = [{}] if others.empty?
+
+        csv << args.dup.unshift(key).concat(columns.map { |header|
+          value = histogram[header] or next
+          value if others.any? { |other| other[header] != value }
+        })
+      }
+    end
+
+    def transpose_csv(csv, columns, rows)
+      csv << columns; values = rows.values_at(*columns); rows.clear
+      values.map(&:size).max.times { |i| csv << values.map { |v| v[i] } }
     end
 
   end
