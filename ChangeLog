@@ -28,6 +28,7 @@
   apply to input read from +STDIN+.
 * Fixed regression introduced in 1.8.6 where Lingo::Attendee::Debugger would
   no longer work immediately behind Lingo::Attendee::TextReader.
+* Fixed +lingoctl+ copy commands when overwriting existing files.
 * Refactored Lingo::Database::Crypter into a module.
 
 == 1.8.6 [2015-02-09]

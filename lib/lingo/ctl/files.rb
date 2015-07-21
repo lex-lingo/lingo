@@ -52,19 +52,21 @@ class Lingo
       }
     end
 
-    def find(what, doit = true)
+    def find(what, doit = true, path = path_for_scope)
       name = ARGV.shift or missing_arg(:name)
       no_args
 
-      file = Lingo.find(what, name, path: path_for_scope) { usage }
+      file = Lingo.find(what, name, path: path) { |err| usage(err) }
       doit ? puts(file) : file
     end
 
     def copy(what)
       usage('Source and target are the same.') if OPTIONS[:scope] == :local
 
-      source = find(what, false)
-      target = File.join(path_for_scope(:local), Lingo.basepath(what, source))
+      local_path = path_for_scope(:local)
+
+      source = find(what, false, path_for_scope || Lingo::PATH - local_path)
+      target = File.expand_path(Lingo.basepath(what, source), local_path)
 
       usage('Source and target are the same.') if source == target
 
