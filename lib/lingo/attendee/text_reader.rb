@@ -195,8 +195,8 @@ class Lingo
       end
 
       def file_type(io, path)
-        Object.const_defined?(:FileMagic) && io.respond_to?(:rewind) ?
-          FileMagic.fm(:mime, simplified: true).io(io, 256).tap { io.rewind } :
+        Object.const_defined?(:FileMagic) && io.respond_to?(:pos=) ?
+          FileMagic.fm(:mime, simplified: true).io(io, 256, true) :
         Object.const_defined?(:MIME) && MIME.const_defined?(:Types) ?
           (type = MIME::Types.of(path).first) ? type.content_type :
           cancel_filters('File type could not be determined.') :

@@ -24,6 +24,8 @@
   read/write Gzip-compressed files (file extension +.gz+ or +.gzip+).
 * Lingo::Attendee::Sequencer learned to recognize +0+ in the pattern to match
   number tokens.
+* Fixed Lingo::Attendee::TextReader to recognize BOM in input files; does not
+  apply to input read from +STDIN+.
 * Fixed regression introduced in 1.8.6 where Lingo::Attendee::Debugger would
   no longer work immediately behind Lingo::Attendee::TextReader.
 * Refactored Lingo::Database::Crypter into a module.
@@ -43,8 +45,7 @@
 * Lingo::Attendee::TextReader no longer removes line endings; option +chomp+
   is obsolete.
 * Lingo::Attendee::TextReader passes byte offset to the following attendee.
-* Lingo::Attendee::Tokenizer records token's byte offset.
-* Lingo::Attendee::Tokenizer records token's sequence position.
+* Lingo::Attendee::Tokenizer records token's position and byte offset.
 * Lingo::Attendee::Tokenizer learned <tt>skip-tags</tt> option to skip over
   specified tags' contents.
 * Lingo::Attendee subclasses warn when invalid or obsolete options or names

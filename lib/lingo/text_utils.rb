@@ -60,7 +60,7 @@ class Lingo
     end
 
     def open_file(path, mode)
-      File.open(path, mode, encoding: @encoding)
+      File.open(path, mode, encoding: bom_encoding(mode))
     end
 
     def open_gzip(path, mode)
@@ -79,6 +79,11 @@ class Lingo
 
     def set_ext(path, ext)
       File.set_ext(path.sub(GZIP_RE, ''), ".#{ext}")
+    end
+
+    def bom_encoding(mode = 'r', encoding = @encoding)
+      (mode.include?('r') || mode.include?('+')) &&
+        encoding.name.start_with?('UTF-') ? "BOM|#{encoding}" : encoding
     end
 
   end
