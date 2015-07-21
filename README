@@ -498,8 +498,8 @@ the full test suite.
 == LINKS
 
 Website::       http://lex-lingo.de
-Demo::          http://ixtrieve.fh-koeln.de/lingoweb
-Documentation:: https://lex-lingo.github.com/lingo
+Demo::          http://lex-lingo.de/lingoweb
+Documentation:: http://lex-lingo.de/doc
 Source code::   https://github.com/lex-lingo/lingo
 RubyGem::       https://rubygems.org/gems/lingo
 Bug tracker::   https://github.com/lex-lingo/lingo/issues
