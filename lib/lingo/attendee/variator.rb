@@ -76,7 +76,7 @@ class Lingo
 
       def init
         @marker = get_key('marker', '*')
-        @max    = get_key('max-var', max = 10000).to_i
+        @max    = get_int('max-var', max = 10000)
         @max    = max unless @max > 0
         @var    = get_key('variations')
 

@@ -126,6 +126,10 @@ class Lingo
       @config.fetch(key, default)
     end
 
+    def get_int(*args)
+      Integer(get_key(*args))
+    end
+
     def get_flo(*args)
       ((val = get_key(*args)) && val.respond_to?(:to_f)) ? val.to_f : val
     end
@@ -188,6 +192,7 @@ require_relative 'attendee/analysis_filter'
 require_relative 'attendee/debugger'
 require_relative 'attendee/debug_filter'  # < Debugger
 require_relative 'attendee/decomposer'
+require_relative 'attendee/hal_filter'
 require_relative 'attendee/lsi_filter'
 require_relative 'attendee/multi_worder'
 require_relative 'attendee/object_filter'
