@@ -61,8 +61,7 @@ end
 CLEAN.include(
   'txt/*.{als,log,lsi,mul,non,seq,ste,syn,ve?}',
   'test/{test.*,text.non}',
-  'store/*/*.rev',
-  'bench/tmp.*'
+  'store/*/*.rev'
 )
 
 CLOBBER.include('store')
@@ -75,19 +74,6 @@ task('test:txt') { test_ref('artikel', 'lingo') }
 
 desc 'Test against reference file (LIR)'
 task('test:lir') { test_ref('lir') }
-
-unless (benchmarks = Dir[File.expand_path('../bench/*_bench.rb', __FILE__)]).empty?
-  desc 'Run all benchmarks'
-  task :bench
-
-  benchmarks.each { |benchmark|
-    bench = File.basename(benchmark, '_bench.rb')
-    task bench: benchtask = "bench:#{bench}"
-
-    desc "Run #{bench} benchmark"
-    task(benchtask) { system(File.ruby, benchmark) }
-  }
-end
 
 def test_ref(name, cfg = name)
   require 'diff/lcs'

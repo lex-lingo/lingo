@@ -4,7 +4,6 @@ pkg
 tmp
 prof
 store
-bench/tmp.*
 .gh-pages
 *.rev
 *.auth
