@@ -155,7 +155,7 @@ class Lingo
           pos = obj.position_and_offset if @pos
 
           obj.is_a?(Token) ? forward_vector(obj, pos) :
-            obj.get_class(@lex).each { |lex| forward_vector(lex, pos, lex.src) }
+            obj.each_lex(@lex) { |lex| forward_vector(lex, pos, lex.src) }
         end
       end
 
@@ -170,14 +170,14 @@ class Lingo
       end
 
       def forward_dict(obj, sep = DEFAULT_GENDER_SEPARATOR)
-        vectors = obj.get_class(@lex).map { |lex|
+        vectors = obj.each_lex(@lex).map { |lex|
           "#{lex.form} ##{lex.attr}".tap { |str|
             str << sep << lex.gender if lex.gender
           }
         }
 
         unless vectors.empty?
-          vec = @norm ? obj.lexicals.first.form : obj.form
+          vec = @norm ? obj.lex_form : obj.form
           forward_vector("#{vec}#{@dict}#{vectors.join(' ')}")
         end
       end

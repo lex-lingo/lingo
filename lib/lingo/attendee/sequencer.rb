@@ -156,10 +156,10 @@ class Lingo
               find_seq(*arg)
               rewind.call if skip > 0
             else
-              if !tok && n = obj.multiword_size(@mwc)
-                n.times { iter.next }
-                skip = idx + 1
-              end
+              obj.each_lex(@mwc) { |lex|
+                lex.form.count(' ').succ.times { iter.next }
+                break skip = idx + 1
+              } unless tok
 
               buf << obj
               map << att
@@ -188,8 +188,12 @@ class Lingo
 
               _tok = nil; args.clear
 
-              _cls.each_with_index { |wc, i| _tok ||= buf[pos + i].token
-                args[i] = buf[pos + i].get_form(wc) or break } or next
+              _cls.each_with_index { |wc, i|
+                obj = buf[pos + i];_tok ||= obj.token
+
+                args[i] = obj.is_a?(Word) ? obj.lexicals.find { |lex|
+                  break lex.form if lex.attr == wc } : obj.form or break
+              } or next
 
               forms << [_str, _tok,
                 fmt =~ /\d/ ? fmt.gsub('%0$s', _str) % args :

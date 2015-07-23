@@ -113,32 +113,20 @@ class Lingo
         self
       end
 
-      def get_class(wc_re)
+      def each_lex(wc_re = //)
+        return enum_for(:each_lex, wc_re) unless block_given?
+
         wc_re = Regexp.new(wc_re) unless wc_re.is_a?(Regexp)
 
-        lexicals.empty? ? attr =~ wc_re ? [self] : [] :
-          lexicals.select { |lex| lex.attr =~ wc_re }
+        lexicals.empty? ? attr =~ wc_re ? yield(self) : nil :
+          lexicals.each { |lex| yield lex if lex.attr =~ wc_re }
+
+        nil
       end
 
-      def get_form(wc)
-        lexicals.find { |lex| return lex.form if lex.attr == wc }
-      end
-
-      def norm
-        identified? ? lexicals.first.form : form
-      end
-
-      def compo_norm
-        lex = get_class(LA_COMPOUND).first if attr == WA_COMPOUND
-        lex ? lex.form : norm
-      end
-
-      def full_compound?
-        attr == WA_COMPOUND && get_class('x+').empty?
-      end
-
-      def multiword_size(wc_re = LA_MULTIWORD)
-        lex = get_class(wc_re).first and lex.form.count(' ') + 1
+      def lex_form(wc_re = //)
+        each_lex(wc_re) { |lex|
+          break block_given? ? yield(lex.form) : lex.form }
       end
 
       def position_and_offset

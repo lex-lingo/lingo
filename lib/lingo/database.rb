@@ -282,6 +282,9 @@ class Lingo
 
       args = nil
 
+      wac = Language::WA_COMPOUND
+      lac = Language::LA_COMPOUND
+
       if inflect = config['inflect']
         inflect, wc = inflect == true ? %w[s e] : inflect.split(SEP_RE), 'a'
 
@@ -295,15 +298,23 @@ class Lingo
 
       [sep = ' ', config['hyphenate'] && [sep, '-'], lambda { |form|
         word = dic.find_word(form)
-        word.unknown? ? gra.find_compound(form).compo_norm : word.norm
+
+        if word.unknown?
+          comp = gra.find_compound(form)
+
+          comp.attr == wac && comp.lex_form(lac) ||
+            (comp.identified? ? comp.lex_form : comp.form)
+        else
+          word.identified? ? word.lex_form : word.form
+        end
       }, inflect && lambda { |forms|
         inflectables = []
 
         forms.each { |form|
           word = dic.find_word(word_form = form[re])
 
-          if word.identified? && lexical = word.get_class(wc).first
-            inflectables << form if form == lexical.form
+          if word.identified? && _form = word.lex_form(wc)
+            inflectables << form if form == _form
           else
             unless inflectables.empty?
               word = gra.find_compound_head(word_form) || word if word.unknown?

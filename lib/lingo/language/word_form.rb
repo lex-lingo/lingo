@@ -57,10 +57,6 @@ class Lingo
         false
       end
 
-      def get_form(wc)
-        form
-      end
-
       def <=>(other)
         other.nil? ? 1 : to_a <=> other.to_a
       end

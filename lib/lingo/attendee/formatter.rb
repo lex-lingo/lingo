@@ -44,10 +44,10 @@ class Lingo
         if obj.is_a?(WordForm)
           str = obj.form
 
-          if obj.respond_to?(:lexicals)
-            lex = obj.lexicals.first  # TODO
-            att = @map[lex.attr] if lex
-            str = @format % [str, lex.form, att] if att
+          if obj.is_a?(Word)
+            # TODO: which lexical to select? (currently: first)
+            obj.each_lex { |lex|
+              att = @map[lex.attr] and str = @format % [str, lex.form, att] }
           end
         else
           str = obj.to_s

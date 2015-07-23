@@ -61,7 +61,7 @@ class Lingo
       def process(obj)
         if obj.is_a?(Word) && !@skip.include?(obj.attr)
           vec = []
-          obj.get_class(@lex).each { |lex| vec << Unicode.downcase(lex.form) }
+          obj.each_lex(@lex) { |lex| vec << Unicode.downcase(lex.form) }
           @vectors[@docnum].concat(vec) unless vec.empty?
         end
       end
