@@ -355,6 +355,9 @@ Linux platforms they are included in the package <tt>ruby-dev</tt>;
 other distributions may have a similarly named package. On Windows those
 development files are currently not required.
 
+On JRuby, install gdbm[https://rubygems.org/gems/gdbm] for efficient database
+operations: <tt>gem install gdbm</tt>.
+
 === Dictionary and configuration file lookup
 
 Lingo will search different locations to find dictionaries and configuration

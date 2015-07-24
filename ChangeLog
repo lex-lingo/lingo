@@ -35,6 +35,7 @@
   no longer work immediately behind Lingo::Attendee::TextReader.
 * Fixed +lingoctl+ copy commands when overwriting existing files.
 * Refactored Lingo::Database::Crypter into a module.
+* JRuby 9000 compatibility.
 
 == 1.8.6 [2015-02-09]
 
