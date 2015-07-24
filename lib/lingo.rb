@@ -61,7 +61,8 @@ class Lingo
   }
 
   # Default encoding
-  Encoding.default_external = Encoding.default_internal = ENC = 'UTF-8'.freeze
+  Encoding.default_external = ENC = 'UTF-8'.freeze
+  Encoding.default_internal = ENC unless RUBY_ENGINE == 'jruby'
 
   SEP_RE = %r{[; ,|]}
 
