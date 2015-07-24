@@ -47,12 +47,12 @@ class Lingo
     end
 
     def open_stdin
-      stdin = lingo.config.stdin.set_encoding(@encoding)
+      stdin = set_encoding(lingo.config.stdin)
       @progress ? StringIO.new(stdin.read) : stdin
     end
 
     def open_stdout
-      lingo.config.stdout.set_encoding(@encoding)
+      set_encoding(lingo.config.stdout)
     end
 
     def open_path(path, mode = 'rb')
@@ -79,6 +79,11 @@ class Lingo
 
     def set_ext(path, ext)
       File.set_ext(path.sub(GZIP_RE, ''), ".#{ext}")
+    end
+
+    def set_encoding(io, encoding = @encoding)
+      io.set_encoding(encoding)
+      io
     end
 
     def bom_encoding(mode = 'r', encoding = @encoding)
