@@ -68,14 +68,15 @@ class Lingo
 
   class BackendNotAvailableError < LingoError
 
-    attr_reader :mod, :file
+    attr_reader :name, :file, :err
 
-    def initialize(mod, file)
-      @mod, @file = mod, file
+    def initialize(name, file, err)
+      @name, @file, @err = name, file, err
     end
 
     def to_s
-      "Backend not available `#{mod}' for `#{file}'."
+      msg = "Backend not available `#{name}'"
+      error(file ? msg << " for `#{file}'" : msg)
     end
 
   end

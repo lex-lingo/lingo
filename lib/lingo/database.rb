@@ -75,12 +75,25 @@ class Lingo
         FileUtils.mkdir_p(File.dirname(@stofile))
       rescue SourceFileNotFoundError => err
         @stofile = skip_ext = err.id
-        backend = backend_from_file(@stofile) unless err.name
+
+        unless err.name
+          if name = BACKEND_BY_EXT[File.extname(@stofile)]
+            backend = get_backend(name, @stofile)
+          else
+            raise BackendNotFoundError.new(@stofile)
+          end
+        end
       rescue NoWritableStoreError
         backend = HashStore
       end
 
-      use_backend(backend, skip_ext)
+      unless backend ||= get_backend(ENV['LINGO_BACKEND'])
+        BACKENDS.find { |name| backend = get_backend(name, nil, true) }
+      end
+
+      extend(@backend = backend || HashStore)
+
+      @stofile << store_ext unless skip_ext || !respond_to?(:store_ext)
 
       convert unless uptodate?
     end
@@ -138,26 +151,13 @@ class Lingo
 
     private
 
-    def use_backend(backend = nil, skip_ext = false)
-      [ENV['LINGO_BACKEND'], *BACKENDS].each { |mod|
-        backend = get_backend(mod) and break if mod
-      } unless backend
+    def get_backend(name, file = nil, relax = false)
+      return unless name
 
-      extend(@backend = backend || HashStore)
-
-      @stofile << store_ext if !skip_ext && respond_to?(:store_ext)
-    end
-
-    def get_backend(mod)
-      self.class.const_get("#{mod}Store") if Object.const_defined?(mod)
-    rescue TypeError, NameError
-    end
-
-    def backend_from_file(file)
-      ext = File.extname(file)
-
-      mod = BACKEND_BY_EXT[ext] or raise BackendNotFoundError.new(file)
-      get_backend(mod) or raise BackendNotAvailableError.new(mod, file)
+      Object.const_get(name)
+      self.class.const_get("#{name}Store")
+    rescue TypeError, NameError => err
+      raise BackendNotAvailableError.new(name, file, err) unless relax
     end
 
     def config_hash
