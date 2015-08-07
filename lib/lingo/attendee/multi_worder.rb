@@ -236,10 +236,6 @@ class Lingo
 
     end
 
-    # For backwards compatibility.
-    Multiworder  = MultiWorder
-    Multi_worder = MultiWorder
-
   end
 
 end

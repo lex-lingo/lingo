@@ -85,10 +85,6 @@ class Lingo
 
     end
 
-    # For backwards compatibility.
-    Objectfilter  = ObjectFilter
-    Object_filter = ObjectFilter
-
   end
 
 end

@@ -145,10 +145,6 @@ class Lingo
 
     end
 
-    # For backwards compatibility.
-    Textwriter  = TextWriter
-    Text_writer = TextWriter
-
   end
 
 end

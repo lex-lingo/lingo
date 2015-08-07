@@ -52,12 +52,7 @@ class Lingo
       def initialize(config, lingo)
         @dic, @suggestions = Dictionary.new(config, lingo), []
 
-        if lingo.dictionary_config.key?('compositum')
-          lingo.config.deprecate(:compositum, :compound, self)
-        end
-
-        cfg = lingo.dictionary_config['compound'] ||
-              lingo.dictionary_config['compositum']  # DEPRECATE compositum
+        cfg = lingo.dictionary_config['compound']
 
         DEFAULTS.each { |k, v| instance_variable_set(
           "@#{k}", cfg.fetch(k.to_s.tr('_', '-'), v).to_i) }

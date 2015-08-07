@@ -42,12 +42,7 @@ class Lingo
       load_config('language', :lang)
       load_config('config')
 
-      if Array(self['meeting/attendees']).flat_map(&:keys).include?('textreader')
-        deprecate(:textreader, :text_reader)
-      end
-
-      if r = get('meeting/attendees', 'text_reader') ||
-             get('meeting/attendees', 'textreader')  # DEPRECATE textreader
+      if r = get('meeting/attendees', 'text_reader')
         f = @cli.files
 
         if i = r['files']
@@ -110,11 +105,11 @@ class Lingo
       @cli.send(:quit, *args)
     end
 
-    def deprecate(old, new, obj = self, what = :option)
+    def deprecate(old, new, obj = self, what = :option, ver = Version.next_minor)
       unless @deprecated[[source = obj.class.name.sub(/\ALingo::/, ''), old]]
         warn(
           "DEPRECATION WARNING: #{source} #{what} `#{old}' is deprecated " <<
-          "and will be removed in Lingo 1.9. Please use `#{new}' instead."
+          "and will be removed in Lingo #{ver}. Please use `#{new}' instead."
         )
       end
     end

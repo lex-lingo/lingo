@@ -240,10 +240,6 @@ class Lingo
 
     end
 
-    # For backwards compatibility.
-    Vectorfilter  = VectorFilter
-    Vector_filter = VectorFilter
-
   end
 
 end

@@ -2,6 +2,16 @@
 
 = Revision history for Lingo
 
+== 1.9.0 [unreleased]
+
+* Removed support for deprecated options and attendee names (+old+ → +new+):
+  * Lingo::Language::Grammar : +compositum+ → +compound+
+  * Lingo::Attendee::TextReader : +lir-record-pattern+ → +records+
+  * Lingo::Config : +multiworder+ → +multi_worder+, +objectfilter+ →
+    +object_filter+, +textreader+ → +text_reader+, +textwriter+ →
+    +text_writer+, +vectorfilter+ → +vector_filter+, +wordsearcher+ →
+    +word_searcher+
+
 == 1.8.7 [2015-08-07]
 
 * Added Lingo::Attendee::LsiFilter to correlate semantically related terms

@@ -83,10 +83,6 @@ class Lingo
 
     end
 
-    # For backwards compatibility.
-    Wordsearcher  = WordSearcher
-    Word_searcher = WordSearcher
-
   end
 
 end

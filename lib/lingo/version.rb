@@ -18,6 +18,10 @@ class Lingo
         to_a.join('.')
       end
 
+      def next_minor
+        to_s[0, 3].next
+      end
+
     end
 
   end

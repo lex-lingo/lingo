@@ -118,11 +118,7 @@ class Lingo
         @filter   = get_key('filter', false)
         @progress = get_key('progress', false)
 
-        if has_key?('lir-record-pattern')
-          lingo.config.deprecate('lir-record-pattern', :records, self)
-        end
-
-        @lir  = get_re('records', get_key('lir-record-pattern', nil), %r{^\[(\d+)\.\]})  # DEPRECATE lir-record-pattern
+        @lir  = get_re('records', nil, %r{^\[(\d+)\.\]})
         @cut  = get_re('fields', !!@lir, %r{^.+?:\s*})
         @skip = get_re('skip', nil)
       end
@@ -262,10 +258,6 @@ class Lingo
       end
 
     end
-
-    # For backwards compatibility.
-    Textreader  = TextReader
-    Text_reader = TextReader
 
   end
 
