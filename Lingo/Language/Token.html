@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::Language::Token - lingo Application documentation (v1.8.6)</title>
+<title>class Lingo::Language::Token - lingo Application documentation (v1.8.7)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
@@ -74,6 +74,8 @@
     
     <li class="calls-super" ><a href="#method-c-new">::new</a>
     
+    <li ><a href="#method-i-number-3F">#number?</a>
+    
     <li ><a href="#method-i-position_and_offset">#position_and_offset</a>
     
     <li ><a href="#method-i-to_a">#to_a</a>
@@ -81,6 +83,8 @@
     <li ><a href="#method-i-to_s">#to_s</a>
     
     <li ><a href="#method-i-word-3F">#word?</a>
+    
+    <li ><a href="#method-i-word_token-3F">#word_token?</a>
     
   </ul>
 </div>
@@ -244,6 +248,39 @@
        </header>
 
     
+      <div id="method-i-number-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">number?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="number-3F-source">
+            <pre><span class="ruby-comment"># File lib/lingo/language/token.rb, line 60</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">number?</span>
+  <span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-constant">TA_NUMBER</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-position_and_offset" class="method-detail ">
         
         <div class="method-heading">
@@ -263,7 +300,7 @@
 
           
           <div class="method-source-code" id="position_and_offset-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/token.rb, line 58</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/token.rb, line 64</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">position_and_offset</span>
   <span class="ruby-node">&quot;#{position}#{POSITION_SEP}#{offset}&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -296,7 +333,7 @@
 
           
           <div class="method-source-code" id="to_a-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/token.rb, line 62</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/token.rb, line 68</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_a</span>
   [<span class="ruby-identifier">form</span>, <span class="ruby-identifier">attr</span>, <span class="ruby-identifier">position</span>, <span class="ruby-identifier">offset</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -329,7 +366,7 @@
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/token.rb, line 66</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/token.rb, line 72</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-node">&quot;:#{super}:&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -371,7 +408,39 @@
         </div>
 
         
+        <div class="aliases">
+          Also aliased as: <a href="Token.html#method-i-word_token-3F">word_token?</a>
+        </div>
+        
 
+        
+      </div>
+
+    
+      <div id="method-i-word_token-3F" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">word_token?</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="Token.html#method-i-word-3F">word?</a>
+        </div>
         
       </div>
 

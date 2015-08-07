@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::Attendee::Variator - lingo Application documentation (v1.8.6)</title>
+<title>class Lingo::Attendee::Variator - lingo Application documentation (v1.8.7)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
@@ -166,14 +166,14 @@
             <pre><span class="ruby-comment"># File lib/lingo/attendee/variator.rb, line 76</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">init</span>
   <span class="ruby-ivar">@marker</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;marker&#39;</span>, <span class="ruby-string">&#39;*&#39;</span>)
-  <span class="ruby-ivar">@max</span>    = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;max-var&#39;</span>, <span class="ruby-identifier">max</span> = <span class="ruby-value">10000</span>).<span class="ruby-identifier">to_i</span>
+  <span class="ruby-ivar">@max</span>    = <span class="ruby-identifier">get_int</span>(<span class="ruby-string">&#39;max-var&#39;</span>, <span class="ruby-identifier">max</span> = <span class="ruby-value">10000</span>)
   <span class="ruby-ivar">@max</span>    = <span class="ruby-identifier">max</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@max</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
   <span class="ruby-ivar">@var</span>    = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;variations&#39;</span>)
 
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">MissingConfigError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:variations</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@var</span>.<span class="ruby-identifier">empty?</span>
 
   <span class="ruby-ivar">@check</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">false</span>)
-  <span class="ruby-identifier">get_array</span>(<span class="ruby-string">&#39;check&#39;</span>, <span class="ruby-constant">WA_UNKNOWN</span>).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@check</span>[<span class="ruby-identifier">s</span>.<span class="ruby-identifier">upcase</span>] = <span class="ruby-keyword">true</span> }
+  <span class="ruby-identifier">get_ary</span>(<span class="ruby-string">&#39;check&#39;</span>, <span class="ruby-constant">WA_UNKNOWN</span>).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@check</span>[<span class="ruby-identifier">s</span>.<span class="ruby-identifier">upcase</span>] = <span class="ruby-keyword">true</span> }
 
   <span class="ruby-identifier">set_dic</span>
   <span class="ruby-identifier">set_gra</span>

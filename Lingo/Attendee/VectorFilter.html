@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::Attendee::VectorFilter - lingo Application documentation (v1.8.6)</title>
+<title>class Lingo::Attendee::VectorFilter - lingo Application documentation (v1.8.7)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
@@ -146,11 +146,6 @@
         <dd>
         
       
-        <dt id="TERMINALS">TERMINALS
-        
-        <dd>
-        
-      
       </dl>
     </section>
     
@@ -183,7 +178,7 @@
 
           
           <div class="method-source-code" id="control-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 133</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 131</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-operator">*</span>)
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">cmd</span>
     <span class="ruby-keyword">when</span> <span class="ruby-value">:EOL</span>       <span class="ruby-keyword">then</span> <span class="ruby-value">:skip_command</span>
@@ -219,7 +214,7 @@
 
           
           <div class="method-source-code" id="control_deferred-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 140</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 138</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">control_deferred</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-operator">*</span>)
   <span class="ruby-ivar">@docnum</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">if</span> <span class="ruby-constant">TERMINALS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">cmd</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -252,14 +247,14 @@
 
           
           <div class="method-source-code" id="init-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 94</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 92</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">init</span>
   <span class="ruby-ivar">@lex</span>  = <span class="ruby-identifier">get_re</span>(<span class="ruby-string">&#39;lexicals&#39;</span>, <span class="ruby-string">&#39;[sy]&#39;</span>)
-  <span class="ruby-ivar">@skip</span> = <span class="ruby-identifier">get_array</span>(<span class="ruby-string">&#39;skip&#39;</span>, <span class="ruby-constant">DEFAULT_SKIP</span>, <span class="ruby-value">:upcase</span>)
+  <span class="ruby-ivar">@skip</span> = <span class="ruby-identifier">get_ary</span>(<span class="ruby-string">&#39;skip&#39;</span>, <span class="ruby-constant">DEFAULT_SKIP</span>, <span class="ruby-value">:upcase</span>)
 
   <span class="ruby-ivar">@src</span> = <span class="ruby-ivar">@pos</span> = <span class="ruby-ivar">@sort_fmt</span> = <span class="ruby-ivar">@sort_rel</span> = <span class="ruby-ivar">@docnum</span> = <span class="ruby-keyword">nil</span>
 
-  <span class="ruby-ivar">@tokens</span>, <span class="ruby-ivar">@vectors</span>, <span class="ruby-ivar">@word_count</span> = [], <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">nest</span>(<span class="ruby-value">1</span>) { [] }, <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>)
+  <span class="ruby-ivar">@tokens</span>, <span class="ruby-ivar">@vectors</span>, <span class="ruby-ivar">@word_count</span> = [], <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">array</span>(<span class="ruby-value">1</span>), <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>)
 
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@dict</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;dict&#39;</span>, <span class="ruby-keyword">false</span>)
     <span class="ruby-ivar">@norm</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;norm&#39;</span>, <span class="ruby-keyword">false</span>)
@@ -271,7 +266,7 @@
     <span class="ruby-ivar">@pos</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;pos&#39;</span>, <span class="ruby-keyword">false</span>)
     <span class="ruby-ivar">@pos</span> = <span class="ruby-constant">DEFAULT_POS_SEPARATOR</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@pos</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span>
 
-    <span class="ruby-ivar">@tokens</span> = <span class="ruby-identifier">get_array</span>(<span class="ruby-string">&#39;tokens&#39;</span>, <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-value">:upcase</span>)
+    <span class="ruby-ivar">@tokens</span> = <span class="ruby-identifier">get_ary</span>(<span class="ruby-string">&#39;tokens&#39;</span>, <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-value">:upcase</span>)
     <span class="ruby-ivar">@tokens</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-constant">Tokenizer</span>.<span class="ruby-identifier">rules</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@tokens</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-string">&#39;ALL&#39;</span>)
   <span class="ruby-keyword">end</span>
 
@@ -320,7 +315,7 @@
 
           
           <div class="method-source-code" id="process-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 144</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 142</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">process</span>(<span class="ruby-identifier">obj</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Token</span>)
     <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@tokens</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">attr</span>)
@@ -336,7 +331,7 @@
     <span class="ruby-identifier">pos</span> = <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">position_and_offset</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@pos</span>
 
     <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Token</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">forward_vector</span>(<span class="ruby-identifier">obj</span>, <span class="ruby-identifier">pos</span>) <span class="ruby-operator">:</span>
-      <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">get_class</span>(<span class="ruby-ivar">@lex</span>).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">lex</span><span class="ruby-operator">|</span> <span class="ruby-identifier">forward_vector</span>(<span class="ruby-identifier">lex</span>, <span class="ruby-identifier">pos</span>, <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">src</span>) }
+      <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">each_lex</span>(<span class="ruby-ivar">@lex</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">lex</span><span class="ruby-operator">|</span> <span class="ruby-identifier">forward_vector</span>(<span class="ruby-identifier">lex</span>, <span class="ruby-identifier">pos</span>, <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">src</span>) }
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -404,7 +399,7 @@
 
           
           <div class="method-source-code" id="flush_vectors-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 228</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 226</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">flush_vectors</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">map_vectors</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
     .<span class="ruby-identifier">sort_by</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">w</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> [<span class="ruby-operator">-</span><span class="ruby-identifier">w</span>, <span class="ruby-identifier">v</span>] }
@@ -439,16 +434,16 @@
 
           
           <div class="method-source-code" id="forward_dict-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 173</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 171</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">forward_dict</span>(<span class="ruby-identifier">obj</span>, <span class="ruby-identifier">sep</span> = <span class="ruby-constant">DEFAULT_GENDER_SEPARATOR</span>)
-  <span class="ruby-identifier">vectors</span> = <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">get_class</span>(<span class="ruby-ivar">@lex</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">lex</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">vectors</span> = <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">each_lex</span>(<span class="ruby-ivar">@lex</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">lex</span><span class="ruby-operator">|</span>
     <span class="ruby-node">&quot;#{lex.form} ##{lex.attr}&quot;</span>.<span class="ruby-identifier">tap</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">str</span><span class="ruby-operator">|</span>
       <span class="ruby-identifier">str</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">sep</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">gender</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">gender</span>
     }
   }
 
   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">vectors</span>.<span class="ruby-identifier">empty?</span>
-    <span class="ruby-identifier">vec</span> = <span class="ruby-ivar">@norm</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">lexicals</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">form</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">form</span>
+    <span class="ruby-identifier">vec</span> = <span class="ruby-ivar">@norm</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">lex_form</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">form</span>
     <span class="ruby-identifier">forward_vector</span>(<span class="ruby-node">&quot;#{vec}#{@dict}#{vectors.join(&#39; &#39;)}&quot;</span>)
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
@@ -481,7 +476,7 @@
 
           
           <div class="method-source-code" id="forward_vector-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 186</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 184</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">forward_vector</span>(<span class="ruby-identifier">vec</span>, <span class="ruby-identifier">pos</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">src</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">vec</span> = <span class="ruby-identifier">vec</span>.<span class="ruby-identifier">form</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">vec</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">WordForm</span>)
 
@@ -519,7 +514,7 @@
 
           
           <div class="method-source-code" id="map_vectors-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 221</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 219</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">map_vectors</span>(<span class="ruby-identifier">wc</span> = <span class="ruby-value">1</span>, <span class="ruby-identifier">docnum</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">v</span> = <span class="ruby-identifier">vectors</span>(<span class="ruby-identifier">docnum</span>)
   <span class="ruby-identifier">v</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">vec</span>, <span class="ruby-identifier">pos</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span> <span class="ruby-identifier">pos</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">wc</span>.<span class="ruby-identifier">to_f</span>, <span class="ruby-identifier">vec</span>, <span class="ruby-identifier">vec_pos</span>(<span class="ruby-identifier">vec</span>, <span class="ruby-identifier">pos</span>) }
@@ -555,7 +550,7 @@
 
           
           <div class="method-source-code" id="send_vectors-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 195</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 193</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">send_vectors</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@docnum</span>
     <span class="ruby-identifier">df</span>, <span class="ruby-identifier">abs</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>), <span class="ruby-ivar">@sort_rel</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-value">1</span>
@@ -612,7 +607,7 @@
 
           
           <div class="method-source-code" id="vec_pos-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 234</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 232</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">vec_pos</span>(<span class="ruby-identifier">vec</span>, <span class="ruby-identifier">pos</span>)
   <span class="ruby-identifier">pos</span>.<span class="ruby-identifier">clear</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@pos</span>
 
@@ -649,7 +644,7 @@
 
           
           <div class="method-source-code" id="vectors-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 165</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 163</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">vectors</span>(<span class="ruby-identifier">docnum</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-ivar">@vectors</span>[<span class="ruby-identifier">docnum</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@docnum</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -682,7 +677,7 @@
 
           
           <div class="method-source-code" id="word_count-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 169</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/vector_filter.rb, line 167</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">word_count</span>(<span class="ruby-identifier">docnum</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-ivar">@word_count</span>[<span class="ruby-identifier">docnum</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@docnum</span>]
 <span class="ruby-keyword">end</span></pre>

@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::Attendee - lingo Application documentation (v1.8.6)</title>
+<title>class Lingo::Attendee - lingo Application documentation (v1.8.7)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
@@ -93,7 +93,13 @@
     
     <li ><a href="#method-i-forward">#forward</a>
     
-    <li ><a href="#method-i-get_array">#get_array</a>
+    <li ><a href="#method-i-get_ary">#get_ary</a>
+    
+    <li ><a href="#method-i-get_enc">#get_enc</a>
+    
+    <li ><a href="#method-i-get_flo">#get_flo</a>
+    
+    <li ><a href="#method-i-get_int">#get_int</a>
     
     <li ><a href="#method-i-get_key">#get_key</a>
     
@@ -156,16 +162,6 @@
         <dd><p>For backwards compatibility.</p>
         
       
-        <dt id="Noneword_filter">Noneword_filter
-        
-        <dd>
-        
-      
-        <dt id="Nonewordfilter">Nonewordfilter
-        
-        <dd><p>For backwards compatibility.</p>
-        
-      
         <dt id="Object_filter">Object_filter
         
         <dd>
@@ -174,6 +170,11 @@
         <dt id="Objectfilter">Objectfilter
         
         <dd><p>For backwards compatibility.</p>
+        
+      
+        <dt id="TERMINALS">TERMINALS
+        
+        <dd>
         
       
         <dt id="Text_reader">Text_reader
@@ -282,7 +283,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 74</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 76</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">config</span>, <span class="ruby-identifier">lingo</span>)
   <span class="ruby-ivar">@lingo</span>, <span class="ruby-ivar">@config</span>, <span class="ruby-ivar">@subscribers</span> = <span class="ruby-identifier">lingo</span>, <span class="ruby-identifier">config</span>, []
 
@@ -338,7 +339,7 @@
 
           
           <div class="method-source-code" id="command-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 99</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 101</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">command</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">subscribers</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">sub</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">command</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">control</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>) <span class="ruby-operator">==</span> <span class="ruby-value">:skip_command</span>
@@ -373,7 +374,7 @@
 
           
           <div class="method-source-code" id="forward-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 95</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 97</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">forward</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">subscribers</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">sub</span><span class="ruby-operator">|</span> <span class="ruby-identifier">sub</span>.<span class="ruby-identifier">process</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>) }
 <span class="ruby-keyword">end</span></pre>
@@ -414,7 +415,7 @@
 
           
           <div class="method-source-code" id="dictionary-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 138</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 154</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">dictionary</span>(<span class="ruby-identifier">src</span>, <span class="ruby-identifier">mod</span>)
   <span class="ruby-constant">Language</span><span class="ruby-operator">::</span><span class="ruby-constant">Dictionary</span>.<span class="ruby-identifier">new</span>({ <span class="ruby-string">&#39;source&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">src</span>, <span class="ruby-string">&#39;mode&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">mod</span> }, <span class="ruby-identifier">lingo</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -447,7 +448,7 @@
 
           
           <div class="method-source-code" id="find_word-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 107</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 109</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find_word</span>(<span class="ruby-identifier">f</span>, <span class="ruby-identifier">d</span> = <span class="ruby-ivar">@dic</span>, <span class="ruby-identifier">g</span> = <span class="ruby-ivar">@gra</span>)
   <span class="ruby-identifier">w</span> = <span class="ruby-identifier">d</span>.<span class="ruby-identifier">find_word</span>(<span class="ruby-identifier">f</span>)
   <span class="ruby-identifier">g</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">block_given?</span> <span class="ruby-operator">?</span> <span class="ruby-operator">!</span><span class="ruby-keyword">yield</span>(<span class="ruby-identifier">w</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">w</span>.<span class="ruby-identifier">unknown?</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">g</span>.<span class="ruby-identifier">find_compound</span>(<span class="ruby-identifier">f</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">w</span>
@@ -481,7 +482,7 @@
 
           
           <div class="method-source-code" id="flush-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 112</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 114</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">flush</span>(<span class="ruby-identifier">buffer</span>)
   <span class="ruby-identifier">buffer</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">i</span>) }.<span class="ruby-identifier">clear</span>
 <span class="ruby-keyword">end</span></pre>
@@ -495,10 +496,10 @@
       </div>
 
     
-      <div id="method-i-get_array" class="method-detail ">
+      <div id="method-i-get_ary" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">get_array</span><span
+          <span class="method-name">get_ary</span><span
             class="method-args">(key, default = nil, method = nil)</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -513,12 +514,113 @@
           
 
           
-          <div class="method-source-code" id="get_array-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 126</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_array</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">method</span> = <span class="ruby-keyword">nil</span>)
+          <div class="method-source-code" id="get_ary-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 136</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_ary</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">method</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">ary</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span>).<span class="ruby-identifier">split</span>(<span class="ruby-constant">SEP_RE</span>)
   <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">map!</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">method</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">method</span>
   <span class="ruby-identifier">ary</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-get_enc" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_enc</span><span
+            class="method-args">(key = 'encoding', default = ENC)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_enc-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 148</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_enc</span>(<span class="ruby-identifier">key</span> = <span class="ruby-string">&#39;encoding&#39;</span>, <span class="ruby-identifier">default</span> = <span class="ruby-constant">ENC</span>)
+  <span class="ruby-constant">Encoding</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">get_key</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span>))
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">ArgumentError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">err</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConfigLoadError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">err</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-get_flo" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_flo</span><span
+            class="method-args">(*args)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_flo-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 132</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_flo</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+  ((<span class="ruby-identifier">val</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">val</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:to_f</span>)) <span class="ruby-operator">?</span> <span class="ruby-identifier">val</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">val</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-get_int" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_int</span><span
+            class="method-args">(*args)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_int-source">
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 128</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_int</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+  <span class="ruby-constant">Integer</span>(<span class="ruby-identifier">get_key</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>))
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -549,7 +651,7 @@
 
           
           <div class="method-source-code" id="get_key-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 120</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 122</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_key</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span> = <span class="ruby-identifier">nodefault</span> = <span class="ruby-keyword">true</span>)
   <span class="ruby-ivar">@valid_keys</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">key</span>
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">MissingConfigError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">key</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">nodefault</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">key</span>)
@@ -584,7 +686,7 @@
 
           
           <div class="method-source-code" id="get_re-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 132</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 142</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_re</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">standard</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span>)
     <span class="ruby-identifier">value</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">standard</span> <span class="ruby-operator">:</span> <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">value</span>)
@@ -619,7 +721,7 @@
 
           
           <div class="method-source-code" id="grammar-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 142</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 158</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">grammar</span>(<span class="ruby-identifier">src</span>, <span class="ruby-identifier">mod</span>)
   <span class="ruby-constant">Language</span><span class="ruby-operator">::</span><span class="ruby-constant">Grammar</span>.<span class="ruby-identifier">new</span>({ <span class="ruby-string">&#39;source&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">src</span>, <span class="ruby-string">&#39;mode&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">mod</span> }, <span class="ruby-identifier">lingo</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -652,7 +754,7 @@
 
           
           <div class="method-source-code" id="has_key-3F-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 116</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 118</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">key</span>)
   <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">key</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -685,7 +787,7 @@
 
           
           <div class="method-source-code" id="require_lib-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 158</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 174</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">require_lib</span>(<span class="ruby-identifier">lib</span>)
   <span class="ruby-identifier">require</span> <span class="ruby-identifier">lib</span>
 <span class="ruby-keyword">rescue</span> <span class="ruby-constant">LoadError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">err</span>
@@ -720,9 +822,9 @@
 
           
           <div class="method-source-code" id="set_dic-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 146</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 162</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">set_dic</span>
-  <span class="ruby-ivar">@dic</span> = <span class="ruby-identifier">dictionary</span>(<span class="ruby-identifier">get_array</span>(<span class="ruby-string">&#39;source&#39;</span>), <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;mode&#39;</span>, <span class="ruby-string">&#39;all&#39;</span>))
+  <span class="ruby-ivar">@dic</span> = <span class="ruby-identifier">dictionary</span>(<span class="ruby-identifier">get_ary</span>(<span class="ruby-string">&#39;source&#39;</span>), <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;mode&#39;</span>, <span class="ruby-string">&#39;all&#39;</span>))
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -753,9 +855,9 @@
 
           
           <div class="method-source-code" id="set_gra-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 150</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 166</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">set_gra</span>
-  <span class="ruby-ivar">@gra</span> = <span class="ruby-identifier">grammar</span>(<span class="ruby-identifier">get_array</span>(<span class="ruby-string">&#39;source&#39;</span>), <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;mode&#39;</span>, <span class="ruby-string">&#39;all&#39;</span>))
+  <span class="ruby-ivar">@gra</span> = <span class="ruby-identifier">grammar</span>(<span class="ruby-identifier">get_ary</span>(<span class="ruby-string">&#39;source&#39;</span>), <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;mode&#39;</span>, <span class="ruby-string">&#39;all&#39;</span>))
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -786,7 +888,7 @@
 
           
           <div class="method-source-code" id="warn-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 154</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee.rb, line 170</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">warn</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">msg</span>)
   <span class="ruby-identifier">lingo</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">msg</span>)
 <span class="ruby-keyword">end</span></pre>

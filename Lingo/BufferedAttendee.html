@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::BufferedAttendee - lingo Application documentation (v1.8.6)</title>
+<title>class Lingo::BufferedAttendee - lingo Application documentation (v1.8.7)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
@@ -72,19 +72,11 @@
     
     <li class="calls-super" ><a href="#method-c-new">::new</a>
     
-    <li ><a href="#method-i-control_multi">#control_multi</a>
-    
-    <li ><a href="#method-i-form_at">#form_at</a>
-    
-    <li ><a href="#method-i-forward_number_of_token">#forward_number_of_token</a>
-    
     <li ><a href="#method-i-process">#process</a>
     
     <li ><a href="#method-i-process_buffer">#process_buffer</a>
     
     <li ><a href="#method-i-process_buffer-3F">#process_buffer?</a>
-    
-    <li ><a href="#method-i-valid_tokens_in_buffer">#valid_tokens_in_buffer</a>
     
   </ul>
 </div>
@@ -188,7 +180,7 @@
           <div class="method-source-code" id="process-source">
             <pre><span class="ruby-comment"># File lib/lingo/buffered_attendee.rb, line 35</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">process</span>(<span class="ruby-identifier">obj</span>)
-  <span class="ruby-ivar">@buffer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">obj</span>
+  <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">word_token?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">obj</span>) <span class="ruby-operator">:</span> <span class="ruby-ivar">@buffer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">obj</span>
   <span class="ruby-identifier">process_buffer</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">process_buffer?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -207,121 +199,6 @@
        <header>
          <h3>Private Instance Methods</h3>
        </header>
-
-    
-      <div id="method-i-control_multi" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">control_multi</span><span
-            class="method-args">(cmd)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="control_multi-source">
-            <pre><span class="ruby-comment"># File lib/lingo/buffered_attendee.rb, line 69</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">control_multi</span>(<span class="ruby-identifier">cmd</span>)
-  <span class="ruby-keyword">if</span> [<span class="ruby-value">:RECORD</span>, <span class="ruby-value">:EOF</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">cmd</span>)
-    <span class="ruby-ivar">@eof_handling</span> = <span class="ruby-keyword">true</span>
-
-    <span class="ruby-keyword">while</span> <span class="ruby-identifier">valid_tokens_in_buffer</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
-      <span class="ruby-identifier">process_buffer</span>
-    <span class="ruby-keyword">end</span>
-
-    <span class="ruby-identifier">forward_number_of_token</span>
-
-    <span class="ruby-ivar">@eof_handling</span> = <span class="ruby-keyword">false</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-form_at" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">form_at</span><span
-            class="method-args">(index, klass = WordForm)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="form_at-source">
-            <pre><span class="ruby-comment"># File lib/lingo/buffered_attendee.rb, line 42</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">form_at</span>(<span class="ruby-identifier">index</span>, <span class="ruby-identifier">klass</span> = <span class="ruby-constant">WordForm</span>)
-  <span class="ruby-identifier">obj</span> = <span class="ruby-ivar">@buffer</span>[<span class="ruby-identifier">index</span>]
-  <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">form</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-identifier">klass</span>)
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-forward_number_of_token" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">forward_number_of_token</span><span
-            class="method-args">(len = default = @buffer.size, punct = !default)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="forward_number_of_token-source">
-            <pre><span class="ruby-comment"># File lib/lingo/buffered_attendee.rb, line 47</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">forward_number_of_token</span>(<span class="ruby-identifier">len</span> = <span class="ruby-identifier">default</span> = <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">size</span>, <span class="ruby-identifier">punct</span> = <span class="ruby-operator">!</span><span class="ruby-identifier">default</span>)
-  <span class="ruby-keyword">begin</span>
-    <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">empty?</span>
-      <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">item</span> = <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">delete_at</span>(<span class="ruby-value">0</span>))
-      <span class="ruby-identifier">len</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">punct</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">form</span> <span class="ruby-operator">==</span> <span class="ruby-constant">CHAR_PUNCT</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span> <span class="ruby-keyword">while</span> <span class="ruby-identifier">len</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
 
     
       <div id="method-i-process_buffer" class="method-detail ">
@@ -343,7 +220,7 @@
 
           
           <div class="method-source-code" id="process_buffer-source">
-            <pre><span class="ruby-comment"># File lib/lingo/buffered_attendee.rb, line 65</span>
+            <pre><span class="ruby-comment"># File lib/lingo/buffered_attendee.rb, line 46</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">process_buffer</span>
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>
 <span class="ruby-keyword">end</span></pre>
@@ -376,43 +253,9 @@
 
           
           <div class="method-source-code" id="process_buffer-3F-source">
-            <pre><span class="ruby-comment"># File lib/lingo/buffered_attendee.rb, line 60</span>
+            <pre><span class="ruby-comment"># File lib/lingo/buffered_attendee.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">process_buffer?</span>
-  <span class="ruby-operator">!</span><span class="ruby-identifier">instance_variable_defined?</span>(<span class="ruby-value">:@expected_tokens_in_buffer</span>) <span class="ruby-operator">||</span>
-  <span class="ruby-identifier">valid_tokens_in_buffer</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-ivar">@expected_tokens_in_buffer</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-valid_tokens_in_buffer" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">valid_tokens_in_buffer</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="valid_tokens_in_buffer-source">
-            <pre><span class="ruby-comment"># File lib/lingo/buffered_attendee.rb, line 56</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">valid_tokens_in_buffer</span>
-  <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">count</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">form</span> <span class="ruby-operator">!=</span> <span class="ruby-constant">CHAR_PUNCT</span> }
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

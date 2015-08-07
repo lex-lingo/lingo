@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::Attendee::Decomposer - lingo Application documentation (v1.8.6)</title>
+<title>class Lingo::Attendee::Decomposer - lingo Application documentation (v1.8.7)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
@@ -129,7 +129,7 @@
 
           
           <div class="method-source-code" id="control-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/decomposer.rb, line 81</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/decomposer.rb, line 82</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">control</span>(<span class="ruby-operator">*</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -161,7 +161,7 @@
 
           
           <div class="method-source-code" id="init-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/decomposer.rb, line 77</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/decomposer.rb, line 78</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">init</span>
   <span class="ruby-identifier">set_gra</span>
 <span class="ruby-keyword">end</span></pre>
@@ -194,10 +194,12 @@
 
           
           <div class="method-source-code" id="process-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/decomposer.rb, line 84</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/decomposer.rb, line 85</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">process</span>(<span class="ruby-identifier">obj</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Word</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">unknown?</span>
     <span class="ruby-identifier">com</span> = <span class="ruby-ivar">@gra</span>.<span class="ruby-identifier">find_compound</span>(<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">form</span>)
+    <span class="ruby-identifier">com</span>.<span class="ruby-identifier">token</span> = <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">token</span>
+
     <span class="ruby-identifier">obj</span> = <span class="ruby-identifier">com</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">com</span>.<span class="ruby-identifier">unknown?</span>
   <span class="ruby-keyword">end</span>
 

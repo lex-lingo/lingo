@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::Attendee::WordSearcher - lingo Application documentation (v1.8.6)</title>
+<title>class Lingo::Attendee::WordSearcher - lingo Application documentation (v1.8.7)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
@@ -196,8 +196,8 @@
           <div class="method-source-code" id="process-source">
             <pre><span class="ruby-comment"># File lib/lingo/attendee/word_searcher.rb, line 78</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">process</span>(<span class="ruby-identifier">obj</span>)
-  <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Token</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">word?</span> <span class="ruby-operator">?</span>
-    <span class="ruby-ivar">@dic</span>.<span class="ruby-identifier">find_word</span>(<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">form</span>, <span class="ruby-identifier">obj</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">obj</span>)
+  <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">obj</span>)
+  <span class="ruby-identifier">forward</span>(<span class="ruby-ivar">@dic</span>.<span class="ruby-identifier">find_word</span>(<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">form</span>, <span class="ruby-identifier">obj</span>)) <span class="ruby-keyword">if</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">word_token?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

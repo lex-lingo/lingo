@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::Config - lingo Application documentation (v1.8.6)</title>
+<title>class Lingo::Config - lingo Application documentation (v1.8.7)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
@@ -534,7 +534,7 @@
           <div class="method-source-code" id="to_h-source">
             <pre><span class="ruby-comment"># File lib/lingo/config.rb, line 62</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_h</span>
-  <span class="ruby-ivar">@opts</span>
+  { <span class="ruby-string">&#39;version&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">VERSION</span> }.<span class="ruby-identifier">merge</span>(<span class="ruby-ivar">@opts</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           

@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>ChangeLog - lingo Application documentation (v1.8.6)</title>
+<title>ChangeLog - lingo Application documentation (v1.8.7)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -56,6 +56,7 @@
 
   <ul class="link-list" role="directory">
     <li><a href="#label-Revision+history+for+Lingo">Revision history for Lingo</a>
+    <li><a href="#label-1.8.7+-5B2015-08-07-5D">1.8.7 [2015-08-07]</a>
     <li><a href="#label-1.8.6+-5B2015-02-09-5D">1.8.6 [2015-02-09]</a>
     <li><a href="#label-1.8.5+-5B2014-10-02-5D">1.8.5 [2014-10-02]</a>
     <li><a href="#label-1.8.4+-5B2013-10-18-5D">1.8.4 [2013-10-18]</a>
@@ -132,6 +133,79 @@
 
 <h1 id="label-Revision+history+for+Lingo">Revision history for <a href="Lingo.html">Lingo</a><span><a href="#label-Revision+history+for+Lingo">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
+<h2 id="label-1.8.7+-5B2015-08-07-5D">1.8.7 [2015-08-07]<span><a href="#label-1.8.7+-5B2015-08-07-5D">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<ul><li>
+<p>Added <a
+href="Lingo/Attendee/LsiFilter.html">Lingo::Attendee::LsiFilter</a> to
+correlate semantically related terms    (<a
+href="https://en.wikipedia.org/wiki/Latent_semantic_indexing">LSI</a>) over
+the   “corpus” of all files processed during a single program invocation;
+requires   <a href="https://blackwinter.github.com/lsi4r">lsi4r</a> which
+in turn requires   <a
+href="https://blackwinter.github.com/rb-gsl">rb-gsl</a>. [EXPERIMENTAL:
+Interface may   be changed or removed in next release.]</p>
+</li><li>
+<p>Added <a
+href="Lingo/Attendee/HalFilter.html">Lingo::Attendee::HalFilter</a> to
+correlate semantically related terms    (<a
+href="https://en.wikipedia.org/wiki/Hyperspace_Analogue_to_Language">HAL</a>)
+over   individual documents; requires <a
+href="https://blackwinter.github.com/hal4r">hal4r</a>   which in turn
+requires <a href="https://blackwinter.github.com/rb-gsl">rb-gsl</a>.  
+[EXPERIMENTAL: Interface may be changed or removed in next release.]</p>
+</li><li>
+<p>Added <a
+href="Lingo/Attendee/AnalysisFilter.html">Lingo::Attendee::AnalysisFilter</a>
+and associated <code>lingoctl</code> tooling.</p>
+</li><li>
+<p>Multiword dictionaries can now identify hyphenated variants (e.g.   
+<code>automatic data-processing</code>); set <code>hyphenate: true</code>
+in the   dictionary config.</p>
+</li><li>
+<p><a href="Lingo/Attendee/Tokenizer.html">Lingo::Attendee::Tokenizer</a> no
+longer considers hyphens at word edges as part    of the word. As a
+consequence, Lingo::Attendee::Dehyphenizer has been   dropped.</p>
+</li><li>
+<p>Dropped Lingo::Attendee::NonewordFilter; use <a
+href="Lingo/Attendee/VectorFilter.html">Lingo::Attendee::VectorFilter</a>  
+with option <code>lexicals: &#39;\?&#39;</code> instead.</p>
+</li><li>
+<p><a href="Lingo/Attendee/TextReader.html">Lingo::Attendee::TextReader</a>
+and <a
+href="Lingo/Attendee/TextWriter.html">Lingo::Attendee::TextWriter</a>
+learned    <code>encoding</code> option to read/write text that is not
+UTF-8 encoded;   configuration files and dictionaries still need to be
+UTF-8, though.</p>
+</li><li>
+<p><a href="Lingo/Attendee/TextReader.html">Lingo::Attendee::TextReader</a>
+and <a
+href="Lingo/Attendee/TextWriter.html">Lingo::Attendee::TextWriter</a>
+learned to    read/write Gzip-compressed files (file extension
+<code>.gz</code> or <code>.gzip</code>).</p>
+</li><li>
+<p><a href="Lingo/Attendee/Sequencer.html">Lingo::Attendee::Sequencer</a>
+learned to recognize <code>0</code> in the pattern to match    number
+tokens.</p>
+</li><li>
+<p>Fixed <a
+href="Lingo/Attendee/TextReader.html">Lingo::Attendee::TextReader</a> to
+recognize BOM in input files; does not    apply to input read from
+<code>STDIN</code>.</p>
+</li><li>
+<p>Fixed regression introduced in 1.8.6 where <a
+href="Lingo/Attendee/Debugger.html">Lingo::Attendee::Debugger</a> would   
+no longer work immediately behind <a
+href="Lingo/Attendee/TextReader.html">Lingo::Attendee::TextReader</a>.</p>
+</li><li>
+<p>Fixed <code>lingoctl</code> copy commands when overwriting existing files.</p>
+</li><li>
+<p>Refactored <a
+href="Lingo/Database/Crypter.html">Lingo::Database::Crypter</a> into a
+module.</p>
+</li><li>
+<p>JRuby 9000 compatibility.</p>
+</li></ul>
+
 <h2 id="label-1.8.6+-5B2015-02-09-5D">1.8.6 [2015-02-09]<span><a href="#label-1.8.6+-5B2015-02-09-5D">&para;</a> <a href="#top">&uarr;</a></span></h2>
 <ul><li>
 <p><a
@@ -166,10 +240,7 @@ longer removes line endings; option <code>chomp</code>    is obsolete.</p>
 passes byte offset to the following attendee.</p>
 </li><li>
 <p><a href="Lingo/Attendee/Tokenizer.html">Lingo::Attendee::Tokenizer</a>
-records token&#39;s byte offset.</p>
-</li><li>
-<p><a href="Lingo/Attendee/Tokenizer.html">Lingo::Attendee::Tokenizer</a>
-records token&#39;s sequence position.</p>
+records token&#39;s position and byte offset.</p>
 </li><li>
 <p><a href="Lingo/Attendee/Tokenizer.html">Lingo::Attendee::Tokenizer</a>
 learned <code>skip-tags</code> option to skip over    specified tags&#39;
@@ -269,10 +340,8 @@ accepts regular expression patterns.</p>
 <p><a href="Lingo/Attendee/Sequencer.html">Lingo::Attendee::Sequencer</a>
 substitutes <code>0</code> in the format string for the    matched pattern.</p>
 </li><li>
-<p><a
-href="Lingo/Attendee/NonewordFilter.html">Lingo::Attendee::NonewordFilter</a>
-learned <code>dict</code> option to print nonewords    in dictionary
-format.</p>
+<p>Lingo::Attendee::NonewordFilter learned <code>dict</code> option to print
+nonewords    in dictionary format.</p>
 </li><li>
 <p>Added progress reporting to <a
 href="Lingo/Attendee/TextReader.html">Lingo::Attendee::TextReader</a> for
@@ -377,9 +446,8 @@ will be removed in <a href="Lingo.html">Lingo</a> 1.9.</p>
 <ul><li>
 <p>Performance improvements regarding <a
 href="Lingo/Attendee/VectorFilter.html">Lingo::Attendee::VectorFilter</a>
-(as well    as <a
-href="Lingo/Attendee/NonewordFilter.html">Lingo::Attendee::NonewordFilter</a>)
-memory usage; set <code>sort: false</code>   in the config.</p>
+(as well    as Lingo::Attendee::NonewordFilter) memory usage; set
+<code>sort: false</code>   in the config.</p>
 </li><li>
 <p>Added <a href="Lingo/Attendee/Stemmer.html">Lingo::Attendee::Stemmer</a>
 (implementing Porter&#39;s algorithm for suffix    stripping).</p>
@@ -471,11 +539,12 @@ dictionaries now    respect <code>def-wc</code>; new parameter
 &#39;m&#39;</code> in your <code>.lang</code> to restore the previous  
 behaviour.</p>
 </li><li>
-<p>New <a href="Lingo/Attendee/Formatter.html">Lingo::Attendee::Formatter</a>
-for configurable output formatting as an    alternative to <a
+<p>Added <a
+href="Lingo/Attendee/Formatter.html">Lingo::Attendee::Formatter</a> for
+configurable output formatting as an    alternative to <a
 href="Lingo/Attendee/TextWriter.html">Lingo::Attendee::TextWriter</a>.</p>
 </li><li>
-<p>New basic input filters to enable indexing of HTML/XML (and PDF) files.</p>
+<p>Added basic input filters to enable indexing of HTML/XML (and PDF) files.</p>
 </li><li>
 <p>Updated the system dictionary.</p>
 </li><li>
@@ -488,8 +557,7 @@ href="Lingo/Attendee/TextWriter.html">Lingo::Attendee::TextWriter</a>.</p>
 </li><li>
 <p>Extended <a
 href="Lingo/Attendee/VectorFilter.html">Lingo::Attendee::VectorFilter</a>
-to double as enhanced    <a
-href="Lingo/Attendee/NonewordFilter.html">Lingo::Attendee::NonewordFilter</a>.</p>
+to double as enhanced    Lingo::Attendee::NonewordFilter.</p>
 </li><li>
 <p>Fixed <a
 href="Lingo/Attendee/Sequencer.html">Lingo::Attendee::Sequencer</a> to

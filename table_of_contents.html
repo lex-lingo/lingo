@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>Table of Contents - lingo Application documentation (v1.8.6)</title>
+<title>Table of Contents - lingo Application documentation (v1.8.7)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -20,7 +20,7 @@
 
 <body id="top" class="table-of-contents">
 <main role="main">
-<h1 class="class">Table of Contents - lingo Application documentation (v1.8.6)</h1>
+<h1 class="class">Table of Contents - lingo Application documentation (v1.8.7)</h1>
 
 <h2 id="pages">Pages</h2>
 <ul>
@@ -36,6 +36,7 @@
 
     <ul>
       <li><a href="ChangeLog.html#label-Revision+history+for+Lingo">Revision history for Lingo</a>
+      <li><a href="ChangeLog.html#label-1.8.7+-5B2015-08-07-5D">1.8.7 [2015-08-07]</a>
       <li><a href="ChangeLog.html#label-1.8.6+-5B2015-02-09-5D">1.8.6 [2015-02-09]</a>
       <li><a href="ChangeLog.html#label-1.8.5+-5B2014-10-02-5D">1.8.5 [2014-10-02]</a>
       <li><a href="ChangeLog.html#label-1.8.4+-5B2013-10-18-5D">1.8.4 [2013-10-18]</a>
@@ -108,7 +109,6 @@
       <li><a href="README.html#label-EXAMPLE">EXAMPLE</a>
       <li><a href="README.html#label-INSTALLATION+AND+USAGE">INSTALLATION AND USAGE</a>
       <li><a href="README.html#label-Dictionary+and+configuration+file+lookup">Dictionary and configuration file lookup</a>
-      <li><a href="README.html#label-Legacy+version">Legacy version</a>
       <li><a href="README.html#label-FILE+FORMATS">FILE FORMATS</a>
       <li><a href="README.html#label-Configuration">Configuration</a>
       <li><a href="README.html#label-Language+definition">Language definition</a>
@@ -145,6 +145,9 @@
     <a href="Lingo/Attendee/Abbreviator.html">Lingo::Attendee::Abbreviator</a>
   </li>
   <li class="class">
+    <a href="Lingo/Attendee/AnalysisFilter.html">Lingo::Attendee::AnalysisFilter</a>
+  </li>
+  <li class="class">
     <a href="Lingo/Attendee/DebugFilter.html">Lingo::Attendee::DebugFilter</a>
   </li>
   <li class="class">
@@ -154,16 +157,16 @@
     <a href="Lingo/Attendee/Decomposer.html">Lingo::Attendee::Decomposer</a>
   </li>
   <li class="class">
-    <a href="Lingo/Attendee/Dehyphenizer.html">Lingo::Attendee::Dehyphenizer</a>
-  </li>
-  <li class="class">
     <a href="Lingo/Attendee/Formatter.html">Lingo::Attendee::Formatter</a>
   </li>
   <li class="class">
-    <a href="Lingo/Attendee/MultiWorder.html">Lingo::Attendee::MultiWorder</a>
+    <a href="Lingo/Attendee/HalFilter.html">Lingo::Attendee::HalFilter</a>
   </li>
   <li class="class">
-    <a href="Lingo/Attendee/NonewordFilter.html">Lingo::Attendee::NonewordFilter</a>
+    <a href="Lingo/Attendee/LsiFilter.html">Lingo::Attendee::LsiFilter</a>
+  </li>
+  <li class="class">
+    <a href="Lingo/Attendee/MultiWorder.html">Lingo::Attendee::MultiWorder</a>
   </li>
   <li class="class">
     <a href="Lingo/Attendee/ObjectFilter.html">Lingo::Attendee::ObjectFilter</a>
@@ -228,7 +231,7 @@
   <li class="class">
     <a href="Lingo/Database.html">Lingo::Database</a>
   </li>
-  <li class="class">
+  <li class="module">
     <a href="Lingo/Database/Crypter.html">Lingo::Database::Crypter</a>
   </li>
   <li class="module">
@@ -333,6 +336,9 @@
   <li class="class">
     <a href="Lingo/Srv.html">Lingo::Srv</a>
   </li>
+  <li class="module">
+    <a href="Lingo/TextUtils.html">Lingo::TextUtils</a>
+  </li>
   <li class="class">
     <a href="Lingo/TokenizeError.html">Lingo::TokenizeError</a>
   </li>
@@ -418,11 +424,6 @@
     <a href="Lingo/Attendee/Tokenizer.html#method-c-delete">::delete</a>
     &mdash;
     <span class="container">Lingo::Attendee::Tokenizer</span>
-
-  <li class="method">
-    <a href="Lingo/Database/Crypter.html#method-c-digest">::digest</a>
-    &mdash;
-    <span class="container">Lingo::Database::Crypter</span>
 
   <li class="method">
     <a href="Lingo/DeferredAttendee.html#method-c-enhance">::enhance</a>
@@ -935,9 +936,9 @@
     <span class="container">Lingo::Language::Word</span>
 
   <li class="method">
-    <a href="Lingo/Database.html#method-i-backend_from_file">#backend_from_file</a>
+    <a href="Lingo/TextUtils.html#method-i-bom_encoding">#bom_encoding</a>
     &mdash;
-    <span class="container">Lingo::Database</span>
+    <span class="container">Lingo::TextUtils</span>
 
   <li class="method">
     <a href="Lingo/Call.html#method-i-call">#call</a>
@@ -955,7 +956,12 @@
     <span class="container">Lingo::Attendee::TextReader</span>
 
   <li class="method">
-    <a href="Lingo/Attendee/MultiWorder.html#method-i-check_multiword_key">#check_multiword_key</a>
+    <a href="Lingo/Attendee/TextReader.html#method-i-cancel_filters">#cancel_filters</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::TextReader</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee/MultiWorder.html#method-i-check_multiword">#check_multiword</a>
     &mdash;
     <span class="container">Lingo::Attendee::MultiWorder</span>
 
@@ -995,12 +1001,17 @@
     <span class="container">Lingo::Database</span>
 
   <li class="method">
+    <a href="Lingo/Ctl.html#method-i-columns">#columns</a>
+    &mdash;
+    <span class="container">Lingo::Ctl</span>
+
+  <li class="method">
     <a href="Lingo/Attendee.html#method-i-command">#command</a>
     &mdash;
     <span class="container">Lingo::Attendee</span>
 
   <li class="method">
-    <a href="Lingo/Language/Word.html#method-i-compo_form">#compo_form</a>
+    <a href="Lingo/Language/Word.html#method-i-compound_attrs">#compound_attrs</a>
     &mdash;
     <span class="container">Lingo::Language::Word</span>
 
@@ -1025,6 +1036,11 @@
     <span class="container">Lingo::Attendee::Abbreviator</span>
 
   <li class="method">
+    <a href="Lingo/Attendee/AnalysisFilter.html#method-i-control">#control</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::AnalysisFilter</span>
+
+  <li class="method">
     <a href="Lingo/Attendee/Debugger.html#method-i-control">#control</a>
     &mdash;
     <span class="container">Lingo::Attendee::Debugger</span>
@@ -1035,19 +1051,19 @@
     <span class="container">Lingo::Attendee::Decomposer</span>
 
   <li class="method">
-    <a href="Lingo/Attendee/Dehyphenizer.html#method-i-control">#control</a>
+    <a href="Lingo/Attendee/HalFilter.html#method-i-control">#control</a>
     &mdash;
-    <span class="container">Lingo::Attendee::Dehyphenizer</span>
+    <span class="container">Lingo::Attendee::HalFilter</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee/LsiFilter.html#method-i-control">#control</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::LsiFilter</span>
 
   <li class="method">
     <a href="Lingo/Attendee/MultiWorder.html#method-i-control">#control</a>
     &mdash;
     <span class="container">Lingo::Attendee::MultiWorder</span>
-
-  <li class="method">
-    <a href="Lingo/Attendee/NonewordFilter.html#method-i-control">#control</a>
-    &mdash;
-    <span class="container">Lingo::Attendee::NonewordFilter</span>
 
   <li class="method">
     <a href="Lingo/Attendee/ObjectFilter.html#method-i-control">#control</a>
@@ -1100,6 +1116,11 @@
     <span class="container">Lingo::Attendee::WordSearcher</span>
 
   <li class="method">
+    <a href="Lingo/Attendee/LsiFilter.html#method-i-control_deferred">#control_deferred</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::LsiFilter</span>
+
+  <li class="method">
     <a href="Lingo/Attendee/VectorFilter.html#method-i-control_deferred">#control_deferred</a>
     &mdash;
     <span class="container">Lingo::Attendee::VectorFilter</span>
@@ -1108,11 +1129,6 @@
     <a href="Lingo/DeferredAttendee.html#method-i-control_deferred">#control_deferred</a>
     &mdash;
     <span class="container">Lingo::DeferredAttendee</span>
-
-  <li class="method">
-    <a href="Lingo/BufferedAttendee.html#method-i-control_multi">#control_multi</a>
-    &mdash;
-    <span class="container">Lingo::BufferedAttendee</span>
 
   <li class="method">
     <a href="Lingo/Database.html#method-i-convert">#convert</a>
@@ -1175,6 +1191,16 @@
     <span class="container">Lingo::Database::Crypter</span>
 
   <li class="method">
+    <a href="Lingo/Ctl.html#method-i-csv_foreach">#csv_foreach</a>
+    &mdash;
+    <span class="container">Lingo::Ctl</span>
+
+  <li class="method">
+    <a href="Lingo/Ctl.html#method-i-csv_writer">#csv_writer</a>
+    &mdash;
+    <span class="container">Lingo::Ctl</span>
+
+  <li class="method">
     <a href="Lingo/Ctl.html#method-i-ctl">#ctl</a>
     &mdash;
     <span class="container">Lingo::Ctl</span>
@@ -1195,16 +1221,6 @@
     <span class="container">Lingo::Database::Crypter</span>
 
   <li class="method">
-    <a href="Lingo/Attendee/Dehyphenizer.html#method-i-dehyphenize">#dehyphenize</a>
-    &mdash;
-    <span class="container">Lingo::Attendee::Dehyphenizer</span>
-
-  <li class="method">
-    <a href="Lingo/Attendee/Dehyphenizer.html#method-i-dehyphenized-3F">#dehyphenized?</a>
-    &mdash;
-    <span class="container">Lingo::Attendee::Dehyphenizer</span>
-
-  <li class="method">
     <a href="Lingo/Config.html#method-i-deprecate">#deprecate</a>
     &mdash;
     <span class="container">Lingo::Config</span>
@@ -1218,6 +1234,21 @@
     <a href="Lingo.html#method-i-dictionary_config">#dictionary_config</a>
     &mdash;
     <span class="container">Lingo</span>
+
+  <li class="method">
+    <a href="Lingo/Database/Crypter.html#method-i-digest">#digest</a>
+    &mdash;
+    <span class="container">Lingo::Database::Crypter</span>
+
+  <li class="method">
+    <a href="Lingo/Ctl.html#method-i-do_analysisstats">#do_analysisstats</a>
+    &mdash;
+    <span class="container">Lingo::Ctl</span>
+
+  <li class="method">
+    <a href="Lingo/Ctl.html#method-i-do_analysistrans">#do_analysistrans</a>
+    &mdash;
+    <span class="container">Lingo::Ctl</span>
 
   <li class="method">
     <a href="Lingo/Ctl.html#method-i-do_archive">#do_archive</a>
@@ -1285,6 +1316,16 @@
     <span class="container">Lingo::Language::Dictionary</span>
 
   <li class="method">
+    <a href="Lingo/Language/Word.html#method-i-each_lex">#each_lex</a>
+    &mdash;
+    <span class="container">Lingo::Language::Word</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee/HalFilter.html#method-i-each_vector">#each_vector</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::HalFilter</span>
+
+  <li class="method">
     <a href="Lingo/Database/Crypter.html#method-i-encode">#encode</a>
     &mdash;
     <span class="container">Lingo::Database::Crypter</span>
@@ -1335,6 +1376,11 @@
     <span class="container">Lingo::Language::Grammar</span>
 
   <li class="method">
+    <a href="Lingo/Language/Grammar.html#method-i-find_compound_head">#find_compound_head</a>
+    &mdash;
+    <span class="container">Lingo::Language::Grammar</span>
+
+  <li class="method">
     <a href="Lingo/Attendee/Sequencer.html#method-i-find_seq">#find_seq</a>
     &mdash;
     <span class="container">Lingo::Attendee::Sequencer</span>
@@ -1360,6 +1406,11 @@
     <span class="container">Lingo::Attendee</span>
 
   <li class="method">
+    <a href="Lingo/Attendee/LsiFilter.html#method-i-flush_deferred">#flush_deferred</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::LsiFilter</span>
+
+  <li class="method">
     <a href="Lingo/Attendee/VectorFilter.html#method-i-flush_deferred">#flush_deferred</a>
     &mdash;
     <span class="container">Lingo::Attendee::VectorFilter</span>
@@ -1380,9 +1431,9 @@
     <span class="container">Lingo::Attendee::VectorFilter</span>
 
   <li class="method">
-    <a href="Lingo/BufferedAttendee.html#method-i-form_at">#form_at</a>
+    <a href="Lingo/Attendee/MultiWorder.html#method-i-form_at">#form_at</a>
     &mdash;
-    <span class="container">Lingo::BufferedAttendee</span>
+    <span class="container">Lingo::Attendee::MultiWorder</span>
 
   <li class="method">
     <a href="Lingo/Attendee.html#method-i-forward">#forward</a>
@@ -1400,9 +1451,19 @@
     <span class="container">Lingo::Attendee::Tokenizer</span>
 
   <li class="method">
-    <a href="Lingo/BufferedAttendee.html#method-i-forward_number_of_token">#forward_number_of_token</a>
+    <a href="Lingo/Attendee/MultiWorder.html#method-i-forward_number_of_token">#forward_number_of_token</a>
     &mdash;
-    <span class="container">Lingo::BufferedAttendee</span>
+    <span class="container">Lingo::Attendee::MultiWorder</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee/AnalysisFilter.html#method-i-forward_obj">#forward_obj</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::AnalysisFilter</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee/AnalysisFilter.html#method-i-forward_row">#forward_row</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::AnalysisFilter</span>
 
   <li class="method">
     <a href="Lingo/Attendee/Tokenizer.html#method-i-forward_token">#forward_token</a>
@@ -1415,11 +1476,6 @@
     <span class="container">Lingo::Attendee::VectorFilter</span>
 
   <li class="method">
-    <a href="Lingo/Language/Word.html#method-i-full_compound-3F">#full_compound?</a>
-    &mdash;
-    <span class="container">Lingo::Language::Word</span>
-
-  <li class="method">
     <a href="Lingo/Language/Word.html#method-i-genders">#genders</a>
     &mdash;
     <span class="container">Lingo::Language::Word</span>
@@ -1430,7 +1486,7 @@
     <span class="container">Lingo::Config</span>
 
   <li class="method">
-    <a href="Lingo/Attendee.html#method-i-get_array">#get_array</a>
+    <a href="Lingo/Attendee.html#method-i-get_ary">#get_ary</a>
     &mdash;
     <span class="container">Lingo::Attendee</span>
 
@@ -1440,14 +1496,24 @@
     <span class="container">Lingo::Database</span>
 
   <li class="method">
-    <a href="Lingo/Language/Word.html#method-i-get_class">#get_class</a>
+    <a href="Lingo/Attendee.html#method-i-get_enc">#get_enc</a>
     &mdash;
-    <span class="container">Lingo::Language::Word</span>
+    <span class="container">Lingo::Attendee</span>
 
   <li class="method">
     <a href="Lingo/Attendee/TextReader.html#method-i-get_files">#get_files</a>
     &mdash;
     <span class="container">Lingo::Attendee::TextReader</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee.html#method-i-get_flo">#get_flo</a>
+    &mdash;
+    <span class="container">Lingo::Attendee</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee.html#method-i-get_int">#get_int</a>
+    &mdash;
+    <span class="container">Lingo::Attendee</span>
 
   <li class="method">
     <a href="Lingo/Attendee.html#method-i-get_key">#get_key</a>
@@ -1475,6 +1541,16 @@
     <span class="container">Lingo::Language::WordForm</span>
 
   <li class="method">
+    <a href="Lingo/Ctl.html#method-i-histograms">#histograms</a>
+    &mdash;
+    <span class="container">Lingo::Ctl</span>
+
+  <li class="method">
+    <a href="Lingo/Ctl.html#method-i-histograms_to_csv">#histograms_to_csv</a>
+    &mdash;
+    <span class="container">Lingo::Ctl</span>
+
+  <li class="method">
     <a href="Lingo/Language/WordForm.html#method-i-identified-3F">#identified?</a>
     &mdash;
     <span class="container">Lingo::Language::WordForm</span>
@@ -1490,9 +1566,9 @@
     <span class="container">Lingo::Attendee::Abbreviator</span>
 
   <li class="method">
-    <a href="Lingo/Attendee/Debugger.html#method-i-init">#init</a>
+    <a href="Lingo/Attendee/AnalysisFilter.html#method-i-init">#init</a>
     &mdash;
-    <span class="container">Lingo::Attendee::Debugger</span>
+    <span class="container">Lingo::Attendee::AnalysisFilter</span>
 
   <li class="method">
     <a href="Lingo/Attendee/DebugFilter.html#method-i-init">#init</a>
@@ -1500,14 +1576,14 @@
     <span class="container">Lingo::Attendee::DebugFilter</span>
 
   <li class="method">
+    <a href="Lingo/Attendee/Debugger.html#method-i-init">#init</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::Debugger</span>
+
+  <li class="method">
     <a href="Lingo/Attendee/Decomposer.html#method-i-init">#init</a>
     &mdash;
     <span class="container">Lingo::Attendee::Decomposer</span>
-
-  <li class="method">
-    <a href="Lingo/Attendee/Dehyphenizer.html#method-i-init">#init</a>
-    &mdash;
-    <span class="container">Lingo::Attendee::Dehyphenizer</span>
 
   <li class="method">
     <a href="Lingo/Attendee/Formatter.html#method-i-init">#init</a>
@@ -1515,14 +1591,19 @@
     <span class="container">Lingo::Attendee::Formatter</span>
 
   <li class="method">
+    <a href="Lingo/Attendee/HalFilter.html#method-i-init">#init</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::HalFilter</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee/LsiFilter.html#method-i-init">#init</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::LsiFilter</span>
+
+  <li class="method">
     <a href="Lingo/Attendee/MultiWorder.html#method-i-init">#init</a>
     &mdash;
     <span class="container">Lingo::Attendee::MultiWorder</span>
-
-  <li class="method">
-    <a href="Lingo/Attendee/NonewordFilter.html#method-i-init">#init</a>
-    &mdash;
-    <span class="container">Lingo::Attendee::NonewordFilter</span>
 
   <li class="method">
     <a href="Lingo/Attendee/ObjectFilter.html#method-i-init">#init</a>
@@ -1595,14 +1676,14 @@
     <span class="container">Lingo::Config</span>
 
   <li class="method">
+    <a href="Lingo/Language/Word.html#method-i-lex_form">#lex_form</a>
+    &mdash;
+    <span class="container">Lingo::Language::Word</span>
+
+  <li class="method">
     <a href="Lingo.html#method-i-lexical_hash">#lexical_hash</a>
     &mdash;
     <span class="container">Lingo</span>
-
-  <li class="method">
-    <a href="Lingo/Language/Word.html#method-i-lexicals">#lexicals</a>
-    &mdash;
-    <span class="container">Lingo::Language::Word</span>
 
   <li class="method">
     <a href="Lingo/Ctl.html#method-i-list">#list</a>
@@ -1630,11 +1711,6 @@
     <span class="container">Lingo::Ctl</span>
 
   <li class="method">
-    <a href="Lingo/Language/Word.html#method-i-multiword_size">#multiword_size</a>
-    &mdash;
-    <span class="container">Lingo::Language::Word</span>
-
-  <li class="method">
     <a href="Lingo/Ctl.html#method-i-no_args">#no_args</a>
     &mdash;
     <span class="container">Lingo::Ctl</span>
@@ -1645,9 +1721,9 @@
     <span class="container">Lingo::Config</span>
 
   <li class="method">
-    <a href="Lingo/Language/Word.html#method-i-norm">#norm</a>
+    <a href="Lingo/Language/Token.html#method-i-number-3F">#number?</a>
     &mdash;
-    <span class="container">Lingo::Language::Word</span>
+    <span class="container">Lingo::Language::Token</span>
 
   <li class="method">
     <a href="Lingo/Database.html#method-i-open">#open</a>
@@ -1655,9 +1731,29 @@
     <span class="container">Lingo::Database</span>
 
   <li class="method">
-    <a href="Lingo/Attendee/TextReader.html#method-i-open_file">#open_file</a>
+    <a href="Lingo/TextUtils.html#method-i-open_file">#open_file</a>
     &mdash;
-    <span class="container">Lingo::Attendee::TextReader</span>
+    <span class="container">Lingo::TextUtils</span>
+
+  <li class="method">
+    <a href="Lingo/TextUtils.html#method-i-open_gzip">#open_gzip</a>
+    &mdash;
+    <span class="container">Lingo::TextUtils</span>
+
+  <li class="method">
+    <a href="Lingo/TextUtils.html#method-i-open_path">#open_path</a>
+    &mdash;
+    <span class="container">Lingo::TextUtils</span>
+
+  <li class="method">
+    <a href="Lingo/TextUtils.html#method-i-open_stdin">#open_stdin</a>
+    &mdash;
+    <span class="container">Lingo::TextUtils</span>
+
+  <li class="method">
+    <a href="Lingo/TextUtils.html#method-i-open_stdout">#open_stdout</a>
+    &mdash;
+    <span class="container">Lingo::TextUtils</span>
 
   <li class="method">
     <a href="Lingo/CLI.html#method-i-opts">#opts</a>
@@ -1685,9 +1781,19 @@
     <span class="container">Lingo::Ctl</span>
 
   <li class="method">
+    <a href="Lingo/Ctl.html#method-i-paths_write">#paths_write</a>
+    &mdash;
+    <span class="container">Lingo::Ctl</span>
+
+  <li class="method">
     <a href="Lingo/Language/Grammar.html#method-i-permute_compound">#permute_compound</a>
     &mdash;
     <span class="container">Lingo::Language::Grammar</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee/TextReader.html#method-i-please_install">#please_install</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::TextReader</span>
 
   <li class="method">
     <a href="Lingo/Attendee/TextReader.html#method-i-pos-3F">#pos?</a>
@@ -1720,6 +1826,11 @@
     <span class="container">Lingo::Attendee::Abbreviator</span>
 
   <li class="method">
+    <a href="Lingo/Attendee/AnalysisFilter.html#method-i-process">#process</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::AnalysisFilter</span>
+
+  <li class="method">
     <a href="Lingo/Attendee/Debugger.html#method-i-process">#process</a>
     &mdash;
     <span class="container">Lingo::Attendee::Debugger</span>
@@ -1735,9 +1846,14 @@
     <span class="container">Lingo::Attendee::Formatter</span>
 
   <li class="method">
-    <a href="Lingo/Attendee/NonewordFilter.html#method-i-process">#process</a>
+    <a href="Lingo/Attendee/HalFilter.html#method-i-process">#process</a>
     &mdash;
-    <span class="container">Lingo::Attendee::NonewordFilter</span>
+    <span class="container">Lingo::Attendee::HalFilter</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee/LsiFilter.html#method-i-process">#process</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::LsiFilter</span>
 
   <li class="method">
     <a href="Lingo/Attendee/ObjectFilter.html#method-i-process">#process</a>
@@ -1785,11 +1901,6 @@
     <span class="container">Lingo::BufferedAttendee</span>
 
   <li class="method">
-    <a href="Lingo/Attendee/Dehyphenizer.html#method-i-process_buffer">#process_buffer</a>
-    &mdash;
-    <span class="container">Lingo::Attendee::Dehyphenizer</span>
-
-  <li class="method">
     <a href="Lingo/Attendee/MultiWorder.html#method-i-process_buffer">#process_buffer</a>
     &mdash;
     <span class="container">Lingo::Attendee::MultiWorder</span>
@@ -1803,6 +1914,11 @@
     <a href="Lingo/BufferedAttendee.html#method-i-process_buffer">#process_buffer</a>
     &mdash;
     <span class="container">Lingo::BufferedAttendee</span>
+
+  <li class="method">
+    <a href="Lingo/Attendee/MultiWorder.html#method-i-process_buffer-3F">#process_buffer?</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::MultiWorder</span>
 
   <li class="method">
     <a href="Lingo/Attendee/Sequencer.html#method-i-process_buffer-3F">#process_buffer?</a>
@@ -1875,14 +1991,19 @@
     <span class="container">Lingo::Attendee::Abbreviator</span>
 
   <li class="method">
+    <a href="Lingo/Attendee/LsiFilter.html#method-i-send_lsi">#send_lsi</a>
+    &mdash;
+    <span class="container">Lingo::Attendee::LsiFilter</span>
+
+  <li class="method">
     <a href="Lingo/Attendee/Debugger.html#method-i-send_msg">#send_msg</a>
     &mdash;
     <span class="container">Lingo::Attendee::Debugger</span>
 
   <li class="method">
-    <a href="Lingo/Attendee/NonewordFilter.html#method-i-send_nonewords">#send_nonewords</a>
+    <a href="Lingo/Attendee/HalFilter.html#method-i-send_vectors">#send_vectors</a>
     &mdash;
-    <span class="container">Lingo::Attendee::NonewordFilter</span>
+    <span class="container">Lingo::Attendee::HalFilter</span>
 
   <li class="method">
     <a href="Lingo/Attendee/VectorFilter.html#method-i-send_vectors">#send_vectors</a>
@@ -1910,19 +2031,29 @@
     <span class="container">Lingo::Attendee</span>
 
   <li class="method">
+    <a href="Lingo/TextUtils.html#method-i-set_encoding">#set_encoding</a>
+    &mdash;
+    <span class="container">Lingo::TextUtils</span>
+
+  <li class="method">
+    <a href="Lingo/TextUtils.html#method-i-set_ext">#set_ext</a>
+    &mdash;
+    <span class="container">Lingo::TextUtils</span>
+
+  <li class="method">
     <a href="Lingo/Attendee.html#method-i-set_gra">#set_gra</a>
     &mdash;
     <span class="container">Lingo::Attendee</span>
 
   <li class="method">
+    <a href="Lingo/Database.html#method-i-set_key">#set_key</a>
+    &mdash;
+    <span class="container">Lingo::Database</span>
+
+  <li class="method">
     <a href="Lingo/Database/Source.html#method-i-size">#size</a>
     &mdash;
     <span class="container">Lingo::Database::Source</span>
-
-  <li class="method">
-    <a href="Lingo/Attendee/TextReader.html#method-i-spool">#spool</a>
-    &mdash;
-    <span class="container">Lingo::Attendee::TextReader</span>
 
   <li class="method">
     <a href="Lingo.html#method-i-start">#start</a>
@@ -1940,9 +2071,9 @@
     <span class="container">Lingo::Config</span>
 
   <li class="method">
-    <a href="Lingo/Attendee/TextReader.html#method-i-stdin-3F">#stdin?</a>
+    <a href="Lingo/TextUtils.html#method-i-stdin-3F">#stdin?</a>
     &mdash;
-    <span class="container">Lingo::Attendee::TextReader</span>
+    <span class="container">Lingo::TextUtils</span>
 
   <li class="method">
     <a href="Lingo/Config.html#method-i-stdout">#stdout</a>
@@ -1950,9 +2081,9 @@
     <span class="container">Lingo::Config</span>
 
   <li class="method">
-    <a href="Lingo/Attendee/TextWriter.html#method-i-stdout-3F">#stdout?</a>
+    <a href="Lingo/TextUtils.html#method-i-stdout-3F">#stdout?</a>
     &mdash;
-    <span class="container">Lingo::Attendee::TextWriter</span>
+    <span class="container">Lingo::TextUtils</span>
 
   <li class="method">
     <a href="Lingo/Attendee/Stemmer/Porter.html#method-i-stem">#stem</a>
@@ -2130,6 +2261,11 @@
     <span class="container">Lingo::Attendee::Tokenizer</span>
 
   <li class="method">
+    <a href="Lingo/Ctl.html#method-i-transpose_csv">#transpose_csv</a>
+    &mdash;
+    <span class="container">Lingo::Ctl</span>
+
+  <li class="method">
     <a href="Lingo/Language/WordForm.html#method-i-unknown-3F">#unknown?</a>
     &mdash;
     <span class="container">Lingo::Language::WordForm</span>
@@ -2168,16 +2304,6 @@
     <a href="Lingo/Ctl.html#method-i-usage">#usage</a>
     &mdash;
     <span class="container">Lingo::Ctl</span>
-
-  <li class="method">
-    <a href="Lingo/Database.html#method-i-use_backend">#use_backend</a>
-    &mdash;
-    <span class="container">Lingo::Database</span>
-
-  <li class="method">
-    <a href="Lingo/BufferedAttendee.html#method-i-valid_tokens_in_buffer">#valid_tokens_in_buffer</a>
-    &mdash;
-    <span class="container">Lingo::BufferedAttendee</span>
 
   <li class="method">
     <a href="Lingo/Attendee/Variator.html#method-i-variate">#variate</a>
@@ -2228,6 +2354,16 @@
     <a href="Lingo/Attendee/VectorFilter.html#method-i-word_count">#word_count</a>
     &mdash;
     <span class="container">Lingo::Attendee::VectorFilter</span>
+
+  <li class="method">
+    <a href="Lingo/Language/Token.html#method-i-word_token-3F">#word_token?</a>
+    &mdash;
+    <span class="container">Lingo::Language::Token</span>
+
+  <li class="method">
+    <a href="Lingo/Language/WordForm.html#method-i-word_token-3F">#word_token?</a>
+    &mdash;
+    <span class="container">Lingo::Language::WordForm</span>
 </ul>
 </main>
 
