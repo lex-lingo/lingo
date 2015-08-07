@@ -66,7 +66,7 @@ class Lingo
       local_path = path_for_scope(:local)
 
       source = find(what, false, path_for_scope || Lingo::PATH - local_path)
-      target = File.expand_path(Lingo.basepath(what, source), local_path)
+      target = File.expand_path(Lingo.basepath(what, source), local_path[0])
 
       usage('Source and target are the same.') if source == target
 
