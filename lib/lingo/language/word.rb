@@ -114,7 +114,7 @@ class Lingo
       end
 
       def each_lex(wc_re = //)
-        return enum_for(:each_lex, wc_re) unless block_given?
+        return enum_for(__method__, wc_re) unless block_given?
 
         wc_re = Regexp.new(wc_re) unless wc_re.is_a?(Regexp)
 
