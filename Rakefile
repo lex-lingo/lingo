@@ -44,8 +44,10 @@ The main functions of Lingo are:
       },
 
       development_dependencies: {
-        'diff-lcs' => '~> 1.2',
-        'open4'    => '~> 1.3'
+        'diff-lcs'   => '~> 1.2',
+        'nokogiri'   => '~> 1.6',
+        'open4'      => '~> 1.3',
+        'pdf-reader' => '~> 1.3'
       },
 
       required_ruby_version: '>= 1.9.3'

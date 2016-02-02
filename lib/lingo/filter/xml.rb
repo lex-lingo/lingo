@@ -36,7 +36,7 @@ class Lingo
 
       def initialize(*args)
         super
-        @obj = Nokogiri.send(self.class::TYPE, @io, nil, @encoding)
+        @obj = Nokogiri.send(self.class::TYPE, @io, nil, @encoding.to_s)
       end
 
       def each(&block)

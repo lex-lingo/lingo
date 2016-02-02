@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml producer="poppler" version="0.33.0">
+<page number="1" position="absolute" top="0" left="0" height="1263" width="892">
+	<fontspec id="0" size="11" family="Times" color="#000000"/>
+	<fontspec id="1" size="16" family="Times" color="#000000"/>
+	<fontspec id="2" size="13" family="Times" color="#000000"/>
+	<fontspec id="3" size="18" family="Times" color="#000000"/>
+	<fontspec id="4" size="16" family="Times" color="#000000"/>
+	<fontspec id="5" size="9" family="Times" color="#000000"/>
+	<fontspec id="6" size="13" family="Times" color="#000080"/>
+<text top="54" left="289" width="319" height="15" font="0">Klaus Lepsky: Ist automatische Normierung mögich? </text>
+<text top="69" left="112" width="673" height="15" font="0">────────────────────────────────────────────────────────────────────── </text>
+<text top="1187" left="106" width="6" height="22" font="1"> </text>
+<text top="1187" left="438" width="17" height="17" font="2">40</text>
+<text top="149" left="106" width="396" height="23" font="3"><b>Ist automatische Normierung möglich? </b></text>
+<text top="181" left="106" width="672" height="20" font="4"><b>Klaus Lepsky, Institut für Informationswissenschaft der Fachhochschule Köln </b></text>
+<text top="237" left="106" width="114" height="20" font="4"><b>1. Einleitung </b></text>
+<text top="267" left="106" width="690" height="20" font="1">Normierung ist allgemein ein nützliches Instrument der formalen und inhaltlichen </text>
+<text top="288" left="106" width="699" height="20" font="1">Dokument- und Medienbeschreibung. Aus diesem Grund werden in der </text>
+<text top="310" left="106" width="686" height="20" font="1">bibliothekarischen Formal- und Inhaltserschließung zentrale Beschreibungselemente </text>
+<text top="331" left="106" width="688" height="20" font="1">über sog. Normdateien kontrolliert, die über die Festlegung von Ansetzungsformen </text>
+<text top="352" left="106" width="680" height="20" font="1">die einheitliche Beschreibung sichern, gleichzeitig durch die Bereitstellung von Nicht-</text>
+<text top="373" left="106" width="692" height="20" font="1">Ansetzungsformen (Verweisungsformen) die Suche auch mit nicht bevorzugten </text>
+<text top="395" left="106" width="680" height="20" font="1">Schreibweisen unterstützen (Synonymen). Normierungselemente in der bibliothekari-</text>
+<text top="416" left="106" width="680" height="20" font="1">schen Formalerschließung sind Verfassernamen, Körperschaften, in der Inhaltser-</text>
+<text top="437" left="106" width="686" height="20" font="1">schließung sind es Schlagwörter. Die gemeinsame Verwendung der Normdateien in </text>
+<text top="458" left="106" width="680" height="20" font="1">Verbindung mit einem einheitlichen Erfassungsstandard (RAK) bzw. einem Quasi-</text>
+<text top="479" left="106" width="695" height="20" font="1">Erschließungsstandard (RSWK) erleichtert die Datenübernahme und führt zu </text>
+<text top="501" left="106" width="439" height="20" font="1">verlässlichen Erschließungs und Katalogumgebungen. </text>
+<text top="543" left="106" width="680" height="20" font="1">Für die Erschließung nicht-textlicher Objekte hat sich eine derartige Rahmenumge-</text>
+<text top="564" left="106" width="693" height="20" font="1">bung bislang nicht entwickelt. Objektdokumentation im musealen Bereich und </text>
+<text top="586" left="106" width="687" height="20" font="1">Bilddokumentation in der Kunstgeschichte erfolgen nach jeweils lokalen Richtlinien, </text>
+<text top="607" left="106" width="687" height="20" font="1">ein Rückgriff auf gemeinsame Erschließungsressourcen (z.B. Normdateien) ist nicht </text>
+<text top="628" left="106" width="691" height="20" font="1">möglich, weil diese entweder nicht existieren oder existierende nicht allgemein </text>
+<text top="649" left="106" width="130" height="20" font="1">genutzt werden.</text>
+<text top="646" left="237" width="7" height="13" font="5">1</text>
+<text top="649" left="243" width="550" height="20" font="1"> Der Wunsch nach „normenden Instanzen“, mindestens aber nach </text>
+<text top="670" left="106" width="690" height="20" font="1">einer Verständigung auf gemeinsame Standards wächst, allerdings ist es höchst </text>
+<text top="692" left="106" width="685" height="20" font="1">unwahrscheinlich, dass sich die große Zahl sehr heterogener Erschließungswelten in </text>
+<text top="713" left="106" width="687" height="20" font="1">ein gemeinsames Konzept bringen lässt. Realistischer ist es, von der existierenden </text>
+<text top="734" left="106" width="691" height="20" font="1">Vielfalt auszugehen und Anstrengungen zu unternehmen, die Vielfalt nicht zum </text>
+<text top="755" left="106" width="217" height="20" font="1">Problem werden zu lassen.</text>
+<text top="753" left="324" width="7" height="13" font="5">2</text>
+<text top="755" left="330" width="461" height="20" font="1"> Dies bedeutet in erster Linie, Versuche zu unternehmen, </text>
+<text top="777" left="106" width="685" height="20" font="1">unterschiedliche Beschreibungsdaten, die aber das Gleiche meinen, mit maschineller </text>
+<text top="798" left="106" width="694" height="20" font="1">Hilfe zusammenzubringen. Dieser Beitrag versucht, für derartige Ansätze die </text>
+<text top="819" left="106" width="562" height="20" font="1">Möglichkeiten und Grenzen des automatisch Machbaren aufzuzeigen. </text>
+<text top="861" left="106" width="5" height="20" font="1"> </text>
+<text top="904" left="106" width="5" height="20" font="1"> </text>
+<text top="988" left="106" width="222" height="22" font="1">                                    </text>
+<text top="1010" left="106" width="692" height="17" font="2">1 Es gibt natürlich kunstgeschichtliche Normdateien bzw. Ressourcen, die eine Nutzung als </text>
+<text top="1027" left="119" width="675" height="17" font="2">Normdatei erlauben: The Union List of Artist Names (ULAN), The Art &amp; Architecture Thesaurus </text>
+<text top="1043" left="119" width="672" height="17" font="2">(AAT), The Getty Thesaurus of Geographic Names (TGN), alle hrsg. vom Getty Research Institute, </text>
+<text top="1060" left="119" width="108" height="17" font="2">Los Angeles  (</text>
+<text top="1060" left="227" width="393" height="17" font="6">www.getty.edu/research/conducting_research/vocabularies</text>
+<text top="1060" left="620" width="167" height="17" font="2">); Allgemeines Künstler-</text>
+<text top="1077" left="119" width="674" height="17" font="2">lexikon (AKL), K.G. Saur. Weitere Informationen zur Thematik in Lebrecht, Heike: Methoden und </text>
+<text top="1094" left="119" width="668" height="17" font="2">Probleme der Bilderschließung. Köln: Fakultät für Informations- und Kommunikationswissenschaf-</text>
+<text top="1110" left="119" width="676" height="17" font="2">ten, 2003. 90 S. (Kölner Arbeitspapiere zur Bibliotheks- und Informationswissenschaft; Bd.42) </text>
+<text top="1127" left="119" width="5" height="17" font="2">(</text>
+<text top="1127" left="124" width="384" height="17" font="6">www.fbi.fh-koeln.de/institut/papers/kabi/band.php?key=53</text>
+<text top="1127" left="508" width="13" height="17" font="2">). </text>
+<text top="1144" left="106" width="686" height="17" font="2">2 So auch Krause, Jürgen: Konkretes zur These, die Standardisierung von der Heterogenität her zu </text>
+<text top="1161" left="119" width="570" height="17" font="2">denken. In: Zeitschrift für Bibliothekswesen und Bibliographie. 51(2004) H.2, S.76-89. </text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="1263" width="892">
+	<fontspec id="7" size="14" family="Courier" color="#000000"/>
+	<fontspec id="8" size="6" family="Courier" color="#000000"/>
+	<fontspec id="9" size="14" family="Times" color="#000000"/>
+<text top="54" left="289" width="319" height="15" font="0">Klaus Lepsky: Ist automatische Normierung mögich? </text>
+<text top="69" left="112" width="673" height="15" font="0">────────────────────────────────────────────────────────────────────── </text>
+<text top="1187" left="106" width="6" height="22" font="1"> </text>
+<text top="1187" left="438" width="17" height="17" font="2">41</text>
+<text top="107" left="106" width="292" height="20" font="4"><b>2. Normierung formaler Merkmale </b></text>
+<text top="149" left="106" width="5" height="20" font="1"> </text>
+<text top="192" left="106" width="5" height="20" font="1"> </text>
+<text top="234" left="106" width="5" height="20" font="1"> </text>
+<text top="277" left="106" width="5" height="20" font="1"> </text>
+<text top="319" left="106" width="5" height="20" font="1"> </text>
+<text top="362" left="106" width="5" height="20" font="1"> </text>
+<text top="404" left="106" width="5" height="20" font="1"> </text>
+<text top="447" left="106" width="5" height="20" font="1"> </text>
+<text top="489" left="106" width="5" height="20" font="1"> </text>
+<text top="531" left="106" width="686" height="20" font="1">Dieses Bild von Canaletto wird in der Bilddatenbank „Die virtuelle Galerie der 25.000 </text>
+<text top="553" left="106" width="362" height="20" font="1">Meisterwerke“ folgendermaßen beschrieben: </text>
+<text top="597" left="128" width="673" height="13" font="7">Canaletto (I): Ansicht von Dresden, Der Neumarkt in Dresden vom </text>
+<text top="614" left="128" width="99" height="13" font="7">Jüdischen </text>
+<text top="630" left="128" width="525" height="13" font="7">Friedhof aus, mit Frauenkirche und Altstädter Wache. </text>
+<text top="665" left="128" width="416" height="13" font="7">1749-1751, Öl auf Leinwand, 136 × 236 cm. </text>
+<text top="681" left="128" width="247" height="13" font="7">Dresden, Gemäldegalerie. </text>
+<text top="698" left="128" width="436" height="13" font="7">Kommentar: Vedutenmalerei, Stadtlandschaft. </text>
+<text top="714" left="128" width="307" height="13" font="7">Land: Italien und Deutschland. </text>
+<text top="731" left="128" width="485" height="13" font="7">Stil: Venezianische Malerei des 18. Jahrhunderts.</text>
+<text top="728" left="613" width="5" height="7" font="8">3</text>
+<text top="726" left="618" width="5" height="18" font="9"> </text>
+<text top="763" left="106" width="687" height="20" font="1">Unter dem Aspekt der Normierung ist v.a. die Bezeichnung „Canaletto (I)“ auffällig, </text>
+<text top="784" left="106" width="690" height="20" font="1">die schließen lässt, dass es weitere Canalettos in der Datenbank gibt, die aber </text>
+<text top="806" left="106" width="691" height="20" font="1">natürlich alle voneinander unterschieden werden. Unabhängig von der Bilddatei </text>
+<text top="827" left="106" width="632" height="20" font="1">existiert eine Künstlerdatei, in der sich zu Canaletto (I) folgender Eintrag findet: </text>
+<text top="872" left="128" width="139" height="13" font="7">Canaletto (I) </text>
+<text top="888" left="128" width="297" height="13" font="7">eigentlich: Bernardo Bellotto </text>
+<text top="904" left="128" width="208" height="13" font="7">* 30.01.1721 Venedig </text>
+<text top="921" left="128" width="218" height="13" font="7">† 17.11.1780 Warschau </text>
+<text top="938" left="128" width="396" height="13" font="7">Wirkungsorte: Venedig, Warschau, Dresden</text>
+<text top="934" left="524" width="5" height="7" font="8">4</text>
+<text top="932" left="529" width="5" height="20" font="1"> </text>
+<text top="970" left="106" width="174" height="20" font="1">Daneben existiert ein </text>
+<text top="1014" left="128" width="148" height="13" font="7">Canaletto (II) </text>
+<text top="1031" left="128" width="346" height="13" font="7">eigentlich: Giovanni Antonio Canal </text>
+<text top="1048" left="128" width="257" height="13" font="7">Maler, Radierer, Zeichner </text>
+<text top="1064" left="128" width="208" height="13" font="7">* 17.10.1697 Venedig </text>
+<text top="1089" left="106" width="222" height="22" font="1">                                    </text>
+<text top="1110" left="106" width="685" height="17" font="2">3 Bilddatenbank: Canaletto (I), S. 11. Die virtuelle Galerie der 25.000 Meisterwerke, S. 3895 (c) 2004 </text>
+<text top="1127" left="119" width="251" height="17" font="2">Zweitausendeins, Frankfurt am Main. </text>
+<text top="1144" left="106" width="686" height="17" font="2">4 Bilddatenbank: Canaletto (I), S. 1. Die virtuelle Galerie der 25.000 Meisterwerke, S. 3885 (c) 2004 </text>
+<text top="1161" left="119" width="251" height="17" font="2">Zweitausendeins, Frankfurt am Main. </text>
+</page>
+</pdf2xml>

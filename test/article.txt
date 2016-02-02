@@ -1,0 +1,44 @@
+
+Klaus Lepsky
+Institut für Informationswissenschaft
+Fachhochschule Köln
+
+Ist automatische Normierung möglich?
+
+
+1. Einleitung
+Normierung ist allgemein ein nützliches Instrument der formalen und inhaltlichen Dokument- und Medienbeschreibung. Aus diesem Grund werden in der bibliothekarischen Formal- und Inhaltserschließung zentrale Beschreibungselemente über sog. Normdateien kontrolliert, die über die Festlegung von Ansetzungsformen die einheitliche Beschreibung sichern, gleichzeitig durch die Bereitstellung von Nicht-Ansetzungsformen (Verweisungsformen) die Suche auch mit nicht bevorzugten Schreibweisen unterstützen (Synonymen). Normierungselemente in der bibliothekarischen Formalerschließung sind Verfassernamen, Körperschaften, in der Inhaltserschließung sind es Schlagwörter. Die gemeinsame Verwendung der Normdateien in Verbindung mit einem einheitlichen Erfassungsstandard (RAK) bzw. einem Quasi-Erschließungsstandard (RSWK) erleichtert die Datenübernahme und führt zu verlässlichen Erschließungs und Katalogumgebungen.
+Für die Erschließung nicht-textlicher Objekte hat sich eine derartige Rahmenumgebung bislang nicht entwickelt. Objektdokumentation im musealen Bereich und Bilddokumentation in der Kunstgeschichte erfolgen nach jeweils lokalen Richtlinien, ein Rückgriff auf gemeinsame Erschließungsressourcen (z.B. Normdateien) ist nicht möglich, weil diese entweder nicht existieren oder existierende nicht allgemein genutzt werden.1 Der Wunsch nach "normenden Instanzen", mindestens aber nach einer Verständigung auf gemeinsame Standards wächst, allerdings ist es höchst unwahrscheinlich, dass sich die große Zahl sehr heterogener Erschließungswelten in ein gemeinsames Konzept bringen lässt. Realistischer ist es, von der existierenden Vielfalt auszugehen und Anstrengungen zu unternehmen, die Vielfalt nicht zum Problem werden zu lassen.2 Dies bedeutet in erster Linie, Versuche zu unternehmen, unterschiedliche Beschreibungsdaten, die aber das Gleiche meinen, mit maschineller Hilfe zusammenzubringen. Dieser Beitrag versucht, für derartige Ansätze die Möglichkeiten und Grenzen des automatisch Machbaren aufzuzeigen.
+2. Normierung formaler Merkmale
+
+
+
+
+
+
+
+
+Dieses Bild von Canaletto wird in der Bilddatenbank "Die virtuelle Galerie der 25.000 Meisterwerke" folgendermaßen beschrieben:
+Canaletto (I): Ansicht von Dresden, Der Neumarkt in Dresden vom Jüdischen
+Friedhof aus, mit Frauenkirche und Altstädter Wache.
+    1749-1751, Öl auf Leinwand, 136 × 236 cm.
+    Dresden, Gemäldegalerie.
+    Kommentar: Vedutenmalerei, Stadtlandschaft.
+    Land: Italien und Deutschland.
+    Stil: Venezianische Malerei des 18. Jahrhunderts.3
+Unter dem Aspekt der Normierung ist v.a. die Bezeichnung "Canaletto (I)" auffällig, die schließen lässt, dass es weitere Canalettos in der Datenbank gibt, die aber natürlich alle voneinander unterschieden werden. Unabhängig von der Bilddatei existiert eine Künstlerdatei, in der sich zu Canaletto (I) folgender Eintrag findet:
+Canaletto (I)
+eigentlich: Bernardo Bellotto
+* 30.01.1721 Venedig
+ 17.11.1780 Warschau
+Wirkungsorte: Venedig, Warschau, Dresden4
+Daneben existiert ein
+Canaletto (II)
+eigentlich: Giovanni Antonio Canal
+Maler, Radierer, Zeichner
+* 17.10.1697 Venedig
+
+1	Es gibt natürlich kunstgeschichtliche Normdateien bzw. Ressourcen, die eine Nutzung als Normdatei erlauben: The Union List of Artist Names (ULAN), The Art & Architecture Thesaurus (AAT)  The Getty Thesaurus of Geographic Names (TGN), alle hrsg. vom Getty Research Institute, Los Angeles  (www.getty.edu/research/conducting_research/vocabularies); Allgemeines Künstlerlexikon (AKL), K.G. Saur. Weitere Informationen zur Thematik in Lebrecht, Heike: Methoden und Probleme der Bilderschließung. Köln: Fakultät für Informations- und Kommunikationswissenschaften, 2003. 90 S. (Kölner Arbeitspapiere zur Bibliotheks- und Informationswissenschaft; Bd.42) (www.fbi.fh-koeln.de/institut/papers/kabi/band.php?key=53).
+2	So auch Krause, Jürgen: Konkretes zur These, die Standardisierung von der Heterogenität her zu denken. In: Zeitschrift für Bibliothekswesen und Bibliographie. 51(2004) H.2, S.76-89.
+3	Bilddatenbank: Canaletto (I), S. 11. Die virtuelle Galerie der 25.000 Meisterwerke, S. 3895 (c) 2004 Zweitausendeins, Frankfurt am Main.
+4	Bilddatenbank: Canaletto (I), S. 1. Die virtuelle Galerie der 25.000 Meisterwerke, S. 3885 (c) 2004 Zweitausendeins, Frankfurt am Main.
