@@ -39,8 +39,8 @@ class Lingo
         @obj = Nokogiri.send(self.class::TYPE, @io, nil, @encoding)
       end
 
-      def each
-        @obj.children.each { |n| yield n.content }
+      def each(&block)
+        @obj.root.element_children.each { |n| n.content.each_line(&block) }
       end
 
     end

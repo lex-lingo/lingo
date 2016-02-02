@@ -37,8 +37,8 @@ class Lingo
         @obj = ::PDF::Reader.new(@io)
       end
 
-      def each
-        @obj.pages.each { |x| yield x.text }
+      def each(&block)
+        @obj.pages.each { |x| x.text.each_line(&block) }
       end
 
     end
