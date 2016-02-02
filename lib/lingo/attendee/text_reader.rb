@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2015 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2016 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -26,14 +26,11 @@
 
 require 'find'
 
-%w[filemagic mime/types nokogiri nuggets/file/which pdf-reader].each { |lib|
-  begin
-    require lib
-  rescue LoadError
-  end
-}
-
 class Lingo
+
+  require_optional 'filemagic'
+  require_optional 'mime/types'
+  require_optional 'nuggets/file/which'
 
   class Attendee
 
@@ -161,8 +158,8 @@ class Lingo
       def filter(io, path, progress)
         case @filter == true ? file_type(io, path) : @filter.to_s
           when 'pdftotext' then filter_pdftotext(io, path, progress)
-          when /html/i     then filter_html(io)
-          when /xml/i      then filter_html(io, true)
+          when /html/i     then filter_xml(io, :HTML)
+          when /xml/i      then filter_xml(io)
           when /pdf/i      then filter_pdf(io)
           else io
         end
@@ -181,13 +178,13 @@ class Lingo
       end
 
       def filter_pdf(io)
-        Object.const_defined?(:PDF) && PDF.const_defined?(:Reader) ? text_enum(
-          PDF::Reader.new(io).pages) : cancel_filter(:PDF, 'pdf-reader')
+        cancel_filter(:PDF, 'pdf-reader') unless Object.const_defined?(:PDF)
+        Filter::PDF.new(io, @encoding)
       end
 
-      def filter_html(io, xml = false, type = xml ? :XML : :HTML)
-        Object.const_defined?(:Nokogiri) ? text_enum(Nokogiri.send(type,
-          io, nil, @encoding).children) : cancel_filter(type, :nokogiri)
+      def filter_xml(io, type = :XML)
+        cancel_filter(type, :nokogiri) unless Object.const_defined?(:Nokogiri)
+        Filter.const_get(type).new(io, @encoding)
       end
 
       def file_type(io, path)
@@ -233,10 +230,6 @@ class Lingo
         }
       ensure
         tempfiles.each(&:unlink)
-      end
-
-      def text_enum(collection)
-        Enumerator.new { |y| collection.each { |x| y << x.text } }
       end
 
       def get_files

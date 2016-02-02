@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2015 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2016 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -318,6 +318,7 @@ require_relative 'lingo/call'
 require_relative 'lingo/error'
 require_relative 'lingo/debug'
 require_relative 'lingo/config'
+require_relative 'lingo/filter'
 require_relative 'lingo/progress'
 require_relative 'lingo/database'
 require_relative 'lingo/language'
