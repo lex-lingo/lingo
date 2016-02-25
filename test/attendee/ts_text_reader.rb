@@ -540,6 +540,6 @@ class TestAttendeeTextReader < AttendeeTestCase
       ai("EOF|#{path}"),
       ai('EOT|')
     ])
-  end
+  end unless RUBY_ENGINE == 'jruby'
 
 end
