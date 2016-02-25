@@ -11,7 +11,21 @@ rvm:
   - jruby-head
   - rbx
 
+env:
+  - LINGO_BACKEND=LibCDB
+  - LINGO_BACKEND=SDBM
+  - LINGO_BACKEND=GDBM
+  - LINGO_BACKEND=Hash
+
 matrix:
+  exclude:
+    - rvm: jruby-19mode
+      env: LINGO_BACKEND=LibCDB
+    - rvm: jruby-head
+      env: LINGO_BACKEND=LibCDB
+    - rvm: rbx
+      env: LINGO_BACKEND=GDBM
+
   allow_failures:
     - rvm: ruby-head
     - rvm: jruby-head
@@ -25,7 +39,15 @@ script:
 
 install:
   - gem install nuggets power_assert
+  - gem install libcdb-ruby || true  # no JRuby
   - gem install --prerelease --development lingo
 
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -y libcdb-dev
+
 sudo:
-  false
+  required
+
+dist:
+  trusty
