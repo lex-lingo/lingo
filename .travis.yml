@@ -6,6 +6,7 @@ rvm:
   - '2.0'
   - '2.1'
   - '2.2'
+  - '2.3'
   - ruby-head
   - jruby-19mode
   - jruby-head
@@ -23,11 +24,10 @@ matrix:
       env: LINGO_BACKEND=LibCDB
     - rvm: jruby-head
       env: LINGO_BACKEND=LibCDB
-    - rvm: rbx
-      env: LINGO_BACKEND=GDBM
 
   allow_failures:
     - rvm: ruby-head
+    - rvm: jruby-19mode
     - rvm: jruby-head
     - rvm: rbx
 
