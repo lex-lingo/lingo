@@ -53,7 +53,7 @@ class Lingo
       end
     end
 
-    attr_reader :language_file, :config_file
+    attr_reader :lang_file, :config_file
 
     def to_h
       { 'version' => VERSION }.merge(@opts)
