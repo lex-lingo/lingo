@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2015 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2016 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -58,6 +58,25 @@ class Lingo
         klass.class_eval('def store_ext; EXT; end', __FILE__, __LINE__) if meth
       end
 
+      def backend_by_ext(file, ext = File.extname(file))
+        get_backend(BACKEND_BY_EXT[ext], file) or
+          raise BackendNotFoundError.new(file)
+      end
+
+      def find_backend(env = 'LINGO_BACKEND')
+        env && get_backend(ENV[env]) || BACKENDS.find { |name|
+          backend = get_backend(name, nil, true) and return backend }
+      end
+
+      def get_backend(name, file = nil, relax = false)
+        return unless name
+
+        Object.const_get(name)
+        const_get("#{name}Store")
+      rescue TypeError, NameError => err
+        raise BackendNotAvailableError.new(name, file, err) unless relax
+      end
+
       def open(*args, &block)
         new(*args).open(&block)
       end
@@ -75,23 +94,12 @@ class Lingo
         FileUtils.mkdir_p(File.dirname(@stofile))
       rescue SourceFileNotFoundError => err
         @stofile = skip_ext = err.id
-
-        unless err.name
-          if name = BACKEND_BY_EXT[File.extname(@stofile)]
-            backend = get_backend(name, @stofile)
-          else
-            raise BackendNotFoundError.new(@stofile)
-          end
-        end
+        backend = self.class.backend_by_ext(@stofile) unless err.name
       rescue NoWritableStoreError
         backend = HashStore
       end
 
-      unless backend ||= get_backend(ENV['LINGO_BACKEND'])
-        BACKENDS.find { |name| backend = get_backend(name, nil, true) }
-      end
-
-      extend(@backend = backend || HashStore)
+      extend(@backend = backend || self.class.find_backend || HashStore)
 
       @stofile << store_ext unless skip_ext || !respond_to?(:store_ext)
 
@@ -150,15 +158,6 @@ class Lingo
     end
 
     private
-
-    def get_backend(name, file = nil, relax = false)
-      return unless name
-
-      Object.const_get(name)
-      self.class.const_get("#{name}Store")
-    rescue TypeError, NameError => err
-      raise BackendNotAvailableError.new(name, file, err) unless relax
-    end
 
     def config_hash
       hashes = [config]
