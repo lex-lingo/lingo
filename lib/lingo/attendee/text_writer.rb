@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2015 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2016 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -99,10 +99,8 @@ class Lingo
           when :LIR
             @lir = true unless @lir.nil?
           when :FILE
-            @no_sep = true
-
-            @io = stdout?(@ext) ? (@path = @ext; open_stdout) :
-              open_path(@path = set_ext(param, @ext), 'w')
+            @no_sep, @io = true, (@stdout = stdout?(@ext)) ?
+              open_stdout : open_path(get_path(param, @ext), 'w')
 
             @lir_rec_no, @lir_rec_buf = '', []
           when :RECORD
@@ -117,7 +115,7 @@ class Lingo
             @io.puts unless @lir || @no_puts
           when :EOF
             flush_lir_buffer if @lir
-            @io.close unless stdout?(@path)
+            @io.close unless @stdout
         end
       end
 

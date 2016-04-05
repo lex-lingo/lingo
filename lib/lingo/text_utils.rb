@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2015 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2016 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -75,6 +75,18 @@ class Lingo
         else
           raise ArgumentError, 'invalid access mode %s' % mode
       end
+    end
+
+    def get_path(path, ext)
+      set_ext(path, ext).gsub(/%(.)/) {
+        case $1
+          when 'c' then File.chomp_ext(File.basename(lingo.config.config_file))
+          when 'l' then File.chomp_ext(File.basename(lingo.config.lang_file))
+          when 'd' then Time.now.strftime('%Y%m%d')
+          when 't' then Time.now.strftime('%H%M%S')
+          else raise ArgumentError, "malformed format string - #{$&}"
+        end
+      }
     end
 
     def set_ext(path, ext)

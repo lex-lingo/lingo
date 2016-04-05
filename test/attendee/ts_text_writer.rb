@@ -33,6 +33,14 @@ class TestAttendeeTextWriter < AttendeeTestCase
     ], File.readlines('test/test.tst', encoding: Lingo::ENC))
   end
 
+  def test_format
+    meet({ 'ext' => '%c-%l.tst', 'sep' => ',' }, @input)
+
+    assert_equal([
+      "Dies,ist,eine,Zeile,.\n", "Dies,ist,eine,zweite,Zeile,.\n"
+    ], File.readlines('test/test.lingo-de.tst', encoding: Lingo::ENC))
+  end
+
   def test_complex
     meet({ 'ext' => 'yip', 'sep' => '-' }, @input)
 
