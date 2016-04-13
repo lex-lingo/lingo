@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2015 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2016 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -175,44 +175,43 @@ class Lingo
       def find_seq(mat, buf, map, seq)
         return mat if buf.empty?
 
-        forms, args = [], []
+        args, seen = [], Hash.seen
 
-        map.replace(map.shift.product(*map)).map! { |i| i.join }.uniq!
+        map.shift.product(*map) { |q|
+          q = q.join
 
-        map.each { |q|
           seq.each { |str, cls, fmt|
-            _str, _cls = [str, cls]
+            _str, _cls = str, cls
 
             while pos = q.index(str, pos || 0)
-              _str, _cls = [$&, $&.chars] unless cls
+              _str, _cls = $&, $&.chars unless cls
 
               _tok = nil; args.clear
 
               _cls.each_with_index { |wc, i|
-                obj = buf[pos + i];_tok ||= obj.token
+                obj = buf[pos + i]; _tok ||= obj.token
 
                 args[i] = obj.is_a?(Word) ? obj.lexicals.find { |lex|
                   break lex.form if lex.attr == wc } : obj.form or break
               } or next
 
-              forms << [_str, _tok,
-                fmt =~ /\d/ ? fmt.gsub('%0$s', _str) % args :
-                fmt ? "#{_str}:#{args.join(fmt)}" : args.join(' ')]
+              f = fmt =~ /\d/ ? fmt.gsub('%0$s', _str) % args :
+                fmt ? "#{_str}:#{args.join(fmt)}" : args.join(' ')
+
+              unless seen[f]
+                wrd = Word.new_lexical(f, WA_SEQUENCE, LA_SEQUENCE)
+                wrd.pattern, wrd.token = _str, _tok
+                mat << wrd
+              end
 
               pos += 1
             end
           }
-        }.clear
-
-        forms.uniq!
-
-        forms.each { |s, t, f|
-          wrd = Word.new_lexical(f, WA_SEQUENCE, LA_SEQUENCE)
-          wrd.pattern, wrd.token = s, t
-          mat << wrd
         }
 
+        map.clear
         buf.clear
+
         mat
       end
 
