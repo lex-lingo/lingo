@@ -130,89 +130,108 @@ class Lingo
       end
 
       def process_buffer
-        flush(@buffer.size < 2 ? @buffer : begin
-          arg = [[], buf = [], map = [], @seq]
-
-          iter, skip, rewind = @buffer.each_with_index, 0, lambda {
-            iter.rewind; skip.times { iter.next }; skip = 0
-          }
-
-          loop {
-            obj, idx = begin
-              iter.next
-            rescue StopIteration
-              raise unless skip > 0
-
-              buf.slice!(0, skip)
-              map.slice!(0, skip)
-
-              rewind.call
-            end
-
-            att = (tok = obj.is_a?(Token)) ? obj.number? ? NUM : UNK :
-              obj.is_a?(Word) && !obj.unknown? ? obj.compound_attrs : UNK
-
-            if (att &= @cls).empty?
-              find_seq(*arg)
-              rewind.call if skip > 0
-            else
-              obj.each_lex(@mwc) { |lex|
-                lex.form.count(' ').succ.times { iter.next }
-                break skip = idx + 1
-              } unless tok
-
-              buf << obj
-              map << att
-            end
-          }
-
-          @buffer.concat(find_seq(*arg))
-        end)
+        process_seq if @buffer.size > 1
+        flush(@buffer)
       end
 
       private
 
-      def find_seq(mat, buf, map, seq)
-        return mat if buf.empty?
+      def process_seq
+        buf, map = [], []
+
+        iter, skip, rewind = @buffer.each_with_index, 0, lambda {
+          iter.rewind; skip.times { iter.next }; skip = 0
+        }
+
+        loop {
+          obj, idx = begin
+            iter.next
+          rescue StopIteration
+            raise unless skip > 0
+
+            buf.slice!(0, skip)
+            map.slice!(0, skip)
+
+            rewind.call
+          end
+
+          att = (tok = obj.is_a?(Token)) ? obj.number? ? NUM : UNK :
+            obj.is_a?(Word) && !obj.unknown? ? obj.compound_attrs : UNK
+
+          if (att &= @cls).empty?
+            find_seq(buf, map)
+            rewind.call if skip > 0
+          else
+            obj.each_lex(@mwc) { |lex|
+              lex.form.count(' ').succ.times { iter.next }
+              break skip = idx + 1
+            } unless tok
+
+            buf << obj
+            map << att
+          end
+        }
+
+        find_seq(buf, map)
+      end
+
+      def find_seq(buf, map)
+        return if buf.empty?
 
         args, seen = [], Hash.seen
 
-        map.shift.product(*map) { |q|
-          q = q.join
+        @seq.each { |str, cls, fmt|
+          if cls
+            len = cls.size
 
-          seq.each { |str, cls, fmt|
-            _str, _cls = str, cls
+            buf.each_cons(len).zip(map.each_cons(len)) { |_buf, _map|
+              obj, tok = _buf.each, nil; args.clear
 
-            while pos = q.index(str, pos || 0)
-              _str, _cls = $&, $&.chars unless cls
+              next if _map.zip(cls) { |_wc, wc|
+                break true unless _wc.include?(wc) &&
+                  find_form(obj.next, wc, args) { |t| tok ||= t }
+              }
 
-              _tok = nil; args.clear
+              forward_seq(fmt, str, tok, args, seen)
+            }
+          else
+            map.first.product(*map.drop(1)) { |q|
+              q, pos = q.join, -1
 
-              _cls.each_with_index { |wc, i|
-                obj = buf[pos + i]; _tok ||= obj.token
+              while pos = q.index(str, pos += 1)
+                tok = nil; args.clear
 
-                args[i] = obj.is_a?(Word) ? obj.lexicals.find { |lex|
-                  break lex.form if lex.attr == wc } : obj.form or break
-              } or next
+                next unless $&.each_char.with_index { |wc, i|
+                  find_form(buf[pos + i], wc, args) { |t| tok ||= t } or break
+                }
 
-              f = fmt =~ /\d/ ? fmt.gsub('%0$s', _str) % args :
-                fmt ? "#{_str}:#{args.join(fmt)}" : args.join(' ')
-
-              unless seen[f]
-                wrd = Word.new_lexical(f, WA_SEQUENCE, LA_SEQUENCE)
-                wrd.pattern, wrd.token = _str, _tok
-                mat << wrd
+                forward_seq(fmt, $&, tok, args, seen)
               end
-
-              pos += 1
-            end
-          }
+            }
+          end
         }
 
-        map.clear
         buf.clear
+        map.clear
+      end
 
-        mat
+      def find_form(obj, wc, args)
+        form = obj.is_a?(Word) ? obj.lexicals.find { |lex|
+          break lex.form if lex.attr == wc } : obj.form or return
+
+        yield obj.token
+        args << form
+      end
+
+      def forward_seq(fmt, str, tok, args, seen)
+        form = fmt =~ /\d/ ? fmt.gsub('%0$s', str) % args :
+          fmt ? "#{str}:#{args.join(fmt)}" : args.join(' ')
+
+        unless seen[form]
+          wrd = Word.new_lexical(form, WA_SEQUENCE, LA_SEQUENCE)
+          wrd.pattern, wrd.token = str, tok
+          @buffer << wrd
+        end
       end
 
     end
