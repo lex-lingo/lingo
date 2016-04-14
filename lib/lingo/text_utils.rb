@@ -25,6 +25,7 @@
 #++
 
 require 'nuggets/file/ext'
+require 'nuggets/string/format'
 
 class Lingo
 
@@ -78,13 +79,11 @@ class Lingo
     end
 
     def get_path(path, ext)
-      set_ext(path, ext).gsub(/%(.)/) {
-        case $1
-          when 'c' then File.chomp_ext(File.basename(lingo.config.config_file))
-          when 'l' then File.chomp_ext(File.basename(lingo.config.lang_file))
-          when 'd' then Time.now.strftime('%Y%m%d')
-          when 't' then Time.now.strftime('%H%M%S')
-          else raise ArgumentError, "malformed format string - #{$&}"
+      set_ext(path, ext).format { |directive|
+        case directive
+          when 'd', t = 't' then Time.now.strftime(t ? '%H%M%S' : '%Y%m%d')
+          when 'c', l = 'l' then File.chomp_ext(File.basename(
+            lingo.config.send("#{l ? :lang : :config}_file")))
         end
       }
     end
