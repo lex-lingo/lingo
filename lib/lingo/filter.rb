@@ -28,7 +28,7 @@ class Lingo
 
   class Filter
 
-    def initialize(io, encoding = ENC)
+    def initialize(io, encoding = ENCODING)
       @io, @encoding = io, encoding
     end
 

@@ -146,7 +146,7 @@ class Lingo
       end
     end
 
-    def get_enc(key = 'encoding', default = ENC)
+    def get_enc(key = 'encoding', default = ENCODING)
       Encoding.find(get_key(key, default))
     rescue ArgumentError => err
       raise ConfigLoadError.new(err)

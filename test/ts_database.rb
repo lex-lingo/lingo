@@ -483,7 +483,7 @@ Wort2=
 
   def compare(config, input, output = nil)
     FileUtils.mkdir_p(File.dirname(TEST_FILE))
-    File.open(TEST_FILE, 'w', encoding: Lingo::ENC) { |f| f.write(input) }
+    File.open(TEST_FILE, 'w', encoding: Lingo::ENCODING) { |f| f.write(input) }
 
     id, err = set_config('tst', config.merge('name' => TEST_FILE)), nil
 

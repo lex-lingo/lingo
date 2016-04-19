@@ -32,6 +32,7 @@ require 'nuggets/file/ext'
 require 'nuggets/hash/nest'
 require 'nuggets/hash/seen'
 require 'nuggets/env/user_home'
+require 'nuggets/object/silence'
 require 'nuggets/string/camelscore'
 
 class Lingo
@@ -61,8 +62,12 @@ class Lingo
   }
 
   # Default encoding
-  Encoding.default_external = ENC = 'UTF-8'.freeze
-  Encoding.default_internal = ENC unless RUBY_ENGINE == 'jruby'
+  ENCODING = 'UTF-8'.freeze
+
+  silence {
+    Encoding.default_external = ENCODING
+    Encoding.default_internal = ENCODING unless RUBY_ENGINE == 'jruby'
+  }
 
   SEP_RE = %r{[; ,|]}
 

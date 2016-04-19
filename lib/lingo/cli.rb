@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2014 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2016 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -64,7 +64,8 @@ class Lingo
       opts.separator
 
       opts.option(:log__FILE, :L, 'Log file to print debug information to') { |log|
-        options[:log] = stderr.reopen(log == '-' ? stdout : File.open(log, 'a+', encoding: ENC))
+        options[:log] = stderr.reopen(
+          log == '-' ? stdout : File.open(log, 'a+', encoding: ENCODING))
       }
 
       opts.separator

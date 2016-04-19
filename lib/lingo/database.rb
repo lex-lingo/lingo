@@ -227,7 +227,7 @@ class Lingo
     end
 
     def _encode!(str)
-      str.force_encoding(ENC)
+      str.force_encoding(ENCODING)
     end
 
     def convert(verbose = lingo.config.stderr.tty?)

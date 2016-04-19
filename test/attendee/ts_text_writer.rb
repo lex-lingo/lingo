@@ -30,7 +30,7 @@ class TestAttendeeTextWriter < AttendeeTestCase
 
     assert_equal([
       "Dies,ist,eine,Zeile,.\n", "Dies,ist,eine,zweite,Zeile,.\n"
-    ], File.readlines('test/test.tst', encoding: Lingo::ENC))
+    ], readlines('test.tst'))
   end
 
   def test_format
@@ -38,7 +38,7 @@ class TestAttendeeTextWriter < AttendeeTestCase
 
     assert_equal([
       "Dies,ist,eine,Zeile,.\n", "Dies,ist,eine,zweite,Zeile,.\n"
-    ], File.readlines('test/test.lingo-de.tst', encoding: Lingo::ENC))
+    ], readlines('test.lingo-de.tst'))
   end
 
   def test_complex
@@ -46,7 +46,7 @@ class TestAttendeeTextWriter < AttendeeTestCase
 
     assert_equal([
       "Dies-ist-eine-Zeile-.\n", "Dies-ist-eine-zweite-Zeile-.\n"
-    ], File.readlines('test/test.yip', encoding: Lingo::ENC))
+    ], readlines('test.yip'))
   end
 
   def test_crlf
@@ -54,7 +54,7 @@ class TestAttendeeTextWriter < AttendeeTestCase
 
     assert_equal([
       "Dies\n", "ist\n", "eine\n", "Zeile\n", ".\n", "Dies\n", "ist\n", "eine\n", "zweite\n", "Zeile\n", ".\n"
-    ], File.readlines('test/test.txt2', encoding: Lingo::ENC))
+    ], readlines('test.txt2'))
   end
 
   def test_lir_file
@@ -81,7 +81,7 @@ cen. 056: Die intellektuelle Erschließung des Internet befindet sich in einer K
 FG-Projekt GERHARD.\n",
       "00239*020: Information Retrieval und Dokumentmanagement im Multimedia-Zeitalter. 056: \"Das Buch ist ein praxisbezogenes VADEMECUM\
  für alle, die in einer Welt der Datennetze Wissen/Informationen sammeln.\n"
-    ], File.readlines('test/lir.vec', encoding: Lingo::ENC))
+    ], readlines('lir.vec'))
   end
 
   def test_nonewords
@@ -91,7 +91,13 @@ FG-Projekt GERHARD.\n",
 
     assert_equal([
       "Nonwörter\n", "Nonsense"
-    ], File.readlines('test/text.non', encoding: Lingo::ENC))
+    ], readlines('text.non'))
+  end
+
+  private
+
+  def readlines(file)
+    File.readlines("test/#{file}", encoding: Lingo::ENCODING)
   end
 
 end
