@@ -104,18 +104,46 @@ class Lingo
 
       CLASS_RE = %r{[a-z#{NUM.join}]}o
 
+      REGEX_RE = %r{
+        ( #{CLASS_RE}+ )
+        |
+        \[
+          ( #{CLASS_RE}+ )
+        \]
+        |
+        \(
+          (?: \?: )?
+          ( #{CLASS_RE}+ (?: \| #{CLASS_RE}+ )* )
+        \)
+      }xo
+
+      FULL_CLASS_RE = %r{\A(?:#{CLASS_RE})+\z}o
+      FULL_REGEX_RE = %r{\A(?:#{REGEX_RE})+\z}o
+
       def init
         @stopper = get_ary('stopper', DEFAULT_SKIP)
                      .push(WA_UNKNOWN, WA_UNKMULPART)
 
         @mwc = get_key('multiword', LA_MULTIWORD)
-        @cls = []
 
-        @seq = get_key('sequences').map { |str, fmt|
+        @cls, @seq = [], []
+
+        get_key('sequences').each { |str, fmt|
+          seq, fmt = lambda { |*a| @seq << (a << fmt) },
+            fmt == true ? '|' : fmt ? fmt.gsub(/\d+/, '%\&$s') : nil
+
           @cls.concat(cls = (str = str.downcase).scan(CLASS_RE))
 
-          (str =~ /\W/ ? [Regexp.new(str), nil] : [str, cls]).push(
-            fmt == true ? '|' : fmt ? fmt.gsub(/\d+/, '%\&$s') : nil)
+          case str
+            when FULL_CLASS_RE then seq[str, cls]
+            when FULL_REGEX_RE then m = []
+              str.scan(REGEX_RE) { |m1, m2, m3|
+                m1 ? m1.each_char { |c| m << [c] } : m << (
+                m2 ? m2.chars : m3.split('|').map(&:chars)) }
+
+              combinations(*m) { |q| seq[q.join, q.flatten] }
+            else seq[Regexp.new(str), nil]
+          end
         }
 
         @cls.uniq!
