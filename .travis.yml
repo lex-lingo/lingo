@@ -2,13 +2,11 @@ language:
   ruby
 
 rvm:
-  - '1.9'
   - '2.0'
   - '2.1'
   - '2.2'
   - '2.3.0'
   - ruby-head
-  - jruby-19mode
   - jruby-head
   - rbx
 
@@ -20,14 +18,11 @@ env:
 
 matrix:
   exclude:
-    - rvm: jruby-19mode
-      env: LINGO_BACKEND=LibCDB
     - rvm: jruby-head
       env: LINGO_BACKEND=LibCDB
 
   allow_failures:
     - rvm: ruby-head
-    - rvm: jruby-19mode
     - rvm: jruby-head
     - rvm: rbx
 

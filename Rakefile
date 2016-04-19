@@ -50,7 +50,7 @@ The main functions of Lingo are:
         'pdf-reader' => '~> 1.3'
       },
 
-      required_ruby_version: '>= 1.9.3'
+      required_ruby_version: '>= 2.0'
     },
     test: {
       pattern: %w[test/ts_*.rb test/attendee/ts_*.rb]

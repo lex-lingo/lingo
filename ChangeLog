@@ -4,6 +4,7 @@
 
 == 1.9.0 [unreleased]
 
+* <b>Dropped support for Ruby 1.9.</b>
 * Removed support for deprecated options and attendee names (+old+ → +new+):
   * Lingo::Language::Grammar : +compositum+ → +compound+
   * Lingo::Attendee::TextReader : +lir-record-pattern+ → +records+
