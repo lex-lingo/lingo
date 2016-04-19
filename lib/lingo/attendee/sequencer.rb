@@ -102,7 +102,7 @@ class Lingo
       UNK = %w[#]
       NUM = %w[0]
 
-      CLS = /[[:alpha:]#{NUM.join}]/o
+      CLASS_RE = %r{[a-z#{NUM.join}]}o
 
       def init
         @stopper = get_ary('stopper', DEFAULT_SKIP)
@@ -112,7 +112,7 @@ class Lingo
         @cls = []
 
         @seq = get_key('sequences').map { |str, fmt|
-          @cls.concat(cls = (str = str.downcase).scan(CLS))
+          @cls.concat(cls = (str = str.downcase).scan(CLASS_RE))
 
           (str =~ /\W/ ? [Regexp.new(str), nil] : [str, cls]).push(
             fmt == true ? '|' : fmt ? fmt.gsub(/\d+/, '%\&$s') : nil)
