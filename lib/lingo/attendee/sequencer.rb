@@ -97,6 +97,8 @@ class Lingo
 
     class Sequencer < BufferedAttendee
 
+      include ArrayUtils
+
       UNK = %w[#]
       NUM = %w[0]
 
@@ -195,7 +197,7 @@ class Lingo
               forward_seq(fmt, str, tok, args, seen)
             }
           else
-            map.first.product(*map.drop(1)) { |q|
+            combinations(*map) { |q|
               q, pos = q.join, -1
 
               while pos = q.index(str, pos += 1)

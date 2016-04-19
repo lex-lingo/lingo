@@ -182,8 +182,6 @@ class Lingo
 
 end
 
-require_relative 'text_utils'
-
 require_relative 'buffered_attendee'
 require_relative 'deferred_attendee'
 

@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2015 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2016 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -78,6 +78,8 @@ class Lingo
     #++
 
     class MultiWorder < BufferedAttendee
+
+      include ArrayUtils
 
       def init
         # combine lexical variants?
@@ -220,7 +222,7 @@ class Lingo
         }
 
         if @combine
-          seq.shift.product(*seq) { |key|
+          combinations(*seq) { |key|
             @mul_dic.select(key.join(sep), mul)
             break unless @all || mul.empty?
           } && mul.uniq!

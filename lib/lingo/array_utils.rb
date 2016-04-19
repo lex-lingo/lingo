@@ -26,54 +26,12 @@
 
 class Lingo
 
-  class Database
+  module ArrayUtils
 
-    class Source
+    private
 
-      #--
-      # Abgeleitet von Source behandelt die Klasse Dateien mit dem Format <tt>WordClass</tt>.
-      # Eine Zeile <tt>"essen,essen #v essen #o esse #s\n"</tt> wird gewandelt in <tt>[ 'essen', ['esse#s', 'essen#v', 'essen#o'] ]</tt>.
-      # Der Trenner zwischen Schlüssel und Projektion kann über den Parameter <tt>separator</tt> geändert werden.
-      #++
-
-      class WordClass < self
-
-        include ArrayUtils
-
-        DEFAULT_SEPARATOR = ','
-
-        GENDER_SEPARATOR  = '.'
-
-        def initialize(id, lingo)
-          super
-
-          gen = Regexp.escape(GENDER_SEPARATOR)
-          sep = Regexp.escape(@sep ||= DEFAULT_SEPARATOR)
-
-          w, a = '\w%1$s(?:\|\w%1$s)*', '[+]?'
-          wc   = "##{w % a}(?:#{gen}#{w % ''})?"
-
-          @pat = /^(#{@wrd})#{sep}((?:#{@wrd}#{wc})+)$/
-        end
-
-        private
-
-        def convert_line(line, key, val)
-          values = []
-
-          val.strip.scan(/(\S.*?)\s*#(\S+)/) { |k, v|
-            v, f = v.split('.')
-
-            combinations(v.split('|'), f ? f.split('|') : [nil]) { |w, g|
-              values << "#{k}##{w}##{g}"
-            }
-          }
-
-          [key.strip, values]
-        end
-
-      end
-
+    def combinations(first, *rest, &block)
+      first.product(*rest, &block)
     end
 
   end

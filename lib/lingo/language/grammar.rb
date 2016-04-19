@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2015 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2016 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -36,6 +36,8 @@ class Lingo
     #++
 
     class Grammar
+
+      include ArrayUtils
 
       HYPHEN_RE = %r{\A(.+)-([^-]+)\z}
 
@@ -170,7 +172,7 @@ class Lingo
 
         flex.concat(blex).delete_if { |lex| lex.attr == LA_COMPOUND }
 
-        [forms.shift.product(*forms).map { |front, back|
+        [combinations(*forms).map { |front, back|
           Lexical.new(front + infix + back, LA_COMPOUND)
         }.concat(flex), sta, seq.join]
       end
