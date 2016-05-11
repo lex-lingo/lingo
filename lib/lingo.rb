@@ -303,6 +303,11 @@ class Lingo
     } }
   end
 
+  def attendees(arg = Object)
+    @attendees.grep(arg.is_a?(Class) ? arg :
+      Attendee.const_get(arg.to_s.camelcase))
+  end
+
   def start
     @attendees.first.control(:TALK)
   end
