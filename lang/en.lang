@@ -68,9 +68,9 @@ language:
       # Suffixliste, Stand: *****ENGLISCH****
       # Suffixklasse: s = Substantiv, a = Adjektiv, v = Verb, e = Eigenwort, f = Fugung
       # Suffixe je Klasse: "<suffix>['/'<ersetzung>][ <suffix>['/'<ersetzung>]]"
-      - [s, 'es s ves/f ves/fe ies/y']
+      - [s, 'es es/is s ves/f ves/fe ies/y']
       - [a, 'er est r st ier/y iest/y ly al ally']
-      - [v, 'd ed en es ing s ing/e']
+      - [v, 'd ed en es ies/y ing s ing/e']
       - [e, 's']
       - [f, '']
 
