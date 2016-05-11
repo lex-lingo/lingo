@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2015 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2016 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -186,7 +186,7 @@ class Lingo
         vec = vec.form if vec.is_a?(WordForm)
 
         vec = Unicode.downcase(vec)
-        vec << @src << src if @src && src
+        vec << @src << src.form if @src && src
 
         @sort_fmt ? vectors[vec] << pos : forward(vec_pos(vec, [pos]))
       end
