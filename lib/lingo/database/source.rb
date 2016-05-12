@@ -134,6 +134,11 @@ class Lingo
         end
       end
 
+      def each_lexical
+        return enum_for(__method__) unless block_given?
+        each { |key, val| yield key, self.class.lexicals(val) }
+      end
+
       def set(db, key, val)
         db[key] = val
       end
