@@ -55,11 +55,24 @@ class Lingo
 
       DEFAULT_DEF_WC = nil
 
-      def self.get(name, id, lingo)
-        klass = Lingo.get_const(name, self)
+      class << self
 
-        config = lingo.database_config(id)
-        klass.new(config['name'], config, id)
+        def get(name, id, lingo)
+          klass = Lingo.get_const(name, self)
+
+          config = lingo.database_config(id)
+          klass.new(config['name'], config, id)
+        end
+
+        def lexicals(val, sep = LEXICAL_SEPARATOR, ref = KEY_REF_RE)
+          val.map { |str|
+            str =~ ref ? $1.to_i : begin
+              k, *w = str.split(sep)
+              Language::Lexical.new(k.strip, w)
+            end
+          }.uniq if val
+        end
+
       end
 
       attr_reader :pos

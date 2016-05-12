@@ -44,8 +44,6 @@ class Lingo
 
       def initialize(id, lingo)
         @src = Database.open(id, lingo)
-        @ref = Database::KEY_REF_RE
-        @sep = Database::Source::LEXICAL_SEPARATOR
       end
 
       def close
@@ -53,17 +51,7 @@ class Lingo
       end
 
       def [](key)
-        rec = @src[Unicode.downcase(key)] or return
-
-        res = rec.map { |str|
-          str =~ @ref ? $1.to_i : begin
-            k, *w = str.split(@sep)
-            Lexical.new(k.strip, w)
-          end
-        }
-
-        res.uniq!
-        res
+        Database::Source.lexicals(@src[Unicode.downcase(key)])
       end
 
     end
