@@ -45,6 +45,8 @@ class Lingo
     KEY_REF = '*'
     SYS_KEY = '~'
 
+    KEY_REF_RE = %r{\A#{Regexp.escape(KEY_REF)}(\d+)\z}o
+
     BACKENDS       = []
     BACKEND_BY_EXT = {}
 

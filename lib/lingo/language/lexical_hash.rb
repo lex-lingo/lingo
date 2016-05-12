@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2014 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2016 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -36,8 +36,6 @@ class Lingo
 
     class LexicalHash
 
-      KEY_REF_RE = %r{\A#{Regexp.escape(Database::KEY_REF)}(\d+)\z}o
-
       def self.open(*args)
         yield lexical_hash = new(*args)
       ensure
@@ -46,6 +44,7 @@ class Lingo
 
       def initialize(id, lingo)
         @src = Database.open(id, lingo)
+        @ref = Database::KEY_REF_RE
       end
 
       def close
@@ -56,7 +55,7 @@ class Lingo
         rec = @src[Unicode.downcase(key)] or return
 
         res = rec.map { |str|
-          str =~ KEY_REF_RE ? $1.to_i : begin
+          str =~ @ref ? $1.to_i : begin
             k, *w = str.split('#')
             Lexical.new(k.strip, w)
           end
