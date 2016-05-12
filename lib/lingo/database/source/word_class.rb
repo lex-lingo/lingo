@@ -40,9 +40,9 @@ class Lingo
 
         include ArrayUtils
 
-        DEFAULT_SEPARATOR = ','
+        DEFAULT_SEPARATOR = ','.freeze
 
-        GENDER_SEPARATOR  = '.'
+        GENDER_SEPARATOR  = '.'.freeze
 
         def initialize(id, lingo)
           super

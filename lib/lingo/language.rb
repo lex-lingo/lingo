@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2015 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2016 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -37,27 +37,27 @@ class Lingo
 
   module Language
 
-    CHAR_PUNCT = '.'
+    CHAR_PUNCT = '.'.freeze
 
-    TA_ABBREVIATION = 'ABRV'
-    TA_HELP         = 'HELP'
-    TA_HTML         = 'HTML'
-    TA_NUMBER       = 'NUMS'
-    TA_OTHER        = 'OTHR'
-    TA_PUNCTUATION  = 'PUNC'
-    TA_SKIP         = 'SKIP'
-    TA_SPACE        = 'SPAC'
-    TA_URL          = 'URLS'
-    TA_WIKI         = 'WIKI'
-    TA_WORD         = 'WORD'
+    TA_ABBREVIATION = 'ABRV'.freeze
+    TA_HELP         = 'HELP'.freeze
+    TA_HTML         = 'HTML'.freeze
+    TA_NUMBER       = 'NUMS'.freeze
+    TA_OTHER        = 'OTHR'.freeze
+    TA_PUNCTUATION  = 'PUNC'.freeze
+    TA_SKIP         = 'SKIP'.freeze
+    TA_SPACE        = 'SPAC'.freeze
+    TA_URL          = 'URLS'.freeze
+    TA_WIKI         = 'WIKI'.freeze
+    TA_WORD         = 'WORD'.freeze
 
-    WA_UNSET      = '-'
-    WA_IDENTIFIED = 'IDF'
-    WA_UNKNOWN    = '?'
-    WA_COMPOUND   = 'COM'
-    WA_MULTIWORD  = 'MUL'
-    WA_SEQUENCE   = 'SEQ'
-    WA_UNKMULPART = 'MU?'
+    WA_UNSET      = '-'.freeze
+    WA_IDENTIFIED = 'IDF'.freeze
+    WA_UNKNOWN    = '?'.freeze
+    WA_COMPOUND   = 'COM'.freeze
+    WA_MULTIWORD  = 'MUL'.freeze
+    WA_SEQUENCE   = 'SEQ'.freeze
+    WA_UNKMULPART = 'MU?'.freeze
 
     LA_SORTORDER = [
       LA_SEQUENCE   = 'q',
@@ -73,7 +73,7 @@ class Lingo
       LA_SYNONYM    = 'y',
       LA_STEM       = 'z',
       LA_UNKNOWN    = '?'
-    ].each_with_index.inject({}) { |h, (i, j)| h[i] = j; h }
+    ].each_with_index.inject({}) { |h, (i, j)| h[i.freeze] = j; h }
 
   end
 
