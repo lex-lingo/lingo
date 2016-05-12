@@ -51,13 +51,17 @@ class Lingo
 
       LEXICAL_SEPARATOR = '#'.freeze
 
+      DEFAULT_SEPARATOR = nil
+
+      DEFAULT_DEF_WC = nil
+
       def self.get(name, *args)
         Lingo.get_const(name, self).new(*args)
       end
 
       attr_reader :pos
 
-      def initialize(id, lingo, def_wc_default = nil)
+      def initialize(id, lingo)
         @config = lingo.database_config(id)
 
         source_file = Lingo.find(:dict, name = @config['name'], relax: true)
@@ -72,9 +76,9 @@ class Lingo
 
         raise SourceFileNotFoundError.new(name, id) unless @src.exist?
 
-        @def = @config.fetch('def-wc', def_wc_default)
+        @sep = @config.fetch('separator', self.class::DEFAULT_SEPARATOR)
+        @def = @config.fetch('def-wc', self.class::DEFAULT_DEF_WC)
         @def = @def.downcase if @def
-        @sep = @config['separator']
 
         @wrd = "(?:#{Language::Char::ANY})+"
         @pat = /^#{@wrd}$/

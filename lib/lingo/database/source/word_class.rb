@@ -44,14 +44,21 @@ class Lingo
 
         GENDER_SEPARATOR  = '.'.freeze
 
+        VALUE_SEPARATOR = '|'.freeze
+
+        WC_SEPARATOR = '#'.freeze
+
+        SCAN_RE = /(\S.*?)\s*#{WC_SEPARATOR}(\S+)/o
+
         def initialize(id, lingo)
           super
 
           gen = Regexp.escape(GENDER_SEPARATOR)
-          sep = Regexp.escape(@sep ||= DEFAULT_SEPARATOR)
+          val = Regexp.escape(VALUE_SEPARATOR)
+          sep = Regexp.escape(@sep)
 
-          w, a = '\w%1$s(?:\|\w%1$s)*', '[+]?'
-          wc   = "##{w % a}(?:#{gen}#{w % ''})?"
+          w, a = "\\w%1$s(?:#{val}\\w%1$s)*", '[+]?'
+          wc   = "#{WC_SEPARATOR}#{w % a}(?:#{gen}#{w % ''})?"
 
           @pat = /^(#{@wrd})#{sep}((?:#{@wrd}#{wc})+)$/
         end
@@ -61,10 +68,11 @@ class Lingo
         def convert_line(line, key, val)
           values = []
 
-          val.strip.scan(/(\S.*?)\s*#(\S+)/) { |k, v|
-            v, f = v.split('.')
+          val.strip.scan(SCAN_RE) { |k, v|
+            v, f = v.split(GENDER_SEPARATOR)
+            f = f ? f.split(VALUE_SEPARATOR) : [nil]
 
-            combinations(v.split('|'), f ? f.split('|') : [nil]) { |w, g|
+            combinations(v.split(VALUE_SEPARATOR), f) { |w, g|
               values << lexical(k, w, g)
             }
           }

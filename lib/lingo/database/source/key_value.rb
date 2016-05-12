@@ -41,9 +41,11 @@ class Lingo
 
         DEFAULT_SEPARATOR = '*'.freeze
 
+        DEFAULT_DEF_WC = Language::LA_UNKNOWN
+
         def initialize(id, lingo)
-          super(id, lingo, Language::LA_UNKNOWN)
-          @pat = /^(#{@wrd})#{Regexp.escape(@sep ||= DEFAULT_SEPARATOR)}(#{@wrd})$/
+          super
+          @pat = /^(#{@wrd})#{Regexp.escape(@sep)}(#{@wrd})$/
         end
 
         private

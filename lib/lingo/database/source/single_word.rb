@@ -38,8 +38,10 @@ class Lingo
 
       class SingleWord < self
 
+        DEFAULT_DEF_WC = Language::LA_NOUN
+
         def initialize(id, lingo)
-          super(id, lingo, Language::LA_NOUN)
+          super
           @pat = /^(#{@wrd})$/
           @mul = @config.fetch('def-mul-wc', @def).downcase
         end

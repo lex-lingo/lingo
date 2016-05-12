@@ -42,7 +42,7 @@ class Lingo
 
         def initialize(id, lingo)
           super
-          @pat = /^#{@wrd}(?:#{Regexp.escape(@sep ||= DEFAULT_SEPARATOR)}#{@wrd})*$/
+          @pat = /^#{@wrd}(?:#{Regexp.escape(@sep)}#{@wrd})*$/
         end
 
         def set(db, key, val)
