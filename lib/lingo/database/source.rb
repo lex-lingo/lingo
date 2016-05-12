@@ -95,10 +95,7 @@ class Lingo
           line.strip!
           next if line.empty? || line.start_with?('#')
 
-          line.chomp!
-          line.replace(Unicode.downcase(line))
-
-          if length < 4096 && line =~ @pat
+          if length < 4096 && line.replace(Unicode.downcase(line)) =~ @pat
             yield convert_line(line, $1, $2)
           else
             @rej_cnt += 1
