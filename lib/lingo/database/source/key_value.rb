@@ -43,7 +43,7 @@ class Lingo
 
         DEFAULT_DEF_WC = Language::LA_UNKNOWN
 
-        def initialize(id, lingo)
+        def initialize(*)
           super
           @pat = /^(#{@wrd})#{Regexp.escape(@sep)}(#{@wrd})$/
         end

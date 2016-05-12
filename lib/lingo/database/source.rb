@@ -55,29 +55,33 @@ class Lingo
 
       DEFAULT_DEF_WC = nil
 
-      def self.get(name, *args)
-        Lingo.get_const(name, self).new(*args)
+      def self.get(name, id, lingo)
+        klass = Lingo.get_const(name, self)
+
+        config = lingo.database_config(id)
+        klass.new(config['name'], config, id)
       end
 
       attr_reader :pos
 
-      def initialize(id, lingo)
-        @config = lingo.database_config(id)
+      def initialize(name, config = {}, id = nil)
+        @config = config
 
-        source_file = Lingo.find(:dict, name = @config['name'], relax: true)
+        source_file = Lingo.find(:dict, name, relax: true)
 
         reject_file = begin
           Lingo.find(:store, source_file) << '.rev'
         rescue NoWritableStoreError, SourceFileNotFoundError
-        end
+        end if id
 
         @src = Pathname.new(source_file)
         @rej = Pathname.new(reject_file) if reject_file
 
-        raise SourceFileNotFoundError.new(name, id) unless @src.exist?
+        raise id ? SourceFileNotFoundError.new(name, id) :
+          FileNotFoundError.new(name) unless @src.exist?
 
-        @sep = @config.fetch('separator', self.class::DEFAULT_SEPARATOR)
-        @def = @config.fetch('def-wc', self.class::DEFAULT_DEF_WC)
+        @sep = config.fetch('separator', self.class::DEFAULT_SEPARATOR)
+        @def = config.fetch('def-wc', self.class::DEFAULT_DEF_WC)
         @def = @def.downcase if @def
 
         @wrd = "(?:#{Language::Char::ANY})+"

@@ -50,7 +50,7 @@ class Lingo
 
         SCAN_RE = /(\S.*?)\s*#{WC_SEPARATOR}(\S+)/o
 
-        def initialize(id, lingo)
+        def initialize(*)
           super
 
           gen = Regexp.escape(GENDER_SEPARATOR)

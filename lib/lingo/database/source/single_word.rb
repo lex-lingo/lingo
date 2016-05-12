@@ -40,7 +40,7 @@ class Lingo
 
         DEFAULT_DEF_WC = Language::LA_NOUN
 
-        def initialize(id, lingo)
+        def initialize(*)
           super
           @pat = /^(#{@wrd})$/
           @mul = @config.fetch('def-mul-wc', @def).downcase

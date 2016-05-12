@@ -42,7 +42,7 @@ class Lingo
 
         DEFAULT_SEPARATOR = ';'.freeze
 
-        def initialize(id, lingo)
+        def initialize(*)
           super
           @pat = /^#{@wrd}(?:#{Regexp.escape(@sep)}#{@wrd})*$/
         end
