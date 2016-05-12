@@ -79,21 +79,21 @@ class Lingo
 
       attr_reader :pos
 
-      def initialize(name, config = {}, id = nil)
+      def initialize(name = nil, config = {}, id = nil)
         @config = config
 
-        source_file = Lingo.find(:dict, name, relax: true)
+        src_file = Lingo.find(:dict, name, relax: true) if name
 
-        reject_file = begin
-          Lingo.find(:store, source_file) << '.rev'
+        rej_file = begin
+          Lingo.find(:store, src_file) << '.rev'
         rescue NoWritableStoreError, SourceFileNotFoundError
-        end if id
+        end if id && src_file
 
-        @src = Pathname.new(source_file)
-        @rej = Pathname.new(reject_file) if reject_file
+        @src = Pathname.new(src_file) if src_file
+        @rej = Pathname.new(rej_file) if rej_file
 
         raise id ? SourceFileNotFoundError.new(name, id) :
-          FileNotFoundError.new(name) unless @src.exist?
+          FileNotFoundError.new(name) if name && !@src.exist?
 
         @sep = config.fetch('separator', self.class::DEFAULT_SEPARATOR)
         @def = config.fetch('def-wc', self.class::DEFAULT_DEF_WC)
@@ -110,7 +110,7 @@ class Lingo
       end
 
       def each
-        reject_file = @rej.open('w', encoding: ENCODING) if @rej
+        rej_file = @rej.open('w', encoding: ENCODING) if @rej
 
         @src.each_line($/, encoding: ENCODING) { |line|
           @pos += length = line.bytesize
@@ -122,15 +122,15 @@ class Lingo
             yield convert_line(line, $1, $2)
           else
             @rej_cnt += 1
-            reject_file.puts(line) if reject_file
+            rej_file.puts(line) if rej_file
           end
         }
 
         self
       ensure
-        if reject_file
-          reject_file.close
-          @rej.delete if @rej.size == 0
+        if rej_file
+          rej_file.close
+          @rej.delete if @rej.size.zero?
         end
       end
 
