@@ -55,6 +55,8 @@ class Lingo
 
       DEFAULT_DEF_WC = nil
 
+      MAX_LENGTH = 4096
+
       class << self
 
         def get(name, id, lingo)
@@ -116,7 +118,7 @@ class Lingo
           line.strip!
           next if line.empty? || line.start_with?('#')
 
-          if length < 4096 && line.replace(Unicode.downcase(line)) =~ @pat
+          if length < MAX_LENGTH && line.replace(Unicode.downcase(line)) =~ @pat
             yield convert_line(line, $1, $2)
           else
             @rej_cnt += 1
