@@ -48,7 +48,7 @@ class Lingo
         end
 
         def set(db, key, val)
-          key += "##{@def}" if @def
+          key = lexical(key, @def) if @def
           val.each { |v| db[v] = [key] }
         end
 

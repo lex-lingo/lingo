@@ -49,6 +49,8 @@ class Lingo
 
     class Source
 
+      LEXICAL_SEPARATOR = '#'.freeze
+
       def self.get(name, *args)
         Lingo.get_const(name, self).new(*args)
       end
@@ -118,6 +120,12 @@ class Lingo
 
       def rejected
         [@rej_cnt, @rej]
+      end
+
+      private
+
+      def lexical(*args)
+        args.join(LEXICAL_SEPARATOR)
       end
 
     end

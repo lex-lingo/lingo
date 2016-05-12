@@ -45,6 +45,7 @@ class Lingo
       def initialize(id, lingo)
         @src = Database.open(id, lingo)
         @ref = Database::KEY_REF_RE
+        @sep = Database::Source::LEXICAL_SEPARATOR
       end
 
       def close
@@ -56,7 +57,7 @@ class Lingo
 
         res = rec.map { |str|
           str =~ @ref ? $1.to_i : begin
-            k, *w = str.split('#')
+            k, *w = str.split(@sep)
             Lexical.new(k.strip, w)
           end
         }

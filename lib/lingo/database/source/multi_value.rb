@@ -46,7 +46,7 @@ class Lingo
         end
 
         def set(db, key, val)
-          values = val.map { |v| @def ? "#{v}##{@def}" : v }
+          values = val.map { |v| @def ? lexical(v, @def) : v }
           val.each { |v| db[v] = values }
         end
 

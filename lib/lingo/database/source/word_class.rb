@@ -65,7 +65,7 @@ class Lingo
             v, f = v.split('.')
 
             combinations(v.split('|'), f ? f.split('|') : [nil]) { |w, g|
-              values << "#{k}##{w}##{g}"
+              values << lexical(k, w, g)
             }
           }
 

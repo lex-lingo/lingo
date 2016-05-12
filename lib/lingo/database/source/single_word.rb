@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2014 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2016 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -47,7 +47,7 @@ class Lingo
         private
 
         def convert_line(line, key, val)
-          [k = key.strip, %W[#{k}##{k.include?(' ') ? @mul : @def}]]
+          [k = key.strip, [lexical(k, k.include?(' ') ? @mul : @def)]]
         end
 
       end

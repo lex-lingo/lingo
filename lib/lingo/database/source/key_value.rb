@@ -49,7 +49,7 @@ class Lingo
         private
 
         def convert_line(line, key, val)
-          [key.strip, %W[#{val.strip}##{@def}]]
+          [key.strip, [lexical(val.strip, @def)]]
         end
 
       end
