@@ -63,9 +63,7 @@ class Lingo
           @pat = /^(#{@wrd})#{sep}((?:#{@wrd}#{wc})+)$/
         end
 
-        private
-
-        def convert_line(line, key, val)
+        def parse_line(line, key, val)
           values = []
 
           val.strip.scan(SCAN_RE) { |k, v|

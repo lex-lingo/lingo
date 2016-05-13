@@ -50,10 +50,8 @@ class Lingo
           val.each { |v| db[v] = values }
         end
 
-        private
-
-        def convert_line(line, key, val)
-          [nil, line.split(@sep).each { |i| i.strip! }]
+        def parse_line(line, key, val)
+          [nil, line.split(@sep).each(&:strip!)]
         end
 
       end

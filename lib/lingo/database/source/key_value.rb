@@ -48,9 +48,7 @@ class Lingo
           @pat = /^(#{@wrd})#{Regexp.escape(@sep)}(#{@wrd})$/
         end
 
-        private
-
-        def convert_line(line, key, val)
+        def parse_line(line, key, val)
           [key.strip, [lexical(val.strip, @def)]]
         end
 

@@ -121,7 +121,7 @@ class Lingo
           next if line.empty? || line.start_with?('#')
 
           if length < MAX_LENGTH && line.replace(Unicode.downcase(line)) =~ @pat
-            yield convert_line(line, $1, $2)
+            yield parse_line(line, $1, $2)
           else
             @rej_cnt += 1
             rej_file.puts(line) if rej_file

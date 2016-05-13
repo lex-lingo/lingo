@@ -46,9 +46,7 @@ class Lingo
           @mul = @config.fetch('def-mul-wc', @def).downcase
         end
 
-        private
-
-        def convert_line(line, key, val)
+        def parse_line(line, key, val)
           [k = key.strip, [lexical(k, k.include?(' ') ? @mul : @def)]]
         end
 
