@@ -2,7 +2,7 @@
 
 require_relative 'test_helper'
 
-class TestDatabase < LingoTestCase
+class DatabaseTestCase < LingoTestCase
 
   def setup
     @lingo = Lingo.new
@@ -63,6 +63,214 @@ Wort1=#s
 Wort2=
     EOT
   end
+
+  def write(config, input)
+    FileUtils.mkdir_p(File.dirname(TEST_FILE))
+    File.open(TEST_FILE, 'w', encoding: Lingo::ENCODING) { |f| f.write(input) }
+
+    yield set_config('tst', config.merge('name' => TEST_FILE))
+  ensure
+    cleanup_store
+  end
+
+  def set_config(id, config)
+    "_test_#{id}_".tap { |i| @lingo.config["language/dictionary/databases/#{i}"] = config }
+  end
+
+end
+
+class TestSource < DatabaseTestCase
+
+  def test_dump_singleword
+    compare({
+      'txt-format' => 'SingleWord'
+    }, @singleword)
+  end
+
+  def test_dump_singleword_defwc
+    compare({
+      'txt-format' => 'SingleWord',
+      'def-wc'     => '*'
+    }, @singleword)
+  end
+
+  def test_dump_singleword_defmulwc
+    compare({
+      'txt-format' => 'SingleWord',
+      'def-mul-wc' => 'm'
+    }, @singleword)
+  end
+
+  def test_dump_singleword_uselex
+    compare({
+      'txt-format' => 'SingleWord',
+      'use-lex'    => set_config('lex',
+        'name'       => 'de/lingo-dic.txt',
+        'txt-format' => 'WordClass',
+        'separator'  => '='
+      )
+    }, @singleword)
+  end
+
+  def test_dump_singleword_inflect
+    compare({
+      'txt-format' => 'SingleWord',
+      'use-lex'    => set_config('lex',
+        'name'       => 'de/lingo-dic.txt',
+        'txt-format' => 'WordClass',
+        'separator'  => '='
+      ),
+      'inflect'    => true
+    }, @singleword_inflect)
+  end
+
+  def test_dump_singleword_inflect_s
+    compare({
+      'txt-format' => 'SingleWord',
+      'use-lex'    => set_config('lex',
+        'name'       => 'de/lingo-dic.txt',
+        'txt-format' => 'WordClass',
+        'separator'  => '='
+      ),
+      'inflect'    => 's'
+    }, @singleword_inflect)
+  end
+
+  def test_dump_singleword_inflect_e
+    compare({
+      'txt-format' => 'SingleWord',
+      'use-lex'    => set_config('lex',
+        'name'       => 'de/lingo-dic.txt',
+        'txt-format' => 'WordClass',
+        'separator'  => '='
+      ),
+      'inflect'    => 'e'
+    }, @singleword_inflect)
+  end
+
+  def test_dump_singleword_hyphenate
+    compare({
+      'txt-format' => 'SingleWord',
+      'use-lex'    => set_config('lex',
+        'name'       => 'de/lingo-dic.txt',
+        'txt-format' => 'WordClass',
+        'separator'  => '='
+      ),
+      'hyphenate'  => true
+    }, @singleword)
+  end
+
+  def test_dump_singleword_crypt
+    compare({
+      'txt-format' => 'SingleWord',
+      'crypt'      => true
+    }, @singleword)
+  end
+
+  def test_dump_keyvalue
+    compare({
+      'txt-format' => 'KeyValue'
+    }, @keyvalue.gsub(' * ', '*'))
+  end
+
+  def test_dump_keyvalue_separator
+    compare({
+      'txt-format' => 'KeyValue',
+      'separator'  => '*'
+    }, @keyvalue.gsub(' * ', '*'))
+  end
+
+  def test_dump_keyvalue_defwc
+    compare({
+      'txt-format' => 'KeyValue',
+      'separator'  => '*',
+      'def-wc'     => 's'
+    }, @keyvalue.gsub(' * ', '*'))
+  end
+
+  def test_dump_wordclass
+    compare({
+      'txt-format' => 'WordClass',
+      'separator'  => '='
+    }, %q{
+      Wort1=Projektion1 #h
+      Wort2=Projektion2 #i
+      Wort3=Projektion3 #e
+      Wort1=Projektion4 #e
+      Wort1=#s
+      Wort2=
+      Wort4.illegal
+      Wort4=still illegal
+      Wort4=still illegal#s!
+      Wort4=now we're talking #s+
+    })
+  end
+
+  def test_dump_wordclass_gender
+    compare({
+      'txt-format' => 'WordClass'
+    }, %q{
+      substantiv,substantiv #a|s.n
+      mehr,mehr #s|w.n mehren #v
+      wort,wort #s.n
+      gruppe,gruppe #s.f
+      modul,modul #s.m|n
+      nocken,nock #s.f|m|n nocke #s.f nocken #s.m
+      albern,albern #a|v
+      fortuna,fortuna #e|s.f
+    })
+  end
+
+  def test_dump_wordclass_gender_noncompact
+    compare({
+      'txt-format' => 'WordClass'
+    }, %q{
+      substantiv,substantiv #a substantiv #s.n
+      mehr,mehr #s.n mehr #w mehren #v
+      wort,wort #s.n
+      gruppe,gruppe #s.f
+      modul,modul #s.m modul #s.n
+      nocken,nock #s.f nock #s.m nock #s.n nocke #s.f nocken #s.m
+      albern,albern #a albern #v
+      fortuna,fortuna #e.f fortuna #s.f
+    }, nil, nil, false)
+  end
+
+  def test_dump_multivalue
+    compare({
+      'txt-format' => 'MultiValue',
+      'separator'  => ';'
+    }, %q{
+      Hasen;Nasen;Vasen;Rasen
+      Gold;Edelmetall;Mehrwert
+      Rasen;Gras;Grüne Fläche
+      Rasen;Rennen;Wettrennen
+    })
+  end
+
+  def test_dump_multikey
+    compare({
+      'txt-format' => 'MultiKey'
+    }, %q{
+      Hasen;Nasen;Vasen;Rasen
+      Gold;Edelmetall;Mehrwert
+    })
+  end
+
+  def compare(config, input, *args)
+    write(config, input) { |id|
+      src, dump, lines = Lingo::Database::Source.from_id(id, @lingo), [], []
+
+      src.each_lexical { |key, lex| dump << src.dump_line(key, lex, *args) }
+      src.each_line { |line,| lines << line }
+
+      assert_equal dump, lines
+    }
+  end
+
+end
+
+class TestDatabase < DatabaseTestCase
 
   def test_singleword
     compare({
@@ -482,22 +690,13 @@ Wort2=
   end
 
   def compare(config, input, output = nil)
-    FileUtils.mkdir_p(File.dirname(TEST_FILE))
-    File.open(TEST_FILE, 'w', encoding: Lingo::ENCODING) { |f| f.write(input) }
+    err = nil
 
-    id, err = set_config('tst', config.merge('name' => TEST_FILE)), nil
-
-    Lingo::Database.open(id, @lingo) { |db| begin
-      block_given? ? yield(db) : assert_equal(output, db.to_h
-        .tap { |h| h.delete(Lingo::Database::SYS_KEY) }); rescue => err; end }
+    write(config, input) { |id| Lingo::Database.open(id, @lingo) { |db| begin
+      block_given? ? yield(db) : assert_equal(output, db.to_h.tap { |h|
+        h.delete(Lingo::Database::SYS_KEY) }); rescue => err; end } }
 
     raise err if err
-  ensure
-    cleanup_store
-  end
-
-  def set_config(id, config)
-    "_test_#{id}_".tap { |i| @lingo.config["language/dictionary/databases/#{i}"] = config }
   end
 
 end

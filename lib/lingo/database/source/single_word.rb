@@ -50,6 +50,10 @@ class Lingo
           [k = key.strip, [lexical(k, k.include?(' ') ? @mul : @def)]]
         end
 
+        def dump_line(key, val, *)
+          key
+        end
+
       end
 
     end

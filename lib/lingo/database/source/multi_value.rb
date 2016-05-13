@@ -54,6 +54,10 @@ class Lingo
           [nil, line.split(@sep).each(&:strip!)]
         end
 
+        def dump_line(key, val, sep = @sep, *)
+          val.map(&:form).join(sep)
+        end
+
       end
 
     end

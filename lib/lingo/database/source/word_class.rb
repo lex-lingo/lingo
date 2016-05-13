@@ -78,6 +78,27 @@ class Lingo
           [key.strip, values]
         end
 
+        def dump_line(key, val, key_sep = nil, val_sep = nil, compact = true, *)
+          "#{key}#{key_sep || @sep}#{dump_values(val, compact).join(val_sep || ' ')}"
+        end
+
+        def dump_values(val, compact = true)
+          join = lambda { |v|
+            v.compact!; v.uniq!; v.sort!; v.join(VALUE_SEPARATOR) }
+
+          if compact
+            values = Hash.new { |h, k| h[k] = [[], []] }; val.each { |lex|
+              a, g = values[lex.form]; a << lex.attr; g << lex.gender }
+          else
+            values = val.map { |lex| [lex.form, [[lex.attr], [lex.gender]]] }
+          end
+
+          values.sort.map { |form, (attrs, genders)|
+            res = "#{form} #{WC_SEPARATOR}#{join[attrs]}"
+            genders.any? ? "#{res}#{GENDER_SEPARATOR}#{join[genders]}" : res
+          }
+        end
+
       end
 
     end

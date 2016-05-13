@@ -57,6 +57,10 @@ class Lingo
           [values.shift, values]
         end
 
+        def dump_line(key, val, sep = @sep, *)
+          val.map(&:form).unshift(key).join(sep)
+        end
+
       end
 
     end
