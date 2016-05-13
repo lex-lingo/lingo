@@ -47,6 +47,25 @@ class Lingo
       STDOUT_EXT.include?(path)
     end
 
+    def overwrite?(path, unlink = false)
+      !File.exist?(path) || if agree?("#{path} already exists. Overwrite?")
+        File.unlink(path) if unlink
+        true
+      end
+    end
+
+    def agree?(msg)
+      print "#{msg} (y/n) [n]: "
+
+      case $stdin.gets.chomp
+        when /\Ano?\z/i, ''  then nil
+        when /\Ay(?:es)?\z/i then true
+        else puts 'Please enter "yes" or "no".'; agree?(msg)
+      end
+    rescue Interrupt
+      abort ''
+    end
+
     def open_stdin
       stdin = set_encoding(lingo.config.stdin)
       @progress ? StringIO.new(stdin.read) : stdin

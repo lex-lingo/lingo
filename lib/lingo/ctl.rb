@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2015 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2016 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -31,6 +31,7 @@ class Lingo
   module Ctl
 
     extend self
+    extend TextUtils
 
     PROG, VERSION, OPTWIDTH = $0, '0.0.3', 21
     PROGNAME, OPTIONS = File.basename(PROG), {}
@@ -118,25 +119,6 @@ Usage: #{PROG} <command> [arguments] [options]
 
     def no_args
       usage('Too many arguments.') unless ARGV.empty?
-    end
-
-    def overwrite?(target, unlink = false)
-      !File.exist?(target) || if agree?("#{target} already exists. Overwrite?")
-        File.unlink(target) if unlink
-        true
-      end
-    end
-
-    def agree?(msg)
-      print "#{msg} (y/n) [n]: "
-
-      case answer = $stdin.gets.chomp
-        when /\Ano?\z/i, ''  then nil
-        when /\Ay(?:es)?\z/i then true
-        else puts 'Please enter "yes" or "no".'; agree?(msg)
-      end
-    rescue Interrupt
-      abort ''
     end
 
   end
