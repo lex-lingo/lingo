@@ -233,7 +233,7 @@ class Lingo
     end
 
     def convert(verbose = lingo.config.stderr.tty?)
-      src = Source.get(config.fetch('txt-format', 'key_value'), @id, lingo)
+      src = Source.from_config(config, @id)
 
       sep, hyphenate, key_map, val_map = prepare_lex
 

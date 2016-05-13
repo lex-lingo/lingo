@@ -59,11 +59,13 @@ class Lingo
 
       class << self
 
-        def get(name, id, lingo)
-          klass = Lingo.get_const(name, self)
+        def from_id(id, lingo)
+          from_config(lingo.database_config(id), id)
+        end
 
-          config = lingo.database_config(id)
-          klass.new(config['name'], config, id)
+        def from_config(config, id = nil)
+          format = config.fetch('txt-format', 'key_value')
+          Lingo.get_const(format, self).new(config['name'], config, id)
         end
 
         def lexicals(val, sep = LEXICAL_SEPARATOR, ref = KEY_REF_RE)
