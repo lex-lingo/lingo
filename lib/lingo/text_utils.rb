@@ -57,7 +57,7 @@ class Lingo
     def agree?(msg)
       print "#{msg} (y/n) [n]: "
 
-      case $stdin.gets.chomp
+      case stdin.gets.chomp
         when /\Ano?\z/i, ''  then nil
         when /\Ay(?:es)?\z/i then true
         else puts 'Please enter "yes" or "no".'; agree?(msg)
@@ -66,13 +66,21 @@ class Lingo
       abort ''
     end
 
+    def stdin
+      respond_to?(:lingo, true) ? lingo.config.stdin : $stdin
+    end
+
+    def stdout
+      respond_to?(:lingo, true) ? lingo.config.stdout : $stdout
+    end
+
     def open_stdin
-      stdin = set_encoding(lingo.config.stdin)
-      @progress ? StringIO.new(stdin.read) : stdin
+      io = set_encoding(stdin)
+      @progress ? StringIO.new(io.read) : io
     end
 
     def open_stdout
-      set_encoding(lingo.config.stdout)
+      set_encoding(stdout)
     end
 
     def open_path(path, mode = 'rb')
@@ -84,7 +92,7 @@ class Lingo
     end
 
     def open_gzip(path, mode)
-      require_lib('zlib')
+      respond_to?(:require_lib, true) ? require_lib('zlib') : require('zlib')
 
       case mode
         when 'r', 'rb'
