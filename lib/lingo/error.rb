@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2014 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2016 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -38,7 +38,9 @@ class Lingo
 
   end
 
-  class NoWritableStoreError < LingoError
+  class StoreError < LingoError; end
+
+  class NoWritableStoreError < StoreError
 
     attr_reader :file, :path
 
@@ -52,7 +54,9 @@ class Lingo
 
   end
 
-  class BackendNotFoundError < LingoError
+  class BackendError < LingoError; end
+
+  class BackendNotFoundError < BackendError
 
     attr_reader :file
 
@@ -66,7 +70,7 @@ class Lingo
 
   end
 
-  class BackendNotAvailableError < LingoError
+  class BackendNotAvailableError < BackendError
 
     attr_reader :name, :file, :err
 
@@ -143,13 +147,17 @@ class Lingo
 
   end
 
-  class FileNotFoundError < LingoError
+  class FileError < LingoError
 
     attr_reader :name
 
     def initialize(name)
       @name = name
     end
+
+  end
+
+  class FileNotFoundError < FileError
 
     def to_s
       "No such file `#{name}'."
