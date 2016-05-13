@@ -77,4 +77,21 @@ class Lingo
 
   end
 
+  def self.CLI(args, extra = nil, &block)
+    opt, req = args.partition { |arg| arg.sub!(/\?\z/, '') }
+
+    unless (n = ARGV.size - req.size) >= 0 && n <= opt.size
+      msg = "Usage: #{$0}#{args.map { |arg| [' ', arg].zip(
+        opt.include?(arg) ? %w[[ ]] : %w[< >]).join }.join}"
+
+      abort Array(extra).unshift(msg).join("\n\n")
+    end
+
+    Object.new.extend(TextUtils).instance_eval(&block)
+  rescue LingoError => err
+    abort err.to_s
+  ensure
+    ObjectSpace.each_object(Zlib::GzipWriter, &:close)
+  end
+
 end
