@@ -74,6 +74,21 @@ class Lingo
       respond_to?(:lingo, true) ? lingo.config.stdout : $stdout
     end
 
+    def open(path, mode = 'rb')
+      io = case mode
+        when /r/ then stdin?(path) ? open_stdin : File.exist?(path) ?
+          open_path(path, mode) : raise(FileNotFoundError.new(path))
+        when /w/ then stdout?(path) ? open_stdout : overwrite?(path) ?
+          open_path(path, mode) : raise(FileExistsError.new(path))
+      end
+
+      !block_given? ? io : begin
+        yield io
+      ensure
+        io.close
+      end
+    end
+
     def open_stdin
       io = set_encoding(stdin)
       @progress ? StringIO.new(io.read) : io

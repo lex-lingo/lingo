@@ -180,6 +180,14 @@ class Lingo
 
   end
 
+  class FileExistsError < FileError
+
+    def to_s
+      "File `#{name}' already exists."
+    end
+
+  end
+
   class NameNotFoundError < LingoError
 
     attr_reader :klass, :name
