@@ -76,9 +76,9 @@ class Lingo
       FileUtils.cp(source, target, verbose: true)
     end
 
-    def do_clearstore
-      store = Dir["#{find(:store, false)}.*"]
-      FileUtils.rm(store, verbose: true) unless store.empty?
+    def clear(what)
+      target = Dir["#{find(what, false)}.*"]
+      FileUtils.rm(target, verbose: true) unless target.empty?
     end
 
   end
