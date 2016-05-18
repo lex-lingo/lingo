@@ -148,6 +148,11 @@ class Lingo
         each { |key, val| yield key, self.class.lexicals(val) }
       end
 
+      def each_dump(*args)
+        return enum_for(__method__, *args) unless block_given?
+        each_lexical { |key, val| yield dump_line(key, val, *args) }
+      end
+
       def set(db, key, val)
         db[key] = val
       end
