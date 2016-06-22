@@ -115,8 +115,6 @@ information see each attendee's documentation):
                     being compounds. (see Lingo::Attendee::Decomposer)
 +synonymer+::       Extends words with their synonyms. (see
                     Lingo::Attendee::Synonymer)
-+noneword_filter+:: Filters out everything and lets through only those tokens
-                    that are unknown. (see Lingo::Attendee::NonewordFilter)
 +vector_filter+::   Filters out everything and lets through only those tokens
                     that are considered useful for indexing. (see
                     Lingo::Attendee::VectorFilter)
