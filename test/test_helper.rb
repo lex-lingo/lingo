@@ -3,6 +3,8 @@
 require 'test/unit'
 require 'lingo'
 
+warn 'NOTICE: Skipping slow tests...' if ENV['LINGO_DISABLE_SLOW_TESTS']
+
 class LingoTestCase < Test::Unit::TestCase
 
   unless const_defined?(:TEST_FILE)

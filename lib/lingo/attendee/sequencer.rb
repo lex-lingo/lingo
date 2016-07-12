@@ -208,34 +208,34 @@ class Lingo
       def find_seq(buf, map)
         return if buf.empty?
 
-        args, seen = [], Hash.seen
+        objs, args = [], []
 
         @seq.each { |str, cls, fmt|
           if cls
             len = cls.size
 
             buf.each_cons(len).zip(map.each_cons(len)) { |_buf, _map|
-              obj, tok = _buf.each, nil; args.clear
+              obj = _buf.each; objs.clear; args.clear
 
               next if _map.zip(cls) { |_wc, wc|
                 break true unless _wc.include?(wc) &&
-                  find_form(obj.next, wc, args) { |t| tok ||= t }
+                  find_form(obj.next, wc, objs, args)
               }
 
-              forward_seq(fmt, str, tok, args, seen)
+              forward_seq(fmt, str, objs, args)
             }
           else
             combinations(*map) { |q|
               q, pos = q.join, -1
 
               while pos = q.index(str, pos += 1)
-                tok = nil; args.clear
+                objs.clear; args.clear
 
                 next unless $&.each_char.with_index { |wc, i|
-                  find_form(buf[pos + i], wc, args) { |t| tok ||= t } or break
+                  find_form(buf[pos + i], wc, objs, args) or break
                 }
 
-                forward_seq(fmt, $&, tok, args, seen)
+                forward_seq(fmt, $&, objs, args)
               end
             }
           end
@@ -245,23 +245,24 @@ class Lingo
         map.clear
       end
 
-      def find_form(obj, wc, args)
+      def find_form(obj, wc, objs, args)
         form = obj.is_a?(Word) ? obj.lexicals.find { |lex|
           break lex.form if lex.attr == wc } : obj.form or return
 
-        yield obj.token
+        objs << obj
         args << form
       end
 
-      def forward_seq(fmt, str, tok, args, seen)
-        form = fmt =~ /\d/ ? fmt.gsub('%0$s', str) % args :
+      def forward_seq(fmt, str, objs, args)
+        wrd_form, form = objs.map(&:form).join(' '),
+          fmt =~ /\d/ ? fmt.gsub('%0$s', str) % args :
           fmt ? "#{str}:#{args.join(fmt)}" : args.join(' ')
 
-        unless seen[form]
-          wrd = Word.new_lexical(form, WA_SEQUENCE, LA_SEQUENCE)
-          wrd.pattern, wrd.token = str, tok
-          @buffer << wrd
-        end
+        wrd = Word.new(wrd_form, WA_SEQUENCE)
+        wrd << Lexical.new(form, LA_SEQUENCE)
+        wrd.pattern, wrd.token = str, objs.first.token
+
+        @buffer << wrd
       end
 
     end
