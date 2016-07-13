@@ -31,6 +31,8 @@ class Lingo
 
   module TextUtils
 
+    DEFAULT_MODE = 'rb'.freeze
+
     STDIN_EXT = %w[STDIN -].freeze
 
     STDOUT_EXT = %w[STDOUT -].freeze
@@ -74,50 +76,51 @@ class Lingo
       respond_to?(:lingo, true) ? lingo.config.stdout : $stdout
     end
 
-    def open(path, mode = 'rb')
-      io = case mode
-        when /r/ then stdin?(path) ? open_stdin : File.exist?(path) ?
-          open_path(path, mode) : raise(FileNotFoundError.new(path))
-        when /w/ then stdout?(path) ? open_stdout : overwrite?(path) ?
-          open_path(path, mode) : raise(FileExistsError.new(path))
-      end
+    def open(path, mode = nil, encoding = nil, &block)
+      mode ||= DEFAULT_MODE
 
-      !block_given? ? io : begin
-        yield io
-      ensure
-        io.close
-      end
+      _yield_obj(case mode
+        when /r/ then stdin?(path) ? open_stdin(encoding) : File.exist?(path) ?
+          open_path(path, mode, encoding) : raise(FileNotFoundError.new(path))
+        when /w/ then stdout?(path) ? open_stdout(encoding) : overwrite?(path) ?
+          open_path(path, mode, encoding) : raise(FileExistsError.new(path))
+      end, &block)
     end
 
-    def open_stdin
-      io = set_encoding(stdin)
+    def open_stdin(encoding = nil)
+      io = set_encoding(stdin, encoding)
       @progress ? StringIO.new(io.read) : io
     end
 
-    def open_stdout
-      set_encoding(stdout)
+    def open_stdout(encoding = nil)
+      set_encoding(stdout, encoding)
     end
 
-    def open_path(path, mode = 'rb')
-      path =~ GZIP_RE ? open_gzip(path, mode) : open_file(path, mode)
+    def open_path(path, mode = nil, encoding = nil)
+      mode ||= DEFAULT_MODE
+
+      path =~ GZIP_RE ?
+        open_gzip(path, mode, encoding) :
+        open_file(path, mode, encoding)
     end
 
-    def open_file(path, mode)
-      File.open(path, mode, encoding: bom_encoding(mode))
+    def open_file(path, mode = nil, encoding = nil)
+      File.open(path, mode ||= DEFAULT_MODE,
+        encoding: bom_encoding(mode, encoding))
     end
 
-    def open_gzip(path, mode)
-      respond_to?(:require_lib, true) ? require_lib('zlib') : require('zlib')
+    def open_gzip(path, mode = nil, encoding = nil)
+      _require_lib('zlib')
 
-      case mode
+      case mode ||= DEFAULT_MODE
         when 'r', 'rb'
           @progress = false
-          Zlib::GzipReader.open(path, encoding: @encoding)
+          Zlib::GzipReader
         when 'w', 'wb'
-          Zlib::GzipWriter.open(path, encoding: @encoding)
+          Zlib::GzipWriter
         else
           raise ArgumentError, 'invalid access mode %s' % mode
-      end
+      end.open(path, encoding: get_encoding(encoding))
     end
 
     def get_path(path, ext)
@@ -134,14 +137,35 @@ class Lingo
       File.set_ext(path.sub(GZIP_RE, ''), ".#{ext}")
     end
 
-    def set_encoding(io, encoding = @encoding)
-      io.set_encoding(encoding)
+    def set_encoding(io, encoding = nil)
+      io.set_encoding(get_encoding(encoding))
       io
     end
 
-    def bom_encoding(mode = 'r', encoding = @encoding)
-      (mode.include?('r') || mode.include?('+')) &&
+    def get_encoding(encoding = nil, iv = :@encoding)
+      encoding ||
+        (instance_variable_defined?(iv) ? instance_variable_get(iv) : nil)
+    end
+
+    def bom_encoding(mode = 'r', encoding = nil)
+      encoding = get_encoding(encoding)
+
+      encoding && (mode.include?('r') || mode.include?('+')) &&
         encoding.name.start_with?('UTF-') ? "BOM|#{encoding}" : encoding
+    end
+
+    private
+
+    def _require_lib(lib)
+      respond_to?(:require_lib, true) ? require_lib(lib) : require(lib)
+    end
+
+    def _yield_obj(obj)
+      !block_given? ? obj : begin
+        yield obj
+      ensure
+        obj.close
+      end
     end
 
   end
