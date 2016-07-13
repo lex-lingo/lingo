@@ -87,6 +87,13 @@ class Lingo
       end, &block)
     end
 
+    def open_csv(path, mode = nil, options = {}, encoding = nil, &block)
+      _require_lib('csv')
+
+      open(path, mode, encoding) { |io|
+        _yield_obj(CSV.new(io, options), &block) }
+    end
+
     def open_stdin(encoding = nil)
       io = set_encoding(stdin, encoding)
       @progress ? StringIO.new(io.read) : io
@@ -121,6 +128,15 @@ class Lingo
         else
           raise ArgumentError, 'invalid access mode %s' % mode
       end.open(path, encoding: get_encoding(encoding))
+    end
+
+    def foreach(path, encoding = nil)
+      open(path, nil, encoding) { |io|
+        io.each { |line| line.chomp!; yield line } }
+    end
+
+    def foreach_csv(path, options = {}, encoding = nil, &block)
+      open_csv(path, nil, options, encoding) { |csv| csv.each(&block) }
     end
 
     def get_path(path, ext)
