@@ -24,8 +24,6 @@
 ###############################################################################
 #++
 
-require 'csv'
-
 class Lingo
 
   class Attendee
@@ -82,6 +80,8 @@ class Lingo
     #++
 
     class VectorFilter < self
+
+      include TextUtils
 
       DEFAULT_SRC_SEPARATOR = '|'
       DEFAULT_POS_SEPARATOR = '@'
@@ -198,7 +198,7 @@ class Lingo
           @vectors.each_value { |w| w.each_key { |v| df[v] += 1 } }
 
           if @tfidf.is_a?(String)
-            CSV.open(@tfidf, 'wb') { |c| df.sort.each { |v| c << v } }
+            open_csv(@tfidf, 'wb') { |c| df.sort.each { |v| c << v } }
           end
 
           yield lambda { |docnum|

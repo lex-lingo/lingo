@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2015 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2016 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -23,8 +23,6 @@
 #                                                                             #
 ###############################################################################
 #++
-
-require 'csv'
 
 class Lingo
 
@@ -97,11 +95,11 @@ class Lingo
         File.basename(path.chomp(File.extname(path))) }.uniq.join('-'))
 
       lambda { |key, &block| overwrite?(file = "#{name}.#{key}.csv") &&
-        puts("#{file}: #{Array(CSV.open(file, 'wb', &block)).join(' / ')}") }
+        puts("#{file}: #{Array(open_csv(file, 'wb', &block)).join(' / ')}") }
     end
 
     def csv_foreach(paths)
-      paths.each { |path| CSV.foreach(path, headers: true) { |row|
+      paths.each { |path| foreach_csv(path, headers: true) { |row|
         yield path, *row.values_at(*%w[string token word pattern]) } }
     end
 
