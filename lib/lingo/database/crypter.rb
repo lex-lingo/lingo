@@ -35,23 +35,25 @@ class Lingo
 
       extend self
 
+      CIPHER = 'AES-128-CBC'.freeze
+
       def digest(key)
         Digest::SHA1.hexdigest(key)
       end
 
       def encode(key, val)
-        [digest(key), crypt(:encrypt, key, val)]
+        [digest = digest(key), crypt(:encrypt, key, val, digest)]
       end
 
       def decode(key, val)
-        crypt(:decrypt, key, val).force_encoding(ENCODING)
+        crypt(:decrypt, key, val, digest(key)).force_encoding(ENCODING)
       end
 
       private
 
-      def crypt(method, key, val)
-        cipher = OpenSSL::Cipher.new('aes-128-cbc').send(method)
-        cipher.iv = cipher.key = digest(key)
+      def crypt(method, key, val, digest)
+        cipher = OpenSSL::Cipher.new(CIPHER).send(method)
+        cipher.iv = cipher.key = digest
         cipher.update(val) + cipher.final
       end
 
