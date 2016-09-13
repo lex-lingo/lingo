@@ -7,7 +7,7 @@ rvm:
   - '2.2'
   - '2.3'
   - ruby-head
-  - jruby-9.0
+  - jruby-9.1
   - jruby-head
   - rbx
 
@@ -19,14 +19,14 @@ env:
 
 matrix:
   exclude:
-    - rvm: jruby-9.0
+    - rvm: jruby-9.1
       env: LINGO_BACKEND=LibCDB
     - rvm: jruby-head
       env: LINGO_BACKEND=LibCDB
 
   allow_failures:
     - rvm: ruby-head
-    - rvm: jruby-9.0
+    - rvm: jruby-9.1
     - rvm: jruby-head
     - rvm: rbx
 
