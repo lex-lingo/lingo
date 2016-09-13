@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::Database::Source::MultiKey - lingo Application documentation (v1.8.7)</title>
+<title>class Lingo::Database::Source::MultiKey - lingo Application documentation (v1.9.0)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../../";
@@ -72,7 +72,9 @@
     
     <li class="calls-super" ><a href="#method-c-new">::new</a>
     
-    <li ><a href="#method-i-convert_line">#convert_line</a>
+    <li ><a href="#method-i-dump_line">#dump_line</a>
+    
+    <li ><a href="#method-i-parse_line">#parse_line</a>
     
     <li ><a href="#method-i-set">#set</a>
     
@@ -128,7 +130,7 @@
         
         <div class="method-heading">
           <span class="method-name">new</span><span
-            class="method-args">(id, lingo)</span>
+            class="method-args">(*)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -149,9 +151,9 @@
           
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File lib/lingo/database/source/multi_key.rb, line 44</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">lingo</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-operator">*</span>)
   <span class="ruby-keyword">super</span>
-  <span class="ruby-ivar">@pat</span> = <span class="ruby-node">/^#{@wrd}(?:#{Regexp.escape(@sep ||= DEFAULT_SEPARATOR)}#{@wrd})*$/</span>
+  <span class="ruby-ivar">@pat</span> = <span class="ruby-node">/^#{@wrd}(?:#{Regexp.escape(@sep)}#{@wrd})*$/</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -169,6 +171,73 @@
        <header>
          <h3>Public Instance Methods</h3>
        </header>
+
+    
+      <div id="method-i-dump_line" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">dump_line</span><span
+            class="method-args">(key, val, sep = @sep, *)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="dump_line-source">
+            <pre><span class="ruby-comment"># File lib/lingo/database/source/multi_key.rb, line 59</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">dump_line</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>, <span class="ruby-identifier">sep</span> = <span class="ruby-ivar">@sep</span>, <span class="ruby-operator">*</span>)
+  <span class="ruby-identifier">val</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:form</span>).<span class="ruby-identifier">unshift</span>(<span class="ruby-identifier">key</span>).<span class="ruby-identifier">join</span>(<span class="ruby-identifier">sep</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-parse_line" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">parse_line</span><span
+            class="method-args">(line, key, val)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="parse_line-source">
+            <pre><span class="ruby-comment"># File lib/lingo/database/source/multi_key.rb, line 54</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">parse_line</span>(<span class="ruby-identifier">line</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
+  <span class="ruby-identifier">values</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-ivar">@sep</span>).<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:strip!</span>)
+  [<span class="ruby-identifier">values</span>.<span class="ruby-identifier">shift</span>, <span class="ruby-identifier">values</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
 
     
       <div id="method-i-set" class="method-detail ">
@@ -192,50 +261,8 @@
           <div class="method-source-code" id="set-source">
             <pre><span class="ruby-comment"># File lib/lingo/database/source/multi_key.rb, line 49</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">set</span>(<span class="ruby-identifier">db</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
-  <span class="ruby-identifier">key</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;##{@def}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@def</span>
+  <span class="ruby-identifier">key</span> = <span class="ruby-identifier">lexical</span>(<span class="ruby-identifier">key</span>, <span class="ruby-ivar">@def</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@def</span>
   <span class="ruby-identifier">val</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">db</span>[<span class="ruby-identifier">v</span>] = [<span class="ruby-identifier">key</span>] }
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-    </section>
-  
-     <section id="private-instance-5Buntitled-5D-method-details" class="method-section">
-       <header>
-         <h3>Private Instance Methods</h3>
-       </header>
-
-    
-      <div id="method-i-convert_line" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">convert_line</span><span
-            class="method-args">(line, key, val)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="convert_line-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/source/multi_key.rb, line 56</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">convert_line</span>(<span class="ruby-identifier">line</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
-  <span class="ruby-identifier">values</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-ivar">@sep</span>).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">strip!</span> }
-  [<span class="ruby-identifier">values</span>.<span class="ruby-identifier">shift</span>, <span class="ruby-identifier">values</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -255,7 +282,7 @@
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

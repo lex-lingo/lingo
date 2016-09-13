@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>module Lingo::Database::Crypter - lingo Application documentation (v1.8.7)</title>
+<title>module Lingo::Database::Crypter - lingo Application documentation (v1.9.0)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
@@ -95,6 +95,25 @@
     
 
     
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+      
+        <dt id="CIPHER">CIPHER
+        
+        <dd>
+        
+      
+        <dt id="KEYLEN">KEYLEN
+        
+        <dd>
+        
+      
+      </dl>
+    </section>
+    
 
     
 
@@ -124,9 +143,9 @@
 
           
           <div class="method-source-code" id="decode-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/crypter.rb, line 45</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database/crypter.rb, line 49</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">decode</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
-  <span class="ruby-identifier">crypt</span>(<span class="ruby-value">:decrypt</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>).<span class="ruby-identifier">force_encoding</span>(<span class="ruby-constant">ENC</span>)
+  <span class="ruby-identifier">crypt</span>(<span class="ruby-value">:decrypt</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>, <span class="ruby-identifier">digest</span>(<span class="ruby-identifier">key</span>)).<span class="ruby-identifier">force_encoding</span>(<span class="ruby-constant">ENCODING</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -157,7 +176,7 @@
 
           
           <div class="method-source-code" id="digest-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/crypter.rb, line 37</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database/crypter.rb, line 41</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">digest</span>(<span class="ruby-identifier">key</span>)
   <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA1</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-identifier">key</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -190,9 +209,9 @@
 
           
           <div class="method-source-code" id="encode-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/crypter.rb, line 41</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database/crypter.rb, line 45</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">encode</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
-  [<span class="ruby-identifier">digest</span>(<span class="ruby-identifier">key</span>), <span class="ruby-identifier">crypt</span>(<span class="ruby-value">:encrypt</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)]
+  [<span class="ruby-identifier">digest</span> = <span class="ruby-identifier">digest</span>(<span class="ruby-identifier">key</span>), <span class="ruby-identifier">crypt</span>(<span class="ruby-value">:encrypt</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>, <span class="ruby-identifier">digest</span>)]
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -216,7 +235,7 @@
         
         <div class="method-heading">
           <span class="method-name">crypt</span><span
-            class="method-args">(method, key, val)</span>
+            class="method-args">(method, key, val, digest)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -231,10 +250,10 @@
 
           
           <div class="method-source-code" id="crypt-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/crypter.rb, line 51</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">crypt</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
-  <span class="ruby-identifier">cipher</span> = <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">Cipher</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;aes-128-cbc&#39;</span>).<span class="ruby-identifier">send</span>(<span class="ruby-identifier">method</span>)
-  <span class="ruby-identifier">cipher</span>.<span class="ruby-identifier">iv</span> = <span class="ruby-identifier">cipher</span>.<span class="ruby-identifier">key</span> = <span class="ruby-identifier">digest</span>(<span class="ruby-identifier">key</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/database/crypter.rb, line 55</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">crypt</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>, <span class="ruby-identifier">digest</span>)
+  <span class="ruby-identifier">cipher</span> = <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">Cipher</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">CIPHER</span>).<span class="ruby-identifier">send</span>(<span class="ruby-identifier">method</span>)
+  <span class="ruby-identifier">cipher</span>.<span class="ruby-identifier">iv</span> = <span class="ruby-identifier">cipher</span>.<span class="ruby-identifier">key</span> = <span class="ruby-identifier">digest</span>[<span class="ruby-value">0</span>, <span class="ruby-constant">KEYLEN</span>]
   <span class="ruby-identifier">cipher</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">val</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">cipher</span>.<span class="ruby-identifier">final</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -255,7 +274,7 @@
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

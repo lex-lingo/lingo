@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>module Lingo::TextUtils - lingo Application documentation (v1.8.7)</title>
+<title>module Lingo::TextUtils - lingo Application documentation (v1.9.0)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
@@ -63,7 +63,25 @@
 
   <ul class="link-list" role="directory">
     
+    <li ><a href="#method-i-_require_lib">#_require_lib</a>
+    
+    <li ><a href="#method-i-_yield_obj">#_yield_obj</a>
+    
+    <li ><a href="#method-i-agree-3F">#agree?</a>
+    
     <li ><a href="#method-i-bom_encoding">#bom_encoding</a>
+    
+    <li ><a href="#method-i-foreach">#foreach</a>
+    
+    <li ><a href="#method-i-foreach_csv">#foreach_csv</a>
+    
+    <li ><a href="#method-i-get_encoding">#get_encoding</a>
+    
+    <li ><a href="#method-i-get_path">#get_path</a>
+    
+    <li ><a href="#method-i-open">#open</a>
+    
+    <li ><a href="#method-i-open_csv">#open_csv</a>
     
     <li ><a href="#method-i-open_file">#open_file</a>
     
@@ -75,11 +93,17 @@
     
     <li ><a href="#method-i-open_stdout">#open_stdout</a>
     
+    <li ><a href="#method-i-overwrite-3F">#overwrite?</a>
+    
     <li ><a href="#method-i-set_encoding">#set_encoding</a>
     
     <li ><a href="#method-i-set_ext">#set_ext</a>
     
+    <li ><a href="#method-i-stdin">#stdin</a>
+    
     <li ><a href="#method-i-stdin-3F">#stdin?</a>
+    
+    <li ><a href="#method-i-stdout">#stdout</a>
     
     <li ><a href="#method-i-stdout-3F">#stdout?</a>
     
@@ -113,6 +137,11 @@
       </header>
       <dl>
       
+        <dt id="DEFAULT_MODE">DEFAULT_MODE
+        
+        <dd>
+        
+      
         <dt id="GZIP_RE">GZIP_RE
         
         <dd>
@@ -141,11 +170,122 @@
        </header>
 
     
+      <div id="method-i-_require_lib" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">_require_lib</span><span
+            class="method-args">(lib)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="_require_lib-source">
+            <pre><span class="ruby-comment"># File lib/lingo/text_utils.rb, line 174</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">_require_lib</span>(<span class="ruby-identifier">lib</span>)
+  <span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:require_lib</span>, <span class="ruby-keyword">true</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">require_lib</span>(<span class="ruby-identifier">lib</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">require</span>(<span class="ruby-identifier">lib</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-_yield_obj" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">_yield_obj</span><span
+            class="method-args">(obj) { |obj| ... }</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="_yield_obj-source">
+            <pre><span class="ruby-comment"># File lib/lingo/text_utils.rb, line 178</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">_yield_obj</span>(<span class="ruby-identifier">obj</span>)
+  <span class="ruby-operator">!</span><span class="ruby-identifier">block_given?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">obj</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">begin</span>
+    <span class="ruby-keyword">yield</span> <span class="ruby-identifier">obj</span>
+  <span class="ruby-keyword">ensure</span>
+    <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">close</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-agree-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">agree?</span><span
+            class="method-args">(msg)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="agree-3F-source">
+            <pre><span class="ruby-comment"># File lib/lingo/text_utils.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">agree?</span>(<span class="ruby-identifier">msg</span>)
+  <span class="ruby-identifier">print</span> <span class="ruby-node">&quot;#{msg} (y/n) [n]: &quot;</span>
+
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">stdin</span>.<span class="ruby-identifier">gets</span>.<span class="ruby-identifier">chomp</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\Ano?\z/i</span>, <span class="ruby-string">&#39;&#39;</span>  <span class="ruby-keyword">then</span> <span class="ruby-keyword">nil</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\Ay(?:es)?\z/i</span> <span class="ruby-keyword">then</span> <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">else</span> <span class="ruby-identifier">puts</span> <span class="ruby-string">&#39;Please enter &quot;yes&quot; or &quot;no&quot;.&#39;</span>; <span class="ruby-identifier">agree?</span>(<span class="ruby-identifier">msg</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">Interrupt</span>
+  <span class="ruby-identifier">abort</span> <span class="ruby-string">&#39;&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-bom_encoding" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">bom_encoding</span><span
-            class="method-args">(mode = 'r', encoding = @encoding)</span>
+            class="method-args">(mode = 'r', encoding = nil)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -160,10 +300,228 @@
 
           
           <div class="method-source-code" id="bom_encoding-source">
-            <pre><span class="ruby-comment"># File lib/lingo/text_utils.rb, line 88</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">bom_encoding</span>(<span class="ruby-identifier">mode</span> = <span class="ruby-string">&#39;r&#39;</span>, <span class="ruby-identifier">encoding</span> = <span class="ruby-ivar">@encoding</span>)
-  (<span class="ruby-identifier">mode</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">&#39;r&#39;</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">mode</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">&#39;+&#39;</span>)) <span class="ruby-operator">&amp;&amp;</span>
+            <pre><span class="ruby-comment"># File lib/lingo/text_utils.rb, line 165</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">bom_encoding</span>(<span class="ruby-identifier">mode</span> = <span class="ruby-string">&#39;r&#39;</span>, <span class="ruby-identifier">encoding</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">encoding</span> = <span class="ruby-identifier">get_encoding</span>(<span class="ruby-identifier">encoding</span>)
+
+  <span class="ruby-identifier">encoding</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">mode</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">&#39;r&#39;</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">mode</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">&#39;+&#39;</span>)) <span class="ruby-operator">&amp;&amp;</span>
     <span class="ruby-identifier">encoding</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">start_with?</span>(<span class="ruby-string">&#39;UTF-&#39;</span>) <span class="ruby-operator">?</span> <span class="ruby-node">&quot;BOM|#{encoding}&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">encoding</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-foreach" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">foreach</span><span
+            class="method-args">(path, encoding = nil) { |line| ... }</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="foreach-source">
+            <pre><span class="ruby-comment"># File lib/lingo/text_utils.rb, line 132</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">foreach</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">encoding</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">encoding</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">io</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">io</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp!</span>; <span class="ruby-keyword">yield</span> <span class="ruby-identifier">line</span> } }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-foreach_csv" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">foreach_csv</span><span
+            class="method-args">(path, options = {}, encoding = nil, &block)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="foreach_csv-source">
+            <pre><span class="ruby-comment"># File lib/lingo/text_utils.rb, line 137</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">foreach_csv</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">encoding</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">open_csv</span>(<span class="ruby-identifier">path</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span>, <span class="ruby-identifier">encoding</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span> <span class="ruby-identifier">csv</span>.<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-get_encoding" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_encoding</span><span
+            class="method-args">(encoding = nil, iv = :@encoding)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_encoding-source">
+            <pre><span class="ruby-comment"># File lib/lingo/text_utils.rb, line 160</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_encoding</span>(<span class="ruby-identifier">encoding</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">iv</span> = <span class="ruby-value">:@encoding</span>)
+  <span class="ruby-identifier">encoding</span> <span class="ruby-operator">||</span>
+    (<span class="ruby-identifier">instance_variable_defined?</span>(<span class="ruby-identifier">iv</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">instance_variable_get</span>(<span class="ruby-identifier">iv</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-get_path" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_path</span><span
+            class="method-args">(path, ext)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_path-source">
+            <pre><span class="ruby-comment"># File lib/lingo/text_utils.rb, line 141</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_path</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">ext</span>)
+  <span class="ruby-identifier">set_ext</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">ext</span>).<span class="ruby-identifier">format</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">directive</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">directive</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;d&#39;</span>, <span class="ruby-identifier">t</span> = <span class="ruby-string">&#39;t&#39;</span> <span class="ruby-keyword">then</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-identifier">t</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;%H%M%S&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;%Y%m%d&#39;</span>)
+      <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;c&#39;</span>, <span class="ruby-identifier">l</span> = <span class="ruby-string">&#39;l&#39;</span> <span class="ruby-keyword">then</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">chomp_ext</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(
+        <span class="ruby-identifier">lingo</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{l ? :lang : :config}_file&quot;</span>)))
+    <span class="ruby-keyword">end</span>
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-open" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">open</span><span
+            class="method-args">(path, mode = nil, encoding = nil, &block)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="open-source">
+            <pre><span class="ruby-comment"># File lib/lingo/text_utils.rb, line 78</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">mode</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">encoding</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">mode</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">DEFAULT_MODE</span>
+
+  <span class="ruby-identifier">_yield_obj</span>(<span class="ruby-keyword">case</span> <span class="ruby-identifier">mode</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/r/</span> <span class="ruby-keyword">then</span> <span class="ruby-identifier">stdin?</span>(<span class="ruby-identifier">path</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">open_stdin</span>(<span class="ruby-identifier">encoding</span>) <span class="ruby-operator">:</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">path</span>) <span class="ruby-operator">?</span>
+      <span class="ruby-identifier">open_path</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">mode</span>, <span class="ruby-identifier">encoding</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">raise</span>(<span class="ruby-constant">FileNotFoundError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">path</span>))
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/w/</span> <span class="ruby-keyword">then</span> <span class="ruby-identifier">stdout?</span>(<span class="ruby-identifier">path</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">open_stdout</span>(<span class="ruby-identifier">encoding</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">overwrite?</span>(<span class="ruby-identifier">path</span>) <span class="ruby-operator">?</span>
+      <span class="ruby-identifier">open_path</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">mode</span>, <span class="ruby-identifier">encoding</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">raise</span>(<span class="ruby-constant">FileExistsError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">path</span>))
+  <span class="ruby-keyword">end</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-open_csv" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">open_csv</span><span
+            class="method-args">(path, mode = nil, options = {}, encoding = nil, &block)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="open_csv-source">
+            <pre><span class="ruby-comment"># File lib/lingo/text_utils.rb, line 89</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">open_csv</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">mode</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">encoding</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">_require_lib</span>(<span class="ruby-string">&#39;csv&#39;</span>)
+
+  <span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">mode</span>, <span class="ruby-identifier">encoding</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">io</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">_yield_obj</span>(<span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">io</span>, <span class="ruby-identifier">options</span>), <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>) }
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -179,7 +537,7 @@
         
         <div class="method-heading">
           <span class="method-name">open_file</span><span
-            class="method-args">(path, mode)</span>
+            class="method-args">(path, mode = nil, encoding = nil)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -194,9 +552,10 @@
 
           
           <div class="method-source-code" id="open_file-source">
-            <pre><span class="ruby-comment"># File lib/lingo/text_utils.rb, line 61</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">open_file</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">mode</span>)
-  <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">mode</span>, <span class="ruby-identifier">encoding</span><span class="ruby-operator">:</span> <span class="ruby-identifier">bom_encoding</span>(<span class="ruby-identifier">mode</span>))
+            <pre><span class="ruby-comment"># File lib/lingo/text_utils.rb, line 113</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">open_file</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">mode</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">encoding</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">mode</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">DEFAULT_MODE</span>,
+    <span class="ruby-identifier">encoding</span><span class="ruby-operator">:</span> <span class="ruby-identifier">bom_encoding</span>(<span class="ruby-identifier">mode</span>, <span class="ruby-identifier">encoding</span>))
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -212,7 +571,7 @@
         
         <div class="method-heading">
           <span class="method-name">open_gzip</span><span
-            class="method-args">(path, mode)</span>
+            class="method-args">(path, mode = nil, encoding = nil)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -227,19 +586,19 @@
 
           
           <div class="method-source-code" id="open_gzip-source">
-            <pre><span class="ruby-comment"># File lib/lingo/text_utils.rb, line 65</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">open_gzip</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">mode</span>)
-  <span class="ruby-identifier">require_lib</span>(<span class="ruby-string">&#39;zlib&#39;</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/text_utils.rb, line 118</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">open_gzip</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">mode</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">encoding</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">_require_lib</span>(<span class="ruby-string">&#39;zlib&#39;</span>)
 
-  <span class="ruby-keyword">case</span> <span class="ruby-identifier">mode</span>
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">mode</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">DEFAULT_MODE</span>
     <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;r&#39;</span>, <span class="ruby-string">&#39;rb&#39;</span>
       <span class="ruby-ivar">@progress</span> = <span class="ruby-keyword">false</span>
-      <span class="ruby-constant">Zlib</span><span class="ruby-operator">::</span><span class="ruby-constant">GzipReader</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">encoding</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@encoding</span>)
+      <span class="ruby-constant">Zlib</span><span class="ruby-operator">::</span><span class="ruby-constant">GzipReader</span>
     <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;w&#39;</span>, <span class="ruby-string">&#39;wb&#39;</span>
-      <span class="ruby-constant">Zlib</span><span class="ruby-operator">::</span><span class="ruby-constant">GzipWriter</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">encoding</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@encoding</span>)
+      <span class="ruby-constant">Zlib</span><span class="ruby-operator">::</span><span class="ruby-constant">GzipWriter</span>
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;invalid access mode %s&#39;</span> <span class="ruby-operator">%</span> <span class="ruby-identifier">mode</span>
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">encoding</span><span class="ruby-operator">:</span> <span class="ruby-identifier">get_encoding</span>(<span class="ruby-identifier">encoding</span>))
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -255,7 +614,7 @@
         
         <div class="method-heading">
           <span class="method-name">open_path</span><span
-            class="method-args">(path, mode = 'rb')</span>
+            class="method-args">(path, mode = nil, encoding = nil)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -270,9 +629,13 @@
 
           
           <div class="method-source-code" id="open_path-source">
-            <pre><span class="ruby-comment"># File lib/lingo/text_utils.rb, line 57</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">open_path</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">mode</span> = <span class="ruby-string">&#39;rb&#39;</span>)
-  <span class="ruby-identifier">path</span> <span class="ruby-operator">=~</span> <span class="ruby-constant">GZIP_RE</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">open_gzip</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">mode</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">open_file</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">mode</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/text_utils.rb, line 105</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">open_path</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">mode</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">encoding</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">mode</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">DEFAULT_MODE</span>
+
+  <span class="ruby-identifier">path</span> <span class="ruby-operator">=~</span> <span class="ruby-constant">GZIP_RE</span> <span class="ruby-operator">?</span>
+    <span class="ruby-identifier">open_gzip</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">mode</span>, <span class="ruby-identifier">encoding</span>) <span class="ruby-operator">:</span>
+    <span class="ruby-identifier">open_file</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">mode</span>, <span class="ruby-identifier">encoding</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -288,7 +651,7 @@
         
         <div class="method-heading">
           <span class="method-name">open_stdin</span><span
-            class="method-args">()</span>
+            class="method-args">(encoding = nil)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -303,10 +666,10 @@
 
           
           <div class="method-source-code" id="open_stdin-source">
-            <pre><span class="ruby-comment"># File lib/lingo/text_utils.rb, line 48</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">open_stdin</span>
-  <span class="ruby-identifier">stdin</span> = <span class="ruby-identifier">set_encoding</span>(<span class="ruby-identifier">lingo</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">stdin</span>)
-  <span class="ruby-ivar">@progress</span> <span class="ruby-operator">?</span> <span class="ruby-constant">StringIO</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">stdin</span>.<span class="ruby-identifier">read</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">stdin</span>
+            <pre><span class="ruby-comment"># File lib/lingo/text_utils.rb, line 96</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">open_stdin</span>(<span class="ruby-identifier">encoding</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">io</span> = <span class="ruby-identifier">set_encoding</span>(<span class="ruby-identifier">stdin</span>, <span class="ruby-identifier">encoding</span>)
+  <span class="ruby-ivar">@progress</span> <span class="ruby-operator">?</span> <span class="ruby-constant">StringIO</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">io</span>.<span class="ruby-identifier">read</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">io</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -322,7 +685,7 @@
         
         <div class="method-heading">
           <span class="method-name">open_stdout</span><span
-            class="method-args">()</span>
+            class="method-args">(encoding = nil)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -337,9 +700,45 @@
 
           
           <div class="method-source-code" id="open_stdout-source">
-            <pre><span class="ruby-comment"># File lib/lingo/text_utils.rb, line 53</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">open_stdout</span>
-  <span class="ruby-identifier">set_encoding</span>(<span class="ruby-identifier">lingo</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">stdout</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/text_utils.rb, line 101</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">open_stdout</span>(<span class="ruby-identifier">encoding</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">set_encoding</span>(<span class="ruby-identifier">stdout</span>, <span class="ruby-identifier">encoding</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-overwrite-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">overwrite?</span><span
+            class="method-args">(path, unlink = false)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="overwrite-3F-source">
+            <pre><span class="ruby-comment"># File lib/lingo/text_utils.rb, line 51</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">overwrite?</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">unlink</span> = <span class="ruby-keyword">false</span>)
+  <span class="ruby-operator">!</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">path</span>) <span class="ruby-operator">||</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">agree?</span>(<span class="ruby-node">&quot;#{path} already exists. Overwrite?&quot;</span>)
+    <span class="ruby-constant">File</span>.<span class="ruby-identifier">unlink</span>(<span class="ruby-identifier">path</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">unlink</span>
+    <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -355,7 +754,7 @@
         
         <div class="method-heading">
           <span class="method-name">set_encoding</span><span
-            class="method-args">(io, encoding = @encoding)</span>
+            class="method-args">(io, encoding = nil)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -370,9 +769,9 @@
 
           
           <div class="method-source-code" id="set_encoding-source">
-            <pre><span class="ruby-comment"># File lib/lingo/text_utils.rb, line 83</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">set_encoding</span>(<span class="ruby-identifier">io</span>, <span class="ruby-identifier">encoding</span> = <span class="ruby-ivar">@encoding</span>)
-  <span class="ruby-identifier">io</span>.<span class="ruby-identifier">set_encoding</span>(<span class="ruby-identifier">encoding</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/text_utils.rb, line 155</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">set_encoding</span>(<span class="ruby-identifier">io</span>, <span class="ruby-identifier">encoding</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">io</span>.<span class="ruby-identifier">set_encoding</span>(<span class="ruby-identifier">get_encoding</span>(<span class="ruby-identifier">encoding</span>))
   <span class="ruby-identifier">io</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -404,9 +803,42 @@
 
           
           <div class="method-source-code" id="set_ext-source">
-            <pre><span class="ruby-comment"># File lib/lingo/text_utils.rb, line 79</span>
+            <pre><span class="ruby-comment"># File lib/lingo/text_utils.rb, line 151</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">set_ext</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">ext</span>)
   <span class="ruby-constant">File</span>.<span class="ruby-identifier">set_ext</span>(<span class="ruby-identifier">path</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-constant">GZIP_RE</span>, <span class="ruby-string">&#39;&#39;</span>), <span class="ruby-node">&quot;.#{ext}&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-stdin" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">stdin</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="stdin-source">
+            <pre><span class="ruby-comment"># File lib/lingo/text_utils.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">stdin</span>
+  <span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:lingo</span>, <span class="ruby-keyword">true</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">lingo</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">stdin</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">$stdin</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -437,9 +869,42 @@
 
           
           <div class="method-source-code" id="stdin-3F-source">
-            <pre><span class="ruby-comment"># File lib/lingo/text_utils.rb, line 40</span>
+            <pre><span class="ruby-comment"># File lib/lingo/text_utils.rb, line 43</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">stdin?</span>(<span class="ruby-identifier">path</span>)
   <span class="ruby-constant">STDIN_EXT</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">path</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-stdout" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">stdout</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="stdout-source">
+            <pre><span class="ruby-comment"># File lib/lingo/text_utils.rb, line 74</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">stdout</span>
+  <span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:lingo</span>, <span class="ruby-keyword">true</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">lingo</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">stdout</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">$stdout</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -470,7 +935,7 @@
 
           
           <div class="method-source-code" id="stdout-3F-source">
-            <pre><span class="ruby-comment"># File lib/lingo/text_utils.rb, line 44</span>
+            <pre><span class="ruby-comment"># File lib/lingo/text_utils.rb, line 47</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">stdout?</span>(<span class="ruby-identifier">path</span>)
   <span class="ruby-constant">STDOUT_EXT</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">path</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -492,7 +957,7 @@
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

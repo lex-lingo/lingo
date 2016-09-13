@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::Database::Source::SingleWord - lingo Application documentation (v1.8.7)</title>
+<title>class Lingo::Database::Source::SingleWord - lingo Application documentation (v1.9.0)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../../";
@@ -72,7 +72,9 @@
     
     <li class="calls-super" ><a href="#method-c-new">::new</a>
     
-    <li ><a href="#method-i-convert_line">#convert_line</a>
+    <li ><a href="#method-i-dump_line">#dump_line</a>
+    
+    <li ><a href="#method-i-parse_line">#parse_line</a>
     
   </ul>
 </div>
@@ -98,6 +100,20 @@
     
 
     
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+      
+        <dt id="DEFAULT_DEF_WC">DEFAULT_DEF_WC
+        
+        <dd>
+        
+      
+      </dl>
+    </section>
+    
 
     
 
@@ -112,7 +128,7 @@
         
         <div class="method-heading">
           <span class="method-name">new</span><span
-            class="method-args">(id, lingo)</span>
+            class="method-args">(*)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -132,9 +148,9 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/source/single_word.rb, line 40</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">lingo</span>)
-  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">lingo</span>, <span class="ruby-constant">Language</span><span class="ruby-operator">::</span><span class="ruby-constant">LA_NOUN</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/database/source/single_word.rb, line 42</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-operator">*</span>)
+  <span class="ruby-keyword">super</span>
   <span class="ruby-ivar">@pat</span> = <span class="ruby-node">/^(#{@wrd})$/</span>
   <span class="ruby-ivar">@mul</span> = <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;def-mul-wc&#39;</span>, <span class="ruby-ivar">@def</span>).<span class="ruby-identifier">downcase</span>
 <span class="ruby-keyword">end</span></pre>
@@ -150,16 +166,49 @@
     
     </section>
   
-     <section id="private-instance-5Buntitled-5D-method-details" class="method-section">
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
-         <h3>Private Instance Methods</h3>
+         <h3>Public Instance Methods</h3>
        </header>
 
     
-      <div id="method-i-convert_line" class="method-detail ">
+      <div id="method-i-dump_line" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">convert_line</span><span
+          <span class="method-name">dump_line</span><span
+            class="method-args">(key, val, *)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="dump_line-source">
+            <pre><span class="ruby-comment"># File lib/lingo/database/source/single_word.rb, line 52</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">dump_line</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>, <span class="ruby-operator">*</span>)
+  <span class="ruby-identifier">key</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-parse_line" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">parse_line</span><span
             class="method-args">(line, key, val)</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -174,10 +223,10 @@
           
 
           
-          <div class="method-source-code" id="convert_line-source">
+          <div class="method-source-code" id="parse_line-source">
             <pre><span class="ruby-comment"># File lib/lingo/database/source/single_word.rb, line 48</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">convert_line</span>(<span class="ruby-identifier">line</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
-  [<span class="ruby-identifier">k</span> = <span class="ruby-identifier">key</span>.<span class="ruby-identifier">strip</span>, <span class="ruby-node">%W[#{k}##{k.include?(&#39; &#39;) ? @mul : @def}]</span>]
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">parse_line</span>(<span class="ruby-identifier">line</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
+  [<span class="ruby-identifier">k</span> = <span class="ruby-identifier">key</span>.<span class="ruby-identifier">strip</span>, [<span class="ruby-identifier">lexical</span>(<span class="ruby-identifier">k</span>, <span class="ruby-identifier">k</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">&#39; &#39;</span>) <span class="ruby-operator">?</span> <span class="ruby-ivar">@mul</span> <span class="ruby-operator">:</span> <span class="ruby-ivar">@def</span>)]]
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -197,7 +246,7 @@
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

@@ -4,17 +4,17 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::LibraryLoadError - lingo Application documentation (v1.9.0)</title>
+<title>class Lingo::Filter::PDF - lingo Application documentation (v1.9.0)</title>
 
 <script type="text/javascript">
-  var rdoc_rel_prefix = "../";
+  var rdoc_rel_prefix = "../../";
 </script>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/darkfish.js"></script>
+<script src="../../js/jquery.js"></script>
+<script src="../../js/darkfish.js"></script>
 
-<link href="../css/fonts.css" rel="stylesheet">
-<link href="../css/rdoc.css" rel="stylesheet">
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
 
 
 
@@ -23,13 +23,13 @@
   <div id="project-navigation">
     <div id="home-section" role="region" title="Quick navigation" class="nav-section">
   <h2>
-    <a href="../index.html" rel="home">Home</a>
+    <a href="../../index.html" rel="home">Home</a>
   </h2>
 
   <div id="table-of-contents-navigation">
-    <a href="../table_of_contents.html#pages">Pages</a>
-    <a href="../table_of_contents.html#classes">Classes</a>
-    <a href="../table_of_contents.html#methods">Methods</a>
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
   </div>
 </div>
 
@@ -58,7 +58,7 @@
   <h3>Parent</h3>
 
   
-  <p class="link"><a href="LingoError.html">Lingo::LingoError</a>
+  <p class="link">self
   
 </div>
 
@@ -70,9 +70,9 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-c-new">::new</a>
+    <li class="calls-super" ><a href="#method-c-new">::new</a>
     
-    <li ><a href="#method-i-to_s">#to_s</a>
+    <li ><a href="#method-i-each">#each</a>
     
   </ul>
 </div>
@@ -80,9 +80,9 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-Lingo::LibraryLoadError">
-  <h1 id="class-Lingo::LibraryLoadError" class="class">
-    class Lingo::LibraryLoadError
+<main role="main" aria-labelledby="class-Lingo::Filter::PDF">
+  <h1 id="class-Lingo::Filter::PDF" class="class">
+    class Lingo::Filter::PDF
   </h1>
 
   <section class="description">
@@ -100,53 +100,6 @@
     
 
     
-    <section class="attribute-method-details" class="method-section">
-      <header>
-        <h3>Attributes</h3>
-      </header>
-
-      
-      <div id="attribute-i-err" class="method-detail">
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">err</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
-
-        <div class="method-description">
-        
-        
-        
-        </div>
-      </div>
-      
-      <div id="attribute-i-klass" class="method-detail">
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">klass</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
-
-        <div class="method-description">
-        
-        
-        
-        </div>
-      </div>
-      
-      <div id="attribute-i-lib" class="method-detail">
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">lib</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
-
-        <div class="method-description">
-        
-        
-        
-        </div>
-      </div>
-      
-    </section>
-    
 
     
      <section id="public-class-5Buntitled-5D-method-details" class="method-section">
@@ -159,7 +112,7 @@
         
         <div class="method-heading">
           <span class="method-name">new</span><span
-            class="method-args">(klass, lib, err)</span>
+            class="method-args">(*args)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -171,12 +124,18 @@
           
           
           
+            <div class="method-calls-super">
+              Calls superclass method
+              
+            </div>
+          
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/lingo/error.rb, line 208</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">klass</span>, <span class="ruby-identifier">lib</span>, <span class="ruby-identifier">err</span>)
-  <span class="ruby-ivar">@klass</span>, <span class="ruby-ivar">@lib</span>, <span class="ruby-ivar">@err</span> = <span class="ruby-identifier">klass</span>, <span class="ruby-identifier">lib</span>, <span class="ruby-identifier">err</span>
+            <pre><span class="ruby-comment"># File lib/lingo/filter/pdf.rb, line 34</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+  <span class="ruby-keyword">super</span>
+  <span class="ruby-ivar">@obj</span> = <span class="ruby-operator">::</span><span class="ruby-constant">PDF</span><span class="ruby-operator">::</span><span class="ruby-constant">Reader</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@io</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -196,11 +155,11 @@
        </header>
 
     
-      <div id="method-i-to_s" class="method-detail ">
+      <div id="method-i-each" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">to_s</span><span
-            class="method-args">()</span>
+          <span class="method-name">each</span><span
+            class="method-args">(&block)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -214,10 +173,10 @@
           
 
           
-          <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/lingo/error.rb, line 212</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
-  <span class="ruby-identifier">error</span>(<span class="ruby-node">&quot;#{class_name}: An error occured while trying to load `#{lib}&#39;&quot;</span>)
+          <div class="method-source-code" id="each-source">
+            <pre><span class="ruby-comment"># File lib/lingo/filter/pdf.rb, line 39</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-ivar">@obj</span>.<span class="ruby-identifier">pages</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">text</span>.<span class="ruby-identifier">each_line</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>) }
 <span class="ruby-keyword">end</span></pre>
           </div>
           

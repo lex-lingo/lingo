@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::Language::Word - lingo Application documentation (v1.8.7)</title>
+<title>class Lingo::Language::Word - lingo Application documentation (v1.9.0)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
@@ -73,8 +73,6 @@
     <li class="calls-super" ><a href="#method-c-new">::new</a>
     
     <li ><a href="#method-c-new_compound_head">::new_compound_head</a>
-    
-    <li ><a href="#method-c-new_lexical">::new_lexical</a>
     
     <li ><a href="#method-c-new_lexicals">::new_lexicals</a>
     
@@ -194,7 +192,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 78</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 74</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">form</span>, <span class="ruby-identifier">attr</span> = <span class="ruby-constant">WA_UNSET</span>, <span class="ruby-identifier">token</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-ivar">@token</span>, <span class="ruby-ivar">@lexicals</span> = <span class="ruby-identifier">token</span>, []
   <span class="ruby-keyword">super</span>
@@ -228,7 +226,7 @@
 
           
           <div class="method-source-code" id="new_compound_head-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 47</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 43</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new_compound_head</span>(<span class="ruby-identifier">lex</span>, <span class="ruby-identifier">attr</span> = <span class="ruby-constant">WA_UNSET</span>)
   <span class="ruby-identifier">form</span>, <span class="ruby-identifier">head_lex</span> = <span class="ruby-keyword">nil</span>, []
 
@@ -241,39 +239,6 @@
   <span class="ruby-identifier">head_lex</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">l</span><span class="ruby-operator">|</span> <span class="ruby-identifier">l</span>.<span class="ruby-identifier">attr</span> = <span class="ruby-identifier">l</span>.<span class="ruby-identifier">attr</span>[<span class="ruby-regexp">/\w+/</span>] }.<span class="ruby-identifier">uniq!</span>
 
   <span class="ruby-identifier">new_lexicals</span>(<span class="ruby-identifier">form</span>, <span class="ruby-identifier">attr</span>, <span class="ruby-identifier">head_lex</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">form</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-c-new_lexical" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">new_lexical</span><span
-            class="method-args">(form, attr, lex_attr)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="new_lexical-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 43</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">new_lexical</span>(<span class="ruby-identifier">form</span>, <span class="ruby-identifier">attr</span>, <span class="ruby-identifier">lex_attr</span>)
-  <span class="ruby-identifier">new_lexicals</span>(<span class="ruby-identifier">form</span>, <span class="ruby-identifier">attr</span>, <span class="ruby-constant">Lexical</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">form</span>, <span class="ruby-identifier">lex_attr</span>))
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -345,7 +310,7 @@
 
           
           <div class="method-source-code" id="3C-3C-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 135</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 131</span>
 <span class="ruby-keyword">def</span> <span class="ruby-operator">&lt;&lt;</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">lex</span>)
   <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">flatten!</span>
   <span class="ruby-identifier">lexicals</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">lex</span>)
@@ -380,7 +345,7 @@
 
           
           <div class="method-source-code" id="3C-3D-3E-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 141</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 137</span>
 <span class="ruby-keyword">def</span> <span class="ruby-operator">&lt;=&gt;</span>(<span class="ruby-identifier">other</span>)
   <span class="ruby-identifier">other</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span> <span class="ruby-value">1</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">lexicals</span>) <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">other</span>.<span class="ruby-identifier">lexicals</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -413,7 +378,7 @@
 
           
           <div class="method-source-code" id="add_lexicals-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 85</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 81</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">add_lexicals</span>(<span class="ruby-identifier">lex</span>)
   <span class="ruby-identifier">lexicals</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">lex</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">lexicals</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -446,7 +411,7 @@
 
           
           <div class="method-source-code" id="attr-3F-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 89</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 85</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">attr?</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">attr</span>)
   <span class="ruby-operator">!</span>(<span class="ruby-identifier">attrs</span> <span class="ruby-operator">&amp;</span> <span class="ruby-identifier">attr</span>).<span class="ruby-identifier">empty?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -479,7 +444,7 @@
 
           
           <div class="method-source-code" id="attrs-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 93</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 89</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">attrs</span>
   <span class="ruby-identifier">lexicals</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:attr</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -512,7 +477,7 @@
 
           
           <div class="method-source-code" id="compound_attrs-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 97</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 93</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">compound_attrs</span>
   <span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-constant">WA_COMPOUND</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">attrs</span>.<span class="ruby-identifier">grep</span>(<span class="ruby-constant">LA_COMPOUND</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">attrs</span>
 <span class="ruby-keyword">end</span></pre>
@@ -545,9 +510,9 @@
 
           
           <div class="method-source-code" id="each_lex-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 115</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 111</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">each_lex</span>(<span class="ruby-identifier">wc_re</span> = <span class="ruby-regexp">//</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">enum_for</span>(<span class="ruby-value">:each_lex</span>, <span class="ruby-identifier">wc_re</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block_given?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">enum_for</span>(<span class="ruby-identifier">__method__</span>, <span class="ruby-identifier">wc_re</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block_given?</span>
 
   <span class="ruby-identifier">wc_re</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">wc_re</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">wc_re</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Regexp</span>)
 
@@ -585,7 +550,7 @@
 
           
           <div class="method-source-code" id="genders-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 101</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 97</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">genders</span>
   <span class="ruby-identifier">lexicals</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:gender</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -618,7 +583,7 @@
 
           
           <div class="method-source-code" id="identify-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 105</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 101</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">identify</span>(<span class="ruby-identifier">lex</span>, <span class="ruby-identifier">wc</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">seq</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">empty?</span>
 
@@ -657,7 +622,7 @@
 
           
           <div class="method-source-code" id="lex_form-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 126</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 122</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">lex_form</span>(<span class="ruby-identifier">wc_re</span> = <span class="ruby-regexp">//</span>)
   <span class="ruby-identifier">each_lex</span>(<span class="ruby-identifier">wc_re</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">lex</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">break</span> <span class="ruby-identifier">block_given?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">lex</span>.<span class="ruby-identifier">form</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">form</span> }
@@ -691,7 +656,7 @@
 
           
           <div class="method-source-code" id="position_and_offset-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 131</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 127</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">position_and_offset</span>
   <span class="ruby-identifier">token</span>.<span class="ruby-identifier">position_and_offset</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">token</span>
 <span class="ruby-keyword">end</span></pre>
@@ -724,7 +689,7 @@
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 145</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word.rb, line 141</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-identifier">s</span> =  <span class="ruby-node">&quot;&lt;#{form}&quot;</span>
   <span class="ruby-identifier">s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;|#{attr}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">identified?</span>
@@ -749,7 +714,7 @@
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

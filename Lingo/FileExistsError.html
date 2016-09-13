@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::LibraryLoadError - lingo Application documentation (v1.9.0)</title>
+<title>class Lingo::FileExistsError - lingo Application documentation (v1.9.0)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
@@ -58,7 +58,7 @@
   <h3>Parent</h3>
 
   
-  <p class="link"><a href="LingoError.html">Lingo::LingoError</a>
+  <p class="link"><a href="FileError.html">Lingo::FileError</a>
   
 </div>
 
@@ -70,8 +70,6 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-c-new">::new</a>
-    
     <li ><a href="#method-i-to_s">#to_s</a>
     
   </ul>
@@ -80,9 +78,9 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-Lingo::LibraryLoadError">
-  <h1 id="class-Lingo::LibraryLoadError" class="class">
-    class Lingo::LibraryLoadError
+<main role="main" aria-labelledby="class-Lingo::FileExistsError">
+  <h1 id="class-Lingo::FileExistsError" class="class">
+    class Lingo::FileExistsError
   </h1>
 
   <section class="description">
@@ -100,96 +98,8 @@
     
 
     
-    <section class="attribute-method-details" class="method-section">
-      <header>
-        <h3>Attributes</h3>
-      </header>
-
-      
-      <div id="attribute-i-err" class="method-detail">
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">err</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
-
-        <div class="method-description">
-        
-        
-        
-        </div>
-      </div>
-      
-      <div id="attribute-i-klass" class="method-detail">
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">klass</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
-
-        <div class="method-description">
-        
-        
-        
-        </div>
-      </div>
-      
-      <div id="attribute-i-lib" class="method-detail">
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">lib</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
-
-        <div class="method-description">
-        
-        
-        
-        </div>
-      </div>
-      
-    </section>
-    
 
     
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
-       <header>
-         <h3>Public Class Methods</h3>
-       </header>
-
-    
-      <div id="method-c-new" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">new</span><span
-            class="method-args">(klass, lib, err)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/lingo/error.rb, line 208</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">klass</span>, <span class="ruby-identifier">lib</span>, <span class="ruby-identifier">err</span>)
-  <span class="ruby-ivar">@klass</span>, <span class="ruby-ivar">@lib</span>, <span class="ruby-ivar">@err</span> = <span class="ruby-identifier">klass</span>, <span class="ruby-identifier">lib</span>, <span class="ruby-identifier">err</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-    </section>
-  
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Instance Methods</h3>
@@ -215,9 +125,9 @@
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/lingo/error.rb, line 212</span>
+            <pre><span class="ruby-comment"># File lib/lingo/error.rb, line 184</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
-  <span class="ruby-identifier">error</span>(<span class="ruby-node">&quot;#{class_name}: An error occured while trying to load `#{lib}&#39;&quot;</span>)
+  <span class="ruby-node">&quot;File `#{name}&#39; already exists.&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

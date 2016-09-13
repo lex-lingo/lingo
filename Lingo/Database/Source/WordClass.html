@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::Database::Source::WordClass - lingo Application documentation (v1.8.7)</title>
+<title>class Lingo::Database::Source::WordClass - lingo Application documentation (v1.9.0)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../../";
@@ -62,7 +62,18 @@
   
 </div>
 
-    
+    <div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><a class="include" href="../../ArrayUtils.html">Lingo::ArrayUtils</a>
+  
+  
+  </ul>
+</div>
+
     
     <!-- Method Quickref -->
 <div id="method-list-section" class="nav-section">
@@ -72,7 +83,11 @@
     
     <li class="calls-super" ><a href="#method-c-new">::new</a>
     
-    <li ><a href="#method-i-convert_line">#convert_line</a>
+    <li ><a href="#method-i-dump_line">#dump_line</a>
+    
+    <li ><a href="#method-i-dump_values">#dump_values</a>
+    
+    <li ><a href="#method-i-parse_line">#parse_line</a>
     
   </ul>
 </div>
@@ -114,6 +129,21 @@
         <dd>
         
       
+        <dt id="SCAN_RE">SCAN_RE
+        
+        <dd>
+        
+      
+        <dt id="VALUE_SEPARATOR">VALUE_SEPARATOR
+        
+        <dd>
+        
+      
+        <dt id="WC_SEPARATOR">WC_SEPARATOR
+        
+        <dd>
+        
+      
       </dl>
     </section>
     
@@ -131,7 +161,7 @@
         
         <div class="method-heading">
           <span class="method-name">new</span><span
-            class="method-args">(id, lingo)</span>
+            class="method-args">(*)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -151,15 +181,16 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/source/word_class.rb, line 44</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">lingo</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/database/source/word_class.rb, line 52</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-operator">*</span>)
   <span class="ruby-keyword">super</span>
 
   <span class="ruby-identifier">gen</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">escape</span>(<span class="ruby-constant">GENDER_SEPARATOR</span>)
-  <span class="ruby-identifier">sep</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">escape</span>(<span class="ruby-ivar">@sep</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">DEFAULT_SEPARATOR</span>)
+  <span class="ruby-identifier">val</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">escape</span>(<span class="ruby-constant">VALUE_SEPARATOR</span>)
+  <span class="ruby-identifier">sep</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">escape</span>(<span class="ruby-ivar">@sep</span>)
 
-  <span class="ruby-identifier">w</span>, <span class="ruby-identifier">a</span> = <span class="ruby-string">&#39;\w%1$s(?:\|\w%1$s)*&#39;</span>, <span class="ruby-string">&#39;[+]?&#39;</span>
-  <span class="ruby-identifier">wc</span>   = <span class="ruby-node">&quot;##{w % a}(?:#{gen}#{w % &#39;&#39;})?&quot;</span>
+  <span class="ruby-identifier">w</span>, <span class="ruby-identifier">a</span> = <span class="ruby-node">&quot;\\w%1$s(?:#{val}\\w%1$s)*&quot;</span>, <span class="ruby-string">&#39;[+]?&#39;</span>
+  <span class="ruby-identifier">wc</span>   = <span class="ruby-node">&quot;#{WC_SEPARATOR}#{w % a}(?:#{gen}#{w % &#39;&#39;})?&quot;</span>
 
   <span class="ruby-ivar">@pat</span> = <span class="ruby-node">/^(#{@wrd})#{sep}((?:#{@wrd}#{wc})+)$/</span>
 <span class="ruby-keyword">end</span></pre>
@@ -175,16 +206,95 @@
     
     </section>
   
-     <section id="private-instance-5Buntitled-5D-method-details" class="method-section">
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
-         <h3>Private Instance Methods</h3>
+         <h3>Public Instance Methods</h3>
        </header>
 
     
-      <div id="method-i-convert_line" class="method-detail ">
+      <div id="method-i-dump_line" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">convert_line</span><span
+          <span class="method-name">dump_line</span><span
+            class="method-args">(key, val, key_sep = nil, val_sep = nil, compact = true, *)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="dump_line-source">
+            <pre><span class="ruby-comment"># File lib/lingo/database/source/word_class.rb, line 80</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">dump_line</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>, <span class="ruby-identifier">key_sep</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">val_sep</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">compact</span> = <span class="ruby-keyword">true</span>, <span class="ruby-operator">*</span>)
+  <span class="ruby-node">&quot;#{key}#{key_sep || @sep}#{dump_values(val, compact).join(val_sep || &#39; &#39;)}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-dump_values" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">dump_values</span><span
+            class="method-args">(val, compact = true)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="dump_values-source">
+            <pre><span class="ruby-comment"># File lib/lingo/database/source/word_class.rb, line 84</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">dump_values</span>(<span class="ruby-identifier">val</span>, <span class="ruby-identifier">compact</span> = <span class="ruby-keyword">true</span>)
+  <span class="ruby-identifier">join</span> = <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">v</span>.<span class="ruby-identifier">compact!</span>; <span class="ruby-identifier">v</span>.<span class="ruby-identifier">uniq!</span>; <span class="ruby-identifier">v</span>.<span class="ruby-identifier">sort!</span>; <span class="ruby-identifier">v</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">VALUE_SEPARATOR</span>) }
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">compact</span>
+    <span class="ruby-identifier">values</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span>, <span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>[<span class="ruby-identifier">k</span>] = [[], []] }; <span class="ruby-identifier">val</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">lex</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">a</span>, <span class="ruby-identifier">g</span> = <span class="ruby-identifier">values</span>[<span class="ruby-identifier">lex</span>.<span class="ruby-identifier">form</span>]; <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">attr</span>; <span class="ruby-identifier">g</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">gender</span> }
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">values</span> = <span class="ruby-identifier">val</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">lex</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">lex</span>.<span class="ruby-identifier">form</span>, [[<span class="ruby-identifier">lex</span>.<span class="ruby-identifier">attr</span>], [<span class="ruby-identifier">lex</span>.<span class="ruby-identifier">gender</span>]]] }
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">values</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">form</span>, (<span class="ruby-identifier">attrs</span>, <span class="ruby-identifier">genders</span>)<span class="ruby-operator">|</span>
+    <span class="ruby-identifier">res</span> = <span class="ruby-node">&quot;#{form} #{WC_SEPARATOR}#{join[attrs]}&quot;</span>
+    <span class="ruby-identifier">genders</span>.<span class="ruby-identifier">any?</span> <span class="ruby-operator">?</span> <span class="ruby-node">&quot;#{res}#{GENDER_SEPARATOR}#{join[genders]}&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">res</span>
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-parse_line" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">parse_line</span><span
             class="method-args">(line, key, val)</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -199,16 +309,17 @@
           
 
           
-          <div class="method-source-code" id="convert_line-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/source/word_class.rb, line 58</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">convert_line</span>(<span class="ruby-identifier">line</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
+          <div class="method-source-code" id="parse_line-source">
+            <pre><span class="ruby-comment"># File lib/lingo/database/source/word_class.rb, line 65</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">parse_line</span>(<span class="ruby-identifier">line</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
   <span class="ruby-identifier">values</span> = []
 
-  <span class="ruby-identifier">val</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-node">/(\S.*?)\s*#(\S+)/</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">v</span>, <span class="ruby-identifier">f</span> = <span class="ruby-identifier">v</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;.&#39;</span>)
+  <span class="ruby-identifier">val</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-constant">SCAN_RE</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">v</span>, <span class="ruby-identifier">f</span> = <span class="ruby-identifier">v</span>.<span class="ruby-identifier">split</span>(<span class="ruby-constant">GENDER_SEPARATOR</span>)
+    <span class="ruby-identifier">f</span> = <span class="ruby-identifier">f</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">split</span>(<span class="ruby-constant">VALUE_SEPARATOR</span>) <span class="ruby-operator">:</span> [<span class="ruby-keyword">nil</span>]
 
-    <span class="ruby-identifier">v</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;|&#39;</span>).<span class="ruby-identifier">product</span>(<span class="ruby-identifier">f</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;|&#39;</span>) <span class="ruby-operator">:</span> [<span class="ruby-keyword">nil</span>]) { <span class="ruby-operator">|</span><span class="ruby-identifier">w</span>, <span class="ruby-identifier">g</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">values</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{k}##{w}##{g}&quot;</span>
+    <span class="ruby-identifier">combinations</span>(<span class="ruby-identifier">v</span>.<span class="ruby-identifier">split</span>(<span class="ruby-constant">VALUE_SEPARATOR</span>), <span class="ruby-identifier">f</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">w</span>, <span class="ruby-identifier">g</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">values</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">lexical</span>(<span class="ruby-identifier">k</span>, <span class="ruby-identifier">w</span>, <span class="ruby-identifier">g</span>)
     }
   }
 
@@ -232,7 +343,7 @@
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 
