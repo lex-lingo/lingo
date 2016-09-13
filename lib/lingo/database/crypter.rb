@@ -35,6 +35,8 @@ class Lingo
 
       extend self
 
+      KEYLEN = 16
+
       CIPHER = 'AES-128-CBC'.freeze
 
       def digest(key)
@@ -53,7 +55,7 @@ class Lingo
 
       def crypt(method, key, val, digest)
         cipher = OpenSSL::Cipher.new(CIPHER).send(method)
-        cipher.iv = cipher.key = digest
+        cipher.iv = cipher.key = digest[0, KEYLEN]
         cipher.update(val) + cipher.final
       end
 
