@@ -6,12 +6,21 @@
 
 * <b>Dropped support for Ruby 1.9.</b>
 * Removed support for deprecated options and attendee names (+old+ → +new+):
-  * Lingo::Language::Grammar : +compositum+ → +compound+
-  * Lingo::Attendee::TextReader : +lir-record-pattern+ → +records+
-  * Lingo::Config : +multiworder+ → +multi_worder+, +objectfilter+ →
-    +object_filter+, +textreader+ → +text_reader+, +textwriter+ →
-    +text_writer+, +vectorfilter+ → +vector_filter+, +wordsearcher+ →
-    +word_searcher+
+  * Lingo::Language::Grammar<b></b>:
+    +compositum+ → +compound+
+  * Lingo::Attendee::TextReader<b></b>:
+    +lir-record-pattern+ → +records+
+  * Lingo::Config<b></b>:
+    +multiworder+ → +multi_worder+,
+    +objectfilter+ → +object_filter+,
+    +textreader+ → +text_reader+,
+    +textwriter+ → +text_writer+,
+    +vectorfilter+ → +vector_filter+,
+    +wordsearcher+ → +word_searcher+
+* Lingo::Attendee::TextWriter learned format directives for +ext+ option
+  (currently supported are: <tt>%c</tt> = config name, <tt>%l</tt> = language
+  name, <tt>%d</tt> = current date, <tt>%t</tt> = current time).
+* Lingo::Attendee::Sequencer remembers word form of sequences.
 * Updated and extended English system dictionary and suffix list.
 * Fixed errors with XML input (issue #15 by Thomas Berger).
 
