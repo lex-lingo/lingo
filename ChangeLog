@@ -12,6 +12,7 @@
     +object_filter+, +textreader+ → +text_reader+, +textwriter+ →
     +text_writer+, +vectorfilter+ → +vector_filter+, +wordsearcher+ →
     +word_searcher+
+* Updated and extended English system dictionary and suffix list.
 * Fixed errors with XML input (issue #15 by Thomas Berger).
 
 == 1.8.7 [2015-08-07]
