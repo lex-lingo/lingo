@@ -34,7 +34,7 @@ matrix:
     true
 
 script:
-  rake test:all
+  rake test:all LINGO_DISABLE_SLOW_TESTS=1
 
 install:
   - gem install nuggets power_assert
