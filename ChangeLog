@@ -2,7 +2,7 @@
 
 = Revision history for Lingo
 
-== 1.9.0 [unreleased]
+== 1.9.0 [2016-09-13]
 
 * <b>Dropped support for Ruby 1.9.</b>
 * Removed support for deprecated options and attendee names (+old+ → +new+):

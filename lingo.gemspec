@@ -1,63 +1,69 @@
 # -*- encoding: utf-8 -*-
-# stub: lingo 1.8.7 ruby lib
+# stub: lingo 1.9.0 ruby lib
 
 Gem::Specification.new do |s|
-  s.name = "lingo"
-  s.version = "1.8.7"
+  s.name = "lingo".freeze
+  s.version = "1.9.0"
 
-  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.require_paths = ["lib"]
-  s.authors = ["John Vorhauer", "Jens Wille"]
-  s.date = "2015-08-07"
-  s.description = "Lingo is an open source indexing system for research and teachings.\nThe main functions of Lingo are:\n\n* identification of (i.e. reduction to) basic word form by means of\n  dictionaries and suffix lists\n* algorithmic decomposition\n* dictionary-based synonymisation and identification of phrases\n* generic identification of phrases/word sequences based on patterns\n  of word classes\n"
-  s.email = ["lingo@vorhauer.de", "jens.wille@gmail.com"]
-  s.executables = ["lingo", "lingoctl", "lingosrv", "lingoweb"]
-  s.extra_rdoc_files = ["README", "COPYING", "ChangeLog"]
-  s.files = ["COPYING", "ChangeLog", "README", "Rakefile", "bin/lingo", "bin/lingoctl", "bin/lingosrv", "bin/lingoweb", "config/lingo-call.cfg", "config/lingo.cfg", "config/lir.cfg", "dict/de/lingo-abk.txt", "dict/de/lingo-dic.txt", "dict/de/lingo-mul.txt", "dict/de/lingo-syn.txt", "dict/de/test_dic.txt", "dict/de/test_gen.txt", "dict/de/test_mu2.txt", "dict/de/test_muh.txt", "dict/de/test_mul.txt", "dict/de/test_sgw.txt", "dict/de/test_syn.txt", "dict/de/user-dic.txt", "dict/en/lingo-dic.txt", "dict/en/lingo-irr.txt", "dict/en/lingo-mul.txt", "dict/en/lingo-syn.txt", "dict/en/lingo-wdn.txt", "dict/en/user-dic.txt", "dict/ru/lingo-dic.txt", "dict/ru/lingo-mul.txt", "dict/ru/lingo-syn.txt", "dict/ru/user-dic.txt", "lang/de.lang", "lang/en.lang", "lang/ru.lang", "lib/lingo.rb", "lib/lingo/app.rb", "lib/lingo/attendee.rb", "lib/lingo/attendee/abbreviator.rb", "lib/lingo/attendee/analysis_filter.rb", "lib/lingo/attendee/debug_filter.rb", "lib/lingo/attendee/debugger.rb", "lib/lingo/attendee/decomposer.rb", "lib/lingo/attendee/formatter.rb", "lib/lingo/attendee/hal_filter.rb", "lib/lingo/attendee/lsi_filter.rb", "lib/lingo/attendee/multi_worder.rb", "lib/lingo/attendee/object_filter.rb", "lib/lingo/attendee/sequencer.rb", "lib/lingo/attendee/stemmer.rb", "lib/lingo/attendee/stemmer/porter.rb", "lib/lingo/attendee/synonymer.rb", "lib/lingo/attendee/text_reader.rb", "lib/lingo/attendee/text_writer.rb", "lib/lingo/attendee/tokenizer.rb", "lib/lingo/attendee/variator.rb", "lib/lingo/attendee/vector_filter.rb", "lib/lingo/attendee/word_searcher.rb", "lib/lingo/buffered_attendee.rb", "lib/lingo/call.rb", "lib/lingo/cli.rb", "lib/lingo/config.rb", "lib/lingo/ctl.rb", "lib/lingo/ctl/analysis.rb", "lib/lingo/ctl/files.rb", "lib/lingo/ctl/other.rb", "lib/lingo/database.rb", "lib/lingo/database/crypter.rb", "lib/lingo/database/gdbm_store.rb", "lib/lingo/database/hash_store.rb", "lib/lingo/database/libcdb_store.rb", "lib/lingo/database/progress.rb", "lib/lingo/database/sdbm_store.rb", "lib/lingo/database/source.rb", "lib/lingo/database/source/key_value.rb", "lib/lingo/database/source/multi_key.rb", "lib/lingo/database/source/multi_value.rb", "lib/lingo/database/source/single_word.rb", "lib/lingo/database/source/word_class.rb", "lib/lingo/debug.rb", "lib/lingo/deferred_attendee.rb", "lib/lingo/error.rb", "lib/lingo/language.rb", "lib/lingo/language/char.rb", "lib/lingo/language/dictionary.rb", "lib/lingo/language/grammar.rb", "lib/lingo/language/lexical.rb", "lib/lingo/language/lexical_hash.rb", "lib/lingo/language/token.rb", "lib/lingo/language/word.rb", "lib/lingo/language/word_form.rb", "lib/lingo/progress.rb", "lib/lingo/srv.rb", "lib/lingo/srv/config.ru", "lib/lingo/srv/lingosrv.cfg", "lib/lingo/srv/public/.gitkeep", "lib/lingo/text_utils.rb", "lib/lingo/version.rb", "lib/lingo/web.rb", "lib/lingo/web/config.ru", "lib/lingo/web/lingoweb.cfg", "lib/lingo/web/public/lingo.png", "lib/lingo/web/public/lingoweb.css", "lib/lingo/web/views/index.erb", "test/attendee/ts_abbreviator.rb", "test/attendee/ts_decomposer.rb", "test/attendee/ts_multi_worder.rb", "test/attendee/ts_object_filter.rb", "test/attendee/ts_sequencer.rb", "test/attendee/ts_stemmer.rb", "test/attendee/ts_synonymer.rb", "test/attendee/ts_text_reader.rb", "test/attendee/ts_text_writer.rb", "test/attendee/ts_tokenizer.rb", "test/attendee/ts_variator.rb", "test/attendee/ts_vector_filter.rb", "test/attendee/ts_word_searcher.rb", "test/lir.txt", "test/lir.vec", "test/lir2.txt", "test/lir3.txt", "test/mul.txt", "test/ref/artikel.mul", "test/ref/artikel.non", "test/ref/artikel.seq", "test/ref/artikel.syn", "test/ref/artikel.vec", "test/ref/artikel.vef", "test/ref/artikel.ven", "test/ref/artikel.ver", "test/ref/artikel.vet", "test/ref/lir.mul", "test/ref/lir.non", "test/ref/lir.seq", "test/ref/lir.syn", "test/ref/lir.vec", "test/ref/lir.vef", "test/ref/lir.ven", "test/ref/lir.ver", "test/ref/lir.vet", "test/test_helper.rb", "test/ts_database.rb", "test/ts_language.rb", "txt/artikel-en.txt", "txt/artikel-ru.txt", "txt/artikel.txt", "txt/lir.txt"]
-  s.homepage = "http://lex-lingo.de"
-  s.licenses = ["AGPL-3.0"]
-  s.post_install_message = "\nlingo-1.8.7 [2015-08-07]:\n\n* Added Lingo::Attendee::LsiFilter to correlate semantically related terms\n  (LSI[https://en.wikipedia.org/wiki/Latent_semantic_indexing]) over the\n  \"corpus\" of all files processed during a single program invocation; requires\n  lsi4r[https://blackwinter.github.com/lsi4r] which in turn requires\n  rb-gsl[https://blackwinter.github.com/rb-gsl]. [EXPERIMENTAL: Interface may\n  be changed or removed in next release.]\n* Added Lingo::Attendee::HalFilter to correlate semantically related terms\n  (HAL[https://en.wikipedia.org/wiki/Hyperspace_Analogue_to_Language]) over\n  individual documents; requires hal4r[https://blackwinter.github.com/hal4r]\n  which in turn requires rb-gsl[https://blackwinter.github.com/rb-gsl].\n  [EXPERIMENTAL: Interface may be changed or removed in next release.]\n* Added Lingo::Attendee::AnalysisFilter and associated +lingoctl+ tooling.\n* Multiword dictionaries can now identify hyphenated variants (e.g.\n  <tt>automatic data-processing</tt>); set <tt>hyphenate: true</tt> in the\n  dictionary config.\n* Lingo::Attendee::Tokenizer no longer considers hyphens at word edges as part\n  of the word. As a consequence, Lingo::Attendee::Dehyphenizer has been\n  dropped.\n* Dropped Lingo::Attendee::NonewordFilter; use Lingo::Attendee::VectorFilter\n  with option <tt>lexicals: '\\?'</tt> instead.\n* Lingo::Attendee::TextReader and Lingo::Attendee::TextWriter learned\n  +encoding+ option to read/write text that is not UTF-8 encoded;\n  configuration files and dictionaries still need to be UTF-8, though.\n* Lingo::Attendee::TextReader and Lingo::Attendee::TextWriter learned to\n  read/write Gzip-compressed files (file extension +.gz+ or +.gzip+).\n* Lingo::Attendee::Sequencer learned to recognize +0+ in the pattern to match\n  number tokens.\n* Fixed Lingo::Attendee::TextReader to recognize BOM in input files; does not\n  apply to input read from +STDIN+.\n* Fixed regression introduced in 1.8.6 where Lingo::Attendee::Debugger would\n  no longer work immediately behind Lingo::Attendee::TextReader.\n* Fixed +lingoctl+ copy commands when overwriting existing files.\n* Refactored Lingo::Database::Crypter into a module.\n* JRuby 9000 compatibility.\n\n"
-  s.rdoc_options = ["--title", "lingo Application documentation (v1.8.7)", "--charset", "UTF-8", "--line-numbers", "--all", "--main", "README"]
-  s.required_ruby_version = Gem::Requirement.new(">= 1.9.3")
-  s.rubygems_version = "2.4.8"
-  s.summary = "The full-featured automatic indexing system"
+  s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
+  s.require_paths = ["lib".freeze]
+  s.authors = ["John Vorhauer".freeze, "Jens Wille".freeze]
+  s.date = "2016-09-13"
+  s.description = "Lingo is an open source indexing system for research and teachings.\nThe main functions of Lingo are:\n\n* identification of (i.e. reduction to) basic word form by means of\n  dictionaries and suffix lists\n* algorithmic decomposition\n* dictionary-based synonymisation and identification of phrases\n* generic identification of phrases/word sequences based on patterns\n  of word classes\n".freeze
+  s.email = ["lingo@vorhauer.de".freeze, "jens.wille@gmail.com".freeze]
+  s.executables = ["lingo".freeze, "lingoctl".freeze, "lingosrv".freeze, "lingoweb".freeze]
+  s.extra_rdoc_files = ["README".freeze, "COPYING".freeze, "ChangeLog".freeze]
+  s.files = ["COPYING".freeze, "ChangeLog".freeze, "README".freeze, "Rakefile".freeze, "bin/lingo".freeze, "bin/lingoctl".freeze, "bin/lingosrv".freeze, "bin/lingoweb".freeze, "config/lingo-call.cfg".freeze, "config/lingo.cfg".freeze, "config/lir.cfg".freeze, "dict/de/lingo-abk.txt".freeze, "dict/de/lingo-dic.txt".freeze, "dict/de/lingo-mul.txt".freeze, "dict/de/lingo-syn.txt".freeze, "dict/de/test_dic.txt".freeze, "dict/de/test_gen.txt".freeze, "dict/de/test_mu2.txt".freeze, "dict/de/test_muh.txt".freeze, "dict/de/test_mul.txt".freeze, "dict/de/test_sgw.txt".freeze, "dict/de/test_syn.txt".freeze, "dict/de/user-dic.txt".freeze, "dict/en/lingo-dic.txt".freeze, "dict/en/lingo-irr.txt".freeze, "dict/en/lingo-mul.txt".freeze, "dict/en/lingo-syn.txt".freeze, "dict/en/lingo-wdn.txt".freeze, "dict/en/user-dic.txt".freeze, "dict/ru/lingo-dic.txt".freeze, "dict/ru/lingo-mul.txt".freeze, "dict/ru/lingo-syn.txt".freeze, "dict/ru/user-dic.txt".freeze, "lang/de.lang".freeze, "lang/en.lang".freeze, "lang/ru.lang".freeze, "lib/lingo.rb".freeze, "lib/lingo/app.rb".freeze, "lib/lingo/array_utils.rb".freeze, "lib/lingo/attendee.rb".freeze, "lib/lingo/attendee/abbreviator.rb".freeze, "lib/lingo/attendee/analysis_filter.rb".freeze, "lib/lingo/attendee/debug_filter.rb".freeze, "lib/lingo/attendee/debugger.rb".freeze, "lib/lingo/attendee/decomposer.rb".freeze, "lib/lingo/attendee/formatter.rb".freeze, "lib/lingo/attendee/hal_filter.rb".freeze, "lib/lingo/attendee/lsi_filter.rb".freeze, "lib/lingo/attendee/multi_worder.rb".freeze, "lib/lingo/attendee/object_filter.rb".freeze, "lib/lingo/attendee/sequencer.rb".freeze, "lib/lingo/attendee/stemmer.rb".freeze, "lib/lingo/attendee/stemmer/porter.rb".freeze, "lib/lingo/attendee/synonymer.rb".freeze, "lib/lingo/attendee/text_reader.rb".freeze, "lib/lingo/attendee/text_writer.rb".freeze, "lib/lingo/attendee/tokenizer.rb".freeze, "lib/lingo/attendee/variator.rb".freeze, "lib/lingo/attendee/vector_filter.rb".freeze, "lib/lingo/attendee/word_searcher.rb".freeze, "lib/lingo/buffered_attendee.rb".freeze, "lib/lingo/call.rb".freeze, "lib/lingo/cli.rb".freeze, "lib/lingo/config.rb".freeze, "lib/lingo/ctl.rb".freeze, "lib/lingo/ctl/analysis.rb".freeze, "lib/lingo/ctl/files.rb".freeze, "lib/lingo/ctl/other.rb".freeze, "lib/lingo/database.rb".freeze, "lib/lingo/database/crypter.rb".freeze, "lib/lingo/database/gdbm_store.rb".freeze, "lib/lingo/database/hash_store.rb".freeze, "lib/lingo/database/libcdb_store.rb".freeze, "lib/lingo/database/progress.rb".freeze, "lib/lingo/database/sdbm_store.rb".freeze, "lib/lingo/database/source.rb".freeze, "lib/lingo/database/source/key_value.rb".freeze, "lib/lingo/database/source/multi_key.rb".freeze, "lib/lingo/database/source/multi_value.rb".freeze, "lib/lingo/database/source/single_word.rb".freeze, "lib/lingo/database/source/word_class.rb".freeze, "lib/lingo/debug.rb".freeze, "lib/lingo/deferred_attendee.rb".freeze, "lib/lingo/error.rb".freeze, "lib/lingo/filter.rb".freeze, "lib/lingo/filter/pdf.rb".freeze, "lib/lingo/filter/xml.rb".freeze, "lib/lingo/language.rb".freeze, "lib/lingo/language/char.rb".freeze, "lib/lingo/language/dictionary.rb".freeze, "lib/lingo/language/grammar.rb".freeze, "lib/lingo/language/lexical.rb".freeze, "lib/lingo/language/lexical_hash.rb".freeze, "lib/lingo/language/token.rb".freeze, "lib/lingo/language/word.rb".freeze, "lib/lingo/language/word_form.rb".freeze, "lib/lingo/progress.rb".freeze, "lib/lingo/srv.rb".freeze, "lib/lingo/srv/config.ru".freeze, "lib/lingo/srv/lingosrv.cfg".freeze, "lib/lingo/srv/public/.gitkeep".freeze, "lib/lingo/text_utils.rb".freeze, "lib/lingo/version.rb".freeze, "lib/lingo/web.rb".freeze, "lib/lingo/web/config.ru".freeze, "lib/lingo/web/lingoweb.cfg".freeze, "lib/lingo/web/public/lingo.png".freeze, "lib/lingo/web/public/lingoweb.css".freeze, "lib/lingo/web/views/index.erb".freeze, "test/article.html".freeze, "test/article.pdf".freeze, "test/article.txt".freeze, "test/article.xml".freeze, "test/attendee/ts_abbreviator.rb".freeze, "test/attendee/ts_decomposer.rb".freeze, "test/attendee/ts_multi_worder.rb".freeze, "test/attendee/ts_object_filter.rb".freeze, "test/attendee/ts_sequencer.rb".freeze, "test/attendee/ts_stemmer.rb".freeze, "test/attendee/ts_synonymer.rb".freeze, "test/attendee/ts_text_reader.rb".freeze, "test/attendee/ts_text_writer.rb".freeze, "test/attendee/ts_tokenizer.rb".freeze, "test/attendee/ts_variator.rb".freeze, "test/attendee/ts_vector_filter.rb".freeze, "test/attendee/ts_word_searcher.rb".freeze, "test/lir.txt".freeze, "test/lir.vec".freeze, "test/lir2.txt".freeze, "test/lir3.txt".freeze, "test/mul.txt".freeze, "test/ref/artikel.mul".freeze, "test/ref/artikel.non".freeze, "test/ref/artikel.seq".freeze, "test/ref/artikel.syn".freeze, "test/ref/artikel.vec".freeze, "test/ref/artikel.vef".freeze, "test/ref/artikel.ven".freeze, "test/ref/artikel.ver".freeze, "test/ref/artikel.vet".freeze, "test/ref/lir.mul".freeze, "test/ref/lir.non".freeze, "test/ref/lir.seq".freeze, "test/ref/lir.syn".freeze, "test/ref/lir.vec".freeze, "test/ref/lir.vef".freeze, "test/ref/lir.ven".freeze, "test/ref/lir.ver".freeze, "test/ref/lir.vet".freeze, "test/test_helper.rb".freeze, "test/ts_database.rb".freeze, "test/ts_language.rb".freeze, "txt/artikel-en.txt".freeze, "txt/artikel-ru.txt".freeze, "txt/artikel.txt".freeze, "txt/lir.txt".freeze]
+  s.homepage = "http://lex-lingo.de".freeze
+  s.licenses = ["AGPL-3.0".freeze]
+  s.post_install_message = "\nlingo-1.9.0 [2016-09-13]:\n\n* <b>Dropped support for Ruby 1.9.</b>\n* Removed support for deprecated options and attendee names (+old+ \u{2192} +new+):\n  * Lingo::Language::Grammar<b></b>:\n    +compositum+ \u{2192} +compound+\n  * Lingo::Attendee::TextReader<b></b>:\n    +lir-record-pattern+ \u{2192} +records+\n  * Lingo::Config<b></b>:\n    +multiworder+ \u{2192} +multi_worder+,\n    +objectfilter+ \u{2192} +object_filter+,\n    +textreader+ \u{2192} +text_reader+,\n    +textwriter+ \u{2192} +text_writer+,\n    +vectorfilter+ \u{2192} +vector_filter+,\n    +wordsearcher+ \u{2192} +word_searcher+\n* Lingo::Attendee::TextWriter learned format directives for +ext+ option\n  (currently supported are: <tt>%c</tt> = config name, <tt>%l</tt> = language\n  name, <tt>%d</tt> = current date, <tt>%t</tt> = current time).\n* Lingo::Attendee::Sequencer remembers word form of sequences.\n* Updated and extended English system dictionary and suffix list.\n* Fixed errors with XML input (issue #15 by Thomas Berger).\n\n".freeze
+  s.rdoc_options = ["--title".freeze, "lingo Application documentation (v1.9.0)".freeze, "--charset".freeze, "UTF-8".freeze, "--line-numbers".freeze, "--all".freeze, "--main".freeze, "README".freeze]
+  s.required_ruby_version = Gem::Requirement.new(">= 2.0".freeze)
+  s.rubygems_version = "2.6.6".freeze
+  s.summary = "The full-featured automatic indexing system".freeze
 
   if s.respond_to? :specification_version then
     s.specification_version = 4
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<cyclops>, ["~> 0.1"])
-      s.add_runtime_dependency(%q<nuggets>, ["~> 1.3"])
-      s.add_runtime_dependency(%q<rubyzip>, ["~> 1.1"])
-      s.add_runtime_dependency(%q<sinatra-bells>, ["~> 0.0"])
-      s.add_runtime_dependency(%q<unicode>, ["~> 0.4"])
-      s.add_development_dependency(%q<diff-lcs>, ["~> 1.2"])
-      s.add_development_dependency(%q<open4>, ["~> 1.3"])
-      s.add_development_dependency(%q<hen>, [">= 0.8.2", "~> 0.8"])
-      s.add_development_dependency(%q<rake>, [">= 0"])
-      s.add_development_dependency(%q<test-unit>, [">= 0"])
+      s.add_runtime_dependency(%q<cyclops>.freeze, ["~> 0.2"])
+      s.add_runtime_dependency(%q<nuggets>.freeze, ["~> 1.5"])
+      s.add_runtime_dependency(%q<rubyzip>.freeze, ["~> 1.2"])
+      s.add_runtime_dependency(%q<sinatra-bells>.freeze, ["~> 0.4"])
+      s.add_runtime_dependency(%q<unicode>.freeze, ["~> 0.4"])
+      s.add_development_dependency(%q<diff-lcs>.freeze, ["~> 1.2"])
+      s.add_development_dependency(%q<nokogiri>.freeze, ["~> 1.6"])
+      s.add_development_dependency(%q<open4>.freeze, ["~> 1.3"])
+      s.add_development_dependency(%q<pdf-reader>.freeze, ["~> 1.4"])
+      s.add_development_dependency(%q<hen>.freeze, [">= 0.8.5", "~> 0.8"])
+      s.add_development_dependency(%q<rake>.freeze, [">= 0"])
+      s.add_development_dependency(%q<test-unit>.freeze, [">= 0"])
     else
-      s.add_dependency(%q<cyclops>, ["~> 0.1"])
-      s.add_dependency(%q<nuggets>, ["~> 1.3"])
-      s.add_dependency(%q<rubyzip>, ["~> 1.1"])
-      s.add_dependency(%q<sinatra-bells>, ["~> 0.0"])
-      s.add_dependency(%q<unicode>, ["~> 0.4"])
-      s.add_dependency(%q<diff-lcs>, ["~> 1.2"])
-      s.add_dependency(%q<open4>, ["~> 1.3"])
-      s.add_dependency(%q<hen>, [">= 0.8.2", "~> 0.8"])
-      s.add_dependency(%q<rake>, [">= 0"])
-      s.add_dependency(%q<test-unit>, [">= 0"])
+      s.add_dependency(%q<cyclops>.freeze, ["~> 0.2"])
+      s.add_dependency(%q<nuggets>.freeze, ["~> 1.5"])
+      s.add_dependency(%q<rubyzip>.freeze, ["~> 1.2"])
+      s.add_dependency(%q<sinatra-bells>.freeze, ["~> 0.4"])
+      s.add_dependency(%q<unicode>.freeze, ["~> 0.4"])
+      s.add_dependency(%q<diff-lcs>.freeze, ["~> 1.2"])
+      s.add_dependency(%q<nokogiri>.freeze, ["~> 1.6"])
+      s.add_dependency(%q<open4>.freeze, ["~> 1.3"])
+      s.add_dependency(%q<pdf-reader>.freeze, ["~> 1.4"])
+      s.add_dependency(%q<hen>.freeze, [">= 0.8.5", "~> 0.8"])
+      s.add_dependency(%q<rake>.freeze, [">= 0"])
+      s.add_dependency(%q<test-unit>.freeze, [">= 0"])
     end
   else
-    s.add_dependency(%q<cyclops>, ["~> 0.1"])
-    s.add_dependency(%q<nuggets>, ["~> 1.3"])
-    s.add_dependency(%q<rubyzip>, ["~> 1.1"])
-    s.add_dependency(%q<sinatra-bells>, ["~> 0.0"])
-    s.add_dependency(%q<unicode>, ["~> 0.4"])
-    s.add_dependency(%q<diff-lcs>, ["~> 1.2"])
-    s.add_dependency(%q<open4>, ["~> 1.3"])
-    s.add_dependency(%q<hen>, [">= 0.8.2", "~> 0.8"])
-    s.add_dependency(%q<rake>, [">= 0"])
-    s.add_dependency(%q<test-unit>, [">= 0"])
+    s.add_dependency(%q<cyclops>.freeze, ["~> 0.2"])
+    s.add_dependency(%q<nuggets>.freeze, ["~> 1.5"])
+    s.add_dependency(%q<rubyzip>.freeze, ["~> 1.2"])
+    s.add_dependency(%q<sinatra-bells>.freeze, ["~> 0.4"])
+    s.add_dependency(%q<unicode>.freeze, ["~> 0.4"])
+    s.add_dependency(%q<diff-lcs>.freeze, ["~> 1.2"])
+    s.add_dependency(%q<nokogiri>.freeze, ["~> 1.6"])
+    s.add_dependency(%q<open4>.freeze, ["~> 1.3"])
+    s.add_dependency(%q<pdf-reader>.freeze, ["~> 1.4"])
+    s.add_dependency(%q<hen>.freeze, [">= 0.8.5", "~> 0.8"])
+    s.add_dependency(%q<rake>.freeze, [">= 0"])
+    s.add_dependency(%q<test-unit>.freeze, [">= 0"])
   end
 end

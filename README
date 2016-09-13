@@ -25,7 +25,7 @@
 * {Issues and Contributions}[rdoc-label:label-ISSUES+AND+CONTRIBUTIONS]
 * {Links}[rdoc-label:label-LINKS]
 * {Literature}[rdoc-label:label-LITERATURE]
-  * {Background and Theory}[rdoc-label:label-Background+and+Theory]
+  * {Background and theoretical works}[rdoc-label:label-Background+and+theoretical+works]
   * {Research publications}[rdoc-label:label-Research+publications]
 * {Credits}[rdoc-label:label-CREDITS]
   * {Authors}[rdoc-label:label-Authors]
@@ -34,7 +34,7 @@
 
 == VERSION
 
-This documentation refers to Lingo version 1.8.7
+This documentation refers to Lingo version 1.9.0
 
 
 == DESCRIPTION
@@ -343,14 +343,14 @@ with administrator privileges, depending on your environment. Then you can call
 the +lingo+ executable to process your text files. See <tt>lingo --help</tt>
 for available options.
 
-Please note that Lingo requires Ruby version 1.9.3 or higher to run
-(2.2.2[http://ruby-lang.org/en/downloads/] is the currently recommended
+Please note that Lingo requires Ruby version 2.0 or higher to run
+(2.3[http://ruby-lang.org/en/downloads/] is the currently recommended
 version).
 
 Since Lingo depends on native extensions, you need to make sure that
 development files for your Ruby version are installed. On Debian-based
-Linux platforms they are included in the package <tt>ruby-dev</tt>;
-other distributions may have a similarly named package. On Windows those
+Linux platforms, they are included in the package <tt>ruby-dev</tt>;
+other distributions may have a similarly named package. On Windows, those
 development files are currently not required.
 
 On JRuby, install gdbm[https://rubygems.org/gems/gdbm] for efficient database
@@ -509,7 +509,7 @@ Travis CI::     https://travis-ci.org/lex-lingo/lingo
 
 == LITERATURE
 
-=== Background and Theory
+=== Background and theoretical works
 
 * Gödert, W.; Lepsky, K.; Nagelschmidt, M.: <em>{Informationserschließung und Automatisches Indexieren: ein Lehr- und Arbeitsbuch}[http://dx.doi.org/10.1007/978-3-642-23513-9]</em>. (German) Berlin etc.: Springer, 2012.
 * Lepsky, K.; Vorhauer, J.: <em>{Lingo – ein open source System für die automatische Indexierung deutschsprachiger Dokumente}[http://dx.doi.org/10.1515/ABITECH.2006.26.1.18]</em>. (German) In: ABI Technik 26 (1), 2006. pp 18-29.
@@ -553,7 +553,7 @@ Lingo is based on a collective development by Klaus Lepsky and John Vorhauer.
 == LICENSE AND COPYRIGHT
 
 Copyright (C) 2005-2007 John Vorhauer
-Copyright (C) 2007-2015 John Vorhauer, Jens Wille
+Copyright (C) 2007-2016 John Vorhauer, Jens Wille
 
 Lingo is free software: you can redistribute it and/or modify it under the
 terms of the GNU Affero General Public License as published by the Free
