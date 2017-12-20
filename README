@@ -509,7 +509,7 @@ Travis CI::     https://travis-ci.org/lex-lingo/lingo
 
 == LITERATURE
 
-=== Background and theoretical works
+=== Background and theoretical foundations
 
 * Gödert, W.; Lepsky, K.; Nagelschmidt, M.: <em>{Informationserschließung und Automatisches Indexieren: ein Lehr- und Arbeitsbuch}[http://dx.doi.org/10.1007/978-3-642-23513-9]</em>. (German) Berlin etc.: Springer, 2012.
 * Lepsky, K.; Vorhauer, J.: <em>{Lingo – ein open source System für die automatische Indexierung deutschsprachiger Dokumente}[http://dx.doi.org/10.1515/ABITECH.2006.26.1.18]</em>. (German) In: ABI Technik 26 (1), 2006. pp 18-29.
@@ -522,6 +522,7 @@ Travis CI::     https://travis-ci.org/lex-lingo/lingo
 
 === Research publications
 
+* Grün, S.: <em>Mehrwortbegriffe und Latent Semantic Analysis: Bewertung automatisch extrahierter Mehrwortgruppen mit LSA</em>. (German) Düsseldorf: Heinrich-Heine-Universität Düsseldorf, 2017.
 * Siebenkäs, A.; Markscheffel, B.: <em>{Conception of a workflow for the semi-automatic construction of a thesaurus for the German printing industry}[https://zenodo.org/record/17945]</em>. (English) In: Re:inventing Information Science in the Networked Society. Proceedings of the 14th International Symposium on Information Science (ISI 2015), Zadar, Croatia, 19th-21st May 2015. Eds.: F. Pehar, C. Schlögl, C. Wolff. Glückstadt: Verlag Werner Hülsbusch, 2015. pp 217-229
 * Grün, S.: <em>Bildung von Komposita-Indextermen auf der Basis einer algorithmischen Mehrwortgruppenanalyse mit Lingo</em>. (German) Köln: Fachhochschule Köln, 2015.
 * Bredack, J.; Lepsky, K.: <em>{Automatische Extraktion von Fachterminologie aus Volltexten}[http://dx.doi.org/10.1515/abitech-2014-0002]</em>. (German) In: ABI Technik 34 (1), 2014. pp 2-12.
