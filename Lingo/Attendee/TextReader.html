@@ -4,10 +4,11 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::Attendee::TextReader - lingo Application documentation (v1.9.0)</title>
+<title>class Lingo::Attendee::TextReader - lingo Application documentation (v1.10.0)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
 </script>
 
 <script src="../../js/jquery.js"></script>
@@ -127,8 +128,6 @@
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -164,8 +163,8 @@
 
           
           <div class="method-source-code" id="control-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 122</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-operator">*</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 123</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-operator">*</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">cmd</span> <span class="ruby-operator">==</span> <span class="ruby-value">:TALK</span>
 
   <span class="ruby-identifier">command</span>(<span class="ruby-value">:LIR</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@lir</span>
@@ -226,8 +225,8 @@
 
           
           <div class="method-source-code" id="init-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 109</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">init</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 110</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">init</span>
   <span class="ruby-identifier">get_files</span>
 
   <span class="ruby-ivar">@encoding</span> = <span class="ruby-identifier">get_enc</span>
@@ -276,8 +275,8 @@
 
           
           <div class="method-source-code" id="add_files-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 243</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_files</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">glob</span>, <span class="ruby-identifier">recursive</span> = <span class="ruby-keyword">false</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 244</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_files</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">glob</span>, <span class="ruby-identifier">recursive</span> = <span class="ruby-keyword">false</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">FileNotFoundError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">path</span>) <span class="ruby-keyword">if</span> (<span class="ruby-identifier">entries</span> = <span class="ruby-constant">Dir</span>[<span class="ruby-identifier">path</span>]).<span class="ruby-identifier">sort!</span>.<span class="ruby-identifier">empty?</span>
 
   <span class="ruby-identifier">entries</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">entry</span><span class="ruby-operator">|</span>
@@ -314,8 +313,8 @@
 
           
           <div class="method-source-code" id="cancel-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 210</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">cancel</span>(<span class="ruby-identifier">msg</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 211</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">cancel</span>(<span class="ruby-identifier">msg</span>)
   <span class="ruby-identifier">throw</span>(<span class="ruby-value">:cancel</span>, <span class="ruby-identifier">msg</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -347,8 +346,8 @@
 
           
           <div class="method-source-code" id="cancel_filter-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 202</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">cancel_filter</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">name</span>, <span class="ruby-identifier">what</span> = <span class="ruby-value">:gem</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 203</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">cancel_filter</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">name</span>, <span class="ruby-identifier">what</span> = <span class="ruby-value">:gem</span>)
   <span class="ruby-identifier">cancel</span>(<span class="ruby-node">&quot;#{type} filter not available. #{please_install(what, name)}&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -380,8 +379,8 @@
 
           
           <div class="method-source-code" id="cancel_filters-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 198</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">cancel_filters</span>(<span class="ruby-identifier">msg</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 199</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">cancel_filters</span>(<span class="ruby-identifier">msg</span>)
   <span class="ruby-identifier">cancel</span>(<span class="ruby-node">&quot;Filters not available. #{msg}&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -413,10 +412,10 @@
 
           
           <div class="method-source-code" id="file_type-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 189</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">file_type</span>(<span class="ruby-identifier">io</span>, <span class="ruby-identifier">path</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 190</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">file_type</span>(<span class="ruby-identifier">io</span>, <span class="ruby-identifier">path</span>)
   <span class="ruby-constant">Object</span>.<span class="ruby-identifier">const_defined?</span>(<span class="ruby-value">:FileMagic</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">io</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:pos=</span>) <span class="ruby-operator">?</span>
-    <span class="ruby-constant">FileMagic</span>.<span class="ruby-identifier">fm</span>(<span class="ruby-value">:mime</span>, <span class="ruby-identifier">simplified</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>).<span class="ruby-identifier">io</span>(<span class="ruby-identifier">io</span>, <span class="ruby-value">256</span>, <span class="ruby-keyword">true</span>) <span class="ruby-operator">:</span>
+    <span class="ruby-constant">FileMagic</span>.<span class="ruby-identifier">fm</span>(<span class="ruby-value">:mime</span>, <span class="ruby-value">simplified:</span> <span class="ruby-keyword">true</span>).<span class="ruby-identifier">io</span>(<span class="ruby-identifier">io</span>, <span class="ruby-value">256</span>, <span class="ruby-keyword">true</span>) <span class="ruby-operator">:</span>
   <span class="ruby-constant">Object</span>.<span class="ruby-identifier">const_defined?</span>(<span class="ruby-value">:MIME</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">MIME</span>.<span class="ruby-identifier">const_defined?</span>(<span class="ruby-value">:Types</span>) <span class="ruby-operator">?</span>
     (<span class="ruby-identifier">type</span> = <span class="ruby-constant">MIME</span><span class="ruby-operator">::</span><span class="ruby-constant">Types</span>.<span class="ruby-identifier">of</span>(<span class="ruby-identifier">path</span>).<span class="ruby-identifier">first</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">type</span>.<span class="ruby-identifier">content_type</span> <span class="ruby-operator">:</span>
     <span class="ruby-identifier">cancel_filters</span>(<span class="ruby-string">&#39;File type could not be determined.&#39;</span>) <span class="ruby-operator">:</span>
@@ -451,8 +450,8 @@
 
           
           <div class="method-source-code" id="filter-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 157</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">filter</span>(<span class="ruby-identifier">io</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">progress</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 158</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">filter</span>(<span class="ruby-identifier">io</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">progress</span>)
   <span class="ruby-keyword">case</span> <span class="ruby-ivar">@filter</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">file_type</span>(<span class="ruby-identifier">io</span>, <span class="ruby-identifier">path</span>) <span class="ruby-operator">:</span> <span class="ruby-ivar">@filter</span>.<span class="ruby-identifier">to_s</span>
     <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;pdftotext&#39;</span> <span class="ruby-keyword">then</span> <span class="ruby-identifier">filter_pdftotext</span>(<span class="ruby-identifier">io</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">progress</span>)
     <span class="ruby-keyword">when</span> <span class="ruby-regexp">/html/i</span>     <span class="ruby-keyword">then</span> <span class="ruby-identifier">filter_xml</span>(<span class="ruby-identifier">io</span>, <span class="ruby-value">:HTML</span>)
@@ -490,8 +489,8 @@
 
           
           <div class="method-source-code" id="filter_pdf-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 179</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">filter_pdf</span>(<span class="ruby-identifier">io</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 180</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">filter_pdf</span>(<span class="ruby-identifier">io</span>)
   <span class="ruby-identifier">cancel_filter</span>(<span class="ruby-value">:PDF</span>, <span class="ruby-string">&#39;pdf-reader&#39;</span>) <span class="ruby-keyword">unless</span> <span class="ruby-constant">Object</span>.<span class="ruby-identifier">const_defined?</span>(<span class="ruby-value">:PDF</span>)
   <span class="ruby-constant">Filter</span><span class="ruby-operator">::</span><span class="ruby-constant">PDF</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">io</span>, <span class="ruby-ivar">@encoding</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -509,7 +508,7 @@
         
         <div class="method-heading">
           <span class="method-name">filter_pdftotext</span><span
-            class="method-args">(io, path, progress, name = 'pdftotext')</span>
+            class="method-args">(io, path, progress, name = &#39;pdftotext&#39;)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -524,8 +523,8 @@
 
           
           <div class="method-source-code" id="filter_pdftotext-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 167</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">filter_pdftotext</span>(<span class="ruby-identifier">io</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">progress</span>, <span class="ruby-identifier">name</span> = <span class="ruby-string">&#39;pdftotext&#39;</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 168</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">filter_pdftotext</span>(<span class="ruby-identifier">io</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">progress</span>, <span class="ruby-identifier">name</span> = <span class="ruby-string">&#39;pdftotext&#39;</span>)
   <span class="ruby-identifier">cancel_filter</span>(<span class="ruby-value">:PDF</span>, <span class="ruby-identifier">name</span>, <span class="ruby-value">:command</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">cmd</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">which</span>(<span class="ruby-identifier">name</span>)
 
   <span class="ruby-identifier">with_tempfile</span>(<span class="ruby-identifier">name</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">tempfile</span><span class="ruby-operator">|</span>
@@ -565,8 +564,8 @@
 
           
           <div class="method-source-code" id="filter_xml-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 184</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">filter_xml</span>(<span class="ruby-identifier">io</span>, <span class="ruby-identifier">type</span> = <span class="ruby-value">:XML</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 185</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">filter_xml</span>(<span class="ruby-identifier">io</span>, <span class="ruby-identifier">type</span> = <span class="ruby-value">:XML</span>)
   <span class="ruby-identifier">cancel_filter</span>(<span class="ruby-identifier">type</span>, <span class="ruby-value">:nokogiri</span>) <span class="ruby-keyword">unless</span> <span class="ruby-constant">Object</span>.<span class="ruby-identifier">const_defined?</span>(<span class="ruby-value">:Nokogiri</span>)
   <span class="ruby-constant">Filter</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">type</span>).<span class="ruby-identifier">new</span>(<span class="ruby-identifier">io</span>, <span class="ruby-ivar">@encoding</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -599,8 +598,8 @@
 
           
           <div class="method-source-code" id="get_files-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 234</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_files</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 235</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_files</span>
   <span class="ruby-identifier">args</span> = [<span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;glob&#39;</span>, <span class="ruby-string">&#39;*.txt&#39;</span>), <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;recursive&#39;</span>, <span class="ruby-keyword">false</span>)]
 
   <span class="ruby-ivar">@files</span> = []
@@ -637,8 +636,8 @@
 
           
           <div class="method-source-code" id="please_install-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 206</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">please_install</span>(<span class="ruby-identifier">what</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">names</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 207</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">please_install</span>(<span class="ruby-identifier">what</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">names</span>)
   <span class="ruby-node">&quot;Please install the `#{names.join(&quot;&#39; or `&quot;)}&#39; #{what}.&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -670,8 +669,8 @@
 
           
           <div class="method-source-code" id="pos-3F-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 214</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">pos?</span>(<span class="ruby-identifier">io</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 215</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pos?</span>(<span class="ruby-identifier">io</span>)
   <span class="ruby-identifier">io</span>.<span class="ruby-identifier">pos</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">io</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:pos</span>)
 <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ESPIPE</span>
 <span class="ruby-keyword">end</span></pre>
@@ -704,8 +703,8 @@
 
           
           <div class="method-source-code" id="with_tempfile-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 219</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">with_tempfile</span>(<span class="ruby-identifier">name</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/text_reader.rb, line 220</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">with_tempfile</span>(<span class="ruby-identifier">name</span>)
   <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;tempfile&#39;</span>
 
   <span class="ruby-identifier">tempfiles</span> = []
@@ -736,8 +735,8 @@
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.4.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

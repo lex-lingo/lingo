@@ -4,10 +4,11 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::DeferredAttendee - lingo Application documentation (v1.9.0)</title>
+<title>class Lingo::DeferredAttendee - lingo Application documentation (v1.10.0)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
 </script>
 
 <script src="../js/jquery.js"></script>
@@ -94,8 +95,6 @@
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -131,11 +130,11 @@
 
           
           <div class="method-source-code" id="enhance-source">
-            <pre><span class="ruby-comment"># File lib/lingo/deferred_attendee.rb, line 30</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">enhance</span>(<span class="ruby-identifier">base</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/deferred_attendee.rb, line 31</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">enhance</span>(<span class="ruby-identifier">base</span>)
   <span class="ruby-identifier">base</span>.<span class="ruby-identifier">instance_variable_set</span>(<span class="ruby-value">:@deferr_buffer</span>, [])
 
-  <span class="ruby-keyword">def</span> <span class="ruby-identifier">base</span>.<span class="ruby-identifier">command</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">base</span>.<span class="ruby-identifier">command</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
     <span class="ruby-ivar">@deferr_buffer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">buf</span> = [<span class="ruby-identifier">args</span>]
 
     <span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">!=</span> <span class="ruby-value">:EOT</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">buf</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">control_deferred</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>) <span class="ruby-operator">:</span>
@@ -181,8 +180,8 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/lingo/deferred_attendee.rb, line 46</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">config</span>, <span class="ruby-identifier">lingo</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/deferred_attendee.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">config</span>, <span class="ruby-identifier">lingo</span>)
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">enhance</span>(<span class="ruby-keyword">self</span>)
   <span class="ruby-keyword">super</span>
 <span class="ruby-keyword">end</span></pre>
@@ -223,8 +222,8 @@
 
           
           <div class="method-source-code" id="control_deferred-source">
-            <pre><span class="ruby-comment"># File lib/lingo/deferred_attendee.rb, line 51</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">control_deferred</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-operator">*</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/deferred_attendee.rb, line 52</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">control_deferred</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-operator">*</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>, <span class="ruby-string">&#39;must be implemented by subclass&#39;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -241,7 +240,7 @@
         
         <div class="method-heading">
           <span class="method-name">flush_deferred</span><span
-            class="method-args">(&block)</span>
+            class="method-args">(&amp;block)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -256,8 +255,8 @@
 
           
           <div class="method-source-code" id="flush_deferred-source">
-            <pre><span class="ruby-comment"># File lib/lingo/deferred_attendee.rb, line 55</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">flush_deferred</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/deferred_attendee.rb, line 56</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">flush_deferred</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>, <span class="ruby-string">&#39;must be implemented by subclass&#39;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -277,8 +276,8 @@
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.4.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

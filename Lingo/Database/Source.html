@@ -4,10 +4,11 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::Database::Source - lingo Application documentation (v1.9.0)</title>
+<title>class Lingo::Database::Source - lingo Application documentation (v1.10.0)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
 </script>
 
 <script src="../../js/jquery.js"></script>
@@ -110,8 +111,6 @@
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -197,8 +196,8 @@
 
           
           <div class="method-source-code" id="from_config-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 65</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">from_config</span>(<span class="ruby-identifier">config</span>, <span class="ruby-identifier">id</span> = <span class="ruby-keyword">nil</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">from_config</span>(<span class="ruby-identifier">config</span>, <span class="ruby-identifier">id</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">format</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;txt-format&#39;</span>, <span class="ruby-string">&#39;key_value&#39;</span>)
   <span class="ruby-constant">Lingo</span>.<span class="ruby-identifier">get_const</span>(<span class="ruby-identifier">format</span>, <span class="ruby-keyword">self</span>).<span class="ruby-identifier">new</span>(<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;name&#39;</span>], <span class="ruby-identifier">config</span>, <span class="ruby-identifier">id</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -231,8 +230,8 @@
 
           
           <div class="method-source-code" id="from_id-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 61</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">from_id</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">lingo</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 62</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">from_id</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">lingo</span>)
   <span class="ruby-identifier">from_config</span>(<span class="ruby-identifier">lingo</span>.<span class="ruby-identifier">database_config</span>(<span class="ruby-identifier">id</span>), <span class="ruby-identifier">id</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -264,8 +263,8 @@
 
           
           <div class="method-source-code" id="lexicals-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 70</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">lexicals</span>(<span class="ruby-identifier">val</span>, <span class="ruby-identifier">sep</span> = <span class="ruby-constant">LEXICAL_SEPARATOR</span>, <span class="ruby-identifier">ref</span> = <span class="ruby-constant">KEY_REF_RE</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 71</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lexicals</span>(<span class="ruby-identifier">val</span>, <span class="ruby-identifier">sep</span> = <span class="ruby-constant">LEXICAL_SEPARATOR</span>, <span class="ruby-identifier">ref</span> = <span class="ruby-constant">KEY_REF_RE</span>)
   <span class="ruby-identifier">val</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">str</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">str</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">ref</span> <span class="ruby-operator">?</span> <span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">begin</span>
       <span class="ruby-identifier">k</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">w</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-identifier">sep</span>)
@@ -302,11 +301,11 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 83</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">config</span> = {}, <span class="ruby-identifier">id</span> = <span class="ruby-keyword">nil</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 84</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">config</span> = {}, <span class="ruby-identifier">id</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">config</span>
 
-  <span class="ruby-identifier">src_file</span> = <span class="ruby-constant">Lingo</span>.<span class="ruby-identifier">find</span>(<span class="ruby-value">:dict</span>, <span class="ruby-identifier">name</span>, <span class="ruby-identifier">relax</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">name</span>
+  <span class="ruby-identifier">src_file</span> = <span class="ruby-constant">Lingo</span>.<span class="ruby-identifier">find</span>(<span class="ruby-value">:dict</span>, <span class="ruby-identifier">name</span>, <span class="ruby-value">relax:</span> <span class="ruby-keyword">true</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">name</span>
 
   <span class="ruby-identifier">rej_file</span> = <span class="ruby-keyword">begin</span>
     <span class="ruby-constant">Lingo</span>.<span class="ruby-identifier">find</span>(<span class="ruby-value">:store</span>, <span class="ruby-identifier">src_file</span>) <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;.rev&#39;</span>
@@ -324,7 +323,7 @@
   <span class="ruby-ivar">@def</span> = <span class="ruby-ivar">@def</span>.<span class="ruby-identifier">downcase</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@def</span>
 
   <span class="ruby-ivar">@wrd</span> = <span class="ruby-node">&quot;(?:#{Language::Char::ANY})+&quot;</span>
-  <span class="ruby-ivar">@pat</span> = <span class="ruby-node">/^#{@wrd}$/</span>
+  <span class="ruby-ivar">@pat</span> = <span class="ruby-regexp">/^#{@wrd}$/</span>
 
   <span class="ruby-ivar">@pos</span> = <span class="ruby-ivar">@rej_cnt</span> = <span class="ruby-value">0</span>
 <span class="ruby-keyword">end</span></pre>
@@ -365,8 +364,8 @@
 
           
           <div class="method-source-code" id="each-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 113</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">each</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 114</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">enum_for</span>(<span class="ruby-identifier">__method__</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block_given?</span>
   <span class="ruby-identifier">each_line</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">line</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span> <span class="ruby-identifier">parse_line</span>(<span class="ruby-identifier">line</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>) }
 <span class="ruby-keyword">end</span></pre>
@@ -399,8 +398,8 @@
 
           
           <div class="method-source-code" id="each_dump-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 150</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">each_dump</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 151</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_dump</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">enum_for</span>(<span class="ruby-identifier">__method__</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block_given?</span>
   <span class="ruby-identifier">each_lexical</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span> <span class="ruby-identifier">dump_line</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>) }
 <span class="ruby-keyword">end</span></pre>
@@ -433,8 +432,8 @@
 
           
           <div class="method-source-code" id="each_lexical-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 145</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">each_lexical</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 146</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_lexical</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">enum_for</span>(<span class="ruby-identifier">__method__</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block_given?</span>
   <span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span> <span class="ruby-identifier">key</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">lexicals</span>(<span class="ruby-identifier">val</span>) }
 <span class="ruby-keyword">end</span></pre>
@@ -467,13 +466,13 @@
 
           
           <div class="method-source-code" id="each_line-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 118</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">each_line</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 119</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_line</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">enum_for</span>(<span class="ruby-identifier">__method__</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block_given?</span>
 
-  <span class="ruby-identifier">rej_file</span> = <span class="ruby-ivar">@rej</span>.<span class="ruby-identifier">open</span>(<span class="ruby-string">&#39;w&#39;</span>, <span class="ruby-identifier">encoding</span><span class="ruby-operator">:</span> <span class="ruby-constant">ENCODING</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@rej</span>
+  <span class="ruby-identifier">rej_file</span> = <span class="ruby-ivar">@rej</span>.<span class="ruby-identifier">open</span>(<span class="ruby-string">&#39;w&#39;</span>, <span class="ruby-value">encoding:</span> <span class="ruby-constant">ENCODING</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@rej</span>
 
-  <span class="ruby-ivar">@src</span>.<span class="ruby-identifier">each_line</span>(<span class="ruby-identifier">$/</span>, <span class="ruby-identifier">encoding</span><span class="ruby-operator">:</span> <span class="ruby-constant">ENCODING</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+  <span class="ruby-ivar">@src</span>.<span class="ruby-identifier">each_line</span>(<span class="ruby-identifier">$/</span>, <span class="ruby-value">encoding:</span> <span class="ruby-constant">ENCODING</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
     <span class="ruby-ivar">@pos</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">length</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">bytesize</span>
 
     <span class="ruby-identifier">line</span>.<span class="ruby-identifier">strip!</span>
@@ -523,8 +522,8 @@
 
           
           <div class="method-source-code" id="rejected-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 159</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">rejected</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 160</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rejected</span>
   [<span class="ruby-ivar">@rej_cnt</span>, <span class="ruby-ivar">@rej</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -556,8 +555,8 @@
 
           
           <div class="method-source-code" id="set-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 155</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">set</span>(<span class="ruby-identifier">db</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 156</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set</span>(<span class="ruby-identifier">db</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
   <span class="ruby-identifier">db</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">val</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -589,8 +588,8 @@
 
           
           <div class="method-source-code" id="size-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 109</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">size</span>
+            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 110</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">size</span>
   <span class="ruby-ivar">@src</span>.<span class="ruby-identifier">size</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -630,8 +629,8 @@
 
           
           <div class="method-source-code" id="lexical-source">
-            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 165</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">lexical</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/database/source.rb, line 166</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lexical</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">args</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">LEXICAL_SEPARATOR</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -651,8 +650,8 @@
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.4.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

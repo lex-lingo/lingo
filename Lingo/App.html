@@ -4,10 +4,11 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::App - lingo Application documentation (v1.9.0)</title>
+<title>class Lingo::App - lingo Application documentation (v1.10.0)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
 </script>
 
 <script src="../js/jquery.js"></script>
@@ -94,8 +95,6 @@
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -116,7 +115,7 @@
         
         <div class="method-heading">
           <span class="method-name">init_app</span><span
-            class="method-args">(file, *args, &block)</span>
+            class="method-args">(file, *args, &amp;block)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -131,12 +130,12 @@
 
           
           <div class="method-source-code" id="init_app-source">
-            <pre><span class="ruby-comment"># File lib/lingo/app.rb, line 37</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">init_app</span>(<span class="ruby-identifier">file</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/app.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">init_app</span>(<span class="ruby-identifier">file</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">set_root</span>(<span class="ruby-identifier">file</span>)
   <span class="ruby-identifier">parse_options</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
 
-  <span class="ruby-identifier">get</span>(<span class="ruby-string">&#39;/about&#39;</span>) { <span class="ruby-identifier">to_json</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>, <span class="ruby-identifier">version</span><span class="ruby-operator">:</span> <span class="ruby-constant">VERSION</span>) }
+  <span class="ruby-identifier">get</span>(<span class="ruby-string">&#39;/about&#39;</span>) { <span class="ruby-identifier">to_json</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>, <span class="ruby-value">version:</span> <span class="ruby-constant">VERSION</span>) }
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -167,8 +166,8 @@
 
           
           <div class="method-source-code" id="parse_options-source">
-            <pre><span class="ruby-comment"># File lib/lingo/app.rb, line 44</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">parse_options</span>(<span class="ruby-identifier">lingo_options</span> = <span class="ruby-keyword">false</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/app.rb, line 45</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse_options</span>(<span class="ruby-identifier">lingo_options</span> = <span class="ruby-keyword">false</span>)
   <span class="ruby-identifier">argv</span>, <span class="ruby-identifier">banner</span> = [], <span class="ruby-node">&quot;Usage: #{$0} [-h|--help] [sinatra-options]&quot;</span>
   <span class="ruby-keyword">while</span> <span class="ruby-identifier">arg</span> = <span class="ruby-constant">ARGV</span>.<span class="ruby-identifier">shift</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">arg</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;--&#39;</span>; <span class="ruby-identifier">argv</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">arg</span>; <span class="ruby-keyword">end</span>
 
@@ -194,7 +193,7 @@
   <span class="ruby-identifier">abort</span> <span class="ruby-node">&quot;Unrecognized arguments: #{argv}\n#{banner}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">argv</span>.<span class="ruby-identifier">empty?</span>
 
   <span class="ruby-constant">ARGV</span>.<span class="ruby-identifier">unshift</span>(<span class="ruby-operator">*</span><span class="ruby-keyword">yield</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
-<span class="ruby-keyword">rescue</span> <span class="ruby-constant">OptionParser</span><span class="ruby-operator">::</span><span class="ruby-constant">ParseError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">err</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">OptionParser</span><span class="ruby-operator">::</span><span class="ruby-constant">ParseError</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">err</span>
   <span class="ruby-identifier">abort</span> <span class="ruby-node">&quot;#{err}\n#{banner}&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -226,8 +225,8 @@
 
           
           <div class="method-source-code" id="rackup-source">
-            <pre><span class="ruby-comment"># File lib/lingo/app.rb, line 74</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">rackup</span>(<span class="ruby-identifier">name</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/app.rb, line 75</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rackup</span>(<span class="ruby-identifier">name</span>)
   <span class="ruby-identifier">file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-keyword">__FILE__</span>), <span class="ruby-identifier">name</span>, <span class="ruby-string">&#39;config.ru&#39;</span>)
   <span class="ruby-identifier">file</span> <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">readable?</span>(<span class="ruby-identifier">file</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -268,12 +267,12 @@
 
           
           <div class="method-source-code" id="to_json-source">
-            <pre><span class="ruby-comment"># File lib/lingo/app.rb, line 81</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_json</span>(<span class="ruby-identifier">q</span>, <span class="ruby-identifier">r</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/app.rb, line 82</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_json</span>(<span class="ruby-identifier">q</span>, <span class="ruby-identifier">r</span>)
   <span class="ruby-identifier">q</span>, <span class="ruby-identifier">r</span> = <span class="ruby-string">&#39;q&#39;</span>, <span class="ruby-string">&#39;Required parameter -- Input string&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">q</span>
 
   <span class="ruby-identifier">content_type</span> <span class="ruby-value">:json</span>
-  { <span class="ruby-identifier">q</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">r</span> }.<span class="ruby-identifier">to_json</span>
+  { <span class="ruby-identifier">q</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">r</span> }.<span class="ruby-identifier">to_json</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -292,8 +291,8 @@
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.4.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

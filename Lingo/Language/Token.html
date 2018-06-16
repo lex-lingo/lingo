@@ -4,10 +4,11 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::Language::Token - lingo Application documentation (v1.9.0)</title>
+<title>class Lingo::Language::Token - lingo Application documentation (v1.10.0)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
 </script>
 
 <script src="../../js/jquery.js"></script>
@@ -102,8 +103,6 @@
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -187,8 +186,8 @@
 
           
           <div class="method-source-code" id="clean-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/token.rb, line 43</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">clean</span>(<span class="ruby-identifier">attr</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/language/token.rb, line 44</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">clean</span>(<span class="ruby-identifier">attr</span>)
   <span class="ruby-identifier">attr</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/:.*/</span>, <span class="ruby-string">&#39;&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -225,8 +224,8 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/token.rb, line 47</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">form</span>, <span class="ruby-identifier">attr</span>, <span class="ruby-identifier">position</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">offset</span> = <span class="ruby-keyword">nil</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/language/token.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">form</span>, <span class="ruby-identifier">attr</span>, <span class="ruby-identifier">position</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">offset</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-ivar">@position</span>, <span class="ruby-ivar">@offset</span> = <span class="ruby-identifier">position</span>, <span class="ruby-identifier">offset</span>
   <span class="ruby-keyword">super</span>(<span class="ruby-identifier">form</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">clean</span>(<span class="ruby-identifier">attr</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -267,8 +266,8 @@
 
           
           <div class="method-source-code" id="number-3F-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/token.rb, line 60</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">number?</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/token.rb, line 61</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">number?</span>
   <span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-constant">TA_NUMBER</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -300,8 +299,8 @@
 
           
           <div class="method-source-code" id="position_and_offset-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/token.rb, line 64</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">position_and_offset</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/token.rb, line 65</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">position_and_offset</span>
   <span class="ruby-node">&quot;#{position}#{POSITION_SEP}#{offset}&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -333,8 +332,8 @@
 
           
           <div class="method-source-code" id="to_a-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/token.rb, line 68</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_a</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/token.rb, line 69</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_a</span>
   [<span class="ruby-identifier">form</span>, <span class="ruby-identifier">attr</span>, <span class="ruby-identifier">position</span>, <span class="ruby-identifier">offset</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -366,8 +365,8 @@
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/token.rb, line 72</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/token.rb, line 73</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
   <span class="ruby-node">&quot;:#{super}:&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -399,8 +398,8 @@
 
           
           <div class="method-source-code" id="word-3F-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/token.rb, line 54</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">word?</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/token.rb, line 55</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">word?</span>
   <span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-constant">TA_WORD</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -452,8 +451,8 @@
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.4.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

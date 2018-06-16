@@ -4,10 +4,11 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::CLI - lingo Application documentation (v1.9.0)</title>
+<title>class Lingo::CLI - lingo Application documentation (v1.10.0)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
 </script>
 
 <script src="../js/jquery.js"></script>
@@ -96,8 +97,6 @@
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -159,12 +158,12 @@
 
           
           <div class="method-source-code" id="defaults-source">
-            <pre><span class="ruby-comment"># File lib/lingo/cli.rb, line 34</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">defaults</span>
+            <pre><span class="ruby-comment"># File lib/lingo/cli.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">defaults</span>
   <span class="ruby-keyword">super</span>.<span class="ruby-identifier">merge</span>(
-    <span class="ruby-identifier">config</span><span class="ruby-operator">:</span>   <span class="ruby-string">&#39;lingo.cfg&#39;</span>,
-    <span class="ruby-identifier">language</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;de&#39;</span>,
-    <span class="ruby-identifier">profile</span><span class="ruby-operator">:</span>  <span class="ruby-keyword">false</span>
+    <span class="ruby-value">config:</span>   <span class="ruby-string">&#39;lingo.cfg&#39;</span>,
+    <span class="ruby-value">language:</span> <span class="ruby-string">&#39;de&#39;</span>,
+    <span class="ruby-value">profile:</span>  <span class="ruby-keyword">false</span>
   )
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -204,8 +203,8 @@
 
           
           <div class="method-source-code" id="run-source">
-            <pre><span class="ruby-comment"># File lib/lingo/cli.rb, line 46</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">run</span>(<span class="ruby-identifier">arguments</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/cli.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">run</span>(<span class="ruby-identifier">arguments</span>)
   <span class="ruby-ivar">@files</span> = <span class="ruby-identifier">arguments</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -245,8 +244,8 @@
 
           
           <div class="method-source-code" id="config_present-3F-source">
-            <pre><span class="ruby-comment"># File lib/lingo/cli.rb, line 52</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">config_present?</span>(<span class="ruby-identifier">config</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/cli.rb, line 53</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">config_present?</span>(<span class="ruby-identifier">config</span>)
   <span class="ruby-constant">Lingo</span>.<span class="ruby-identifier">find</span>(<span class="ruby-value">:config</span>, <span class="ruby-identifier">config</span>) {}
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -278,8 +277,8 @@
 
           
           <div class="method-source-code" id="load_config-source">
-            <pre><span class="ruby-comment"># File lib/lingo/cli.rb, line 56</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">load_config</span>(<span class="ruby-operator">*</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/cli.rb, line 57</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">load_config</span>(<span class="ruby-operator">*</span>)
   <span class="ruby-ivar">@config</span> = {}
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -311,15 +310,15 @@
 
           
           <div class="method-source-code" id="opts-source">
-            <pre><span class="ruby-comment"># File lib/lingo/cli.rb, line 60</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">opts</span>(<span class="ruby-identifier">opts</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/cli.rb, line 61</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">opts</span>(<span class="ruby-identifier">opts</span>)
   <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">option</span>(<span class="ruby-value">:language__LANG</span>, <span class="ruby-node">&quot;Language for processing [Default: #{defaults[:language]}]&quot;</span>)
 
   <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span>
 
   <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">option</span>(<span class="ruby-value">:log__FILE</span>, <span class="ruby-value">:L</span>, <span class="ruby-string">&#39;Log file to print debug information to&#39;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">log</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">options</span>[<span class="ruby-value">:log</span>] = <span class="ruby-identifier">stderr</span>.<span class="ruby-identifier">reopen</span>(
-      <span class="ruby-identifier">log</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;-&#39;</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">stdout</span> <span class="ruby-operator">:</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">log</span>, <span class="ruby-string">&#39;a+&#39;</span>, <span class="ruby-identifier">encoding</span><span class="ruby-operator">:</span> <span class="ruby-constant">ENCODING</span>))
+      <span class="ruby-identifier">log</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;-&#39;</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">stdout</span> <span class="ruby-operator">:</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">log</span>, <span class="ruby-string">&#39;a+&#39;</span>, <span class="ruby-value">encoding:</span> <span class="ruby-constant">ENCODING</span>))
   }
 
   <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span>
@@ -345,8 +344,8 @@
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.4.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

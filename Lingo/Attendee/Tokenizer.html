@@ -4,10 +4,11 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::Attendee::Tokenizer - lingo Application documentation (v1.9.0)</title>
+<title>class Lingo::Attendee::Tokenizer - lingo Application documentation (v1.10.0)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
 </script>
 
 <script src="../../js/jquery.js"></script>
@@ -130,8 +131,6 @@
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -206,8 +205,8 @@
 
           
           <div class="method-source-code" id="append-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 144</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">append</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">rules</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 145</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">append</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">rules</span>)
   <span class="ruby-identifier">_insert</span>(<span class="ruby-value">-1</span>, <span class="ruby-identifier">rules</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -239,8 +238,8 @@
 
           
           <div class="method-source-code" id="delete-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 132</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">names</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 133</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">names</span>)
   <span class="ruby-identifier">names</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span> <span class="ruby-identifier">rules</span>(<span class="ruby-identifier">name</span>).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">rule</span><span class="ruby-operator">|</span> <span class="ruby-constant">RULES</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">rule</span>) } }
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -272,8 +271,8 @@
 
           
           <div class="method-source-code" id="insert-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 140</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">insert</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">rules</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 141</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">insert</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">rules</span>)
   <span class="ruby-identifier">_insert</span>(<span class="ruby-value">0</span>, <span class="ruby-identifier">rules</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -305,8 +304,8 @@
 
           
           <div class="method-source-code" id="insert_after-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 152</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">insert_after</span>(<span class="ruby-identifier">name</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">rules</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 153</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">insert_after</span>(<span class="ruby-identifier">name</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">rules</span>)
   <span class="ruby-identifier">_insert_name</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">rules</span>, <span class="ruby-value">-1</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -338,8 +337,8 @@
 
           
           <div class="method-source-code" id="insert_before-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 148</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">insert_before</span>(<span class="ruby-identifier">name</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">rules</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 149</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">insert_before</span>(<span class="ruby-identifier">name</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">rules</span>)
   <span class="ruby-identifier">_insert_name</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">rules</span>, <span class="ruby-value">0</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -371,8 +370,8 @@
 
           
           <div class="method-source-code" id="replace-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 136</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">replace</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">expr</span> = <span class="ruby-keyword">nil</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 137</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">replace</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">expr</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">rules</span>(<span class="ruby-identifier">name</span>).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">rule</span><span class="ruby-operator">|</span> <span class="ruby-identifier">rule</span>[<span class="ruby-value">1</span>] = <span class="ruby-identifier">expr</span> <span class="ruby-operator">||</span> <span class="ruby-keyword">yield</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">rule</span>) }
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -404,8 +403,8 @@
 
           
           <div class="method-source-code" id="rule-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 124</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">rule</span>(<span class="ruby-identifier">name</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 125</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rule</span>(<span class="ruby-identifier">name</span>)
   <span class="ruby-constant">RULES</span>.<span class="ruby-identifier">assoc</span>(<span class="ruby-identifier">name</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -437,8 +436,8 @@
 
           
           <div class="method-source-code" id="rules-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 128</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">rules</span>(<span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 129</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rules</span>(<span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">name</span> <span class="ruby-operator">?</span> <span class="ruby-constant">RULES</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">rule</span>,<span class="ruby-operator">|</span> <span class="ruby-identifier">rule</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">name</span> } <span class="ruby-operator">:</span> <span class="ruby-constant">RULES</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:first</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -478,8 +477,8 @@
 
           
           <div class="method-source-code" id="_insert-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 158</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">_insert</span>(<span class="ruby-identifier">index</span>, <span class="ruby-identifier">rules</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 159</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">_insert</span>(<span class="ruby-identifier">index</span>, <span class="ruby-identifier">rules</span>)
   <span class="ruby-identifier">rules</span>.<span class="ruby-identifier">push</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">rules</span>.<span class="ruby-identifier">pop</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">rules</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
   <span class="ruby-constant">RULES</span>.<span class="ruby-identifier">insert</span>(<span class="ruby-identifier">index</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">rules</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -512,8 +511,8 @@
 
           
           <div class="method-source-code" id="_insert_name-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 163</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">_insert_name</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">rules</span>, <span class="ruby-identifier">offset</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 164</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">_insert_name</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">rules</span>, <span class="ruby-identifier">offset</span>)
   <span class="ruby-identifier">index</span> = <span class="ruby-constant">RULES</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">rule</span>(<span class="ruby-identifier">name</span>))
   <span class="ruby-identifier">_insert</span>(<span class="ruby-identifier">index</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">index</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">offset</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">offset</span>, <span class="ruby-identifier">rules</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -554,8 +553,8 @@
 
           
           <div class="method-source-code" id="control-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 201</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">filename</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">*</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 202</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">filename</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">*</span>)
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">cmd</span>
     <span class="ruby-keyword">when</span> <span class="ruby-value">:FILE</span> <span class="ruby-keyword">then</span> <span class="ruby-identifier">reset</span>(<span class="ruby-identifier">filename</span>)
     <span class="ruby-keyword">when</span> <span class="ruby-value">:LIR</span>  <span class="ruby-keyword">then</span> <span class="ruby-identifier">reset</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-keyword">nil</span>)
@@ -592,8 +591,8 @@
 
           
           <div class="method-source-code" id="init-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 170</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">init</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 171</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">init</span>
   <span class="ruby-ivar">@space</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;space&#39;</span>, <span class="ruby-keyword">false</span>)
   <span class="ruby-ivar">@tags</span>  = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;tags&#39;</span>,  <span class="ruby-keyword">false</span>)
   <span class="ruby-ivar">@wiki</span>  = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;wiki&#39;</span>,  <span class="ruby-keyword">false</span>)
@@ -613,13 +612,13 @@
 
   <span class="ruby-ivar">@nests</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">re</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">re</span>.<span class="ruby-identifier">map!</span>.<span class="ruby-identifier">with_index</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">r</span>, <span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">r</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Regexp</span>) <span class="ruby-operator">?</span>
-      <span class="ruby-identifier">r</span> <span class="ruby-operator">:</span> <span class="ruby-node">/^#{&#39;.*?&#39; if i &gt; 0}#{Regexp.escape(r)}/</span> }
+      <span class="ruby-identifier">r</span> <span class="ruby-operator">:</span> <span class="ruby-regexp">/^#{&#39;.*?&#39; if i &gt; 0}#{Regexp.escape(r)}/</span> }
 
     <span class="ruby-identifier">nest_re</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;(?&lt;#{name}&gt;#{Regexp.new(
       re[0].source.sub(/^\^/, &#39;&#39;), re[0].options)})&quot;</span>
   }
 
-  <span class="ruby-ivar">@nest_re</span> = <span class="ruby-node">/^(?&lt;_&gt;.*?)(?:#{nest_re.join(&#39;|&#39;)})/</span>
+  <span class="ruby-ivar">@nest_re</span> = <span class="ruby-regexp">/^(?&lt;_&gt;.*?)(?:#{nest_re.join(&#39;|&#39;)})/</span>
 
   <span class="ruby-identifier">reset</span>
 <span class="ruby-keyword">end</span></pre>
@@ -652,8 +651,8 @@
 
           
           <div class="method-source-code" id="process-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 210</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">process</span>(<span class="ruby-identifier">line</span>, <span class="ruby-identifier">offset</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 211</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process</span>(<span class="ruby-identifier">line</span>, <span class="ruby-identifier">offset</span>)
   <span class="ruby-ivar">@offset</span> = <span class="ruby-identifier">offset</span>
   <span class="ruby-identifier">tokenize</span>(<span class="ruby-identifier">line</span>)
   <span class="ruby-identifier">command</span>(<span class="ruby-value">:EOL</span>, <span class="ruby-ivar">@filename</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@filename</span>
@@ -695,8 +694,8 @@
 
           
           <div class="method-source-code" id="forward_nest-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 289</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">forward_nest</span>(<span class="ruby-identifier">match</span>, <span class="ruby-identifier">nest</span>, <span class="ruby-identifier">rest</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 290</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">forward_nest</span>(<span class="ruby-identifier">match</span>, <span class="ruby-identifier">nest</span>, <span class="ruby-identifier">rest</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">overriding?</span>(<span class="ruby-identifier">nest</span>)
     <span class="ruby-identifier">tag</span> = <span class="ruby-identifier">rest</span>[<span class="ruby-regexp">/^[^\s&gt;]*/</span>].<span class="ruby-identifier">downcase</span>
     <span class="ruby-ivar">@override</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">tag</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@skip_tags</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">tag</span>)
@@ -721,7 +720,7 @@
         
         <div class="method-heading">
           <span class="method-name">forward_token</span><span
-            class="method-args">(form, attr, rest = '')</span>
+            class="method-args">(form, attr, rest = &#39;&#39;)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -736,8 +735,8 @@
 
           
           <div class="method-source-code" id="forward_token-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 301</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">forward_token</span>(<span class="ruby-identifier">form</span>, <span class="ruby-identifier">attr</span>, <span class="ruby-identifier">rest</span> = <span class="ruby-string">&#39;&#39;</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 302</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">forward_token</span>(<span class="ruby-identifier">form</span>, <span class="ruby-identifier">attr</span>, <span class="ruby-identifier">rest</span> = <span class="ruby-string">&#39;&#39;</span>)
   <span class="ruby-identifier">forward</span>(<span class="ruby-constant">Token</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">form</span>, <span class="ruby-ivar">@override</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">attr</span> <span class="ruby-operator">:</span> <span class="ruby-constant">TA_SKIP</span>,
     <span class="ruby-ivar">@position</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>, <span class="ruby-ivar">@offset</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">form</span>.<span class="ruby-identifier">bytesize</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">rest</span>.<span class="ruby-identifier">bytesize</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -770,8 +769,8 @@
 
           
           <div class="method-source-code" id="overriding-3F-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 306</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">overriding?</span>(<span class="ruby-identifier">nest</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 307</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">overriding?</span>(<span class="ruby-identifier">nest</span>)
   <span class="ruby-identifier">nest</span> <span class="ruby-operator">==</span> <span class="ruby-constant">TA_HTML</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@skip_tags</span>.<span class="ruby-identifier">empty?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -803,8 +802,8 @@
 
           
           <div class="method-source-code" id="reset-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 218</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">reset</span>(<span class="ruby-identifier">filename</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">linenum</span> = <span class="ruby-value">1</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 219</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reset</span>(<span class="ruby-identifier">filename</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">linenum</span> = <span class="ruby-value">1</span>)
   <span class="ruby-ivar">@filename</span>, <span class="ruby-ivar">@linenum</span>, <span class="ruby-ivar">@position</span>, <span class="ruby-ivar">@offset</span> = <span class="ruby-identifier">filename</span>, <span class="ruby-identifier">linenum</span>, <span class="ruby-value">-1</span>, <span class="ruby-value">0</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -836,10 +835,10 @@
 
           
           <div class="method-source-code" id="tokenize-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 222</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">tokenize</span>(<span class="ruby-identifier">line</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 223</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">tokenize</span>(<span class="ruby-identifier">line</span>)
   <span class="ruby-ivar">@nest</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">tokenize_line</span>(<span class="ruby-identifier">line</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">tokenize_nest</span>(<span class="ruby-identifier">line</span>)
-<span class="ruby-keyword">rescue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">err</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">err</span>
   <span class="ruby-identifier">raise</span> <span class="ruby-identifier">err</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">err</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">TokenizeError</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">TokenizeError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">line</span>, <span class="ruby-ivar">@filename</span>, <span class="ruby-ivar">@linenum</span>, <span class="ruby-identifier">err</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -872,8 +871,8 @@
 
           
           <div class="method-source-code" id="tokenize_line-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 229</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">tokenize_line</span>(<span class="ruby-identifier">line</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 230</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">tokenize_line</span>(<span class="ruby-identifier">line</span>)
   <span class="ruby-keyword">while</span> (<span class="ruby-identifier">length</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">length</span>) <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">tokenize_rule</span>(<span class="ruby-identifier">line</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">rest</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">rest</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">break</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">line</span> = <span class="ruby-identifier">rest</span>
   }
@@ -910,8 +909,8 @@
 
           
           <div class="method-source-code" id="tokenize_nest-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 249</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">tokenize_nest</span>(<span class="ruby-identifier">line</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 250</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">tokenize_nest</span>(<span class="ruby-identifier">line</span>)
   <span class="ruby-identifier">mdo</span> = <span class="ruby-ivar">@nest_re</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">line</span>)
   <span class="ruby-identifier">mdc</span> = <span class="ruby-ivar">@nests</span>[<span class="ruby-ivar">@nest</span>.<span class="ruby-identifier">last</span>].<span class="ruby-identifier">last</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">line</span>)
 
@@ -969,8 +968,8 @@
 
           
           <div class="method-source-code" id="tokenize_open-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 279</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">tokenize_open</span>(<span class="ruby-identifier">line</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 280</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">tokenize_open</span>(<span class="ruby-identifier">line</span>)
   <span class="ruby-ivar">@nests</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">nest</span>, (<span class="ruby-identifier">open_re</span>, <span class="ruby-identifier">_</span>)<span class="ruby-operator">|</span>
     <span class="ruby-keyword">next</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">open_re</span>
     <span class="ruby-keyword">return</span> <span class="ruby-identifier">forward_nest</span>(<span class="ruby-node">$&amp;</span>, <span class="ruby-identifier">nest</span>, <span class="ruby-node">$&#39;</span>)
@@ -1008,8 +1007,8 @@
 
           
           <div class="method-source-code" id="tokenize_rule-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 238</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">tokenize_rule</span>(<span class="ruby-identifier">line</span>, <span class="ruby-identifier">rules</span> = <span class="ruby-ivar">@rules</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/tokenizer.rb, line 239</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">tokenize_rule</span>(<span class="ruby-identifier">line</span>, <span class="ruby-identifier">rules</span> = <span class="ruby-ivar">@rules</span>)
   <span class="ruby-identifier">rules</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">expr</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">next</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">expr</span>
 
@@ -1036,8 +1035,8 @@
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.4.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

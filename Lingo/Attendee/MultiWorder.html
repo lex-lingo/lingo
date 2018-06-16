@@ -4,10 +4,11 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::Attendee::MultiWorder - lingo Application documentation (v1.9.0)</title>
+<title>class Lingo::Attendee::MultiWorder - lingo Application documentation (v1.10.0)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
 </script>
 
 <script src="../../js/jquery.js"></script>
@@ -113,8 +114,6 @@
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -150,8 +149,8 @@
 
           
           <div class="method-source-code" id="control-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/multi_worder.rb, line 118</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-operator">*</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/multi_worder.rb, line 119</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-operator">*</span>)
   <span class="ruby-keyword">if</span> [<span class="ruby-value">:RECORD</span>, <span class="ruby-value">:EOF</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">cmd</span>)
     <span class="ruby-ivar">@eof_handling</span> = <span class="ruby-keyword">true</span>
 
@@ -193,13 +192,13 @@
 
           
           <div class="method-source-code" id="init-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/multi_worder.rb, line 83</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">init</span>
-  <span class="ruby-comment"># combine lexical variants?</span>
-  <span class="ruby-comment">#</span>
-  <span class="ruby-comment"># false = old behaviour</span>
-  <span class="ruby-comment"># true  = first match</span>
-  <span class="ruby-comment"># &#39;all&#39; = all matches</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/multi_worder.rb, line 84</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">init</span>
+  <span class="ruby-comment"># combine lexical variants?</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># false = old behaviour</span>
+  <span class="ruby-comment"># true  = first match</span>
+  <span class="ruby-comment"># &#39;all&#39; = all matches</span>
   <span class="ruby-ivar">@combine</span> = <span class="ruby-identifier">get_key</span>(<span class="ruby-string">&#39;combine&#39;</span>, <span class="ruby-keyword">false</span>)
   <span class="ruby-ivar">@all</span>     = <span class="ruby-ivar">@combine</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@combine</span>.<span class="ruby-identifier">downcase</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;all&#39;</span>
 
@@ -265,8 +264,8 @@
 
           
           <div class="method-source-code" id="check_multiword-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/multi_worder.rb, line 201</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">check_multiword</span>(<span class="ruby-identifier">len</span>, <span class="ruby-identifier">lst</span> = <span class="ruby-keyword">nil</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/multi_worder.rb, line 202</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">check_multiword</span>(<span class="ruby-identifier">len</span>, <span class="ruby-identifier">lst</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">process_buffer?</span>(<span class="ruby-identifier">len</span>)
 
   <span class="ruby-identifier">seq</span>, <span class="ruby-identifier">mul</span>, <span class="ruby-identifier">sep</span> = [], [], <span class="ruby-string">&#39; &#39;</span>
@@ -331,8 +330,8 @@
 
           
           <div class="method-source-code" id="create_and_forward_multiword-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/multi_worder.rb, line 178</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_and_forward_multiword</span>(<span class="ruby-identifier">len</span>, <span class="ruby-identifier">lex</span> = <span class="ruby-identifier">check_multiword</span>(<span class="ruby-identifier">len</span>))
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/multi_worder.rb, line 179</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_and_forward_multiword</span>(<span class="ruby-identifier">len</span>, <span class="ruby-identifier">lex</span> = <span class="ruby-identifier">check_multiword</span>(<span class="ruby-identifier">len</span>))
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">lex</span>
 
   <span class="ruby-identifier">pos</span>, <span class="ruby-identifier">parts</span> = <span class="ruby-value">0</span>, []
@@ -383,8 +382,8 @@
 
           
           <div class="method-source-code" id="form_at-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/multi_worder.rb, line 134</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">form_at</span>(<span class="ruby-identifier">index</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/multi_worder.rb, line 135</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">form_at</span>(<span class="ruby-identifier">index</span>)
   <span class="ruby-identifier">obj</span> = <span class="ruby-ivar">@buffer</span>[<span class="ruby-identifier">index</span>]
   <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">form</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">WordForm</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">form</span> <span class="ruby-operator">!=</span> <span class="ruby-constant">CHAR_PUNCT</span>
 <span class="ruby-keyword">end</span></pre>
@@ -417,8 +416,8 @@
 
           
           <div class="method-source-code" id="forward_number_of_token-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/multi_worder.rb, line 139</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">forward_number_of_token</span>(<span class="ruby-identifier">len</span> = <span class="ruby-identifier">default</span> = <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">size</span>, <span class="ruby-identifier">punct</span> = <span class="ruby-operator">!</span><span class="ruby-identifier">default</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/multi_worder.rb, line 140</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">forward_number_of_token</span>(<span class="ruby-identifier">len</span> = <span class="ruby-identifier">default</span> = <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">size</span>, <span class="ruby-identifier">punct</span> = <span class="ruby-operator">!</span><span class="ruby-identifier">default</span>)
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">empty?</span>
       <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">item</span> = <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">delete_at</span>(<span class="ruby-value">0</span>))
@@ -455,8 +454,8 @@
 
           
           <div class="method-source-code" id="process_buffer-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/multi_worder.rb, line 152</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">process_buffer</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/multi_worder.rb, line 153</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_buffer</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">form_at</span>(<span class="ruby-value">0</span>)
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">res</span> = <span class="ruby-identifier">check_multiword</span>(<span class="ruby-value">3</span>, <span class="ruby-identifier">len</span> = [])
       <span class="ruby-keyword">if</span> (<span class="ruby-identifier">max</span> = <span class="ruby-identifier">len</span>.<span class="ruby-identifier">first</span>) <span class="ruby-operator">&lt;=</span> <span class="ruby-value">3</span>
@@ -510,8 +509,8 @@
 
           
           <div class="method-source-code" id="process_buffer-3F-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/multi_worder.rb, line 148</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">process_buffer?</span>(<span class="ruby-identifier">num</span> = <span class="ruby-ivar">@expected_tokens_in_buffer</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/multi_worder.rb, line 149</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_buffer?</span>(<span class="ruby-identifier">num</span> = <span class="ruby-ivar">@expected_tokens_in_buffer</span>)
   <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">count</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">form</span> <span class="ruby-operator">!=</span> <span class="ruby-constant">CHAR_PUNCT</span> } <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">num</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -531,8 +530,8 @@
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.4.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

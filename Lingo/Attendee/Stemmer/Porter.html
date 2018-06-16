@@ -4,10 +4,11 @@
 <head>
 <meta charset="UTF-8">
 
-<title>module Lingo::Attendee::Stemmer::Porter - lingo Application documentation (v1.9.0)</title>
+<title>module Lingo::Attendee::Stemmer::Porter - lingo Application documentation (v1.10.0)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../../";
+  var index_rel_prefix = "../../../";
 </script>
 
 <script src="../../../js/jquery.js"></script>
@@ -81,8 +82,6 @@
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -142,8 +141,8 @@
 
           
           <div class="method-source-code" id="stem-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/stemmer/porter.rb, line 282</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">stem</span>(<span class="ruby-identifier">word</span>, <span class="ruby-identifier">found</span> = <span class="ruby-keyword">false</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/stemmer/porter.rb, line 283</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">stem</span>(<span class="ruby-identifier">word</span>, <span class="ruby-identifier">found</span> = <span class="ruby-keyword">false</span>)
   <span class="ruby-identifier">goto</span>, <span class="ruby-identifier">conv</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">s</span>, <span class="ruby-identifier">h</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">q</span>, <span class="ruby-identifier">r</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-identifier">q</span>, <span class="ruby-identifier">r</span>.<span class="ruby-identifier">to_s</span>) } }
 
   <span class="ruby-constant">RULES</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">rules</span><span class="ruby-operator">|</span>
@@ -153,29 +152,29 @@
       <span class="ruby-keyword">case</span> <span class="ruby-identifier">rule</span>
         <span class="ruby-keyword">when</span> <span class="ruby-constant">RULE_RE</span>
           <span class="ruby-identifier">cond</span>, <span class="ruby-identifier">repl</span>, <span class="ruby-identifier">goto</span> = <span class="ruby-node">$1</span>, <span class="ruby-node">$3</span>, <span class="ruby-node">$4</span>
-          <span class="ruby-identifier">stem</span> = <span class="ruby-identifier">word</span>[<span class="ruby-node">/(.+)#{Unicode.downcase($2)}$/</span>, <span class="ruby-value">1</span>] <span class="ruby-keyword">or</span> <span class="ruby-keyword">next</span>
+          <span class="ruby-identifier">stem</span> = <span class="ruby-identifier">word</span>[<span class="ruby-regexp">/(.+)#{Unicode.downcase($2)}$/</span>, <span class="ruby-value">1</span>] <span class="ruby-keyword">or</span> <span class="ruby-keyword">next</span>
         <span class="ruby-keyword">when</span> <span class="ruby-constant">GOTO_RE</span>
           <span class="ruby-identifier">goto</span> = <span class="ruby-node">$1</span>
           <span class="ruby-keyword">break</span>
       <span class="ruby-keyword">end</span>
 
       <span class="ruby-identifier">conv</span>[<span class="ruby-identifier">shad</span> = <span class="ruby-identifier">stem</span>.<span class="ruby-identifier">dup</span>,
-        <span class="ruby-regexp">/[^aeiouy]/</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;c&#39;</span>,
-        <span class="ruby-regexp">/[aeiou]/</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;v&#39;</span>,
-        <span class="ruby-regexp">/cy/</span>        =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;cv&#39;</span>,
-        <span class="ruby-regexp">/y/</span>         =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;c&#39;</span>
+        <span class="ruby-regexp">/[^aeiouy]/</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;c&#39;</span>,
+        <span class="ruby-regexp">/[aeiou]/</span>   <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;v&#39;</span>,
+        <span class="ruby-regexp">/cy/</span>        <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;cv&#39;</span>,
+        <span class="ruby-regexp">/y/</span>         <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;c&#39;</span>
       ]
 
       <span class="ruby-keyword">if</span> <span class="ruby-identifier">cond</span>
         <span class="ruby-identifier">conv</span>[<span class="ruby-identifier">cond</span>,
-          <span class="ruby-string">&#39;m&#39;</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">shad</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/vc/</span>).<span class="ruby-identifier">size</span>,
-          <span class="ruby-string">&#39;*v*&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">shad</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">&#39;v&#39;</span>),
-          <span class="ruby-string">&#39;*d&#39;</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">shad</span>.<span class="ruby-identifier">end_with?</span>(<span class="ruby-string">&#39;c&#39;</span>) <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">last</span> = <span class="ruby-identifier">stem</span>[<span class="ruby-value">-1</span>]) <span class="ruby-operator">==</span> <span class="ruby-identifier">stem</span>[<span class="ruby-value">-2</span>],
-          <span class="ruby-string">&#39;*o&#39;</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">shad</span>.<span class="ruby-identifier">end_with?</span>(<span class="ruby-string">&#39;cvc&#39;</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-string">&#39;wxy&#39;</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">last</span>),
-          <span class="ruby-string">&#39;and&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;&amp;&amp;&#39;</span>,
-          <span class="ruby-string">&#39;or&#39;</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;||&#39;</span>,
-          <span class="ruby-string">&#39;not&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;!&#39;</span>,
-          <span class="ruby-string">&#39;=&#39;</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;==&#39;</span>
+          <span class="ruby-string">&#39;m&#39;</span>   <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">shad</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/vc/</span>).<span class="ruby-identifier">size</span>,
+          <span class="ruby-string">&#39;*v*&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">shad</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">&#39;v&#39;</span>),
+          <span class="ruby-string">&#39;*d&#39;</span>  <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">shad</span>.<span class="ruby-identifier">end_with?</span>(<span class="ruby-string">&#39;c&#39;</span>) <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">last</span> = <span class="ruby-identifier">stem</span>[<span class="ruby-value">-1</span>]) <span class="ruby-operator">==</span> <span class="ruby-identifier">stem</span>[<span class="ruby-value">-2</span>],
+          <span class="ruby-string">&#39;*o&#39;</span>  <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">shad</span>.<span class="ruby-identifier">end_with?</span>(<span class="ruby-string">&#39;cvc&#39;</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-string">&#39;wxy&#39;</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">last</span>),
+          <span class="ruby-string">&#39;and&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;&amp;&amp;&#39;</span>,
+          <span class="ruby-string">&#39;or&#39;</span>  <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;||&#39;</span>,
+          <span class="ruby-string">&#39;not&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;!&#39;</span>,
+          <span class="ruby-string">&#39;=&#39;</span>   <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;==&#39;</span>
         ]
 
         <span class="ruby-identifier">last</span>.<span class="ruby-identifier">upcase!</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">last</span>
@@ -213,8 +212,8 @@
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.4.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

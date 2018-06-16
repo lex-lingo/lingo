@@ -4,10 +4,11 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::Language::WordForm - lingo Application documentation (v1.9.0)</title>
+<title>class Lingo::Language::WordForm - lingo Application documentation (v1.10.0)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
 </script>
 
 <script src="../../js/jquery.js"></script>
@@ -118,8 +119,6 @@
     
   </section>
 
-  
-  
   
   <section id="5Buntitled-5D" class="documentation-section">
     
@@ -242,8 +241,8 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word_form.rb, line 40</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">form</span>, <span class="ruby-identifier">attr</span> = <span class="ruby-constant">WA_UNSET</span>, <span class="ruby-identifier">src</span> = <span class="ruby-keyword">nil</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/language/word_form.rb, line 41</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">form</span>, <span class="ruby-identifier">attr</span> = <span class="ruby-constant">WA_UNSET</span>, <span class="ruby-identifier">src</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">attr</span>, <span class="ruby-ivar">@gender</span> = <span class="ruby-identifier">attr</span>
   <span class="ruby-ivar">@form</span>, <span class="ruby-ivar">@attr</span>, <span class="ruby-ivar">@src</span> = <span class="ruby-identifier">form</span> <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">attr</span> <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">src</span>
 <span class="ruby-keyword">end</span></pre>
@@ -284,8 +283,8 @@
 
           
           <div class="method-source-code" id="3C-3D-3E-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word_form.rb, line 59</span>
-<span class="ruby-keyword">def</span> <span class="ruby-operator">&lt;=&gt;</span>(<span class="ruby-identifier">other</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/language/word_form.rb, line 60</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">&lt;=&gt;</span>(<span class="ruby-identifier">other</span>)
   <span class="ruby-identifier">other</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span> <span class="ruby-value">1</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">to_a</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">to_a</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -345,8 +344,8 @@
 
           
           <div class="method-source-code" id="eql-3F-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word_form.rb, line 79</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">eql?</span>(<span class="ruby-identifier">other</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/language/word_form.rb, line 80</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">eql?</span>(<span class="ruby-identifier">other</span>)
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">equal?</span>(<span class="ruby-identifier">other</span>.<span class="ruby-identifier">class</span>) <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-keyword">self</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">other</span>) <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -382,8 +381,8 @@
 
           
           <div class="method-source-code" id="hash-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word_form.rb, line 75</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">hash</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word_form.rb, line 76</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hash</span>
   <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">hash</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -415,8 +414,8 @@
 
           
           <div class="method-source-code" id="identified-3F-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word_form.rb, line 51</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">identified?</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word_form.rb, line 52</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">identified?</span>
   <span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-constant">WA_IDENTIFIED</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -448,8 +447,8 @@
 
           
           <div class="method-source-code" id="inspect-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word_form.rb, line 71</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">inspect</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word_form.rb, line 72</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">inspect</span>
   <span class="ruby-identifier">to_s</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -481,8 +480,8 @@
 
           
           <div class="method-source-code" id="to_a-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word_form.rb, line 63</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_a</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word_form.rb, line 64</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_a</span>
   [<span class="ruby-identifier">form</span>, <span class="ruby-identifier">attr</span>, <span class="ruby-identifier">gender</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -514,8 +513,8 @@
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word_form.rb, line 67</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word_form.rb, line 68</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
   <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;/&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -547,8 +546,8 @@
 
           
           <div class="method-source-code" id="unknown-3F-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word_form.rb, line 47</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">unknown?</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word_form.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">unknown?</span>
   [<span class="ruby-constant">WA_UNKNOWN</span>, <span class="ruby-constant">WA_UNKMULPART</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">attr</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -580,8 +579,8 @@
 
           
           <div class="method-source-code" id="word_token-3F-source">
-            <pre><span class="ruby-comment"># File lib/lingo/language/word_form.rb, line 55</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">word_token?</span>
+            <pre><span class="ruby-comment"># File lib/lingo/language/word_form.rb, line 56</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">word_token?</span>
   <span class="ruby-keyword">false</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -601,8 +600,8 @@
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.4.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

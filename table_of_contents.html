@@ -4,10 +4,11 @@
 <head>
 <meta charset="UTF-8">
 
-<title>Table of Contents - lingo Application documentation (v1.9.0)</title>
+<title>Table of Contents - lingo Application documentation (v1.10.0)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
 </script>
 
 <script src="./js/jquery.js"></script>
@@ -20,7 +21,7 @@
 
 <body id="top" class="table-of-contents">
 <main role="main">
-<h1 class="class">Table of Contents - lingo Application documentation (v1.9.0)</h1>
+<h1 class="class">Table of Contents - lingo Application documentation (v1.10.0)</h1>
 
 <h2 id="pages">Pages</h2>
 <ul>
@@ -36,6 +37,7 @@
 
     <ul>
       <li><a href="ChangeLog.html#label-Revision+history+for+Lingo">Revision history for Lingo</a>
+      <li><a href="ChangeLog.html#label-1.10.0+-5B2018-06-16-5D">1.10.0 [2018-06-16]</a>
       <li><a href="ChangeLog.html#label-1.9.0+-5B2016-09-13-5D">1.9.0 [2016-09-13]</a>
       <li><a href="ChangeLog.html#label-1.8.7+-5B2015-08-07-5D">1.8.7 [2015-08-07]</a>
       <li><a href="ChangeLog.html#label-1.8.6+-5B2015-02-09-5D">1.8.6 [2015-02-09]</a>
@@ -120,7 +122,7 @@
       <li><a href="README.html#label-ISSUES+AND+CONTRIBUTIONS">ISSUES AND CONTRIBUTIONS</a>
       <li><a href="README.html#label-LINKS">LINKS</a>
       <li><a href="README.html#label-LITERATURE">LITERATURE</a>
-      <li><a href="README.html#label-Background+and+theoretical+works">Background and theoretical works</a>
+      <li><a href="README.html#label-Background+and+theoretical+foundations">Background and theoretical foundations</a>
       <li><a href="README.html#label-Research+publications">Research publications</a>
       <li><a href="README.html#label-CREDITS">CREDITS</a>
       <li><a href="README.html#label-Authors">Authors</a>
@@ -376,18 +378,6 @@
   <li class="class">
     <a href="Lingo/Web.html">Lingo::Web</a>
   </li>
-  <li class="module">
-    <a href="Lingo/Web/ERB.html">Lingo::Web::ERB</a>
-  </li>
-  <li class="module">
-    <a href="Lingo/Web/Rack.html">Lingo::Web::Rack</a>
-  </li>
-  <li class="module">
-    <a href="Lingo/Web/Rack/Auth.html">Lingo::Web::Rack::Auth</a>
-  </li>
-  <li class="module">
-    <a href="Nuggets.html">Nuggets</a>
-  </li>
 </ul>
 
 <h2 id="methods">Methods</h2>
@@ -442,16 +432,6 @@
     <a href="Lingo/Language/Token.html#method-c-clean">::clean</a>
     &mdash;
     <span class="container">Lingo::Language::Token</span>
-
-  <li class="method">
-    <a href="Lingo/Ctl.html#method-c-cmd">::cmd</a>
-    &mdash;
-    <span class="container">Lingo::Ctl</span>
-
-  <li class="method">
-    <a href="Lingo.html#method-c-ctl">::ctl</a>
-    &mdash;
-    <span class="container">Lingo</span>
 
   <li class="method">
     <a href="Lingo/CLI.html#method-c-defaults">::defaults</a>
@@ -1279,11 +1259,6 @@
     <span class="container">Lingo::Ctl</span>
 
   <li class="method">
-    <a href="Lingo/Ctl.html#method-i-ctl">#ctl</a>
-    &mdash;
-    <span class="container">Lingo::Ctl</span>
-
-  <li class="method">
     <a href="Lingo.html#method-i-database_config">#database_config</a>
     &mdash;
     <span class="container">Lingo</span>
@@ -1350,11 +1325,6 @@
 
   <li class="method">
     <a href="Lingo/Ctl.html#method-i-do_rackup">#do_rackup</a>
-    &mdash;
-    <span class="container">Lingo::Ctl</span>
-
-  <li class="method">
-    <a href="Lingo/Ctl.html#method-i-do_usage">#do_usage</a>
     &mdash;
     <span class="container">Lingo::Ctl</span>
 
@@ -1869,16 +1839,6 @@
     <span class="container">Lingo::Attendee::VectorFilter</span>
 
   <li class="method">
-    <a href="Lingo/Ctl.html#method-i-missing_arg">#missing_arg</a>
-    &mdash;
-    <span class="container">Lingo::Ctl</span>
-
-  <li class="method">
-    <a href="Lingo/Ctl.html#method-i-no_args">#no_args</a>
-    &mdash;
-    <span class="container">Lingo::Ctl</span>
-
-  <li class="method">
     <a href="Lingo/Config.html#method-i-nodes_to_key">#nodes_to_key</a>
     &mdash;
     <span class="container">Lingo::Config</span>
@@ -1967,16 +1927,6 @@
     <a href="Lingo/Database/Source/WordClass.html#method-i-parse_line">#parse_line</a>
     &mdash;
     <span class="container">Lingo::Database::Source::WordClass</span>
-
-  <li class="method">
-    <a href="Lingo/Ctl.html#method-i-parse_options">#parse_options</a>
-    &mdash;
-    <span class="container">Lingo::Ctl</span>
-
-  <li class="method">
-    <a href="Lingo/Ctl.html#method-i-path_for_scope">#path_for_scope</a>
-    &mdash;
-    <span class="container">Lingo::Ctl</span>
 
   <li class="method">
     <a href="Lingo/Ctl.html#method-i-paths_write">#paths_write</a>
@@ -2514,11 +2464,6 @@
     <span class="container">Lingo::Web</span>
 
   <li class="method">
-    <a href="Lingo/Ctl.html#method-i-usage">#usage</a>
-    &mdash;
-    <span class="container">Lingo::Ctl</span>
-
-  <li class="method">
     <a href="Lingo/Attendee/Variator.html#method-i-variate">#variate</a>
     &mdash;
     <span class="container">Lingo::Attendee::Variator</span>
@@ -2582,8 +2527,8 @@
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.4.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

@@ -4,10 +4,11 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::Attendee::AnalysisFilter - lingo Application documentation (v1.9.0)</title>
+<title>class Lingo::Attendee::AnalysisFilter - lingo Application documentation (v1.10.0)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
 </script>
 
 <script src="../../js/jquery.js"></script>
@@ -96,8 +97,6 @@
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -147,8 +146,8 @@
 
           
           <div class="method-source-code" id="control-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/analysis_filter.rb, line 47</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-operator">*</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/analysis_filter.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-operator">*</span>)
   <span class="ruby-value">:skip_command</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">cmd</span> <span class="ruby-operator">==</span> <span class="ruby-value">:EOL</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -180,9 +179,9 @@
 
           
           <div class="method-source-code" id="init-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/analysis_filter.rb, line 43</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">init</span>
-  <span class="ruby-ivar">@csv</span>, <span class="ruby-ivar">@header</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">row_sep</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;&#39;</span>), <span class="ruby-constant">FIELDS</span>.<span class="ruby-identifier">keys</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/analysis_filter.rb, line 44</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">init</span>
+  <span class="ruby-ivar">@csv</span>, <span class="ruby-ivar">@header</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>, <span class="ruby-value">row_sep:</span> <span class="ruby-string">&#39;&#39;</span>), <span class="ruby-constant">FIELDS</span>.<span class="ruby-identifier">keys</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -213,8 +212,8 @@
 
           
           <div class="method-source-code" id="process-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/analysis_filter.rb, line 51</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">process</span>(<span class="ruby-identifier">obj</span>, <span class="ruby-operator">*</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/analysis_filter.rb, line 52</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process</span>(<span class="ruby-identifier">obj</span>, <span class="ruby-operator">*</span>)
   <span class="ruby-identifier">forward_row</span>(<span class="ruby-ivar">@header</span>.<span class="ruby-identifier">tap</span> { <span class="ruby-ivar">@header</span> = <span class="ruby-keyword">nil</span> }) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@header</span>
 
   <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Token</span>) <span class="ruby-operator">?</span>
@@ -262,8 +261,8 @@
 
           
           <div class="method-source-code" id="forward_obj-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/analysis_filter.rb, line 65</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">forward_obj</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/analysis_filter.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">forward_obj</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">forward_row</span>(<span class="ruby-constant">FIELDS</span>.<span class="ruby-identifier">map</span>.<span class="ruby-identifier">with_index</span> { <span class="ruby-operator">|</span>(<span class="ruby-identifier">_</span>, <span class="ruby-identifier">method</span>), <span class="ruby-identifier">index</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">arg</span> = <span class="ruby-identifier">args</span>[<span class="ruby-identifier">index</span>] <span class="ruby-keyword">and</span> <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">method</span>) })
 <span class="ruby-keyword">end</span></pre>
@@ -296,8 +295,8 @@
 
           
           <div class="method-source-code" id="forward_row-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/analysis_filter.rb, line 70</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">forward_row</span>(<span class="ruby-identifier">row</span>)
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/analysis_filter.rb, line 71</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">forward_row</span>(<span class="ruby-identifier">row</span>)
   <span class="ruby-identifier">forward</span>(<span class="ruby-ivar">@csv</span>.<span class="ruby-identifier">add_row</span>(<span class="ruby-identifier">row</span>).<span class="ruby-identifier">string</span>.<span class="ruby-identifier">dup</span>)
   <span class="ruby-ivar">@csv</span>.<span class="ruby-identifier">string</span>.<span class="ruby-identifier">clear</span>
   <span class="ruby-ivar">@csv</span>.<span class="ruby-identifier">rewind</span>
@@ -319,8 +318,8 @@
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.4.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 
