@@ -6,7 +6,7 @@
 # Lingo -- A full-featured automatic indexing system                          #
 #                                                                             #
 # Copyright (C) 2005-2007 John Vorhauer                                       #
-# Copyright (C) 2007-2016 John Vorhauer, Jens Wille                           #
+# Copyright (C) 2007-2018 John Vorhauer, Jens Wille                           #
 #                                                                             #
 # Lingo is free software; you can redistribute it and/or modify it under the  #
 # terms of the GNU Affero General Public License as published by the Free     #
@@ -24,7 +24,7 @@
 ###############################################################################
 #++
 
-require 'safe_yaml/load'
+require 'psych'
 require_relative 'cli'
 
 class Lingo
@@ -129,7 +129,7 @@ class Lingo
       instance_variable_set("@#{type}_file", file)
 
       File.open(file, encoding: ENCODING) { |f|
-        @opts.update(SafeYAML.load(f)) }
+        @opts.update(Psych.safe_load(f.read)) }
     rescue Psych::SyntaxError => err
       err.message << " (in #{file})"
       raise

@@ -36,7 +36,7 @@ The main functions of Lingo are:
       ].to_a,
 
       dependencies: {
-        'cyclops'       => '~> 0.2',
+        'cyclops'       => '~> 0.3',
         'nuggets'       => '~> 1.5',
         'rubyzip'       => '~> 1.2',
         'sinatra-bells' => '~> 0.4',
@@ -44,13 +44,13 @@ The main functions of Lingo are:
       },
 
       development_dependencies: {
-        'diff-lcs'   => '~> 1.2',
-        'nokogiri'   => '~> 1.6',
+        'diff-lcs'   => '~> 1.3',
+        'nokogiri'   => '~> 1.8',
         'open4'      => '~> 1.3',
-        'pdf-reader' => '~> 1.4'
+        'pdf-reader' => '~> 2.1'
       },
 
-      required_ruby_version: '>= 2.0'
+      required_ruby_version: '>= 2.1'
     },
     test: {
       pattern: %w[test/ts_*.rb test/attendee/ts_*.rb]
