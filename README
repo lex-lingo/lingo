@@ -34,7 +34,7 @@
 
 == VERSION
 
-This documentation refers to Lingo version 1.9.0
+This documentation refers to Lingo version 1.10.0
 
 
 == DESCRIPTION
@@ -343,8 +343,8 @@ with administrator privileges, depending on your environment. Then you can call
 the +lingo+ executable to process your text files. See <tt>lingo --help</tt>
 for available options.
 
-Please note that Lingo requires Ruby version 2.0 or higher to run
-(2.3[http://ruby-lang.org/en/downloads/] is the currently recommended
+Please note that Lingo requires Ruby version 2.1 or higher to run
+(2.5[http://ruby-lang.org/en/downloads/] is the currently recommended
 version).
 
 Since Lingo depends on native extensions, you need to make sure that
@@ -554,7 +554,7 @@ Lingo is based on a collective development by Klaus Lepsky and John Vorhauer.
 == LICENSE AND COPYRIGHT
 
 Copyright (C) 2005-2007 John Vorhauer
-Copyright (C) 2007-2016 John Vorhauer, Jens Wille
+Copyright (C) 2007-2018 John Vorhauer, Jens Wille
 
 Lingo is free software: you can redistribute it and/or modify it under the
 terms of the GNU Affero General Public License as published by the Free

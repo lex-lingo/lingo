@@ -2,6 +2,11 @@
 
 = Revision history for Lingo
 
+== 1.10.0 [2018-06-16]
+
+* <b>Dropped support for Ruby 2.0.</b>
+* Updated dependency versions.
+
 == 1.9.0 [2016-09-13]
 
 * <b>Dropped support for Ruby 1.9.</b>
