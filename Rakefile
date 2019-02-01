@@ -37,7 +37,7 @@ The main functions of Lingo are:
 
       dependencies: {
         'cyclops'       => '~> 0.3',
-        'nuggets'       => '~> 1.5',
+        'nuggets'       => '~> 1.6',
         'rubyzip'       => '~> 1.2',
         'sinatra-bells' => '~> 0.4',
         'unicode'       => '~> 0.4'
