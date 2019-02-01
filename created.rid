@@ -1,19 +1,19 @@
-Sat, 16 Jun 2018 10:02:01 +0200
-README	Sat, 16 Jun 2018 10:01:31 +0200
+Fri, 01 Feb 2019 20:05:50 +0100
+README	Fri, 01 Feb 2019 19:45:04 +0100
 COPYING	Sat, 01 Nov 2014 15:08:33 +0100
-ChangeLog	Sat, 16 Jun 2018 10:01:31 +0200
+ChangeLog	Fri, 01 Feb 2019 19:44:49 +0100
 lib/lingo.rb	Tue, 13 Sep 2016 20:11:19 +0200
 lib/lingo/app.rb	Sat, 01 Nov 2014 15:08:33 +0100
 lib/lingo/cli.rb	Sat, 15 Oct 2016 21:50:24 +0200
 lib/lingo/ctl.rb	Tue, 13 Sep 2016 20:11:19 +0200
-lib/lingo/srv.rb	Wed, 22 Jun 2016 22:37:34 +0200
+lib/lingo/srv.rb	Fri, 01 Feb 2019 19:33:43 +0100
 lib/lingo/web.rb	Thu, 11 Dec 2014 23:11:04 +0100
 lib/lingo/call.rb	Sat, 01 Nov 2014 15:08:33 +0100
 lib/lingo/debug.rb	Wed, 22 Jun 2016 22:39:08 +0200
 lib/lingo/error.rb	Tue, 13 Sep 2016 20:11:19 +0200
 lib/lingo/config.rb	Sat, 16 Jun 2018 09:21:38 +0200
 lib/lingo/filter.rb	Wed, 22 Jun 2016 22:39:08 +0200
-lib/lingo/version.rb	Sat, 16 Jun 2018 10:01:31 +0200
+lib/lingo/version.rb	Fri, 01 Feb 2019 19:45:16 +0100
 lib/lingo/attendee.rb	Wed, 22 Jun 2016 22:39:08 +0200
 lib/lingo/database.rb	Tue, 13 Sep 2016 20:11:19 +0200
 lib/lingo/language.rb	Tue, 13 Sep 2016 20:11:19 +0200
