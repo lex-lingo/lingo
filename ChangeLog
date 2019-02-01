@@ -2,6 +2,12 @@
 
 = Revision history for Lingo
 
+== 1.10.1 [unreleased]
+
+* Fixed regression introduced in 1.8.6 where renamed constant in
+  Lingo::Attendee::VectorFilter was not reflected in Lingo::Srv
+  (issue #16 by svelsae).
+
 == 1.10.0 [2018-06-16]
 
 * <b>Dropped support for Ruby 2.0.</b>
