@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo::Attendee::Sequencer - lingo Application documentation (v1.10.1)</title>
+<title>class Lingo::Attendee::Sequencer - lingo Application documentation (v1.10.2)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
@@ -188,7 +188,7 @@
 
           
           <div class="method-source-code" id="control-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/sequencer.rb, line 154</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/sequencer.rb, line 153</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">control</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-operator">*</span>)
   <span class="ruby-identifier">process_buffer</span> <span class="ruby-keyword">if</span> [<span class="ruby-value">:RECORD</span>, <span class="ruby-value">:EOF</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">cmd</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -221,7 +221,7 @@
 
           
           <div class="method-source-code" id="init-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/sequencer.rb, line 123</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/sequencer.rb, line 122</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">init</span>
   <span class="ruby-ivar">@stopper</span> = <span class="ruby-identifier">get_ary</span>(<span class="ruby-string">&#39;stopper&#39;</span>, <span class="ruby-constant">DEFAULT_SKIP</span>)
                .<span class="ruby-identifier">push</span>(<span class="ruby-constant">WA_UNKNOWN</span>, <span class="ruby-constant">WA_UNKMULPART</span>)
@@ -281,7 +281,7 @@
 
           
           <div class="method-source-code" id="process_buffer-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/sequencer.rb, line 162</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/sequencer.rb, line 161</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_buffer</span>
   <span class="ruby-identifier">process_seq</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
   <span class="ruby-identifier">flush</span>(<span class="ruby-ivar">@buffer</span>)
@@ -315,7 +315,7 @@
 
           
           <div class="method-source-code" id="process_buffer-3F-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/sequencer.rb, line 158</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/sequencer.rb, line 157</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_buffer?</span>
   (<span class="ruby-identifier">obj</span> = <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">last</span>).<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">WordForm</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@stopper</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">attr</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -356,7 +356,7 @@
 
           
           <div class="method-source-code" id="find_form-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/sequencer.rb, line 248</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/sequencer.rb, line 247</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_form</span>(<span class="ruby-identifier">obj</span>, <span class="ruby-identifier">wc</span>, <span class="ruby-identifier">objs</span>, <span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">form</span> = <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Word</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">lexicals</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">lex</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">break</span> <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">form</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">lex</span>.<span class="ruby-identifier">attr</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">wc</span> } <span class="ruby-operator">:</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">form</span> <span class="ruby-keyword">or</span> <span class="ruby-keyword">return</span>
@@ -393,7 +393,7 @@
 
           
           <div class="method-source-code" id="find_seq-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/sequencer.rb, line 208</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/sequencer.rb, line 207</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_seq</span>(<span class="ruby-identifier">buf</span>, <span class="ruby-identifier">map</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">buf</span>.<span class="ruby-identifier">empty?</span>
 
@@ -462,7 +462,7 @@
 
           
           <div class="method-source-code" id="forward_seq-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/sequencer.rb, line 256</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/sequencer.rb, line 255</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">forward_seq</span>(<span class="ruby-identifier">fmt</span>, <span class="ruby-identifier">str</span>, <span class="ruby-identifier">objs</span>, <span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">wrd_form</span>, <span class="ruby-identifier">form</span> = <span class="ruby-identifier">objs</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:form</span>).<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>),
     <span class="ruby-identifier">fmt</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/\d/</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">fmt</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-string">&#39;%0$s&#39;</span>, <span class="ruby-identifier">str</span>) <span class="ruby-operator">%</span> <span class="ruby-identifier">args</span> <span class="ruby-operator">:</span>
@@ -503,7 +503,7 @@
 
           
           <div class="method-source-code" id="process_seq-source">
-            <pre><span class="ruby-comment"># File lib/lingo/attendee/sequencer.rb, line 169</span>
+            <pre><span class="ruby-comment"># File lib/lingo/attendee/sequencer.rb, line 168</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_seq</span>
   <span class="ruby-identifier">buf</span>, <span class="ruby-identifier">map</span> = [], []
 
@@ -560,7 +560,7 @@
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.4.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

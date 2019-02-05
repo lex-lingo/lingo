@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Lingo - lingo Application documentation (v1.10.1)</title>
+<title>class Lingo - lingo Application documentation (v1.10.2)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -267,7 +267,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="CLI-source">
-            <pre><span class="ruby-comment"># File lib/lingo/cli.rb, line 80</span>
+            <pre><span class="ruby-comment"># File lib/lingo/cli.rb, line 79</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-constant">CLI</span>(<span class="ruby-identifier ruby-title">args</span>, <span class="ruby-identifier">extra</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">opt</span>, <span class="ruby-identifier">req</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">partition</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">arg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/\?\z/</span>, <span class="ruby-string">&#39;&#39;</span>) }
 
@@ -313,7 +313,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="append_path-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 124</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 123</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">append_path</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">path</span>)
   <span class="ruby-identifier">include_path</span>(<span class="ruby-identifier">path</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -346,7 +346,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="basename-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 115</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 114</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">basename</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">file</span>)
   <span class="ruby-identifier">dir</span>, <span class="ruby-identifier">name</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">split</span>(<span class="ruby-identifier">file</span>)
   <span class="ruby-identifier">type</span> <span class="ruby-operator">!=</span> <span class="ruby-value">:dict</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">name</span> <span class="ruby-operator">:</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">dir</span>), <span class="ruby-identifier">name</span>)
@@ -380,7 +380,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="basepath-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 120</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 119</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">basepath</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">file</span>)
   <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">options_for</span>(<span class="ruby-identifier">type</span>)[<span class="ruby-value">:dir</span>], <span class="ruby-identifier">basename</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">file</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -413,7 +413,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="call-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 80</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 79</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">call</span>(<span class="ruby-identifier">cfg</span> = <span class="ruby-identifier">find</span>(<span class="ruby-value">:config</span>, <span class="ruby-string">&#39;lingo-call&#39;</span>), <span class="ruby-identifier">args</span> = [], <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-constant">Call</span>.<span class="ruby-identifier">new</span>([<span class="ruby-string">&#39;-c&#39;</span>, <span class="ruby-identifier">cfg</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>]).<span class="ruby-identifier">call</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -446,7 +446,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="find-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 100</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 99</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>)
     <span class="ruby-identifier">path</span>    = <span class="ruby-identifier">options</span>
@@ -490,7 +490,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="get_const-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 132</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 131</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_const</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">klass</span> = <span class="ruby-keyword">self</span>)
   <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">name</span>.<span class="ruby-identifier">camelcase</span>)
 <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NameError</span>
@@ -525,7 +525,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="list-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 84</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 83</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">list</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-identifier">options</span> = <span class="ruby-identifier">options_for</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">options</span>)
 
@@ -570,7 +570,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 232</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 231</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
   <span class="ruby-constant">Debug</span>.<span class="ruby-identifier">ps</span>(<span class="ruby-value">:lingo_new</span>)
 
@@ -606,7 +606,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="prepend_path-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 128</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 127</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">prepend_path</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">path</span>)
   <span class="ruby-identifier">include_path</span>(<span class="ruby-identifier">path</span>, <span class="ruby-keyword">true</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -639,7 +639,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="talk-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 76</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 75</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">talk</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>).<span class="ruby-identifier">talk</span>
 <span class="ruby-keyword">end</span></pre>
@@ -680,7 +680,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="file_with_ext-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 205</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 204</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">file_with_ext</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">ext</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:ext</span>]
   <span class="ruby-identifier">ext</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">extname</span>(<span class="ruby-identifier">file</span>).<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-node">&quot;#{file}.#{ext}&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">file</span>
@@ -714,7 +714,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="find_file-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 144</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 143</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_file</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">glob</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:glob</span>]
     <span class="ruby-identifier">file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">chomp_ext</span>(<span class="ruby-identifier">file</span>)
@@ -768,7 +768,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="find_store-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 169</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 168</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_store</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">base</span> = <span class="ruby-identifier">basename</span>(<span class="ruby-value">:dict</span>, <span class="ruby-identifier">find</span>(<span class="ruby-value">:dict</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>) {
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">SourceFileNotFoundError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">find_file</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">path</span>,
@@ -821,7 +821,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="include_path-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 140</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 139</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">include_path</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">pre</span> = <span class="ruby-keyword">false</span>)
   <span class="ruby-constant">PATH</span>.<span class="ruby-identifier">insert</span>(<span class="ruby-identifier">pre</span> <span class="ruby-operator">?</span> <span class="ruby-value">0</span> <span class="ruby-operator">:</span> <span class="ruby-value">-1</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">path</span>.<span class="ruby-identifier">map!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">to_s</span> })
 <span class="ruby-keyword">end</span></pre>
@@ -854,7 +854,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="options_for-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 193</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 192</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">options_for</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">find_options</span> = <span class="ruby-constant">FIND_OPTIONS</span>[<span class="ruby-identifier">type</span>]
     <span class="ruby-identifier">options</span> = <span class="ruby-identifier">find_options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>)
@@ -891,7 +891,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="path_for-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 201</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 200</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">path_for</span>(<span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">options</span>[<span class="ruby-value">:path</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">PATH</span>
 <span class="ruby-keyword">end</span></pre>
@@ -924,7 +924,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="realpath_for-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 221</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 220</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">realpath_for</span>(<span class="ruby-identifier">pn</span>, <span class="ruby-identifier">path</span>)
   <span class="ruby-identifier">pn</span>.<span class="ruby-identifier">realpath</span>(<span class="ruby-identifier">path</span>.<span class="ruby-identifier">first</span>).<span class="ruby-identifier">to_s</span>
 <span class="ruby-keyword">end</span></pre>
@@ -957,7 +957,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="require_optional-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 225</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 224</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">require_optional</span>(<span class="ruby-identifier">lib</span>)
   <span class="ruby-identifier">require</span> <span class="ruby-identifier">lib</span> <span class="ruby-keyword">unless</span> <span class="ruby-constant">ENV</span>[<span class="ruby-node">&quot;LINGO_NO_#{lib.upcase}&quot;</span>]
 <span class="ruby-keyword">rescue</span> <span class="ruby-constant">LoadError</span>
@@ -991,7 +991,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="walk-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 210</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 209</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">walk</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span>, <span class="ruby-identifier">legacy</span> = <span class="ruby-keyword">true</span>)
   <span class="ruby-identifier">dirs</span>, <span class="ruby-identifier">seen</span> = [<span class="ruby-identifier">options</span>[<span class="ruby-value">:dir</span>].<span class="ruby-identifier">to_s</span>], <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">seen</span>
   <span class="ruby-identifier">dirs</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">legacy</span>
@@ -1039,7 +1039,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="attendees-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 306</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 305</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">attendees</span>(<span class="ruby-identifier">arg</span> = <span class="ruby-constant">Object</span>)
   <span class="ruby-ivar">@attendees</span>.<span class="ruby-identifier">grep</span>(<span class="ruby-identifier">arg</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Class</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">arg</span> <span class="ruby-operator">:</span>
     <span class="ruby-constant">Attendee</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">arg</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">camelcase</span>))
@@ -1073,7 +1073,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="config-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 241</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 240</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">config</span>
   <span class="ruby-ivar">@config</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Config</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-ivar">@config_args</span>)
 <span class="ruby-keyword">rescue</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">err</span>
@@ -1108,7 +1108,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="database_config-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 251</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 250</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">database_config</span>(<span class="ruby-identifier">id</span>)
   <span class="ruby-identifier">dictionary_config</span>[<span class="ruby-string">&#39;databases&#39;</span>][<span class="ruby-identifier">id</span>].<span class="ruby-identifier">tap</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">cfg</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">NoDatabaseConfigError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">id</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">cfg</span>
@@ -1144,7 +1144,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="dictionary_config-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 247</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 246</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dictionary_config</span>
   <span class="ruby-ivar">@dictionary_config</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;language/dictionary&#39;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -1177,7 +1177,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="invite-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 273</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 272</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">invite</span>(<span class="ruby-identifier">list</span> = <span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;meeting/attendees&#39;</span>])
   <span class="ruby-identifier">supplier</span>, <span class="ruby-identifier">subscriber</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">array</span>, <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">array</span>
 
@@ -1239,7 +1239,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="lexical_hash-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 258</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 257</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lexical_hash</span>(<span class="ruby-identifier">src</span>)
   <span class="ruby-ivar">@lexical_hash</span>[<span class="ruby-identifier">src</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -1272,7 +1272,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="reset-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 315</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 314</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reset</span>(<span class="ruby-identifier">close</span> = <span class="ruby-keyword">true</span>)
   <span class="ruby-identifier">dictionaries</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">close</span> } <span class="ruby-keyword">if</span> <span class="ruby-identifier">close</span>
   <span class="ruby-ivar">@dictionaries</span>, <span class="ruby-ivar">@attendees</span> = [], []
@@ -1307,7 +1307,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="start-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 311</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 310</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">start</span>
   <span class="ruby-ivar">@attendees</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">control</span>(<span class="ruby-value">:TALK</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -1340,7 +1340,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="talk-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 262</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 261</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">talk</span>
   <span class="ruby-constant">Debug</span>.<span class="ruby-identifier">profile</span>(<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;profile&#39;</span>]) {
     <span class="ruby-identifier">invite</span>
@@ -1380,7 +1380,7 @@ configuration files.</p>
 
           
           <div class="method-source-code" id="warn-source">
-            <pre><span class="ruby-comment"># File lib/lingo.rb, line 321</span>
+            <pre><span class="ruby-comment"># File lib/lingo.rb, line 320</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">warn</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">msg</span>)
   <span class="ruby-identifier">config</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">msg</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -1402,7 +1402,7 @@ configuration files.</p>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.4.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

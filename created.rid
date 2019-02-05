@@ -1,7 +1,7 @@
-Fri, 01 Feb 2019 20:05:50 +0100
-README	Fri, 01 Feb 2019 19:45:04 +0100
+Tue, 05 Feb 2019 18:11:06 +0100
+README	Tue, 05 Feb 2019 00:43:47 +0100
 COPYING	Sat, 01 Nov 2014 15:08:33 +0100
-ChangeLog	Fri, 01 Feb 2019 19:44:49 +0100
+ChangeLog	Tue, 05 Feb 2019 00:44:25 +0100
 lib/lingo.rb	Tue, 13 Sep 2016 20:11:19 +0200
 lib/lingo/app.rb	Sat, 01 Nov 2014 15:08:33 +0100
 lib/lingo/cli.rb	Sat, 15 Oct 2016 21:50:24 +0200
@@ -10,10 +10,10 @@ lib/lingo/srv.rb	Fri, 01 Feb 2019 19:33:43 +0100
 lib/lingo/web.rb	Thu, 11 Dec 2014 23:11:04 +0100
 lib/lingo/call.rb	Sat, 01 Nov 2014 15:08:33 +0100
 lib/lingo/debug.rb	Wed, 22 Jun 2016 22:39:08 +0200
-lib/lingo/error.rb	Tue, 13 Sep 2016 20:11:19 +0200
+lib/lingo/error.rb	Tue, 05 Feb 2019 00:39:57 +0100
 lib/lingo/config.rb	Sat, 16 Jun 2018 09:21:38 +0200
 lib/lingo/filter.rb	Wed, 22 Jun 2016 22:39:08 +0200
-lib/lingo/version.rb	Fri, 01 Feb 2019 19:45:16 +0100
+lib/lingo/version.rb	Tue, 05 Feb 2019 00:43:29 +0100
 lib/lingo/attendee.rb	Wed, 22 Jun 2016 22:39:08 +0200
 lib/lingo/database.rb	Tue, 13 Sep 2016 20:11:19 +0200
 lib/lingo/language.rb	Tue, 13 Sep 2016 20:11:19 +0200
@@ -41,7 +41,7 @@ lib/lingo/deferred_attendee.rb	Thu, 11 Dec 2014 23:11:04 +0100
 lib/lingo/attendee/formatter.rb	Wed, 22 Jun 2016 22:37:34 +0200
 lib/lingo/attendee/sequencer.rb	Tue, 13 Sep 2016 20:11:19 +0200
 lib/lingo/attendee/synonymer.rb	Wed, 22 Jun 2016 22:37:34 +0200
-lib/lingo/attendee/tokenizer.rb	Wed, 02 Nov 2016 20:23:52 +0100
+lib/lingo/attendee/tokenizer.rb	Tue, 05 Feb 2019 00:12:23 +0100
 lib/lingo/language/word_form.rb	Wed, 22 Jun 2016 22:37:34 +0200
 lib/lingo/attendee/decomposer.rb	Wed, 22 Jun 2016 22:37:34 +0200
 lib/lingo/attendee/hal_filter.rb	Wed, 22 Jun 2016 22:37:34 +0200
@@ -58,7 +58,7 @@ lib/lingo/attendee/multi_worder.rb	Wed, 02 Nov 2016 21:06:05 +0100
 lib/lingo/database/libcdb_store.rb	Sat, 01 Nov 2014 15:08:33 +0100
 lib/lingo/language/lexical_hash.rb	Tue, 13 Sep 2016 20:11:19 +0200
 lib/lingo/attendee/object_filter.rb	Wed, 22 Jun 2016 22:37:34 +0200
-lib/lingo/attendee/vector_filter.rb	Tue, 13 Sep 2016 20:11:19 +0200
+lib/lingo/attendee/vector_filter.rb	Tue, 05 Feb 2019 00:39:11 +0100
 lib/lingo/attendee/word_searcher.rb	Wed, 22 Jun 2016 22:37:34 +0200
 lib/lingo/attendee/stemmer/porter.rb	Sat, 01 Nov 2014 15:08:33 +0100
 lib/lingo/attendee/analysis_filter.rb	Wed, 22 Jun 2016 22:37:34 +0200
