@@ -2,7 +2,7 @@
 
 = Revision history for Lingo
 
-== 1.10.2 [unreleased]
+== 1.10.2 [2019-02-05]
 
 * Fixed regression introduced in 1.9.0 where source form was assumed to be a
   Lingo::Language::Token (issue reported by Leonhard Maylein).
